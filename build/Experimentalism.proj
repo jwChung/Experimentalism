@@ -4,12 +4,8 @@
           Build;
           UnitTest;
           " />
-
-  <Target Name="Local" DependsOnTargets="
-          MakePrivateKeyFile;
-          Build;
-          DeleteKeyFiles;
-          UnitTest;
+  
+  <Target Name="LocalDeployment" DependsOnTargets="
           NuGetVersioning;
           NuGetReleaseNotes;
           NuGetPack;
@@ -18,12 +14,18 @@
           NuGetPushToLocal;
           DeleteNupkgFiles;
           " />
-  
-  <Target Name="CI" DependsOnTargets="
+
+  <Target Name="Build" DependsOnTargets="
           MakePrivateKeyFile;
           Build;
           DeleteKeyFiles;
+          " />
+
+  <Target Name="Tests" DependsOnTargets="
           UnitTest;
+          " />
+  
+  <Target Name="Deployment" DependsOnTargets="
           NuGetVersioning;
           NuGetReleaseNotes;
           NuGetPack;
@@ -31,10 +33,15 @@
           RestoreReleaseNotes;
           NuGetPush;
           DeleteNupkgFiles;
+          
           CreateReleaseNotes;
           GitTagging;
           DeleteReleaseNotes;
           " />
+
+  <ItemGroup>
+    <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
+  </ItemGroup>
 
   <Target Name="MakePrivateKeyFile">
     <PropertyGroup>
@@ -55,15 +62,12 @@
                          CodeAnalysisTreatWarningsAsErrors=true;
                          SignAssembly=$(SignAssembly);
                          AssemblyOriginatorKeyFile=..\..\build\PrivateKey.snk;
-                         ">
-    </MSBuild>
+                         "/>
     <MSBuild Projects="@(TestProjects)"
              Targets="Build;"
              Properties="Configuration=Release;
                          DefineConstants=TRACE,CI;
-                         ">
-      <Output TaskParameter="TargetOutputs" ItemName="TestAssemblies" />
-    </MSBuild>
+                         "/>
     <OnError ExecuteTargets="DeleteKeyFiles" />
   </Target>
 
