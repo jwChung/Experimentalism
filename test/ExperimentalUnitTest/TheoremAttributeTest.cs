@@ -5,7 +5,7 @@ using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
 
-namespace Jwc.Experimental
+namespace Jwc.Experiment
 {
     public class TheoremAttributeTest
     {

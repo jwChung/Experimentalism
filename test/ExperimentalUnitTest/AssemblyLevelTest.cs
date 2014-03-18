@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit;
 
-namespace Jwc.Experimental
+namespace Jwc.Experiment
 {
     public class AssemblyLevelTest
     {
