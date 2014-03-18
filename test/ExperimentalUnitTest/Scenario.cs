@@ -5,9 +5,9 @@ namespace Jwc.Experimental
     public class Scenario
     {
         [Theorem]
-        public void TheoremActAsFactAttribute()
+        public void TheoremAttributeOnMethodIndicatesTestCase()
         {
-            Assert.True(true, "Excuted");
+            Assert.True(true, "excuted.");
         }
     }
 }
