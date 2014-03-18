@@ -13,7 +13,8 @@ namespace Jwc.Experimental
             Assert.NotNull(sut);
             var specifiedAssemblies = new []
             {
-                "mscorlib"
+                "mscorlib",
+                "xunit"
             };
 
             var actual = sut.GetReferencedAssemblies().Select(an => an.Name).ToArray();
