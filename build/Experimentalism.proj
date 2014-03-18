@@ -1,43 +1,53 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Verify">
 
-  <Target Name="Verify" DependsOnTargets="
-          Build;
-          UnitTest;
-          " />
-  
-  <Target Name="LocalDeployment" DependsOnTargets="
-          NuGetVersioning;
-          NuGetReleaseNotes;
-          NuGetPack;
-          RestoreNuGetVersion;
-          RestoreReleaseNotes;
-          NuGetPushToLocal;
-          DeleteNupkgFiles;
-          " />
+  <Target Name="Verify">
+    <CallTarget Targets="
+      Build;
+      UnitTest;
+      " />
+  </Target>
 
-  <Target Name="Build" DependsOnTargets="
-          MakePrivateKeyFile;
-          Build;
-          DeleteKeyFiles;
-          " />
-
-  <Target Name="Tests" DependsOnTargets="
-          UnitTest;
-          " />
+  <Target Name="LocalDeployment">
+    <CallTarget Targets="
+      NuGetVersioning;
+      NuGetReleaseNotes;
+      NuGetPack;
+      RestoreNuGetVersion;
+      RestoreReleaseNotes;
+      NuGetPushToLocal;
+      DeleteNupkgFiles;
+      " />
+  </Target>
   
-  <Target Name="Deployment" DependsOnTargets="
-          NuGetVersioning;
-          NuGetReleaseNotes;
-          NuGetPack;
-          RestoreNuGetVersion;
-          RestoreReleaseNotes;
-          NuGetPush;
-          DeleteNupkgFiles;
+  <Target Name="Build">
+    <CallTarget Targets="
+      MakePrivateKeyFile;
+      Build;
+      DeleteKeyFiles;
+      " />
+  </Target>
+
+  <Target Name="Tests">
+    <CallTarget Targets="
+      UnitTest;
+      " />
+  </Target>
+
+  <Target Name="Deployment">
+    <CallTarget Targets="
+      NuGetVersioning;
+      NuGetReleaseNotes;
+      NuGetPack;
+      RestoreNuGetVersion;
+      RestoreReleaseNotes;
+      NuGetPush;
+      DeleteNupkgFiles;
           
-          CreateReleaseNotes;
-          GitTagging;
-          DeleteReleaseNotes;
-          " />
+      CreateReleaseNotes;
+      GitTagging;
+      DeleteReleaseNotes;
+      " />
+  </Target>
 
   <ItemGroup>
     <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
