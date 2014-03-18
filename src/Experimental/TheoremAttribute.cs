@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
+using Xunit.Extensions;
+using Xunit.Sdk;
 
 namespace Jwc.Experimental
 {
@@ -9,5 +12,11 @@ namespace Jwc.Experimental
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class TheoremAttribute : FactAttribute
     {
+        protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
+        {
+            return !method.MethodInfo.IsDefined(typeof(DataAttribute), false) 
+                ? base.EnumerateTestCommands(method)
+                : new TheoryAttribute().CreateTestCommands(method);
+        }
     }
 }
