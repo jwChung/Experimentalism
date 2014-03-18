@@ -9,7 +9,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutOnlyReferencesSpecifiedAssemblies()
         {
-            var sut = Assembly.LoadFrom("Jwc.Experimental.dll");
+            var sut = Assembly.LoadFrom("Jwc.Experiment.dll");
             Assert.NotNull(sut);
             var specifiedAssemblies = new []
             {
