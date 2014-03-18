@@ -11,14 +11,13 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("0.1.0")]
-[assembly: AssemblyInformationalVersion("0.1.0")]
+[assembly: AssemblyInformationalVersion("0.1.1")]
 
 /*
- * Version 0.1.0
+ * Version 0.1.1
  * 
- * - TheoremAttribute is test attribute specified on method to indicate
- *   test-case which is the same with FactAttribute of xunit.
- * 
- * - TheoremAttribute supports parameterized test, which is the same with
- *   TheoryAttribute of xunit.
+ * - renamed Experimental(adjective) to Experiment(noun).
+ *   Although this results in breaking change, it can be treated as patch
+ *   version because according to semver(v2), major version zero is allowed
+ *   to make breaking changes.
  */
