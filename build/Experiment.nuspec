@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <title>Experimental</title>
-    <id>Experimental</id>
+    <title>Experiment</title>
+    <id>Experiment</id>
     <version>0.0.0</version>
     <authors>Jin-Wook Chung</authors>
-    <description>Experimental is to support parameterized tests base on auto-data.</description>
+    <description>Experiment is to support parameterized tests base on auto-data.</description>
     <tags>unit-testing tdd xunit</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
     <licenseUrl>https://github.com/jwChung/Experimentalism/blob/master/LICENCE.md</licenseUrl>
