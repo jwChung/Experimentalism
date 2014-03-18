@@ -163,3 +163,7 @@ packages/*
 *.cmd
 *.dll
 *.exe
+
+# Build
+!build/Verify.cmd
+!build/CI.cmd

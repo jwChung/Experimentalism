@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <title>Experimental</title>
+    <id>Experimental</id>
+    <version>0.0.0</version>
+    <authors>Jin-Wook Chung</authors>
+    <description>Experimental is to support parameterized tests base on auto-data.</description>
+    <tags>unit-testing tdd xunit</tags>
+    <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
+    <licenseUrl>https://github.com/jwChung/Experimentalism/blob/master/LICENCE.md</licenseUrl>
+    <releaseNotes>releaseNotes</releaseNotes>
+  </metadata>
+  <files>
+    <file src="..\src\Experimental\bin\Release\Jwc.Experimental.dll" target="lib\net40" />
+    <file src="..\src\Experimental\bin\Release\Jwc.Experimental.pdb" target="lib\net40" />
+    <file src="..\src\Experimental\bin\Release\Jwc.Experimental.xml" target="lib\net40" />
+    <file src="..\src\Experimental\**\*.cs" target="src" />
+    <file src="Install.ps1" target="tools" />
+  </files>
+</package>
