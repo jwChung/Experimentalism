@@ -157,8 +157,9 @@ $RECYCLE.BIN/
 # NuGet
 packages/*
 !packages/repositories.config
-.nuget/NuGet.exe
 
-# Build
-build/*.snk
-build/*.cmd
+# Genernal
+*.snk
+*.cmd
+*.dll
+*.exe
