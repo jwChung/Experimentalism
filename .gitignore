@@ -154,15 +154,5 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 
-# NuGet
-packages/*
-!packages/repositories.config
-
 # Genernal
 *.snk
-*.cmd
-*.dll
-*.exe
-
-# Build
-!build/Run.cmd
