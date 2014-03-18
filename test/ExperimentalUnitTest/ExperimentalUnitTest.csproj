@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheoremAttributeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

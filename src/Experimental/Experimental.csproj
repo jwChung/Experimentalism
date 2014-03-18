@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheoremAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
