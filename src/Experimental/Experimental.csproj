@@ -7,8 +7,8 @@
     <ProjectGuid>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Experimental</RootNamespace>
-    <AssemblyName>Experimental</AssemblyName>
+    <RootNamespace>Jwc.Experimental</RootNamespace>
+    <AssemblyName>Jwc.Experimental</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
