@@ -12,10 +12,10 @@
     <releaseNotes>releaseNotes</releaseNotes>
   </metadata>
   <files>
-    <file src="..\src\Experimental\bin\Release\Jwc.Experimental.dll" target="lib\net40" />
-    <file src="..\src\Experimental\bin\Release\Jwc.Experimental.pdb" target="lib\net40" />
-    <file src="..\src\Experimental\bin\Release\Jwc.Experimental.xml" target="lib\net40" />
-    <file src="..\src\Experimental\**\*.cs" target="src" />
+    <file src="..\src\Experiment\bin\Release\Jwc.Experiment.dll" target="lib\net40" />
+    <file src="..\src\Experiment\bin\Release\Jwc.Experiment.pdb" target="lib\net40" />
+    <file src="..\src\Experiment\bin\Release\Jwc.Experiment.xml" target="lib\net40" />
+    <file src="..\src\Experiment\**\*.cs" target="src" />
     <file src="Install.ps1" target="tools" />
   </files>
 </package>
