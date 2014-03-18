@@ -56,6 +56,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
+      <Link>Properties\CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
