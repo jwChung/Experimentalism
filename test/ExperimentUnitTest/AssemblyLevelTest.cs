@@ -9,8 +9,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutOnlyReferencesSpecifiedAssemblies()
         {
-            var sut = Assembly.LoadFrom("Jwc.Experiment.dll");
-            Assert.NotNull(sut);
+            var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 "mscorlib",
