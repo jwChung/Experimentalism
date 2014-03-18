@@ -9,7 +9,7 @@ namespace Jwc.Experiment
     public class Scenario
     {
         [Theorem]
-        public void TheoremOnMethodIndicatesTestCase()
+        public void TheoremSupportsNonParameterizedTest()
         {
             Assert.True(true, "excuted.");
         }
