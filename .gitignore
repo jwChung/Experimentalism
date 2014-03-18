@@ -165,5 +165,4 @@ packages/*
 *.exe
 
 # Build
-!build/Verify.cmd
-!build/CI.cmd
+!build/Run.cmd

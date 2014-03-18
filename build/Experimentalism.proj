@@ -1,40 +1,57 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Verify">
 
-  <Target Name="Verify" DependsOnTargets="
-          Build;
-          UnitTest;
-          " />
+  <Target Name="Verify">
+    <CallTarget Targets="
+      Build;
+      UnitTest;
+      " />
+  </Target>
 
-  <Target Name="Local" DependsOnTargets="
-          MakePrivateKeyFile;
-          Build;
-          DeleteKeyFiles;
-          UnitTest;
-          NuGetVersioning;
-          NuGetReleaseNotes;
-          NuGetPack;
-          RestoreNuGetVersion;
-          RestoreReleaseNotes;
-          NuGetPushToLocal;
-          DeleteNupkgFiles;
-          " />
+  <Target Name="LocalDeployment">
+    <CallTarget Targets="
+      NuGetVersioning;
+      NuGetReleaseNotes;
+      NuGetPack;
+      RestoreNuGetVersion;
+      RestoreReleaseNotes;
+      NuGetPushToLocal;
+      DeleteNupkgFiles;
+      " />
+  </Target>
   
-  <Target Name="CI" DependsOnTargets="
-          MakePrivateKeyFile;
-          Build;
-          DeleteKeyFiles;
-          UnitTest;
-          NuGetVersioning;
-          NuGetReleaseNotes;
-          NuGetPack;
-          RestoreNuGetVersion;
-          RestoreReleaseNotes;
-          NuGetPush;
-          DeleteNupkgFiles;
-          CreateReleaseNotes;
-          GitTagging;
-          DeleteReleaseNotes;
-          " />
+  <Target Name="Build">
+    <CallTarget Targets="
+      MakePrivateKeyFile;
+      Build;
+      DeleteKeyFiles;
+      " />
+  </Target>
+
+  <Target Name="Tests">
+    <CallTarget Targets="
+      UnitTest;
+      " />
+  </Target>
+
+  <Target Name="Deployment" Condition=" '$(APPVEYOR_REPO_BRANCH)' == 'master' ">
+    <CallTarget Targets="
+      NuGetVersioning;
+      NuGetReleaseNotes;
+      NuGetPack;
+      RestoreNuGetVersion;
+      RestoreReleaseNotes;
+      NuGetPush;
+      DeleteNupkgFiles;
+          
+      CreateReleaseNotes;
+      GitTagging;
+      DeleteReleaseNotes;
+      " />
+  </Target>
+
+  <ItemGroup>
+    <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
+  </ItemGroup>
 
   <Target Name="MakePrivateKeyFile">
     <PropertyGroup>
@@ -55,15 +72,12 @@
                          CodeAnalysisTreatWarningsAsErrors=true;
                          SignAssembly=$(SignAssembly);
                          AssemblyOriginatorKeyFile=..\..\build\PrivateKey.snk;
-                         ">
-    </MSBuild>
+                         "/>
     <MSBuild Projects="@(TestProjects)"
              Targets="Build;"
              Properties="Configuration=Release;
                          DefineConstants=TRACE,CI;
-                         ">
-      <Output TaskParameter="TargetOutputs" ItemName="TestAssemblies" />
-    </MSBuild>
+                         "/>
     <OnError ExecuteTargets="DeleteKeyFiles" />
   </Target>
 
