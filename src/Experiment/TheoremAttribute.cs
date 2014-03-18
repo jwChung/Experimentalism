@@ -25,6 +25,11 @@ namespace Jwc.Experiment
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
             return !method.MethodInfo.IsDefined(typeof(DataAttribute), false) 
                 ? base.EnumerateTestCommands(method)
                 : new TheoryAttribute().CreateTestCommands(method);
