@@ -14,10 +14,11 @@ namespace Jwc.Experimental
             var specifiedAssemblies = new []
             {
                 "mscorlib",
-                "xunit"
+                "xunit",
+                "xunit.extensions"
             };
 
-            var actual = sut.GetReferencedAssemblies().Select(an => an.Name).ToArray();
+            var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();
 
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
             Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
