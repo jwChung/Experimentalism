@@ -4,7 +4,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experimental
+namespace Jwc.Experiment
 {
     public class Scenario
     {

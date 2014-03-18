@@ -2,14 +2,14 @@
 using System.Reflection;
 using Xunit;
 
-namespace Jwc.Experimental
+namespace Jwc.Experiment
 {
     public class AssemblyLevelTest
     {
         [Fact]
         public void SutOnlyReferencesSpecifiedAssemblies()
         {
-            var sut = Assembly.LoadFrom("Jwc.Experimental.dll");
+            var sut = Assembly.LoadFrom("Jwc.Experiment.dll");
             Assert.NotNull(sut);
             var specifiedAssemblies = new []
             {

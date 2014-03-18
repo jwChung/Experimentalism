@@ -4,7 +4,7 @@ using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
 
-namespace Jwc.Experimental
+namespace Jwc.Experiment
 {
     /// <summary>
     /// 이 attribute는 method위에 선언되어 해당 method가 test-case라는 것을
@@ -25,6 +25,11 @@ namespace Jwc.Experimental
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
             return !method.MethodInfo.IsDefined(typeof(DataAttribute), false) 
                 ? base.EnumerateTestCommands(method)
                 : new TheoryAttribute().CreateTestCommands(method);
