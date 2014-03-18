@@ -12,6 +12,15 @@ namespace Jwc.Experimental
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class TheoremAttribute : FactAttribute
     {
+        /// <summary>
+        /// Enumerates the test commands represented by this test method.
+        /// Derived classes should override this method to return instances of 
+        /// <see cref="ITestCommand" />, one per execution of a test method.
+        /// </summary>
+        /// <param name="method">The test method</param>
+        /// <returns>
+        /// The test commands which will execute the test runs for the given method
+        /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             return !method.MethodInfo.IsDefined(typeof(DataAttribute), false) 
