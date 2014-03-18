@@ -33,7 +33,7 @@
       " />
   </Target>
 
-  <Target Name="Deployment">
+  <Target Name="Deployment" Condition=" '$(APPVEYOR_REPO_BRANCH)' == 'master' ">
     <CallTarget Targets="
       NuGetVersioning;
       NuGetReleaseNotes;
