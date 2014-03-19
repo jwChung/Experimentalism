@@ -106,6 +106,7 @@ namespace Jwc.Experiment
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var autoArguments = new AutoArgumentCollection(
@@ -126,7 +127,8 @@ namespace Jwc.Experiment
                 return new ExceptionCommand(method, exception);
             }
         }
-        
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
         {
             var autoArguments = new AutoArgumentCollection(
