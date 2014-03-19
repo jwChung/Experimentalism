@@ -17,7 +17,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateNonParameterizedTestCommandReturnsFactCommand()
+        public void CreateNonParameterizedReturnsFactCommand()
         {
             var sut = new TheoremAttribute();
             
@@ -31,7 +31,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         [InlineData("dummy", 1, null)]
         [InlineData("dummy", 1, null)]
-        public void CreateParameterizedTestCommandsReturnsThoeryCommands(string arg1, int arg2, object arg3)
+        public void CreateParameterizedReturnsThoeryCommands(string arg1, int arg2, object arg3)
         {
             var sut = new TheoremAttribute();
 
@@ -69,7 +69,7 @@ namespace Jwc.Experiment
 
             Assert.Equal(expected, actual);
         }
-
+        
         private class AutoDataTheoremAttribute : TheoremAttribute
         {
             public AutoDataTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
