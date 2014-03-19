@@ -85,7 +85,7 @@ namespace Jwc.Experiment
             {
                 var theoryCommand = Assert.IsType<TheoryCommand>(c);
                 Assert.Equal(
-                    new object[] { FakeTestFixture.StringValue, FakeTestFixture .IntValue },
+                    new object[] { fixture.StringValue, fixture.IntValue },
                     theoryCommand.Parameters);
             });
         }
@@ -101,7 +101,7 @@ namespace Jwc.Experiment
 
             var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
             Assert.Equal(
-                new object[] { "expected", FakeTestFixture.IntValue },
+                new object[] { "expected", fixture.IntValue },
                 theoryCommand.Parameters);
         }
 
@@ -157,7 +157,7 @@ namespace Jwc.Experiment
 
             var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
             Assert.Equal(
-                new object[] { FakeTestFixture.StringValue, FakeTestFixture.IntValue },
+                new object[] { fixture.StringValue, fixture.IntValue },
                 theoryCommand.Parameters);
         }
 

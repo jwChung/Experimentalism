@@ -4,26 +4,30 @@ namespace Jwc.Experiment
 {
     public class FakeTestFixture : ITestFixture
     {
-        public readonly static string StringValue = Guid.NewGuid().ToString();
-        public readonly static int IntValue = new Random().Next();
+        private readonly string _stringValue = Guid.NewGuid().ToString();
+        private readonly string _intValue = Guid.NewGuid().ToString();
+        private readonly Func<object, object> _onCreate;
 
-        private Func<object, object> _onCreate = r =>
+        public FakeTestFixture()
         {
-            var type = r as Type;
-            if (type != null)
+            _onCreate = r =>
             {
-                if (type == typeof(string))
+                var type = r as Type;
+                if (type != null)
                 {
-                    return StringValue;
+                    if (type == typeof(string))
+                    {
+                        return _stringValue;
+                    }
+                    if (type == typeof(int))
+                    {
+                        return _intValue;
+                    }
                 }
-                if (type == typeof(int))
-                {
-                    return IntValue;
-                }
-            }
 
-            throw new NotSupportedException();
-        };
+                throw new NotSupportedException();
+            };
+        }
 
         public Func<object, object> OnCreate
         {
@@ -31,9 +35,21 @@ namespace Jwc.Experiment
             {
                 return _onCreate;
             }
-            set
+        }
+
+        public string StringValue
+        {
+            get
             {
-                _onCreate = value;
+                return _stringValue;
+            }
+        }
+
+        public string IntValue
+        {
+            get
+            {
+                return _intValue;
             }
         }
 
