@@ -115,7 +115,7 @@
 
   <Target Name="NuGetPack">
     <PropertyGroup>
-      <NuGetPath>..\.nuget\NuGet.exe</NuGetPath>
+      <NuGetPath>..\packages\NuGet.CommandLine.2.8.0\tools\NuGet.exe</NuGetPath>
     </PropertyGroup>
     <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" />
   </Target>
