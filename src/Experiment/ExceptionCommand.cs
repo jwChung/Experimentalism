@@ -12,7 +12,7 @@ namespace Jwc.Experiment
         /// </summary>
         /// <param name="method">The method under test.</param>
         public ExceptionCommand(IMethodInfo method)
-            : base(method, "dummy", 1000)
+            : base(method, null, 0)
         {
         }
 
