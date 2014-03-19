@@ -144,6 +144,30 @@ namespace Jwc.Experiment
             Assert.Equal(new object[] { "expected", 1234 }, theoryCommand.Parameters);
         }
 
+        [Fact]
+        public void CreateParameterizedWithInvalidCountDataThrows()
+        {
+            var sut = new TheoremAttribute();
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
+
+            var actual = sut.CreateTestCommands(method);
+
+            var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
+            Assert.Throws<InvalidOperationException>(() => theoryCommand.Execute(this));
+        }
+
+        [Fact]
+        public void CreateParameterizedWithInvalidTypeDataThrows()
+        {
+            var sut = new TheoremAttribute();
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
+
+            var actual = sut.CreateTestCommands(method);
+
+            var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
+            Assert.Throws<ArgumentException>(() => theoryCommand.Execute(this));
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
@@ -152,6 +176,16 @@ namespace Jwc.Experiment
 
         [InlineData("expected")]
         public void ParameterizedWithMixedData(string arg1, int arg2)
+        {
+        }
+
+        [InlineData("expected", 1234)]
+        public void ParameterizedWithInvalidCountData(string arg)
+        {
+        }
+
+        [InlineData("expected")]
+        public void ParameterizedWithInvalidTypeData(int arg)
         {
         }
 
