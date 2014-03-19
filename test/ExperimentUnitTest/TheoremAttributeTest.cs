@@ -74,75 +74,35 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithAutoDataReturnsCorrectCommands()
         {
-            // Fixture setup
-            var fixture = new FakeTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type != null)
-                    {
-                        if (type == typeof(string))
-                        {
-                            return "expected";
-                        }
-                        if (type == typeof(int))
-                        {
-                            return 1234;
-                        }
-                    }
-
-                    throw new NotSupportedException();
-                }
-            };
-
+            var fixture = new FakeTestFixture();
             var sut = new AutoDataTheoremAttribute(() => fixture);
-
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
-            // Excercise system
             var actual = sut.CreateTestCommands(method).ToArray();
 
-            // Verify outcome
             Assert.Equal(2, actual.Length);
             Array.ForEach(actual, c =>
             {
                 var theoryCommand = Assert.IsType<TheoryCommand>(c);
-                Assert.Equal(new object[] { "expected", 1234 }, theoryCommand.Parameters);
+                Assert.Equal(
+                    new object[] { FakeTestFixture.StringValue, FakeTestFixture .IntValue },
+                    theoryCommand.Parameters);
             });
         }
 
         [Fact]
         public void CreateParameterizedWithMixedDataReturnsCorrectCommands()
         {
-            // Fixture setup
-            var fixture = new FakeTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type != null)
-                    {
-                        if (type == typeof(int))
-                        {
-                            return 1234;
-                        }
-                    }
-
-                    throw new NotSupportedException();
-                }
-            };
-
+            var fixture = new FakeTestFixture();
             var sut = new AutoDataTheoremAttribute(() => fixture);
-
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
-            // Excercise system
             var actual = sut.CreateTestCommands(method);
 
-            // Verify outcome
             var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
-            Assert.Equal(new object[] { "expected", 1234 }, theoryCommand.Parameters);
+            Assert.Equal(
+                new object[] { "expected", FakeTestFixture.IntValue },
+                theoryCommand.Parameters);
         }
 
         [Fact]
@@ -189,38 +149,16 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
-            // Fixture setup
-            var fixture = new FakeTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type != null)
-                    {
-                        if (type == typeof(string))
-                        {
-                            return "expected";
-                        }
-                        if (type == typeof(int))
-                        {
-                            return 1234;
-                        }
-                    }
-
-                    throw new NotSupportedException();
-                }
-            };
-
+            var fixture = new FakeTestFixture();
             var sut = new AutoDataTheoremAttribute(() => fixture);
-
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
-            // Excercise system
             var actual = sut.CreateTestCommands(method);
 
-            // Verify outcome
             var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
-            Assert.Equal(new object[] { "expected", 1234 }, theoryCommand.Parameters);
+            Assert.Equal(
+                new object[] { FakeTestFixture.StringValue, FakeTestFixture.IntValue },
+                theoryCommand.Parameters);
         }
 
         [Fact]
@@ -247,125 +185,54 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithAutoDataInitializesFixtureForEachTestCase()
         {
-            // Fixture setup
-            var fixture = new FakeTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type != null)
-                    {
-                        if (type == typeof(string))
-                        {
-                            return "expected";
-                        }
-                        if (type == typeof(int))
-                        {
-                            return 1234;
-                        }
-                    }
-
-                    throw new NotSupportedException();
-                }
-            };
-
+            var fixture = new FakeTestFixture();
             int callCount = 0;
             Func<ITestFixture> fixtureFactory = () =>
             {
                 callCount++;
                 return fixture;
             };
-
             var sut = new AutoDataTheoremAttribute(fixtureFactory);
-
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
-            // Excercise system
             sut.CreateTestCommands(method).ToArray();
 
-            // Verify outcome
             Assert.Equal(2, callCount);
         }
 
         [Fact]
         public void CreateParameterizedWithMixedDataInitializesFixtureForEachTestCase()
         {
-            // Fixture setup
-            var fixture = new FakeTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type != null)
-                    {
-                        if (type == typeof(int))
-                        {
-                            return 1234;
-                        }
-                    }
-
-                    throw new NotSupportedException();
-                }
-            };
-
+            var fixture = new FakeTestFixture();
             int callCount = 0;
             Func<ITestFixture> fixtureFactory = () =>
             {
                 callCount++;
                 return fixture;
             };
-
             var sut = new AutoDataTheoremAttribute(fixtureFactory);
-
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
-            // Excercise system
             sut.CreateTestCommands(method).ToArray();
 
-            // Verify outcome
             Assert.Equal(1, callCount);
         }
 
         [Fact]
         public void CreateParameterizedWithAutoDataNotUsingDataAttributeInitializesFixtureForEachTestCase()
         {
-            // Fixture setup
-            var fixture = new FakeTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type != null)
-                    {
-                        if (type == typeof(string))
-                        {
-                            return "expected";
-                        }
-                        if (type == typeof(int))
-                        {
-                            return 1234;
-                        }
-                    }
-
-                    throw new NotSupportedException();
-                }
-            };
-
+            var fixture = new FakeTestFixture();
             int callCount = 0;
             Func<ITestFixture> fixtureFactory = () =>
             {
                 callCount++;
                 return fixture;
             };
-
             var sut = new AutoDataTheoremAttribute(fixtureFactory);
-
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
-            // Excercise system
             sut.CreateTestCommands(method).ToArray();
 
-            // Verify outcome
             Assert.Equal(1, callCount);
         }
 
