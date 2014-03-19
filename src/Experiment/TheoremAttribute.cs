@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
@@ -55,9 +57,27 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            return !method.MethodInfo.IsDefined(typeof(DataAttribute), false) 
-                ? base.EnumerateTestCommands(method)
-                : new TheoryAttribute().CreateTestCommands(method);
+            var dataAttributes = method.MethodInfo.GetCustomAttributes(typeof(DataAttribute), false);
+            if (!dataAttributes.Any())
+            {
+                yield return base.EnumerateTestCommands(method).Single();
+                yield break;
+            }
+
+            ParameterInfo[] parameters = method.MethodInfo.GetParameters();
+
+            IEnumerable<object[]> testData = dataAttributes.Cast<DataAttribute>()
+                .SelectMany(da => da.GetData(method.MethodInfo, null));
+
+            foreach (var testCaseData in testData)
+            {
+                object[] arguments = parameters
+                        .Skip(testCaseData.Length)
+                        .Select(pi => FixtureFactory.Invoke().Create(pi.ParameterType))
+                        .ToArray();
+
+                yield return new TheoryCommand(method, testCaseData.Concat(arguments).ToArray());
+            }
         }
     }
 }

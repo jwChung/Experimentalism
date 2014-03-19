@@ -12,6 +12,7 @@ namespace Jwc.Experiment
             var specifiedAssemblies = new []
             {
                 "mscorlib",
+                "System.Core",
                 "xunit",
                 "xunit.extensions"
             };
