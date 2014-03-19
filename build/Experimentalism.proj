@@ -33,7 +33,7 @@
       " />
   </Target>
 
-  <Target Name="Deployment" Condition=" '$(APPVEYOR_REPO_BRANCH)' == 'master' ">
+  <Target Name="Deployment" Condition=" '$(APPVEYOR_REPO_BRANCH)' == 'master' and !$(APPVEYOR_REPO_COMMIT_MESSAGE.Contains('Merge pull request #')) ">
     <CallTarget Targets="
       NuGetVersioning;
       NuGetReleaseNotes;
