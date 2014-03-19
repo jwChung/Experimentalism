@@ -10,14 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.1.0")]
-[assembly: AssemblyInformationalVersion("0.1.1")]
+[assembly: AssemblyVersion("0.2.0")]
+[assembly: AssemblyInformationalVersion("0.2.0")]
 
 /*
- * Version 0.1.1
+ * Version 0.2.0
  * 
- * - renamed Experimental(adjective) to Experiment(noun).
- *   Although this results in breaking change, it can be treated as patch
- *   version because according to semver(v2), major version zero is allowed
- *   to make breaking changes.
+ * - supports parameterized test with auto data.
  */
