@@ -10,6 +10,7 @@ namespace Jwc.Experiment
         /// <summary>
         /// 이 메소드를 호출하게 되면 <see cref="NotSupportedException"/>이 발생함.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification="한글 사용에 의해 발생되는 문제.")]
         public object Create(object request)
         {
             throw new NotSupportedException(
