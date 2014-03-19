@@ -231,6 +231,156 @@ namespace Jwc.Experiment
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
 
+        [Theory]
+        [InlineData("dummy", 1, null)]
+        public void CreateParameterizedDoesNotInitializeFixture(string arg1, int arg2, object arg3)
+        {
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                throw new NotSupportedException();
+            };
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            Assert.DoesNotThrow(() => sut.CreateTestCommands(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
+        }
+
+        [Fact]
+        public void CreateParameterizedWithAutoDataInitializesFixtureForEachTestCase()
+        {
+            // Fixture setup
+            var fixture = new FakeTestFixture
+            {
+                OnCreate = r =>
+                {
+                    var type = r as Type;
+                    if (type != null)
+                    {
+                        if (type == typeof(string))
+                        {
+                            return "expected";
+                        }
+                        if (type == typeof(int))
+                        {
+                            return 1234;
+                        }
+                    }
+
+                    throw new NotSupportedException();
+                }
+            };
+
+            int callCount = 0;
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                callCount++;
+                return fixture;
+            };
+
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
+
+            // Excercise system
+            sut.CreateTestCommands(method).ToArray();
+
+            // Verify outcome
+            Assert.Equal(2, callCount);
+        }
+
+        [Fact]
+        public void CreateParameterizedWithMixedDataInitializesFixtureForEachTestCase()
+        {
+            // Fixture setup
+            var fixture = new FakeTestFixture
+            {
+                OnCreate = r =>
+                {
+                    var type = r as Type;
+                    if (type != null)
+                    {
+                        if (type == typeof(int))
+                        {
+                            return 1234;
+                        }
+                    }
+
+                    throw new NotSupportedException();
+                }
+            };
+
+            int callCount = 0;
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                callCount++;
+                return fixture;
+            };
+
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
+
+            // Excercise system
+            sut.CreateTestCommands(method).ToArray();
+
+            // Verify outcome
+            Assert.Equal(1, callCount);
+        }
+
+        [Fact]
+        public void CreateParameterizedWithAutoDataNotUsingDataAttributeInitializesFixtureForEachTestCase()
+        {
+            // Fixture setup
+            var fixture = new FakeTestFixture
+            {
+                OnCreate = r =>
+                {
+                    var type = r as Type;
+                    if (type != null)
+                    {
+                        if (type == typeof(string))
+                        {
+                            return "expected";
+                        }
+                        if (type == typeof(int))
+                        {
+                            return 1234;
+                        }
+                    }
+
+                    throw new NotSupportedException();
+                }
+            };
+
+            int callCount = 0;
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                callCount++;
+                return fixture;
+            };
+
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
+
+            // Excercise system
+            sut.CreateTestCommands(method).ToArray();
+
+            // Verify outcome
+            Assert.Equal(1, callCount);
+        }
+
+        [Fact]
+        public void CreateNonParameterizedDoesNotInitializeFixture()
+        {
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                throw new NotSupportedException();
+            };
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            Assert.DoesNotThrow(() => sut.CreateTestCommands(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)

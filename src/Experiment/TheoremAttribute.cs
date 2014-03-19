@@ -161,9 +161,11 @@ namespace Jwc.Experiment
 
             public IEnumerator<object> GetEnumerator()
             {
+                var testFixture = _fixtureFactory.Invoke();
+
                 return _parameters
                     .Skip(_skipCount)
-                    .Select(pi => _fixtureFactory.Invoke().Create(pi.ParameterType))
+                    .Select(pi => testFixture.Create(pi.ParameterType))
                     .GetEnumerator();
             }
 
