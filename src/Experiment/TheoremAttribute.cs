@@ -100,7 +100,7 @@ namespace Jwc.Experiment
                 yield break;
             }
 
-            foreach (var testCommand in CreateManyTestCommands(method, testData))
+            foreach (var testCommand in testData.Select(tcd => CreateEachTestCommand(method, tcd)))
             {
                 yield return testCommand;
             }
@@ -112,25 +112,37 @@ namespace Jwc.Experiment
                 method.MethodInfo.GetParameters(),
                 FixtureFactory);
 
-            if (autoArguments.HasAutoParemeters)
+            if (!autoArguments.HasAutoParemeters)
+            {
+                return base.EnumerateTestCommands(method).Single();
+            }
+           
+            try
             {
                 return new TheoryCommand(method, autoArguments.ToArray());
             }
-
-            return base.EnumerateTestCommands(method).Single();
+            catch (Exception exception)
+            {
+                return new ExceptionCommand(method, exception);
+            }
         }
-
-        private IEnumerable<ITestCommand> CreateManyTestCommands(
-            IMethodInfo method, IEnumerable<object[]> testData)
+        
+        private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
         {
-            return from testCaseData in testData
-                   let autoArguments = new AutoArgumentCollection(
-                       method.MethodInfo.GetParameters(),
-                       FixtureFactory,
-                       testCaseData.Length)
-                   select testCaseData.Concat(autoArguments)
-                   into argument
-                   select new TheoryCommand(method, argument.ToArray());
+            var autoArguments = new AutoArgumentCollection(
+                method.MethodInfo.GetParameters(),
+                FixtureFactory,
+                testCaseData.Length);
+            var argument = testCaseData.Concat(autoArguments);
+
+            try
+            {
+                return new TheoryCommand(method, argument.ToArray());
+            }
+            catch (Exception exception)
+            {
+                return new ExceptionCommand(method, exception);
+            }
         }
 
         private class TestData : IEnumerable<object[]>

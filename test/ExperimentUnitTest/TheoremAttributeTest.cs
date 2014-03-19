@@ -248,6 +248,46 @@ namespace Jwc.Experiment
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
         }
 
+        [Fact]
+        public void CreateParameterizedForSingleIfExceptionIsThrownReturnsCorrectExceptionCommand()
+        {
+            var exception = new NotSupportedException();
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                throw exception;
+            };
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsAssignableFrom<ExceptionCommand>(actual);
+            Assert.Equal(method.MethodInfo.Name, command.MethodName);
+            Assert.Equal(exception, command.Exception);
+        }
+
+        [Fact]
+        public void CreateParameterizedForManyIfExceptionIsThrownReturnsCorrectExceptionCommand()
+        {
+            var exception = new NotSupportedException();
+            Func<ITestFixture> fixtureFactory = () =>
+            {
+                throw exception;
+            };
+            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
+
+            var actual = sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(2, actual.Length);
+            Array.ForEach(actual, c =>
+            {
+                var command = Assert.IsAssignableFrom<ExceptionCommand>(c);
+                Assert.Equal(method.MethodInfo.Name, command.MethodName);
+                Assert.Equal(exception, command.Exception);
+            });
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
