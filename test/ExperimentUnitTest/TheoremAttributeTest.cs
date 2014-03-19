@@ -51,6 +51,25 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => new AutoDataTheoremAttribute(null));
         }
 
+        [Fact]
+        public void FixtureFactoryInitializedFromDefaultIsCorrect()
+        {
+            var sut = new TheoremAttribute();
+            var actual = sut.FixtureFactory;
+            Assert.IsType<NotSupportedFixture>(actual.Invoke());
+        }
+
+        [Fact]
+        public void FixtureFactoryInitializedFromGreedyIsCorrect()
+        {
+            Func<ITestFixture> expected = () => null;
+            var sut = new AutoDataTheoremAttribute(expected);
+
+            var actual = sut.FixtureFactory;
+
+            Assert.Equal(expected, actual);
+        }
+
         private class AutoDataTheoremAttribute : TheoremAttribute
         {
             public AutoDataTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)

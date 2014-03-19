@@ -14,8 +14,11 @@ namespace Jwc.Experiment
     [AttributeUsage(AttributeTargets.Method)]
     public class TheoremAttribute : FactAttribute
     {
+        private readonly Func<ITestFixture> _fixtureFactory;
+
         public TheoremAttribute()
         {
+            _fixtureFactory = () => new NotSupportedFixture();
         }
 
         protected TheoremAttribute(Func<ITestFixture> fixtureFactory)
@@ -25,7 +28,15 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureFactory");
             }
 
-            throw new NotImplementedException();
+            _fixtureFactory = fixtureFactory;
+        }
+
+        public Func<ITestFixture> FixtureFactory
+        {
+            get
+            {
+                return _fixtureFactory;
+            }
         }
 
         /// <summary>
