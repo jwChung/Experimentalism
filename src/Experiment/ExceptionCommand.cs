@@ -44,7 +44,7 @@ namespace Jwc.Experiment
         /// <returns>테스트 결과.</returns>
         public override MethodResult Execute(object testClass)
         {
-            throw new System.NotImplementedException();
+            return new FailedResult(testMethod, Exception, DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)

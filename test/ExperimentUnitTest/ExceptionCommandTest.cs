@@ -71,5 +71,20 @@ namespace Jwc.Experiment
 
             Assert.Equal(exception, actual);
         }
+
+        [Fact]
+        public void ExecuteReturnsCorrectResult()
+        {
+            var sut = new ExceptionCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Exception());
+
+            var actual = sut.Execute(null);
+
+            var failedResult = Assert.IsType<FailedResult>(actual);
+            Assert.Equal(sut.MethodName, failedResult.MethodName);
+            Assert.Equal(sut.Exception.GetType().FullName, failedResult.ExceptionType);
+            Assert.Equal(sut.DisplayName, failedResult.DisplayName);
+        }
     }
 }
