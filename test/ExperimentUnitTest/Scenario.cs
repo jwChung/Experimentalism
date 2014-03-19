@@ -23,7 +23,7 @@ namespace Jwc.Experiment
             Assert.Equal(1234, arg2);
         }
 
-        public class ParameterizedTestDataAttribute : DataAttribute
+        private class ParameterizedTestDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
             {
