@@ -12,8 +12,22 @@ namespace Jwc.Experiment
     /// 사용될 수 있다.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class TheoremAttribute : FactAttribute
+    public class TheoremAttribute : FactAttribute
     {
+        public TheoremAttribute()
+        {
+        }
+
+        protected TheoremAttribute(Func<ITestFixture> fixtureFactory)
+        {
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of 

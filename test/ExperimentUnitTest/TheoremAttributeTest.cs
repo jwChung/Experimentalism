@@ -44,5 +44,18 @@ namespace Jwc.Experiment
                 Assert.Equal(new[] { arg1, arg2, arg3 }, theoryCommand.Parameters);
             });
         }
+
+        [Fact]
+        public void InitializeWithNullFixtureFactoryThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new AutoDataTheoremAttribute(null));
+        }
+
+        private class AutoDataTheoremAttribute : TheoremAttribute
+        {
+            public AutoDataTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
+            {
+            }
+        }
     }
 }
