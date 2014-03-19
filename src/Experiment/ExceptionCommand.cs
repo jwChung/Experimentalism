@@ -38,10 +38,10 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// 테스트 메소드 실행.
+        /// 이 테스트 실행 결과는 항상 <see cref="FailedResult"/>를 리턴함.
         /// </summary>
         /// <param name="testClass">테스트 메소드의 owner.</param>
-        /// <returns>테스트 결과.</returns>
+        /// <returns> 특정 exception을 표현하는 <see cref="FailedResult"/> 결과.</returns>
         public override MethodResult Execute(object testClass)
         {
             return new FailedResult(testMethod, Exception, DisplayName);
