@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -222,6 +223,14 @@ namespace Jwc.Experiment
             Assert.Equal(new object[] { "expected", 1234 }, theoryCommand.Parameters);
         }
 
+        [Fact]
+        public void CreateParameterizedPassesCorrectParameterTypes()
+        {
+            var sut = new TheoremAttribute();
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
+            Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
@@ -247,10 +256,24 @@ namespace Jwc.Experiment
         {
         }
 
+        [ParameterTypeData]
+        public void ParameterizedForParameterTypes(string arg1, int arg2)
+        {
+        }
+
         private class AutoDataTheoremAttribute : TheoremAttribute
         {
             public AutoDataTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
             {
+            }
+        }
+
+        private class ParameterTypeDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                Assert.Equal(new[] { typeof(string), typeof(int) }, parameterTypes);
+                yield return new object[] { "dummy", 1 };
             }
         }
     }

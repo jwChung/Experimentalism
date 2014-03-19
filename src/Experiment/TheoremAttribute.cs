@@ -125,7 +125,8 @@ namespace Jwc.Experiment
 
             public IEnumerator<object[]> GetEnumerator()
             {
-                return _dataAttributes.SelectMany(da => da.GetData(_method, null)).GetEnumerator();
+                var parameterTypes = _method.GetParameters().Select(pi => pi.ParameterType).ToArray();
+                return _dataAttributes.SelectMany(da => da.GetData(_method, parameterTypes)).GetEnumerator();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
