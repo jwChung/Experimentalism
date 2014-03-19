@@ -185,6 +185,43 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => new TheoremAttribute(null));
         }
 
+        [Fact]
+        public void CreateParameterizedWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
+        {
+            // Fixture setup
+            var fixture = new FakeTestFixture
+            {
+                OnCreate = r =>
+                {
+                    var type = r as Type;
+                    if (type != null)
+                    {
+                        if (type == typeof(string))
+                        {
+                            return "expected";
+                        }
+                        if (type == typeof(int))
+                        {
+                            return 1234;
+                        }
+                    }
+
+                    throw new NotSupportedException();
+                }
+            };
+
+            var sut = new AutoDataTheoremAttribute(() => fixture);
+
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
+
+            // Excercise system
+            var actual = sut.CreateTestCommands(method);
+
+            // Verify outcome
+            var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
+            Assert.Equal(new object[] { "expected", 1234 }, theoryCommand.Parameters);
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
@@ -203,6 +240,10 @@ namespace Jwc.Experiment
 
         [InlineData("expected")]
         public void ParameterizedWithInvalidTypeData(int arg)
+        {
+        }
+
+        public void ParameterizedWithAutoDataNotUsingDataAttribute(string arg1, int arg2)
         {
         }
 

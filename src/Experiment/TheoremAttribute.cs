@@ -53,7 +53,7 @@ namespace Jwc.Experiment
 
         /// <summary>
         /// Enumerates the test commands represented by this test method.
-        /// Derived classes should override this method to return instances of 
+        /// Derived classes should override this method to return instances of
         /// <see cref="ITestCommand" />, one per execution of a test method.
         /// </summary>
         /// <param name="method">The test method</param>
@@ -67,24 +67,34 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            var dataAttributes = method.MethodInfo.GetCustomAttributes(typeof(DataAttribute), false);
-            if (!dataAttributes.Any())
+            object[] dataAttributes = method.MethodInfo.GetCustomAttributes(typeof(DataAttribute), false);
+            ParameterInfo[] parameters = method.MethodInfo.GetParameters();
+
+            if (dataAttributes.Length == 0)
             {
-                yield return base.EnumerateTestCommands(method).Single();
+                if (parameters.Length == 0)
+                {
+                    yield return base.EnumerateTestCommands(method).Single();
+                }
+                else
+                {
+                    object[] arguments = parameters
+                        .Select(pi => FixtureFactory.Invoke().Create(pi.ParameterType))
+                        .ToArray();
+                    yield return new TheoryCommand(method, arguments);
+                }
+
                 yield break;
             }
-
-            ParameterInfo[] parameters = method.MethodInfo.GetParameters();
 
             IEnumerable<object[]> testData = dataAttributes.Cast<DataAttribute>()
                 .SelectMany(da => da.GetData(method.MethodInfo, null));
 
             foreach (var testCaseData in testData)
             {
-                object[] arguments = parameters
-                        .Skip(testCaseData.Length)
-                        .Select(pi => FixtureFactory.Invoke().Create(pi.ParameterType))
-                        .ToArray();
+                var arguments = parameters
+                    .Skip(testCaseData.Length)
+                    .Select(pi => FixtureFactory.Invoke().Create(pi.ParameterType));
 
                 yield return new TheoryCommand(method, testCaseData.Concat(arguments).ToArray());
             }
