@@ -6,7 +6,7 @@ namespace Jwc.Experiment
     public class AssemblyLevelTest
     {
         [Fact]
-        public void SutOnlyReferencesSpecifiedAssemblies()
+        public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
