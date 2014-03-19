@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -67,36 +68,107 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            object[] dataAttributes = method.MethodInfo.GetCustomAttributes(typeof(DataAttribute), false);
-            ParameterInfo[] parameters = method.MethodInfo.GetParameters();
+            var dataAttributes = ((IEnumerable<DataAttribute>)method
+                .MethodInfo
+                .GetCustomAttributes(typeof(DataAttribute), false)).ToArray();
+            var testData = new TestData(method.MethodInfo, dataAttributes);
 
-            if (dataAttributes.Length == 0)
+            if (!testData.Any())
             {
-                if (parameters.Length == 0)
-                {
-                    yield return base.EnumerateTestCommands(method).Single();
-                }
-                else
-                {
-                    object[] arguments = parameters
-                        .Select(pi => FixtureFactory.Invoke().Create(pi.ParameterType))
-                        .ToArray();
-                    yield return new TheoryCommand(method, arguments);
-                }
-
+                yield return CreateSingleTestCommand(method);
                 yield break;
             }
 
-            IEnumerable<object[]> testData = dataAttributes.Cast<DataAttribute>()
-                .SelectMany(da => da.GetData(method.MethodInfo, null));
-
-            foreach (var testCaseData in testData)
+            foreach (var testCommand in CreateManyTestCommands(method, testData))
             {
-                var arguments = parameters
-                    .Skip(testCaseData.Length)
-                    .Select(pi => FixtureFactory.Invoke().Create(pi.ParameterType));
+                yield return testCommand;
+            }
+        }
 
-                yield return new TheoryCommand(method, testCaseData.Concat(arguments).ToArray());
+        private ITestCommand CreateSingleTestCommand(IMethodInfo method)
+        {
+            var autoArguments = new AutoArgumentCollection(
+                method.MethodInfo.GetParameters(),
+                FixtureFactory);
+
+            if (autoArguments.HasAutoParemeters)
+            {
+                return new TheoryCommand(method, autoArguments.ToArray());
+            }
+
+            return base.EnumerateTestCommands(method).Single();
+        }
+
+        private IEnumerable<ITestCommand> CreateManyTestCommands(
+            IMethodInfo method, IEnumerable<object[]> testData)
+        {
+            return from testCaseData in testData
+                   let autoArguments = new AutoArgumentCollection(
+                       method.MethodInfo.GetParameters(),
+                       FixtureFactory,
+                       testCaseData.Length)
+                   select testCaseData.Concat(autoArguments)
+                   into argument
+                   select new TheoryCommand(method, argument.ToArray());
+        }
+
+        private class TestData : IEnumerable<object[]>
+        {
+            private readonly MethodInfo _method;
+            private readonly DataAttribute[] _dataAttributes;
+
+            public TestData(MethodInfo method, DataAttribute[] dataAttributes)
+            {
+                _method = method;
+                _dataAttributes = dataAttributes;
+            }
+
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                return _dataAttributes.SelectMany(da => da.GetData(_method, null)).GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
+        private class AutoArgumentCollection : IEnumerable<object>
+        {
+            private readonly ParameterInfo[] _parameters;
+            private readonly Func<ITestFixture> _fixtureFactory;
+            private readonly int _skipCount;
+
+            public AutoArgumentCollection(
+                ParameterInfo[] parameters,
+                Func<ITestFixture> fixtureFactory,
+                int skipCount = 0)
+            {
+                _parameters = parameters;
+                _fixtureFactory = fixtureFactory;
+                _skipCount = skipCount;
+            }
+
+            public bool HasAutoParemeters
+            {
+                get
+                {
+                    return _parameters.Length != 0;
+                }
+            }
+
+            public IEnumerator<object> GetEnumerator()
+            {
+                return _parameters
+                    .Skip(_skipCount)
+                    .Select(pi => _fixtureFactory.Invoke().Create(pi.ParameterType))
+                    .GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
             }
         }
     }
