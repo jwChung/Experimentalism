@@ -8,13 +8,33 @@ namespace Jwc.Experiment
     /// </summary>
     public class ExceptionCommand : TestCommand
     {
+        private readonly Exception _exception;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExceptionCommand"/> class.
         /// </summary>
         /// <param name="method">The method under test.</param>
-        public ExceptionCommand(IMethodInfo method)
+        /// <param name="exception">The exception to be expressed.</param>
+        public ExceptionCommand(IMethodInfo method, Exception exception)
             : base(EnsureIsNotNull(method), null, 0)
         {
+            if (exception == null)
+            {
+                throw new ArgumentNullException("exception");
+            }
+
+            _exception = exception;
+        }
+
+        /// <summary>
+        /// Gets a value indicating the exception.
+        /// </summary>
+        public Exception Exception
+        {
+            get
+            {
+                return _exception;
+            }
         }
 
         /// <summary>

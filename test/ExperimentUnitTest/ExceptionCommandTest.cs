@@ -10,14 +10,18 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsTestCommand()
         {
-            var sut = new ExceptionCommand(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
+            var sut = new ExceptionCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Exception());
             Assert.IsAssignableFrom<TestCommand>(sut);
         }
 
         [Fact]
         public void MethodNameIsCorrect()
         {
-            var sut = new ExceptionCommand(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
+            var sut = new ExceptionCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Exception());
             var actual = sut.MethodName;
             Assert.Equal("MethodNameIsCorrect", actual);
         }
@@ -25,7 +29,9 @@ namespace Jwc.Experiment
         [Fact]
         public void DisplayNameIsCorrect()
         {
-            var sut = new ExceptionCommand(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
+            var sut = new ExceptionCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Exception());
             var actual = sut.DisplayName;
             Assert.Equal("Jwc.Experiment.ExceptionCommandTest.DisplayNameIsCorrect", actual);
         }
@@ -33,7 +39,9 @@ namespace Jwc.Experiment
         [Fact]
         public void TimeoutIsCorrect()
         {
-            var sut = new ExceptionCommand(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
+            var sut = new ExceptionCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Exception());
             var actual = sut.Timeout;
             Assert.Equal(0, actual);
         }
@@ -41,7 +49,27 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullMethodThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ExceptionCommand(null));
+            Assert.Throws<ArgumentNullException>(() => new ExceptionCommand(null, new Exception()));
+        }
+
+        [Fact]
+        public void InitializeWithNullExceptionThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new ExceptionCommand(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), null));
+        }
+
+        [Fact]
+        public void ExceptionIsCorrect()
+        {
+            var exception = new Exception();
+            var sut = new ExceptionCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                exception);
+
+            var actual = sut.Exception;
+
+            Assert.Equal(exception, actual);
         }
     }
 }
