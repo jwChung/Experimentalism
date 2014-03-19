@@ -12,7 +12,10 @@ namespace Jwc.Experiment
         /// </summary>
         public object Create(object request)
         {
-            throw new System.NotImplementedException();
+            throw new NotSupportedException(
+                "Parameterized test에 auto data기능을 구현하기 위해서는 ITestFixture를 직접구현하여 " +
+                "TheoremAttribute에 제공하여야 함. NotSupportedFixture는 TheoremAttribute의 " +
+                "기본 ITestFixture임.");
         }
     }
 }
