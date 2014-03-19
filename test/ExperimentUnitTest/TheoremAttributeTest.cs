@@ -60,7 +60,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryInitializedFromGreedyIsCorrect()
+        public void FixtureFactoryInitializedWithFuncIsCorrect()
         {
             Func<ITestFixture> expected = () => null;
             var sut = new AutoDataTheoremAttribute(expected);
@@ -166,6 +166,23 @@ namespace Jwc.Experiment
 
             var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
             Assert.Throws<ArgumentException>(() => theoryCommand.Execute(this));
+        }
+
+        [Fact]
+        public void FixtureFactoryInitializedWithTypeIsCorrect()
+        {
+            var sut = new TheoremAttribute(typeof(FakeTestFixture));
+
+            var actual = sut.FixtureFactory;
+
+            Assert.IsType<FakeTestFixture>(actual());
+            Assert.NotSame(actual(), actual());
+        }
+
+        [Fact]
+        public void InitializeWithNullFactoryTypeThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TheoremAttribute(null));
         }
 
         [InlineData]

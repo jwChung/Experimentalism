@@ -23,6 +23,16 @@ namespace Jwc.Experiment
             _fixtureFactory = () => new NotSupportedFixture();
         }
 
+        public TheoremAttribute(Type fixtureType)
+        {
+            if (fixtureType == null)
+            {
+                throw new ArgumentNullException("fixtureType");
+            }
+
+            _fixtureFactory = () => (ITestFixture)Activator.CreateInstance(fixtureType);
+        }
+
         protected TheoremAttribute(Func<ITestFixture> fixtureFactory)
         {
             if (fixtureFactory == null)
