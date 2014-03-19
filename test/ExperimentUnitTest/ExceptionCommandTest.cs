@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
@@ -35,6 +36,12 @@ namespace Jwc.Experiment
             var sut = new ExceptionCommand(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
             var actual = sut.Timeout;
             Assert.Equal(0, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullMethodThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ExceptionCommand(null));
         }
     }
 }

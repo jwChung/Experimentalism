@@ -1,4 +1,5 @@
-﻿using Xunit.Sdk;
+﻿using System;
+using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
@@ -12,7 +13,7 @@ namespace Jwc.Experiment
         /// </summary>
         /// <param name="method">The method under test.</param>
         public ExceptionCommand(IMethodInfo method)
-            : base(method, null, 0)
+            : base(EnsureIsNotNull(method), null, 0)
         {
         }
 
@@ -23,6 +24,16 @@ namespace Jwc.Experiment
         public override MethodResult Execute(object testClass)
         {
             throw new System.NotImplementedException();
+        }
+
+        private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            return method;
         }
     }
 }
