@@ -19,11 +19,19 @@ namespace Jwc.Experiment
     {
         private readonly Func<ITestFixture> _fixtureFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
+        /// </summary>
         public TheoremAttribute()
         {
             _fixtureFactory = () => new NotSupportedFixture();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureType">Type of the fixture.</param>
+        /// <exception cref="System.ArgumentNullException">fixtureType</exception>
         public TheoremAttribute(Type fixtureType)
         {
             if (fixtureType == null)
@@ -34,6 +42,11 @@ namespace Jwc.Experiment
             _fixtureFactory = () => (ITestFixture)Activator.CreateInstance(fixtureType);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureFactory">The fixture factory.</param>
+        /// <exception cref="System.ArgumentNullException">fixtureFactory</exception>
         protected TheoremAttribute(Func<ITestFixture> fixtureFactory)
         {
             if (fixtureFactory == null)
@@ -44,6 +57,12 @@ namespace Jwc.Experiment
             _fixtureFactory = fixtureFactory;
         }
 
+        /// <summary>
+        /// Gets a value indicating the fixture factory which is passed from a constructor.
+        /// </summary>
+        /// <value>
+        /// The fixture factory.
+        /// </value>
         public Func<ITestFixture> FixtureFactory
         {
             get
