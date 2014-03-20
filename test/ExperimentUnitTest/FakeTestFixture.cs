@@ -29,14 +29,6 @@ namespace Jwc.Experiment
             };
         }
 
-        public Func<object, object> OnCreate
-        {
-            get
-            {
-                return _onCreate;
-            }
-        }
-
         public string StringValue
         {
             get
@@ -52,10 +44,10 @@ namespace Jwc.Experiment
                 return _intValue;
             }
         }
-
+        
         public object Create(object request)
         {
-            return OnCreate(request);
+            return _onCreate(request);
         }
     }
 }
