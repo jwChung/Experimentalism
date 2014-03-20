@@ -51,10 +51,6 @@
       " />
   </Target>
 
-  <ItemGroup>
-    <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
-  </ItemGroup>
-
   <Target Name="MakePrivateKeyFile">
     <PropertyGroup>
       <SignAssembly>true</SignAssembly>
@@ -63,10 +59,6 @@
   </Target>
 
   <Target Name="BuildProjects">
-    <ItemGroup>
-      <Projects Include="..\src\**\*.csproj" />
-      <TestProjects Include="..\test\**\*.csproj" />
-    </ItemGroup>
     <MSBuild Projects="@(Projects)"
              Targets="Rebuild;"
              Properties="Configuration=Release;
@@ -95,9 +87,6 @@
   </Target>
 
   <Target Name="NuGetVersioning">
-    <ItemGroup>
-      <NuGetFiles Include="*.nuspec" />
-    </ItemGroup>
     <PropertyGroup>
       <Assembly>%(TestAssemblies.Identity)</Assembly>
     </PropertyGroup>
@@ -108,7 +97,7 @@
   </Target>
 
   <Target Name="NuGetReleaseNotes">
-    <GetReleaseNotes CommonAssemblyInfo="CommonAssemblyInfo.cs">
+    <GetReleaseNotes CommonAssemblyInfo="%(CommonAssemblyInfo.Identity)">
       <Output TaskParameter="ReleaseNotes" PropertyName="ReleaseNotes" />
     </GetReleaseNotes>
     <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/releaseNotes" Value="$(ReleaseNotes)" />
@@ -116,9 +105,6 @@
   </Target>
 
   <Target Name="NuGetPack">
-    <PropertyGroup>
-      <NuGetPath>..\packages\NuGet.CommandLine.2.8.0\tools\NuGet.exe</NuGetPath>
-    </PropertyGroup>
     <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" />
   </Target>
 
@@ -140,9 +126,6 @@
   </Target>
 
   <Target Name="NuGetPushToLocal">
-    <PropertyGroup>
-      <LocalNugetFeed>D:\LocalNugetFeed</LocalNugetFeed>
-    </PropertyGroup>
     <ItemGroup>
       <NugetPackages Include="@(NuGetFiles->'%(RelativeDir)%(Filename).$(SemanticVersion).nupkg')" />
     </ItemGroup>
@@ -164,10 +147,10 @@
   </Target>
 
   <Target Name="GitTagging" Condition="!$(SemanticVersion.Contains('-'))">
-    <Exec Command='git config user.name "$(APPVEYOR_REPO_COMMIT_AUTHOR)"' />
-    <Exec Command='git config user.email "$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)"' />
-    <Exec Command="git tag -a -F ReleaseNotes.txt $(SemanticVersion)" />
-    <Exec Command="git push --quiet --tags --repo https://$(GitHubAccount)@github.com/jwChung/$(MSBuildThisFileName).git" />
+    <Exec Command='git config user.name "$(CommitAuthor)"' />
+    <Exec Command='git config user.email "$(CommitAuthorEmail)"' />
+    <Exec Command='git tag -a -F ReleaseNotes.txt $(SemanticVersion)' />
+    <Exec Command='git push --quiet --tags --repo "$(Repository)"' />
     <OnError ExecuteTargets="DeleteReleaseNotes" />
   </Target>
 
@@ -203,7 +186,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask AssemblyFile="..\packages\xunit.1.9.0.1566\lib\xunit.runner.msbuild.dll"
+  <UsingTask AssemblyFile="$(XunitRunnerPath)"
              TaskName="Xunit.Runner.MSBuild.xunit" />
 
   <UsingTask TaskName="GetSemanticVersion"
