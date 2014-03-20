@@ -50,6 +50,10 @@
       " />
   </Target>
 
+  <ItemGroup>
+    <CopyNuGetFiles Include="@(NuGetFiles)"/>
+  </ItemGroup>
+
   <Target Name="MakePrivateKeyFile">
     <PropertyGroup>
       <SignAssembly>true</SignAssembly>
@@ -97,7 +101,7 @@
              Query="//metadata/version"
              Value="$(SemanticVersion)" />
     <XmlPoke XmlInputPath="$(NuGetFile)"
-             Query="//metadata/dependencies/dependency[@id='%(NuGetPackageNames.Identity)']/@version"
+             Query="//metadata/dependencies/dependency[@id='%(CopyNuGetFiles.Filename)']/@version"
              Value="$(SemanticVersion)" />
   </Target>
 
@@ -124,7 +128,7 @@
              Query="//metadata/version"
              Value="0.0.0" />
     <XmlPoke XmlInputPath="$(NuGetFile)"
-             Query="//metadata/dependencies/dependency[@id='%(NuGetPackageNames.Identity)']/@version"
+             Query="//metadata/dependencies/dependency[@id='%(CopyNuGetFiles.Filename)']/@version"
              Value="0.0.0" />
   </Target>
 
