@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Xunit;
@@ -29,6 +30,12 @@ namespace Jwc.Experiment
         [InlineData("AutoDataTheoremAttribute")]
         [InlineData("TestFixtureAdapter")]
         public void SutGeneratesTransformFiles(string originName)
+        {
+            GenerateTransformFile(originName);
+        }
+
+        [Conditional("CI")]
+        private static void GenerateTransformFile(string originName)
         {
             string directory = @"..\..\..\..\src\Experiment.AutoFixture\";
             var origin = directory + originName + ".cs";
