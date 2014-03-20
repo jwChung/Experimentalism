@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <title>Experiment.AutoFixture</title>
+    <id>Experiment.AutoFixture</id>
+    <version>0.0.0</version>
+    <authors>Jin-Wook Chung</authors>
+    <description>Experiment supports parameterized tests with auto data using AutoFixture library.</description>
+    <tags>unit-testing tdd xunit</tags>
+    <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
+    <licenseUrl>https://github.com/jwChung/Experimentalism/blob/master/LICENCE.md</licenseUrl>
+    <releaseNotes>releaseNotes</releaseNotes>
+    <dependencies>
+      <dependency id="Experiment" version="0.0.0" />
+      <dependency id="AutoFixture" version="3.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\Experiment.AutoFixture\**\*.pp" target="content" />
+    <file src="Install.ps1" target="tools" />
+  </files>
+</package>

@@ -85,14 +85,20 @@
     <xunit Assembly="%(TestAssemblies.Identity)" />
   </Target>
 
-  <Target Name="NuGetVersioning">
+  <Target Name="NuGetVersioning" Outputs="%(NuGetFiles.FullPath)">
     <PropertyGroup>
       <Assembly>%(TestAssemblies.Identity)</Assembly>
+      <NuGetFile>%(NuGetFiles.FullPath)</NuGetFile>
     </PropertyGroup>
     <GetSemanticVersion Assembly="$(Assembly)">
       <Output TaskParameter="SemanticVersion" PropertyName="SemanticVersion" />
     </GetSemanticVersion>
-    <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/version" Value="$(SemanticVersion)" />
+    <XmlPoke XmlInputPath="$(NuGetFile)"
+             Query="//metadata/version"
+             Value="$(SemanticVersion)" />
+    <XmlPoke XmlInputPath="$(NuGetFile)"
+             Query="//metadata/dependencies/dependency[@id='%(NuGetPackageNames.Identity)']/@version"
+             Value="$(SemanticVersion)" />
   </Target>
 
   <Target Name="NuGetReleaseNotes">
@@ -104,11 +110,22 @@
   </Target>
 
   <Target Name="NuGetPack">
-    <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" />
+    <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" ContinueOnError="true" />
   </Target>
 
-  <Target Name="RestoreNuGetVersion">
-    <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/version" Value="0.0.0" />
+  <Target Name="RestoreNuGetVersion" Outputs="%(NuGetFiles.FullPath)">
+    <PropertyGroup>
+      <NuGetFile>%(NuGetFiles.FullPath)</NuGetFile>
+    </PropertyGroup>
+    <GetSemanticVersion Assembly="$(Assembly)">
+      <Output TaskParameter="SemanticVersion" PropertyName="SemanticVersion" />
+    </GetSemanticVersion>
+    <XmlPoke XmlInputPath="$(NuGetFile)"
+             Query="//metadata/version"
+             Value="0.0.0" />
+    <XmlPoke XmlInputPath="$(NuGetFile)"
+             Query="//metadata/dependencies/dependency[@id='%(NuGetPackageNames.Identity)']/@version"
+             Value="0.0.0" />
   </Target>
 
   <Target Name="RestoreReleaseNotes">
