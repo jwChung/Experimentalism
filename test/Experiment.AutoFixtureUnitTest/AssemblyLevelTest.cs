@@ -35,11 +35,11 @@ namespace Jwc.Experiment
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";
             Assert.True(File.Exists(origin), "exists.");
-            VerifyGenerateFile(origin, destination);
+            VerifyGeneratingFile(origin, destination);
         }
 
         [Conditional("CI")]
-        private static void VerifyGenerateFile(string origin, string destination)
+        private static void VerifyGeneratingFile(string origin, string destination)
         {
             var content = File.ReadAllText(origin, Encoding.UTF8)
                 .Replace("namespace Jwc.Experiment", "namespace $rootnamespace$");
