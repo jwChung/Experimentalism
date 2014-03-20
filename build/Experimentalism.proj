@@ -2,7 +2,7 @@
 
   <Target Name="Verify">
     <CallTarget Targets="
-      Build;
+      BuildProjects;
       UnitTest;
       " />
   </Target>
@@ -22,7 +22,7 @@
   <Target Name="Build">
     <CallTarget Targets="
       MakePrivateKeyFile;
-      Build;
+      BuildProjects;
       DeleteKeyFiles;
       " />
   </Target>
@@ -60,7 +60,7 @@
     <MakePrivateKeyFile PrivateKey="$(PrivateKey)"/>
   </Target>
 
-  <Target Name="Build">
+  <Target Name="BuildProjects">
     <ItemGroup>
       <Projects Include="..\src\**\*.csproj" />
       <TestProjects Include="..\test\**\*.csproj" />
