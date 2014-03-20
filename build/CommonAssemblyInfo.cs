@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("0.3.0")]
-[assembly: AssemblyInformationalVersion("0.3.0-pre01")]
+[assembly: AssemblyInformationalVersion("0.3.0")]
 
 /*
- * Version 0.3.0-pre01
+ * Version 0.3.0
  * 
  * - implement Experiment.AutoFixture, which supports parameterized test
  *   with auto data using AutoFixture library.
