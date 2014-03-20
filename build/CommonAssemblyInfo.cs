@@ -10,12 +10,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.3.0")]
-[assembly: AssemblyInformationalVersion("0.3.0")]
+[assembly: AssemblyVersion("0.4.0")]
+[assembly: AssemblyInformationalVersion("0.4.0")]
 
 /*
- * Version 0.3.0
+ * Version 0.4.0
  * 
- * - implement Experiment.AutoFixture, which supports parameterized test
- *   with auto data using AutoFixture library.
+ * - rename TheoremAttribute to NaiveTheoremAttribute.
+ * 
+ * - rename AutoDataTheoremAttribute to TheoremAttribute.
+ * 
+ * - The above changes are breaking change but as the current major
+ *   version is zero(unstable), the change is acceptable according to
+ *   Semantic Versioning.
  */
