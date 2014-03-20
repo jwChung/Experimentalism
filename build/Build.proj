@@ -35,7 +35,7 @@
       " />
   </Target>
 
-  <Target Name="Deployment" Condition=" '$(BranchName)' == 'master' and !$(CommitMessage.Contains('Merge pull request #')) ">
+  <Target Name="Deployment" Condition=" '$(CurrentBranchName)' == 'master' and !$(CommitMessage.StartsWith('Merge pull request #')) ">
     <CallTarget Targets="
       NuGetVersioning;
       NuGetReleaseNotes;
