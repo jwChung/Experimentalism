@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Text;
+using Jwc.Experiment;
 using Xunit;
 using Xunit.Extensions;
 
@@ -35,7 +36,7 @@ namespace Jwc.Experiment
         {
             string directory = @"..\..\..\..\src\Experiment.AutoFixture\";
             var origin = directory + originName + ".cs";
-            var destination = directory + originName + ".pp";
+            var destination = directory + originName + ".cs.pp";
             Assert.True(File.Exists(origin), "exists.");
             var content = File.ReadAllText(origin, Encoding.UTF8)
                 .Replace("namespace Jwc.Experiment", "namespace $rootnamespace$");
