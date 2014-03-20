@@ -6,7 +6,7 @@ namespace Jwc.Experiment
 {
     /// <summary>
     /// <see cref="ISpecimenContext"/>를 <see cref="ITestFixture"/>에 맞춘다.
-    /// auto data기능을 AutoFixture library로 부터 채용하게 된다.
+    /// auto data기능을 AutoFixture library로부터 채용하게 된다.
     /// </summary>
     public class TestFixtureAdapter : ITestFixture
     {
