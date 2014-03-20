@@ -50,6 +50,7 @@
     <Compile Include="AutoDataTheoremAttributeTest.cs" />
     <Compile Include="FakeSpecimenContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureAdapterTest.cs" />
   </ItemGroup>
   <ItemGroup>
