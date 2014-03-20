@@ -43,10 +43,21 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AutoDataTheoremAttributeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.AutoFixture\Experiment.AutoFixture.csproj">
+      <Project>{B78B09AD-1B2D-40E8-A4E0-15913A04B313}</Project>
+      <Name>Experiment.AutoFixture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
+      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
+      <Name>Experiment</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
