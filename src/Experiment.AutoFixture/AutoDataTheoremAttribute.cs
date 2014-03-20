@@ -1,4 +1,6 @@
-﻿namespace Jwc.Experiment
+﻿using System;
+
+namespace Jwc.Experiment
 {
     /// <summary>
     /// 이 attribute는 method위에 선언되어 해당 method가 test-case라는 것을
@@ -7,7 +9,8 @@
     /// Parameterized test에 대해 이 attribute는 AutoFixture library를 이용하여
     /// auto data기능을 제공한다.
     /// </summary>
-    public class AutoDataTheoremAttribute : TheoremAttribute
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class AutoDataTheoremAttribute : TheoremAttribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoDataTheoremAttribute"/> class.
