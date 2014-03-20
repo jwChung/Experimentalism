@@ -33,7 +33,7 @@ namespace Jwc.Experiment
 
         public object Create(object request)
         {
-            throw new System.NotImplementedException();
+            return SpecimenContext.Resolve(request);
         }
     }
 }

@@ -41,5 +41,24 @@ namespace Jwc.Experiment
         {
             Assert.Throws<ArgumentNullException>(() => new TestFixtureAdapter(null));
         }
+
+        [Fact]
+        public void CreateReturnsCorrectSpecimen()
+        {
+            var context = new FakeSpecimenContext();
+            var request = new object();
+            var expected = new object();
+            context.OnResolve = r =>
+            {
+                if (r == request)
+                    return expected;
+                throw new NotSupportedException();
+            };
+            var sut = new TestFixtureAdapter(context);
+
+            var actual = sut.Create(request);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
