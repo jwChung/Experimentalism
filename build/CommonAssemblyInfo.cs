@@ -10,11 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.2.2")]
-[assembly: AssemblyInformationalVersion("0.2.2")]
+[assembly: AssemblyVersion("0.3.0")]
+[assembly: AssemblyInformationalVersion("0.3.0-pre01")]
 
 /*
- * Version 0.2.2
+ * Version 0.3.0-pre01
  * 
- * - fixes specifying xunit dependency in nuspec.
+ * - implement Experiment.AutoFixture, which supports parameterized test
+ *   with auto data using AutoFixture library.
  */
