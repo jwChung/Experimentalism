@@ -9,7 +9,7 @@ namespace Jwc.Experiment
     public class Scenario
     {
         [NaiveTheorem]
-        public void TheoremSupportsNonParameterizedTest()
+        public void NaiveTheoremSupportsNonParameterizedTest()
         {
             Assert.True(true, "excuted.");
         }
@@ -17,7 +17,7 @@ namespace Jwc.Experiment
         [NaiveTheorem]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void TheoremSupportsParameterizedTest(string arg1, int arg2)
+        public void NaiveTheoremSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);

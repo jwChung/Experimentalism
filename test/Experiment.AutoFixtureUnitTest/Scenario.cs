@@ -6,7 +6,7 @@ namespace Jwc.Experiment
     public class Scenario
     {
         [Theorem]
-        public void AutoDataTheoremSupportsParameterizedTestWithAutoData(
+        public void TheoremSupportsParameterizedTestWithAutoData(
             string arg1, Type arg2)
         {
             Assert.NotNull(arg1);
