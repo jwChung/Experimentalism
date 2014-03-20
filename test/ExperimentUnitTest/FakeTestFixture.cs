@@ -5,7 +5,7 @@ namespace Jwc.Experiment
     public class FakeTestFixture : ITestFixture
     {
         private readonly string _stringValue = Guid.NewGuid().ToString();
-        private readonly string _intValue = Guid.NewGuid().ToString();
+        private readonly int _intValue = new Random().Next();
 
         public string StringValue
         {
@@ -15,7 +15,7 @@ namespace Jwc.Experiment
             }
         }
 
-        public string IntValue
+        public int IntValue
         {
             get
             {
