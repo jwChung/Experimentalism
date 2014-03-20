@@ -6,28 +6,6 @@ namespace Jwc.Experiment
     {
         private readonly string _stringValue = Guid.NewGuid().ToString();
         private readonly string _intValue = Guid.NewGuid().ToString();
-        private readonly Func<object, object> _onCreate;
-
-        public FakeTestFixture()
-        {
-            _onCreate = r =>
-            {
-                var type = r as Type;
-                if (type != null)
-                {
-                    if (type == typeof(string))
-                    {
-                        return _stringValue;
-                    }
-                    if (type == typeof(int))
-                    {
-                        return _intValue;
-                    }
-                }
-
-                throw new NotSupportedException();
-            };
-        }
 
         public string StringValue
         {
@@ -47,7 +25,20 @@ namespace Jwc.Experiment
         
         public object Create(object request)
         {
-            return _onCreate(request);
+            var type = request as Type;
+            if (type != null)
+            {
+                if (type == typeof(string))
+                {
+                    return _stringValue;
+                }
+                if (type == typeof(int))
+                {
+                    return _intValue;
+                }
+            }
+
+            throw new NotSupportedException();
         }
     }
 }
