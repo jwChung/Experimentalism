@@ -2,19 +2,19 @@
 
 namespace Jwc.Experiment
 {
-    public class AutoDataTheoremAttributeTest
+    public class TheoremAttributeTest
     {
         [Fact]
         public void SutIsTheoremAttribute()
         {
-            var sut = new AutoDataTheoremAttribute();
+            var sut = new TheoremAttribute();
             Assert.IsAssignableFrom<NaiveTheoremAttribute>(sut);
         }
 
         [Fact]
         public void FixtureFactoryIsCorrect()
         {
-            var sut = new AutoDataTheoremAttribute();
+            var sut = new TheoremAttribute();
 
             var actual = sut.FixtureFactory();
 

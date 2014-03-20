@@ -11,12 +11,12 @@ namespace Jwc.Experiment
     /// auto data기능을 제공한다.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class AutoDataTheoremAttribute : NaiveTheoremAttribute
+    public sealed class TheoremAttribute : NaiveTheoremAttribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutoDataTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
         /// </summary>
-        public AutoDataTheoremAttribute() : base(() => new TestFixtureAdapter())
+        public TheoremAttribute() : base(() => new TestFixtureAdapter())
         {
         }
     }

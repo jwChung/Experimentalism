@@ -5,7 +5,7 @@ namespace Jwc.Experiment
 {
     public class Scenario
     {
-        [AutoDataTheorem]
+        [Theorem]
         public void AutoDataTheoremSupportsParameterizedTestWithAutoData(
             string arg1, Type arg2)
         {

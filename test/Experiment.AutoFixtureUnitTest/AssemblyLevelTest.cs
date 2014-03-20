@@ -13,7 +13,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(AutoDataTheoremAttribute).Assembly;
+            var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 "mscorlib",
@@ -28,7 +28,7 @@ namespace Jwc.Experiment
         }
 
         [Theory]
-        [InlineData("AutoDataTheoremAttribute")]
+        [InlineData("TheoremAttribute")]
         [InlineData("TestFixtureAdapter")]
         public void SutGeneratesNugetTransformFiles(string originName)
         {
