@@ -16,9 +16,9 @@ namespace Jwc.Experiment
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixtureAdapter"/> class.
         /// </summary>
-        public TestFixtureAdapter() : this(
-            new SpecimenContext(new Fixture()))
+        public TestFixtureAdapter()
         {
+            _specimenContext = new SpecimenContext(new Fixture());
         }
 
         /// <summary>
