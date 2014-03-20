@@ -162,8 +162,8 @@
   </Target>
 
   <Target Name="GitTagging" Condition="!$(SemanticVersion.Contains('-'))">
-    <Exec Command='git config user.name "Jin-Wook Chung"' />
-    <Exec Command='git config user.email "jwChung@hotmail.com"' />
+    <Exec Command='git config user.name "$(APPVEYOR_REPO_COMMIT_AUTHOR)"' />
+    <Exec Command='git config user.email "$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)"' />
     <Exec Command="git tag -a -F ReleaseNotes.txt $(SemanticVersion)" />
     <Exec Command="git push --quiet --tags --repo https://$(GitHubAccount)@github.com/jwChung/$(MSBuildThisFileName).git" />
     <OnError ExecuteTargets="DeleteReleaseNotes" />
