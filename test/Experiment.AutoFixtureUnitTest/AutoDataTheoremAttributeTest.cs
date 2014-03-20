@@ -1,7 +1,6 @@
-﻿using Jwc.Experiment;
-using Xunit;
+﻿using Xunit;
 
-namespace Experiment.AutoFixtureUnitTest
+namespace Jwc.Experiment
 {
     public class AutoDataTheoremAttributeTest
     {

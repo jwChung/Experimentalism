@@ -1,10 +1,9 @@
 ﻿using System;
-using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
-namespace Experiment.AutoFixtureUnitTest
+namespace Jwc.Experiment
 {
     public class TestFixtureAdapterTest
     {

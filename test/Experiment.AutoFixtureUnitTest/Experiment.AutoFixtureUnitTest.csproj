@@ -7,8 +7,8 @@
     <ProjectGuid>{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Experiment.AutoFixtureUnitTest</RootNamespace>
-    <AssemblyName>Experiment.AutoFixtureUnitTest</AssemblyName>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
+    <AssemblyName>Jwc.Experiment.AutoFixtureUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
