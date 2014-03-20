@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Jwc.Experiment;
@@ -25,19 +26,22 @@ namespace Jwc.Experiment
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
             Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
         }
-#if CI
+
         [Theory]
-#else
-        [Theory(Skip = "Run on CI server")]
-#endif
         [InlineData("AutoDataTheoremAttribute")]
         [InlineData("TestFixtureAdapter")]
-        public void SutGeneratesTransformFiles(string originName)
+        public void SutGeneratesNugetTransformFiles(string originName)
         {
             string directory = @"..\..\..\..\src\Experiment.AutoFixture\";
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";
             Assert.True(File.Exists(origin), "exists.");
+            VerifyGenerateFile(origin, destination);
+        }
+
+        [Conditional("CI")]
+        private static void VerifyGenerateFile(string origin, string destination)
+        {
             var content = File.ReadAllText(origin, Encoding.UTF8)
                 .Replace("namespace Jwc.Experiment", "namespace $rootnamespace$");
 
