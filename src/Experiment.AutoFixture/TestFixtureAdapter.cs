@@ -4,16 +4,16 @@ using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
 {
-    public class TestFixture : ITestFixture
+    public class TestFixtureAdapter : ITestFixture
     {
         private readonly ISpecimenContext _specimenContext;
 
-        public TestFixture() : this(
+        public TestFixtureAdapter() : this(
             new SpecimenContext(new Fixture()))
         {
         }
 
-        public TestFixture(ISpecimenContext specimenContext)
+        public TestFixtureAdapter(ISpecimenContext specimenContext)
         {
             if (specimenContext == null)
             {

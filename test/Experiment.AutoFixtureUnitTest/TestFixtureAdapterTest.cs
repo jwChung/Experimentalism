@@ -6,19 +6,19 @@ using Xunit;
 
 namespace Experiment.AutoFixtureUnitTest
 {
-    public class TestFixtureTest
+    public class TestFixtureAdapterTest
     {
         [Fact]
         public void SutIsTestFixture()
         {
-            var sut = new TestFixture();
+            var sut = new TestFixtureAdapter();
             Assert.IsAssignableFrom<ITestFixture>(sut);
         }
 
         [Fact]
         public void SpecimenContextIsCorrect()
         {
-            var sut = new TestFixture();
+            var sut = new TestFixtureAdapter();
 
             var actual = sut.SpecimenContext;
 
@@ -30,7 +30,7 @@ namespace Experiment.AutoFixtureUnitTest
         public void SpecimenContextInitializedFromCtorIsCorrect()
         {
             var expected = new SpecimenContext(new ArrayRelay());
-            var sut = new TestFixture(expected);
+            var sut = new TestFixtureAdapter(expected);
 
             var actual = sut.SpecimenContext;
 
@@ -40,7 +40,7 @@ namespace Experiment.AutoFixtureUnitTest
         [Fact]
         public void InitializeWithNullContextThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestFixture(null));
+            Assert.Throws<ArgumentNullException>(() => new TestFixtureAdapter(null));
         }
     }
 }
