@@ -7,8 +7,8 @@
     <ProjectGuid>{B78B09AD-1B2D-40E8-A4E0-15913A04B313}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Experiment.AutoFixture</RootNamespace>
-    <AssemblyName>Experiment.AutoFixture</AssemblyName>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
+    <AssemblyName>Jwc.Experiment.AutoFixture</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\..\build\Experimentalism.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Experiment.AutoFixture.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Jwc.Experiment.AutoFixture.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
