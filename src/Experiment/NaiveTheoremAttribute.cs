@@ -10,7 +10,7 @@ using Xunit.Sdk;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// 이 attribute는 method위에 선언되어 해당 method가 test-case라는 것을
+    /// 이 attribute는 method위에 선언되어 해당 method가 test case라는 것을
     /// 지칭하게 되며, non-parameterized test 뿐 아니라 parameterized test에도
     /// 사용될 수 있다.
     /// </summary>

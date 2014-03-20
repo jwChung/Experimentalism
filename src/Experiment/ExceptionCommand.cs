@@ -4,7 +4,7 @@ using Xunit.Sdk;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Exception 테스트 케이스를 나타냄.
+    /// Exception 테스트커멘드를 나타냄.
     /// </summary>
     public class ExceptionCommand : TestCommand
     {
