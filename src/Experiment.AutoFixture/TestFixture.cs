@@ -1,0 +1,10 @@
+﻿namespace Jwc.Experiment
+{
+    public class TestFixture : ITestFixture
+    {
+        public object Create(object request)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}
