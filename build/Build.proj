@@ -44,7 +44,6 @@
       RestoreReleaseNotes;
       NuGetPush;
       DeleteNupkgFiles;
-          
       CreateReleaseNotes;
       GitTagging;
       DeleteReleaseNotes;
