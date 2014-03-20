@@ -8,7 +8,7 @@ namespace Jwc.Experiment
         public void SutIsTheoremAttribute()
         {
             var sut = new AutoDataTheoremAttribute();
-            Assert.IsAssignableFrom<TheoremAttribute>(sut);
+            Assert.IsAssignableFrom<NaiveTheoremAttribute>(sut);
         }
 
         [Fact]

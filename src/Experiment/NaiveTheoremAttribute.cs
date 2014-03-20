@@ -17,24 +17,24 @@ namespace Jwc.Experiment
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification="fixtureType은 FixtureFactory property를 통해 얼마든지 얻을 수 있으며, 중요한 정보가 아님.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class TheoremAttribute : FactAttribute
+    public class NaiveTheoremAttribute : FactAttribute
     {
         private readonly Func<ITestFixture> _fixtureFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
         /// </summary>
-        public TheoremAttribute()
+        public NaiveTheoremAttribute()
         {
             _fixtureFactory = () => new NotSupportedFixture();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureType">Type of the fixture.</param>
         /// <exception cref="System.ArgumentNullException">fixtureType</exception>
-        public TheoremAttribute(Type fixtureType)
+        public NaiveTheoremAttribute(Type fixtureType)
         {
             if (fixtureType == null)
             {
@@ -45,11 +45,11 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
         /// <exception cref="System.ArgumentNullException">fixtureFactory</exception>
-        protected TheoremAttribute(Func<ITestFixture> fixtureFactory)
+        protected NaiveTheoremAttribute(Func<ITestFixture> fixtureFactory)
         {
             if (fixtureFactory == null)
             {

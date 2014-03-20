@@ -8,19 +8,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class TheoremAttributeTest
+    public class NaiveTheoremAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateNonParameterizedReturnsFactCommand()
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
             
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
 
@@ -34,7 +34,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         public void CreateParameterizedReturnsThoeryCommands(string arg1, int arg2, object arg3)
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
 
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
@@ -55,7 +55,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryInitializedFromDefaultIsCorrect()
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
             var actual = sut.FixtureFactory;
             Assert.IsType<NotSupportedFixture>(actual.Invoke());
         }
@@ -108,7 +108,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithInvalidCountDataThrows()
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -120,7 +120,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithInvalidTypeDataThrows()
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -132,7 +132,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryInitializedWithTypeIsCorrect()
         {
-            var sut = new TheoremAttribute(typeof(FakeTestFixture));
+            var sut = new NaiveTheoremAttribute(typeof(FakeTestFixture));
 
             var actual = sut.FixtureFactory;
 
@@ -143,7 +143,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFactoryTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TheoremAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new NaiveTheoremAttribute(null));
         }
 
         [Fact]
@@ -164,7 +164,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedPassesCorrectParameterTypes()
         {
-            var sut = new TheoremAttribute();
+            var sut = new NaiveTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
@@ -318,7 +318,7 @@ namespace Jwc.Experiment
         {
         }
 
-        private class AutoDataTheoremAttribute : TheoremAttribute
+        private class AutoDataTheoremAttribute : NaiveTheoremAttribute
         {
             public AutoDataTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
             {

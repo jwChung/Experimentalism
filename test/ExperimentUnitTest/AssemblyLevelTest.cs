@@ -8,7 +8,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(TheoremAttribute).Assembly;
+            var sut = typeof(NaiveTheoremAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 "mscorlib",
