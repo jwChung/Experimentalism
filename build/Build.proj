@@ -1,5 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Verify">
 
+  <Import Project="Build.config"/>
+  
   <Target Name="Verify">
     <CallTarget Targets="
       BuildProjects;
@@ -33,7 +35,7 @@
       " />
   </Target>
 
-  <Target Name="Deployment" Condition=" '$(APPVEYOR_REPO_BRANCH)' == 'master' and !$(APPVEYOR_REPO_COMMIT_MESSAGE.Contains('Merge pull request #')) ">
+  <Target Name="Deployment" Condition=" '$(CurrentBranchName)' == 'master' and !$(CommitMessage.StartsWith('Merge pull request #')) ">
     <CallTarget Targets="
       NuGetVersioning;
       NuGetReleaseNotes;
@@ -42,16 +44,11 @@
       RestoreReleaseNotes;
       NuGetPush;
       DeleteNupkgFiles;
-          
       CreateReleaseNotes;
       GitTagging;
       DeleteReleaseNotes;
       " />
   </Target>
-
-  <ItemGroup>
-    <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
-  </ItemGroup>
 
   <Target Name="MakePrivateKeyFile">
     <PropertyGroup>
@@ -61,10 +58,6 @@
   </Target>
 
   <Target Name="BuildProjects">
-    <ItemGroup>
-      <Projects Include="..\src\**\*.csproj" />
-      <TestProjects Include="..\test\**\*.csproj" />
-    </ItemGroup>
     <MSBuild Projects="@(Projects)"
              Targets="Rebuild;"
              Properties="Configuration=Release;
@@ -93,9 +86,6 @@
   </Target>
 
   <Target Name="NuGetVersioning">
-    <ItemGroup>
-      <NuGetFiles Include="*.nuspec" />
-    </ItemGroup>
     <PropertyGroup>
       <Assembly>%(TestAssemblies.Identity)</Assembly>
     </PropertyGroup>
@@ -106,7 +96,7 @@
   </Target>
 
   <Target Name="NuGetReleaseNotes">
-    <GetReleaseNotes CommonAssemblyInfo="CommonAssemblyInfo.cs">
+    <GetReleaseNotes CommonAssemblyInfo="%(CommonAssemblyInfo.Identity)">
       <Output TaskParameter="ReleaseNotes" PropertyName="ReleaseNotes" />
     </GetReleaseNotes>
     <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/releaseNotes" Value="$(ReleaseNotes)" />
@@ -114,9 +104,6 @@
   </Target>
 
   <Target Name="NuGetPack">
-    <PropertyGroup>
-      <NuGetPath>..\packages\NuGet.CommandLine.2.8.0\tools\NuGet.exe</NuGetPath>
-    </PropertyGroup>
     <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" />
   </Target>
 
@@ -138,9 +125,6 @@
   </Target>
 
   <Target Name="NuGetPushToLocal">
-    <PropertyGroup>
-      <LocalNugetFeed>D:\LocalNugetFeed</LocalNugetFeed>
-    </PropertyGroup>
     <ItemGroup>
       <NugetPackages Include="@(NuGetFiles->'%(RelativeDir)%(Filename).$(SemanticVersion).nupkg')" />
     </ItemGroup>
@@ -162,10 +146,10 @@
   </Target>
 
   <Target Name="GitTagging" Condition="!$(SemanticVersion.Contains('-'))">
-    <Exec Command='git config user.name "Jin-Wook Chung"' />
-    <Exec Command='git config user.email "jwChung@hotmail.com"' />
-    <Exec Command="git tag -a -F ReleaseNotes.txt $(SemanticVersion)" />
-    <Exec Command="git push --quiet --tags --repo https://$(GitHubAccount)@github.com/jwChung/$(MSBuildThisFileName).git" />
+    <Exec Command='git config user.name "$(CommitAuthor)"' />
+    <Exec Command='git config user.email "$(CommitAuthorEmail)"' />
+    <Exec Command='git tag -a -F ReleaseNotes.txt $(SemanticVersion)' />
+    <Exec Command='git push --quiet --tags --repo "$(Repository)"' />
     <OnError ExecuteTargets="DeleteReleaseNotes" />
   </Target>
 
@@ -201,7 +185,7 @@
     </Task>
   </UsingTask>
 
-  <UsingTask AssemblyFile="..\packages\xunit.1.9.0.1566\lib\xunit.runner.msbuild.dll"
+  <UsingTask AssemblyFile="$(XunitRunnerPath)"
              TaskName="Xunit.Runner.MSBuild.xunit" />
 
   <UsingTask TaskName="GetSemanticVersion"
