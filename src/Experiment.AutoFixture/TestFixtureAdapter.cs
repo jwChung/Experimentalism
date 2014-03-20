@@ -6,7 +6,7 @@ using Ploeh.AutoFixture.Kernel;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// <see cref="ISpecimenContext"/>를 <see cref="ITestFixture"/>에 맞춘다.
+    /// <see cref="ISpecimenContext"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.
     /// auto data기능을 AutoFixture library로부터 채용하게 된다.
     /// </summary>
     public class TestFixtureAdapter : ITestFixture
@@ -54,8 +54,7 @@ namespace Jwc.Experiment
         /// request를 통해 테스트에 필요한 specimen를 만듦.
         /// </summary>
         /// <param name="request">specimen을 만들기 위해 필요한 정보를 제공.
-        /// 일반적으로 
-        /// <see cref="Type" />을 많이 활용.</param>
+        /// 일반적으로 <see cref="Type" />을 많이 활용.</param>
         /// <returns>
         /// 만들어진 specimen 객체.
         /// </returns>
