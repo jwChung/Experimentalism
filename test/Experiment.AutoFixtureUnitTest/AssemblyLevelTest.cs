@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using Jwc.Experiment;
 using Xunit;
 using Xunit.Extensions;
 
