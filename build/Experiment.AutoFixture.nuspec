@@ -8,7 +8,7 @@
     <description>Experiment.AutoFixture supports parameterized tests with auto data using AutoFixture library.</description>
     <tags>unit-testing tdd xunit</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
-    <licenseUrl>https://github.com/jwChung/Experimentalism/blob/master/LICENCE.md</licenseUrl>
+    <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.md</licenseUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Experiment" version="0.0.0" />
