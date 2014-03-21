@@ -5,7 +5,7 @@
     <id>Experiment.AutoFixture</id>
     <version>0.0.0</version>
     <authors>Jin-Wook Chung</authors>
-    <description>Experiment supports parameterized tests with auto data using AutoFixture library.</description>
+    <description>Experiment.AutoFixture supports parameterized tests with auto data using AutoFixture library.</description>
     <tags>unit-testing tdd xunit</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
     <licenseUrl>https://github.com/jwChung/Experimentalism/blob/master/LICENCE.md</licenseUrl>
