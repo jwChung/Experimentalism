@@ -21,7 +21,7 @@ Just start with examples
 ------------------------
 Experimentalism을 빠르게 이해는 가장  좋은 방법은, 예제를 직접 실행해 보는 것이 아닐까 합니다. 아래의 순서에 따라 예제를 실행해 볼 수 있습니다.
 
-* Visual Studio 2010이상 버전에서 콘솔프로젝트(.NET Famework 4.0 이상기반) 하나 생성한다.
+* Visual Studio 2010이상 버전에서 클래스 라이브러리 프로젝트(.NET Famework 4.0 이상 기반)를 하나 생성한다.
 * NuGet package manager 혹은 [Package manager console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)을 통해 아래와 같은 명령으로 Experiment.AutoFixtureWithExample을 설치한다.
     ```
     PM> Install-Package Experiment.AutoFixtureWithExample
