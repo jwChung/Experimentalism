@@ -100,7 +100,7 @@ PM> Install-Package Experiment
 
 Questions
 ---------
-Experimentalism에 대한 도움말이나 설명 문서가 많이 부족합니다. 따라서, 궁금증이나 문의가 있으시면 **누구나**, **언제든지**  [GitHub issues](https://github.com/jwChung/Experimentalism/issues)를 통해 질문을 등록할 수 있습니다.
+Experimentalism에 대한 도움말이나 설명 문서가 많이 부족합니다. 따라서, 궁금증이나 문의가 있으시면 [GitHub issues](https://github.com/jwChung/Experimentalism/issues)를 통해 질문을 등록하실 수 있습니다.
 
 Additional references
 ---------------------
