@@ -93,11 +93,11 @@ public class PersonTest2
 Experiment는 직접 auto data기능을 제공하고 있지 않으며, _Parameterized test with auto data_에 대한 base class library역할을 합니다. auto data 기능은 `Experiment는.ITestFixture` 인터페이스 구현을 통해 이루어집니다.
 
 ### Inspiration
-Experiment는 [xUnit Test Patterns](by *Gerard Meszaros*)의 [Anonymous Creation Method]와 [Parameterized Anonymous Creation Method]에서 영감을 얻었으며, [AutoFixture]의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/) 라이브러리로부터 많은 영향을 받았습니다.
+Experiment는 [xUnit Test Patterns](by *Gerard Meszaros*)의 [Anonymous Creation Method]와 [Parameterized Anonymous Creation Method]에서 영감을 얻었으며, [AutoFixture]의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/) 라이브러리로부터 영향을 받았습니다.
 
 Experiment.AutoFixture
 ----------------------
-Experiment.AutoFixture auto data기능을 [AutoFixture]로부터 채용합니다. 따라서, Experiment.AutoFixture는 AutoFixture와 앞선  Experiment 라이브러리에 의존성을 가지게 됩니다.
+Experiment.AutoFixture auto data기능을 [AutoFixture]로부터 채용합니다. 따라서, Experiment.AutoFixture는 AutoFixture와 앞선 Experiment 라이브러리에 의존성을 가지게 됩니다.
 
 ### Source code transform
 Experiment.AutoFixture은 *.dll 형태로 제공되지 않고, 해당 프로젝트에 소스코드 파일이 직접 추가되는 형태로 배포되어, 사용자로 하여금 특정 목적에 맞게 소스코드를 수정할 수 있게 해주는 이점을 제공합니다(customization). _Source code transform_에 대한 자세한 사항은 NuGet의 [도움말](http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations#Source_Code_Transformations)을 참고하세요.
