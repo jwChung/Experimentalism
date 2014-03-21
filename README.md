@@ -1,6 +1,7 @@
 Experimentalism
 ===============
 
+* [Just start with examples](#just-start-with-examples)
 * [Experiment](#Experiment)
     * [Parameterized test with auto data](#parameterized-test-with-auto-data)
     * [Base class library](#base-class-library)
@@ -15,6 +16,17 @@ Experimentalism
 Experimentalism은 TDD를 용이하게 하기 위한 라이브러리와 툴을 제공하는 것이 목적입니다.
 
 Experimentalism의 모든 프로젝트(Nuget패키지)는 [Semantic Versioning](http://semver.org/)을 따릅니다.
+
+Just start with examples
+------------------------
+Experimentalism을 빠르게 이해는 가장  좋은 방법은, 예제를 직접 실행해 보는 것이 아닐까 합니다. 아래의 순서에 따라 예제를 실행해 볼 수 있습니다.
+
+* Visual Studio 2010이상 버전에서 콘솔프로젝트(.NET Famework 4.0 이상기반) 하나 생성한다.
+* NuGet package manager 혹은 [Package manager console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)을 통해 아래와 같은 명령으로 Experiment.AutoFixtureWithExample을 설치한다.
+    ```
+    PM> Install-Package Experiment.AutoFixtureWithExample
+    ```
+* Xunit test runner 들 중([TestDriven.net](http://testdriven.net/), [xUnit.net runner for Visual Studio](http://visualstudiogallery.msdn.microsoft.com/463c5987-f82b-46c8-a97e-b1cde42b9099?SRC=VSIDE), 또는 [Resharper test runner](http://www.jetbrains.com/resharper/features/unit_testing.html)) 하나로 Scenario.cs안에 있는 테스트들을 실행한다.
 
 Experiment
 ----------
