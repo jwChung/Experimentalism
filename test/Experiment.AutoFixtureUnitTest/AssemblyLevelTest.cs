@@ -38,6 +38,17 @@ namespace Jwc.Experiment
             VerifyGeneratingFile(origin, destination);
         }
 
+        [Theory]
+        [InlineData("Scenario")]
+        public void SutGeneratesNugetTransformFilesForTest(string originName)
+        {
+            string directory = @"..\..\..\..\test\Experiment.AutoFixtureUnitTest\";
+            var origin = directory + originName + ".cs";
+            var destination = directory + originName + ".cs.pp";
+            Assert.True(File.Exists(origin), "exists.");
+            VerifyGeneratingFile(origin, destination);
+        }
+
         [Conditional("CI")]
         private static void VerifyGeneratingFile(string origin, string destination)
         {
