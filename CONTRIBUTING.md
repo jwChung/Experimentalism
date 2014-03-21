@@ -50,19 +50,20 @@ Pull requests
     제목과 내용은 공백 줄로 분리되어야 합니다. (git commit message 가이드라인)
 * <내용>  
     필요 시, 해당 커밋의 작업내용에 대한 의도, 방법 이유 및 해당 작업에 대한 side effect에 관한 사항을 작성합니다.
+    [각 라인은 72자를 넘지 않도록 합니다](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
- ### pull request 검증  
-    Experimentalism의 루트 디렉토리에는 Run.cmd라는 파일이 있습니다. 이를 실행하여 에러가 발생하지 않으면, 이상이 없는 것으로 판단할 수 있습니다.
+### pull request 검증  
+Experimentalism의 루트 디렉토리에는 Run.cmd라는 파일이 있습니다. 이를 실행하여 에러가 발생하지 않으면, 이상이 없는 것으로 판단할 수 있습니다.
 
-    Visual studio에서는 release모드에서 모든 테스트들이 성공하고, 솔루션 레벨 Code analysis실행 시(단축키: Alt+F11) 어떠한 에러나 경고가 없을 시 해당 pull request는 이상이 없는 것을 간주합니다.
+Visual studio에서는 release모드에서 모든 테스트들이 성공하고, 솔루션 레벨 Code analysis실행 시(단축키: Alt+F11) 어떠한 에러나 경고가 없을 시 해당 pull request는 이상이 없는 것을 간주합니다.
 
-Jump in!
+Jump in
 --------
-Experimentalism 개발 혹은 오픈소스 참여에 익숙하지 않으신 분들은 **Jump in 라벨**이 붙은 이슈를 주목해 주시기 바랍니다. Jump in 라벨의 의미는 다음과 같은 의미를 가집니다.
+Experimentalism 개발 혹은 오픈소스 참여에 익숙하지 않으신 분들은 [GitHub issues](https://github.com/jwChung/Experimentalism/issues?labels=jump+in)에서 **Jump in** 라벨이 붙은 이슈를 주목해 주시기 바랍니다. Jump in 라벨의 의미는 다음과 같은 의미를 가집니다.
 
-* 해당 Jump in 이슈를 해결하는데 상대적으로 많은 시간이 필요하지 않다.
+* 해당 이슈를 해결하는데 상대적으로 많은 시간이 필요하지 않다.
 * 상대적으로 독립적인 이슈로 이해하기 쉽다.
-* 해당 이슈를 이해하기 쉽게 잘 설명이 되어 있으며, 필요 시 언제든 해당 이슈에 대한 질문을 할 수 있다.
+* 해당 이슈는 이해하기 쉽게 잘 설명이 되어 있으며, 필요 시 언제든 해당 이슈에 대한 질문을 할 수 있다.
 
 보다 상세한 Jump in 라벨에 대한 내용은 [여기](http://nikcodes.com/2013/05/10/new-contributor-jump-in/)를 참고하시기 바랍니다.
 
