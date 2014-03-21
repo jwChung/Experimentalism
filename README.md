@@ -107,7 +107,7 @@ Experiment.AutoFixture은 [NuGet](https://www.nuget.org/packages/Experiment.Auto
 NuGet package manager 혹은 [Package manager console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)을 통해 아래와 같은 명령으로 설치할 수 있습니다.
 
 ```
-PM> Install-Package Experiment
+PM> Install-Package Experiment.AutoFixture
 ```
 
 Questions
