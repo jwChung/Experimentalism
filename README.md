@@ -115,6 +115,8 @@ Contributions
 
 관심이 있으신 **누구나** Experimentalism에 참여하실 수 있습니다. 특별히 TDD에 관심있거나 또는 배우고자하는 분들이 참여하시면 많은 TDD에 관한 많은 insight를 얻을 수 있을 것으로 생각됩니다.
 
+참여방법은 [CONTRIBUTING.md](https://github.com/jwChung/Experimentalism/blob/master/CONTRIBUTING.md)를 통해서 확인하실 수 있습니다.
+
 [xUnit.net]: <http://xunit.codeplex.com/>
 [Parameterized test]: <http://xunitpatterns.com/Parameterized%20Test.html>
 [AutoFixture]: <https://github.com/AutoFixture/AutoFixture>
