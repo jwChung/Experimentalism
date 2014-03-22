@@ -1,6 +1,6 @@
 How to contribute to Experimentalism
 ====================================
-Experimentalism 오픈소스 프로젝트에서는 타인과의 협업을 위한 규칙이 필요로 합니다. 본 문서에서는 규칙과 자율성(프로젝트 참여 용이성) 사이의 균형점을 찾기위한 노력을 하고 있습니다.
+Experimentalism에서는 타인과의 협업을 위한 규칙이 필요합니다. 본 문서에서는 규칙과 자율성(프로젝트 참여 용이성) 사이의 균형점을 찾기 위한 노력을 하고 있습니다.
 
 본 문서에 대한 문의가 있을 시, [GitHub issues](https://github.com/jwChung/Experimentalism/issues)를 통해 질문을 등록하실 수 있습니다.
 
