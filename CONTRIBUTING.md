@@ -1,6 +1,6 @@
 How to contribute to Experimentalism
 ====================================
-Experimentalism 오픈소스 프로젝트는 개인을 위한 공간이 아니므로 타인과의 협업을 위한 규칙이 필요합니다. 본 문서에서는 규칙과 자율성(프로젝트 참여 용이성) 사이의 균형점을 찾기위한 노력을 하고 있습니다.
+Experimentalism 오픈소스 프로젝트에서는 타인과의 협업을 위한 규칙이 필요로 합니다. 본 문서에서는 규칙과 자율성(프로젝트 참여 용이성) 사이의 균형점을 찾기위한 노력을 하고 있습니다.
 
 본 문서에 대한 문의가 있을 시, [GitHub issues](https://github.com/jwChung/Experimentalism/issues)를 통해 질문을 등록하실 수 있습니다.
 
@@ -20,7 +20,7 @@ Experimentalism 개발 가이드라인
 
 Pull requests
 -------------
-개발참여는 GitHub의 [pull requeset](https://github.com/jwChung/Experimentalism/pulls)를 통하여 참여하실 수 있습니며, 아래와 같은 코딩스타일, 커밋메세지 포멧을 지켜야하며, 마지막으로 해당 pull request가 이상이 없는지 확인하는 과정이 필요합니다.
+개발참여는 GitHub의 [pull requeset](https://github.com/jwChung/Experimentalism/pulls)를 통하여 참여하실 수 있습니다. 아래와 같은 코딩스타일, 커밋메세지 포멧을 지켜야하며, 마지막으로 해당 pull request가 이상이 없는지 확인하는 과정이 필요합니다.
 
 ### Coding style
 * **코드라인은 120자를 넘지 않아야 합니다.**  
