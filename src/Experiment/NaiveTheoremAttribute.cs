@@ -132,8 +132,7 @@ namespace Jwc.Experiment
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var autoArguments = new AutoArgumentCollection(
-                method.MethodInfo.GetParameters(),
-                FixtureFactory);
+                FixtureFactory, method.MethodInfo, method.MethodInfo.GetParameters());
 
             if (!autoArguments.HasAutoParemeters)
             {
@@ -154,8 +153,9 @@ namespace Jwc.Experiment
         private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
         {
             var autoArguments = new AutoArgumentCollection(
-                method.MethodInfo.GetParameters(),
                 FixtureFactory,
+                method.MethodInfo,
+                method.MethodInfo.GetParameters(),
                 testCaseData.Length);
             var argument = testCaseData.Concat(autoArguments);
 
@@ -194,17 +194,20 @@ namespace Jwc.Experiment
 
         private class AutoArgumentCollection : IEnumerable<object>
         {
-            private readonly ParameterInfo[] _parameters;
             private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
+            private readonly MethodInfo _methodInfo;
+            private readonly ParameterInfo[] _parameters;
             private readonly int _skipCount;
 
             public AutoArgumentCollection(
-                ParameterInfo[] parameters,
                 Func<MethodInfo, ITestFixture> fixtureFactory,
+                MethodInfo methodInfo,
+                ParameterInfo[] parameters,
                 int skipCount = 0)
             {
-                _parameters = parameters;
                 _fixtureFactory = fixtureFactory;
+                _methodInfo = methodInfo;
+                _parameters = parameters;
                 _skipCount = skipCount;
             }
 
@@ -218,8 +221,7 @@ namespace Jwc.Experiment
 
             public IEnumerator<object> GetEnumerator()
             {
-                var testFixture = _fixtureFactory.Invoke(null);
-
+                var testFixture = _fixtureFactory.Invoke(_methodInfo);
                 return _parameters
                     .Skip(_skipCount)
                     .Select(pi => testFixture.Create(pi.ParameterType))

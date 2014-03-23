@@ -346,6 +346,24 @@ namespace Jwc.Experiment
 
             Assert.Equal(typeof(FakeTestFixture), actual);
         }
+
+        [Fact]
+        public void CreateTestCommandsPassesCorrectMethodInfoToFixtureFactory()
+        {
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
+            bool verified = false;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                Assert.Equal(method.MethodInfo, mi);
+                verified = true;
+                return new FakeTestFixture();
+            };
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
+
+            sut.CreateTestCommands(method).Single();
+
+            Assert.True(verified, "verified");
+        }
         
         [InlineData]
         [InlineData]
