@@ -31,6 +31,16 @@ namespace Jwc.Experiment
             var adapter = Assert.IsType<TestFixtureAdapter>(actual);
             var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
             Assert.IsType<Fixture>(context.Builder);
+        }
+
+        [Fact]
+        public void FixtureFactoryAlwaysCreatesNewInstance()
+        {
+            var sut = new TheoremAttribute();
+
+            var actual = sut.FixtureFactory(null);
+
+            Assert.NotNull(actual);
             Assert.NotSame(sut.FixtureFactory(null), actual);
         }
     }
