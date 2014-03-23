@@ -49,7 +49,8 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFixtureFactoryThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(null));
+            Func<ITestFixture> fixtureFactory = null;
+            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
         }
 
         [Fact]
@@ -310,6 +311,13 @@ namespace Jwc.Experiment
             Assert.Equal(fixtureType, actual);
         }
 
+        [Fact]
+        public void InitializeWithNullFixtureFactoryHavingMethodInfoThrows()
+        {
+            Func<MethodInfo, ITestFixture> fixtureFactory = null;
+            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
@@ -343,6 +351,10 @@ namespace Jwc.Experiment
         private class DerivedTheoremAttribute : NaiveTheoremAttribute
         {
             public DerivedTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
+            {
+            }
+
+            public DerivedTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory) : base(fixtureFactory)
             {
             }
         }

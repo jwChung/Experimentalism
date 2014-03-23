@@ -59,6 +59,20 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureFactory">The fixture factory.</param>
+        protected NaiveTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+        {
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Gets a value indicating the fixture type passed from a constructor.
         /// </summary>
         public object FixtureType
