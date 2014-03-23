@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using Jwc.Experiment;
 using Ploeh.AutoFixture;
@@ -43,20 +42,12 @@ namespace Jwc.Experiment
 
         private static void Customize(IFixture fixture, ParameterInfo parameter)
         {
-            if (GetCustomizeAttribute(parameter) == null)
+            foreach (CustomizeAttribute customAttribute 
+                in parameter.GetCustomAttributes(typeof(CustomizeAttribute), false))
             {
-                return;
+                var customization = customAttribute.GetCustomization(parameter);
+                fixture.Customize(customization);
             }
-
-            var customization = GetCustomizeAttribute(parameter).GetCustomization(parameter);
-            fixture.Customize(customization);
-        }
-
-        private static CustomizeAttribute GetCustomizeAttribute(ParameterInfo parameter)
-        {
-            return (CustomizeAttribute)parameter
-                .GetCustomAttributes(typeof(CustomizeAttribute), false)
-                .SingleOrDefault();
         }
     }
 }

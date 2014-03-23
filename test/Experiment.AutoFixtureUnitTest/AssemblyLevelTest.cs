@@ -16,7 +16,6 @@ namespace Jwc.Experiment
             var specifiedAssemblies = new []
             {
                 "mscorlib",
-                "System.Core",
                 "Jwc.Experiment",
                 "Ploeh.AutoFixture",
                 "Ploeh.AutoFixture.Xunit"

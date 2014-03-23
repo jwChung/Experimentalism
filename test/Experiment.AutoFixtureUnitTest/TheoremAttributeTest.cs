@@ -71,11 +71,27 @@ namespace Jwc.Experiment
             Assert.NotNull(other);
         }
 
+        [Fact]
+        public void FixtureFactoryReflectsManyCustomizeAttributesOnSameParameter()
+        {
+            var sut = new TheoremAttribute();
+
+            var actual = sut.FixtureFactory(GetType().GetMethod("ManyAttributeTest"));
+
+            var person = (Person)actual.Create(typeof(Person));
+            Assert.NotNull(person.Name);
+            Assert.NotEqual(0, person.Age);
+        }
+
         public void FrozenTest([Frozen] string arg)
         {
         }
 
-        public void PersonTest([Frozen] string name, [Frozen] int age, Person person, object other)
+        public void PersonTest([Frozen] string name, [Frozen] int age, [Greedy] Person person, object other)
+        {
+        }
+
+        public void ManyAttributeTest([Greedy][Frozen] Person person)
         {
         }
 
@@ -83,6 +99,10 @@ namespace Jwc.Experiment
         {
             private readonly string _name;
             private readonly int _age;
+
+            public Person()
+            {
+            }
 
             public Person(string name, int age)
             {
