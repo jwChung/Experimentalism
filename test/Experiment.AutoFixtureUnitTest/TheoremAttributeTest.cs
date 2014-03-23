@@ -1,5 +1,6 @@
 ﻿using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
+using Ploeh.AutoFixture.Xunit;
 using Xunit;
 
 namespace Jwc.Experiment
@@ -25,8 +26,9 @@ namespace Jwc.Experiment
         public void FixtureFactoryIsCorrect()
         {
             var sut = new TheoremAttribute();
+            var dummyMethod = typeof(object).GetMethod("ToString");
 
-            var actual = sut.FixtureFactory(null);
+            var actual = sut.FixtureFactory(dummyMethod);
 
             var adapter = Assert.IsType<TestFixtureAdapter>(actual);
             var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
@@ -37,11 +39,24 @@ namespace Jwc.Experiment
         public void FixtureFactoryAlwaysCreatesNewInstance()
         {
             var sut = new TheoremAttribute();
+            var dummyMethod = typeof(object).GetMethod("ToString");
 
-            var actual = sut.FixtureFactory(null);
+            var actual = sut.FixtureFactory(dummyMethod);
 
             Assert.NotNull(actual);
-            Assert.NotSame(sut.FixtureFactory(null), actual);
+            Assert.NotSame(sut.FixtureFactory(dummyMethod), actual);
+        }
+
+        [Fact]
+        public void FixtureFactoryReflectsCustomizeAttribute()
+        {
+            var sut = new TheoremAttribute();
+            var actual = sut.FixtureFactory(GetType().GetMethod("FrozenTest"));
+            Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
+        }
+
+        public void FrozenTest([Frozen] string arg)
+        {
         }
     }
 }

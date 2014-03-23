@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
+using Ploeh.AutoFixture.Xunit;
 
 namespace Jwc.Experiment
 {
@@ -22,9 +25,24 @@ namespace Jwc.Experiment
         {
         }
 
-        private static ITestFixture CreateTestFixture()
+        private static ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
-            return new TestFixtureAdapter(new SpecimenContext(new Fixture()));
+            var fixture = new Fixture();
+
+            foreach (var parameter in testMethod.GetParameters())
+            {
+                var attribute = (CustomizeAttribute)parameter
+                .GetCustomAttributes(typeof(CustomizeAttribute), false)
+                .SingleOrDefault();
+
+                if (attribute != null)
+                {
+                    var customization = attribute.GetCustomization(parameter);
+                    fixture.Customize(customization);
+                }
+            }
+
+            return new TestFixtureAdapter(new SpecimenContext(fixture));
         }
     }
 }
