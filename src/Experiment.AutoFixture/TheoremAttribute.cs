@@ -27,22 +27,36 @@ namespace Jwc.Experiment
 
         private static ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
-            var fixture = new Fixture();
-
+            var fixture = CreateFixture();
             foreach (var parameter in testMethod.GetParameters())
             {
-                var attribute = (CustomizeAttribute)parameter
-                .GetCustomAttributes(typeof(CustomizeAttribute), false)
-                .SingleOrDefault();
-
-                if (attribute != null)
-                {
-                    var customization = attribute.GetCustomization(parameter);
-                    fixture.Customize(customization);
-                }
+                Customize(fixture, parameter);
             }
 
             return new TestFixtureAdapter(new SpecimenContext(fixture));
+        }
+
+        private static IFixture CreateFixture()
+        {
+            return new Fixture();
+        }
+
+        private static void Customize(IFixture fixture, ParameterInfo parameter)
+        {
+            if (GetCustomizeAttribute(parameter) == null)
+            {
+                return;
+            }
+
+            var customization = GetCustomizeAttribute(parameter).GetCustomization(parameter);
+            fixture.Customize(customization);
+        }
+
+        private static CustomizeAttribute GetCustomizeAttribute(ParameterInfo parameter)
+        {
+            return (CustomizeAttribute)parameter
+                .GetCustomAttributes(typeof(CustomizeAttribute), false)
+                .SingleOrDefault();
         }
     }
 }
