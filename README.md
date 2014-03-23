@@ -15,7 +15,7 @@ Experimentalism
 
 Experimentalism은 TDD를 용이하게 하기 위한 라이브러리와 툴을 제공하는 것이 목적입니다.
 
-Experimentalism의 모든 프로젝트(Nuget패키지)는 [Semantic Versioning](http://semver.org/)을 따릅니다.
+Experimentalism의 모든 프로젝트(NuGet패키지)는 [Semantic Versioning](http://semver.org/)을 따릅니다.
 
 Just start with examples
 ------------------------
@@ -30,7 +30,7 @@ Experimentalism을 빠르게 이해는 가장  좋은 방법은, 예제를 직�
 
 Experiment
 ----------
-[Parameterized Test]에 대한 auto data를 제공하기 위한 [xUnit.net]의 확장라이브러리입니다. 여기서 auto data란, 테스트에 필요한 값 또는 객체를 anonymous(또는 non-deterministric) 값으로 자동생성하는 것을 말합니다. 생성된 auto data는 테스트 메소드의 파라메타를 통해 제공되게 됩니다.
+[Parameterized Test](http://xunitpatterns.com/Parameterized%20Test.html)에 대한 auto data를 제공하기 위한 [xUnit.net](http://xunit.codeplex.com/)의 확장라이브러리입니다. 여기서 auto data란, 테스트에 필요한 값 또는 객체를 anonymous(또는 non-deterministric) 값으로 자동생성하는 것을 말합니다. 생성된 auto data는 테스트 메소드의 파라메타를 통해 제공되게 됩니다.
 
 ### Parameterized test with auto data
 
@@ -93,11 +93,11 @@ public class PersonTest2
 Experiment는 직접 auto data기능을 제공하고 있지 않으며, _Parameterized test with auto data_에 대한 base class library역할을 합니다. auto data 기능은 `Experiment는.ITestFixture` 인터페이스 구현을 통해 이루어집니다.
 
 ### Inspiration
-Experiment는 [xUnit Test Patterns](by *Gerard Meszaros*)의 [Anonymous Creation Method]와 [Parameterized Anonymous Creation Method]에서 영감을 얻었으며, [AutoFixture]의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/) 라이브러리로부터 영향을 받았습니다.
+Experiment는 [xUnit Test Patterns(*by Gerard Meszaros*)](http://xunitpatterns.com/index.html)의 [Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method)와 [Parameterized Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method)에서 영감을 얻었으며, [AutoFixture](https://github.com/AutoFixture/AutoFixture)의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/) 라이브러리로부터 영향을 받았습니다.
 
 Experiment.AutoFixture
 ----------------------
-Experiment.AutoFixture auto data기능을 [AutoFixture]로부터 채용합니다. 따라서, Experiment.AutoFixture는 AutoFixture와 앞선 Experiment 라이브러리에 의존성을 가지게 됩니다.
+Experiment.AutoFixture auto data기능을 AutoFixture로부터 채용합니다. 따라서, Experiment.AutoFixture는 AutoFixture와 앞선 Experiment 라이브러리에 의존성을 가지게 됩니다.
 
 ### Source code transform
 Experiment.AutoFixture은 *.dll 형태로 제공되지 않고, 해당 프로젝트에 소스코드 파일이 직접 추가되는 형태로 배포되어, 사용자로 하여금 특정 목적에 맞게 소스코드를 수정할 수 있게 해주는 이점을 제공합니다(customization). _Source code transform_에 대한 자세한 사항은 NuGet의 [도움말](http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations#Source_Code_Transformations)을 참고하세요.
@@ -128,10 +128,3 @@ Contributions
 관심이 있으신 **누구나** Experimentalism에 참여하실 수 있습니다. 특히, TDD에 관심있거나 또는 배우고자하는 분들이 참여하시면 TDD에 관한 insight를 얻을 수 있을 것으로 생각됩니다.
 
 참여방법은 [CONTRIBUTING.md](https://github.com/jwChung/Experimentalism/blob/master/CONTRIBUTING.md)를 통해서 확인하실 수 있습니다.
-
-[xUnit.net]: <http://xunit.codeplex.com/>
-[Parameterized test]: <http://xunitpatterns.com/Parameterized%20Test.html>
-[AutoFixture]: <https://github.com/AutoFixture/AutoFixture>
-[xUnit Test Patterns]: <http://xunitpatterns.com/index.html>
-[Anonymous Creation Method]: <http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method>
-[Parameterized Anonymous Creation Method]: <http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method>
