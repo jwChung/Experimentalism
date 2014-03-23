@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.5.1")]
-[assembly: AssemblyInformationalVersion("0.5.1")]
+[assembly: AssemblyVersion("0.6.0")]
+[assembly: AssemblyInformationalVersion("0.6.0")]
 
 /*
- * Version 0.5.1
+ * Version 0.6.0
  * 
- * - FixtureType property를 노출함으로써, NaiveTheoremAttribute의 fixtureType
- *   argument 노출에 대한 code analysis warning(CA1019)을 해결하였음.
+ * - 생성자 NaiveTheoremAttribute(Func<MethodInfo, ITestFixture>)를
+ *   오버로드함. ITestFixture 생성 시 MethodInfo(메타데이터)이용이 가능함.
  */
