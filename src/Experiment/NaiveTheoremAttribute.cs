@@ -69,7 +69,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureFactory");
             }
 
-            throw new NotImplementedException();
+            _fixtureFactory = fixtureFactory;
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return FixtureFactory.Invoke(null).GetType();
+                return FixtureFactory.Invoke(typeof(object).GetMethod("ToString")).GetType();
             }
         }
 

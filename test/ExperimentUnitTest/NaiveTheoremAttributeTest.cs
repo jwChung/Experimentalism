@@ -319,6 +319,33 @@ namespace Jwc.Experiment
             var actual = sut.FixtureType;
             Assert.Equal(typeof(NotSupportedFixture), actual);
         }
+
+        [Fact]
+        public void FixtureFactoryInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        {
+            Func<MethodInfo, ITestFixture> expected = mi => new FakeTestFixture();
+            var sut = new DerivedTheoremAttribute(expected);
+
+            var actual = sut.FixtureFactory;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void FixtureTypeInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        {
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                if (mi == null)
+                    throw new ArgumentException();
+                return new FakeTestFixture();
+            };
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
+
+            var actual = sut.FixtureType;
+
+            Assert.Equal(typeof(FakeTestFixture), actual);
+        }
         
         [InlineData]
         [InlineData]
