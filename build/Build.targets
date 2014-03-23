@@ -195,6 +195,7 @@
       <Using Namespace="System.Linq" />
       <Using Namespace="System.Text" />
       <Using Namespace="System.Text.RegularExpressions" />
+      <Using Namespace="System.Xml" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
         try
