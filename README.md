@@ -13,7 +13,7 @@ Experimentalism
 * [Additional references](#additional-references)
 * [Contributions](#contributions)
 
-Experimentalism은 TDD를 용이하게 하기 위한 라이브러리와 툴을 제공하는 것이 목적입니다.
+Experimentalism은 TDD에 도움을 줄 수 있는 라이브러리와 툴을 제공하는 것이 목적입니다. 
 
 Experimentalism의 모든 프로젝트(NuGet패키지)는 [Semantic Versioning](http://semver.org/)을 따릅니다.
 
