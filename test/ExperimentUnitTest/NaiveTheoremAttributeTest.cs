@@ -47,28 +47,26 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void InitializeWithNullFixtureFactoryThrows()
+        public void InitializeWithNullFuncOfITestFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(null));
+            Func<ITestFixture> fixtureFactory = null;
+            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
         }
 
         [Fact]
-        public void FixtureFactoryInitializedFromDefaultIsCorrect()
+        public void FixtureFactoryIsCorrect()
         {
             var sut = new NaiveTheoremAttribute();
             var actual = sut.FixtureFactory;
-            Assert.IsType<NotSupportedFixture>(actual.Invoke());
+            Assert.IsType<NotSupportedFixture>(actual.Invoke(null));
         }
 
         [Fact]
-        public void FixtureFactoryInitializedWithFuncIsCorrect()
+        public void FixtureFactoryInitializedWithFuncOfITestFixtureIsCorrect()
         {
-            Func<ITestFixture> expected = () => null;
-            var sut = new DerivedTheoremAttribute(expected);
-
+            var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
             var actual = sut.FixtureFactory;
-
-            Assert.Equal(expected, actual);
+            Assert.IsType<FakeTestFixture>(actual.Invoke(null));
         }
 
         [Fact]
@@ -136,8 +134,8 @@ namespace Jwc.Experiment
 
             var actual = sut.FixtureFactory;
 
-            Assert.IsType<FakeTestFixture>(actual());
-            Assert.NotSame(actual(), actual());
+            Assert.IsType<FakeTestFixture>(actual(null));
+            Assert.NotSame(actual(null), actual(null));
         }
 
         [Fact]
@@ -300,16 +298,73 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeInitializedWithFixtureFactoryIsCorrect()
+        public void FixtureTypeInitializedWithFuncOfITestFixtureIsCorrect()
         {
-            var fixtureType = typeof(FakeTestFixture);
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
+            var actual = sut.FixtureType;
+            Assert.Equal(typeof(FakeTestFixture), actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncOfMethodInfoAndITestFixtureThrows()
+        {
+            Func<MethodInfo, ITestFixture> fixtureFactory = null;
+            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
+        }
+
+        [Fact]
+        public void FixtureTypeIsCorrect()
+        {
+            var sut = new NaiveTheoremAttribute();
+            var actual = sut.FixtureType;
+            Assert.Equal(typeof(NotSupportedFixture), actual);
+        }
+
+        [Fact]
+        public void FixtureFactoryInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        {
+            Func<MethodInfo, ITestFixture> expected = mi => new FakeTestFixture();
+            var sut = new DerivedTheoremAttribute(expected);
+
+            var actual = sut.FixtureFactory;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void FixtureTypeInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        {
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                if (mi == null)
+                    throw new ArgumentException();
+                return new FakeTestFixture();
+            };
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
 
             var actual = sut.FixtureType;
 
-            Assert.Equal(fixtureType, actual);
+            Assert.Equal(typeof(FakeTestFixture), actual);
         }
 
+        [Fact]
+        public void CreateTestCommandsPassesCorrectMethodInfoToFixtureFactory()
+        {
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
+            bool verified = false;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                Assert.Equal(method.MethodInfo, mi);
+                verified = true;
+                return new FakeTestFixture();
+            };
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
+
+            sut.CreateTestCommands(method).Single();
+
+            Assert.True(verified, "verified");
+        }
+        
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
@@ -343,6 +398,10 @@ namespace Jwc.Experiment
         private class DerivedTheoremAttribute : NaiveTheoremAttribute
         {
             public DerivedTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
+            {
+            }
+
+            public DerivedTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory) : base(fixtureFactory)
             {
             }
         }
