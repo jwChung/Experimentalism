@@ -18,14 +18,14 @@ namespace Jwc.Experiment
     [AttributeUsage(AttributeTargets.Method)]
     public class NaiveTheoremAttribute : FactAttribute
     {
-        private readonly Func<ITestFixture> _fixtureFactory;
+        private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
         /// </summary>
         public NaiveTheoremAttribute()
         {
-            _fixtureFactory = () => new NotSupportedFixture();
+            _fixtureFactory = mi => new NotSupportedFixture();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureType");
             }
 
-            _fixtureFactory = () => (ITestFixture)Activator.CreateInstance(fixtureType);
+            _fixtureFactory = mi => (ITestFixture)Activator.CreateInstance(fixtureType);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureFactory");
             }
 
-            _fixtureFactory = fixtureFactory;
+            _fixtureFactory = mi => fixtureFactory();
         }
 
         /// <summary>
@@ -79,14 +79,14 @@ namespace Jwc.Experiment
         {
             get
             {
-                return FixtureFactory.Invoke().GetType();
+                return FixtureFactory.Invoke(null).GetType();
             }
         }
 
         /// <summary>
         /// Gets a value indicating the fixture factory passed from a constructor.
         /// </summary>
-        public Func<ITestFixture> FixtureFactory
+        public Func<MethodInfo, ITestFixture> FixtureFactory
         {
             get
             {
@@ -194,12 +194,12 @@ namespace Jwc.Experiment
         private class AutoArgumentCollection : IEnumerable<object>
         {
             private readonly ParameterInfo[] _parameters;
-            private readonly Func<ITestFixture> _fixtureFactory;
+            private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
             private readonly int _skipCount;
 
             public AutoArgumentCollection(
                 ParameterInfo[] parameters,
-                Func<ITestFixture> fixtureFactory,
+                Func<MethodInfo, ITestFixture> fixtureFactory,
                 int skipCount = 0)
             {
                 _parameters = parameters;
@@ -217,7 +217,7 @@ namespace Jwc.Experiment
 
             public IEnumerator<object> GetEnumerator()
             {
-                var testFixture = _fixtureFactory.Invoke();
+                var testFixture = _fixtureFactory.Invoke(null);
 
                 return _parameters
                     .Skip(_skipCount)

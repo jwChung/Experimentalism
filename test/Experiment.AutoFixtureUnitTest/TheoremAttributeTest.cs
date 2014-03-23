@@ -16,10 +16,10 @@ namespace Jwc.Experiment
         {
             var sut = new TheoremAttribute();
 
-            var actual = sut.FixtureFactory();
+            var actual = sut.FixtureFactory(null);
 
             Assert.IsType<TestFixtureAdapter>(actual);
-            Assert.NotSame(sut.FixtureFactory(), actual);
+            Assert.NotSame(sut.FixtureFactory(null), actual);
         }
     }
 }

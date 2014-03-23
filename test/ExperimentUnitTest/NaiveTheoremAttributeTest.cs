@@ -58,18 +58,17 @@ namespace Jwc.Experiment
         {
             var sut = new NaiveTheoremAttribute();
             var actual = sut.FixtureFactory;
-            Assert.IsType<NotSupportedFixture>(actual.Invoke());
+            Assert.IsType<NotSupportedFixture>(actual.Invoke(null));
         }
 
         [Fact]
         public void FixtureFactoryInitializedWithFuncIsCorrect()
         {
-            Func<ITestFixture> expected = () => null;
-            var sut = new DerivedTheoremAttribute(expected);
+            var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
 
             var actual = sut.FixtureFactory;
 
-            Assert.Equal(expected, actual);
+            Assert.IsType<FakeTestFixture>(actual.Invoke(null));
         }
 
         [Fact]
@@ -137,8 +136,8 @@ namespace Jwc.Experiment
 
             var actual = sut.FixtureFactory;
 
-            Assert.IsType<FakeTestFixture>(actual());
-            Assert.NotSame(actual(), actual());
+            Assert.IsType<FakeTestFixture>(actual(null));
+            Assert.NotSame(actual(null), actual(null));
         }
 
         [Fact]
@@ -303,12 +302,11 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureTypeInitializedWithFixtureFactoryIsCorrect()
         {
-            var fixtureType = typeof(FakeTestFixture);
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
 
             var actual = sut.FixtureType;
 
-            Assert.Equal(fixtureType, actual);
+            Assert.Equal(typeof(FakeTestFixture), actual);
         }
 
         [Fact]
