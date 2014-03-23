@@ -8,7 +8,7 @@
     <description>Experiment.AutoFixtureWithExample is to show examples for parameterized tests with auto data using AutoFixture library.</description>
     <tags>unit-testing tdd xunit</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
-    <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.md</licenseUrl>
+    <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Experiment.AutoFixture" version="0.0.0" />

@@ -8,7 +8,7 @@
     <description>Experiment is a base library to support parameterized tests with auto data.</description>
     <tags>unit-testing tdd xunit</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
-    <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.md</licenseUrl>
+    <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="xunit.extensions" version="1.9.0.1566" />
