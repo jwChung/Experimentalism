@@ -79,7 +79,8 @@ namespace Jwc.Experiment
         {
             get
             {
-                return FixtureFactory.Invoke(typeof(object).GetMethod("ToString")).GetType();
+                var dummyMethodInfo = typeof(object).GetMethod("ToString");
+                return FixtureFactory.Invoke(dummyMethodInfo).GetType();
             }
         }
 
