@@ -15,7 +15,6 @@ namespace Jwc.Experiment
     /// 사용될 수 있다.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification="fixtureType은 FixtureFactory property를 통해 얼마든지 얻을 수 있으며, 중요한 정보가 아님.")]
     [AttributeUsage(AttributeTargets.Method)]
     public class NaiveTheoremAttribute : FactAttribute
     {
