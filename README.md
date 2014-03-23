@@ -17,6 +17,10 @@ Experimentalism은 TDD를 용이하게 하기 위한 라이브러리와 툴을 �
 
 Experimentalism의 모든 프로젝트(NuGet패키지)는 [Semantic Versioning](http://semver.org/)을 따릅니다.
 
+Experimentalism는 [AppVeyor](http://www.appveyor.com/)에서 제공하는 CI 서비스를 이용하고 있습니다. 아래 아이콘(badge)을 통해서 현재 빌드상태를 확인할 수 있습니다.
+
+[![Build status](https://ci.appveyor.com/api/projects/status/29e9eyt7whxmoq6a)](https://ci.appveyor.com/project/jwChung/experimentalism)
+
 Just start with examples
 ------------------------
 Experimentalism을 빠르게 이해는 가장  좋은 방법은, 예제를 직접 실행해 보는 것이 아닐까 합니다. 아래의 순서에 따라 예제를 실행해 볼 수 있습니다.
