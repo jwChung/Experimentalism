@@ -47,14 +47,14 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void InitializeWithNullFixtureFactoryThrows()
+        public void InitializeWithNullFuncOfITestFixtureThrows()
         {
             Func<ITestFixture> fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
         }
 
         [Fact]
-        public void FixtureFactoryInitializedFromDefaultIsCorrect()
+        public void FixtureFactoryIsCorrect()
         {
             var sut = new NaiveTheoremAttribute();
             var actual = sut.FixtureFactory;
@@ -62,7 +62,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryInitializedWithFuncIsCorrect()
+        public void FixtureFactoryInitializedWithFuncOfITestFixtureIsCorrect()
         {
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
 
@@ -300,7 +300,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeInitializedWithFixtureFactoryIsCorrect()
+        public void FixtureTypeInitializedWithFuncOfITestFixtureIsCorrect()
         {
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
 
@@ -310,7 +310,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void InitializeWithNullFixtureFactoryHavingMethodInfoThrows()
+        public void InitializeWithNullFuncOfMethodInfoAndITestFixtureThrows()
         {
             Func<MethodInfo, ITestFixture> fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
