@@ -49,7 +49,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFixtureFactoryThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new AutoDataTheoremAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(null));
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Jwc.Experiment
         public void FixtureFactoryInitializedWithFuncIsCorrect()
         {
             Func<ITestFixture> expected = () => null;
-            var sut = new AutoDataTheoremAttribute(expected);
+            var sut = new DerivedTheoremAttribute(expected);
 
             var actual = sut.FixtureFactory;
 
@@ -75,7 +75,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new AutoDataTheoremAttribute(() => fixture);
+            var sut = new DerivedTheoremAttribute(() => fixture);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -94,7 +94,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new AutoDataTheoremAttribute(() => fixture);
+            var sut = new DerivedTheoremAttribute(() => fixture);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -150,7 +150,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
-            var sut = new AutoDataTheoremAttribute(() => fixture);
+            var sut = new DerivedTheoremAttribute(() => fixture);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method);
@@ -177,7 +177,7 @@ namespace Jwc.Experiment
             {
                 throw new NotSupportedException();
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
         }
@@ -192,7 +192,7 @@ namespace Jwc.Experiment
                 callCount++;
                 return fixture;
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -210,7 +210,7 @@ namespace Jwc.Experiment
                 callCount++;
                 return fixture;
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -228,7 +228,7 @@ namespace Jwc.Experiment
                 callCount++;
                 return fixture;
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -243,7 +243,7 @@ namespace Jwc.Experiment
             {
                 throw new NotSupportedException();
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
         }
@@ -256,7 +256,7 @@ namespace Jwc.Experiment
             {
                 throw exception;
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -274,7 +274,7 @@ namespace Jwc.Experiment
             {
                 throw exception;
             };
-            var sut = new AutoDataTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -303,7 +303,7 @@ namespace Jwc.Experiment
         public void FixtureTypeInitializedWithFixtureFactoryIsCorrect()
         {
             var fixtureType = typeof(FakeTestFixture);
-            var sut = new AutoDataTheoremAttribute(() => new FakeTestFixture());
+            var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
 
             var actual = sut.FixtureType;
 
@@ -340,9 +340,9 @@ namespace Jwc.Experiment
         {
         }
 
-        private class AutoDataTheoremAttribute : NaiveTheoremAttribute
+        private class DerivedTheoremAttribute : NaiveTheoremAttribute
         {
-            public AutoDataTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
+            public DerivedTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
             {
             }
         }
