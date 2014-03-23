@@ -16,7 +16,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\src\Experiment.AutoFixture\**\*.pp" target="content" />
+    <file src="..\src\Experiment.AutoFixture\**\*.pp" target="content\net40" />
     <file src="Install.ps1" target="tools" />
   </files>
 </package>
