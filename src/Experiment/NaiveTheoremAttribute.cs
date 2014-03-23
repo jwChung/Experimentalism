@@ -60,6 +60,17 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Gets a value indicating the fixture type passed from a constructor.
+        /// </summary>
+        public object FixtureType
+        {
+            get
+            {
+                return FixtureFactory.Invoke().GetType();
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating the fixture factory which is passed from a constructor.
         /// </summary>
         /// <value>

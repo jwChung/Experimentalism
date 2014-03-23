@@ -288,6 +288,28 @@ namespace Jwc.Experiment
             });
         }
 
+        [Fact]
+        public void FixtureTypeInitializedWithFixtureTypeIsCorrect()
+        {
+            var fixtureType = typeof(FakeTestFixture);
+            var sut = new NaiveTheoremAttribute(fixtureType);
+
+            var actual = sut.FixtureType;
+
+            Assert.Equal(fixtureType, actual);
+        }
+
+        [Fact]
+        public void FixtureTypeInitializedWithFixtureFactoryIsCorrect()
+        {
+            var fixtureType = typeof(FakeTestFixture);
+            var sut = new AutoDataTheoremAttribute(() => new FakeTestFixture());
+
+            var actual = sut.FixtureType;
+
+            Assert.Equal(fixtureType, actual);
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
