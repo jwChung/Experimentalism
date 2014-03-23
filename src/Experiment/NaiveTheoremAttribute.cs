@@ -71,11 +71,8 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture factory which is passed from a constructor.
+        /// Gets a value indicating the fixture factory passed from a constructor.
         /// </summary>
-        /// <value>
-        /// The fixture factory.
-        /// </value>
         public Func<ITestFixture> FixtureFactory
         {
             get
