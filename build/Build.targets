@@ -238,7 +238,12 @@
                 builder.AppendLine(new string(line.Skip(indentation).ToArray()).TrimEnd());
 
             builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
-            ReleaseNotes = builder.ToString();
+            var result = new StringBuilder();
+            using (var writer = new XmlTextWriter(new StringWriter(result)))
+            {
+                writer.WriteString(builder.ToString());
+            }
+            ReleaseNotes = result.ToString();
         }
         catch (Exception ex)
         {
