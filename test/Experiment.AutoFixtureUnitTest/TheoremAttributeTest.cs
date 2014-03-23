@@ -55,8 +55,56 @@ namespace Jwc.Experiment
             Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
 
+        [Fact]
+        public void FixtureFactoryReflectsComplexCustomizeAttributes()
+        {
+            var sut = new TheoremAttribute();
+
+            var actual = sut.FixtureFactory(GetType().GetMethod("PersonTest"));
+
+            var name = (string)actual.Create(typeof(string));
+            var age = (int)actual.Create(typeof(int));
+            var person = (Person)actual.Create(typeof(Person));
+            var other = actual.Create(typeof(object));
+            Assert.Same(name, person.Name);
+            Assert.Equal(age, person.Age);
+            Assert.NotNull(other);
+        }
+
         public void FrozenTest([Frozen] string arg)
         {
+        }
+
+        public void PersonTest([Frozen] string name, [Frozen] int age, Person person, object other)
+        {
+        }
+
+        public class Person
+        {
+            private readonly string _name;
+            private readonly int _age;
+
+            public Person(string name, int age)
+            {
+                _name = name;
+                _age = age;
+            }
+
+            public string Name
+            {
+                get
+                {
+                    return _name;
+                }
+            }
+
+            public int Age
+            {
+                get
+                {
+                    return _age;
+                }
+            }
         }
     }
 }
