@@ -316,6 +316,14 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
         }
 
+        [Fact]
+        public void FixtureTypeIsCorrect()
+        {
+            var sut = new NaiveTheoremAttribute();
+            var actual = sut.FixtureType;
+            Assert.Equal(typeof(NotSupportedFixture), actual);
+        }
+        
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
