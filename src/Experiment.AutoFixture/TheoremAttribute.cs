@@ -18,8 +18,13 @@ namespace Jwc.Experiment
         /// <summary>
         /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
         /// </summary>
-        public TheoremAttribute() : base(() => new TestFixtureAdapter(new SpecimenContext(new Fixture())))
+        public TheoremAttribute() : base(CreateTestFixture)
         {
+        }
+
+        private static ITestFixture CreateTestFixture()
+        {
+            return new TestFixtureAdapter(new SpecimenContext(new Fixture()));
         }
     }
 }
