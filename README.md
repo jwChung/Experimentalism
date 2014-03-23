@@ -30,7 +30,7 @@ Experimentalism을 빠르게 이해는 가장  좋은 방법은, 예제를 직�
 
 Experiment
 ----------
-[Parameterized Test](http://xunitpatterns.com/Parameterized%20Test.html)에 대한 auto data를 제공하기 위한 [xUnit.net](http://xunit.codeplex.com/)의 확장라이브러리입니다. 여기서 auto data란, 테스트에 필요한 값 또는 객체를 anonymous(또는 non-deterministric) 값으로 자동생성하는 것을 말합니다. 생성된 auto data는 테스트 메소드의 파라메타를 통해 제공되게 됩니다.
+[Parameterized Test](http://xunitpatterns.com/Parameterized%20Test.html)에 대한 auto data를 제공하기 위한 [xUnit.net](http://xunit.codeplex.com/)의 확장라이브러리입니다. 여기서 auto data란 테스트에 참여하는 객체 또는 값들이 anonymous 형태로 자동 생성된 것을 말합니다. 생성된 auto data는 테스트 메소드의 파라메타를 통해 제공되게 됩니다.
 
 ### Parameterized test with auto data
 
