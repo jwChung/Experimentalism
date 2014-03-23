@@ -190,6 +190,7 @@
       <ReleaseNotes ParameterType="System.String" Output="true" />
     </ParameterGroup>
     <Task>
+      <Reference Include="System.Xml" />
       <Using Namespace="System" />
       <Using Namespace="System.IO" />
       <Using Namespace="System.Linq" />
