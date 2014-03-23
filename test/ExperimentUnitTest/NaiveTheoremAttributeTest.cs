@@ -65,9 +65,7 @@ namespace Jwc.Experiment
         public void FixtureFactoryInitializedWithFuncOfITestFixtureIsCorrect()
         {
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
-
             var actual = sut.FixtureFactory;
-
             Assert.IsType<FakeTestFixture>(actual.Invoke(null));
         }
 
@@ -303,9 +301,7 @@ namespace Jwc.Experiment
         public void FixtureTypeInitializedWithFuncOfITestFixtureIsCorrect()
         {
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
-
             var actual = sut.FixtureType;
-
             Assert.Equal(typeof(FakeTestFixture), actual);
         }
 
