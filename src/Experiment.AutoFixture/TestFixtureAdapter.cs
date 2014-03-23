@@ -1,6 +1,5 @@
 ﻿using System;
 using Jwc.Experiment;
-using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
@@ -12,14 +11,6 @@ namespace Jwc.Experiment
     public class TestFixtureAdapter : ITestFixture
     {
         private readonly ISpecimenContext _specimenContext;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestFixtureAdapter"/> class.
-        /// </summary>
-        public TestFixtureAdapter()
-        {
-            _specimenContext = new SpecimenContext(new Fixture());
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixtureAdapter"/> class.

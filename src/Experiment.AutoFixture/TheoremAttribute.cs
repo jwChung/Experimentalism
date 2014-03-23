@@ -1,5 +1,7 @@
 ﻿using System;
 using Jwc.Experiment;
+using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
 {
@@ -16,7 +18,7 @@ namespace Jwc.Experiment
         /// <summary>
         /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
         /// </summary>
-        public TheoremAttribute() : base(() => new TestFixtureAdapter())
+        public TheoremAttribute() : base(() => new TestFixtureAdapter(new SpecimenContext(new Fixture())))
         {
         }
     }
