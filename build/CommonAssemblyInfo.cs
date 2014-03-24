@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("0.7.0")]
-[assembly: AssemblyInformationalVersion("0.7.0-pre01")]
+[assembly: AssemblyInformationalVersion("0.7.0")]
 
 /*
- * Version 0.7.0-pre01
+ * Version 0.7.0
  * 
  * - Experiment.AutoFixture에서 AutoFixture.Xunit의 CustomizeAttribute 지원.
  *   이로써, 테스트 메소드 파라메타의 어트리뷰트를 통해 dependency injection을
