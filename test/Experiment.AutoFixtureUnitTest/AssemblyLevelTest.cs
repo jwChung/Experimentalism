@@ -41,6 +41,7 @@ namespace Jwc.Experiment
 
         [Theory]
         [InlineData("Scenario")]
+        [InlineData("Person")]
         public void SutGeneratesNugetTransformFilesForTest(string originName)
         {
             string directory = @"..\..\..\..\test\Experiment.AutoFixtureUnitTest\";
