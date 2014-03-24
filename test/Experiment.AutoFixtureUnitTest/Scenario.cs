@@ -53,6 +53,7 @@ namespace Jwc.Experiment
             [Modest] Person person)
         {
             Assert.Null(person.Name);
+            Assert.Equal(0, person.Age);
         }
 
         [Theorem]
