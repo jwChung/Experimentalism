@@ -67,10 +67,11 @@ public class PersonTest
         var name = "Foo";
         var sut = new Person(name);
         var something = "Bar";
+        var expected = name + ": " + something;
         
         var actual = sut.Say(something);
         
-        Assert.Equal(name + ": " + something, actual);
+        Assert.Equal(expected, actual);
     }
 }
 ```
@@ -83,9 +84,9 @@ public class PersonTest2
     [Theorem]
     public void SayTest2(Person sut, string something)
     {
+        var expected = name + ": " + something;
         var actual = sut.Say(something);
-        
-        Assert.Equal(sut.Name + ": " + something, actual);
+        Assert.Equal(expected, actual);
     }
 }
 ```
