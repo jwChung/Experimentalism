@@ -114,7 +114,7 @@ namespace Jwc.Experiment
             var dataAttributes = ((IEnumerable<DataAttribute>)method
                 .MethodInfo
                 .GetCustomAttributes(typeof(DataAttribute), false)).ToArray();
-            var testData = new TestData(method.MethodInfo, dataAttributes);
+            var testData = new TestDataCollection(method.MethodInfo, dataAttributes);
 
             if (!testData.Any())
             {
@@ -169,12 +169,12 @@ namespace Jwc.Experiment
             }
         }
 
-        private class TestData : IEnumerable<object[]>
+        private class TestDataCollection : IEnumerable<object[]>
         {
             private readonly MethodInfo _method;
             private readonly DataAttribute[] _dataAttributes;
 
-            public TestData(MethodInfo method, DataAttribute[] dataAttributes)
+            public TestDataCollection(MethodInfo method, DataAttribute[] dataAttributes)
             {
                 _method = method;
                 _dataAttributes = dataAttributes;
