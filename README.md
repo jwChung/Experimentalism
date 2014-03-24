@@ -1,4 +1,4 @@
-Experimentalism
+Experimentalism [![Build status](https://ci.appveyor.com/api/projects/status/29e9eyt7whxmoq6a)](https://ci.appveyor.com/project/jwChung/experimentalism)
 ===============
 
 * [Just start with examples](#just-start-with-examples)
@@ -17,9 +17,7 @@ Experimentalism은 TDD에 도움을 줄 수 있는 라이브러리와 툴을 제
 
 Experimentalism의 모든 프로젝트(NuGet패키지)는 [Semantic Versioning](http://semver.org/)을 따릅니다.
 
-Experimentalism는 [AppVeyor](http://www.appveyor.com/)에서 제공하는 CI 서비스를 이용하고 있습니다. 아래 아이콘(badge)을 통해서 현재 빌드상태를 확인할 수 있습니다.
-
-[![Build status](https://ci.appveyor.com/api/projects/status/29e9eyt7whxmoq6a)](https://ci.appveyor.com/project/jwChung/experimentalism)
+Experimentalism는 [AppVeyor](http://www.appveyor.com/)에서 제공하는 CI 서비스를 이용하고 있습니다. 위 Experimentalism 옆에 붙어있는 [빌드 상태 뺏지(status badge)](https://ci.appveyor.com/api/projects/status/29e9eyt7whxmoq6a)를 통해서 현재 빌드상태를 확인할 수 있습니다.
 
 Just start with examples
 ------------------------
