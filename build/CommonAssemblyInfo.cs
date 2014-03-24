@@ -10,16 +10,13 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.6.1")]
-[assembly: AssemblyInformationalVersion("0.6.1")]
+[assembly: AssemblyVersion("0.7.0")]
+[assembly: AssemblyInformationalVersion("0.7.0-pre01")]
 
 /*
- * Version 0.6.1
+ * Version 0.7.0-pre01
  * 
- * - TestFixtureAdapter의 디폴트 생성자는 
- *   "Anything more than field assignment in constructors"에 해당함으로 이를
- *   해결(삭제).
- *   
- * - TestFixtureAdapter의 디폴트 생성자 삭제는 breaking change에 해당하나,
- *   unstable major version(zero)이기 때문에 용인됨.
+ * - Experiment.AutoFixture에서 AutoFixture.Xunit의 CustomizeAttribute 지원.
+ *   이로써, 테스트 메소드 파라메타의 어트리뷰트를 통해 dependency injection을
+ *   이용할 수 있음.
  */

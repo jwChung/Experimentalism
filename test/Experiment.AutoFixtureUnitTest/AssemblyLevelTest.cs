@@ -17,7 +17,8 @@ namespace Jwc.Experiment
             {
                 "mscorlib",
                 "Jwc.Experiment",
-                "Ploeh.AutoFixture"
+                "Ploeh.AutoFixture",
+                "Ploeh.AutoFixture.Xunit"
             };
 
             var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();
@@ -40,6 +41,7 @@ namespace Jwc.Experiment
 
         [Theory]
         [InlineData("Scenario")]
+        [InlineData("Person")]
         public void SutGeneratesNugetTransformFilesForTest(string originName)
         {
             string directory = @"..\..\..\..\test\Experiment.AutoFixtureUnitTest\";

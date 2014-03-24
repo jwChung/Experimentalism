@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
@@ -38,6 +39,31 @@ namespace Jwc.Experiment
         {
             Assert.Equal("expected", arg1);
             Assert.NotNull(arg2);
+        }
+
+        [Theorem]
+        public void TeoremSupportsFrozenAttributeOfAutoFixtureXunit(
+            [Frozen] string arg1, string arg2)
+        {
+            Assert.Same(arg1, arg2);
+        }
+
+        [Theorem]
+        public void TeoremSupportsModestAttributeOfAutoFixtureXunit(
+            [Modest] Person person)
+        {
+            Assert.Null(person.Name);
+            Assert.Equal(0, person.Age);
+        }
+
+        [Theorem]
+        public void TeoremSupportsGreedyAttributeOfAutoFixtureXunit(
+            [Frozen] string name,
+            [Frozen] int age,
+            [Greedy] Person person)
+        {
+            Assert.Same(name, person.Name);
+            Assert.Equal(age, person.Age);
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute

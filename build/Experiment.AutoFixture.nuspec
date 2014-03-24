@@ -12,7 +12,7 @@
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Experiment" version="0.0.0" />
-      <dependency id="AutoFixture" version="3.0.1" />
+      <dependency id="AutoFixture.Xunit" version="3.0.1" />
     </dependencies>
   </metadata>
   <files>

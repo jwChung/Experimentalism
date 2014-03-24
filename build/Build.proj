@@ -36,7 +36,7 @@
       " />
   </Target>
 
-  <Target Name="Deployment" Condition=" '$(CurrentBranchName)' == 'master' and $(CommitMessage.Contains('DEPLOYMENT')) ">
+  <Target Name="Deployment" Condition="$(CommitMessage.Contains('DEPLOYMENT'))">
     <CallTarget Targets="
       NuGetVersioning;
       NuGetReleaseNotes;
