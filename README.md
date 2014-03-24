@@ -64,13 +64,16 @@ public class PersonTest
     [Fact]
     public void SayTest()
     {
+        // Fixture setup
         var name = "Foo";
         var sut = new Person(name);
         var something = "Bar";
         var expected = name + ": " + something;
         
+        // Exercise system
         var actual = sut.Say(something);
         
+        // Verify outcome
         Assert.Equal(expected, actual);
     }
 }
@@ -84,8 +87,13 @@ public class PersonTest2
     [Theorem]
     public void SayTest2(Person sut, string something)
     {
+        // Fixture setup
         var expected = name + ": " + something;
+        
+        // Exercise system
         var actual = sut.Say(something);
+        
+        // Verify outcome
         Assert.Equal(expected, actual);
     }
 }
