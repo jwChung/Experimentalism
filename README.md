@@ -88,7 +88,7 @@ public class PersonTest2
     public void SayTest2(Person sut, string something)
     {
         // Fixture setup
-        var expected = name + ": " + something;
+        var expected = sut.Name + ": " + something;
         
         // Exercise system
         var actual = sut.Say(something);
