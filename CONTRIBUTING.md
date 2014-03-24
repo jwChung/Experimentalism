@@ -20,7 +20,7 @@ Experimentalism 개발 가이드라인
 
 Pull requests
 -------------
-개발참여는 GitHub의 [pull requeset](https://github.com/jwChung/Experimentalism/pulls)를 통하여 참여하실 수 있습니다. 아래와 같은 코딩스타일, 커밋메세지 포멧을 지켜야하며, 마지막으로 해당 pull request가 이상이 없는지 확인하는 과정이 필요합니다.
+개발참여는 GitHub의 [pull requeset](https://github.com/jwChung/Experimentalism/pulls)를 통하여 참여하실 수 있습니다. 아래와 같은 코딩스타일, 커밋메세지 포멧을 지켜야하며, 해당 pull request가 이상이 없는지 확인하는 과정이 필요합니다.
 
 ### Coding style
 * **코드라인은 120자를 넘지 않아야 합니다.**  
