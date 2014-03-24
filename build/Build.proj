@@ -36,7 +36,7 @@
       " />
   </Target>
 
-  <Target Name="Deployment" Condition="$(CommitMessage.Contains('DEPLOYMENT'))">
+  <Target Name="Deployment" Condition=" '$(CommitAuthor)' == 'Jin-Wook Chung' and $(CommitMessage.Contains('DEPLOYMENT')) ">
     <CallTarget Targets="
       NuGetVersioning;
       NuGetReleaseNotes;
