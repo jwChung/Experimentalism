@@ -50,6 +50,7 @@
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
+    <Compile Include="NaiveFirstClassTheoremAttribute.cs" />
     <Compile Include="NotSupportedFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NaiveTheoremAttribute.cs" />
