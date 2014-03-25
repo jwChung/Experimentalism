@@ -95,6 +95,49 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null));
         }
 
+        [Fact]
+        public void FixtureTypeIsCorrect()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var actual = sut.FixtureType;
+            Assert.Equal(typeof(NotSupportedFixture), actual);
+        }
+
+        [Fact]
+        public void FixtureTypeInitializedWithFixtureTypeIsCorrect()
+        {
+            var fixtureType = typeof(FakeTestFixture);
+            var sut = new NaiveFirstClassTheoremAttribute(fixtureType);
+
+            var actual = sut.FixtureType;
+
+            Assert.Equal(fixtureType, actual);
+        }
+
+        [Fact]
+        public void FixtureTypeInitializedWithFuncOfITestFixtureIsCorrect()
+        {
+            var sut = new DerivedNaiveFirstClassTheoremAttribute(() => new FakeTestFixture());
+            var actual = sut.FixtureType;
+            Assert.Equal(typeof(FakeTestFixture), actual);
+        }
+
+        [Fact]
+        public void FixtureTypeInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        {
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                if (mi == null)
+                    throw new ArgumentNullException("mi");
+                return new FakeTestFixture();
+            };
+            var sut = new DerivedNaiveFirstClassTheoremAttribute(fixtureFactory);
+
+            var actual = sut.FixtureType;
+
+            Assert.Equal(typeof(FakeTestFixture), actual);
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
