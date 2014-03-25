@@ -30,7 +30,8 @@ namespace Jwc.Experiment
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
             var methodInfo = method.MethodInfo;
-            return (IEnumerable<ITestCase>)methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+            var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+            return (IEnumerable<ITestCase>)testCases;
         }
 
         private static object CreateDeclaringObject(MethodInfo methodInfo)
