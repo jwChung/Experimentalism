@@ -119,14 +119,9 @@ namespace Jwc.Experiment
 
         private static object CreateDeclaringObject(MethodInfo methodInfo)
         {
-            return IsStatic(methodInfo.DeclaringType)
+            return methodInfo.IsStatic
                 ? null
                 : Activator.CreateInstance(methodInfo.DeclaringType);
-        }
-
-        private static bool IsStatic(Type type)
-        {
-            return type.IsAbstract && type.IsSealed;
         }
     }
 }

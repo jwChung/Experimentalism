@@ -1,0 +1,76 @@
+﻿<#@ Template Debug="false" HostSpecific="false" Language="C#" #>
+<#@ Output Extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Import Namespace="System.Linq" #>
+using System;
+using System.Diagnostics;
+
+namespace Jwc.Experiment
+{
+    public partial class TestCase
+    {
+        /* Contain just the typed overloads that are just pass-through to the real implementations.
+         * They all have DebuggerStepThrough to ease debugging. */
+
+<#
+for (var typeCount = 2; typeCount <= GenericTypeMax; typeCount++)
+{
+    var typeList = GetGenericList(typeCount, "TArg{0}");
+#>
+		/// <summary>
+        /// Creates a new instance of <see cref="ITestCase" />.
+        /// </summary>
+        /// <returns>
+        /// The created instance.
+        /// </returns>
+		[DebuggerStepThrough]
+        public static ITestCase New<<#=typeList#>>(Action<<#=typeList#>> @delegate)
+        {
+            return new TestCase(@delegate, new object[0]);
+        }
+
+<#
+for (var autoCount = 1; autoCount <= typeCount; autoCount++)
+{
+	string argumentList = GetGenericList(autoCount, "TArg{0} arg{0}");
+	string valueList = GetGenericList(autoCount, "arg{0}");
+#>
+		/// <summary>
+        /// Creates a new instance of <see cref="ITestCase" />.
+        /// </summary>
+        /// <returns>
+        /// The created instance.
+        /// </returns>
+		[DebuggerStepThrough]
+        public static ITestCase New<<#=typeList#>>(<#=argumentList#>, Action<<#=typeList#>> @delegate)
+        {
+            return new TestCase(@delegate, new object[] { <#=valueList#> });
+        }
+
+<#
+}
+}
+#>
+    }
+}
+<#+
+private const int GenericTypeMax = 16;
+private const int GenericTypeMin = 5;
+private static readonly string[] ordinalNumbers = new[] { "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth" };
+private static readonly string[] wordNumbers = new[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen" };
+
+public static string ConvertToWord(int number)
+{
+    return wordNumbers[number - 1];
+}
+
+public static string ConvertToOrdinal(int number)
+{
+    return ordinalNumbers[number - 1];
+}
+
+private static string GetGenericList(int typeCount, string format, string separator = ", ")
+{
+    return string.Join(separator, Enumerable.Range(1, typeCount).Select(n => string.Format(format, n)).ToArray());
+}
+#>
