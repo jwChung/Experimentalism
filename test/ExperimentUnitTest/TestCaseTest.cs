@@ -184,5 +184,11 @@ namespace Jwc.Experiment
             Assert.Equal(expectedArguments, command.Parameters);
             Assert.Equal(expectedDisplayName, command.DisplayName);
         }
+
+        [Fact]
+        public void InitializeWithNonStaticDelegateThrows()
+        {
+            Assert.Throws<ArgumentException>(() => TestCase.New(ConvertToTestCommandReturnsCorrectCommand));
+        }
     }
 }

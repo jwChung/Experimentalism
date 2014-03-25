@@ -24,6 +24,16 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("delegate");
             }
 
+            if (!@delegate.Method.IsStatic)
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        "The supplied delegate '{0}' is non static. This is because the delegate uses objects " +
+                        "from outer scope, which results in the problem as Shared Fixture.",
+                        @delegate),
+                    "delegate");
+            }
+
             _delegate = @delegate;
             _arguments = arguments;
         }
