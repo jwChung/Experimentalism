@@ -55,6 +55,7 @@
     <Compile Include="NotSupportedFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NaiveTheoremAttribute.cs" />
+    <Compile Include="TestCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
