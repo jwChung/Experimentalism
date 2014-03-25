@@ -11,7 +11,7 @@ namespace Jwc.Experiment
         public void SutIsTheoremAttribute()
         {
             var sut = new TheoremAttribute();
-            Assert.IsAssignableFrom<NaiveTheoremAttribute>(sut);
+            Assert.IsAssignableFrom<DefaultTheoremAttribute>(sut);
         }
 
         [Fact]

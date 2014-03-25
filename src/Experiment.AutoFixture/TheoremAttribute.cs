@@ -15,7 +15,7 @@ namespace Jwc.Experiment
     /// auto data기능을 제공한다.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class TheoremAttribute : NaiveTheoremAttribute
+    public sealed class TheoremAttribute : DefaultTheoremAttribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.

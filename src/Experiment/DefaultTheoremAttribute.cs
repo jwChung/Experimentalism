@@ -16,24 +16,24 @@ namespace Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class NaiveTheoremAttribute : FactAttribute
+    public class DefaultTheoremAttribute : FactAttribute
     {
         private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
         /// </summary>
-        public NaiveTheoremAttribute()
+        public DefaultTheoremAttribute()
         {
             _fixtureFactory = mi => new NotSupportedFixture();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureType">Type of the fixture.</param>
         /// <exception cref="System.ArgumentNullException">fixtureType</exception>
-        public NaiveTheoremAttribute(Type fixtureType)
+        public DefaultTheoremAttribute(Type fixtureType)
         {
             if (fixtureType == null)
             {
@@ -44,11 +44,11 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
         /// <exception cref="System.ArgumentNullException">fixtureFactory</exception>
-        protected NaiveTheoremAttribute(Func<ITestFixture> fixtureFactory)
+        protected DefaultTheoremAttribute(Func<ITestFixture> fixtureFactory)
         {
             if (fixtureFactory == null)
             {
@@ -59,10 +59,10 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NaiveTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
-        protected NaiveTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+        protected DefaultTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
         {
             if (fixtureFactory == null)
             {
