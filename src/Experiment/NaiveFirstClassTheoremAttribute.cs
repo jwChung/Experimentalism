@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -99,6 +100,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// The test commands which will execute the test runs for the given method
         /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="This is suppressed to catch unhandled exception thrown from creating test commands.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
@@ -126,6 +128,7 @@ namespace Jwc.Experiment
             {
                 throw new ArgumentException(
                     string.Format(
+                        CultureInfo.CurrentCulture,
                         "The supplied method '{0}' does not return IEnumerable<ITestCase>.",
                         methodInfo),
                     "method");
