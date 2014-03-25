@@ -10,7 +10,7 @@ namespace Jwc.Experiment
     public class Scenario
     {
         [DefaultTheorem]
-        public void NaiveTheoremSupportsNonParameterizedTest()
+        public void DefaultTheoremSupportsNonParameterizedTest()
         {
             Assert.True(true, "excuted.");
         }
@@ -18,14 +18,14 @@ namespace Jwc.Experiment
         [DefaultTheorem]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void NaiveTheoremSupportsParameterizedTest(string arg1, int arg2)
+        public void DefaultTheoremSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);
         }
 
         [DefaultFirstClassTheorem]
-        public IEnumerable<ITestCase> NaiveFirstClassTheoremSupportsYieldReturnedTestCases()
+        public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsYieldReturnedTestCases()
         {
             yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
 
@@ -35,7 +35,7 @@ namespace Jwc.Experiment
         }
 
         [DefaultFirstClassTheorem]
-        public ITestCase[] NaiveFirstClassTheoremSupportsArrayTestCases()
+        public ITestCase[] DefaultFirstClassTheoremSupportsArrayTestCases()
         {
             var testCases = new[]
             {
@@ -52,7 +52,7 @@ namespace Jwc.Experiment
         }
 
         [DefaultFirstClassTheorem]
-        public IEnumerable<ITestCase> NaiveFirstClassTheoremSupportsTestMethodCases()
+        public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsTestMethodCases()
         {
             var testCases = new[]
             {
@@ -63,7 +63,7 @@ namespace Jwc.Experiment
             return testCases.Select(tc =>
                 TestCase.New(
                     new Scenario(), tc,
-                    (ps, ptc) => ps.NaiveTheoremSupportsParameterizedTest(ptc.X, ptc.Y)));
+                    (ps, ptc) => ps.DefaultTheoremSupportsParameterizedTest(ptc.X, ptc.Y)));
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute
