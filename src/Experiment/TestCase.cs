@@ -9,7 +9,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="NaiveFirstClassTheoremAttribute" />.
     /// </summary>
-    public class TestCase : ITestCase
+    public partial class TestCase : ITestCase
     {
         private readonly Delegate _delegate;
         private readonly object[] _arguments;
@@ -88,7 +88,7 @@ namespace Jwc.Experiment
         /// </summary>
         /// <typeparam name="TArg">The type of the argument.</typeparam>
         /// <param name="delegate">
-        /// The delegate to be invoked with some auto arguments when the test is executed.
+        /// The delegate to be invoked with an auto argument when the test is executed.
         /// </param>
         /// <returns>
         /// The created instance.
