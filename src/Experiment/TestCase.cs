@@ -24,6 +24,16 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("delegate");
             }
 
+            if (!@delegate.Method.IsStatic)
+            {
+                throw new ArgumentException(
+                    "The supplied delegate is non static. This is because the delegate uses objects " +
+                    "from outer scope, which results in problems from Shared Fixture " +
+                    "- Erratic Tests, probably complicated than Minimal Fixture and leading to Fragile Fixture. " +
+                    "(http://xunitpatterns.com/Shared%20Fixture.html)",
+                    "delegate");
+            }
+
             _delegate = @delegate;
             _arguments = arguments;
         }
@@ -123,9 +133,10 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("testFixture");
             }
 
-            return new TheoryCommand(
+            return new FirstClassCommand(
                 Reflector.Wrap(Delegate.Method),
-                GetFinalArguments(testFixture, Delegate.Method));
+                GetFinalArguments(testFixture, Delegate.Method),
+                method.TypeName + "." + method.Name);
         }
 
         private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)
@@ -136,6 +147,15 @@ namespace Jwc.Experiment
                 .Select(pi => testFixture.Create(pi.ParameterType));
 
             return specifiedArgument.Concat(autoArguments).ToArray();
+        }
+
+        private class FirstClassCommand : TheoryCommand
+        {
+            public FirstClassCommand(IMethodInfo testMethod, object[] parameters, string displayName)
+                : base(testMethod, parameters)
+            {
+                DisplayName = displayName;
+            }
         }
     }
 }

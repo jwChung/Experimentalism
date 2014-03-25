@@ -176,13 +176,19 @@ namespace Jwc.Experiment
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixture = new FakeTestFixture();
             var expectedArguments = new[] { obj, testFixture.IntValue, testFixture.StringValue };
-            ////var expectedDisplayName = method.TypeName + "." + method.Name;
+            var expectedDisplayName = method.TypeName + "." + method.Name;
 
             var actual = sut.ConvertToTestCommand(method, testFixture);
 
-            var command = Assert.IsType<TheoryCommand>(actual);
+            var command = Assert.IsAssignableFrom<TheoryCommand>(actual);
             Assert.Equal(expectedArguments, command.Parameters);
-            ////Assert.Equal(expectedDisplayName, command.DisplayName);
+            Assert.Equal(expectedDisplayName, command.DisplayName);
+        }
+
+        [Fact]
+        public void InitializeWithNonStaticDelegateThrows()
+        {
+            Assert.Throws<ArgumentException>(() => TestCase.New(ConvertToTestCommandReturnsCorrectCommand));
         }
     }
 }

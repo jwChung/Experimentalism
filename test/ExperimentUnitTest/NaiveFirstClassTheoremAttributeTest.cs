@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Xunit;
+using Xunit.Extensions;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -179,14 +180,78 @@ namespace Jwc.Experiment
             var sut = new DerivedNaiveFirstClassTheoremAttribute(() =>
             {
                 creatCount++;
-                return null;
+                return new FakeTestFixture();
             });
             const string methodName = "TestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
-            sut.CreateTestCommands(method).ToArray();
+            sut.CreateTestCommands(method);
 
             Assert.Equal(3, creatCount);
+        }
+
+        [Fact]
+        public void CreateTestCommandsReturnsExceptionCommandIfCreatingTestCaseThrows()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("ExceptionFromCreatingTestCaseTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<NotSupportedException>(command.Exception);
+        }
+
+        [Fact]
+        public void CreateTestCommandsReturnsExceptionCommandIfCreatingTestFixtureThrows()
+        {
+            var sut = new DerivedNaiveFirstClassTheoremAttribute(() =>
+            {
+                throw new NotSupportedException();
+            });
+            var method = Reflector.Wrap(GetType().GetMethod("TestCasesTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<NotSupportedException>(command.Exception);
+        }
+
+        [Theory]
+        [InlineData("VoidReturnTypeTest")]
+        [InlineData("InvalidReturnTypeTest")]
+        public void CreateTestCommandsReturnsExceptionCommandIfMethodReturnTypeIsInvalid(string methodName)
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod(methodName));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<ArgumentException>(command.Exception);
+        }
+
+        [Fact]
+        public void CreateTestCommandsDoesNotThrowIfMethodReturnTypeIsValid()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("ValidReturnTypeTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            Assert.IsType<FactCommand>(actual);
+        }
+
+        [Fact]
+        public void CreateTestCommandsThrowsIfMethodHasParemeters()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<ArgumentException>(command.Exception);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()
@@ -213,6 +278,31 @@ namespace Jwc.Experiment
                     return null;
                 }
             };
+        }
+
+        public IEnumerable<ITestCase> ExceptionFromCreatingTestCaseTest()
+        {
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            throw new NotSupportedException();
+        }
+
+        public void VoidReturnTypeTest()
+        {
+        }
+
+        public ITestCase InvalidReturnTypeTest()
+        {
+            return null;
+        }
+
+        public IEnumerable<FakeTestCase> ValidReturnTypeTest()
+        {
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+        }
+
+        public IEnumerable<ITestCase> ParameterizedTest(object arg)
+        {
+            yield break;
         }
 
         private class DerivedNaiveFirstClassTheoremAttribute : NaiveFirstClassTheoremAttribute
