@@ -31,6 +31,11 @@ namespace Jwc.Experiment
         /// <param name="fixtureType">Type of the fixture.</param>
         public NaiveFirstClassTheoremAttribute(Type fixtureType)
         {
+            if (fixtureType == null)
+            {
+                throw new ArgumentNullException("fixtureType");
+            }
+
             _fixtureFactory = mi => (ITestFixture)Activator.CreateInstance(fixtureType);
         }
 
@@ -40,6 +45,11 @@ namespace Jwc.Experiment
         /// <param name="fixtureFactory">The fixture factory.</param>
         protected NaiveFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
         {
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
             _fixtureFactory = mi => fixtureFactory();
         }
 
@@ -49,6 +59,11 @@ namespace Jwc.Experiment
         /// <param name="fixtureFactory">The fixture factory.</param>
         protected NaiveFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
         {
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
             _fixtureFactory = fixtureFactory;
         }
 
