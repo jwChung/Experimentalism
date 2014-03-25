@@ -42,14 +42,14 @@ namespace Jwc.Experiment
         }
 
         [Theorem]
-        public void TeoremSupportsFrozenAttributeOfAutoFixtureXunit(
+        public void TheoremSupportsFrozenAttributeOfAutoFixtureXunit(
             [Frozen] string arg1, string arg2)
         {
             Assert.Same(arg1, arg2);
         }
 
         [Theorem]
-        public void TeoremSupportsModestAttributeOfAutoFixtureXunit(
+        public void TheoremSupportsModestAttributeOfAutoFixtureXunit(
             [Modest] Person person)
         {
             Assert.Null(person.Name);
@@ -57,7 +57,7 @@ namespace Jwc.Experiment
         }
 
         [Theorem]
-        public void TeoremSupportsGreedyAttributeOfAutoFixtureXunit(
+        public void TheoremSupportsGreedyAttributeOfAutoFixtureXunit(
             [Frozen] string name,
             [Frozen] int age,
             [Greedy] Person person)
