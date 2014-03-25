@@ -56,7 +56,9 @@ namespace Jwc.Experiment
         /// <summary>
         /// Creates a new instance of <see cref="ITestCase" />.
         /// </summary>
-        /// <param name="delegate">The delegate to be invoked when the test is executed.</param>
+        /// <param name="delegate">
+        /// The delegate to be invoked when the test is executed.
+        /// </param>
         /// <returns>
         /// The created instance.
         /// </returns>
@@ -70,13 +72,30 @@ namespace Jwc.Experiment
         /// </summary>
         /// <typeparam name="TArg">The type of the argument.</typeparam>
         /// <param name="arg">The argument of the test delegate.</param>
-        /// <param name="delegate">The delegate to be invoked when the test is executed.</param>
+        /// <param name="delegate">
+        /// The delegate to be invoked when the test is executed.
+        /// </param>
         /// <returns>
         /// The created instance.
         /// </returns>
         public static ITestCase New<TArg>(TArg arg, Action<TArg> @delegate)
         {
             return new TestCase(@delegate, new object[] { arg });
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="ITestCase" />.
+        /// </summary>
+        /// <typeparam name="TArg">The type of the argument.</typeparam>
+        /// <param name="delegate">
+        /// The delegate to be invoked with some auto arguments when the test is executed.
+        /// </param>
+        /// <returns>
+        /// The created instance.
+        /// </returns>
+        public static ITestCase New<TArg>(Action<TArg> @delegate)
+        {
+            return new TestCase(@delegate, new object[0]);
         }
 
         /// <summary>

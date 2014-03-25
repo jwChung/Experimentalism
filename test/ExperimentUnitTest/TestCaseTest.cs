@@ -66,5 +66,26 @@ namespace Jwc.Experiment
         {
             Assert.Throws<ArgumentNullException>(() => TestCase.New<object>(null, null));
         }
+
+        [Fact]
+        public void DelegateInitializeWithOneAutoArgumentIsCorrect()
+        {
+            Action<object> expected = x => { };
+            var sut = (TestCase)TestCase.New(expected);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(expected, actual);
+        }
+        
+        [Fact]
+        public void ArgumentsInitializeWithOneAutoArgumentIsCorrect()
+        {
+            var sut = (TestCase)TestCase.New<object>(x => { });
+
+            var actual = sut.Arguments;
+
+            Assert.Empty(actual);
+        }
     }
 }
