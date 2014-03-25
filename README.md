@@ -7,7 +7,7 @@ Experimentalism [![Build status](https://ci.appveyor.com/api/projects/status/29e
     * [Base class library](#base-class-library)
     * [Inspiration](#inspiration)
 * [Experiment.AutoFixture](#experimentautofixture)
-    * [Source code transform](#source-code-transform)
+    * [Source code transformations](#source-code-transformations)
     * [How to install](#how-to-install)
 * [Questions](#questions)
 * [Additional references](#additional-references)
