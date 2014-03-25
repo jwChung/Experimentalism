@@ -13,6 +13,54 @@ namespace Jwc.Experiment
     /// </summary>
     public class NaiveFirstClassTheoremAttribute : FactAttribute
     {
+        private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        public NaiveFirstClassTheoremAttribute()
+        {
+            _fixtureFactory = mi => new NotSupportedFixture();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureType">Type of the fixture.</param>
+        public NaiveFirstClassTheoremAttribute(Type fixtureType)
+        {
+            _fixtureFactory = mi => (ITestFixture)Activator.CreateInstance(fixtureType);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureFactory">The fixture factory.</param>
+        protected NaiveFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
+        {
+            _fixtureFactory = mi => fixtureFactory();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureFactory">The fixture factory.</param>
+        protected NaiveFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+        {
+            _fixtureFactory = fixtureFactory;
+        }
+
+        /// <summary>
+        /// Gets a value indicating the fixture factory passed from a constructor.
+        /// </summary>
+        public Func<MethodInfo, ITestFixture> FixtureFactory
+        {
+            get
+            {
+                return _fixtureFactory;
+            }
+        }
+
         /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of
