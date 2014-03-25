@@ -116,7 +116,6 @@ namespace Jwc.Experiment
             }
             catch (Exception exception)
             {
-
                 return new ITestCommand[] { new ExceptionCommand(method, exception) };
             }
         }
@@ -124,6 +123,15 @@ namespace Jwc.Experiment
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
             var methodInfo = method.MethodInfo;
+            if (!IsMethodParameterless(methodInfo))
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "The supplied method '{0}' does not be parameterless.",
+                        methodInfo),
+                    "method");
+            }
             if (!IsReturnTypeValid(methodInfo.ReturnType))
             {
                 throw new ArgumentException(
@@ -133,8 +141,15 @@ namespace Jwc.Experiment
                         methodInfo),
                     "method");
             }
+
             var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+
             return (IEnumerable<ITestCase>)testCases;
+        }
+
+        private static bool IsMethodParameterless(MethodInfo methodInfo)
+        {
+            return !methodInfo.GetParameters().Any();
         }
 
         private static bool IsReturnTypeValid(Type returnType)
