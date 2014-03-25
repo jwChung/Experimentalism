@@ -122,19 +122,16 @@ namespace Jwc.Experiment
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
             var methodInfo = method.MethodInfo;
-            EnsureReturnTypeIsValue(methodInfo);
-            var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
-            return (IEnumerable<ITestCase>)testCases;
-        }
-
-        private static void EnsureReturnTypeIsValue(MethodInfo methodInfo)
-        {
             if (!typeof(IEnumerable<ITestCase>).IsAssignableFrom(methodInfo.ReturnType))
             {
-                throw new InvalidCastException(string.Format(
-                    "The supplied method '{0}' does not return IEnumerable<ITestCase>.",
-                    methodInfo));
+                throw new ArgumentException(
+                    string.Format(
+                        "The supplied method '{0}' does not return IEnumerable<ITestCase>.",
+                        methodInfo),
+                    "method");
             }
+            var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+            return (IEnumerable<ITestCase>)testCases;
         }
 
         private static object CreateDeclaringObject(MethodInfo methodInfo)

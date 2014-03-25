@@ -228,7 +228,7 @@ namespace Jwc.Experiment
             var actual = sut.CreateTestCommands(method).Single();
 
             var command = Assert.IsType<ExceptionCommand>(actual);
-            Assert.IsType<InvalidCastException>(command.Exception);
+            Assert.IsType<ArgumentException>(command.Exception);
         }
 
         [Fact]
