@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using Xunit;
+using Xunit.Extensions;
+using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
@@ -146,6 +149,40 @@ namespace Jwc.Experiment
             var actual = sut.Arguments;
 
             Assert.Equal(new object[] { expected1, expected2 }, actual);
+        }
+
+        [Fact]
+        public void ConvertNullMethodToTestCommandThrows()
+        {
+            var sut = TestCase.New(() => { });
+            Assert.Throws<ArgumentNullException>(
+                () => sut.ConvertToTestCommand(null, new FakeTestFixture()));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandWithNullFixtureThrows()
+        {
+            var sut = TestCase.New(() => { });
+            IMethodInfo dummyMethodInfo = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(
+                () => sut.ConvertToTestCommand(dummyMethodInfo, null));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandReturnsCorrectCommand()
+        {
+            var obj = new object();
+            var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var testFixture = new FakeTestFixture();
+            var expectedArguments = new[] { obj, testFixture.IntValue, testFixture.StringValue };
+            ////var expectedDisplayName = method.TypeName + "." + method.Name;
+
+            var actual = sut.ConvertToTestCommand(method, testFixture);
+
+            var command = Assert.IsType<TheoryCommand>(actual);
+            Assert.Equal(expectedArguments, command.Parameters);
+            ////Assert.Equal(expectedDisplayName, command.DisplayName);
         }
     }
 }

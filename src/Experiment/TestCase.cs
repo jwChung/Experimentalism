@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Xunit.Extensions;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -101,14 +104,38 @@ namespace Jwc.Experiment
         /// <summary>
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
-        /// <param name="method">The method adorned by a <see cref="NaiveFirstClassTheoremAttribute" />.</param>
+        /// <param name="method">
+        /// The method adorned by a <see cref="NaiveFirstClassTheoremAttribute" />.
+        /// </param>
         /// <param name="testFixture">A test fixture to provide auto data.</param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
         public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixture testFixture)
         {
-            throw new NotImplementedException();
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            if (testFixture == null)
+            {
+                throw new ArgumentNullException("testFixture");
+            }
+
+            return new TheoryCommand(
+                Reflector.Wrap(Delegate.Method),
+                GetFinalArguments(testFixture, Delegate.Method));
+        }
+
+        private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)
+        {
+            var specifiedArgument = Arguments.ToArray();
+            var autoArguments = methodInfo.GetParameters()
+                .Skip(specifiedArgument.Length)
+                .Select(pi => testFixture.Create(pi.ParameterType));
+
+            return specifiedArgument.Concat(autoArguments).ToArray();
         }
     }
 }
