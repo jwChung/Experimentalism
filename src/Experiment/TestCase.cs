@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Xunit.Extensions;
@@ -27,10 +28,8 @@ namespace Jwc.Experiment
             if (!@delegate.Method.IsStatic)
             {
                 throw new ArgumentException(
-                    string.Format(
-                        "The supplied delegate '{0}' is non static. This is because the delegate uses objects " +
-                        "from outer scope, which results in the problem as Shared Fixture.",
-                        @delegate),
+                    "The supplied delegate is non static. This is because the delegate uses objects " +
+                    "from outer scope, which results in the problem as Shared Fixture.",
                     "delegate");
             }
 
