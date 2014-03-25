@@ -106,7 +106,8 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            return CreateTestCases(method).Select(tc => tc.ConvertToTestCommand(method, null));
+            return CreateTestCases(method).Select(
+                tc => tc.ConvertToTestCommand(method, FixtureFactory(method.MethodInfo)));
         }
 
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)

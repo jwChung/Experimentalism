@@ -160,6 +160,35 @@ namespace Jwc.Experiment
                 () => new DerivedNaiveFirstClassTheoremAttribute(fixtureFactory));
         }
 
+        [Fact]
+        public void CreateTestCommandsPassesTestFixtureToTestCase()
+        {
+            // Fixture setup
+            var sut = new NaiveFirstClassTheoremAttribute(typeof(FakeTestFixture));
+            const string methodName = "PassTestFixtureTest";
+            var method = Reflector.Wrap(GetType().GetMethod(methodName));
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
+        }
+
+        [Fact]
+        public void CreateTestCommandsCreatesTestFixtureForEachTestCase()
+        {
+            int creatCount = 0;
+            var sut = new DerivedNaiveFirstClassTheoremAttribute(() =>
+            {
+                creatCount++;
+                return null;
+            });
+            const string methodName = "TestCasesTest";
+            var method = Reflector.Wrap(GetType().GetMethod(methodName));
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(3, creatCount);
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
@@ -172,6 +201,18 @@ namespace Jwc.Experiment
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+        }
+
+        public IEnumerable<ITestCase> PassTestFixtureTest()
+        {
+            yield return new FakeTestCase
+            {
+                OnConvertToTestCommand = (m, f) =>
+                {
+                    Assert.IsType<FakeTestFixture>(f);
+                    return null;
+                }
+            };
         }
 
         private class DerivedNaiveFirstClassTheoremAttribute : NaiveFirstClassTheoremAttribute
