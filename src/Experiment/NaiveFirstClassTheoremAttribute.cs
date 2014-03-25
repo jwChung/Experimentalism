@@ -106,15 +106,35 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            return CreateTestCases(method).Select(
-                tc => tc.ConvertToTestCommand(method, FixtureFactory(method.MethodInfo)));
+            try
+            {
+                return CreateTestCases(method).Select(
+                        tc => tc.ConvertToTestCommand(method, FixtureFactory(method.MethodInfo)))
+                    .ToArray();
+            }
+            catch (Exception exception)
+            {
+
+                return new ITestCommand[] { new ExceptionCommand(method, exception) };
+            }
         }
 
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
             var methodInfo = method.MethodInfo;
+            EnsureReturnTypeIsValue(methodInfo);
             var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
             return (IEnumerable<ITestCase>)testCases;
+        }
+
+        private static void EnsureReturnTypeIsValue(MethodInfo methodInfo)
+        {
+            if (!typeof(IEnumerable<ITestCase>).IsAssignableFrom(methodInfo.ReturnType))
+            {
+                throw new InvalidCastException(string.Format(
+                    "The supplied method '{0}' does not return IEnumerable<ITestCase>.",
+                    methodInfo));
+            }
         }
 
         private static object CreateDeclaringObject(MethodInfo methodInfo)
