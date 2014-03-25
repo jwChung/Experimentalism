@@ -24,7 +24,7 @@ namespace Jwc.Experiment
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
-            return CreateTestCases(method).Select(tc => tc.ConvertToTestCommand(method));
+            return CreateTestCases(method).Select(tc => tc.ConvertToTestCommand(method, null));
         }
 
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)

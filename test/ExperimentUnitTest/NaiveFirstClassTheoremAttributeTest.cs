@@ -51,16 +51,16 @@ namespace Jwc.Experiment
 
         public IEnumerable<ITestCase> TestCasesTest()
         {
-            yield return new FakeTestCase { OnConvertToTestCommand = m => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand = m => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand = m => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
         }
 
         public static IEnumerable<ITestCase> StaticTestCasesTest()
         {
-            yield return new FakeTestCase { OnConvertToTestCommand = m => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand = m => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand = m => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
         }
     }
 }

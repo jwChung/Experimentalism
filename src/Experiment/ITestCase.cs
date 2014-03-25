@@ -15,9 +15,12 @@ namespace Jwc.Experiment
         /// <param name="method">
         /// The method adorned by a <see cref="NaiveFirstClassTheoremAttribute" />.
         /// </param>
+        /// <param name="testFixture">
+        /// A test fixture to provide auto data.
+        /// </param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        ITestCommand ConvertToTestCommand(IMethodInfo method);
+        ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixture testFixture);
     }
 }
