@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -10,20 +11,72 @@ namespace Jwc.Experiment
     /// </summary>
     public class TestCase : ITestCase
     {
-        private TestCase()
+        private readonly Delegate _delegate;
+        private readonly object[] _arguments;
+
+        private TestCase(Delegate @delegate, object[] arguments)
         {
+            if (@delegate == null)
+            {
+                throw new ArgumentNullException("delegate");
+            }
+
+            _delegate = @delegate;
+            _arguments = arguments;
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="ITestCase"/>.
+        /// Gets a value indicating the test delegate.
         /// </summary>
-        /// <param name="delegate">
-        /// The delegate to be invoked when the test is executed.
-        /// </param>
-        /// <returns>The created instance.</returns>
+        /// <value>
+        /// The test delegate originally supplied as a constructor argument.
+        /// </value>
+        public Delegate Delegate
+        {
+            get
+            {
+                return _delegate;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the the arguments of the test delegate.
+        /// </summary>
+        /// <value>
+        /// The test arguments originally supplied as a constructor argument.
+        /// </value>
+        public IEnumerable<object> Arguments
+        {
+            get
+            {
+                return _arguments;
+            }
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="ITestCase" />.
+        /// </summary>
+        /// <param name="delegate">The delegate to be invoked when the test is executed.</param>
+        /// <returns>
+        /// The created instance.
+        /// </returns>
         public static ITestCase New(Action @delegate)
         {
-            return new TestCase();
+            return new TestCase(@delegate, new object[0]);
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="ITestCase" />.
+        /// </summary>
+        /// <typeparam name="TArg">The type of the argument.</typeparam>
+        /// <param name="arg">The argument of the test delegate.</param>
+        /// <param name="delegate">The delegate to be invoked when the test is executed.</param>
+        /// <returns>
+        /// The created instance.
+        /// </returns>
+        public static ITestCase New<TArg>(TArg arg, Action<TArg> @delegate)
+        {
+            return new TestCase(@delegate, new object[] { arg });
         }
 
         /// <summary>

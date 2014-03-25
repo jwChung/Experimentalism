@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Jwc.Experiment
 {
@@ -11,15 +12,59 @@ namespace Jwc.Experiment
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
 
-        //[Fact]
-        //public void DelegateIsCorrect()
-        //{
-        //    Action expected = () => { };
-        //    var sut = TestCase.New(expected);
+        [Fact]
+        public void DelegateIsCorrect()
+        {
+            Action expected = () => { };
+            var sut = (TestCase)TestCase.New(expected);
 
-        //    var actual = sut.Delegate;
+            var actual = sut.Delegate;
 
-        //    Assert.Equal(expected, actual);
-        //}
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void DelegateInitializeWithOneArgumentIsCorrect()
+        {
+            Action<object> expected = x => { };
+            var sut = (TestCase)TestCase.New(null, expected);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ArgumentsIsCorrect()
+        {
+            var sut = (TestCase)TestCase.New(() => { });
+
+            var actual = sut.Arguments;
+
+            Assert.Empty(actual);
+        }
+
+        [Fact]
+        public void ArgumentsWithOneArgumentIsCorrect()
+        {
+            var expected = new object();
+            var sut = (TestCase)TestCase.New(expected, x => { });
+
+            var actual = sut.Arguments;
+
+            Assert.Equal(new[] { expected }, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullDelegateThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => TestCase.New(null));
+        }
+
+        [Fact]
+        public void InitializeWithNullDelegateOfTArgThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => TestCase.New<object>(null, null));
+        }
     }
 }
