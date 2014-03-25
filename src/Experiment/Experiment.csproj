@@ -54,7 +54,7 @@
     <Compile Include="DefaultFirstClassTheoremAttribute.cs" />
     <Compile Include="NotSupportedFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NaiveTheoremAttribute.cs" />
+    <Compile Include="DefaultTheoremAttribute.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="TestCase.New.cs">
       <AutoGen>True</AutoGen>

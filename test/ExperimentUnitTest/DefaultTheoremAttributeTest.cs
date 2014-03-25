@@ -8,19 +8,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class NaiveTheoremAttributeTest
+    public class DefaultTheoremAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateNonParameterizedReturnsFactCommand()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
 
@@ -34,7 +34,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         public void CreateParameterizedReturnsThoeryCommands(string arg1, int arg2, object arg3)
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
 
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
@@ -56,7 +56,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryIsCorrect()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             var actual = sut.FixtureFactory;
             Assert.IsType<NotSupportedFixture>(actual.Invoke(null));
         }
@@ -106,7 +106,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithInvalidCountDataThrows()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -118,7 +118,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedWithInvalidTypeDataThrows()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -130,7 +130,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryInitializedWithTypeIsCorrect()
         {
-            var sut = new NaiveTheoremAttribute(typeof(FakeTestFixture));
+            var sut = new DefaultTheoremAttribute(typeof(FakeTestFixture));
 
             var actual = sut.FixtureFactory;
 
@@ -141,7 +141,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFactoryTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new NaiveTheoremAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new DefaultTheoremAttribute(null));
         }
 
         [Fact]
@@ -162,7 +162,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedPassesCorrectParameterTypes()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
@@ -290,7 +290,7 @@ namespace Jwc.Experiment
         public void FixtureTypeInitializedWithFixtureTypeIsCorrect()
         {
             var fixtureType = typeof(FakeTestFixture);
-            var sut = new NaiveTheoremAttribute(fixtureType);
+            var sut = new DefaultTheoremAttribute(fixtureType);
 
             var actual = sut.FixtureType;
 
@@ -315,7 +315,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureTypeIsCorrect()
         {
-            var sut = new NaiveTheoremAttribute();
+            var sut = new DefaultTheoremAttribute();
             var actual = sut.FixtureType;
             Assert.Equal(typeof(NotSupportedFixture), actual);
         }
@@ -395,7 +395,7 @@ namespace Jwc.Experiment
         {
         }
 
-        private class DerivedTheoremAttribute : NaiveTheoremAttribute
+        private class DerivedTheoremAttribute : DefaultTheoremAttribute
         {
             public DerivedTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
             {

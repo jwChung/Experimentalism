@@ -9,13 +9,13 @@ namespace Jwc.Experiment
 {
     public class Scenario
     {
-        [NaiveTheorem]
+        [DefaultTheorem]
         public void NaiveTheoremSupportsNonParameterizedTest()
         {
             Assert.True(true, "excuted.");
         }
 
-        [NaiveTheorem]
+        [DefaultTheorem]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void NaiveTheoremSupportsParameterizedTest(string arg1, int arg2)
