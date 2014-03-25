@@ -24,7 +24,7 @@ namespace Jwc.Experiment
             Assert.Equal(1234, arg2);
         }
 
-        [NaiveFirstClassTheorem]
+        [DefaultFirstClassTheorem]
         public IEnumerable<ITestCase> NaiveFirstClassTheoremSupportsYieldReturnedTestCases()
         {
             yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
@@ -34,7 +34,7 @@ namespace Jwc.Experiment
                 (x, y, z) => Assert.Equal(z, x + y));
         }
 
-        [NaiveFirstClassTheorem]
+        [DefaultFirstClassTheorem]
         public ITestCase[] NaiveFirstClassTheoremSupportsArrayTestCases()
         {
             var testCases = new[]
@@ -51,7 +51,7 @@ namespace Jwc.Experiment
                 .ToArray();
         }
 
-        [NaiveFirstClassTheorem]
+        [DefaultFirstClassTheorem]
         public IEnumerable<ITestCase> NaiveFirstClassTheoremSupportsTestMethodCases()
         {
             var testCases = new[]

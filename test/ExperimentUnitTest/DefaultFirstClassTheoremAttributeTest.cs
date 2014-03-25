@@ -8,19 +8,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class NaiveFirstClassTheoremAttributeTest
+    public class DefaultFirstClassTheoremAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateTestCommandsReturnsCorrectCommands()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             const string methodName = "TestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -37,7 +37,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsFromStaticReturnsCorrectCommands()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             const string methodName = "StaticTestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -54,7 +54,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryIsCorrect()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             var actual = sut.FixtureFactory;
             Assert.IsType<NotSupportedFixture>(actual.Invoke(null));
         }
@@ -62,7 +62,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryInitializedWithTypeIsCorrect()
         {
-            var sut = new NaiveFirstClassTheoremAttribute(typeof(FakeTestFixture));
+            var sut = new DefaultFirstClassTheoremAttribute(typeof(FakeTestFixture));
 
             var actual = sut.FixtureFactory;
 
@@ -73,7 +73,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryInitializedWithFuncOfITestFixtureIsCorrect()
         {
-            var sut = new DerivedNaiveFirstClassTheoremAttribute(() => new FakeTestFixture());
+            var sut = new DerivedFirstClassTheoremAttribute(() => new FakeTestFixture());
             var actual = sut.FixtureFactory;
             Assert.IsType<FakeTestFixture>(actual.Invoke(null));
         }
@@ -82,7 +82,7 @@ namespace Jwc.Experiment
         public void FixtureFactoryInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
         {
             Func<MethodInfo, ITestFixture> expected = mi => new FakeTestFixture();
-            var sut = new DerivedNaiveFirstClassTheoremAttribute(expected);
+            var sut = new DerivedFirstClassTheoremAttribute(expected);
 
             var actual = sut.FixtureFactory;
 
@@ -92,14 +92,14 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsWithNullMethodInfoThrows()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null));
         }
 
         [Fact]
         public void FixtureTypeIsCorrect()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             var actual = sut.FixtureType;
             Assert.Equal(typeof(NotSupportedFixture), actual);
         }
@@ -108,7 +108,7 @@ namespace Jwc.Experiment
         public void FixtureTypeInitializedWithFixtureTypeIsCorrect()
         {
             var fixtureType = typeof(FakeTestFixture);
-            var sut = new NaiveFirstClassTheoremAttribute(fixtureType);
+            var sut = new DefaultFirstClassTheoremAttribute(fixtureType);
 
             var actual = sut.FixtureType;
 
@@ -118,7 +118,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureTypeInitializedWithFuncOfITestFixtureIsCorrect()
         {
-            var sut = new DerivedNaiveFirstClassTheoremAttribute(() => new FakeTestFixture());
+            var sut = new DerivedFirstClassTheoremAttribute(() => new FakeTestFixture());
             var actual = sut.FixtureType;
             Assert.Equal(typeof(FakeTestFixture), actual);
         }
@@ -132,7 +132,7 @@ namespace Jwc.Experiment
                     throw new ArgumentNullException("mi");
                 return new FakeTestFixture();
             };
-            var sut = new DerivedNaiveFirstClassTheoremAttribute(fixtureFactory);
+            var sut = new DerivedFirstClassTheoremAttribute(fixtureFactory);
 
             var actual = sut.FixtureType;
 
@@ -142,7 +142,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFixtureTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new NaiveFirstClassTheoremAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new DefaultFirstClassTheoremAttribute(null));
         }
 
         [Fact]
@@ -150,7 +150,7 @@ namespace Jwc.Experiment
         {
             Func<ITestFixture> fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(
-                () => new DerivedNaiveFirstClassTheoremAttribute(fixtureFactory));
+                () => new DerivedFirstClassTheoremAttribute(fixtureFactory));
         }
 
         [Fact]
@@ -158,14 +158,14 @@ namespace Jwc.Experiment
         {
             Func<MethodInfo, ITestFixture> fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(
-                () => new DerivedNaiveFirstClassTheoremAttribute(fixtureFactory));
+                () => new DerivedFirstClassTheoremAttribute(fixtureFactory));
         }
 
         [Fact]
         public void CreateTestCommandsPassesTestFixtureToTestCase()
         {
             // Fixture setup
-            var sut = new NaiveFirstClassTheoremAttribute(typeof(FakeTestFixture));
+            var sut = new DefaultFirstClassTheoremAttribute(typeof(FakeTestFixture));
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -177,7 +177,7 @@ namespace Jwc.Experiment
         public void CreateTestCommandsCreatesTestFixtureForEachTestCase()
         {
             int creatCount = 0;
-            var sut = new DerivedNaiveFirstClassTheoremAttribute(() =>
+            var sut = new DerivedFirstClassTheoremAttribute(() =>
             {
                 creatCount++;
                 return new FakeTestFixture();
@@ -193,7 +193,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandIfCreatingTestCaseThrows()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ExceptionFromCreatingTestCaseTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -205,7 +205,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandIfCreatingTestFixtureThrows()
         {
-            var sut = new DerivedNaiveFirstClassTheoremAttribute(() =>
+            var sut = new DerivedFirstClassTheoremAttribute(() =>
             {
                 throw new NotSupportedException();
             });
@@ -222,7 +222,7 @@ namespace Jwc.Experiment
         [InlineData("InvalidReturnTypeTest")]
         public void CreateTestCommandsReturnsExceptionCommandIfMethodReturnTypeIsInvalid(string methodName)
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -234,7 +234,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsDoesNotThrowIfMethodReturnTypeIsValid()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ValidReturnTypeTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -245,7 +245,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsThrowsIfMethodHasParemeters()
         {
-            var sut = new NaiveFirstClassTheoremAttribute();
+            var sut = new DefaultFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -305,14 +305,14 @@ namespace Jwc.Experiment
             yield break;
         }
 
-        private class DerivedNaiveFirstClassTheoremAttribute : NaiveFirstClassTheoremAttribute
+        private class DerivedFirstClassTheoremAttribute : DefaultFirstClassTheoremAttribute
         {
-            public DerivedNaiveFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
+            public DerivedFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
                 : base(fixtureFactory)
             {
             }
 
-            public DerivedNaiveFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+            public DerivedFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
                 : base(fixtureFactory)
             {
             }
