@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
@@ -23,13 +24,20 @@ namespace Jwc.Experiment
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
+            return CreateTestCases(method).Select(tc => tc.ConvertToTestCommand(method));
+        }
+
+        private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
+        {
             var methodInfo = method.MethodInfo;
-            var declaringObject = IsStatic(methodInfo.DeclaringType) 
+            return (IEnumerable<ITestCase>)methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+        }
+
+        private static object CreateDeclaringObject(MethodInfo methodInfo)
+        {
+            return IsStatic(methodInfo.DeclaringType)
                 ? null
                 : Activator.CreateInstance(methodInfo.DeclaringType);
-            
-            var testCases = (IEnumerable<ITestCase>)methodInfo.Invoke(declaringObject, null);
-            return testCases.Select(tc => tc.ConvertToTestCommand(method));
         }
 
         private static bool IsStatic(Type type)
