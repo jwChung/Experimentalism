@@ -72,6 +72,11 @@ namespace Jwc.Experiment
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
             return CreateTestCases(method).Select(tc => tc.ConvertToTestCommand(method, null));
         }
 

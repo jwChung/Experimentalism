@@ -88,6 +88,13 @@ namespace Jwc.Experiment
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void CreateTestCommandsWithNullMethodInfoThrows()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null));
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
