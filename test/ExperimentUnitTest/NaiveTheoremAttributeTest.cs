@@ -337,7 +337,7 @@ namespace Jwc.Experiment
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {
                 if (mi == null)
-                    throw new ArgumentException();
+                    throw new ArgumentNullException("mi");
                 return new FakeTestFixture();
             };
             var sut = new DerivedTheoremAttribute(fixtureFactory);

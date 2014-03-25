@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Xunit;
+using Xunit.Sdk;
+
+namespace Jwc.Experiment
+{
+    /// <summary>
+    /// A test attribute used to adorn methods that creates first-class 
+    /// executable test cases.
+    /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
+    [AttributeUsage(AttributeTargets.Method)]
+    public class NaiveFirstClassTheoremAttribute : FactAttribute
+    {
+        private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        public NaiveFirstClassTheoremAttribute()
+        {
+            _fixtureFactory = mi => new NotSupportedFixture();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureType">Type of the fixture.</param>
+        public NaiveFirstClassTheoremAttribute(Type fixtureType)
+        {
+            if (fixtureType == null)
+            {
+                throw new ArgumentNullException("fixtureType");
+            }
+
+            _fixtureFactory = mi => (ITestFixture)Activator.CreateInstance(fixtureType);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureFactory">The fixture factory.</param>
+        protected NaiveFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
+        {
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
+            _fixtureFactory = mi => fixtureFactory();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NaiveFirstClassTheoremAttribute"/> class.
+        /// </summary>
+        /// <param name="fixtureFactory">The fixture factory.</param>
+        protected NaiveFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+        {
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
+            _fixtureFactory = fixtureFactory;
+        }
+
+        /// <summary>
+        /// Gets a value indicating the fixture factory passed from a constructor.
+        /// </summary>
+        public Func<MethodInfo, ITestFixture> FixtureFactory
+        {
+            get
+            {
+                return _fixtureFactory;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the fixture type passed from a constructor.
+        /// </summary>
+        public Type FixtureType
+        {
+            get
+            {
+                var dummyMethodInfo = typeof(object).GetMethod("ToString");
+                return FixtureFactory(dummyMethodInfo).GetType();
+            }
+        }
+
+        /// <summary>
+        /// Enumerates the test commands represented by this test method.
+        /// Derived classes should override this method to return instances of
+        /// <see cref="ITestCommand" />, one per execution of a test method.
+        /// </summary>
+        /// <param name="method">The test method</param>
+        /// <returns>
+        /// The test commands which will execute the test runs for the given method
+        /// </returns>
+        protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            return CreateTestCases(method).Select(
+                tc => tc.ConvertToTestCommand(method, FixtureFactory(method.MethodInfo)));
+        }
+
+        private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
+        {
+            var methodInfo = method.MethodInfo;
+            var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+            return (IEnumerable<ITestCase>)testCases;
+        }
+
+        private static object CreateDeclaringObject(MethodInfo methodInfo)
+        {
+            return IsStatic(methodInfo.DeclaringType)
+                ? null
+                : Activator.CreateInstance(methodInfo.DeclaringType);
+        }
+
+        private static bool IsStatic(Type type)
+        {
+            return type.IsAbstract && type.IsSealed;
+        }
+    }
+}
