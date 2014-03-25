@@ -231,6 +231,17 @@ namespace Jwc.Experiment
             Assert.IsType<InvalidCastException>(command.Exception);
         }
 
+        [Fact]
+        public void CreateTestCommandsDoesNotThrowIfMethodReturnTypeIsValid()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("ValidReturnTypeTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            Assert.IsType<FactCommand>(actual);
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
@@ -270,6 +281,11 @@ namespace Jwc.Experiment
         public ITestCase InvalidReturnTypeTest()
         {
             return null;
+        }
+
+        public IEnumerable<FakeTestCase> ValidReturnTypeTest()
+        {
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
         }
 
         private class DerivedNaiveFirstClassTheoremAttribute : NaiveFirstClassTheoremAttribute
