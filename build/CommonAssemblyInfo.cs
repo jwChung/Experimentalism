@@ -10,13 +10,19 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.7.0")]
-[assembly: AssemblyInformationalVersion("0.7.0")]
+[assembly: AssemblyVersion("0.8.0")]
+[assembly: AssemblyInformationalVersion("0.8.0")]
 
 /*
- * Version 0.7.0
+ * Version 0.8.0
  * 
- * - Experiment.AutoFixture에서 AutoFixture.Xunit의 CustomizeAttribute 지원.
- *   이로써, 테스트 메소드 파라메타의 어트리뷰트를 통해 dependency injection을
- *   이용할 수 있음.
+ * - Implemented the feature of First class tests, which is
+ *   varataion of parameterized tests.
+ *   
+ *   Closes https://github.com/jwChung/Experimentalism/pull/19
+ *   
+ *   Related to pull requests:
+ *   https://github.com/jwChung/Experimentalism/pull/20
+ *   https://github.com/jwChung/Experimentalism/pull/21
+ *   https://github.com/jwChung/Experimentalism/pull/22
  */
