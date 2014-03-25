@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ITestCase.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="NaiveFirstClassTheoremAttribute.cs" />
     <Compile Include="NotSupportedFixture.cs" />
