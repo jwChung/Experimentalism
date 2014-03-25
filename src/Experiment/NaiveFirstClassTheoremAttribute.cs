@@ -122,7 +122,7 @@ namespace Jwc.Experiment
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
             var methodInfo = method.MethodInfo;
-            if (!typeof(IEnumerable<ITestCase>).IsAssignableFrom(methodInfo.ReturnType))
+            if (!IsReturnTypeValid(methodInfo.ReturnType))
             {
                 throw new ArgumentException(
                     string.Format(
@@ -132,6 +132,11 @@ namespace Jwc.Experiment
             }
             var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
             return (IEnumerable<ITestCase>)testCases;
+        }
+
+        private static bool IsReturnTypeValid(Type returnType)
+        {
+            return typeof(IEnumerable<ITestCase>).IsAssignableFrom(returnType);
         }
 
         private static object CreateDeclaringObject(MethodInfo methodInfo)
