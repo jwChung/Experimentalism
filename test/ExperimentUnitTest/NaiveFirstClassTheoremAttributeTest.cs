@@ -242,6 +242,18 @@ namespace Jwc.Experiment
             Assert.IsType<FactCommand>(actual);
         }
 
+        [Fact]
+        public void CreateTestCommandsThrowsIfMethodHasParemeters()
+        {
+            var sut = new NaiveFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<TargetParameterCountException>(command.Exception);
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
@@ -286,6 +298,11 @@ namespace Jwc.Experiment
         public IEnumerable<FakeTestCase> ValidReturnTypeTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+        }
+
+        public IEnumerable<ITestCase> ParameterizedTest(object arg)
+        {
+            yield break;
         }
 
         private class DerivedNaiveFirstClassTheoremAttribute : NaiveFirstClassTheoremAttribute
