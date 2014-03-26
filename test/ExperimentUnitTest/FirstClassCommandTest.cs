@@ -98,5 +98,43 @@ namespace Jwc.Experiment
 
             Assert.Equal(exptected, actual);
         }
+
+        [Fact]
+        public void ExecuteCallsDelegate()
+        {
+            // Fixture setup
+            var arguments = new object[] { 1, "string" };
+            var @delegate = new Action<int, string>((x, y) =>
+            {
+                Assert.Equal(1, x);
+                Assert.Equal("string", y);
+                //Console.WriteLine(
+                //    "Confirm this message is shown in the output window " +
+                //    "to verify this delegate is called.");
+            });
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                @delegate,
+                arguments);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Execute(null));
+        }
+
+        [Fact]
+        public void ExecuteReturnsCorrectResult()
+        {
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new FirstClassCommand(
+                method,
+                new Action(() => { }),
+                new object[0]);
+
+            var actual = sut.Execute(null);
+
+            var result = Assert.IsType<PassedResult>(actual);
+            Assert.Equal(method.Name, result.MethodName);
+            Assert.Equal(sut.DisplayName, result.DisplayName);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -79,6 +80,17 @@ namespace Jwc.Experiment
             {
                 return _arguments;
             }
+        }
+
+        /// <summary>
+        /// Execute the test delegate with the arguments.
+        /// </summary>
+        /// <param name="testClass">The test class object.</param>
+        /// <returns>The result of the execution.</returns>
+        public override MethodResult Execute(object testClass)
+        {
+            Delegate.Method.Invoke(null, Arguments.ToArray());
+            return new PassedResult(Method, DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
