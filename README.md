@@ -12,7 +12,7 @@ Experimentalism [![Build status](https://ci.appveyor.com/api/projects/status/29e
 * [Questions](#questions)
 * [Additional references](#additional-references)
 * [Contributions](#contributions)
-* [New Contributor? Jump In!](#new-contributor-jump-In)
+    * [New Contributor? Jump In!](#new-contributor-jump-in)
 
 Experimentalism은 TDD에 도움을 줄 수 있는 라이브러리와 툴을 제공하는 것이 목적입니다. 
 
