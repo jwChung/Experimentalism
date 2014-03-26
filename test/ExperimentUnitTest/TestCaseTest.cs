@@ -15,7 +15,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrect()
+        public void DelegateIsCorrectWhenInitializedWithNoArguments()
         {
             Action expected = () => { };
             var sut = (TestCase)TestCase.New(expected);
@@ -26,7 +26,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateInitializeWithOneArgumentIsCorrect()
+        public void DelegateIsCorrectWhenInitializedWithOneArgument()
         {
             Action<object> expected = x => { };
             var sut = (TestCase)TestCase.New(null, expected);
@@ -37,7 +37,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ArgumentsIsCorrect()
+        public void ArgumentsIsCorrectWhenInitializedWithNoArguments()
         {
             var sut = (TestCase)TestCase.New(() => { });
             var actual = sut.Arguments;
@@ -45,7 +45,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ArgumentsWithOneArgumentIsCorrect()
+        public void ArgumentsIsCorrectWhenInitializedWithOneArgument()
         {
             var expected = new object();
             var sut = (TestCase)TestCase.New(expected, x => { });
@@ -68,7 +68,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateInitializeWithOneAutoArgumentIsCorrect()
+        public void DelegateIsCorrectWhenInitializedWithOneAutoArgument()
         {
             Action<object> expected = x => { };
             var sut = (TestCase)TestCase.New(expected);
@@ -79,7 +79,7 @@ namespace Jwc.Experiment
         }
         
         [Fact]
-        public void ArgumentsInitializeWithOneAutoArgumentIsCorrect()
+        public void ArgumentsIsCorrectWhenInitizliedWithOneAutoArgument()
         {
             var sut = (TestCase)TestCase.New<object>(x => { });
             var actual = sut.Arguments;
@@ -87,7 +87,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateInitializeWithTwoAutoArgumentsIsCorrect()
+        public void DelegateIsCorrectWhenInitizliedWithTwoAutoArguments()
         {
             Action<object, string> expected = (x, y) => { };
             var sut = (TestCase)TestCase.New(expected);
@@ -98,7 +98,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateInitializeWithOneArgumentAndOneAutoArgumentIsCorrect()
+        public void DelegateIsCorrectWhenInitizliedWithOneArgumentAndOneAutoArgument()
         {
             Action<int, object> expected = (x, y) => { };
             var sut = (TestCase)TestCase.New(0, expected);
@@ -109,7 +109,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateInitializeWithTwoArgumentsIsCorrect()
+        public void DelegateIsCorrectWhenInitizliedWithTwoArguments()
         {
             Action<int, object> expected = (x, y) => { };
             var sut = (TestCase)TestCase.New(0, null, expected);
@@ -120,7 +120,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ArgumentsInitializeWithTwoAutoArgumentsIsCorrect()
+        public void ArgumentsIsCorrectWhenInitizliedWithTwoAutoArguments()
         {
             var sut = (TestCase)TestCase.New<object, string>((x, y) => { });
             var actual = sut.Arguments;
@@ -128,7 +128,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ArgumentsInitializeWithOneArgumentAndOneAutoArgumentIsCorrect()
+        public void ArgumentsIsCorrectWhenInitizliedWithOneArgumentAndOneAutoArgument()
         {
             var expected = new object();
             var sut = (TestCase)TestCase.New<object, string>(expected, (x, y) => { });
@@ -139,7 +139,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ArgumentsInitializeWithTwoArgumentsIsCorrect()
+        public void ArgumentsIsCorrectWhenInitizliedWithTwoArguments()
         {
             const string expected1 = "anonymous";
             const int expected2 = 1234;

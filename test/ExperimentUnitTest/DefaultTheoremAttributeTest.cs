@@ -54,7 +54,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryIsCorrect()
+        public void FixtureFactoryIsCorrectWhenInitializedWithDefaultCtor()
         {
             var sut = new DefaultTheoremAttribute();
             var actual = sut.FixtureFactory;
@@ -62,7 +62,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryInitializedWithFuncOfITestFixtureIsCorrect()
+        public void FixtureFactoryIsCorrectWhenInitializedWithFuncOfITestFixture()
         {
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
             var actual = sut.FixtureFactory;
@@ -128,7 +128,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryInitializedWithTypeIsCorrect()
+        public void FixtureFactoryIsCorrectWhenInitializedWithType()
         {
             var sut = new DefaultTheoremAttribute(typeof(FakeTestFixture));
 
@@ -247,7 +247,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedForSingleIfExceptionIsThrownReturnsCorrectExceptionCommand()
+        public void CreateParameterizedForSingleReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
             Func<ITestFixture> fixtureFactory = () =>
@@ -265,7 +265,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedForManyIfExceptionIsThrownReturnsCorrectExceptionCommand()
+        public void CreateParameterizedForManyReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
             Func<ITestFixture> fixtureFactory = () =>
@@ -287,7 +287,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeInitializedWithFixtureTypeIsCorrect()
+        public void FixtureTypeIsCorrectWhenInitializedWithFixtureType()
         {
             var fixtureType = typeof(FakeTestFixture);
             var sut = new DefaultTheoremAttribute(fixtureType);
@@ -298,7 +298,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeInitializedWithFuncOfITestFixtureIsCorrect()
+        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfITestFixture()
         {
             var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
             var actual = sut.FixtureType;
@@ -313,7 +313,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrect()
+        public void FixtureTypeIsCorrectWhenInitializedWithDefaultCtor()
         {
             var sut = new DefaultTheoremAttribute();
             var actual = sut.FixtureType;
@@ -321,7 +321,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        public void FixtureFactoryIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
         {
             Func<MethodInfo, ITestFixture> expected = mi => new FakeTestFixture();
             var sut = new DerivedTheoremAttribute(expected);
@@ -332,7 +332,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeInitializedWithFuncOfMethodInfoAndITestFixtureIsCorrect()
+        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
         {
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {

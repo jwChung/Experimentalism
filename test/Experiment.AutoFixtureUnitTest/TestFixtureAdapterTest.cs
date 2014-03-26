@@ -13,7 +13,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void SpecimenContextInitializedFromCtorIsCorrect()
+        public void SpecimenContextIsCorrect()
         {
             var expected = new FakeSpecimenContext();
             var sut = new TestFixtureAdapter(expected);
