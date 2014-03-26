@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Xunit.Extensions;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -134,9 +133,9 @@ namespace Jwc.Experiment
             }
 
             return new FirstClassCommand(
-                Reflector.Wrap(Delegate.Method),
-                GetFinalArguments(testFixture, Delegate.Method),
-                method.TypeName + "." + method.Name);
+                method,
+                Delegate,
+                GetFinalArguments(testFixture, Delegate.Method));
         }
 
         private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)
@@ -147,15 +146,6 @@ namespace Jwc.Experiment
                 .Select(pi => testFixture.Create(pi.ParameterType));
 
             return specifiedArgument.Concat(autoArguments).ToArray();
-        }
-
-        private class FirstClassCommand : TheoryCommand
-        {
-            public FirstClassCommand(IMethodInfo testMethod, object[] parameters, string displayName)
-                : base(testMethod, parameters)
-            {
-                DisplayName = displayName;
-            }
         }
     }
 }

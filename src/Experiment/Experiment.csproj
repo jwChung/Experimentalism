@@ -48,6 +48,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ExceptionCommand.cs" />
+    <Compile Include="FirstClassCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestCase.cs" />
     <Compile Include="ITestFixture.cs" />

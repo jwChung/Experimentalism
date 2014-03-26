@@ -50,6 +50,7 @@
     <Compile Include="FakeTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="DefaultFirstClassTheoremAttributeTest.cs" />
+    <Compile Include="FirstClassCommandTest.cs" />
     <Compile Include="NotSupportedFixtureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
