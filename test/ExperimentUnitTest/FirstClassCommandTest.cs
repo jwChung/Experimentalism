@@ -82,5 +82,21 @@ namespace Jwc.Experiment
 
             Assert.Equal(arguments, actual);
         }
+
+        [Fact]
+        public void DisplayNameIsWellFormatted()
+        {
+            var arguments = new[] { 1, new object(), "string", null };
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action<int, object, string, Type>((a, b, c, d) => { }),
+                arguments);
+            var exptected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsWellFormatted" +
+                            "(Int32: \"1\", Object: \"System.Object\", String: \"string\", Type: NULL)";
+
+            var actual = sut.DisplayName;
+
+            Assert.Equal(exptected, actual);
+        }
     }
 }

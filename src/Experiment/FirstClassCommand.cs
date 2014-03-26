@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -43,6 +44,8 @@ namespace Jwc.Experiment
             _method = method;
             _delegate = @delegate;
             _arguments = arguments;
+
+            SetWellFormattedDisplayName();
         }
 
         /// <summary>
@@ -86,6 +89,23 @@ namespace Jwc.Experiment
             }
 
             return method;
+        }
+
+        private void SetWellFormattedDisplayName()
+        {
+            DisplayName += "(" + string.Join(", ", GetArgumentValues()) + ")";
+        }
+
+        private IEnumerable<string> GetArgumentValues()
+        {
+            var arguments = Arguments.ToArray();
+            return Delegate.Method.GetParameters().Select(pi =>
+                GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
+        }
+
+        private static string GetArgumentValue(string typeName, object argument)
+        {
+            return typeName + ": " + (argument != null ? "\"" + argument + "\"" : "NULL");
         }
     }
 }
