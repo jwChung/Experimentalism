@@ -16,4 +16,10 @@
     <CommitAuthor>$(APPVEYOR_REPO_COMMIT_AUTHOR)</CommitAuthor>
     <CommitAuthorEmail>$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)</CommitAuthorEmail>
   </PropertyGroup>
+  <Target Name="DeletePPFiles" AfterTargets="UnitTest" >
+    <ItemGroup>
+      <PPFiles Include="..\**\*.pp" />
+    </ItemGroup>
+    <Delete Files="@(PPFiles)" />
+  </Target>
 </Project>
