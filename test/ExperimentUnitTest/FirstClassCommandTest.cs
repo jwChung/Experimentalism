@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
@@ -9,9 +10,77 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsFactCommand()
         {
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var sut = new FirstClassCommand(method);
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }),
+                new object[0]);
             Assert.IsAssignableFrom<FactCommand>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullMethodThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new FirstClassCommand(null, new Action(() => { }), new object[0]));
+        }
+
+        [Fact]
+        public void InitializeWithNullDelegateThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new FirstClassCommand(
+                    Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    null,
+                    new object[0]));
+        }
+
+        [Fact]
+        public void InitializeWithNullArgumentsThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new FirstClassCommand(
+                    Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    new Action(() => { }),
+                    null));
+        }
+
+        [Fact]
+        public void MethodIsCorrect()
+        {
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new FirstClassCommand(method, new Action(() => { }), new object[0]);
+
+            var actual = sut.Method;
+
+            Assert.Equal(method, actual);
+        }
+
+        [Fact]
+        public void DelegateIsCorrect()
+        {
+            var @delegate = new Action(() => { });
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                @delegate,
+                new object[0]);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(@delegate, actual);
+        }
+
+        [Fact]
+        public void ArgumentsIsCorrect()
+        {
+            var arguments = new[]{1, new object(), "string"};
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }),
+                arguments);
+
+            var actual = sut.Arguments;
+
+            Assert.Equal(arguments, actual);
         }
     }
 }

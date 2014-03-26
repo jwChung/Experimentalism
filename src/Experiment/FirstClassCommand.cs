@@ -1,4 +1,6 @@
-﻿using Xunit.Sdk;
+﻿using System;
+using System.Collections.Generic;
+using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
@@ -7,12 +9,83 @@ namespace Jwc.Experiment
     /// </summary>
     public class FirstClassCommand : FactCommand
     {
+        private readonly IMethodInfo _method;
+        private readonly Delegate _delegate;
+        private readonly object[] _arguments;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FirstClassCommand"/> class.
         /// </summary>
-        /// <param name="method">The test method.</param>
-        public FirstClassCommand(IMethodInfo method) : base(method)
+        /// <param name="method">
+        /// The test method with which this instance is associated. This will
+        /// likely be the method adorned with an
+        /// <see cref="DefaultFirstClassTheoremAttribute" />.
+        /// </param>
+        /// <param name="delegate">
+        /// The test delegate to be invoked when the test is executed.
+        /// </param>
+        /// <param name="arguments">
+        /// The test arguments to be supplied to the test delegate.
+        /// </param>
+        public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
+            : base(EnsureIsNotNull(method))
         {
+            if (@delegate == null)
+            {
+                throw new ArgumentNullException("delegate");
+            }
+
+            if (arguments == null)
+            {
+                throw new ArgumentNullException("arguments");
+            }
+
+            _method = method;
+            _delegate = @delegate;
+            _arguments = arguments;
+        }
+
+        /// <summary>
+        /// Gets the method.
+        /// </summary>
+        public IMethodInfo Method
+        {
+            get
+            {
+                return _method;
+            }
+        }
+
+        /// <summary>
+        /// Gets the delegate.
+        /// </summary>
+        public Delegate Delegate
+        {
+            get
+            {
+                return _delegate;
+            }
+        }
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        public IEnumerable<object> Arguments
+        {
+            get
+            {
+                return _arguments;
+            }
+        }
+
+        private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            return method;
         }
     }
 }
