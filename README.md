@@ -12,6 +12,7 @@ Experimentalism [![Build status](https://ci.appveyor.com/api/projects/status/29e
 * [Questions](#questions)
 * [Additional references](#additional-references)
 * [Contributions](#contributions)
+* [New Contributor? Jump In!](#new-contributor-jump-In)
 
 Experimentalism은 TDD에 도움을 줄 수 있는 라이브러리와 툴을 제공하는 것이 목적입니다. 
 
@@ -136,6 +137,12 @@ Contributions
 -------------
 > Coming together is a beginning; keeping together is progress; working together is success. – Henry Ford
 
-관심이 있으신 **누구나** Experimentalism에 참여하실 수 있습니다. 특히, TDD에 관심있거나 또는 배우고자하는 분들이 참여하시면 TDD에 관한 insight를 얻을 수 있을 것으로 생각됩니다.
+관심이 있으신 **누구나** Experimentalism에 참여하실 수 있습니다. 특히, TDD에 관심있거나 또는 배우고자하는 분들이 참여하시면 TDD에 관한 insight를 얻을 수 있을 것으로 생각됩니다. 참여방법은 [CONTRIBUTING 문서](https://github.com/jwChung/Experimentalism/blob/master/CONTRIBUTING.md)를 통해서 확인하실 수 있습니다.
 
-참여방법은 [CONTRIBUTING.md](https://github.com/jwChung/Experimentalism/blob/master/CONTRIBUTING.md)를 통해서 확인하실 수 있습니다.
+###New Contributor? Jump In!
+Experimentalism 오픈소스 참여에 익숙하지 않으신 분들은 [Issue list](https://github.com/jwChung/Experimentalism/issues?labels=jump+in)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨은 다음과 같은 의미이며, _Experimentalism 오픈소스 참여를 독려하기 위한 장치_입니다.
+
+* 해당 이슈를 해결하는데 상대적으로 많은 시간을 할애하지 않아도 된다.
+* 상대적으로 독립적인 이슈이기 때문에 이해하기 쉽다.
+* 핵심을 잘 지적하고 있다.
+* 필요 시 해당 이슈에 대한 설명을 요청할 수 있다.
