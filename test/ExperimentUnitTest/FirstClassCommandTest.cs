@@ -104,21 +104,20 @@ namespace Jwc.Experiment
         {
             // Fixture setup
             var arguments = new object[] { 1, "string" };
-            var @delegate = new Action<int, string>((x, y) =>
-            {
-                Assert.Equal(1, x);
-                Assert.Equal("string", y);
-                //Console.WriteLine(
-                //    "Confirm this message is shown in the output window " +
-                //    "to verify this delegate is called.");
-            });
+            var @delegate = new Action<int, string>(StaticDelegateMethod);
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 @delegate,
                 arguments);
 
-            // Exercise system and Verify outcome
+            // Exercise system
             Assert.DoesNotThrow(() => sut.Execute(null));
+
+            // Verify outcome
+            Assert.True(_verified, "verified.");
+
+            // Teardown
+            _verified = false;
         }
 
         [Fact]
@@ -135,6 +134,14 @@ namespace Jwc.Experiment
             var result = Assert.IsType<PassedResult>(actual);
             Assert.Equal(method.Name, result.MethodName);
             Assert.Equal(sut.DisplayName, result.DisplayName);
+        }
+
+        private static bool _verified;
+        private static void StaticDelegateMethod(int arg1, string arg2)
+        {
+            Assert.Equal(1, arg1);
+            Assert.Equal("string", arg2);
+            _verified = true;
         }
     }
 }
