@@ -176,18 +176,31 @@ namespace Jwc.Experiment
         [Fact]
         public void ConvertToTestCommandReturnsCorrectCommand()
         {
-            var testFixture = new FakeTestFixture();
-            var arguments = new[] { new object(), testFixture.IntValue, testFixture.StringValue };
-            Action<object, int, string> @delegate = (x, y, z) => { };
-            var sut = TestCase.New(arguments[0], testFixture.IntValue, testFixture.StringValue, @delegate);
+            var arguments = new[] { new object() };
+            Action<object> @delegate = x => { };
+            var sut = TestCase.New(arguments[0], @delegate);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, testFixture);
+            var actual = sut.ConvertToTestCommand(method, new FakeTestFixture());
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(method, command.Method);
             Assert.Equal(@delegate, command.Delegate);
             Assert.Equal(arguments, command.Arguments);
+        }
+
+        [Fact]
+        public void ConvertToTestCommandPassesAutoDataToCommand()
+        {
+            var testFixture = new FakeTestFixture();
+            var obj = new object();
+            var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var actual = sut.ConvertToTestCommand(method, testFixture);
+
+            var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
+            Assert.Equal(new[] { obj, testFixture.IntValue, testFixture.StringValue }, command.Arguments);
         }
     }
 }
