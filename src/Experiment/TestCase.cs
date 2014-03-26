@@ -27,7 +27,7 @@ namespace Jwc.Experiment
             {
                 throw new ArgumentException(
                     "The supplied delegate should be static, but isn't because of using objects " +
-                    "from outer scope, which results in problems from Shared Fixture " +
+                    "from outer scope, which can result in problems from Shared Fixture " +
                     "- Erratic Tests, probably complicated than Minimal Fixture and leading to Fragile Fixture. " +
                     "(http://xunitpatterns.com/Shared%20Fixture.html)",
                     "delegate");
