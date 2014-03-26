@@ -24,8 +24,25 @@ namespace Jwc.Experiment
             Assert.Equal(1234, arg2);
         }
 
+        [DefaultTheorem(typeof(CustomTestFixture))]
+        public void DefaultTheoremWithCustomFixtureSupportsParameterizedTestWithAutoData(
+            string arg1, int arg2)
+        {
+            Assert.Equal("custom string", arg1);
+            Assert.Equal(5678, arg2);
+        }
+
+        [DefaultTheorem(typeof(CustomTestFixture))]
+        [InlineData("expected")]
+        public void DefaultTheoremWithCustomFixtureSupportsParameterizedTestWithMixedData(
+            string arg1, int arg2)
+        {
+            Assert.Equal("expected", arg1);
+            Assert.Equal(5678, arg2);
+        }
+
         [DefaultFirstClassTheorem]
-        public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsYieldReturnedTestCases()
+        public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsFirstClassTestsForYieldReturn()
         {
             yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
 
@@ -35,7 +52,7 @@ namespace Jwc.Experiment
         }
 
         [DefaultFirstClassTheorem]
-        public ITestCase[] DefaultFirstClassTheoremSupportsArrayTestCases()
+        public ITestCase[] DefaultFirstClassTheoremSupportsFirstClassTestsForArray()
         {
             var testCases = new[]
             {
@@ -52,7 +69,7 @@ namespace Jwc.Experiment
         }
 
         [DefaultFirstClassTheorem]
-        public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsTestMethodCases()
+        public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsFirstClassTestsForEnumerable()
         {
             var testCases = new[]
             {
@@ -66,11 +83,53 @@ namespace Jwc.Experiment
                     (ps, ptc) => ps.DefaultTheoremSupportsParameterizedTest(ptc.X, ptc.Y)));
         }
 
+        [DefaultFirstClassTheorem(typeof(CustomTestFixture))]
+        public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithAutoData()
+        {
+            yield return TestCase.New<string, int>((x, y) =>
+            {
+                Assert.Equal("custom string", x);
+                Assert.Equal(5678, y);
+            });
+        }
+
+        [DefaultFirstClassTheorem(typeof(CustomTestFixture))]
+        public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithMixedData()
+        {
+            yield return TestCase.New<string, int>("expected", (x, y) =>
+            {
+                Assert.Equal("expected", x);
+                Assert.Equal(5678, y);
+            });
+        }
+
         private class ParameterizedTestDataAttribute : DataAttribute
         {
-            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            public override IEnumerable<object[]> GetData(
+                MethodInfo methodUnderTest, Type[] parameterTypes)
             {
                 yield return new object[] { "expected", 1234 };
+            }
+        }
+
+        private class CustomTestFixture : ITestFixture
+        {
+            public object Create(object request)
+            {
+                var type = request as Type;
+                if (type != null)
+                {
+                    if (type == typeof(string))
+                    {
+                        return "custom string";
+                    }
+                    if (type == typeof(int))
+                    {
+                        return 5678;
+                    }
+                }
+
+                throw new NotSupportedException();
             }
         }
     }
