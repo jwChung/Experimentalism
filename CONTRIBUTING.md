@@ -2,7 +2,7 @@ How to contribute to Experimentalism
 ====================================
 Experimentalism에서는 타인과의 협업을 위한 규칙이 필요합니다. 본 문서에서는 규칙과 자율성(프로젝트 참여 용이성) 사이의 균형점을 찾기 위한 노력을 하고 있습니다.
 
-본 문서에 대한 문의가 있을 시, [GitHub issues](https://github.com/jwChung/Experimentalism/issues)를 통해 질문을 등록하실 수 있습니다.
+본 문서에 대한 문의가 있을 시, [Issue list](https://github.com/jwChung/Experimentalism/issues)에 질문을 등록하실 수 있습니다.
 
 개발환경
 -------
@@ -59,7 +59,7 @@ Visual studio에서는 release모드에서 모든 테스트들이 성공하고, 
 
 Jump in
 --------
-Experimentalism 개발 혹은 오픈소스 참여에 익숙하지 않으신 분들은 [GitHub issues](https://github.com/jwChung/Experimentalism/issues?labels=jump+in)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨의 의미는 다음과 같은 의미를 가집니다.
+Experimentalism 개발 혹은 오픈소스 참여에 익숙하지 않으신 분들은 [Issue list](https://github.com/jwChung/Experimentalism/issues?labels=jump+in)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨의 의미는 다음과 같은 의미를 가집니다.
 
 * 해당 이슈를 해결하는데 상대적으로(Jump in 이슈가 아닌 이슈와 비교했을 때) 많은 시간을 할애하지 않아도 된다.
 * 독립적인 이슈이기 때문에 이해하기 쉽다.
