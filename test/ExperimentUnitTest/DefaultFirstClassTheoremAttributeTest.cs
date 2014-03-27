@@ -174,7 +174,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateTestCommandsCreatesTestFixtureForEachTestCase()
+        public void CreateTestCommandsInitializesTestFixtureForEachTestCase()
         {
             int creatCount = 0;
             var sut = new DerivedFirstClassTheoremAttribute(() =>
