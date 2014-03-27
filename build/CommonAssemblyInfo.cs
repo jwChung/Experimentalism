@@ -10,18 +10,26 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.2")]
-[assembly: AssemblyInformationalVersion("0.8.2")]
+[assembly: AssemblyVersion("0.8.3")]
+[assembly: AssemblyInformationalVersion("0.8.3")]
 
 /*
- * Version 0.8.2
+ * Version 0.8.3
  * 
- * Implemented FistClassCommand to display well-formatted name
- * of first class test.
+ * Initializes a test-fixture only when necessary rather than every time.
+ * 
+ * Fixes that fixture factory passed from ConvertToTestCommand should take
+ * MethodInfo of a test delegate rather than it of a test method, which is
+ * adorned with FisrtClassTheoremAttribute.
+ * 
+ * BREAKING CHANGE
+ * - ITestCase, TestCase
+ *   ITestCommand ConvertToTestCommand(IMethodInfo, ITestFixture)
+ *   -> ITestCommand ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>)
  * 
  * Issue
- * - https://github.com/jwChung/Experimentalism/issues/26
+ * - https://github.com/jwChung/Experimentalism/issues/28
  * 
- * Pull requests
- * - https://github.com/jwChung/Experimentalism/pull/27
+ * Pull request
+ * - https://github.com/jwChung/Experimentalism/pull/29
  */
