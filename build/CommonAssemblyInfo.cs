@@ -10,26 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.3")]
-[assembly: AssemblyInformationalVersion("0.8.3-test")]
+[assembly: AssemblyVersion("0.8.4")]
+[assembly: AssemblyInformationalVersion("0.8.4")]
 
 /*
- * Version 0.8.3-test
+ * Version 0.8.4
  * 
- * Initializes a test-fixture only when necessary rather than every time.
- * 
- * Fixes that fixture factory passed from ConvertToTestCommand should take
- * MethodInfo of a test delegate rather than it of a test method, which is
- * adorned with FisrtClassTheoremAttribute.
- * 
- * BREAKING CHANGE
- * - ITestCase, TestCase
- *   ITestCommand ConvertToTestCommand(IMethodInfo, ITestFixture)
- *   -> ITestCommand ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>)
- * 
- * Issue
- * - https://github.com/jwChung/Experimentalism/issues/28
- * 
- * Pull request
- * - https://github.com/jwChung/Experimentalism/pull/29
+ * Fixes the previous nuget-package deployments(v0.8.3), which does not
+ * include transformation files(*.pp).
  */
