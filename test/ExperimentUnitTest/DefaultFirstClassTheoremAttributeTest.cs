@@ -165,15 +165,18 @@ namespace Jwc.Experiment
         public void CreateTestCommandsPassesTestFixtureToTestCase()
         {
             // Fixture setup
-            var sut = new DefaultFirstClassTheoremAttribute(typeof(FakeTestFixture));
+            var sut = new DerivedFirstClassTheoremAttribute(mi => new FakeTestFixture());
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
-            // Exercise system and Verify outcome
-            Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
+            // Exercise system
+            var actual = sut.CreateTestCommands(method).Single();
+
+            // Verify outcome
+            Assert.IsType<FactCommand>(actual);
         }
 
-        [Fact]
+        [Fact(Skip="Will be deleted")]
         public void CreateTestCommandsInitializesTestFixtureForEachTestCase()
         {
             int creatCount = 0;
@@ -209,7 +212,7 @@ namespace Jwc.Experiment
             {
                 throw new NotSupportedException();
             });
-            var method = Reflector.Wrap(GetType().GetMethod("TestCasesTest"));
+            var method = Reflector.Wrap(GetType().GetMethod("CallFixtureFactoryTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
 
@@ -256,33 +259,45 @@ namespace Jwc.Experiment
 
         public IEnumerable<ITestCase> TestCasesTest()
         {
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+        }
+
+        public IEnumerable<ITestCase> CallFixtureFactoryTest()
+        {
+            yield return new FakeTestCase
+            {
+                OnConvertToTestCommand = (m, f) =>
+                {
+                    f(m.MethodInfo);
+                    return new FactCommand(m);
+                }
+            };
         }
 
         public static IEnumerable<ITestCase> StaticTestCasesTest()
         {
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
         }
 
         public IEnumerable<ITestCase> PassTestFixtureTest()
         {
             yield return new FakeTestCase
             {
-                OnConvertToTestCommand2 = (m, f) =>
+                OnConvertToTestCommand = (m, f) =>
                 {
-                    Assert.IsType<FakeTestFixture>(f);
-                    return null;
+                    Assert.IsType<FakeTestFixture>(f(m.MethodInfo));
+                    return new FactCommand(m);
                 }
             };
         }
 
         public IEnumerable<ITestCase> ExceptionFromCreatingTestCaseTest()
         {
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
             throw new NotSupportedException();
         }
 
@@ -297,7 +312,7 @@ namespace Jwc.Experiment
 
         public IEnumerable<FakeTestCase> ValidReturnTypeTest()
         {
-            yield return new FakeTestCase { OnConvertToTestCommand2 = (m, f) => new FactCommand(m) };
+            yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
         }
 
         public IEnumerable<ITestCase> ParameterizedTest(object arg)

@@ -111,7 +111,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, FixtureFactory(method.MethodInfo)))
+                        tc => tc.ConvertToTestCommand(method, FixtureFactory))
                     .ToArray();
             }
             catch (Exception exception)
