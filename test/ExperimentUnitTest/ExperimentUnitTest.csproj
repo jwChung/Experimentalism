@@ -57,6 +57,7 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="DefaultTheoremAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
+    <Compile Include="TypeFixtureFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

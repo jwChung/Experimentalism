@@ -64,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCase.New.tt</DependentUpon>
     </Compile>
+    <Compile Include="TypeFixtureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
