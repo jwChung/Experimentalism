@@ -11,13 +11,13 @@ namespace Jwc.Experiment
         /// <summary>
         /// Creates an instance of <see cref="NotSupportedFixture" />.
         /// </summary>
-        /// <param name="method">
+        /// <param name="testMethod">
         /// The test method
         /// </param>
         /// <returns>
         /// The created fixture.
         /// </returns>
-        public ITestFixture Create(MethodInfo method)
+        public ITestFixture Create(MethodInfo testMethod)
         {
             return new NotSupportedFixture();
         }

@@ -11,12 +11,12 @@ namespace Jwc.Experiment
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture"/>.
         /// </summary>
-        /// <param name="method">
+        /// <param name="testMethod">
         /// The test method
         /// </param>
         /// <returns>
         /// The created fixture.
         /// </returns>
-        ITestFixture Create(MethodInfo method);
+        ITestFixture Create(MethodInfo testMethod);
     }
 }

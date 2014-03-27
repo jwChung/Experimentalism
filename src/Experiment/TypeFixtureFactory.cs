@@ -39,13 +39,13 @@ namespace Jwc.Experiment
         /// Creates an instance of <see cref="ITestFixture" />. This uses
         /// a default constructor of supplied fixture type.
         /// </summary>
-        /// <param name="method">
+        /// <param name="testMethod">
         /// The test method.
         /// </param>
         /// <returns>
         /// The created fixture.
         /// </returns>
-        public ITestFixture Create(MethodInfo method)
+        public ITestFixture Create(MethodInfo testMethod)
         {
             return (ITestFixture)Activator.CreateInstance(FixtureType);
         }
