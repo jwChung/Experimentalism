@@ -14,8 +14,45 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.8.4")]
 
 /*
- * Version 0.8.4
+ * Version 0.8.5
  * 
- * Fixes the previous nuget-package deployments(v0.8.3), which does not
- * include transformation files(*.pp).
+ * BREAKING CHNAGE
+ *   DefaultTheoremAttribute
+ *   - delete:
+ *     DefaultTheoremAttribute(Func<ITestFixture>)
+ *   
+ *   - before:
+ *     DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
+ *     after:
+ *     DefaultTheoremAttribute(ITestFixtureFactory)
+ *   
+ *   - before:
+ *     Func<MethodInfo, ITestFixture> FixtureFactory
+ *     after:
+ *     ITestFixtureFactory FixtureFactory
+ *   
+ *   - before:
+ *     object FixtureType
+ *     after:
+ *     Type FixtureType
+ *   
+ *   ITestCase and TestCase
+ *   - before:
+ *     ITestCommand ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>);
+ *     after:
+ *     ITestCommand ConvertToTestCommand(IMethodInfo, ITestFixtureFactory);
+ *     
+ *   DefaultFirstClassTheoremAttribute
+ *   - delete:
+ *     DefaultTheoremAttribute(Func<ITestFixture>)
+ *   
+ *   - before:
+ *     DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
+ *     after:
+ *     DefaultTheoremAttribute(ITestFixtureFactory)
+ *   
+ *   - before:
+ *     Func<MethodInfo, ITestFixture> FixtureFactory
+ *     after:
+ *     ITestFixtureFactory FixtureFactory
  */

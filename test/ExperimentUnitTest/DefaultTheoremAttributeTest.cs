@@ -47,33 +47,18 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void InitializeWithNullFuncOfITestFixtureThrows()
-        {
-            Func<ITestFixture> fixtureFactory = null;
-            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
-        }
-
-        [Fact]
         public void FixtureFactoryIsCorrectWhenInitializedWithDefaultCtor()
         {
             var sut = new DefaultTheoremAttribute();
             var actual = sut.FixtureFactory;
-            Assert.IsType<NotSupportedFixture>(actual.Invoke(null));
-        }
-
-        [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithFuncOfITestFixture()
-        {
-            var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
-            var actual = sut.FixtureFactory;
-            Assert.IsType<FakeTestFixture>(actual.Invoke(null));
+            Assert.IsType<NotSupportedFixtureFactory>(actual);
         }
 
         [Fact]
         public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(() => fixture);
+            var sut = new DerivedTheoremAttribute(new FakeFixtureFactory { OnCreate = mi => fixture });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -92,7 +77,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(() => fixture);
+            var sut = new DerivedTheoremAttribute(new FakeFixtureFactory { OnCreate = mi => fixture });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -130,12 +115,13 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryIsCorrectWhenInitializedWithType()
         {
-            var sut = new DefaultTheoremAttribute(typeof(FakeTestFixture));
+            var fixtureType = typeof(FakeTestFixture);
+            var sut = new DefaultTheoremAttribute(fixtureType);
 
             var actual = sut.FixtureFactory;
 
-            Assert.IsType<FakeTestFixture>(actual(null));
-            Assert.NotSame(actual(null), actual(null));
+            var typeFixtureFactory = Assert.IsType<TypeFixtureFactory>(actual);
+            Assert.Equal(fixtureType, typeFixtureFactory.FixtureType);
         }
 
         [Fact]
@@ -148,7 +134,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(() => fixture);
+            var sut = new DerivedTheoremAttribute(new FakeFixtureFactory { OnCreate = mi => fixture });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method);
@@ -172,11 +158,11 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithNoAutoDataDoesNotInitializeFixture(
             string arg1, int arg2, object arg3)
         {
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                throw new NotSupportedException();
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi => { throw new NotSupportedException(); }
+                });
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
         }
@@ -186,12 +172,15 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                callCount++;
-                return fixture;
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi =>
+                    {
+                        callCount++;
+                        return fixture;
+                    }
+                });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -204,12 +193,15 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                callCount++;
-                return fixture;
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi =>
+                    {
+                        callCount++;
+                        return fixture;
+                    }
+                });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -222,12 +214,15 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                callCount++;
-                return fixture;
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi =>
+                    {
+                        callCount++;
+                        return fixture;
+                    }
+                });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -238,11 +233,14 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateNonParameterizedTestDoesNotInitializeFixture()
         {
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                throw new NotSupportedException();
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi =>
+                    {
+                        throw new NotSupportedException();
+                    }
+                });
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
         }
@@ -251,11 +249,11 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestForSingleReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                throw exception;
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi => { throw exception; }
+                });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -269,11 +267,11 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestForManyReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            Func<ITestFixture> fixtureFactory = () =>
-            {
-                throw exception;
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
+            var sut = new DerivedTheoremAttribute(
+                new FakeFixtureFactory
+                {
+                    OnCreate = mi => { throw exception; }
+                });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -297,19 +295,11 @@ namespace Jwc.Experiment
 
             Assert.Equal(fixtureType, actual);
         }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfITestFixture()
-        {
-            var sut = new DerivedTheoremAttribute(() => new FakeTestFixture());
-            var actual = sut.FixtureType;
-            Assert.Equal(typeof(FakeTestFixture), actual);
-        }
-
+        
         [Fact]
         public void InitializeWithNullFuncOfMethodInfoAndITestFixtureThrows()
         {
-            Func<MethodInfo, ITestFixture> fixtureFactory = null;
+            ITestFixtureFactory fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
         }
 
@@ -322,24 +312,26 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
+        public void FixtureFactoryIsCorrectWhenInitializedWithFixtureFactory()
         {
-            Func<MethodInfo, ITestFixture> expected = mi => new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(expected);
+            var fixtureFactory = new FakeFixtureFactory();
+            var sut = new DerivedTheoremAttribute(fixtureFactory);
 
             var actual = sut.FixtureFactory;
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(fixtureFactory, actual);
         }
 
         [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
+        public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
         {
-            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            var fixtureFactory = new FakeFixtureFactory
             {
-                if (mi == null)
-                    throw new ArgumentNullException("mi");
-                return new FakeTestFixture();
+                OnCreate = mi =>
+                {
+                    Assert.NotNull(mi);
+                    return new FakeTestFixture();
+                }
             };
             var sut = new DerivedTheoremAttribute(fixtureFactory);
 
@@ -353,11 +345,14 @@ namespace Jwc.Experiment
         {
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
             bool verified = false;
-            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            var fixtureFactory = new FakeFixtureFactory
             {
-                Assert.Equal(method.MethodInfo, mi);
-                verified = true;
-                return new FakeTestFixture();
+                OnCreate = mi =>
+                {
+                    Assert.Equal(method.MethodInfo, mi);
+                    verified = true;
+                    return new FakeTestFixture();
+                }
             };
             var sut = new DerivedTheoremAttribute(fixtureFactory);
 
@@ -398,11 +393,8 @@ namespace Jwc.Experiment
 
         private class DerivedTheoremAttribute : DefaultTheoremAttribute
         {
-            public DerivedTheoremAttribute(Func<ITestFixture> fixtureFactory) : base(fixtureFactory)
-            {
-            }
-
-            public DerivedTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory) : base(fixtureFactory)
+            public DerivedTheoremAttribute(ITestFixtureFactory fixtureFactory)
+                : base(fixtureFactory)
             {
             }
         }

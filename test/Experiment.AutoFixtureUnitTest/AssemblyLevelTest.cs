@@ -30,6 +30,7 @@ namespace Jwc.Experiment
         [Theory]
         [InlineData("TheoremAttribute")]
         [InlineData("TestFixtureAdapter")]
+        [InlineData("AutoFixtureFactory")]
         public void SutGeneratesNugetTransformFiles(string originName)
         {
             string directory = @"..\..\..\..\src\Experiment.AutoFixture\";

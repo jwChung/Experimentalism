@@ -120,7 +120,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory)
         {
             if (method == null)
             {
@@ -135,7 +135,7 @@ namespace Jwc.Experiment
             return new FirstClassCommand(
                 method,
                 Delegate,
-                GetFinalArguments(fixtureFactory(Delegate.Method), Delegate.Method));
+                GetFinalArguments(fixtureFactory.Create(Delegate.Method), Delegate.Method));
         }
 
         private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)

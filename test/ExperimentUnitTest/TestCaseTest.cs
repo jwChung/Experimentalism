@@ -155,11 +155,11 @@ namespace Jwc.Experiment
         {
             var sut = TestCase.New(() => { });
             Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(null, mi => new FakeTestFixture()));
+                () => sut.ConvertToTestCommand(null, new FakeFixtureFactory()));
         }
 
         [Fact]
-        public void ConvertToTestCommandWithNullFixtureThrows()
+        public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
             var sut = TestCase.New(() => { });
             IMethodInfo dummyMethodInfo = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -181,7 +181,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New(arguments[0], @delegate);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, mi => new FakeTestFixture());
+            var actual = sut.ConvertToTestCommand(method, new FakeFixtureFactory { OnCreate = x => null });
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(method, command.Method);
@@ -197,7 +197,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, mi => testFixture);
+            var actual = sut.ConvertToTestCommand(method, new FakeFixtureFactory { OnCreate = x => testFixture });
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(new[] { obj, testFixture.IntValue, testFixture.StringValue }, command.Arguments);
@@ -209,10 +209,13 @@ namespace Jwc.Experiment
             var sut = TestCase.New<int>(x => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             int creatCount = 0;
-            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            var fixtureFactory = new FakeFixtureFactory
             {
-                creatCount++;
-                return new FakeTestFixture();
+                OnCreate = mi =>
+                {
+                    creatCount++;
+                    return new FakeTestFixture();
+                }
             };
 
             sut.ConvertToTestCommand(method, fixtureFactory);
@@ -226,11 +229,14 @@ namespace Jwc.Experiment
             Action @delegate = () => { };
             var sut = TestCase.New(@delegate);
             bool verified = false;
-            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            var fixtureFactory = new FakeFixtureFactory
             {
-                Assert.Equal(@delegate.Method, mi);
-                verified = true;
-                return new FakeTestFixture();
+                OnCreate = mi =>
+                {
+                    Assert.Equal(@delegate.Method, mi);
+                    verified = true;
+                    return new FakeTestFixture();
+                }
             };
 
             sut.ConvertToTestCommand(

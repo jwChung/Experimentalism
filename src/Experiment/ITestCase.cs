@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Xunit.Sdk;
+﻿using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
@@ -23,6 +21,6 @@ namespace Jwc.Experiment
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory);
+        ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory);
     }
 }

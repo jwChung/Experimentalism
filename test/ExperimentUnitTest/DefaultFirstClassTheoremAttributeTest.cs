@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
@@ -56,37 +55,30 @@ namespace Jwc.Experiment
         {
             var sut = new DefaultFirstClassTheoremAttribute();
             var actual = sut.FixtureFactory;
-            Assert.IsType<NotSupportedFixture>(actual.Invoke(null));
+            Assert.IsType<NotSupportedFixtureFactory>(actual);
         }
 
         [Fact]
         public void FixtureFactoryIsCorrectWhenInitializedWithType()
         {
-            var sut = new DefaultFirstClassTheoremAttribute(typeof(FakeTestFixture));
+            Type fixtureType = typeof(FakeTestFixture);
+            var sut = new DefaultFirstClassTheoremAttribute(fixtureType);
 
             var actual = sut.FixtureFactory;
 
-            Assert.IsType<FakeTestFixture>(actual(null));
-            Assert.NotSame(actual(null), actual(null));
+            var fixtureFactory = Assert.IsType<TypeFixtureFactory>(actual);
+            Assert.Equal(fixtureType, fixtureFactory.FixtureType);
         }
 
         [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithFuncOfITestFixture()
+        public void FixtureFactoryIsCorrectWhenInitializedWithFixtureFactory()
         {
-            var sut = new DerivedFirstClassTheoremAttribute(() => new FakeTestFixture());
-            var actual = sut.FixtureFactory;
-            Assert.IsType<FakeTestFixture>(actual.Invoke(null));
-        }
-
-        [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
-        {
-            Func<MethodInfo, ITestFixture> expected = mi => new FakeTestFixture();
-            var sut = new DerivedFirstClassTheoremAttribute(expected);
+            var fixtureFactory = new FakeFixtureFactory();
+            var sut = new DerivedFirstClassTheoremAttribute(fixtureFactory);
 
             var actual = sut.FixtureFactory;
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(fixtureFactory, actual);
         }
 
         [Fact]
@@ -116,21 +108,15 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfITestFixture()
+        public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
         {
-            var sut = new DerivedFirstClassTheoremAttribute(() => new FakeTestFixture());
-            var actual = sut.FixtureType;
-            Assert.Equal(typeof(FakeTestFixture), actual);
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
-        {
-            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            var fixtureFactory = new FakeFixtureFactory
             {
-                if (mi == null)
-                    throw new ArgumentNullException("mi");
-                return new FakeTestFixture();
+                OnCreate = mi =>
+                {
+                    Assert.NotNull(mi);
+                    return new FakeTestFixture();
+                }
             };
             var sut = new DerivedFirstClassTheoremAttribute(fixtureFactory);
 
@@ -146,17 +132,9 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void InitializeWithNullFuncOfITestFixtureThrows()
+        public void InitializeWithNullFixtureFactoryThrows()
         {
-            Func<ITestFixture> fixtureFactory = null;
-            Assert.Throws<ArgumentNullException>(
-                () => new DerivedFirstClassTheoremAttribute(fixtureFactory));
-        }
-
-        [Fact]
-        public void InitializeWithNullFuncOfMethodInfoAndITestFixtureThrows()
-        {
-            Func<MethodInfo, ITestFixture> fixtureFactory = null;
+            ITestFixtureFactory fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(
                 () => new DerivedFirstClassTheoremAttribute(fixtureFactory));
         }
@@ -165,7 +143,8 @@ namespace Jwc.Experiment
         public void CreateTestCommandsPassesTestFixtureToTestCase()
         {
             // Fixture setup
-            var sut = new DerivedFirstClassTheoremAttribute(mi => new FakeTestFixture());
+            var sut = new DerivedFirstClassTheoremAttribute(
+                new FakeFixtureFactory { OnCreate = mi => new FakeTestFixture() });
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -191,9 +170,12 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestFixtureThrows()
         {
-            var sut = new DerivedFirstClassTheoremAttribute(() =>
+            var sut = new DerivedFirstClassTheoremAttribute(new FakeFixtureFactory
             {
-                throw new NotSupportedException();
+                OnCreate = mi =>
+                {
+                    throw new NotSupportedException();
+                }
             });
             var method = Reflector.Wrap(GetType().GetMethod("CallFixtureFactoryTest"));
 
@@ -253,7 +235,7 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) =>
                 {
-                    f(m.MethodInfo);
+                    f.Create(m.MethodInfo);
                     return new FactCommand(m);
                 }
             };
@@ -272,7 +254,7 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) =>
                 {
-                    Assert.IsType<FakeTestFixture>(f(m.MethodInfo));
+                    Assert.IsType<FakeTestFixture>(f.Create(m.MethodInfo));
                     return new FactCommand(m);
                 }
             };
@@ -305,12 +287,7 @@ namespace Jwc.Experiment
 
         private class DerivedFirstClassTheoremAttribute : DefaultFirstClassTheoremAttribute
         {
-            public DerivedFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
-                : base(fixtureFactory)
-            {
-            }
-
-            public DerivedFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+            public DerivedFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
                 : base(fixtureFactory)
             {
             }
