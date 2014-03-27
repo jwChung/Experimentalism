@@ -135,7 +135,7 @@ namespace Jwc.Experiment
             return new FirstClassCommand(
                 method,
                 Delegate,
-                GetFinalArguments(fixtureFactory(method.MethodInfo), Delegate.Method));
+                GetFinalArguments(fixtureFactory(Delegate.Method), Delegate.Method));
         }
 
         private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)

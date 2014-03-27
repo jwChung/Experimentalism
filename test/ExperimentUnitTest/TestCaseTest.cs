@@ -219,5 +219,25 @@ namespace Jwc.Experiment
 
             Assert.Equal(1, creatCount);
         }
+
+        [Fact]
+        public void ConvertToTestCommandPassesCorrectMethodInfoToFixtureFactory()
+        {
+            Action @delegate = () => { };
+            var sut = TestCase.New(@delegate);
+            bool verified = false;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                Assert.Equal(@delegate.Method, mi);
+                verified = true;
+                return new FakeTestFixture();
+            };
+
+            sut.ConvertToTestCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                fixtureFactory);
+
+            Assert.True(verified);
+        }
     }
 }
