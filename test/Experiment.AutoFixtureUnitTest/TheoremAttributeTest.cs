@@ -28,7 +28,7 @@ namespace Jwc.Experiment
             var sut = new TheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
 
-            var actual = sut.FixtureFactory(dummyMethod);
+            var actual = sut.FixtureFactory.Create(dummyMethod);
 
             var adapter = Assert.IsType<TestFixtureAdapter>(actual);
             var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
@@ -41,17 +41,17 @@ namespace Jwc.Experiment
             var sut = new TheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
 
-            var actual = sut.FixtureFactory(dummyMethod);
+            var actual = sut.FixtureFactory.Create(dummyMethod);
 
             Assert.NotNull(actual);
-            Assert.NotSame(sut.FixtureFactory(dummyMethod), actual);
+            Assert.NotSame(sut.FixtureFactory.Create(dummyMethod), actual);
         }
 
         [Fact]
         public void FixtureFactoryReflectsCustomizeAttribute()
         {
             var sut = new TheoremAttribute();
-            var actual = sut.FixtureFactory(GetType().GetMethod("FrozenTest"));
+            var actual = sut.FixtureFactory.Create(GetType().GetMethod("FrozenTest"));
             Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
 
@@ -60,7 +60,7 @@ namespace Jwc.Experiment
         {
             var sut = new TheoremAttribute();
 
-            var actual = sut.FixtureFactory(GetType().GetMethod("PersonTest"));
+            var actual = sut.FixtureFactory.Create(GetType().GetMethod("PersonTest"));
 
             var name = (string)actual.Create(typeof(string));
             var age = (int)actual.Create(typeof(int));
@@ -76,7 +76,7 @@ namespace Jwc.Experiment
         {
             var sut = new TheoremAttribute();
 
-            var actual = sut.FixtureFactory(GetType().GetMethod("ManyAttributeTest"));
+            var actual = sut.FixtureFactory.Create(GetType().GetMethod("ManyAttributeTest"));
 
             var person = (Person)actual.Create(typeof(Person));
             Assert.NotNull(person.Name);
