@@ -164,7 +164,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New(() => { });
             IMethodInfo dummyMethodInfo = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(dummyMethodInfo, null));
+                () => sut.ConvertToTestCommand(dummyMethodInfo, (ITestFixture)null));
         }
         
         [Fact]
