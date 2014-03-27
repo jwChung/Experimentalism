@@ -176,23 +176,6 @@ namespace Jwc.Experiment
             Assert.IsType<FactCommand>(actual);
         }
 
-        [Fact(Skip="Will be deleted")]
-        public void CreateTestCommandsInitializesTestFixtureForEachTestCase()
-        {
-            int creatCount = 0;
-            var sut = new DerivedFirstClassTheoremAttribute(() =>
-            {
-                creatCount++;
-                return new FakeTestFixture();
-            });
-            const string methodName = "TestCasesTest";
-            var method = Reflector.Wrap(GetType().GetMethod(methodName));
-
-            sut.CreateTestCommands(method);
-
-            Assert.Equal(3, creatCount);
-        }
-
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestCaseThrows()
         {
