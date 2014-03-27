@@ -253,7 +253,7 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) =>
                 {
-                    f(m.MethodInfo);
+                    f.Create(m.MethodInfo);
                     return new FactCommand(m);
                 }
             };
@@ -272,7 +272,7 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) =>
                 {
-                    Assert.IsType<FakeTestFixture>(f(m.MethodInfo));
+                    Assert.IsType<FakeTestFixture>(f.Create(m.MethodInfo));
                     return new FactCommand(m);
                 }
             };

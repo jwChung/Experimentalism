@@ -17,21 +17,28 @@ using System.Runtime.InteropServices;
  * Version 0.8.5
  * 
  * BREAKING CHNAGE
- * - delete:
- *   DefaultTheoremAttribute(Func<ITestFixture>)
+ *   DefaultTheoremAttribute
+ *   - delete:
+ *     DefaultTheoremAttribute(Func<ITestFixture>)
  *   
- * - before:
- *   DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
- *   after:
- *   DefaultTheoremAttribute(ITestFixtureFactory)
+ *   - before:
+ *     DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
+ *     after:
+ *     DefaultTheoremAttribute(ITestFixtureFactory)
  *   
- * - before:
- *   Func<MethodInfo, ITestFixture> FixtureFactory
- *   after:
- *   ITestFixtureFactory FixtureFactory
+ *   - before:
+ *     Func<MethodInfo, ITestFixture> FixtureFactory
+ *     after:
+ *     ITestFixtureFactory FixtureFactory
  *   
- * - before:
- *   object FixtureType
- *   after:
- *   Type FixtureType
+ *   - before:
+ *     object FixtureType
+ *     after:
+ *     Type FixtureType
+ *   
+ *   ITestCase and TestCase
+ *   - before:
+ *     ITestCommand ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>);
+ *     after:
+ *     ITestCommand ConvertToTestCommand(IMethodInfo, ITestFixtureFactory);
  */

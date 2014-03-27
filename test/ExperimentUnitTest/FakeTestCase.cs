@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
     public class FakeTestCase : ITestCase
     {
-        public Func<IMethodInfo, Func<MethodInfo, ITestFixture>, ITestCommand> OnConvertToTestCommand
+        public Func<IMethodInfo, ITestFixtureFactory, ITestCommand> OnConvertToTestCommand
         {
             get;
             set;
         }
 
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory)
         {
             return OnConvertToTestCommand(method, fixtureFactory);
         }

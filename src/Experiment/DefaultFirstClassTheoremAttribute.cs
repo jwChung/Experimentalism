@@ -111,7 +111,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, FixtureFactory))
+                        tc => tc.ConvertToTestCommand(method, new FakeFixtureFactory { OnCreate = FixtureFactory }))
                     .ToArray();
             }
             catch (Exception exception)
@@ -162,6 +162,20 @@ namespace Jwc.Experiment
             return methodInfo.IsStatic
                 ? null
                 : Activator.CreateInstance(methodInfo.DeclaringType);
+        }
+
+        private class FakeFixtureFactory : ITestFixtureFactory
+        {
+            public Func<MethodInfo, ITestFixture> OnCreate
+            {
+                get;
+                set;
+            }
+
+            public ITestFixture Create(MethodInfo testMethod)
+            {
+                return OnCreate(testMethod);
+            }
         }
     }
 }
