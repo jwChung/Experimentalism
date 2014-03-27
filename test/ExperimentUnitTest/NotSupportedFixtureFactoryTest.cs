@@ -10,5 +10,13 @@ namespace Jwc.Experiment
             var sut = new NotSupportedFixtureFactory();
             Assert.IsAssignableFrom<ITestFixtureFactory>(sut);
         }
+
+        [Fact]
+        public void CreateReturnsNotSupportedFixture()
+        {
+            var sut = new NotSupportedFixtureFactory();
+            var actual = sut.Create(null);
+            Assert.IsType<NotSupportedFixture>(actual);
+        }
     }
 }

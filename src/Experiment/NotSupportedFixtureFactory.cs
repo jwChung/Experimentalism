@@ -3,7 +3,7 @@
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents a default factory to create an instance of
+    /// Represents a default fixture factory to create an instance of
     /// <see cref="NotSupportedFixture"/>.
     /// </summary>
     public class NotSupportedFixtureFactory : ITestFixtureFactory
@@ -17,10 +17,9 @@ namespace Jwc.Experiment
         /// <returns>
         /// The result instance.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public ITestFixture Create(MethodInfo method)
         {
-            throw new System.NotImplementedException();
+            return new NotSupportedFixture();
         }
     }
 }
