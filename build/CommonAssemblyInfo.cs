@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("0.8.3")]
-[assembly: AssemblyInformationalVersion("0.8.3")]
+[assembly: AssemblyInformationalVersion("0.8.3-test")]
 
 /*
- * Version 0.8.3
+ * Version 0.8.3-test
  * 
  * Initializes a test-fixture only when necessary rather than every time.
  * 
