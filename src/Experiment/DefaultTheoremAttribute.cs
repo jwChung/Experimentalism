@@ -18,14 +18,14 @@ namespace Jwc.Experiment
     [AttributeUsage(AttributeTargets.Method)]
     public class DefaultTheoremAttribute : FactAttribute
     {
-        private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
+        private readonly ITestFixtureFactory _fixtureFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
         /// </summary>
         public DefaultTheoremAttribute()
         {
-            _fixtureFactory = mi => new NotSupportedFixture();
+            _fixtureFactory = new NotSupportedFixtureFactory();
         }
 
         /// <summary>
@@ -40,29 +40,14 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureType");
             }
 
-            _fixtureFactory = mi => (ITestFixture)Activator.CreateInstance(fixtureType);
+            _fixtureFactory = new TypeFixtureFactory(fixtureType);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
-        /// <exception cref="System.ArgumentNullException">fixtureFactory</exception>
-        protected DefaultTheoremAttribute(Func<ITestFixture> fixtureFactory)
-        {
-            if (fixtureFactory == null)
-            {
-                throw new ArgumentNullException("fixtureFactory");
-            }
-
-            _fixtureFactory = mi => fixtureFactory();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureFactory">The fixture factory.</param>
-        protected DefaultTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+        protected DefaultTheoremAttribute(ITestFixtureFactory fixtureFactory)
         {
             if (fixtureFactory == null)
             {
@@ -75,19 +60,18 @@ namespace Jwc.Experiment
         /// <summary>
         /// Gets a value indicating the fixture type passed from a constructor.
         /// </summary>
-        public object FixtureType
+        public Type FixtureType
         {
             get
             {
-                var dummyMethodInfo = typeof(object).GetMethod("ToString");
-                return FixtureFactory.Invoke(dummyMethodInfo).GetType();
+                return FixtureFactory.Create(null).GetType();
             }
         }
 
         /// <summary>
         /// Gets a value indicating the fixture factory passed from a constructor.
         /// </summary>
-        public Func<MethodInfo, ITestFixture> FixtureFactory
+        public ITestFixtureFactory FixtureFactory
         {
             get
             {
@@ -194,13 +178,13 @@ namespace Jwc.Experiment
 
         private class AutoArgumentCollection : IEnumerable<object>
         {
-            private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
+            private readonly ITestFixtureFactory _fixtureFactory;
             private readonly MethodInfo _methodInfo;
             private readonly ParameterInfo[] _parameters;
             private readonly int _skipCount;
 
             public AutoArgumentCollection(
-                Func<MethodInfo, ITestFixture> fixtureFactory,
+                ITestFixtureFactory fixtureFactory,
                 MethodInfo methodInfo,
                 ParameterInfo[] parameters,
                 int skipCount = 0)
@@ -221,7 +205,7 @@ namespace Jwc.Experiment
 
             public IEnumerator<object> GetEnumerator()
             {
-                var testFixture = _fixtureFactory.Invoke(_methodInfo);
+                var testFixture = _fixtureFactory.Create(_methodInfo);
                 return _parameters
                     .Skip(_skipCount)
                     .Select(pi => testFixture.Create(pi.ParameterType))
