@@ -12,7 +12,7 @@ namespace Jwc.Experiment
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }),
+                new Action(() => { }).Method,
                 new object[0]);
             Assert.IsAssignableFrom<FactCommand>(sut);
         }
@@ -21,16 +21,16 @@ namespace Jwc.Experiment
         public void InitializeWithNullMethodThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new FirstClassCommand(null, new Action(() => { }), new object[0]));
+                () => new FirstClassCommand(null, new Action(() => { }).Method, new object[0]));
         }
 
         [Fact]
-        public void InitializeWithNullDelegateThrows()
+        public void InitializeWithNullTestCaseThrows()
         {
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                    null,
+                    (MethodInfo)null,
                     new object[0]));
         }
 
@@ -40,7 +40,7 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                    new Action(() => { }),
+                    new Action(() => { }).Method,
                     null));
         }
 
@@ -48,7 +48,7 @@ namespace Jwc.Experiment
         public void MethodIsCorrect()
         {
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var sut = new FirstClassCommand(method, new Action(() => { }), new object[0]);
+            var sut = new FirstClassCommand(method, new Action(() => { }).Method, new object[0]);
 
             var actual = sut.Method;
 
@@ -56,17 +56,17 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrect()
+        public void TestCaseIsCorrect()
         {
-            var @delegate = new Action(() => { });
+            var testCase = new Action(() => { }).Method;
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                @delegate,
+                testCase,
                 new object[0]);
 
-            var actual = sut.Delegate;
+            var actual = sut.TestCase;
 
-            Assert.Equal(@delegate, actual);
+            Assert.Equal(testCase, actual);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Jwc.Experiment
             var arguments = new[]{1, new object(), "string"};
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }),
+                new Action(() => { }).Method,
                 arguments);
 
             var actual = sut.Arguments;
@@ -89,7 +89,7 @@ namespace Jwc.Experiment
             var arguments = new[] { 1, new object(), "string", null };
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action<int, object, string, Type>((a, b, c, d) => { }),
+                new Action<int, object, string, Type>((a, b, c, d) => { }).Method,
                 arguments);
             var exptected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsWellFormatted" +
                             "(Int32: \"1\", Object: \"System.Object\", String: \"string\", Type: NULL)";
@@ -100,14 +100,14 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ExecuteCallsDelegate()
+        public void ExecuteCallsTestCase()
         {
             // Fixture setup
             var arguments = new object[] { 1, "string" };
-            var @delegate = new Action<int, string>(StaticDelegateMethod);
+            var testCase = new Action<int, string>(StaticDelegateMethod).Method;
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                @delegate,
+                testCase,
                 arguments);
 
             // Exercise system
@@ -126,7 +126,7 @@ namespace Jwc.Experiment
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new FirstClassCommand(
                 method,
-                new Action(() => { }),
+                new Action(() => { }).Method,
                 new object[0]);
 
             var actual = sut.Execute(null);

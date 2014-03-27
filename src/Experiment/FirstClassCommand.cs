@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -11,29 +12,29 @@ namespace Jwc.Experiment
     public class FirstClassCommand : FactCommand
     {
         private readonly IMethodInfo _method;
-        private readonly Delegate _delegate;
+        private readonly MethodInfo _testCase;
         private readonly object[] _arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FirstClassCommand"/> class.
         /// </summary>
         /// <param name="method">
-        /// The test method with which this instance is associated. This will
+        /// The test method which this instance is associated. This will
         /// likely be the method adorned with an
         /// <see cref="DefaultFirstClassTheoremAttribute" />.
         /// </param>
-        /// <param name="delegate">
-        /// The test delegate to be invoked when the test is executed.
+        /// <param name="testCase">
+        /// The test case to be invoked when the test is executed.
         /// </param>
         /// <param name="arguments">
         /// The test arguments to be supplied to the test delegate.
         /// </param>
-        public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
+        public FirstClassCommand(IMethodInfo method, MethodInfo testCase, object[] arguments)
             : base(EnsureIsNotNull(method))
         {
-            if (@delegate == null)
+            if (testCase == null)
             {
-                throw new ArgumentNullException("delegate");
+                throw new ArgumentNullException("testCase");
             }
 
             if (arguments == null)
@@ -42,7 +43,7 @@ namespace Jwc.Experiment
             }
 
             _method = method;
-            _delegate = @delegate;
+            _testCase = testCase;
             _arguments = arguments;
 
             SetWellFormattedDisplayName();
@@ -62,11 +63,11 @@ namespace Jwc.Experiment
         /// <summary>
         /// Gets the delegate.
         /// </summary>
-        public Delegate Delegate
+        public MethodInfo TestCase
         {
             get
             {
-                return _delegate;
+                return _testCase;
             }
         }
 
@@ -88,7 +89,7 @@ namespace Jwc.Experiment
         /// <returns>The result of the execution.</returns>
         public override MethodResult Execute(object testClass)
         {
-            Delegate.Method.Invoke(null, Arguments.ToArray());
+            TestCase.Invoke(null, Arguments.ToArray());
             return new PassedResult(Method, DisplayName);
         }
 
@@ -110,7 +111,7 @@ namespace Jwc.Experiment
         private IEnumerable<string> GetArgumentValues()
         {
             var arguments = Arguments.ToArray();
-            return Delegate.Method.GetParameters().Select(pi =>
+            return TestCase.GetParameters().Select(pi =>
                 GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
         }
 
