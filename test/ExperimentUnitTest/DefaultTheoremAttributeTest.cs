@@ -325,7 +325,14 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
         {
-            var fixtureFactory = new FakeFixtureFactory { OnCreate = x => new FakeTestFixture() };
+            var fixtureFactory = new FakeFixtureFactory
+            {
+                OnCreate = mi =>
+                {
+                    Assert.NotNull(mi);
+                    return new FakeTestFixture();
+                }
+            };
             var sut = new DerivedTheoremAttribute(fixtureFactory);
 
             var actual = sut.FixtureType;

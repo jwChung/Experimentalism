@@ -108,14 +108,13 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFuncOfMethodInfoAndITestFixture()
+        public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
         {
             var fixtureFactory = new FakeFixtureFactory
             {
                 OnCreate = mi =>
                 {
-                    if (mi == null)
-                        throw new ArgumentNullException("mi");
+                    Assert.NotNull(mi);
                     return new FakeTestFixture();
                 }
             };

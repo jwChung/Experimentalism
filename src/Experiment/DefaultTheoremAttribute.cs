@@ -64,7 +64,8 @@ namespace Jwc.Experiment
         {
             get
             {
-                return FixtureFactory.Create(null).GetType();
+                var dummyMethod = typeof(object).GetMethod("ToString");
+                return FixtureFactory.Create(dummyMethod).GetType();
             }
         }
 
