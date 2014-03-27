@@ -10,16 +10,12 @@
     <NuGetPath>..\packages\NuGet.CommandLine.2.8.0\tools\NuGet.exe</NuGetPath>
     <XunitRunnerPath>..\packages\xunit.1.9.0.1566\lib\xunit.runner.msbuild.dll</XunitRunnerPath>
     <LocalNugetFeed>D:\LocalNugetFeed</LocalNugetFeed>
-    <Repository>https://$(GitHubAccount)@github.com/jwChung/Experimentalism.git</Repository>
+    <Repository>https://$(APPVEYOR_GITHUBACCOUNT)@github.com/jwChung/Experimentalism.git</Repository>
     <CurrentBranchName>$(APPVEYOR_REPO_BRANCH)</CurrentBranchName>
     <CommitMessage>$(APPVEYOR_REPO_COMMIT_MESSAGE)</CommitMessage>
     <CommitAuthor>$(APPVEYOR_REPO_COMMIT_AUTHOR)</CommitAuthor>
     <CommitAuthorEmail>$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)</CommitAuthorEmail>
+    <SetApiKey>$(APPVEYOR_SETAPIKEY)</SetApiKey>
+    <PrivateKey>$(APPVEYOR_PRIVATEKEY)</PrivateKey>
   </PropertyGroup>
-  <Target Name="DeletePPFiles" AfterTargets="UnitTest" >
-    <ItemGroup>
-      <PPFiles Include="..\**\*.pp" />
-    </ItemGroup>
-    <Delete Files="@(PPFiles)" />
-  </Target>
 </Project>
