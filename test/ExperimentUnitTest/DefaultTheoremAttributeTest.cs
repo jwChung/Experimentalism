@@ -18,7 +18,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateNonParameterizedReturnsFactCommand()
+        public void CreateNonParameterizedTestReturnsFactCommand()
         {
             var sut = new DefaultTheoremAttribute();
             
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         [InlineData("dummy", 1, null)]
         [InlineData("dummy", 1, null)]
-        public void CreateParameterizedReturnsThoeryCommands(string arg1, int arg2, object arg3)
+        public void CreateParameterizedTestReturnsThoeryCommands(string arg1, int arg2, object arg3)
         {
             var sut = new DefaultTheoremAttribute();
 
@@ -70,7 +70,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithAutoDataReturnsCorrectCommands()
+        public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
             var sut = new DerivedTheoremAttribute(() => fixture);
@@ -89,7 +89,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithMixedDataReturnsCorrectCommands()
+        public void CreateParameterizedTestWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
             var sut = new DerivedTheoremAttribute(() => fixture);
@@ -104,7 +104,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithInvalidCountDataThrows()
+        public void CreateParameterizedTestWithInvalidCountDataThrows()
         {
             var sut = new DefaultTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
@@ -116,7 +116,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithInvalidTypeDataThrows()
+        public void CreateParameterizedTestWithInvalidTypeDataThrows()
         {
             var sut = new DefaultTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
@@ -145,7 +145,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
+        public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
             var sut = new DerivedTheoremAttribute(() => fixture);
@@ -160,7 +160,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedPassesCorrectParameterTypes()
+        public void CreateParameterizedTestPassesCorrectParameterTypes()
         {
             var sut = new DefaultTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
@@ -169,7 +169,7 @@ namespace Jwc.Experiment
 
         [Theory]
         [InlineData("dummy", 1, null)]
-        public void CreateParameterizedDoesNotInitializeFixture(string arg1, int arg2, object arg3)
+        public void CreateParameterizedTestDoesNotInitializeFixture(string arg1, int arg2, object arg3)
         {
             Func<ITestFixture> fixtureFactory = () =>
             {
@@ -181,7 +181,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithAutoDataInitializesFixtureForEachTestCase()
+        public void CreateParameterizedTestWithAutoDataInitializesFixtureForEachTestCase()
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
@@ -199,7 +199,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithMixedDataInitializesFixtureForEachTestCase()
+        public void CreateParameterizedTestWithMixedDataInitializesFixtureForEachTestCase()
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
@@ -217,7 +217,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedWithAutoDataNotUsingDataAttributeInitializesFixtureForEachTestCase()
+        public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeInitializesFixtureForEachTestCase()
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
@@ -235,7 +235,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateNonParameterizedDoesNotInitializeFixture()
+        public void CreateNonParameterizedTestDoesNotInitializeFixture()
         {
             Func<ITestFixture> fixtureFactory = () =>
             {
@@ -247,7 +247,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedForSingleReturnsExceptionCommandWhenThrowingException()
+        public void CreateParameterizedTestForSingleReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
             Func<ITestFixture> fixtureFactory = () =>
@@ -265,7 +265,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateParameterizedForManyReturnsExceptionCommandWhenThrowingException()
+        public void CreateParameterizedTestForManyReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
             Func<ITestFixture> fixtureFactory = () =>
