@@ -53,6 +53,7 @@
     <Compile Include="ITestCase.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="DefaultFirstClassTheoremAttribute.cs" />
+    <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="NotSupportedFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DefaultTheoremAttribute.cs" />
