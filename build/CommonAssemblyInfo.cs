@@ -10,57 +10,24 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.5")]
-[assembly: AssemblyInformationalVersion("0.8.5")]
+[assembly: AssemblyVersion("0.8.6")]
+[assembly: AssemblyInformationalVersion("0.8.6")]
 
 /*
- * Version 0.8.5
+ * Version 0.8.6
  * 
- * Introduce ITestFixtureFactory instead of Func<ITestFixture>.
+ * Change the FirstClassCommand constructor to use MethodInfo directly
+ * instead of Delegate.
  * 
  * BREAKING CHNAGE
- *   DefaultTheoremAttribute
- *   - delete:
- *     DefaultTheoremAttribute(Func<ITestFixture>)
+ *   FirstClassCommand
+ *   - before:
+ *     FirstClassCommand(IMethodInfo, Delegate, object[])
+ *     after:
+ *     FirstClassCommand(IMethodInfo, MethodInfo, object[])
  *   
  *   - before:
- *     DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
+ *     Delegate Delegate
  *     after:
- *     DefaultTheoremAttribute(ITestFixtureFactory)
- *   
- *   - before:
- *     Func<MethodInfo, ITestFixture> FixtureFactory
- *     after:
- *     ITestFixtureFactory FixtureFactory
- *   
- *   - before:
- *     object FixtureType
- *     after:
- *     Type FixtureType
- *   
- *   ITestCase and TestCase
- *   - before:
- *     ITestCommand ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>);
- *     after:
- *     ITestCommand ConvertToTestCommand(IMethodInfo, ITestFixtureFactory);
- *     
- *   DefaultFirstClassTheoremAttribute
- *   - delete:
- *     DefaultTheoremAttribute(Func<ITestFixture>)
- *   
- *   - before:
- *     DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
- *     after:
- *     DefaultTheoremAttribute(ITestFixtureFactory)
- *   
- *   - before:
- *     Func<MethodInfo, ITestFixture> FixtureFactory
- *     after:
- *     ITestFixtureFactory FixtureFactory
- *  
- * Issue
- * - https://github.com/jwChung/Experimentalism/issues/30
- * 
- * Pull request
- * - https://github.com/jwChung/Experimentalism/pull/31
+ *     MethodInfo TestCase
  */
