@@ -41,4 +41,18 @@ using System.Runtime.InteropServices;
  *     ITestCommand ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>);
  *     after:
  *     ITestCommand ConvertToTestCommand(IMethodInfo, ITestFixtureFactory);
+ *     
+ *   DefaultFirstClassTheoremAttribute
+ *   - delete:
+ *     DefaultTheoremAttribute(Func<ITestFixture>)
+ *   
+ *   - before:
+ *     DefaultTheoremAttribute(Func<MethodInfo, ITestFixture>)
+ *     after:
+ *     DefaultTheoremAttribute(ITestFixtureFactory)
+ *   
+ *   - before:
+ *     Func<MethodInfo, ITestFixture> FixtureFactory
+ *     after:
+ *     ITestFixtureFactory FixtureFactory
  */

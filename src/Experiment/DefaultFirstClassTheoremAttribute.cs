@@ -16,14 +16,14 @@ namespace Jwc.Experiment
     [AttributeUsage(AttributeTargets.Method)]
     public class DefaultFirstClassTheoremAttribute : FactAttribute
     {
-        private readonly Func<MethodInfo, ITestFixture> _fixtureFactory;
+        private readonly ITestFixtureFactory _fixtureFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
         /// </summary>
         public DefaultFirstClassTheoremAttribute()
         {
-            _fixtureFactory = mi => new NotSupportedFixture();
+            _fixtureFactory = new NotSupportedFixtureFactory();
         }
 
         /// <summary>
@@ -37,28 +37,14 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureType");
             }
 
-            _fixtureFactory = mi => (ITestFixture)Activator.CreateInstance(fixtureType);
+            _fixtureFactory = new TypeFixtureFactory(fixtureType);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
-        protected DefaultFirstClassTheoremAttribute(Func<ITestFixture> fixtureFactory)
-        {
-            if (fixtureFactory == null)
-            {
-                throw new ArgumentNullException("fixtureFactory");
-            }
-
-            _fixtureFactory = mi => fixtureFactory();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureFactory">The fixture factory.</param>
-        protected DefaultFirstClassTheoremAttribute(Func<MethodInfo, ITestFixture> fixtureFactory)
+        protected DefaultFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
         {
             if (fixtureFactory == null)
             {
@@ -71,7 +57,7 @@ namespace Jwc.Experiment
         /// <summary>
         /// Gets a value indicating the fixture factory passed from a constructor.
         /// </summary>
-        public Func<MethodInfo, ITestFixture> FixtureFactory
+        public ITestFixtureFactory FixtureFactory
         {
             get
             {
@@ -86,8 +72,8 @@ namespace Jwc.Experiment
         {
             get
             {
-                var dummyMethodInfo = typeof(object).GetMethod("ToString");
-                return FixtureFactory(dummyMethodInfo).GetType();
+                var dummyMethod = typeof(object).GetMethod("ToString");
+                return FixtureFactory.Create(dummyMethod).GetType();
             }
         }
 
@@ -100,7 +86,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// The test commands which will execute the test runs for the given method
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="This is suppressed to catch unhandled exception thrown from creating test commands.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from creating test commands.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
@@ -111,7 +97,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, new FakeFixtureFactory { OnCreate = FixtureFactory }))
+                        tc => tc.ConvertToTestCommand(method, FixtureFactory))
                     .ToArray();
             }
             catch (Exception exception)
@@ -162,20 +148,6 @@ namespace Jwc.Experiment
             return methodInfo.IsStatic
                 ? null
                 : Activator.CreateInstance(methodInfo.DeclaringType);
-        }
-
-        private class FakeFixtureFactory : ITestFixtureFactory
-        {
-            public Func<MethodInfo, ITestFixture> OnCreate
-            {
-                get;
-                set;
-            }
-
-            public ITestFixture Create(MethodInfo testMethod)
-            {
-                return OnCreate(testMethod);
-            }
         }
     }
 }
