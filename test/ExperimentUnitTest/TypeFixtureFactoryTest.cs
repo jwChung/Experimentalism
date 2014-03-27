@@ -28,5 +28,21 @@ namespace Jwc.Experiment
         {
             Assert.Throws<ArgumentNullException>(() => new TypeFixtureFactory(null));
         }
+
+        [Fact]
+        public void CreateReturnsCorrectFixture()
+        {
+            var sut = new TypeFixtureFactory(typeof(FakeTestFixture));
+            var actual = sut.Create(null);
+            Assert.IsType<FakeTestFixture>(actual);
+        }
+
+        [Fact]
+        public void CreateAlwaysReturnsNewInstance()
+        {
+            var sut = new TypeFixtureFactory(typeof(FakeTestFixture));
+            var actual = sut.Create(null);
+            Assert.NotSame(sut.Create(null), actual);
+        }
     }
 }

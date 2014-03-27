@@ -47,7 +47,7 @@ namespace Jwc.Experiment
         /// </returns>
         public ITestFixture Create(MethodInfo method)
         {
-            throw new System.NotImplementedException();
+            return (ITestFixture)Activator.CreateInstance(FixtureType);
         }
     }
 }
