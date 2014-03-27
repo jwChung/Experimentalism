@@ -10,11 +10,13 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.4")]
-[assembly: AssemblyInformationalVersion("0.8.4")]
+[assembly: AssemblyVersion("0.8.5")]
+[assembly: AssemblyInformationalVersion("0.8.5")]
 
 /*
  * Version 0.8.5
+ * 
+ * Introduce ITestFixtureFactory instead of Func<ITestFixture>.
  * 
  * BREAKING CHNAGE
  *   DefaultTheoremAttribute
@@ -55,4 +57,10 @@ using System.Runtime.InteropServices;
  *     Func<MethodInfo, ITestFixture> FixtureFactory
  *     after:
  *     ITestFixtureFactory FixtureFactory
+ *  
+ * Issue
+ * - https://github.com/jwChung/Experimentalism/issues/30
+ * 
+ * Pull request
+ * - https://github.com/jwChung/Experimentalism/pull/31
  */
