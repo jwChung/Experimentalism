@@ -4,7 +4,7 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents a test factory to create an instance base on its type.
+    /// Represents a fixture factory to create an instance base on the fixture type.
     /// </summary>
     public class TypeFixtureFactory : ITestFixtureFactory
     {
@@ -40,7 +40,7 @@ namespace Jwc.Experiment
         /// a default constructor of supplied fixture type.
         /// </summary>
         /// <param name="method">
-        /// The method to be called when a test is executed.
+        /// The test method.
         /// </param>
         /// <returns>
         /// The created fixture.

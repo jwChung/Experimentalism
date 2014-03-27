@@ -3,7 +3,7 @@
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents a facotry to create an instance of
+    /// Represents a fixture facotry to create an instance of
     /// the <see cref="ITestFixture"/> type.
     /// </summary>
     public interface ITestFixtureFactory
@@ -12,7 +12,7 @@ namespace Jwc.Experiment
         /// Creates an instance of <see cref="ITestFixture"/>.
         /// </summary>
         /// <param name="method">
-        /// The method to be called when a test is executed.
+        /// The test method
         /// </param>
         /// <returns>
         /// The created fixture.

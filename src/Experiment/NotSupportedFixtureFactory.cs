@@ -12,7 +12,7 @@ namespace Jwc.Experiment
         /// Creates an instance of <see cref="NotSupportedFixture" />.
         /// </summary>
         /// <param name="method">
-        /// The method to be called when a test is executed.
+        /// The test method
         /// </param>
         /// <returns>
         /// The created fixture.
