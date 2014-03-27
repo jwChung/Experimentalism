@@ -116,26 +116,26 @@ namespace Jwc.Experiment
         /// <param name="method">
         /// The method adorned by a <see cref="DefaultFirstClassTheoremAttribute" />.
         /// </param>
-        /// <param name="testFixture">A test fixture to provide auto data.</param>
+        /// <param name="fixtureFactory">A test fixture factory to provide auto data.</param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixture testFixture)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
         {
             if (method == null)
             {
                 throw new ArgumentNullException("method");
             }
 
-            if (testFixture == null)
+            if (fixtureFactory == null)
             {
-                throw new ArgumentNullException("testFixture");
+                throw new ArgumentNullException("fixtureFactory");
             }
 
             return new FirstClassCommand(
                 method,
                 Delegate,
-                GetFinalArguments(testFixture, Delegate.Method));
+                GetFinalArguments(fixtureFactory(Delegate.Method), Delegate.Method));
         }
 
         private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)

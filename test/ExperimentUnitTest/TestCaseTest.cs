@@ -155,7 +155,7 @@ namespace Jwc.Experiment
         {
             var sut = TestCase.New(() => { });
             Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(null, new FakeTestFixture()));
+                () => sut.ConvertToTestCommand(null, mi => new FakeTestFixture()));
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New(arguments[0], @delegate);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, new FakeTestFixture());
+            var actual = sut.ConvertToTestCommand(method, mi => new FakeTestFixture());
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(method, command.Method);
@@ -197,10 +197,47 @@ namespace Jwc.Experiment
             var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, testFixture);
+            var actual = sut.ConvertToTestCommand(method, mi => testFixture);
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(new[] { obj, testFixture.IntValue, testFixture.StringValue }, command.Arguments);
+        }
+
+        [Fact]
+        public void ConvertToTestCommandInitializesFixtureOnlyOnceWhenCreatingAutoData()
+        {
+            var sut = TestCase.New<int>(x => { });
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            int creatCount = 0;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                creatCount++;
+                return new FakeTestFixture();
+            };
+
+            sut.ConvertToTestCommand(method, fixtureFactory);
+
+            Assert.Equal(1, creatCount);
+        }
+
+        [Fact]
+        public void ConvertToTestCommandPassesCorrectMethodInfoToFixtureFactory()
+        {
+            Action @delegate = () => { };
+            var sut = TestCase.New(@delegate);
+            bool verified = false;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                Assert.Equal(@delegate.Method, mi);
+                verified = true;
+                return new FakeTestFixture();
+            };
+
+            sut.ConvertToTestCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                fixtureFactory);
+
+            Assert.True(verified);
         }
     }
 }

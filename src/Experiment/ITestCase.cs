@@ -1,4 +1,6 @@
-﻿using Xunit.Sdk;
+﻿using System;
+using System.Reflection;
+using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
@@ -15,12 +17,12 @@ namespace Jwc.Experiment
         /// <param name="method">
         /// The method adorned by a <see cref="DefaultFirstClassTheoremAttribute" />.
         /// </param>
-        /// <param name="testFixture">
-        /// A test fixture to provide auto data.
+        /// <param name="fixtureFactory">
+        /// A test fixture factory to provide auto data.
         /// </param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixture testFixture);
+        ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory);
     }
 }
