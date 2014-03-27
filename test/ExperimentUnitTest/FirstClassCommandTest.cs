@@ -30,7 +30,7 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                    (MethodInfo)null,
+                    null,
                     new object[0]));
         }
 
