@@ -129,7 +129,7 @@ namespace Jwc.Experiment
 
             if (fixtureFactory == null)
             {
-                throw new ArgumentNullException("testFixture");
+                throw new ArgumentNullException("fixtureFactory");
             }
 
             return new FirstClassCommand(
