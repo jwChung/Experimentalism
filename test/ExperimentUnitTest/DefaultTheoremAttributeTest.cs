@@ -169,7 +169,8 @@ namespace Jwc.Experiment
 
         [Theory]
         [InlineData("dummy", 1, null)]
-        public void CreateParameterizedTestDoesNotInitializeFixture(string arg1, int arg2, object arg3)
+        public void CreateParameterizedTestWithNoAutoDataDoesNotInitializeFixture(
+            string arg1, int arg2, object arg3)
         {
             Func<ITestFixture> fixtureFactory = () =>
             {
