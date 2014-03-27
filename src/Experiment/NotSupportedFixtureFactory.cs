@@ -15,7 +15,7 @@ namespace Jwc.Experiment
         /// The method to be called when a test is executed.
         /// </param>
         /// <returns>
-        /// The result instance.
+        /// The created fixture.
         /// </returns>
         public ITestFixture Create(MethodInfo method)
         {
