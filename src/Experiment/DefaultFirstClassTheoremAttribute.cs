@@ -23,7 +23,7 @@ namespace Jwc.Experiment
         /// </summary>
         public DefaultFirstClassTheoremAttribute()
         {
-            _fixtureFactory = new NotSupportedFixtureFactory();
+            _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
         }
 
         /// <summary>

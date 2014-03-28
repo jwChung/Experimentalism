@@ -54,8 +54,11 @@ namespace Jwc.Experiment
         public void FixtureFactoryIsCorrectWhenInitializedWithDefaultCtor()
         {
             var sut = new DefaultFirstClassTheoremAttribute();
+
             var actual = sut.FixtureFactory;
-            Assert.IsType<NotSupportedFixtureFactory>(actual);
+
+            var factory = Assert.IsType<TypeFixtureFactory>(actual);
+            Assert.Equal(typeof(NotSupportedFixture), factory.FixtureType);
         }
 
         [Fact]
