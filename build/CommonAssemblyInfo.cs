@@ -10,12 +10,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.9")]
-[assembly: AssemblyInformationalVersion("0.8.9")]
+[assembly: AssemblyVersion("0.8.10")]
+[assembly: AssemblyInformationalVersion("0.8.10")]
 
 /*
- * Version 0.8.9
+ * Version 0.8.10
  * 
- * Add guard clause for suppressing to set only one delegate operation
- * to TestCase.New(Delegate).
+ * Make AutoFixtureFactory singleton
+ *
+ * BREAKING CHANGE
+ *     before:
+ *     new AutoFixtureFactory()
+ *     after:
+ *     AutoFixtureFactory.Instance
  */
