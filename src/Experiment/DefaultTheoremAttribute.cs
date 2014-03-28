@@ -25,7 +25,7 @@ namespace Jwc.Experiment
         /// </summary>
         public DefaultTheoremAttribute()
         {
-            _fixtureFactory = new NotSupportedFixtureFactory();
+            _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
         }
 
         /// <summary>
