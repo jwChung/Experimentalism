@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class TestFixtureAdapterTest
+    public class AutoFixtureAdapterTest
     {
         [Fact]
         public void SutIsTestFixture()
         {
-            var sut = new TestFixtureAdapter(new FakeSpecimenContext());
+            var sut = new AutoFixtureAdapter(new FakeSpecimenContext());
             Assert.IsAssignableFrom<ITestFixture>(sut);
         }
 
@@ -16,7 +16,7 @@ namespace Jwc.Experiment
         public void SpecimenContextIsCorrect()
         {
             var expected = new FakeSpecimenContext();
-            var sut = new TestFixtureAdapter(expected);
+            var sut = new AutoFixtureAdapter(expected);
 
             var actual = sut.SpecimenContext;
 
@@ -26,7 +26,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullContextThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestFixtureAdapter(null));
+            Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter(null));
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Jwc.Experiment
                     return expected;
                 throw new NotSupportedException();
             };
-            var sut = new TestFixtureAdapter(context);
+            var sut = new AutoFixtureAdapter(context);
 
             var actual = sut.Create(request);
 

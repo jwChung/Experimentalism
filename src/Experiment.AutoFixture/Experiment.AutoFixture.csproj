@@ -59,7 +59,7 @@
     <Compile Include="TheoremAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFixtureAdapter.cs" />
+    <Compile Include="AutoFixtureAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">

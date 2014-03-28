@@ -8,16 +8,16 @@ namespace Jwc.Experiment
     /// <see cref="ISpecimenContext"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.
     /// auto data기능을 AutoFixture library로부터 채용하게 된다.
     /// </summary>
-    public class TestFixtureAdapter : ITestFixture
+    public class AutoFixtureAdapter : ITestFixture
     {
         private readonly ISpecimenContext _specimenContext;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestFixtureAdapter"/> class.
+        /// Initializes a new instance of the <see cref="AutoFixtureAdapter"/> class.
         /// </summary>
         /// <param name="specimenContext">The specimen context.</param>
         /// <exception cref="System.ArgumentNullException">specimenContext</exception>
-        public TestFixtureAdapter(ISpecimenContext specimenContext)
+        public AutoFixtureAdapter(ISpecimenContext specimenContext)
         {
             if (specimenContext == null)
             {

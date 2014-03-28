@@ -29,7 +29,7 @@ namespace Jwc.Experiment
 
         [Theory]
         [InlineData("TheoremAttribute")]
-        [InlineData("TestFixtureAdapter")]
+        [InlineData("AutoFixtureAdapter")]
         [InlineData("AutoFixtureFactory")]
         public void SutGeneratesNugetTransformFiles(string originName)
         {

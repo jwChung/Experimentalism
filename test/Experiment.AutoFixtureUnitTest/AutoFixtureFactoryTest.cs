@@ -30,7 +30,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Create(dummyMethod);
 
-            var adapter = Assert.IsType<TestFixtureAdapter>(actual);
+            var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
             var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
             Assert.IsType<Fixture>(context.Builder);
         }

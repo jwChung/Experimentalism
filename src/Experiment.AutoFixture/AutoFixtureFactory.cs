@@ -33,7 +33,7 @@ namespace Jwc.Experiment
                 Customize(fixture, parameter);
             }
 
-            return new TestFixtureAdapter(new SpecimenContext(fixture));
+            return new AutoFixtureAdapter(new SpecimenContext(fixture));
         }
 
         private static IFixture CreateFixture()
