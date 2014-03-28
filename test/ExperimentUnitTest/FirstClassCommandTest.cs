@@ -116,7 +116,7 @@ namespace Jwc.Experiment
             // Verify outcome
             Assert.True(_verified, "verified.");
 
-            // Teardown
+            // Fixture teardown
             _verified = false;
         }
 
