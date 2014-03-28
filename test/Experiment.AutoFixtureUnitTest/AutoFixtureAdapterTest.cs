@@ -32,13 +32,15 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateReturnsCorrectSpecimen()
         {
-            var context = new FakeSpecimenContext();
             var request = new object();
             var expected = new object();
-            context.OnResolve = r =>
+            var context = new FakeSpecimenContext
             {
-                Assert.Equal(request, r);
-                return expected;
+                OnResolve = r =>
+                {
+                    Assert.Equal(request, r);
+                    return expected;
+                }
             };
             var sut = new AutoFixtureAdapter(context);
 
