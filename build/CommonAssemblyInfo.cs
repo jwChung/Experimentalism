@@ -10,17 +10,15 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.7")]
-[assembly: AssemblyInformationalVersion("0.8.7")]
+[assembly: AssemblyVersion("0.8.8")]
+[assembly: AssemblyInformationalVersion("0.8.8")]
 
 /*
  * Version 0.8.7
  * 
- * Rename TestFixtureAdapter to AutoFixtureAdapter to clarify.
+ * Delete NotSupportedFixtureFactory and instead, use TypeFixtureFactory.
  * 
  * BREAKING CHNAGE
- * - before:
- *   TestFixtureAdapter class
- *   after:
- *   AutoFixtureAdapter class
+ * - delete:
+ *   NotSupportedFixtureFactory class
  */
