@@ -13,6 +13,23 @@ namespace Jwc.Experiment
     /// </summary>
     public class AutoFixtureFactory : ITestFixtureFactory
     {
+        private static readonly ITestFixtureFactory _instance = new AutoFixtureFactory();
+
+        private AutoFixtureFactory()
+        {
+        }
+
+        /// <summary>
+        /// Gets the singleton instance of <see cref="AutoFixtureFactory"/>.
+        /// </summary>
+        public static ITestFixtureFactory Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
         /// <summary>
         /// Creates an instance of <see cref="Fixture" />.
         /// </summary>

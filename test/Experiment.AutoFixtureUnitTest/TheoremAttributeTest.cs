@@ -12,11 +12,11 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrect()
+        public void FixtureFactoryIsCorrect()
         {
             var sut = new TheoremAttribute();
             var actual = sut.FixtureFactory;
-            Assert.IsType<AutoFixtureFactory>(actual);
+            Assert.Same(AutoFixtureFactory.Instance, actual);
         }
     }
 }

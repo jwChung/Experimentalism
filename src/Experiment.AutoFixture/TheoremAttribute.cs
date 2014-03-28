@@ -16,7 +16,7 @@ namespace Jwc.Experiment
         /// <summary>
         /// Initializes a new instance of the <see cref="TheoremAttribute"/> class.
         /// </summary>
-        public TheoremAttribute() : base(new AutoFixtureFactory())
+        public TheoremAttribute() : base(AutoFixtureFactory.Instance)
         {
         }
     }

@@ -11,21 +11,21 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsTestFixtureFactory()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
             Assert.IsAssignableFrom<ITestFixtureFactory>(sut);
         }
 
         [Fact]
         public void CreateWithNullMethodThrows()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
             Assert.Throws<ArgumentNullException>(() => sut.Create(null));
         }
 
         [Fact]
         public void CreateReturnsCorrectFixture()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
             var dummyMethod = typeof(object).GetMethod("ToString");
 
             var actual = sut.Create(dummyMethod);
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateAlwaysReturnsNewInstance()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
             var dummyMethod = typeof(object).GetMethod("ToString");
 
             var actual = sut.Create(dummyMethod);
@@ -50,7 +50,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateAppliesCustomizeAttribute()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
             var actual = sut.Create(GetType().GetMethod("FrozenTest"));
             Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
@@ -58,7 +58,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateAppliesComplexCustomizeAttributes()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
 
             var actual = sut.Create(GetType().GetMethod("PersonTest"));
 
@@ -74,13 +74,21 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateAppliesManyCustomizeAttributesOnSameParameter()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = AutoFixtureFactory.Instance;
 
             var actual = sut.Create(GetType().GetMethod("ManyAttributeTest"));
 
             var person = (Person)actual.Create(typeof(Person));
             Assert.NotNull(person.Name);
             Assert.NotEqual(0, person.Age);
+        }
+
+        [Fact]
+        public void SutIsSingleton()
+        {
+            var sut = AutoFixtureFactory.Instance;
+            Assert.IsType<AutoFixtureFactory>(sut);
+            Assert.Same(AutoFixtureFactory.Instance, sut);
         }
 
         public void FrozenTest([Frozen] string arg)
