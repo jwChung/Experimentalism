@@ -10,15 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.8")]
-[assembly: AssemblyInformationalVersion("0.8.8")]
+[assembly: AssemblyVersion("0.8.9")]
+[assembly: AssemblyInformationalVersion("0.8.9")]
 
 /*
- * Version 0.8.7
+ * Version 0.8.9
  * 
- * Delete NotSupportedFixtureFactory and instead, use TypeFixtureFactory.
- * 
- * BREAKING CHNAGE
- * - delete:
- *   NotSupportedFixtureFactory class
+ * Add guard clause for suppressing to set only one delegate operation
+ * to TestCase.New(Delegate).
  */
