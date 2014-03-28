@@ -245,5 +245,13 @@ namespace Jwc.Experiment
 
             Assert.True(verified);
         }
+
+        [Fact]
+        public void InitializeWithCompositeDelegateThrows()
+        {
+            Action @delegate = () => { };
+            @delegate += () => { };
+            Assert.Throws<ArgumentException>(() => TestCase.New(@delegate));
+        }
     }
 }

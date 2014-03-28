@@ -23,6 +23,13 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("delegate");
             }
 
+            if (@delegate.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite delegates are not supported, set only one delegate operation.",
+                    "delegate");
+            }
+
             if (!@delegate.Method.IsStatic)
             {
                 throw new ArgumentException(
