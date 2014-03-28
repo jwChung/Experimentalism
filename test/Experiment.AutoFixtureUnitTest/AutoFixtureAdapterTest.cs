@@ -37,9 +37,8 @@ namespace Jwc.Experiment
             var expected = new object();
             context.OnResolve = r =>
             {
-                if (r == request)
-                    return expected;
-                throw new NotSupportedException();
+                Assert.Equal(request, r);
+                return expected;
             };
             var sut = new AutoFixtureAdapter(context);
 
