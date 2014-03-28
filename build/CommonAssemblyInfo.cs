@@ -10,24 +10,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.6")]
-[assembly: AssemblyInformationalVersion("0.8.6")]
+[assembly: AssemblyVersion("0.8.7")]
+[assembly: AssemblyInformationalVersion("0.8.7")]
 
 /*
- * Version 0.8.6
+ * Version 0.8.7
  * 
- * Change the FirstClassCommand constructor to use MethodInfo directly
- * instead of Delegate.
+ * Rename TestFixtureAdapter to AutoFixtureAdapter to clarify.
  * 
  * BREAKING CHNAGE
- *   FirstClassCommand
- *   - before:
- *     FirstClassCommand(IMethodInfo, Delegate, object[])
- *     after:
- *     FirstClassCommand(IMethodInfo, MethodInfo, object[])
- *   
- *   - before:
- *     Delegate Delegate
- *     after:
- *     MethodInfo TestCase
+ * - before:
+ *   TestFixtureAdapter class
+ *   after:
+ *   AutoFixtureAdapter class
  */
