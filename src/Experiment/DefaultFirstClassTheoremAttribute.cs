@@ -147,7 +147,7 @@ namespace Jwc.Experiment
         {
             return methodInfo.IsStatic
                 ? null
-                : Activator.CreateInstance(methodInfo.DeclaringType);
+                : Activator.CreateInstance(methodInfo.ReflectedType);
         }
     }
 }

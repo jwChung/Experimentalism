@@ -225,6 +225,17 @@ namespace Jwc.Experiment
             Assert.IsType<ArgumentException>(command.Exception);
         }
 
+        [Fact]
+        public void CreateTestCommandsOfAbstractBaseClassReturnsCorrectTestCommand()
+        {
+            var sut = new DefaultFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(typeof(SubTestClass).GetMethod("FirstClassTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            Assert.IsType<FirstClassCommand>(actual);
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new FakeTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
@@ -294,6 +305,18 @@ namespace Jwc.Experiment
                 : base(fixtureFactory)
             {
             }
+        }
+
+        private abstract class BaseTestClass
+        {
+            public IEnumerable<ITestCase> FirstClassTest()
+            {
+                yield return TestCase.New(() => { });
+            }
+        }
+
+        private class SubTestClass : BaseTestClass
+        {
         }
     }
 }
