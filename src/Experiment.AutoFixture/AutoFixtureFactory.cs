@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Jwc.Experiment;
 using Ploeh.AutoFixture;
@@ -44,28 +46,23 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("testMethod");
             }
 
-            var fixture = CreateFixture();
-            foreach (var parameter in testMethod.GetParameters())
-            {
-                Customize(fixture, parameter);
-            }
+            var fixture = testMethod.GetParameters()
+                .SelectMany(SelectCustomizations)
+                .Aggregate(CreateFixture(), (f, c) => f.Customize(c));
 
             return new AutoFixtureAdapter(new SpecimenContext(fixture));
+        }
+
+        private static IEnumerable<ICustomization> SelectCustomizations(ParameterInfo parameter)
+        {
+            return parameter.GetCustomAttributes(typeof(CustomizeAttribute), false)
+                .Cast<CustomizeAttribute>()
+                .Select(a => a.GetCustomization(parameter));
         }
 
         private static IFixture CreateFixture()
         {
             return new Fixture();
-        }
-
-        private static void Customize(IFixture fixture, ParameterInfo parameter)
-        {
-            foreach (CustomizeAttribute customAttribute
-                in parameter.GetCustomAttributes(typeof(CustomizeAttribute), false))
-            {
-                var customization = customAttribute.GetCustomization(parameter);
-                fixture.Customize(customization);
-            }
         }
     }
 }
