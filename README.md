@@ -126,9 +126,9 @@ public void AddTestCase(int a, int b, int expected)
 }
 ```
 
-이러한 테스트를 [xUnit Patterns](http://xunitpatterns.com/index.html)에서는 [Tabular Test](http://xunitpatterns.com/Parameterized%20Test.html#Tabular%20Test)라 하는데, 모든 테스트가 통과할 때는 문제가 없지만, 만약 하나라도 실패하게 된다면 우리는 그 실패가 3가지 중 어느 테스트에서 발생하였는지 쉽게 알아차릴 수 없게 됩니다. ([Eager Test](http://xunitpatterns.com/Assertion%20Roulette.html#Eager%20Test))
+이러한 테스트를 [xUnit Patterns](http://xunitpatterns.com/index.html)에서는 [Tabular Test](http://xunitpatterns.com/Parameterized%20Test.html#Tabular%20Test)라 하는데, 모든 테스트가 통과할 때는 문제가 없지만, 만약 하나라도 실패하게 된다면 우리는 그 실패가 3가지 중 어느 테스트에서 발생하였는지 쉽게 알아차릴 수 없게 됩니다([Eager Test](http://xunitpatterns.com/Assertion%20Roulette.html#Eager%20Test)).
 
-이 Eager Test 문제를 해결하기 위해서 Experiment에서는 아래와 같이 xUnit.net의 `DataAttribute`를 사용하여 각각의 테스트를 분리하였습니다(Attribute Tabular Test). 이 경우 `AddTest``는 하나의 테스트가 아니라 arguments 별로 3개의 테스트로 작동하게 됩니다.
+이 Eager Test 문제를 해결하기 위해서 Experiment에서는 아래와 같이 xUnit.net의 `DataAttribute`를 사용하여 각각의 테스트를 분리하였습니다(Attribute Tabular Test). 이 경우 `AddTest`는 하나의 테스트가 아니라 arguments 별로 3개의 테스트로 작동하게 됩니다.
 
 ```c#
 [Theorem]
@@ -185,9 +185,7 @@ public IEnumerable<ITestCase> FirstClassTestWithAutoDataTest()
 Experiment는 직접 auto data기능을 제공하고 있지 않으며, _Parameterized test with auto data_에 대한 base class library역할을 합니다. auto data 기능은 `Experiment.ITestFixture` 인터페이스 구현을 통해 이루어집니다.
 
 ### Inspiration
-Experiment의 auto data 기능은 [xUnit Test Patterns(*by Gerard Meszaros*)](http://xunitpatterns.com/index.html)의 [Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method)와 [Parameterized Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method)에서 영감을 얻었으며, [AutoFixture](https://github.com/AutoFixture/AutoFixture)의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/)로부터 영향을 받았습니다.
-
-First class test 방식은 [Bug squash의 First-class tests in MbUnit](http://bugsquash.blogspot.dk/2012/05/first-class-tests-in-mbunit.html)라는 포스트에서 영감을 얻었으며, [Exude](https://github.com/GreanTech/Exude)로부터 영향을 받았습니다.
+Experiment의 auto data 기능은 [xUnit Test Patterns(*by Gerard Meszaros*)](http://xunitpatterns.com/index.html)의 [Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method)와 [Parameterized Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method)에서 영감을 얻었으며, [AutoFixture](https://github.com/AutoFixture/AutoFixture)의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/)로부터 많은 영향을 받았습니다. First class test 방식은 [Bug squash의 First-class tests in MbUnit](http://bugsquash.blogspot.dk/2012/05/first-class-tests-in-mbunit.html)라는 글에서 영감을 얻었으며, [Exude](https://github.com/GreanTech/Exude)로부터 영향을 받았습니다.
 
 Experiment.AutoFixture
 ----------------------
