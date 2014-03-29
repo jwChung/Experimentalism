@@ -10,17 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.10")]
-[assembly: AssemblyInformationalVersion("0.8.10")]
+[assembly: AssemblyVersion("0.8.11")]
+[assembly: AssemblyInformationalVersion("0.8.11")]
 
 /*
- * Version 0.8.10
+ * Version 0.8.11
  * 
- * Make AutoFixtureFactory singleton
- *
- * BREAKING CHANGE
- *     before:
- *     new AutoFixtureFactory()
- *     after:
- *     AutoFixtureFactory.Instance
+ * Fix creating test commands of abstract base test class
+ * using the First-Class-Test manner.
  */
