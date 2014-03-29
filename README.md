@@ -2,7 +2,7 @@ Experimentalism [![Build status](https://ci.appveyor.com/api/projects/status/29e
 ===============
 
 * [Just start with examples](#just-start-with-examples)
-* [Experiment](#Experiment)
+* [Experiment](#experiment)
     * [Parameterized test with auto data](#parameterized-test-with-auto-data)
     * [Base class library](#base-class-library)
     * [Inspiration](#inspiration)
