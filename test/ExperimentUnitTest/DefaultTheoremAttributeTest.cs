@@ -18,14 +18,15 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateNonParameterizedTestReturnsFactCommand()
+        public void CreateNonParameterizedTestReturnsCorrectFactCommand()
         {
             var sut = new DefaultTheoremAttribute();
-            
-            var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()));
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var actual = sut.CreateTestCommands(method);
 
             var factCommand = Assert.IsType<FactCommand>(actual.Single());
-            Console.WriteLine(factCommand.MethodName);
+            Assert.Equal(method.Name, factCommand.MethodName);
         }
 
         [Theory]

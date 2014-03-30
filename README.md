@@ -81,13 +81,13 @@ public class PersonTest
 }
 ```
 
-`SayTest`를 Experiment를 이용하여 다시 작성해 보면 아래 `SayTestUsingTheorem`와 같은 테스트를 작성할 수 있습니다. `sut`, `name`과 `something`값을 파라메타로 넘겨받음으로써, 테스트 데이터 생성의 번거로움을 덜 수 있을 뿐 아니라, 테스트가 무엇을 테스트하는지 그 의도를 좀 더 명확히 보여줄 수 있게 됩니다.
+`SayTest`를 Experiment를 이용하여 다시 작성해 보면 아래 `TheoremSayTest`와 같은 테스트를 작성할 수 있습니다. `sut`, `name`과 `something`값을 파라메타로 넘겨받음으로써, 테스트 데이터 생성의 번거로움을 덜 수 있을 뿐 아니라, 테스트가 무엇을 테스트하는지 그 의도를 좀 더 명확히 보여줄 수 있게 됩니다.
 
 ```c#
 public class PersonTest
 {
     [Theorem]
-    public void SayTestUsingTheorem(Person sut, string something)
+    public void TheoremSayTest(Person sut, string something)
     {
         // Fixture setup
         var expected = sut.Name + ": " + something;
