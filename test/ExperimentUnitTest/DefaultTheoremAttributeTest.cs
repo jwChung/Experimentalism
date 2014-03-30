@@ -301,7 +301,7 @@ namespace Jwc.Experiment
         }
         
         [Fact]
-        public void InitializeWithNullFuncOfMethodInfoAndITestFixtureThrows()
+        public void InitializeWithNullFixtureFactoryThrows()
         {
             ITestFixtureFactory fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
