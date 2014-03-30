@@ -128,7 +128,7 @@ namespace Jwc.Experiment
                     "method");
             }
 
-            var testCases = methodInfo.Invoke(CreateDeclaringObject(methodInfo), null);
+            var testCases = methodInfo.Invoke(CreateReflectedObject(methodInfo), null);
 
             return (IEnumerable<ITestCase>)testCases;
         }
@@ -143,7 +143,7 @@ namespace Jwc.Experiment
             return typeof(IEnumerable<ITestCase>).IsAssignableFrom(returnType);
         }
 
-        private static object CreateDeclaringObject(MethodInfo methodInfo)
+        private static object CreateReflectedObject(MethodInfo methodInfo)
         {
             return methodInfo.IsStatic
                 ? null
