@@ -81,13 +81,13 @@ public class PersonTest
 }
 ```
 
-`SayTest`를 Experiment를 이용하여 다시 작성해 보면 아래 `SayTest2`와 같은 테스트를 작성할 수 있습니다. `sut`, `name`과 `something`값을 파라메타로 넘겨받음으로써, 테스트 데이터 생성의 번거로움을 덜 수 있을 뿐 아니라, 테스트가 무엇을 테스트하는지 그 의도를 좀 더 명확히 보여줄 수 있게 됩니다.
+`SayTest`를 Experiment를 이용하여 다시 작성해 보면 아래 `SayTestUsingTheorem`와 같은 테스트를 작성할 수 있습니다. `sut`, `name`과 `something`값을 파라메타로 넘겨받음으로써, 테스트 데이터 생성의 번거로움을 덜 수 있을 뿐 아니라, 테스트가 무엇을 테스트하는지 그 의도를 좀 더 명확히 보여줄 수 있게 됩니다.
 
 ```c#
-public class PersonTest2
+public class PersonTest
 {
     [Theorem]
-    public void SayTest2(Person sut, string something)
+    public void SayTestUsingTheorem(Person sut, string something)
     {
         // Fixture setup
         var expected = sut.Name + ": " + something;
@@ -126,9 +126,9 @@ public void AddTestCase(int a, int b, int expected)
 }
 ```
 
-이러한 테스트를 [xUnit Patterns](http://xunitpatterns.com/index.html)에서는 [Tabular Test](http://xunitpatterns.com/Parameterized%20Test.html#Tabular%20Test)라 하는데, 모든 테스트가 통과할 때는 문제가 없지만, 만약 하나라도 실패하게 된다면 우리는 그 실패가 3가지 중 어느 테스트에서 발생하였는지 쉽게 알아차릴 수 없게 됩니다([Eager Test](http://xunitpatterns.com/Assertion%20Roulette.html#Eager%20Test)).
+이러한 테스트를 [xUnit Patterns](http://xunitpatterns.com/index.html)에서는 [Tabular Test](http://xunitpatterns.com/Parameterized%20Test.html#Tabular%20Test)라 하는데, 모든 테스트가 통과할 때는 문제가 없지만, 만약 하나라도 실패하게 된다면 우리는 그 실패가 3가지 중 어느 테스트에서 발생하였는지 쉽게 알아차릴 수 없게 됩니다([Eager Test](http://xunitpatterns.com/Assertion%20Roulette.html#Eager%20Test), [Defect Localization](http://xunitpatterns.com/Goals%20of%20Test%20Automation.html#Defect%20Localization)).
 
-이 Eager Test 문제를 해결하기 위해서 Experiment에서는 아래와 같이 xUnit.net의 `DataAttribute`를 사용하여 각각의 테스트를 분리하였습니다(Attribute Tabular Test). 이 경우 `AddTest`는 하나의 테스트가 아니라 arguments 별로 3개의 테스트로 작동하게 됩니다.
+이 문제를 해결하기 위해서 Experiment에서는 아래와 같이 xUnit.net의 `DataAttribute`를 사용하여 각각의 테스트를 분리하였습니다(Attribute Tabular Test). 이 경우 `AddTest`는 하나의 테스트가 아니라 arguments 별로 3개의 테스트로 작동하게 됩니다.
 
 ```c#
 [Theorem]
@@ -148,7 +148,7 @@ public void AddTest(int a, int b, int expected)
 }
 ```
 
-하지만 Attribute Tabular Test는 Tabular Test에는 없는 문제점이 있습니다. 그것은 바로 type-safe 방식이 아니라는 점이다. 그래서 Experiment에서는 Tabular Test와 Attribute Tabular Test의 장점만을 살릴 수 있는 First class test 방식을 지원합니다. First class test 방식에서는 Eager Test 문제를 해결함과 동시에 type-safe 방식을 지원하는 장점을 가집니다.
+하지만 Attribute Tabular Test는 Tabular Test에서는 없는 문제점이 있는데, 그것은 type-safe 방식이 아니라는 점이다. 그래서 Experiment에서는 Tabular Test와 Attribute Tabular Test의 장점만을 살릴 수 있는 First class test 방식을 지원합니다. First class test 방식에서는 Eager Test 문제를 해결함과 동시에 type-safe 방식을 지원하는 장점을 가집니다.
 
 ```c#
 [FirstClassTheorem]
