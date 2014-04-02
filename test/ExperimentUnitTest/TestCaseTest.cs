@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
@@ -44,6 +46,29 @@ namespace Jwc.Experiment
             var actual = sut.Delegate;
 
             Assert.Equal(func, actual);
+        }
+
+        [Fact]
+        public void ConvertNullMethodToTestCommandThrows()
+        {
+            var sut = new TestCase(() => { });
+            ITestFixtureFactory dummyFixtureFactory = null;
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, dummyFixtureFactory));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandReturnsCorrectTestCommand()
+        {
+            Action action = () => { };
+            var sut = new TestCase(action);
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var actual = sut.ConvertToTestCommand(method, null);
+
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(method, command.DeclaredMethod);
+            Assert.Equal(action.Method, command.TestMethod);
+            Assert.Empty(command.Arguments);
         }
     }
 }
