@@ -70,5 +70,12 @@ namespace Jwc.Experiment
             Assert.Equal(action.Method, command.TestMethod);
             Assert.Empty(command.Arguments);
         }
+
+        [Fact]
+        public void SutOfTIsTestCase()
+        {
+            var sut = new TestCase<object>(x => { });
+            Assert.IsAssignableFrom<ITestCase>(sut);
+        }
     }
 }
