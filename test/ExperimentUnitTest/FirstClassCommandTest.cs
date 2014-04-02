@@ -147,6 +147,17 @@ namespace Jwc.Experiment
             Assert.Equal(0, actual);
         }
 
+        [Fact]
+        public void ShouldCreateInstanceIsCorrect()
+        {
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }).Method,
+                new object[0]);
+            var actual = sut.ShouldCreateInstance;
+            Assert.False(actual, "ShouldCreateInstance");
+        }
+
         private static bool _verified;
         private static void StaticDelegateMethod(int arg1, string arg2)
         {
