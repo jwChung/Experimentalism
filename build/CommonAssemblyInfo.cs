@@ -10,26 +10,18 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.13")]
-[assembly: AssemblyInformationalVersion("0.8.13")]
+[assembly: AssemblyVersion("0.8.14")]
+[assembly: AssemblyInformationalVersion("0.8.14")]
 
 /*
- * Version 0.8.13
+ * Version 0.8.14
  * 
- * While publishing v0.8.12 to NuGet server, exception was thrown,
- * so v0.8.13 is published to ignore the exception.
- * 
- * Rename some properties of FirstClassCommand to clarify
+ * Change the base class of the FirstClassCommand class to the TestCommand
+ * class. 
  * 
  * BREAKING CHANGE
- *   FirstClassCommand class
- *     before:
- *     Method
- *     after:
- *     DeclaredMethod
- *   
- *     before:
- *     TestCase
- *     after:
- *     TestMethod
+ *   before:
+ *   public class FirstClassCommand : FactCommand { ... }
+ *   after:
+ *   public class FirstClassCommand : TestCommand { ... }
  */
