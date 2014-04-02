@@ -148,7 +148,7 @@ namespace Jwc.Experiment
         public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT()
         {
             var sut = new TestCase<object>(x => { });
-            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new FakeFixtureFactory()));
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
         }
 
         [Fact]
@@ -166,7 +166,7 @@ namespace Jwc.Experiment
             var sut = new TestCase<int>(action);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixture = new FakeTestFixture();
-            var fixtureFactory = new FakeFixtureFactory
+            var fixtureFactory = new DelegatingFixtureFactory
             {
                 OnCreate = x =>
                 {
@@ -244,7 +244,7 @@ namespace Jwc.Experiment
         public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT1T2()
         {
             var sut = new TestCase<object, int>((x, y) => { });
-            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new FakeFixtureFactory()));
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
         }
 
         [Fact]
@@ -262,7 +262,7 @@ namespace Jwc.Experiment
             var sut = new TestCase<int, string>(action);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixture = new FakeTestFixture();
-            var fixtureFactory = new FakeFixtureFactory
+            var fixtureFactory = new DelegatingFixtureFactory
             {
                 OnCreate = x =>
                 {
