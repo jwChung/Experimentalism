@@ -9,7 +9,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a test command for first class tests.
     /// </summary>
-    public class FirstClassCommand : FactCommand
+    public class FirstClassCommand : TestCommand
     {
         private readonly IMethodInfo _declaredMethod;
         private readonly MethodInfo _testMethod;
@@ -29,7 +29,7 @@ namespace Jwc.Experiment
         /// The test arguments to be supplied to the test delegate.
         /// </param>
         public FirstClassCommand(IMethodInfo declaredMethod, MethodInfo testMethod, object[] arguments)
-            : base(EnsureIsNotNull(declaredMethod))
+            : base(EnsureIsNotNull(declaredMethod), null, 0)
         {
             if (testMethod == null)
             {

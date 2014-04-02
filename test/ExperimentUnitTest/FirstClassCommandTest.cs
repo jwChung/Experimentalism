@@ -8,13 +8,13 @@ namespace Jwc.Experiment
     public class FirstClassCommandTest
     {
         [Fact]
-        public void SutIsFactCommand()
+        public void SutIsTestCommand()
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 new Action(() => { }).Method,
                 new object[0]);
-            Assert.IsAssignableFrom<FactCommand>(sut);
+            Assert.IsAssignableFrom<TestCommand>(sut);
         }
 
         [Fact]
@@ -134,6 +134,17 @@ namespace Jwc.Experiment
             var result = Assert.IsType<PassedResult>(actual);
             Assert.Equal(method.Name, result.MethodName);
             Assert.Equal(sut.DisplayName, result.DisplayName);
+        }
+
+        [Fact]
+        public void TimeoutIsCorrect()
+        {
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }).Method,
+                new object[0]);
+            var actual = sut.Timeout;
+            Assert.Equal(0, actual);
         }
 
         private static bool _verified;
