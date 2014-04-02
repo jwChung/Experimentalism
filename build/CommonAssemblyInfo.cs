@@ -10,11 +10,14 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.12")]
-[assembly: AssemblyInformationalVersion("0.8.12")]
+[assembly: AssemblyVersion("0.8.13")]
+[assembly: AssemblyInformationalVersion("0.8.13")]
 
 /*
- * Version 0.8.12
+ * Version 0.8.13
+ * 
+ * While publishing v0.8.12 to NuGet server, exception was thrown,
+ * so v0.8.13 is published to ignore the exception.
  * 
  * Rename some properties of FirstClassCommand to clarify
  * 
