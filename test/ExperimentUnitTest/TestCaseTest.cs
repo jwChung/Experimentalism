@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Jwc.Experiment
 {
@@ -9,6 +10,18 @@ namespace Jwc.Experiment
         {
             var sut = new TestCase(() => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullActionThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase((Action)null));
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase((Func<object>)null));
         }
     }
 }

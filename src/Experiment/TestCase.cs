@@ -16,6 +16,22 @@ namespace Jwc.Experiment
         /// <param name="action">The test action.</param>
         public TestCase(Action action)
         {
+            if (action == null)
+            {
+                throw new ArgumentNullException("action");
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
+        /// </summary>
+        /// <param name="func">The test function.</param>
+        public TestCase(Func<object> func)
+        {
+            if (func == null)
+            {
+                throw new ArgumentNullException("func");
+            }
         }
 
         /// <summary>
