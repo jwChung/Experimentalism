@@ -182,5 +182,103 @@ namespace Jwc.Experiment
             Assert.Equal(action.Method, command.TestMethod);
             Assert.Equal(new object[] { testFixture.IntValue }, command.Arguments);
         }
+
+        [Fact]
+        public void SutOfT1T2IsTestCase()
+        {
+            var sut = new TestCase<object, int>((x, y) => { });
+            Assert.IsAssignableFrom<ITestCase>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullActionOfT1T2Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<object, int>((Action<object, int>)null));
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncOfT1T2Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<string, int>((Func<string, int, object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeActionOfT1T2Throws()
+        {
+            Action<object, int> action = (x, y) => { };
+            action += (x, y) => { };
+            Assert.Throws<ArgumentException>(() => new TestCase<object, int>(action));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeFuncOfT1T2Throws()
+        {
+            Func<object, int, object> func = (x, y) => null;
+            func += (x, y) => null;
+            Assert.Throws<ArgumentException>(() => new TestCase<object, int>(func));
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithActionOfT1T2()
+        {
+            Action<object, int> action = (x, y) => { };
+            var sut = new TestCase<object, int>(action);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(action, actual);
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithFuncOfT1T2()
+        {
+            Func<int, string, object> func = (x, y) => null;
+            var sut = new TestCase<int, string>(func);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(func, actual);
+        }
+
+        [Fact]
+        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT1T2()
+        {
+            var sut = new TestCase<object, int>((x, y) => { });
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new FakeFixtureFactory()));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandWithNullFixtureFactoryThrowsIfDeclaredOnSutOfT1T2()
+        {
+            var sut = new TestCase<object, int>((x, y) => { });
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(dummyMethod, null));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandReturnsCorrectTestCommandIfDeclaredOnSutOfT1T2()
+        {
+            Action<int, string> action = (x, y) => { };
+            var sut = new TestCase<int, string>(action);
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var testFixture = new FakeTestFixture();
+            var fixtureFactory = new FakeFixtureFactory
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(action.Method, x);
+                    return testFixture;
+                }
+            };
+
+            var actual = sut.ConvertToTestCommand(method, fixtureFactory);
+
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(method, command.DeclaredMethod);
+            Assert.Equal(action.Method, command.TestMethod);
+            Assert.Equal(
+                new object[] { testFixture.IntValue, testFixture.StringValue },
+                command.Arguments);
+        }
     }
 }
