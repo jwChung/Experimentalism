@@ -11,17 +11,16 @@ namespace Jwc.Experiment
     /// </summary>
     public class FirstClassCommand : FactCommand
     {
-        private readonly IMethodInfo _method;
+        private readonly IMethodInfo _declaredMethod;
         private readonly MethodInfo _testCase;
         private readonly object[] _arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FirstClassCommand"/> class.
         /// </summary>
-        /// <param name="method">
+        /// <param name="declaredMethod">
         /// The test method which this instance is associated. This will
         /// likely be the method adorned with an
-        /// <see cref="DefaultFirstClassTheoremAttribute" />.
         /// </param>
         /// <param name="testCase">
         /// The test case to be invoked when the test is executed.
@@ -29,8 +28,8 @@ namespace Jwc.Experiment
         /// <param name="arguments">
         /// The test arguments to be supplied to the test delegate.
         /// </param>
-        public FirstClassCommand(IMethodInfo method, MethodInfo testCase, object[] arguments)
-            : base(EnsureIsNotNull(method))
+        public FirstClassCommand(IMethodInfo declaredMethod, MethodInfo testCase, object[] arguments)
+            : base(EnsureIsNotNull(declaredMethod))
         {
             if (testCase == null)
             {
@@ -42,7 +41,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("arguments");
             }
 
-            _method = method;
+            _declaredMethod = declaredMethod;
             _testCase = testCase;
             _arguments = arguments;
 
@@ -50,13 +49,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets the method.
+        /// Gets the declared method.
         /// </summary>
-        public IMethodInfo Method
+        public IMethodInfo DeclaredMethod
         {
             get
             {
-                return _method;
+                return _declaredMethod;
             }
         }
 
@@ -90,17 +89,17 @@ namespace Jwc.Experiment
         public override MethodResult Execute(object testClass)
         {
             TestCase.Invoke(null, Arguments.ToArray());
-            return new PassedResult(Method, DisplayName);
+            return new PassedResult(DeclaredMethod, DisplayName);
         }
 
-        private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
+        private static IMethodInfo EnsureIsNotNull(IMethodInfo declaredMethod)
         {
-            if (method == null)
+            if (declaredMethod == null)
             {
-                throw new ArgumentNullException("method");
+                throw new ArgumentNullException("declaredMethod");
             }
 
-            return method;
+            return declaredMethod;
         }
 
         private void SetWellFormattedDisplayName()

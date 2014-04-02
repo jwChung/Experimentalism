@@ -50,7 +50,7 @@ namespace Jwc.Experiment
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new FirstClassCommand(method, new Action(() => { }).Method, new object[0]);
 
-            var actual = sut.Method;
+            var actual = sut.DeclaredMethod;
 
             Assert.Equal(method, actual);
         }
