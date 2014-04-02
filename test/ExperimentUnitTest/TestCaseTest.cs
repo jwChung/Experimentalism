@@ -23,5 +23,27 @@ namespace Jwc.Experiment
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase((Func<object>)null));
         }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithAction()
+        {
+            Action action = () => { };
+            var sut = new TestCase(action);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(action, actual);
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithFunc()
+        {
+            Func<object> func = () => null;
+            var sut = new TestCase(func);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(func, actual);
+        }
     }
 }
