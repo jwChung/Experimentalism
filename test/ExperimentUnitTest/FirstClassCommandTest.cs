@@ -45,7 +45,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void MethodIsCorrect()
+        public void DeclaredMethodIsCorrect()
         {
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new FirstClassCommand(method, new Action(() => { }).Method, new object[0]);
@@ -56,7 +56,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void TestCaseIsCorrect()
+        public void TestMethodIsCorrect()
         {
             var testCase = new Action(() => { }).Method;
             var sut = new FirstClassCommand(
