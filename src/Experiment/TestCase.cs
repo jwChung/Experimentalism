@@ -175,7 +175,10 @@ namespace Jwc.Experiment
             }
 
             var fixture = fixtureFactory.Create(Delegate.Method);
-            var arguments = new[] { fixture.Create(typeof(T)) };
+            var arguments = new[]
+            {
+                fixture.Create(typeof(T))
+            };
             return new FirstClassCommand(method, Delegate.Method, arguments);
         }
     }

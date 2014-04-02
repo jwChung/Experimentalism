@@ -64,6 +64,11 @@
       <DependentUpon>TempTestCase.New.tt</DependentUpon>
     </Compile>
     <Compile Include="TestCase.cs" />
+    <Compile Include="TestCase.Generic.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCase.Generic.tt</DependentUpon>
+    </Compile>
     <Compile Include="TypeFixtureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +77,11 @@
       <DependentUpon>TempTestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TempTestCase.New.cs</LastGenOutput>
+    </None>
+    <None Include="TestCase.Generic.tt">
+      <DependentUpon>TestCase.cs</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCase.Generic.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
