@@ -5,12 +5,12 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class TestCaseTest
+    public class TempTestCaseTest
     {
         [Fact]
         public void SutIsTestCase()
         {
-            var sut = TestCase.New(() => { });
+            var sut = TempTestCase.New(() => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
 
@@ -18,7 +18,7 @@ namespace Jwc.Experiment
         public void DelegateIsCorrectWhenInitializedWithNoArguments()
         {
             Action expected = () => { };
-            var sut = (TestCase)TestCase.New(expected);
+            var sut = (TempTestCase)TempTestCase.New(expected);
 
             var actual = sut.Delegate;
 
@@ -29,7 +29,7 @@ namespace Jwc.Experiment
         public void DelegateIsCorrectWhenInitializedWithOneArgument()
         {
             Action<object> expected = x => { };
-            var sut = (TestCase)TestCase.New(null, expected);
+            var sut = (TempTestCase)TempTestCase.New(null, expected);
 
             var actual = sut.Delegate;
 
@@ -39,7 +39,7 @@ namespace Jwc.Experiment
         [Fact]
         public void ArgumentsIsCorrectWhenInitializedWithNoArguments()
         {
-            var sut = (TestCase)TestCase.New(() => { });
+            var sut = (TempTestCase)TempTestCase.New(() => { });
             var actual = sut.Arguments;
             Assert.Empty(actual);
         }
@@ -48,7 +48,7 @@ namespace Jwc.Experiment
         public void ArgumentsIsCorrectWhenInitializedWithOneArgument()
         {
             var expected = new object();
-            var sut = (TestCase)TestCase.New(expected, x => { });
+            var sut = (TempTestCase)TempTestCase.New(expected, x => { });
 
             var actual = sut.Arguments;
 
@@ -58,20 +58,20 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullDelegateThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => TestCase.New(null));
+            Assert.Throws<ArgumentNullException>(() => TempTestCase.New(null));
         }
 
         [Fact]
         public void InitializeWithNullDelegateOfTArgThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => TestCase.New<object>(null, null));
+            Assert.Throws<ArgumentNullException>(() => TempTestCase.New<object>(null, null));
         }
 
         [Fact]
         public void DelegateIsCorrectWhenInitializedWithOneAutoArgument()
         {
             Action<object> expected = x => { };
-            var sut = (TestCase)TestCase.New(expected);
+            var sut = (TempTestCase)TempTestCase.New(expected);
 
             var actual = sut.Delegate;
 
@@ -81,7 +81,7 @@ namespace Jwc.Experiment
         [Fact]
         public void ArgumentsIsCorrectWhenInitizliedWithOneAutoArgument()
         {
-            var sut = (TestCase)TestCase.New<object>(x => { });
+            var sut = (TempTestCase)TempTestCase.New<object>(x => { });
             var actual = sut.Arguments;
             Assert.Empty(actual);
         }
@@ -90,7 +90,7 @@ namespace Jwc.Experiment
         public void DelegateIsCorrectWhenInitizliedWithTwoAutoArguments()
         {
             Action<object, string> expected = (x, y) => { };
-            var sut = (TestCase)TestCase.New(expected);
+            var sut = (TempTestCase)TempTestCase.New(expected);
 
             var actual = sut.Delegate;
 
@@ -101,7 +101,7 @@ namespace Jwc.Experiment
         public void DelegateIsCorrectWhenInitizliedWithOneArgumentAndOneAutoArgument()
         {
             Action<int, object> expected = (x, y) => { };
-            var sut = (TestCase)TestCase.New(0, expected);
+            var sut = (TempTestCase)TempTestCase.New(0, expected);
 
             var actual = sut.Delegate;
 
@@ -112,7 +112,7 @@ namespace Jwc.Experiment
         public void DelegateIsCorrectWhenInitizliedWithTwoArguments()
         {
             Action<int, object> expected = (x, y) => { };
-            var sut = (TestCase)TestCase.New(0, null, expected);
+            var sut = (TempTestCase)TempTestCase.New(0, null, expected);
 
             var actual = sut.Delegate;
 
@@ -122,7 +122,7 @@ namespace Jwc.Experiment
         [Fact]
         public void ArgumentsIsCorrectWhenInitizliedWithTwoAutoArguments()
         {
-            var sut = (TestCase)TestCase.New<object, string>((x, y) => { });
+            var sut = (TempTestCase)TempTestCase.New<object, string>((x, y) => { });
             var actual = sut.Arguments;
             Assert.Empty(actual);
         }
@@ -131,7 +131,7 @@ namespace Jwc.Experiment
         public void ArgumentsIsCorrectWhenInitizliedWithOneArgumentAndOneAutoArgument()
         {
             var expected = new object();
-            var sut = (TestCase)TestCase.New<object, string>(expected, (x, y) => { });
+            var sut = (TempTestCase)TempTestCase.New<object, string>(expected, (x, y) => { });
 
             var actual = sut.Arguments;
 
@@ -143,7 +143,7 @@ namespace Jwc.Experiment
         {
             const string expected1 = "anonymous";
             const int expected2 = 1234;
-            var sut = (TestCase)TestCase.New(expected1, expected2, (x, y) => { });
+            var sut = (TempTestCase)TempTestCase.New(expected1, expected2, (x, y) => { });
 
             var actual = sut.Arguments;
 
@@ -153,7 +153,7 @@ namespace Jwc.Experiment
         [Fact]
         public void ConvertNullMethodToTestCommandThrows()
         {
-            var sut = TestCase.New(() => { });
+            var sut = TempTestCase.New(() => { });
             Assert.Throws<ArgumentNullException>(
                 () => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
         }
@@ -161,7 +161,7 @@ namespace Jwc.Experiment
         [Fact]
         public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
-            var sut = TestCase.New(() => { });
+            var sut = TempTestCase.New(() => { });
             IMethodInfo dummyMethodInfo = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ArgumentNullException>(
                 () => sut.ConvertToTestCommand(dummyMethodInfo, null));
@@ -170,7 +170,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNonStaticDelegateThrows()
         {
-            Assert.Throws<ArgumentException>(() => TestCase.New(ConvertToTestCommandReturnsCorrectCommand));
+            Assert.Throws<ArgumentException>(() => TempTestCase.New(ConvertToTestCommandReturnsCorrectCommand));
         }
 
         [Fact]
@@ -178,7 +178,7 @@ namespace Jwc.Experiment
         {
             var arguments = new[] { new object() };
             Action<object> @delegate = x => { };
-            var sut = TestCase.New(arguments[0], @delegate);
+            var sut = TempTestCase.New(arguments[0], @delegate);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => null });
@@ -194,7 +194,7 @@ namespace Jwc.Experiment
         {
             var testFixture = new FakeTestFixture();
             var obj = new object();
-            var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
+            var sut = TempTestCase.New<object, int, string>(obj, (x, y, z) => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => testFixture });
@@ -206,7 +206,7 @@ namespace Jwc.Experiment
         [Fact]
         public void ConvertToTestCommandInitializesFixtureOnlyOnceWhenCreatingAutoData()
         {
-            var sut = TestCase.New<int>(x => { });
+            var sut = TempTestCase.New<int>(x => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             int creatCount = 0;
             var fixtureFactory = new DelegatingFixtureFactory
@@ -227,7 +227,7 @@ namespace Jwc.Experiment
         public void ConvertToTestCommandPassesCorrectMethodInfoToFixtureFactory()
         {
             Action @delegate = () => { };
-            var sut = TestCase.New(@delegate);
+            var sut = TempTestCase.New(@delegate);
             bool verified = false;
             var fixtureFactory = new DelegatingFixtureFactory
             {
@@ -251,7 +251,7 @@ namespace Jwc.Experiment
         {
             Action @delegate = () => { };
             @delegate += () => { };
-            Assert.Throws<ArgumentException>(() => TestCase.New(@delegate));
+            Assert.Throws<ArgumentException>(() => TempTestCase.New(@delegate));
         }
     }
 }

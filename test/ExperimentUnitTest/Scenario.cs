@@ -44,9 +44,9 @@ namespace Jwc.Experiment
         [DefaultFirstClassTheorem]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsFirstClassTestsForYieldReturn()
         {
-            yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
+            yield return TempTestCase.New(() => Assert.Equal(3, 2 + 1));
 
-            yield return TestCase.New(
+            yield return TempTestCase.New(
                 3, 7, 10,
                 (x, y, z) => Assert.Equal(z, x + y));
         }
@@ -62,7 +62,7 @@ namespace Jwc.Experiment
             };
 
             return testCases.Select(tc =>
-                TestCase.New(
+                TempTestCase.New(
                     tc,
                     ptc => Assert.Equal(ptc.Z, ptc.X + ptc.Y)))
                 .ToArray();
@@ -78,7 +78,7 @@ namespace Jwc.Experiment
             };
 
             return testCases.Select(tc =>
-                TestCase.New(
+                TempTestCase.New(
                     new Scenario(), tc,
                     (ps, ptc) => ps.DefaultTheoremSupportsParameterizedTest(ptc.X, ptc.Y)));
         }
@@ -86,7 +86,7 @@ namespace Jwc.Experiment
         [DefaultFirstClassTheorem(typeof(CustomTestFixture))]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithAutoData()
         {
-            yield return TestCase.New<string, int>((x, y) =>
+            yield return TempTestCase.New<string, int>((x, y) =>
             {
                 Assert.Equal("custom string", x);
                 Assert.Equal(5678, y);
@@ -96,7 +96,7 @@ namespace Jwc.Experiment
         [DefaultFirstClassTheorem(typeof(CustomTestFixture))]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithMixedData()
         {
-            yield return TestCase.New<string, int>("expected", (x, y) =>
+            yield return TempTestCase.New<string, int>("expected", (x, y) =>
             {
                 Assert.Equal("expected", x);
                 Assert.Equal(5678, y);

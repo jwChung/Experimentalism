@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Jwc.Experiment
 {
-    public partial class TestCase
+    public partial class TempTestCase
     {
         /* Contain just the typed overloads that are just pass-through to the real implementations.
          * They all have DebuggerStepThrough to ease debugging. */
@@ -26,7 +26,7 @@ for (var typeCount = 2; typeCount <= GenericTypeMax; typeCount++)
         [DebuggerStepThrough]
         public static ITestCase New<<#=typeList#>>(Action<<#=typeList#>> @delegate)
         {
-            return new TestCase(@delegate, new object[0]);
+            return new TempTestCase(@delegate, new object[0]);
         }
 
 <#
@@ -44,7 +44,7 @@ for (var autoCount = 1; autoCount <= typeCount; autoCount++)
         [DebuggerStepThrough]
         public static ITestCase New<<#=typeList#>>(<#=argumentList#>, Action<<#=typeList#>> @delegate)
         {
-            return new TestCase(@delegate, new object[] { <#=valueList#> });
+            return new TempTestCase(@delegate, new object[] { <#=valueList#> });
         }
 
 <#

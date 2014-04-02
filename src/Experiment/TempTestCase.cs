@@ -11,12 +11,12 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
-    public partial class TestCase : ITestCase
+    public partial class TempTestCase : ITestCase
     {
         private readonly Delegate _delegate;
         private readonly object[] _arguments;
 
-        private TestCase(Delegate @delegate, object[] arguments)
+        private TempTestCase(Delegate @delegate, object[] arguments)
         {
             if (@delegate == null)
             {
@@ -83,7 +83,7 @@ namespace Jwc.Experiment
         /// </returns>
         public static ITestCase New(Action @delegate)
         {
-            return new TestCase(@delegate, new object[0]);
+            return new TempTestCase(@delegate, new object[0]);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Jwc.Experiment
         /// </returns>
         public static ITestCase New<TArg>(TArg arg, Action<TArg> @delegate)
         {
-            return new TestCase(@delegate, new object[] { arg });
+            return new TempTestCase(@delegate, new object[] { arg });
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Jwc.Experiment
         /// </returns>
         public static ITestCase New<TArg>(Action<TArg> @delegate)
         {
-            return new TestCase(@delegate, new object[0]);
+            return new TempTestCase(@delegate, new object[0]);
         }
 
         /// <summary>

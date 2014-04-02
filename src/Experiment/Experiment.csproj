@@ -57,20 +57,20 @@
     <Compile Include="NotSupportedFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DefaultTheoremAttribute.cs" />
-    <Compile Include="TestCase.cs" />
-    <Compile Include="TestCase.New.cs">
+    <Compile Include="TempTestCase.cs" />
+    <Compile Include="TempTestCase.New.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TestCase.New.tt</DependentUpon>
+      <DependentUpon>TempTestCase.New.tt</DependentUpon>
     </Compile>
     <Compile Include="TypeFixtureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TestCase.New.tt">
-      <DependentUpon>TestCase.cs</DependentUpon>
+    <None Include="TempTestCase.New.tt">
+      <DependentUpon>TempTestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCase.New.cs</LastGenOutput>
+      <LastGenOutput>TempTestCase.New.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
