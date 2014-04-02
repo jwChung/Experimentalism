@@ -155,7 +155,7 @@ namespace Jwc.Experiment
         {
             var sut = TestCase.New(() => { });
             Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(null, new FakeFixtureFactory()));
+                () => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New(arguments[0], @delegate);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, new FakeFixtureFactory { OnCreate = x => null });
+            var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => null });
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(method, command.DeclaredMethod);
@@ -197,7 +197,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, new FakeFixtureFactory { OnCreate = x => testFixture });
+            var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => testFixture });
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(new[] { obj, testFixture.IntValue, testFixture.StringValue }, command.Arguments);
@@ -209,7 +209,7 @@ namespace Jwc.Experiment
             var sut = TestCase.New<int>(x => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             int creatCount = 0;
-            var fixtureFactory = new FakeFixtureFactory
+            var fixtureFactory = new DelegatingFixtureFactory
             {
                 OnCreate = mi =>
                 {
@@ -229,7 +229,7 @@ namespace Jwc.Experiment
             Action @delegate = () => { };
             var sut = TestCase.New(@delegate);
             bool verified = false;
-            var fixtureFactory = new FakeFixtureFactory
+            var fixtureFactory = new DelegatingFixtureFactory
             {
                 OnCreate = mi =>
                 {

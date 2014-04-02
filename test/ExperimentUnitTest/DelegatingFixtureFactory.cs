@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Jwc.Experiment
 {
-    public class FakeFixtureFactory : ITestFixtureFactory
+    public class DelegatingFixtureFactory : ITestFixtureFactory
     {
         public Func<MethodInfo, ITestFixture> OnCreate
         {

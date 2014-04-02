@@ -47,8 +47,8 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
-    <Compile Include="FakeFixtureFactory.cs" />
-    <Compile Include="FakeTestCase.cs" />
+    <Compile Include="DelegatingFixtureFactory.cs" />
+    <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="DefaultFirstClassTheoremAttributeTest.cs" />
     <Compile Include="FirstClassCommandTest.cs" />

@@ -3,7 +3,7 @@ using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
 {
-    public class FakeSpecimenContext : ISpecimenContext
+    public class DelegatingSpecimenContext : ISpecimenContext
     {
         public Func<object, object> OnResolve
         {

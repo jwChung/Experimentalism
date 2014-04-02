@@ -3,7 +3,7 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class FakeTestCase : ITestCase
+    public class DelegatingTestCase : ITestCase
     {
         public Func<IMethodInfo, ITestFixtureFactory, ITestCommand> OnConvertToTestCommand
         {

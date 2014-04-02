@@ -8,14 +8,14 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsTestFixture()
         {
-            var sut = new AutoFixtureAdapter(new FakeSpecimenContext());
+            var sut = new AutoFixtureAdapter(new DelegatingSpecimenContext());
             Assert.IsAssignableFrom<ITestFixture>(sut);
         }
 
         [Fact]
         public void SpecimenContextIsCorrect()
         {
-            var expected = new FakeSpecimenContext();
+            var expected = new DelegatingSpecimenContext();
             var sut = new AutoFixtureAdapter(expected);
 
             var actual = sut.SpecimenContext;
@@ -34,7 +34,7 @@ namespace Jwc.Experiment
         {
             var request = new object();
             var expected = new object();
-            var context = new FakeSpecimenContext
+            var context = new DelegatingSpecimenContext
             {
                 OnResolve = r =>
                 {

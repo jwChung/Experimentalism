@@ -62,7 +62,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(new FakeFixtureFactory { OnCreate = mi => fixture });
+            var sut = new DerivedTheoremAttribute(new DelegatingFixtureFactory { OnCreate = mi => fixture });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -81,7 +81,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(new FakeFixtureFactory { OnCreate = mi => fixture });
+            var sut = new DerivedTheoremAttribute(new DelegatingFixtureFactory { OnCreate = mi => fixture });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -138,7 +138,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(new FakeFixtureFactory { OnCreate = mi => fixture });
+            var sut = new DerivedTheoremAttribute(new DelegatingFixtureFactory { OnCreate = mi => fixture });
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method);
@@ -163,7 +163,7 @@ namespace Jwc.Experiment
             string arg1, int arg2, object arg3)
         {
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi => { throw new NotSupportedException(); }
                 });
@@ -177,7 +177,7 @@ namespace Jwc.Experiment
             var fixture = new FakeTestFixture();
             int callCount = 0;
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi =>
                     {
@@ -198,7 +198,7 @@ namespace Jwc.Experiment
             var fixture = new FakeTestFixture();
             int callCount = 0;
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi =>
                     {
@@ -219,7 +219,7 @@ namespace Jwc.Experiment
             var fixture = new FakeTestFixture();
             int callCount = 0;
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi =>
                     {
@@ -238,7 +238,7 @@ namespace Jwc.Experiment
         public void CreateNonParameterizedTestDoesNotInitializeFixture()
         {
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi =>
                     {
@@ -254,7 +254,7 @@ namespace Jwc.Experiment
         {
             var exception = new NotSupportedException();
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi => { throw exception; }
                 });
@@ -272,7 +272,7 @@ namespace Jwc.Experiment
         {
             var exception = new NotSupportedException();
             var sut = new DerivedTheoremAttribute(
-                new FakeFixtureFactory
+                new DelegatingFixtureFactory
                 {
                     OnCreate = mi => { throw exception; }
                 });
@@ -318,7 +318,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureFactoryIsCorrectWhenInitializedWithFixtureFactory()
         {
-            var fixtureFactory = new FakeFixtureFactory();
+            var fixtureFactory = new DelegatingFixtureFactory();
             var sut = new DerivedTheoremAttribute(fixtureFactory);
 
             var actual = sut.FixtureFactory;
@@ -329,7 +329,7 @@ namespace Jwc.Experiment
         [Fact]
         public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
         {
-            var fixtureFactory = new FakeFixtureFactory
+            var fixtureFactory = new DelegatingFixtureFactory
             {
                 OnCreate = mi =>
                 {
@@ -349,7 +349,7 @@ namespace Jwc.Experiment
         {
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
             bool verified = false;
-            var fixtureFactory = new FakeFixtureFactory
+            var fixtureFactory = new DelegatingFixtureFactory
             {
                 OnCreate = mi =>
                 {
