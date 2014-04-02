@@ -81,6 +81,8 @@ namespace Jwc.Experiment
     /// </summary>
     public class TestCase<T> : ITestCase
     {
+        private readonly Delegate _delegate;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase"/> class.
         /// </summary>
@@ -91,6 +93,8 @@ namespace Jwc.Experiment
             {
                 throw new ArgumentNullException("action");
             }
+
+            _delegate = action;
         }
 
         /// <summary>
@@ -102,6 +106,19 @@ namespace Jwc.Experiment
             if (func == null)
             {
                 throw new ArgumentNullException("func");
+            }
+
+            _delegate = func;
+        }
+
+        /// <summary>
+        /// Gets the test delegate.
+        /// </summary>
+        public Delegate Delegate
+        {
+            get
+            {
+                return _delegate;
             }
         }
 
