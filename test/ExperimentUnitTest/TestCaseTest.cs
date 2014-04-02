@@ -27,6 +27,22 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void InitializeWithCompositeActionThrows()
+        {
+            Action action = () => { };
+            action += () => { };
+            Assert.Throws<ArgumentException>(() => new TestCase(action));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeFuncThrows()
+        {
+            Func<object> func = () => null;
+            func += () => null;
+            Assert.Throws<ArgumentException>(() => new TestCase(func));
+        }
+
+        [Fact]
         public void DelegateIsCorrectWhenInitializedWithAction()
         {
             Action action = () => { };
@@ -88,6 +104,22 @@ namespace Jwc.Experiment
         public void InitializeWithNullFuncOfTThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase<string>((Func<string, object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeActionOfTThrows()
+        {
+            Action<object> action = x => { };
+            action += x => { };
+            Assert.Throws<ArgumentException>(() => new TestCase<object>(action));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeFuncOfTThrows()
+        {
+            Func<object, object> func = x => null;
+            func += x => null;
+            Assert.Throws<ArgumentException>(() => new TestCase<object>(func));
         }
 
         [Fact]

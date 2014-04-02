@@ -23,6 +23,13 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("action");
             }
 
+            if (action.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite actions are not supported, set only one action operation.",
+                    "action");
+            }
+
             _delegate = action;
         }
 
@@ -35,6 +42,13 @@ namespace Jwc.Experiment
             if (func == null)
             {
                 throw new ArgumentNullException("func");
+            }
+
+            if (func.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite functions are not supported, set only one function operation.",
+                    "func");
             }
 
             _delegate = func;
@@ -94,6 +108,13 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("action");
             }
 
+            if (action.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite actions are not supported, set only one action operation.",
+                    "action");
+            }
+
             _delegate = action;
         }
 
@@ -106,6 +127,13 @@ namespace Jwc.Experiment
             if (func == null)
             {
                 throw new ArgumentNullException("func");
+            }
+
+            if (func.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite functions are not supported, set only one function operation.",
+                    "func");
             }
 
             _delegate = func;
