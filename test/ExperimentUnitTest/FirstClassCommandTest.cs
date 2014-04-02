@@ -64,7 +64,7 @@ namespace Jwc.Experiment
                 testCase,
                 new object[0]);
 
-            var actual = sut.TestCase;
+            var actual = sut.TestMethod;
 
             Assert.Equal(testCase, actual);
         }

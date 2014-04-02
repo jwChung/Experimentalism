@@ -185,7 +185,7 @@ namespace Jwc.Experiment
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
             Assert.Equal(method, command.DeclaredMethod);
-            Assert.Equal(@delegate.Method, command.TestCase);
+            Assert.Equal(@delegate.Method, command.TestMethod);
             Assert.Equal(arguments, command.Arguments);
         }
 
