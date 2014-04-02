@@ -63,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TempTestCase.New.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestCase.cs" />
     <Compile Include="TypeFixtureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
