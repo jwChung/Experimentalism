@@ -49,7 +49,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ConvertNullMethodToTestCommandThrows()
+        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSut()
         {
             var sut = new TestCase(() => { });
             ITestFixtureFactory dummyFixtureFactory = null;
@@ -110,6 +110,45 @@ namespace Jwc.Experiment
             var actual = sut.Delegate;
 
             Assert.Equal(func, actual);
+        }
+
+        [Fact]
+        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT()
+        {
+            var sut = new TestCase<object>(x => { });
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new FakeFixtureFactory()));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandWithNullFixtureFactoryThrowsIfDeclaredOnSutOfT()
+        {
+            var sut = new TestCase<object>(x => { });
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(dummyMethod, null));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandReturnsCorrectTestCommandIfDeclaredOnSutOfT()
+        {
+            Action<int> action = x => { };
+            var sut = new TestCase<int>(action);
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var testFixture = new FakeTestFixture();
+            var fixtureFactory = new FakeFixtureFactory
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(action.Method, x);
+                    return testFixture;
+                }
+            };
+
+            var actual = sut.ConvertToTestCommand(method, fixtureFactory);
+
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(method, command.DeclaredMethod);
+            Assert.Equal(action.Method, command.TestMethod);
+            Assert.Equal(new object[] { testFixture.IntValue }, command.Arguments);
         }
     }
 }

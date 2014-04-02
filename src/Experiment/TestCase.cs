@@ -136,7 +136,19 @@ namespace Jwc.Experiment
         /// </returns>
         public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory)
         {
-            throw new NotImplementedException();
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
+            var fixture = fixtureFactory.Create(Delegate.Method);
+            var arguments = new[] { fixture.Create(typeof(T)) };
+            return new FirstClassCommand(method, Delegate.Method, arguments);
         }
     }
 }
