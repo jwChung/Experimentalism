@@ -77,5 +77,17 @@ namespace Jwc.Experiment
             var sut = new TestCase<object>(x => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
+
+        [Fact]
+        public void InitializeWithNullActionOfTThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<object>((Action<object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncOfTThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<string>((Func<string, object>)null));
+        }
     }
 }
