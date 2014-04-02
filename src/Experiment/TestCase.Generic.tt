@@ -21,6 +21,7 @@ for (var typeCount = 2; typeCount <= GenericTypeMax; typeCount++)
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<<#=typeList#>> : ITestCase
     {
         private readonly Delegate _delegate;

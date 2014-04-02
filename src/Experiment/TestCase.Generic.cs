@@ -8,6 +8,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -104,6 +105,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -201,6 +203,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -299,6 +302,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -398,6 +402,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -498,6 +503,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -599,6 +605,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -701,6 +708,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -804,6 +812,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -908,6 +917,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -1013,6 +1023,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -1119,6 +1130,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -1226,6 +1238,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -1334,6 +1347,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : ITestCase
     {
         private readonly Delegate _delegate;
@@ -1443,6 +1457,7 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : ITestCase
     {
         private readonly Delegate _delegate;
