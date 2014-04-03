@@ -10,14 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.17")]
-[assembly: AssemblyInformationalVersion("0.8.17")]
+[assembly: AssemblyVersion("0.8.18")]
+[assembly: AssemblyInformationalVersion("0.8.18-pre01")]
 
 /*
- * Version 0.8.17
+ * Version 0.8.18-pre01
  * 
- * Experiment.AutoFixture nuget package includes Excperiment.dll
- * but does not depend on the Experiment nuget package.
- * 
- * This version does not publish the Experiment nuget package.
+ * To test publishing.
  */
