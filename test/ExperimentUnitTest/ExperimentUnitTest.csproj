@@ -56,7 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="DefaultTheoremAttributeTest.cs" />
-    <Compile Include="TempTestCaseTest.cs" />
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="TypeFixtureFactoryTest.cs" />
   </ItemGroup>

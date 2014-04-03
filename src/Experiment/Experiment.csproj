@@ -57,12 +57,6 @@
     <Compile Include="NotSupportedFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DefaultTheoremAttribute.cs" />
-    <Compile Include="TempTestCase.cs" />
-    <Compile Include="TempTestCase.New.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TempTestCase.New.tt</DependentUpon>
-    </Compile>
     <Compile Include="TestCase.cs" />
     <Compile Include="TestCase.Generic.cs">
       <AutoGen>True</AutoGen>
@@ -73,11 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TempTestCase.New.tt">
-      <DependentUpon>TempTestCase.cs</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TempTestCase.New.cs</LastGenOutput>
-    </None>
     <None Include="TestCase.Generic.tt">
       <DependentUpon>TestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
