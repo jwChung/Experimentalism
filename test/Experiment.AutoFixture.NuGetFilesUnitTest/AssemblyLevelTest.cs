@@ -34,7 +34,7 @@ namespace Jwc.Experiment
         [InlineData("AutoFixtureFactory")]
         public void SutGeneratesNugetTransformFiles(string originName)
         {
-            string directory = @"..\..\..\..\src\Experiment.AutoFixture\";
+            string directory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";
             Assert.True(File.Exists(origin), "exists.");
@@ -46,7 +46,7 @@ namespace Jwc.Experiment
         [InlineData("Person")]
         public void SutGeneratesNugetTransformFilesForTest(string originName)
         {
-            string directory = @"..\..\..\..\test\Experiment.AutoFixtureUnitTest\";
+            string directory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";
             Assert.True(File.Exists(origin), "exists.");
