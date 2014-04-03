@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("0.8.18")]
-[assembly: AssemblyInformationalVersion("0.8.18-pre01")]
+[assembly: AssemblyInformationalVersion("0.8.18")]
 
 /*
- * Version 0.8.18-pre01
+ * Version 0.8.18
  * 
- * To test publishing.
+ * This version publishes the Experiment nuget package again.
  */
