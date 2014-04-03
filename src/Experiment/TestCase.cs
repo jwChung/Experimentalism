@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -11,45 +8,55 @@ namespace Jwc.Experiment
     /// xUnit.net ITestCommand when returned from a test method adorned with
     /// the <see cref="DefaultFirstClassTheoremAttribute" />.
     /// </summary>
-    public partial class TestCase : ITestCase
+    public class TestCase : ITestCase
     {
         private readonly Delegate _delegate;
-        private readonly object[] _arguments;
 
-        private TestCase(Delegate @delegate, object[] arguments)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
+        /// </summary>
+        /// <param name="action">The test action.</param>
+        public TestCase(Action action)
         {
-            if (@delegate == null)
+            if (action == null)
             {
-                throw new ArgumentNullException("delegate");
+                throw new ArgumentNullException("action");
             }
 
-            if (@delegate.GetInvocationList().Length != 1)
-            {
-                throw new ArgumentException(
-                    "Composite delegates are not supported, set only one delegate operation.",
-                    "delegate");
-            }
-
-            if (!@delegate.Method.IsStatic)
+            if (action.GetInvocationList().Length != 1)
             {
                 throw new ArgumentException(
-                    "The supplied delegate should be static, but isn't because of using objects " +
-                    "from outer scope, which can result in problems from Shared Fixture " +
-                    "- Erratic Tests, probably complicated Fixture than Minimal and leading to Fragile Fixture. " +
-                    "(http://xunitpatterns.com/Shared%20Fixture.html)",
-                    "delegate");
+                    "Composite actions are not supported, set only one action operation.",
+                    "action");
             }
 
-            _delegate = @delegate;
-            _arguments = arguments;
+            _delegate = action;
         }
 
         /// <summary>
-        /// Gets a value indicating the test delegate.
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
         /// </summary>
-        /// <value>
-        /// The test delegate originally supplied as a constructor argument.
-        /// </value>
+        /// <param name="func">The test function.</param>
+        public TestCase(Func<object> func)
+        {
+            if (func == null)
+            {
+                throw new ArgumentNullException("func");
+            }
+
+            if (func.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite functions are not supported, set only one function operation.",
+                    "func");
+            }
+
+            _delegate = func;
+        }
+
+        /// <summary>
+        /// Gets the test delegate.
+        /// </summary>
         public Delegate Delegate
         {
             get
@@ -59,62 +66,88 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the the arguments of the test delegate.
+        /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
-        /// <value>
-        /// The test arguments originally supplied as a constructor argument.
-        /// </value>
-        public IEnumerable<object> Arguments
+        /// <param name="method">
+        /// The method adorned by a <see cref="DefaultFirstClassTheoremAttribute" />.
+        /// </param>
+        /// <param name="fixtureFactory">
+        /// A test fixture factory to provide auto data.
+        /// </param>
+        /// <returns>
+        /// An xUnit.net ITestCommand that represents the executable test case.
+        /// </returns>
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            return new FirstClassCommand(method, Delegate, new object[0]);
+        }
+    }
+
+    /// <summary>
+    /// Represents a weakly-typed test case that can be turned into an
+    /// xUnit.net ITestCommand when returned from a test method adorned with
+    /// the <see cref="DefaultFirstClassTheoremAttribute" />.
+    /// </summary>
+    public class TestCase<T> : ITestCase
+    {
+        private readonly Delegate _delegate;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
+        /// </summary>
+        /// <param name="action">The test action.</param>
+        public TestCase(Action<T> action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException("action");
+            }
+
+            if (action.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite actions are not supported, set only one action operation.",
+                    "action");
+            }
+
+            _delegate = action;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
+        /// </summary>
+        /// <param name="func">The test function.</param>
+        public TestCase(Func<T, object> func)
+        {
+            if (func == null)
+            {
+                throw new ArgumentNullException("func");
+            }
+
+            if (func.GetInvocationList().Length != 1)
+            {
+                throw new ArgumentException(
+                    "Composite functions are not supported, set only one function operation.",
+                    "func");
+            }
+
+            _delegate = func;
+        }
+
+        /// <summary>
+        /// Gets the test delegate.
+        /// </summary>
+        public Delegate Delegate
         {
             get
             {
-                return _arguments;
+                return _delegate;
             }
-        }
-
-        /// <summary>
-        /// Creates a new instance of <see cref="ITestCase" />.
-        /// </summary>
-        /// <param name="delegate">
-        /// The delegate to be invoked when the test is executed.
-        /// </param>
-        /// <returns>
-        /// The created instance.
-        /// </returns>
-        public static ITestCase New(Action @delegate)
-        {
-            return new TestCase(@delegate, new object[0]);
-        }
-
-        /// <summary>
-        /// Creates a new instance of <see cref="ITestCase" />.
-        /// </summary>
-        /// <typeparam name="TArg">The type of the argument.</typeparam>
-        /// <param name="arg">The argument of the test delegate.</param>
-        /// <param name="delegate">
-        /// The delegate to be invoked when the test is executed.
-        /// </param>
-        /// <returns>
-        /// The created instance.
-        /// </returns>
-        public static ITestCase New<TArg>(TArg arg, Action<TArg> @delegate)
-        {
-            return new TestCase(@delegate, new object[] { arg });
-        }
-
-        /// <summary>
-        /// Creates a new instance of <see cref="ITestCase" />.
-        /// </summary>
-        /// <typeparam name="TArg">The type of the argument.</typeparam>
-        /// <param name="delegate">
-        /// The delegate to be invoked with an auto argument when the test is executed.
-        /// </param>
-        /// <returns>
-        /// The created instance.
-        /// </returns>
-        public static ITestCase New<TArg>(Action<TArg> @delegate)
-        {
-            return new TestCase(@delegate, new object[0]);
         }
 
         /// <summary>
@@ -123,7 +156,9 @@ namespace Jwc.Experiment
         /// <param name="method">
         /// The method adorned by a <see cref="DefaultFirstClassTheoremAttribute" />.
         /// </param>
-        /// <param name="fixtureFactory">A test fixture factory to provide auto data.</param>
+        /// <param name="fixtureFactory">
+        /// A test fixture factory to provide auto data.
+        /// </param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
@@ -139,20 +174,12 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureFactory");
             }
 
-            return new FirstClassCommand(
-                method,
-                Delegate.Method,
-                GetFinalArguments(fixtureFactory.Create(Delegate.Method), Delegate.Method));
-        }
-
-        private object[] GetFinalArguments(ITestFixture testFixture, MethodInfo methodInfo)
-        {
-            var specifiedArgument = Arguments.ToArray();
-            var autoArguments = methodInfo.GetParameters()
-                .Skip(specifiedArgument.Length)
-                .Select(pi => testFixture.Create(pi.ParameterType));
-
-            return specifiedArgument.Concat(autoArguments).ToArray();
+            var fixture = fixtureFactory.Create(Delegate.Method);
+            var arguments = new[]
+            {
+                fixture.Create(typeof(T))
+            };
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 }

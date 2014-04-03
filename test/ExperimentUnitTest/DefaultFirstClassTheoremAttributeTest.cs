@@ -311,7 +311,7 @@ namespace Jwc.Experiment
         {
             public IEnumerable<ITestCase> FirstClassTest()
             {
-                yield return TestCase.New(() => { });
+                yield return new TestCase(() => { });
             }
         }
 

@@ -12,7 +12,7 @@ namespace Jwc.Experiment
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }).Method,
+                new Action(() => { }),
                 new object[0]);
             Assert.IsAssignableFrom<TestCommand>(sut);
         }
@@ -21,16 +21,16 @@ namespace Jwc.Experiment
         public void InitializeWithNullMethodThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new FirstClassCommand(null, new Action(() => { }).Method, new object[0]));
+                () => new FirstClassCommand(null, new Action(() => { }), new object[0]));
         }
 
         [Fact]
-        public void InitializeWithNullTestCaseThrows()
+        public void InitializeWithNullDelegateThrows()
         {
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                    null,
+                    (Delegate)null,
                     new object[0]));
         }
 
@@ -40,33 +40,33 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                    new Action(() => { }).Method,
+                    new Action(() => { }),
                     null));
         }
 
         [Fact]
-        public void DeclaredMethodIsCorrect()
+        public void MethodIsCorrect()
         {
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var sut = new FirstClassCommand(method, new Action(() => { }).Method, new object[0]);
+            var sut = new FirstClassCommand(method, new Action(() => { }), new object[0]);
 
-            var actual = sut.DeclaredMethod;
+            var actual = sut.Method;
 
             Assert.Equal(method, actual);
         }
 
         [Fact]
-        public void TestMethodIsCorrect()
+        public void DelegateIsCorrect()
         {
-            var testCase = new Action(() => { }).Method;
+            var @delegate = new Action(() => { });
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                testCase,
+                @delegate,
                 new object[0]);
 
-            var actual = sut.TestMethod;
+            var actual = sut.Delegate;
 
-            Assert.Equal(testCase, actual);
+            Assert.Equal(@delegate, actual);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Jwc.Experiment
             var arguments = new[]{1, new object(), "string"};
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }).Method,
+                new Action(() => { }),
                 arguments);
 
             var actual = sut.Arguments;
@@ -84,14 +84,14 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DisplayNameIsWellFormatted()
+        public void DisplayNameIsCorrect()
         {
             var arguments = new[] { 1, new object(), "string", null };
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action<int, object, string, Type>((a, b, c, d) => { }).Method,
+                new Action<int, object, string, Type>((a, b, c, d) => { }),
                 arguments);
-            var exptected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsWellFormatted" +
+            var exptected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsCorrect" +
                             "(Int32: \"1\", Object: \"System.Object\", String: \"string\", Type: NULL)";
 
             var actual = sut.DisplayName;
@@ -100,24 +100,27 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void ExecuteCallsTestCase()
+        public void ExecuteCallsDelegate()
         {
             // Fixture setup
             var arguments = new object[] { 1, "string" };
-            var testCase = new Action<int, string>(StaticDelegateMethod).Method;
+            var verified = false;
+            Action<int, string> @delegate = (x, y) =>
+            {
+                Assert.Equal(1, x);
+                Assert.Equal("string", y);
+                verified = true;
+            };
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                testCase,
+                @delegate,
                 arguments);
 
             // Exercise system
             Assert.DoesNotThrow(() => sut.Execute(null));
 
             // Verify outcome
-            Assert.True(_verified, "verified.");
-
-            // Fixture teardown
-            _verified = false;
+            Assert.True(verified, "verified.");
         }
 
         [Fact]
@@ -126,7 +129,7 @@ namespace Jwc.Experiment
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new FirstClassCommand(
                 method,
-                new Action(() => { }).Method,
+                new Action(() => { }),
                 new object[0]);
 
             var actual = sut.Execute(null);
@@ -141,7 +144,7 @@ namespace Jwc.Experiment
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }).Method,
+                new Action(() => { }),
                 new object[0]);
             var actual = sut.Timeout;
             Assert.Equal(0, actual);
@@ -152,18 +155,10 @@ namespace Jwc.Experiment
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }).Method,
+                new Action(() => { }),
                 new object[0]);
             var actual = sut.ShouldCreateInstance;
             Assert.False(actual, "ShouldCreateInstance");
-        }
-
-        private static bool _verified;
-        private static void StaticDelegateMethod(int arg1, string arg2)
-        {
-            Assert.Equal(1, arg1);
-            Assert.Equal("string", arg2);
-            _verified = true;
         }
     }
 }

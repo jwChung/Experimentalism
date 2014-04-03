@@ -10,248 +10,275 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsTestCase()
         {
-            var sut = TestCase.New(() => { });
+            var sut = new TestCase(() => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithNoArguments()
+        public void InitializeWithNullActionThrows()
         {
-            Action expected = () => { };
-            var sut = (TestCase)TestCase.New(expected);
+            Assert.Throws<ArgumentNullException>(() => new TestCase((Action)null));
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase((Func<object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeActionThrows()
+        {
+            Action action = () => { };
+            action += () => { };
+            Assert.Throws<ArgumentException>(() => new TestCase(action));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeFuncThrows()
+        {
+            Func<object> func = () => null;
+            func += () => null;
+            Assert.Throws<ArgumentException>(() => new TestCase(func));
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithAction()
+        {
+            Action action = () => { };
+            var sut = new TestCase(action);
 
             var actual = sut.Delegate;
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(action, actual);
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithOneArgument()
+        public void DelegateIsCorrectWhenInitializedWithFunc()
         {
-            Action<object> expected = x => { };
-            var sut = (TestCase)TestCase.New(null, expected);
+            Func<object> func = () => null;
+            var sut = new TestCase(func);
 
             var actual = sut.Delegate;
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(func, actual);
         }
 
         [Fact]
-        public void ArgumentsIsCorrectWhenInitializedWithNoArguments()
+        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSut()
         {
-            var sut = (TestCase)TestCase.New(() => { });
-            var actual = sut.Arguments;
-            Assert.Empty(actual);
+            var sut = new TestCase(() => { });
+            ITestFixtureFactory dummyFixtureFactory = null;
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, dummyFixtureFactory));
         }
 
         [Fact]
-        public void ArgumentsIsCorrectWhenInitializedWithOneArgument()
+        public void ConvertToTestCommandReturnsCorrectTestCommand()
         {
-            var expected = new object();
-            var sut = (TestCase)TestCase.New(expected, x => { });
-
-            var actual = sut.Arguments;
-
-            Assert.Equal(new[] { expected }, actual);
-        }
-
-        [Fact]
-        public void InitializeWithNullDelegateThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => TestCase.New(null));
-        }
-
-        [Fact]
-        public void InitializeWithNullDelegateOfTArgThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => TestCase.New<object>(null, null));
-        }
-
-        [Fact]
-        public void DelegateIsCorrectWhenInitializedWithOneAutoArgument()
-        {
-            Action<object> expected = x => { };
-            var sut = (TestCase)TestCase.New(expected);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(expected, actual);
-        }
-        
-        [Fact]
-        public void ArgumentsIsCorrectWhenInitizliedWithOneAutoArgument()
-        {
-            var sut = (TestCase)TestCase.New<object>(x => { });
-            var actual = sut.Arguments;
-            Assert.Empty(actual);
-        }
-
-        [Fact]
-        public void DelegateIsCorrectWhenInitizliedWithTwoAutoArguments()
-        {
-            Action<object, string> expected = (x, y) => { };
-            var sut = (TestCase)TestCase.New(expected);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void DelegateIsCorrectWhenInitizliedWithOneArgumentAndOneAutoArgument()
-        {
-            Action<int, object> expected = (x, y) => { };
-            var sut = (TestCase)TestCase.New(0, expected);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void DelegateIsCorrectWhenInitizliedWithTwoArguments()
-        {
-            Action<int, object> expected = (x, y) => { };
-            var sut = (TestCase)TestCase.New(0, null, expected);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void ArgumentsIsCorrectWhenInitizliedWithTwoAutoArguments()
-        {
-            var sut = (TestCase)TestCase.New<object, string>((x, y) => { });
-            var actual = sut.Arguments;
-            Assert.Empty(actual);
-        }
-
-        [Fact]
-        public void ArgumentsIsCorrectWhenInitizliedWithOneArgumentAndOneAutoArgument()
-        {
-            var expected = new object();
-            var sut = (TestCase)TestCase.New<object, string>(expected, (x, y) => { });
-
-            var actual = sut.Arguments;
-
-            Assert.Equal(new[] { expected }, actual);
-        }
-
-        [Fact]
-        public void ArgumentsIsCorrectWhenInitizliedWithTwoArguments()
-        {
-            const string expected1 = "anonymous";
-            const int expected2 = 1234;
-            var sut = (TestCase)TestCase.New(expected1, expected2, (x, y) => { });
-
-            var actual = sut.Arguments;
-
-            Assert.Equal(new object[] { expected1, expected2 }, actual);
-        }
-
-        [Fact]
-        public void ConvertNullMethodToTestCommandThrows()
-        {
-            var sut = TestCase.New(() => { });
-            Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
-        }
-
-        [Fact]
-        public void ConvertToTestCommandWithNullFixtureFactoryThrows()
-        {
-            var sut = TestCase.New(() => { });
-            IMethodInfo dummyMethodInfo = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(dummyMethodInfo, null));
-        }
-        
-        [Fact]
-        public void InitializeWithNonStaticDelegateThrows()
-        {
-            Assert.Throws<ArgumentException>(() => TestCase.New(ConvertToTestCommandReturnsCorrectCommand));
-        }
-
-        [Fact]
-        public void ConvertToTestCommandReturnsCorrectCommand()
-        {
-            var arguments = new[] { new object() };
-            Action<object> @delegate = x => { };
-            var sut = TestCase.New(arguments[0], @delegate);
+            Action action = () => { };
+            var sut = new TestCase(action);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
-            var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => null });
+            var actual = sut.ConvertToTestCommand(method, null);
 
-            var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
-            Assert.Equal(method, command.DeclaredMethod);
-            Assert.Equal(@delegate.Method, command.TestMethod);
-            Assert.Equal(arguments, command.Arguments);
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(action, command.Delegate);
+            Assert.Empty(command.Arguments);
         }
 
         [Fact]
-        public void ConvertToTestCommandPassesAutoDataToCommand()
+        public void SutOfTIsTestCase()
         {
+            var sut = new TestCase<object>(x => { });
+            Assert.IsAssignableFrom<ITestCase>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullActionOfTThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<object>((Action<object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncOfTThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<string>((Func<string, object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeActionOfTThrows()
+        {
+            Action<object> action = x => { };
+            action += x => { };
+            Assert.Throws<ArgumentException>(() => new TestCase<object>(action));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeFuncOfTThrows()
+        {
+            Func<object, object> func = x => null;
+            func += x => null;
+            Assert.Throws<ArgumentException>(() => new TestCase<object>(func));
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithActionOfT()
+        {
+            Action<object> action = x => { };
+            var sut = new TestCase<object>(action);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(action, actual);
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithFuncOfT()
+        {
+            Func<int, object> func = x => null;
+            var sut = new TestCase<int>(func);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(func, actual);
+        }
+
+        [Fact]
+        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT()
+        {
+            var sut = new TestCase<object>(x => { });
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandWithNullFixtureFactoryThrowsIfDeclaredOnSutOfT()
+        {
+            var sut = new TestCase<object>(x => { });
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(dummyMethod, null));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandReturnsCorrectTestCommandIfDeclaredOnSutOfT()
+        {
+            Action<int> action = x => { };
+            var sut = new TestCase<int>(action);
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixture = new FakeTestFixture();
-            var obj = new object();
-            var sut = TestCase.New<object, int, string>(obj, (x, y, z) => { });
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-
-            var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => testFixture });
-
-            var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
-            Assert.Equal(new[] { obj, testFixture.IntValue, testFixture.StringValue }, command.Arguments);
-        }
-
-        [Fact]
-        public void ConvertToTestCommandInitializesFixtureOnlyOnceWhenCreatingAutoData()
-        {
-            var sut = TestCase.New<int>(x => { });
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            int creatCount = 0;
             var fixtureFactory = new DelegatingFixtureFactory
             {
-                OnCreate = mi =>
+                OnCreate = x =>
                 {
-                    creatCount++;
-                    return new FakeTestFixture();
+                    Assert.Equal(action.Method, x);
+                    return testFixture;
                 }
             };
 
-            sut.ConvertToTestCommand(method, fixtureFactory);
+            var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
-            Assert.Equal(1, creatCount);
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(action, command.Delegate);
+            Assert.Equal(new object[] { testFixture.IntValue }, command.Arguments);
         }
 
         [Fact]
-        public void ConvertToTestCommandPassesCorrectMethodInfoToFixtureFactory()
+        public void SutOfT1T2IsTestCase()
         {
-            Action @delegate = () => { };
-            var sut = TestCase.New(@delegate);
-            bool verified = false;
+            var sut = new TestCase<object, int>((x, y) => { });
+            Assert.IsAssignableFrom<ITestCase>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullActionOfT1T2Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<object, int>((Action<object, int>)null));
+        }
+
+        [Fact]
+        public void InitializeWithNullFuncOfT1T2Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase<string, int>((Func<string, int, object>)null));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeActionOfT1T2Throws()
+        {
+            Action<object, int> action = (x, y) => { };
+            action += (x, y) => { };
+            Assert.Throws<ArgumentException>(() => new TestCase<object, int>(action));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeFuncOfT1T2Throws()
+        {
+            Func<object, int, object> func = (x, y) => null;
+            func += (x, y) => null;
+            Assert.Throws<ArgumentException>(() => new TestCase<object, int>(func));
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithActionOfT1T2()
+        {
+            Action<object, int> action = (x, y) => { };
+            var sut = new TestCase<object, int>(action);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(action, actual);
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithFuncOfT1T2()
+        {
+            Func<int, string, object> func = (x, y) => null;
+            var sut = new TestCase<int, string>(func);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(func, actual);
+        }
+
+        [Fact]
+        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT1T2()
+        {
+            var sut = new TestCase<object, int>((x, y) => { });
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, new DelegatingFixtureFactory()));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandWithNullFixtureFactoryThrowsIfDeclaredOnSutOfT1T2()
+        {
+            var sut = new TestCase<object, int>((x, y) => { });
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(dummyMethod, null));
+        }
+
+        [Fact]
+        public void ConvertToTestCommandReturnsCorrectTestCommandIfDeclaredOnSutOfT1T2()
+        {
+            Action<int, string> action = (x, y) => { };
+            var sut = new TestCase<int, string>(action);
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var testFixture = new FakeTestFixture();
             var fixtureFactory = new DelegatingFixtureFactory
             {
-                OnCreate = mi =>
+                OnCreate = x =>
                 {
-                    Assert.Equal(@delegate.Method, mi);
-                    verified = true;
-                    return new FakeTestFixture();
+                    Assert.Equal(action.Method, x);
+                    return testFixture;
                 }
             };
 
-            sut.ConvertToTestCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                fixtureFactory);
+            var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
-            Assert.True(verified);
-        }
-
-        [Fact]
-        public void InitializeWithCompositeDelegateThrows()
-        {
-            Action @delegate = () => { };
-            @delegate += () => { };
-            Assert.Throws<ArgumentException>(() => TestCase.New(@delegate));
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(action, command.Delegate);
+            Assert.Equal(
+                new object[] { testFixture.IntValue, testFixture.StringValue },
+                command.Arguments);
         }
     }
 }

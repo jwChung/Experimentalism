@@ -44,11 +44,8 @@ namespace Jwc.Experiment
         [DefaultFirstClassTheorem]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsFirstClassTestsForYieldReturn()
         {
-            yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
-
-            yield return TestCase.New(
-                3, 7, 10,
-                (x, y, z) => Assert.Equal(z, x + y));
+            yield return new TestCase(() => Assert.Equal(3, 2 + 1));
+            yield return new TestCase(() => Assert.Equal(10, 3 + 7));
         }
 
         [DefaultFirstClassTheorem]
@@ -61,10 +58,10 @@ namespace Jwc.Experiment
                 new { X = 100, Y = 23, Z = 123 }
             };
 
-            return testCases.Select(tc =>
-                TestCase.New(
-                    tc,
-                    ptc => Assert.Equal(ptc.Z, ptc.X + ptc.Y)))
+            return testCases.Select(
+                tc => new TestCase(
+                    () => Assert.Equal(tc.Z, tc.X + tc.Y)))
+                .Cast<ITestCase>()
                 .ToArray();
         }
 
@@ -77,30 +74,20 @@ namespace Jwc.Experiment
                 new { X = "expected", Y = 1234 }
             };
 
-            return testCases.Select(tc =>
-                TestCase.New(
-                    new Scenario(), tc,
-                    (ps, ptc) => ps.DefaultTheoremSupportsParameterizedTest(ptc.X, ptc.Y)));
+            return testCases.Select(
+                tc => new TestCase(
+                    () => new Scenario().DefaultTheoremSupportsParameterizedTest(tc.X, tc.Y)));
         }
 
         [DefaultFirstClassTheorem(typeof(CustomTestFixture))]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithAutoData()
         {
-            yield return TestCase.New<string, int>((x, y) =>
-            {
-                Assert.Equal("custom string", x);
-                Assert.Equal(5678, y);
-            });
-        }
-
-        [DefaultFirstClassTheorem(typeof(CustomTestFixture))]
-        public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithMixedData()
-        {
-            yield return TestCase.New<string, int>("expected", (x, y) =>
-            {
-                Assert.Equal("expected", x);
-                Assert.Equal(5678, y);
-            });
+            yield return new TestCase<string, int>(
+                (x, y) =>
+                {
+                    Assert.Equal("custom string", x);
+                    Assert.Equal(5678, y);
+                });
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute
