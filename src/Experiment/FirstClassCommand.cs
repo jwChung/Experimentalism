@@ -101,7 +101,7 @@ namespace Jwc.Experiment
         /// <returns>The result of the execution.</returns>
         public override MethodResult Execute(object testClass)
         {
-            Delegate.DynamicInvoke(Arguments.ToArray());
+            Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, Arguments.ToArray());
             return new PassedResult(Method, DisplayName);
         }
 
