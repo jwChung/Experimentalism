@@ -10,12 +10,41 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.15")]
-[assembly: AssemblyInformationalVersion("0.8.15")]
+[assembly: AssemblyVersion("0.8.16")]
+[assembly: AssemblyInformationalVersion("0.8.16")]
 
 /*
- * Version 0.8.15
+ * Version 0.8.16
  * 
- * Make ShouldCreateInstance of FirstClassCommand false
- * not to create a test case instance for first class test.
+ * Change TestCase to accept delegate for instance method rather than
+ * delegate for only static method.
+ * 
+ * BREAKING CHANGE
+ *   TestCase
+ *     before:
+ *     TestCase.New(...);
+ *     after:
+ *     new TestCase(...);
+ *     
+ *     before:
+ *     TestCase.New("anonymous", x => { x.ToString() });
+ *     after: disable specifying explicit arguments.
+ *     var value = "anonymous";
+ *     new TestCase(() => { value.ToString() });
+ *     
+ *   FirstClassCommand
+ *     before:
+ *     FirstClassCommand(IMethodInfo, MethodInfo, object[])
+ *     after:
+ *     FirstClassCommand(IMethodInfo, Delegate, object[])
+ *     
+ *     before:
+ *     DeclaredMethod
+ *     after:
+ *     Method
+ *     
+ *     before:
+ *     TestMethod
+ *     after:
+ *     Delegate
  */
