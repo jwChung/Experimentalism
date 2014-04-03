@@ -84,7 +84,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            return new FirstClassCommand(method, Delegate.Method, new object[0]);
+            return new FirstClassCommand(method, Delegate, new object[0]);
         }
     }
 
@@ -179,7 +179,7 @@ namespace Jwc.Experiment
             {
                 fixture.Create(typeof(T))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 }

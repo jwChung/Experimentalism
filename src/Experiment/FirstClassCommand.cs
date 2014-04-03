@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -11,29 +10,29 @@ namespace Jwc.Experiment
     /// </summary>
     public class FirstClassCommand : TestCommand
     {
-        private readonly IMethodInfo _declaredMethod;
-        private readonly MethodInfo _testMethod;
+        private readonly IMethodInfo _method;
+        private readonly Delegate _delegate;
         private readonly object[] _arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FirstClassCommand"/> class.
         /// </summary>
-        /// <param name="declaredMethod">
+        /// <param name="method">
         /// The test method which this instance is associated. This will
         /// likely be the method adorned with an
         /// </param>
-        /// <param name="testMethod">
+        /// <param name="delegate">
         /// The test case to be invoked when the test is executed.
         /// </param>
         /// <param name="arguments">
         /// The test arguments to be supplied to the test delegate.
         /// </param>
-        public FirstClassCommand(IMethodInfo declaredMethod, MethodInfo testMethod, object[] arguments)
-            : base(EnsureIsNotNull(declaredMethod), null, 0)
+        public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
+            : base(EnsureIsNotNull(method), null, 0)
         {
-            if (testMethod == null)
+            if (@delegate == null)
             {
-                throw new ArgumentNullException("testMethod");
+                throw new ArgumentNullException("delegate");
             }
 
             if (arguments == null)
@@ -41,33 +40,32 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("arguments");
             }
 
-            _declaredMethod = declaredMethod;
-            _testMethod = testMethod;
+            _method = method;
+            _delegate = @delegate;
             _arguments = arguments;
 
             SetWellFormattedDisplayName();
         }
 
         /// <summary>
-        /// Gets the declared method.
+        /// Gets the test method.
         /// </summary>
-        public IMethodInfo DeclaredMethod
+        public IMethodInfo Method
         {
             get
             {
-                return _declaredMethod;
+                return _method;
             }
         }
 
         /// <summary>
-        /// Gets the actual test method.
+        /// Gets the test delegate.
         /// </summary>
-        [CLSCompliant(false)]
-        public MethodInfo TestMethod
+        public Delegate Delegate
         {
             get
             {
-                return _testMethod;
+                return _delegate;
             }
         }
 
@@ -103,18 +101,18 @@ namespace Jwc.Experiment
         /// <returns>The result of the execution.</returns>
         public override MethodResult Execute(object testClass)
         {
-            TestMethod.Invoke(null, Arguments.ToArray());
-            return new PassedResult(DeclaredMethod, DisplayName);
+            Delegate.DynamicInvoke(Arguments.ToArray());
+            return new PassedResult(Method, DisplayName);
         }
 
-        private static IMethodInfo EnsureIsNotNull(IMethodInfo declaredMethod)
+        private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
         {
-            if (declaredMethod == null)
+            if (method == null)
             {
-                throw new ArgumentNullException("declaredMethod");
+                throw new ArgumentNullException("method");
             }
 
-            return declaredMethod;
+            return method;
         }
 
         private void SetWellFormattedDisplayName()
@@ -125,7 +123,7 @@ namespace Jwc.Experiment
         private IEnumerable<string> GetArgumentValues()
         {
             var arguments = Arguments.ToArray();
-            return TestMethod.GetParameters().Select(pi =>
+            return Delegate.Method.GetParameters().Select(pi =>
                 GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
         }
 

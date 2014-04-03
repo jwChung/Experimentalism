@@ -141,7 +141,7 @@ namespace Jwc.Experiment
 
             return new FirstClassCommand(
                 method,
-                Delegate.Method,
+                Delegate,
                 GetFinalArguments(fixtureFactory.Create(Delegate.Method), Delegate.Method));
         }
 

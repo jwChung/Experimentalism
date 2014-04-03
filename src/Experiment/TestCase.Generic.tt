@@ -108,7 +108,7 @@ for (var typeCount = 2; typeCount <= GenericTypeMax; typeCount++)
             {
                 <#=argumentList#>
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 

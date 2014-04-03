@@ -82,8 +82,8 @@ namespace Jwc.Experiment
             var actual = sut.ConvertToTestCommand(method, null);
 
             var command = Assert.IsType<FirstClassCommand>(actual);
-            Assert.Equal(method, command.DeclaredMethod);
-            Assert.Equal(action.Method, command.TestMethod);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(action, command.Delegate);
             Assert.Empty(command.Arguments);
         }
 
@@ -178,8 +178,8 @@ namespace Jwc.Experiment
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
             var command = Assert.IsType<FirstClassCommand>(actual);
-            Assert.Equal(method, command.DeclaredMethod);
-            Assert.Equal(action.Method, command.TestMethod);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(action, command.Delegate);
             Assert.Equal(new object[] { testFixture.IntValue }, command.Arguments);
         }
 
@@ -274,8 +274,8 @@ namespace Jwc.Experiment
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
             var command = Assert.IsType<FirstClassCommand>(actual);
-            Assert.Equal(method, command.DeclaredMethod);
-            Assert.Equal(action.Method, command.TestMethod);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(action, command.Delegate);
             Assert.Equal(
                 new object[] { testFixture.IntValue, testFixture.StringValue },
                 command.Arguments);

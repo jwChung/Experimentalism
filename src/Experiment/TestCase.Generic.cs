@@ -96,7 +96,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T1)),
                 fixture.Create(typeof(T2))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -194,7 +194,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T2)),
                 fixture.Create(typeof(T3))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -293,7 +293,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T3)),
                 fixture.Create(typeof(T4))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -393,7 +393,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T4)),
                 fixture.Create(typeof(T5))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -494,7 +494,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T5)),
                 fixture.Create(typeof(T6))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -596,7 +596,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T6)),
                 fixture.Create(typeof(T7))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -699,7 +699,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T7)),
                 fixture.Create(typeof(T8))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -803,7 +803,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T8)),
                 fixture.Create(typeof(T9))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -908,7 +908,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T9)),
                 fixture.Create(typeof(T10))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -1014,7 +1014,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T10)),
                 fixture.Create(typeof(T11))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -1121,7 +1121,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T11)),
                 fixture.Create(typeof(T12))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -1229,7 +1229,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T12)),
                 fixture.Create(typeof(T13))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -1338,7 +1338,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T13)),
                 fixture.Create(typeof(T14))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -1448,7 +1448,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T14)),
                 fixture.Create(typeof(T15))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 
@@ -1559,7 +1559,7 @@ namespace Jwc.Experiment
                 fixture.Create(typeof(T15)),
                 fixture.Create(typeof(T16))
             };
-            return new FirstClassCommand(method, Delegate.Method, arguments);
+            return new FirstClassCommand(method, Delegate, arguments);
         }
     }
 

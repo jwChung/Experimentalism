@@ -184,8 +184,8 @@ namespace Jwc.Experiment
             var actual = sut.ConvertToTestCommand(method, new DelegatingFixtureFactory { OnCreate = x => null });
 
             var command = Assert.IsAssignableFrom<FirstClassCommand>(actual);
-            Assert.Equal(method, command.DeclaredMethod);
-            Assert.Equal(@delegate.Method, command.TestMethod);
+            Assert.Equal(method, command.Method);
+            Assert.Equal(@delegate, command.Delegate);
             Assert.Equal(arguments, command.Arguments);
         }
 
