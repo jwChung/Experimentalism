@@ -161,23 +161,24 @@ public IEnumerable<ITestCase> AddTest()
         new { X = 100, Y = 23, Z = 123 }
     };
 
-    return testCases.Select(tc => TestCase.New(
-            tc,
-            ptc => Assert.Equal(ptc.Z, ptc.X + ptc.Y)));
+    return testCases.Select(
+        tc => new TestCase(
+            () => Assert.Equal(tc.Z, tc.X + tc.Y)));
 }
 ```
 
-또한, First class test 방식은 argument 값을 명시하지 않으면 anonymous 값을 넘겨주는 auto data 기능도 제공합니다.
+또한, First class test 방식은 아래와 같이 anonymous 값을 넘겨주는 auto data 기능도 제공합니다.
 
 ```c#
 [FirstClassTheorem]
 public IEnumerable<ITestCase> FirstClassTestWithAutoDataTest()
 {
-    yield return TestCase.New<string, object>("anonymous", (x, y) =>
-    {
-        Assert.Equal("anonymous", x);
-        Assert.NotNull(y);
-    });
+    yield return new TestCase<string, object>(
+        (x, y) =>
+        {
+            Assert.NotNull(x);
+            Assert.NotNull(y);
+        });
 }
 ```
 
