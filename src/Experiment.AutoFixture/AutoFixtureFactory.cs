@@ -11,7 +11,7 @@ namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents a fixture factory to create an instance of
-    /// <see cref="Fixture"/>.
+    /// <see cref="ITestFixture"/>.
     /// </summary>
     public class AutoFixtureFactory : ITestFixtureFactory
     {
