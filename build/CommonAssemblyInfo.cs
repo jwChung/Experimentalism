@@ -10,13 +10,15 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.19")]
-[assembly: AssemblyInformationalVersion("0.8.19")]
+[assembly: AssemblyVersion("0.8.20")]
+[assembly: AssemblyInformationalVersion("0.8.20")]
 
 /*
- * Version 0.8.19
+ * Version 0.8.20
  * 
- * This version lets the xunit.extensions.dll library is copied to a output
- * directory of a target project but prevents it from being directly added
- * to references of the project.
+ * This version removes AutoFixture.Xunit dependency from
+ * Experiment.AutoFixture. Instead, to support the way of customizing fixture
+ * with attribute using AutoFixture.Xunit, this version uses reflection
+ * through the `ICustomization GetCustomization(ParameterInfo)` method
+ * signature.
  */
