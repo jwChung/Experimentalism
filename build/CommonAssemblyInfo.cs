@@ -10,11 +10,13 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.18")]
-[assembly: AssemblyInformationalVersion("0.8.18")]
+[assembly: AssemblyVersion("0.8.19")]
+[assembly: AssemblyInformationalVersion("0.8.19")]
 
 /*
- * Version 0.8.18
+ * Version 0.8.19
  * 
- * This version publishes the Experiment nuget package again.
+ * This version lets the xunit.extensions.dll library is copied to a output
+ * directory of a target project but prevents it from being directly added
+ * to references of the project.
  */
