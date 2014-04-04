@@ -19,7 +19,6 @@ namespace Jwc.Experiment
                 "System.Core",
                 "Jwc.Experiment",
                 "Ploeh.AutoFixture",
-                "Ploeh.AutoFixture.Xunit"
             };
 
             var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();

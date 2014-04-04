@@ -5,7 +5,6 @@ using System.Reflection;
 using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
-using Ploeh.AutoFixture.Xunit;
 
 namespace Jwc.Experiment
 {
@@ -65,9 +64,15 @@ namespace Jwc.Experiment
 
         private static IEnumerable<ICustomization> SelectCustomizations(ParameterInfo parameter)
         {
-            return parameter.GetCustomAttributes(typeof(CustomizeAttribute), false)
-                .Cast<CustomizeAttribute>()
-                .Select(a => a.GetCustomization(parameter));
+            return from attribute in parameter.GetCustomAttributes(false)
+                   let method = GetMethod(attribute)
+                   where method != null
+                   select (ICustomization)method.Invoke(attribute, new object[] { parameter });
+        }
+
+        private static MethodInfo GetMethod(object attribute)
+        {
+            return attribute.GetType().GetMethod("GetCustomization");
         }
     }
 }
