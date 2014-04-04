@@ -47,7 +47,9 @@ namespace Jwc.Experiment
 
             return new AutoFixtureAdapter(
                 new SpecimenContext(
-                    CustomizeFixture(CreateFixture(), testMethod.GetParameters())));
+                    CustomizeFixture(
+                        CreateFixture(),
+                        testMethod.GetParameters())));
         }
 
         private static IFixture CreateFixture()
@@ -55,10 +57,10 @@ namespace Jwc.Experiment
             return new Fixture();
         }
 
-        private static IFixture CustomizeFixture(IFixture fixture, IEnumerable<ParameterInfo> parameters)
+        private static IFixture CustomizeFixture(
+            IFixture fixture, IEnumerable<ParameterInfo> parameters)
         {
-            return parameters
-                .SelectMany(SelectCustomizations)
+            return parameters.SelectMany(SelectCustomizations)
                 .Aggregate(fixture, (f, c) => f.Customize(c));
         }
 
