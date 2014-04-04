@@ -46,11 +46,21 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("testMethod");
             }
 
-            var fixture = testMethod.GetParameters()
-                .SelectMany(SelectCustomizations)
-                .Aggregate(CreateFixture(), (f, c) => f.Customize(c));
+            return new AutoFixtureAdapter(
+                new SpecimenContext(
+                    CustomizeFixture(CreateFixture(), testMethod.GetParameters())));
+        }
 
-            return new AutoFixtureAdapter(new SpecimenContext(fixture));
+        private static IFixture CreateFixture()
+        {
+            return new Fixture();
+        }
+
+        private static IFixture CustomizeFixture(IFixture fixture, IEnumerable<ParameterInfo> parameters)
+        {
+            return parameters
+                .SelectMany(SelectCustomizations)
+                .Aggregate(fixture, (f, c) => f.Customize(c));
         }
 
         private static IEnumerable<ICustomization> SelectCustomizations(ParameterInfo parameter)
@@ -58,11 +68,6 @@ namespace Jwc.Experiment
             return parameter.GetCustomAttributes(typeof(CustomizeAttribute), false)
                 .Cast<CustomizeAttribute>()
                 .Select(a => a.GetCustomization(parameter));
-        }
-
-        private static IFixture CreateFixture()
-        {
-            return new Fixture();
         }
     }
 }
