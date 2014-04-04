@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Jwc.Experiment
 {
@@ -91,6 +93,24 @@ namespace Jwc.Experiment
             Assert.Same(AutoFixtureFactory.Instance, sut);
         }
 
+        [Theory]
+        [InlineData("InvalidParameterTypeTest")]
+        [InlineData("InvalidReturnTypeTest")]
+        public void CreateWithInvalidCustomizeAttributeDoesNotThrows(string testMethodName)
+        {
+            var sut = AutoFixtureFactory.Instance;
+            var testMethod = GetType().GetMethod(testMethodName);
+            Assert.DoesNotThrow(() => sut.Create(testMethod));
+        }
+
+        [Fact]
+        public void CreateWithAssignablReturnTypeCustomizeAttributeAppliesCustomizeAttribute()
+        {
+            var sut = AutoFixtureFactory.Instance;
+            var actual = sut.Create(GetType().GetMethod("AssignableReturnTypeTest"));
+            Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
+        }
+
         public void FrozenTest([Frozen] string arg)
         {
         }
@@ -101,6 +121,42 @@ namespace Jwc.Experiment
 
         public void ManyAttributeTest([Greedy][Frozen] Person person)
         {
+        }
+
+        public void InvalidParameterTypeTest([InvalidParameterType] object value)
+        {
+        }
+
+        public void InvalidReturnTypeTest([InvalidReturnType] object value)
+        {
+        }
+
+        public void AssignableReturnTypeTest([AssignableReturnType] string value)
+        {
+        }
+
+        public class InvalidParameterTypeAttribute : Attribute
+        {
+            public ICustomization GetCustomization(string invalidType)
+            {
+                return null;
+            }
+        }
+
+        public class InvalidReturnTypeAttribute : Attribute
+        {
+            public object GetCustomization(ParameterInfo parameter)
+            {
+                return null;
+            }
+        }
+
+        public class AssignableReturnTypeAttribute : Attribute
+        {
+            public FreezingCustomization GetCustomization(ParameterInfo parameter)
+            {
+                return new FreezingCustomization(parameter.ParameterType);
+            }
         }
     }
 }

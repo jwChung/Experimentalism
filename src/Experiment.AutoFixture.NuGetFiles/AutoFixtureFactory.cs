@@ -68,13 +68,14 @@ namespace Jwc.Experiment
         {
             return from attribute in parameter.GetCustomAttributes(false)
                    let method = GetMethod(attribute)
-                   where method != null
+                   where method != null && typeof(ICustomization).IsAssignableFrom(method.ReturnType) 
                    select (ICustomization)method.Invoke(attribute, new object[] { parameter });
         }
 
         private static MethodInfo GetMethod(object attribute)
         {
-            return attribute.GetType().GetMethod("GetCustomization");
+            return attribute.GetType().GetMethod(
+                "GetCustomization", new[] { typeof(ParameterInfo) });
         }
     }
 }
