@@ -96,7 +96,8 @@ namespace Jwc.Experiment
         [Theory]
         [InlineData("InvalidParameterTypeTest")]
         [InlineData("InvalidReturnTypeTest")]
-        public void CreateWithInvalidCustomizeAttributeDoesNotThrows(string testMethodName)
+        public void CreateDoesNotThrowsAlthoughGetCustomizationHasInvalidSignature(
+            string testMethodName)
         {
             var sut = AutoFixtureFactory.Instance;
             var testMethod = GetType().GetMethod(testMethodName);
@@ -104,7 +105,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateWithAssignablReturnTypeCustomizeAttributeAppliesCustomizeAttribute()
+        public void CreateAppliesCustomizeAttributeIfGetCustomizationHasAssignablReturnType()
         {
             var sut = AutoFixtureFactory.Instance;
             var actual = sut.Create(GetType().GetMethod("AssignableReturnTypeTest"));
