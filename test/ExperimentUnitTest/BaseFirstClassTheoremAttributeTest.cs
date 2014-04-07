@@ -85,7 +85,10 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestFixtureThrows()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute
+            {
+                OnCreateTestFixture = mi => { throw new NotSupportedException(); }
+            };
             var method = Reflector.Wrap(GetType().GetMethod("CallFixtureFactoryTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -207,11 +210,6 @@ namespace Jwc.Experiment
 
         private class DelegatingFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
         {
-            public DelegatingFirstClassTheoremAttribute()
-            {
-                OnCreateTestFixture = mi => { throw new NotSupportedException(); };
-            }
-
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {
                 get;

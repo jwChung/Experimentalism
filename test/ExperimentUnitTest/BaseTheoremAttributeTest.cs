@@ -204,10 +204,7 @@ namespace Jwc.Experiment
         {
             var sut = new DelegatingTheoremAttribute
             {
-                OnCreateTestFixture = mi =>
-                {
-                    throw new NotSupportedException();
-                }
+                OnCreateTestFixture = mi => { throw new NotSupportedException(); }
             };
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
@@ -303,11 +300,6 @@ namespace Jwc.Experiment
 
         private class DelegatingTheoremAttribute : BaseTheoremAttribute
         {
-            public DelegatingTheoremAttribute()
-            {
-                OnCreateTestFixture = mi => { throw new NotSupportedException(); };
-            }
-
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {
                 get;
