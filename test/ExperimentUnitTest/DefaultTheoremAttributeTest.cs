@@ -290,29 +290,10 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFixtureType()
-        {
-            var fixtureType = typeof(FakeTestFixture);
-            var sut = new DefaultTheoremAttribute(fixtureType);
-
-            var actual = sut.FixtureType;
-
-            Assert.Equal(fixtureType, actual);
-        }
-        
-        [Fact]
         public void InitializeWithNullFixtureFactoryThrows()
         {
             ITestFixtureFactory fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithDefaultCtor()
-        {
-            var sut = new DefaultTheoremAttribute();
-            var actual = sut.FixtureType;
-            Assert.Equal(typeof(NotSupportedFixture), actual);
         }
 
         [Fact]
@@ -324,24 +305,6 @@ namespace Jwc.Experiment
             var actual = sut.FixtureFactory;
 
             Assert.Equal(fixtureFactory, actual);
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
-        {
-            var fixtureFactory = new DelegatingFixtureFactory
-            {
-                OnCreate = mi =>
-                {
-                    Assert.NotNull(mi);
-                    return new FakeTestFixture();
-                }
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
-
-            var actual = sut.FixtureType;
-
-            Assert.Equal(typeof(FakeTestFixture), actual);
         }
 
         [Fact]

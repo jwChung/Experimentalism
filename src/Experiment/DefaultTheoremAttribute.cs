@@ -58,18 +58,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture type passed from a constructor.
-        /// </summary>
-        public Type FixtureType
-        {
-            get
-            {
-                var dummyMethod = typeof(object).GetMethod("ToString");
-                return FixtureFactory.Create(dummyMethod).GetType();
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating the fixture factory passed from a constructor.
         /// </summary>
         public ITestFixtureFactory FixtureFactory
