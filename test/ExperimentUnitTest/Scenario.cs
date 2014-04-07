@@ -9,13 +9,13 @@ namespace Jwc.Experiment
 {
     public class Scenario
     {
-        [BaseTheorem]
+        [Theorem]
         public void DefaultTheoremSupportsNonParameterizedTest()
         {
             Assert.True(true, "excuted.");
         }
 
-        [BaseTheorem]
+        [Theorem]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void DefaultTheoremSupportsParameterizedTest(string arg1, int arg2)
@@ -24,7 +24,7 @@ namespace Jwc.Experiment
             Assert.Equal(1234, arg2);
         }
 
-        [BaseTheorem(typeof(CustomTestFixture))]
+        [Theorem]
         public void DefaultTheoremWithCustomFixtureSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
             Assert.Equal(5678, arg2);
         }
 
-        [BaseTheorem(typeof(CustomTestFixture))]
+        [Theorem]
         [InlineData("expected")]
         public void DefaultTheoremWithCustomFixtureSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
@@ -96,6 +96,14 @@ namespace Jwc.Experiment
                 MethodInfo methodUnderTest, Type[] parameterTypes)
             {
                 yield return new object[] { "expected", 1234 };
+            }
+        }
+
+        private class TheoremAttribute : BaseTheoremAttribute
+        {
+            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            {
+                return new CustomTestFixture();
             }
         }
 

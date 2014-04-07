@@ -16,46 +16,18 @@ namespace Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class BaseTheoremAttribute : FactAttribute
+    public abstract class BaseTheoremAttribute : FactAttribute
     {
-        private readonly ITestFixtureFactory _fixtureFactory;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseTheoremAttribute"/> class.
+        /// Creates an instance of <see cref="ITestFixture"/>.
         /// </summary>
-        public BaseTheoremAttribute()
-        {
-            _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureType">Type of the fixture.</param>
-        /// <exception cref="System.ArgumentNullException">fixtureType</exception>
-        public BaseTheoremAttribute(Type fixtureType)
-        {
-            if (fixtureType == null)
-            {
-                throw new ArgumentNullException("fixtureType");
-            }
-
-            _fixtureFactory = new TypeFixtureFactory(fixtureType);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureFactory">The fixture factory.</param>
-        protected BaseTheoremAttribute(ITestFixtureFactory fixtureFactory)
-        {
-            if (fixtureFactory == null)
-            {
-                throw new ArgumentNullException("fixtureFactory");
-            }
-
-            _fixtureFactory = fixtureFactory;
-        }
+        /// <param name="testMethod">
+        /// The test method
+        /// </param>
+        /// <returns>
+        /// The created fixture.
+        /// </returns>
+        public abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
 
         /// <summary>
         /// Enumerates the test commands represented by this test method.
@@ -90,25 +62,12 @@ namespace Jwc.Experiment
             }
         }
 
-        /// <summary>
-        /// Creates an instance of <see cref="ITestFixture"/>.
-        /// </summary>
-        /// <param name="testMethod">
-        /// The test method
-        /// </param>
-        /// <returns>
-        /// The created fixture.
-        /// </returns>
-        protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
-        {
-            throw new NotImplementedException();
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var autoArguments = new AutoArgumentCollection(
-                _fixtureFactory, method.MethodInfo, method.MethodInfo.GetParameters());
+                new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
+                method.MethodInfo.GetParameters());
 
             if (!autoArguments.HasAutoParemeters)
             {
@@ -129,8 +88,7 @@ namespace Jwc.Experiment
         private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
         {
             var autoArguments = new AutoArgumentCollection(
-                _fixtureFactory,
-                method.MethodInfo,
+                new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
                 method.MethodInfo.GetParameters(),
                 testCaseData.Length);
             var argument = testCaseData.Concat(autoArguments);
@@ -170,19 +128,16 @@ namespace Jwc.Experiment
 
         private class AutoArgumentCollection : IEnumerable<object>
         {
-            private readonly ITestFixtureFactory _fixtureFactory;
-            private readonly MethodInfo _methodInfo;
+            private readonly Lazy<ITestFixture> _fixture;
             private readonly ParameterInfo[] _parameters;
             private readonly int _skipCount;
 
             public AutoArgumentCollection(
-                ITestFixtureFactory fixtureFactory,
-                MethodInfo methodInfo,
+                Lazy<ITestFixture> fixture,
                 ParameterInfo[] parameters,
                 int skipCount = 0)
             {
-                _fixtureFactory = fixtureFactory;
-                _methodInfo = methodInfo;
+                _fixture = fixture;
                 _parameters = parameters;
                 _skipCount = skipCount;
             }
@@ -197,10 +152,9 @@ namespace Jwc.Experiment
 
             public IEnumerator<object> GetEnumerator()
             {
-                var testFixture = _fixtureFactory.Create(_methodInfo);
                 return _parameters
                     .Skip(_skipCount)
-                    .Select(pi => testFixture.Create(pi.ParameterType))
+                    .Select(pi => _fixture.Value.Create(pi.ParameterType))
                     .GetEnumerator();
             }
 
