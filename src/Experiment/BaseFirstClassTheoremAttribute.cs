@@ -55,6 +55,20 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Creates an instance of <see cref="ITestFixture"/>.
+        /// </summary>
+        /// <param name="testMethod">
+        /// The test method
+        /// </param>
+        /// <returns>
+        /// The created fixture.
+        /// </returns>
+        public virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of
         /// <see cref="ITestCommand" />, one per execution of a test method.
