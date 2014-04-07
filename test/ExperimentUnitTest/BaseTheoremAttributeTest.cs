@@ -8,19 +8,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class DefaultTheoremAttributeTest
+    public class BaseTheoremAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new DelegatingTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateNonParameterizedTestReturnsCorrectFactCommand()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new DelegatingTheoremAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.CreateTestCommands(method);
@@ -35,7 +35,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         public void CreateParameterizedTestReturnsThoeryCommands(string arg1, int arg2, object arg3)
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new DelegatingTheoremAttribute();
 
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
@@ -48,21 +48,10 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithDefaultCtor()
-        {
-            var sut = new DefaultTheoremAttribute();
-
-            var actual = sut.FixtureFactory;
-
-            var factory = Assert.IsType<TypeFixtureFactory>(actual);
-            Assert.Equal(typeof(NotSupportedFixture), factory.FixtureType);
-        }
-
-        [Fact]
         public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(new DelegatingFixtureFactory { OnCreate = mi => fixture });
+            var sut = new DelegatingTheoremAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -81,7 +70,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(new DelegatingFixtureFactory { OnCreate = mi => fixture });
+            var sut = new DelegatingTheoremAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -95,7 +84,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestWithInvalidCountDataThrows()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new DelegatingTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -107,7 +96,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestWithInvalidTypeDataThrows()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new DelegatingTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -117,28 +106,10 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithType()
-        {
-            var fixtureType = typeof(FakeTestFixture);
-            var sut = new DefaultTheoremAttribute(fixtureType);
-
-            var actual = sut.FixtureFactory;
-
-            var typeFixtureFactory = Assert.IsType<TypeFixtureFactory>(actual);
-            Assert.Equal(fixtureType, typeFixtureFactory.FixtureType);
-        }
-
-        [Fact]
-        public void InitializeWithNullFactoryTypeThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => new DefaultTheoremAttribute(null));
-        }
-
-        [Fact]
         public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DerivedTheoremAttribute(new DelegatingFixtureFactory { OnCreate = mi => fixture });
+            var sut = new DelegatingTheoremAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method);
@@ -152,7 +123,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestPassesCorrectParameterTypes()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new DelegatingTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
@@ -162,13 +133,10 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithNoAutoDataDoesNotInitializeFixture(
             string arg1, int arg2, object arg3)
         {
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
-                {
-                    OnCreate = mi => { throw new NotSupportedException(); }
-                });
-            Assert.DoesNotThrow(() => sut.CreateTestCommands(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
+            var sut = new DelegatingTheoremAttribute();
+            var actual = sut.CreateTestCommands(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).Single();
+            Assert.IsNotType<ExceptionCommand>(actual);
         }
 
         [Fact]
@@ -176,15 +144,14 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
+            var sut = new DelegatingTheoremAttribute
+            {
+                OnCreateTestFixture = mi =>
                 {
-                    OnCreate = mi =>
-                    {
-                        callCount++;
-                        return fixture;
-                    }
-                });
+                    callCount++;
+                    return fixture;
+                }
+            };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -197,15 +164,14 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
+            var sut = new DelegatingTheoremAttribute
+            {
+                OnCreateTestFixture = mi =>
                 {
-                    OnCreate = mi =>
-                    {
-                        callCount++;
-                        return fixture;
-                    }
-                });
+                    callCount++;
+                    return fixture;
+                }
+            };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -218,15 +184,14 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
+            var sut = new DelegatingTheoremAttribute
+            {
+                OnCreateTestFixture = mi =>
                 {
-                    OnCreate = mi =>
-                    {
-                        callCount++;
-                        return fixture;
-                    }
-                });
+                    callCount++;
+                    return fixture;
+                }
+            };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -237,14 +202,13 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateNonParameterizedTestDoesNotInitializeFixture()
         {
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
+            var sut = new DelegatingTheoremAttribute
+            {
+                OnCreateTestFixture = mi =>
                 {
-                    OnCreate = mi =>
-                    {
-                        throw new NotSupportedException();
-                    }
-                });
+                    throw new NotSupportedException();
+                }
+            };
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
         }
@@ -253,11 +217,10 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestForSingleReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
-                {
-                    OnCreate = mi => { throw exception; }
-                });
+            var sut = new DelegatingTheoremAttribute
+            {
+                OnCreateTestFixture = mi => { throw exception; }
+            };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -271,11 +234,10 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestForManyReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            var sut = new DerivedTheoremAttribute(
-                new DelegatingFixtureFactory
-                {
-                    OnCreate = mi => { throw exception; }
-                });
+            var sut = new DelegatingTheoremAttribute
+            {
+                OnCreateTestFixture = mi => { throw exception; }
+            };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -290,75 +252,19 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFixtureType()
-        {
-            var fixtureType = typeof(FakeTestFixture);
-            var sut = new DefaultTheoremAttribute(fixtureType);
-
-            var actual = sut.FixtureType;
-
-            Assert.Equal(fixtureType, actual);
-        }
-        
-        [Fact]
-        public void InitializeWithNullFixtureFactoryThrows()
-        {
-            ITestFixtureFactory fixtureFactory = null;
-            Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithDefaultCtor()
-        {
-            var sut = new DefaultTheoremAttribute();
-            var actual = sut.FixtureType;
-            Assert.Equal(typeof(NotSupportedFixture), actual);
-        }
-
-        [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithFixtureFactory()
-        {
-            var fixtureFactory = new DelegatingFixtureFactory();
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
-
-            var actual = sut.FixtureFactory;
-
-            Assert.Equal(fixtureFactory, actual);
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
-        {
-            var fixtureFactory = new DelegatingFixtureFactory
-            {
-                OnCreate = mi =>
-                {
-                    Assert.NotNull(mi);
-                    return new FakeTestFixture();
-                }
-            };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
-
-            var actual = sut.FixtureType;
-
-            Assert.Equal(typeof(FakeTestFixture), actual);
-        }
-
-        [Fact]
         public void CreateTestCommandsPassesCorrectMethodInfoToFixtureFactory()
         {
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
             bool verified = false;
-            var fixtureFactory = new DelegatingFixtureFactory
+            var sut = new DelegatingTheoremAttribute
             {
-                OnCreate = mi =>
+                OnCreateTestFixture = mi =>
                 {
                     Assert.Equal(method.MethodInfo, mi);
                     verified = true;
                     return new FakeTestFixture();
                 }
             };
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
 
             sut.CreateTestCommands(method).Single();
 
@@ -395,11 +301,22 @@ namespace Jwc.Experiment
         {
         }
 
-        private class DerivedTheoremAttribute : DefaultTheoremAttribute
+        private class DelegatingTheoremAttribute : BaseTheoremAttribute
         {
-            public DerivedTheoremAttribute(ITestFixtureFactory fixtureFactory)
-                : base(fixtureFactory)
+            public DelegatingTheoremAttribute()
             {
+                OnCreateTestFixture = mi => { throw new NotSupportedException(); };
+            }
+
+            public Func<MethodInfo, ITestFixture> OnCreateTestFixture
+            {
+                get;
+                set;
+            }
+
+            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            {
+                return OnCreateTestFixture(testMethod);
             }
         }
 

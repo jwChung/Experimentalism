@@ -14,68 +14,18 @@ namespace Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class DefaultFirstClassTheoremAttribute : FactAttribute
+    public abstract class BaseFirstClassTheoremAttribute : FactAttribute
     {
-        private readonly ITestFixtureFactory _fixtureFactory;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
+        /// Creates an instance of <see cref="ITestFixture"/>.
         /// </summary>
-        public DefaultFirstClassTheoremAttribute()
-        {
-            _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureType">Type of the fixture.</param>
-        public DefaultFirstClassTheoremAttribute(Type fixtureType)
-        {
-            if (fixtureType == null)
-            {
-                throw new ArgumentNullException("fixtureType");
-            }
-
-            _fixtureFactory = new TypeFixtureFactory(fixtureType);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureFactory">The fixture factory.</param>
-        protected DefaultFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
-        {
-            if (fixtureFactory == null)
-            {
-                throw new ArgumentNullException("fixtureFactory");
-            }
-
-            _fixtureFactory = fixtureFactory;
-        }
-
-        /// <summary>
-        /// Gets a value indicating the fixture factory passed from a constructor.
-        /// </summary>
-        public ITestFixtureFactory FixtureFactory
-        {
-            get
-            {
-                return _fixtureFactory;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating the fixture type passed from a constructor.
-        /// </summary>
-        public Type FixtureType
-        {
-            get
-            {
-                var dummyMethod = typeof(object).GetMethod("ToString");
-                return FixtureFactory.Create(dummyMethod).GetType();
-            }
-        }
+        /// <param name="testMethod">
+        /// The test method
+        /// </param>
+        /// <returns>
+        /// The created fixture.
+        /// </returns>
+        public abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
 
         /// <summary>
         /// Enumerates the test commands represented by this test method.
@@ -97,7 +47,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, FixtureFactory))
+                        tc => tc.ConvertToTestCommand(method, CreateTestFixture))
                     .ToArray();
             }
             catch (Exception exception)

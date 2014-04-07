@@ -47,17 +47,14 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
-    <Compile Include="DelegatingFixtureFactory.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
-    <Compile Include="DefaultFirstClassTheoremAttributeTest.cs" />
+    <Compile Include="BaseFirstClassTheoremAttributeTest.cs" />
     <Compile Include="FirstClassCommandTest.cs" />
-    <Compile Include="NotSupportedFixtureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
-    <Compile Include="DefaultTheoremAttributeTest.cs" />
+    <Compile Include="BaseTheoremAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
-    <Compile Include="TypeFixtureFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

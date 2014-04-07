@@ -18,7 +18,7 @@ namespace Jwc.Experiment
                 "mscorlib",
                 "System.Core",
                 "Jwc.Experiment",
-                "Ploeh.AutoFixture",
+                "Ploeh.AutoFixture"
             };
 
             var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();
@@ -30,7 +30,6 @@ namespace Jwc.Experiment
         [Theory]
         [InlineData("TheoremAttribute")]
         [InlineData("AutoFixtureAdapter")]
-        [InlineData("AutoFixtureFactory")]
         public void ThisCorrectlyGeneratesNugetTransformFiles(string originName)
         {
             string directory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";

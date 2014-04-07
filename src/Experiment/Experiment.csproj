@@ -52,18 +52,15 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestCase.cs" />
     <Compile Include="ITestFixture.cs" />
-    <Compile Include="DefaultFirstClassTheoremAttribute.cs" />
-    <Compile Include="ITestFixtureFactory.cs" />
-    <Compile Include="NotSupportedFixture.cs" />
+    <Compile Include="BaseFirstClassTheoremAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DefaultTheoremAttribute.cs" />
+    <Compile Include="BaseTheoremAttribute.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="TestCase.Generic.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCase.Generic.tt</DependentUpon>
     </Compile>
-    <Compile Include="TypeFixtureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
