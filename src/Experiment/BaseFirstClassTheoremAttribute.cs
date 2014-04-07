@@ -66,18 +66,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture type passed from a constructor.
-        /// </summary>
-        public Type FixtureType
-        {
-            get
-            {
-                var dummyMethod = typeof(object).GetMethod("ToString");
-                return FixtureFactory.Create(dummyMethod).GetType();
-            }
-        }
-
-        /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of
         /// <see cref="ITestCommand" />, one per execution of a test method.

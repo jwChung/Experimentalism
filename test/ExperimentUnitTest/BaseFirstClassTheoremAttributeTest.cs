@@ -92,43 +92,6 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithDefaultCtor()
-        {
-            var sut = new BaseFirstClassTheoremAttribute();
-            var actual = sut.FixtureType;
-            Assert.Equal(typeof(NotSupportedFixture), actual);
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFixtureType()
-        {
-            var fixtureType = typeof(FakeTestFixture);
-            var sut = new BaseFirstClassTheoremAttribute(fixtureType);
-
-            var actual = sut.FixtureType;
-
-            Assert.Equal(fixtureType, actual);
-        }
-
-        [Fact]
-        public void FixtureTypeIsCorrectWhenInitializedWithFixtureFactory()
-        {
-            var fixtureFactory = new DelegatingFixtureFactory
-            {
-                OnCreate = mi =>
-                {
-                    Assert.NotNull(mi);
-                    return new FakeTestFixture();
-                }
-            };
-            var sut = new DerivedFirstClassTheoremAttribute(fixtureFactory);
-
-            var actual = sut.FixtureType;
-
-            Assert.Equal(typeof(FakeTestFixture), actual);
-        }
-
-        [Fact]
         public void InitializeWithNullFixtureTypeThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new BaseFirstClassTheoremAttribute(null));
