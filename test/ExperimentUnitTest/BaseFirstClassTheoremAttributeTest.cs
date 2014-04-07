@@ -123,7 +123,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateTestCommandsThrowsWhenMethodIsParameterized()
+        public void CreateTestCommandsReturnsExceptionCommandWhenMethodIsParameterized()
         {
             var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
