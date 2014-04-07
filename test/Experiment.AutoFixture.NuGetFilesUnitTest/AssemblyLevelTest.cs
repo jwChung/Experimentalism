@@ -29,6 +29,7 @@ namespace Jwc.Experiment
 
         [Theory]
         [InlineData("TheoremAttribute")]
+        [InlineData("FirstClassTheoremAttribute")]
         [InlineData("AutoFixtureAdapter")]
         public void ThisCorrectlyGeneratesNugetTransformFiles(string originName)
         {
