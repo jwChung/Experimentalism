@@ -11,7 +11,8 @@ namespace Jwc.Experiment
     /// executable test cases. This attribute supports to generate auto data
     /// using the AutoFixture library.
     /// </summary>
-    public class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+    [AttributeUsage(AttributeTargets.Method)]
+    public sealed class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
     {
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture" />.
