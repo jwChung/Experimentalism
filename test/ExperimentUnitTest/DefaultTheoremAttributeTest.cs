@@ -48,17 +48,6 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithDefaultCtor()
-        {
-            var sut = new DefaultTheoremAttribute();
-
-            var actual = sut.FixtureFactory;
-
-            var factory = Assert.IsType<TypeFixtureFactory>(actual);
-            Assert.Equal(typeof(NotSupportedFixture), factory.FixtureType);
-        }
-
-        [Fact]
         public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
@@ -114,18 +103,6 @@ namespace Jwc.Experiment
 
             var theoryCommand = Assert.IsType<TheoryCommand>(actual.Single());
             Assert.Throws<ArgumentException>(() => theoryCommand.Execute(this));
-        }
-
-        [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithType()
-        {
-            var fixtureType = typeof(FakeTestFixture);
-            var sut = new DefaultTheoremAttribute(fixtureType);
-
-            var actual = sut.FixtureFactory;
-
-            var typeFixtureFactory = Assert.IsType<TypeFixtureFactory>(actual);
-            Assert.Equal(fixtureType, typeFixtureFactory.FixtureType);
         }
 
         [Fact]
@@ -294,17 +271,6 @@ namespace Jwc.Experiment
         {
             ITestFixtureFactory fixtureFactory = null;
             Assert.Throws<ArgumentNullException>(() => new DerivedTheoremAttribute(fixtureFactory));
-        }
-
-        [Fact]
-        public void FixtureFactoryIsCorrectWhenInitializedWithFixtureFactory()
-        {
-            var fixtureFactory = new DelegatingFixtureFactory();
-            var sut = new DerivedTheoremAttribute(fixtureFactory);
-
-            var actual = sut.FixtureFactory;
-
-            Assert.Equal(fixtureFactory, actual);
         }
 
         [Fact]

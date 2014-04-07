@@ -58,17 +58,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture factory passed from a constructor.
-        /// </summary>
-        public ITestFixtureFactory FixtureFactory
-        {
-            get
-            {
-                return _fixtureFactory;
-            }
-        }
-
-        /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of
         /// <see cref="ITestCommand" />, one per execution of a test method.
@@ -105,7 +94,7 @@ namespace Jwc.Experiment
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var autoArguments = new AutoArgumentCollection(
-                FixtureFactory, method.MethodInfo, method.MethodInfo.GetParameters());
+                _fixtureFactory, method.MethodInfo, method.MethodInfo.GetParameters());
 
             if (!autoArguments.HasAutoParemeters)
             {
@@ -126,7 +115,7 @@ namespace Jwc.Experiment
         private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
         {
             var autoArguments = new AutoArgumentCollection(
-                FixtureFactory,
+                _fixtureFactory,
                 method.MethodInfo,
                 method.MethodInfo.GetParameters(),
                 testCaseData.Length);
