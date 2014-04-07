@@ -10,7 +10,7 @@ namespace Jwc.Experiment
     public class AssemblyLevelTest
     {
         [Fact]
-        public void SutReferencesOnlySpecifiedAssemblies()
+        public void TargetAssemblyReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
@@ -31,7 +31,7 @@ namespace Jwc.Experiment
         [InlineData("TheoremAttribute")]
         [InlineData("AutoFixtureAdapter")]
         [InlineData("AutoFixtureFactory")]
-        public void SutGeneratesNugetTransformFiles(string originName)
+        public void ThisCorrectlyGeneratesNugetTransformFiles(string originName)
         {
             string directory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
             var origin = directory + originName + ".cs";
@@ -43,7 +43,7 @@ namespace Jwc.Experiment
         [Theory]
         [InlineData("Scenario")]
         [InlineData("Person")]
-        public void SutGeneratesNugetTransformFilesForTest(string originName)
+        public void ThisCorrectlyGeneratesNugetTransformFilesForTest(string originName)
         {
             string directory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
             var origin = directory + originName + ".cs";
