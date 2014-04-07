@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
@@ -64,6 +65,29 @@ namespace Jwc.Experiment
         {
             Assert.Same(name, person.Name);
             Assert.Equal(age, person.Age);
+        }
+
+        [FirstClassTheorem]
+        public IEnumerable<ITestCase> FirstClassTheoremSupportsManyTestCases()
+        {
+            var testCases = new[]
+            {
+                new { X = 1, Y = 2, Z = 3 },
+                new { X = 3, Y = 7, Z = 10 },
+                new { X = 100, Y = 23, Z = 123 }
+            };
+
+            return testCases.Select(
+                tc => new TestCase(
+                    () => Assert.Equal(tc.Z, tc.X + tc.Y)));
+        }
+
+        [FirstClassTheorem]
+        public IEnumerable<ITestCase> FirstClassTheoremWithCustomFixtureSupportsTestCasesWithAutoData()
+        {
+            yield return new TestCase<string>(x => Assert.NotNull(x));
+            yield return new TestCase<int>(x => Assert.True(x > 0, "x > 0"));
+            yield return new TestCase<object>(x => Assert.NotNull(x));
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute
