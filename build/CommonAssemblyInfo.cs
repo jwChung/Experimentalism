@@ -10,15 +10,31 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.8.20")]
-[assembly: AssemblyInformationalVersion("0.8.20")]
+[assembly: AssemblyVersion("0.8.21")]
+[assembly: AssemblyInformationalVersion("0.8.21")]
 
 /*
- * Version 0.8.20
+ * Version 0.8.21
  * 
- * This version removes AutoFixture.Xunit dependency from
- * Experiment.AutoFixture. Instead, to support the way of customizing fixture
- * with attribute using AutoFixture.Xunit, this version uses reflection
- * through the `ICustomization GetCustomization(ParameterInfo)` method
- * signature.
+ * Refactor to simplify
+ * - Makes BaseTheoremAttribute and BaseFirstClassTheoremAttribute
+ *   abstract class.
+ * - Removes all the parameterized constructors of BaseTheoremAttribute
+ *   and BaseFirstClassTheoremAttribute, but instead, introduces
+ *   the abstract method 'CreateTestFixture(MethodInfo)'.
+ * 
+ * BREAKING CHANGE
+ * - Delete: ITestFixtureFactory
+ * - Delete: TypeFixtureFactory
+ * - Delete: NotSupportedFixture
+ * - Delete: AutoFixtureFactory
+ * - Rename: DefaultTheoremAttribute -> BaseTheoremAttribute
+ * - Rename: DefaultFirstClassTheoremAttribute ->
+ *           BaseFirstClassTheoremAttribute
+ * - Delete: All the constructors of BaseTheoremAttribute
+ *           and BaseFirstClassTheoremAttribute
+ * - Delete: FixtureFactory and FixtureType properties of
+ *           BaseTheoremAttribute and BaseFirstClassTheoremAttribute
+ * - Change: ConvertToTestCommand(IMethodInfo, ITestFixtureFactory) ->
+ *           ConvertToTestCommand(IMethodInfo, Func<MethodInfo, ITestFixture>)
  */
