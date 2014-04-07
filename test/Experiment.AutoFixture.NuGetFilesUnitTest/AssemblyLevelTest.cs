@@ -66,6 +66,19 @@ namespace Jwc.Experiment
             VerifyGeneratingFile(origin, destination);
         }
 
+        [Theory]
+        [InlineData("Scenario")]
+        public void NugetTransformFileForTestShouldHaveJwcExperimentUsingDirective(string originName)
+        {
+            string directory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
+            var path = directory + originName + ".cs";
+
+            var actual = File.ReadAllText(path, Encoding.UTF8).Contains("using Jwc.Experiment;");
+
+            Assert.True(actual, "Constains 'using Jwc.Experiment;'.");
+        }
+
+
         [Conditional("CI")]
         private static void VerifyGeneratingFile(string origin, string destination)
         {
