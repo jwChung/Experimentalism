@@ -8,7 +8,7 @@ namespace Jwc.Experiment
         public void SutIsTheoremAttribute()
         {
             var sut = new TheoremAttribute();
-            Assert.IsAssignableFrom<DefaultTheoremAttribute>(sut);
+            Assert.IsAssignableFrom<BaseTheoremAttribute>(sut);
         }
     }
 }

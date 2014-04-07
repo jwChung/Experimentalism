@@ -55,7 +55,7 @@
     <Compile Include="NotSupportedFixtureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
-    <Compile Include="DefaultTheoremAttributeTest.cs" />
+    <Compile Include="BaseTheoremAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="TypeFixtureFactoryTest.cs" />
   </ItemGroup>

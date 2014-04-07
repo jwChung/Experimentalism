@@ -8,19 +8,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class DefaultTheoremAttributeTest
+    public class BaseTheoremAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new BaseTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateNonParameterizedTestReturnsCorrectFactCommand()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new BaseTheoremAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.CreateTestCommands(method);
@@ -35,7 +35,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         public void CreateParameterizedTestReturnsThoeryCommands(string arg1, int arg2, object arg3)
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new BaseTheoremAttribute();
 
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
@@ -84,7 +84,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestWithInvalidCountDataThrows()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new BaseTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -96,7 +96,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestWithInvalidTypeDataThrows()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new BaseTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -108,7 +108,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFactoryTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new DefaultTheoremAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new BaseTheoremAttribute(null));
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestPassesCorrectParameterTypes()
         {
-            var sut = new DefaultTheoremAttribute();
+            var sut = new BaseTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
@@ -324,7 +324,7 @@ namespace Jwc.Experiment
         {
         }
 
-        private class DerivedTheoremAttribute : DefaultTheoremAttribute
+        private class DerivedTheoremAttribute : BaseTheoremAttribute
         {
             public DerivedTheoremAttribute(ITestFixtureFactory fixtureFactory)
                 : base(fixtureFactory)

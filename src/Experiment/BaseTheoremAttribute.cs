@@ -16,24 +16,24 @@ namespace Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class DefaultTheoremAttribute : FactAttribute
+    public class BaseTheoremAttribute : FactAttribute
     {
         private readonly ITestFixtureFactory _fixtureFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="BaseTheoremAttribute"/> class.
         /// </summary>
-        public DefaultTheoremAttribute()
+        public BaseTheoremAttribute()
         {
             _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="BaseTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureType">Type of the fixture.</param>
         /// <exception cref="System.ArgumentNullException">fixtureType</exception>
-        public DefaultTheoremAttribute(Type fixtureType)
+        public BaseTheoremAttribute(Type fixtureType)
         {
             if (fixtureType == null)
             {
@@ -44,10 +44,10 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="BaseTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
-        protected DefaultTheoremAttribute(ITestFixtureFactory fixtureFactory)
+        protected BaseTheoremAttribute(ITestFixtureFactory fixtureFactory)
         {
             if (fixtureFactory == null)
             {
