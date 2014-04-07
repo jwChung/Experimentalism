@@ -14,23 +14,23 @@ namespace Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class DefaultFirstClassTheoremAttribute : FactAttribute
+    public class BaseFirstClassTheoremAttribute : FactAttribute
     {
         private readonly ITestFixtureFactory _fixtureFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="BaseFirstClassTheoremAttribute"/> class.
         /// </summary>
-        public DefaultFirstClassTheoremAttribute()
+        public BaseFirstClassTheoremAttribute()
         {
             _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="BaseFirstClassTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureType">Type of the fixture.</param>
-        public DefaultFirstClassTheoremAttribute(Type fixtureType)
+        public BaseFirstClassTheoremAttribute(Type fixtureType)
         {
             if (fixtureType == null)
             {
@@ -41,10 +41,10 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultFirstClassTheoremAttribute"/> class.
+        /// Initializes a new instance of the <see cref="BaseFirstClassTheoremAttribute"/> class.
         /// </summary>
         /// <param name="fixtureFactory">The fixture factory.</param>
-        protected DefaultFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
+        protected BaseFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
         {
             if (fixtureFactory == null)
             {
