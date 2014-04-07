@@ -37,6 +37,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// The test commands which will execute the test runs for the given method
         /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
@@ -44,24 +45,31 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
             }
 
-            var dataAttributes = ((IEnumerable<DataAttribute>)method
-                .MethodInfo
-                .GetCustomAttributes(typeof(DataAttribute), false)).ToArray();
-            var testData = new TestDataCollection(method.MethodInfo, dataAttributes);
-
-            if (!testData.Any())
+            try
             {
-                yield return CreateSingleTestCommand(method);
-                yield break;
+                TestDataCollection testData = CreateTestData(method);
+
+                if (!testData.Any())
+                {
+                    return new[] { CreateSingleTestCommand(method) };
+                }
+
+                return testData.Select(tcd => CreateEachTestCommand(method, tcd));
             }
-
-            foreach (var testCommand in testData.Select(tcd => CreateEachTestCommand(method, tcd)))
+            catch (Exception exception)
             {
-                yield return testCommand;
+                return new ITestCommand[] { new ExceptionCommand(method, exception) };
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
+        private static TestDataCollection CreateTestData(IMethodInfo method)
+        {
+            var dataAttributes = ((IEnumerable<DataAttribute>)method
+                .MethodInfo
+                .GetCustomAttributes(typeof(DataAttribute), false)).ToArray();
+            return new TestDataCollection(method.MethodInfo, dataAttributes);
+        }
+
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var autoArguments = new AutoArgumentCollection(
@@ -72,28 +80,21 @@ namespace Jwc.Experiment
             {
                 return base.EnumerateTestCommands(method).Single();
             }
-           
-            try
-            {
-                return new TheoryCommand(method, autoArguments.ToArray());
-            }
-            catch (Exception exception)
-            {
-                return new ExceptionCommand(method, exception);
-            }
+
+            return new TheoryCommand(method, autoArguments.ToArray());
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
         {
-            var autoArguments = new AutoArgumentCollection(
-                new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
-                method.MethodInfo.GetParameters(),
-                testCaseData.Length);
-            var argument = testCaseData.Concat(autoArguments);
-
             try
             {
+                var autoArguments = new AutoArgumentCollection(
+                    new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
+                    method.MethodInfo.GetParameters(),
+                    testCaseData.Length);
+                var argument = testCaseData.Concat(autoArguments);
+
                 return new TheoryCommand(method, argument.ToArray());
             }
             catch (Exception exception)
