@@ -27,57 +27,22 @@ namespace Jwc.Experiment
             Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
         }
 
+        const string _productDirectory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
+        const string _testDirectory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
+
         [Theory]
-        [InlineData("TheoremAttribute")]
-        [InlineData("FirstClassTheoremAttribute")]
-        [InlineData("AutoFixtureAdapter")]
-        public void ThisCorrectlyGeneratesNugetTransformFiles(string originName)
+        [InlineData(_productDirectory, "TheoremAttribute")]
+        [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
+        [InlineData(_productDirectory, "AutoFixtureAdapter")]
+        [InlineData(_testDirectory, "Scenario")]
+        [InlineData(_testDirectory, "Person")]
+        public void ThisCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {
-            string directory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";
             Assert.True(File.Exists(origin), "exists.");
             VerifyGeneratingFile(origin, destination);
         }
-
-        [Theory]
-        [InlineData("TheoremAttribute")]
-        [InlineData("FirstClassTheoremAttribute")]
-        [InlineData("AutoFixtureAdapter")]
-        public void NugetTransformFileShouldHaveJwcExperimentUsingDirective(string originName)
-        {
-            string directory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
-            var path = directory + originName + ".cs";
-
-            var actual = File.ReadAllText(path, Encoding.UTF8).Contains("using Jwc.Experiment;");
-
-            Assert.True(actual, "Constains 'using Jwc.Experiment;'.");
-        }
-
-        [Theory]
-        [InlineData("Scenario")]
-        [InlineData("Person")]
-        public void ThisCorrectlyGeneratesNugetTransformFilesForTest(string originName)
-        {
-            string directory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
-            var origin = directory + originName + ".cs";
-            var destination = directory + originName + ".cs.pp";
-            Assert.True(File.Exists(origin), "exists.");
-            VerifyGeneratingFile(origin, destination);
-        }
-
-        [Theory]
-        [InlineData("Scenario")]
-        public void NugetTransformFileForTestShouldHaveJwcExperimentUsingDirective(string originName)
-        {
-            string directory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
-            var path = directory + originName + ".cs";
-
-            var actual = File.ReadAllText(path, Encoding.UTF8).Contains("using Jwc.Experiment;");
-
-            Assert.True(actual, "Constains 'using Jwc.Experiment;'.");
-        }
-
 
         [Conditional("CI")]
         private static void VerifyGeneratingFile(string origin, string destination)
@@ -88,6 +53,18 @@ namespace Jwc.Experiment
             File.WriteAllText(destination, content, Encoding.UTF8);
 
             Assert.True(File.Exists(destination), "exists.");
+        }
+
+        [Theory]
+        [InlineData(_productDirectory, "TheoremAttribute")]
+        [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
+        [InlineData(_productDirectory, "AutoFixtureAdapter")]
+        [InlineData(_testDirectory, "Scenario")]
+        public void NugetTransformFileShouldHaveJwcExperimentUsingDirective(string directory, string originName)
+        {
+            var path = directory + originName + ".cs";
+            var actual = File.ReadAllText(path, Encoding.UTF8).Contains("using Jwc.Experiment;");
+            Assert.True(actual, "Constains 'using Jwc.Experiment;'.");
         }
     }
 }
