@@ -12,7 +12,6 @@ namespace Jwc.Experiment
     /// A test attribute used to adorn methods that creates first-class 
     /// executable test cases.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
     public abstract class BaseFirstClassTheoremAttribute : FactAttribute
     {

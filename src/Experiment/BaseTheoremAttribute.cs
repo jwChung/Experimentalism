@@ -14,7 +14,6 @@ namespace Jwc.Experiment
     /// 지칭하게 되며, non-parameterized test 뿐 아니라 parameterized test에도
     /// 사용될 수 있다.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
     public abstract class BaseTheoremAttribute : FactAttribute
     {
