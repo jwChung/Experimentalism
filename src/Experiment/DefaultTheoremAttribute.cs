@@ -90,6 +90,20 @@ namespace Jwc.Experiment
             }
         }
 
+        /// <summary>
+        /// Creates an instance of <see cref="ITestFixture"/>.
+        /// </summary>
+        /// <param name="testMethod">
+        /// The test method
+        /// </param>
+        /// <returns>
+        /// The created fixture.
+        /// </returns>
+        protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
+        {
+            throw new NotImplementedException();
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification="auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
