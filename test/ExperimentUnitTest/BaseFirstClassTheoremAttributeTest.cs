@@ -74,16 +74,13 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsPassesTestFixtureToTestCase()
         {
-            // Fixture setup
             var sut = new DerivedFirstClassTheoremAttribute(
                 new DelegatingFixtureFactory { OnCreate = mi => new FakeTestFixture() });
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
-            // Exercise system
             var actual = sut.CreateTestCommands(method).Single();
 
-            // Verify outcome
             Assert.IsType<FactCommand>(actual);
         }
 
@@ -104,10 +101,7 @@ namespace Jwc.Experiment
         {
             var sut = new DerivedFirstClassTheoremAttribute(new DelegatingFixtureFactory
             {
-                OnCreate = mi =>
-                {
-                    throw new NotSupportedException();
-                }
+                OnCreate = mi => { throw new NotSupportedException(); }
             });
             var method = Reflector.Wrap(GetType().GetMethod("CallFixtureFactoryTest"));
 
@@ -178,7 +172,7 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) =>
                 {
-                    f.Create(m.MethodInfo);
+                    f(m.MethodInfo);
                     return new FactCommand(m);
                 }
             };
@@ -197,7 +191,7 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) =>
                 {
-                    Assert.IsType<FakeTestFixture>(f.Create(m.MethodInfo));
+                    Assert.IsType<FakeTestFixture>(f(m.MethodInfo));
                     return new FactCommand(m);
                 }
             };

@@ -88,7 +88,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, _fixtureFactory))
+                        tc => tc.ConvertToTestCommand(method, _fixtureFactory.Create))
                     .ToArray();
             }
             catch (Exception exception)

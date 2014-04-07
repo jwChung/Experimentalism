@@ -18,7 +18,7 @@ namespace Jwc.Experiment
                 "mscorlib",
                 "System.Core",
                 "Jwc.Experiment",
-                "Ploeh.AutoFixture",
+                "Ploeh.AutoFixture"
             };
 
             var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();

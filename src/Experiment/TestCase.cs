@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
@@ -77,7 +78,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
         {
             if (method == null)
             {
@@ -162,7 +163,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory fixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
         {
             if (method == null)
             {
@@ -174,7 +175,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fixtureFactory");
             }
 
-            var fixture = fixtureFactory.Create(Delegate.Method);
+            var fixture = fixtureFactory(Delegate.Method);
             var arguments = new[]
             {
                 fixture.Create(typeof(T))
