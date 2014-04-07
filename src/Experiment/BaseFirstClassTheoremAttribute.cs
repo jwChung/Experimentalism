@@ -82,6 +82,7 @@ namespace Jwc.Experiment
             return (IEnumerable<ITestCase>)testCases;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from ConvertToTestCommand.")]
         private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
         {
             try
