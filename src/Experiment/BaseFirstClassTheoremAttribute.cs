@@ -55,17 +55,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture factory passed from a constructor.
-        /// </summary>
-        public ITestFixtureFactory FixtureFactory
-        {
-            get
-            {
-                return _fixtureFactory;
-            }
-        }
-
-        /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of
         /// <see cref="ITestCommand" />, one per execution of a test method.
@@ -85,7 +74,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, FixtureFactory))
+                        tc => tc.ConvertToTestCommand(method, _fixtureFactory))
                     .ToArray();
             }
             catch (Exception exception)
