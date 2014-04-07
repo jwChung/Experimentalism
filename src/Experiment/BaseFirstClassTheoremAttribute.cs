@@ -45,8 +45,8 @@ namespace Jwc.Experiment
 
             try
             {
-                return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, CreateTestFixture))
+                return CreateTestCases(method)
+                    .Select(tc => ConvertToTestCommand(method, tc))
                     .ToArray();
             }
             catch (Exception exception)
@@ -80,6 +80,18 @@ namespace Jwc.Experiment
             var testCases = methodInfo.Invoke(CreateReflectedObject(methodInfo), null);
 
             return (IEnumerable<ITestCase>)testCases;
+        }
+
+        private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
+        {
+            try
+            {
+                return testCase.ConvertToTestCommand(method, CreateTestFixture);
+            }
+            catch (Exception exception)
+            {
+                return new ExceptionCommand(method, exception);
+            }
         }
 
         private static bool IsMethodParameterless(MethodInfo methodInfo)

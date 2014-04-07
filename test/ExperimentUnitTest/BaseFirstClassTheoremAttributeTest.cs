@@ -145,6 +145,23 @@ namespace Jwc.Experiment
             Assert.IsType<FirstClassCommand>(actual);
         }
 
+        [Fact]
+        public void CreateTestCommandsReturnsCorrectExceptionCommandsWhenManyTestCasesThrows()
+        {
+            var sut = new DelegatingFirstClassTheoremAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("ManyExceptionTest"));
+
+            var actual = sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(3, actual.Length);
+            Array.ForEach(actual, c =>
+            {
+                var command = Assert.IsAssignableFrom<ExceptionCommand>(c);
+                Assert.Equal(method.MethodInfo.Name, command.MethodName);
+                Assert.IsType<NotSupportedException>(command.Exception);
+            });
+        }
+
         public IEnumerable<ITestCase> TestCasesTest()
         {
             yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
@@ -220,6 +237,22 @@ namespace Jwc.Experiment
             {
                 return OnCreateTestFixture(testMethod);
             }
+        }
+
+        public IEnumerable<ITestCase> ManyExceptionTest()
+        {
+            yield return new DelegatingTestCase
+            {
+                OnConvertToTestCommand = (m, f) => { throw new NotSupportedException(); }
+            };
+            yield return new DelegatingTestCase
+            {
+                OnConvertToTestCommand = (m, f) => { throw new NotSupportedException(); }
+            };
+            yield return new DelegatingTestCase
+            {
+                OnConvertToTestCommand = (m, f) => { throw new NotSupportedException(); }
+            };
         }
 
         private abstract class BaseTestClass
