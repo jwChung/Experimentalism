@@ -47,7 +47,6 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
-    <Compile Include="DelegatingFixtureFactory.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="BaseFirstClassTheoremAttributeTest.cs" />
@@ -57,7 +56,6 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="BaseTheoremAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
-    <Compile Include="TypeFixtureFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
