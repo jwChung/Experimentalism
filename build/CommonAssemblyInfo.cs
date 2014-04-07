@@ -10,19 +10,14 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.0")]
-[assembly: AssemblyInformationalVersion("0.9.0")]
+[assembly: AssemblyVersion("0.9.1")]
+[assembly: AssemblyInformationalVersion("0.9.1")]
 
 /*
- * Version 0.9.0
+ * Version 0.9.1
  * 
- * Implemented FirstClassTheoremAttribute which supports providing auto data
- * using the AutoFixture library.
+ * Fixes returning a exception command per each test case
  * 
- * Addressed unhandled exception thrown when creating TestCommand instances
- * in BaseTheoremAttribute.EnumerateTestCommands(IMethodInfo).
- * 
- * Issue: https://github.com/jwChung/Experimentalism/issues/23
- * 
- * Pull request: https://github.com/jwChung/Experimentalism/pull/32
+ * Fixes the using directive 'using Jwc.Experiment',
+ * in the Scenario file of Experiment.AutoFixtureWithExample. 
  */
