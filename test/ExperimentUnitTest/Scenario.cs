@@ -41,14 +41,14 @@ namespace Jwc.Experiment
             Assert.Equal(5678, arg2);
         }
 
-        [BaseFirstClassTheorem]
+        [FirstClassTheorem]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsFirstClassTestsForYieldReturn()
         {
             yield return new TestCase(() => Assert.Equal(3, 2 + 1));
             yield return new TestCase(() => Assert.Equal(10, 3 + 7));
         }
 
-        [BaseFirstClassTheorem]
+        [FirstClassTheorem]
         public ITestCase[] DefaultFirstClassTheoremSupportsFirstClassTestsForArray()
         {
             var testCases = new[]
@@ -65,7 +65,7 @@ namespace Jwc.Experiment
                 .ToArray();
         }
 
-        [BaseFirstClassTheorem]
+        [FirstClassTheorem]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremSupportsFirstClassTestsForEnumerable()
         {
             var testCases = new[]
@@ -79,7 +79,7 @@ namespace Jwc.Experiment
                     () => new Scenario().DefaultTheoremSupportsParameterizedTest(tc.X, tc.Y)));
         }
 
-        [BaseFirstClassTheorem(typeof(CustomTestFixture))]
+        [FirstClassTheorem]
         public IEnumerable<ITestCase> DefaultFirstClassTheoremWithCustomFixtureSupportsFirstClassTestsWithAutoData()
         {
             yield return new TestCase<string, int>(
@@ -100,6 +100,14 @@ namespace Jwc.Experiment
         }
 
         private class TheoremAttribute : BaseTheoremAttribute
+        {
+            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            {
+                return new CustomTestFixture();
+            }
+        }
+
+        private class FirstClassTheoremAttribute : BaseTheoremAttribute
         {
             public override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {

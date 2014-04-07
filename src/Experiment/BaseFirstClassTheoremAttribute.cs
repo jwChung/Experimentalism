@@ -14,46 +14,8 @@ namespace Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Parameterized test에 auto data를 제공하기 위해, Subclass에서 ITestFixture factory를 제공할 수 있음.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class BaseFirstClassTheoremAttribute : FactAttribute
+    public abstract class BaseFirstClassTheoremAttribute : FactAttribute
     {
-        private readonly ITestFixtureFactory _fixtureFactory;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseFirstClassTheoremAttribute"/> class.
-        /// </summary>
-        public BaseFirstClassTheoremAttribute()
-        {
-            _fixtureFactory = new TypeFixtureFactory(typeof(NotSupportedFixture));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseFirstClassTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureType">Type of the fixture.</param>
-        public BaseFirstClassTheoremAttribute(Type fixtureType)
-        {
-            if (fixtureType == null)
-            {
-                throw new ArgumentNullException("fixtureType");
-            }
-
-            _fixtureFactory = new TypeFixtureFactory(fixtureType);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseFirstClassTheoremAttribute"/> class.
-        /// </summary>
-        /// <param name="fixtureFactory">The fixture factory.</param>
-        protected BaseFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
-        {
-            if (fixtureFactory == null)
-            {
-                throw new ArgumentNullException("fixtureFactory");
-            }
-
-            _fixtureFactory = fixtureFactory;
-        }
-
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture"/>.
         /// </summary>
@@ -63,10 +25,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// The created fixture.
         /// </returns>
-        public virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
 
         /// <summary>
         /// Enumerates the test commands represented by this test method.
@@ -88,7 +47,7 @@ namespace Jwc.Experiment
             try
             {
                 return CreateTestCases(method).Select(
-                        tc => tc.ConvertToTestCommand(method, _fixtureFactory.Create))
+                        tc => tc.ConvertToTestCommand(method, CreateTestFixture))
                     .ToArray();
             }
             catch (Exception exception)

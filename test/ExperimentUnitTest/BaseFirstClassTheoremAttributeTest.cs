@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
@@ -12,14 +13,14 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateTestCommandsReturnsCorrectCommands()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             const string methodName = "TestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -36,7 +37,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsFromStaticReturnsCorrectCommands()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             const string methodName = "StaticTestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -53,29 +54,14 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsWithNullMethodInfoThrows()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null));
-        }
-
-        [Fact]
-        public void InitializeWithNullFixtureTypeThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => new BaseFirstClassTheoremAttribute(null));
-        }
-
-        [Fact]
-        public void InitializeWithNullFixtureFactoryThrows()
-        {
-            ITestFixtureFactory fixtureFactory = null;
-            Assert.Throws<ArgumentNullException>(
-                () => new DerivedFirstClassTheoremAttribute(fixtureFactory));
         }
 
         [Fact]
         public void CreateTestCommandsPassesTestFixtureToTestCase()
         {
-            var sut = new DerivedFirstClassTheoremAttribute(
-                new DelegatingFixtureFactory { OnCreate = mi => new FakeTestFixture() });
+            var sut = new DelegatingFirstClassTheoremAttribute { OnCreateTestFixture = mi => new FakeTestFixture() };
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -87,7 +73,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestCaseThrows()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ExceptionFromCreatingTestCaseTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -99,10 +85,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestFixtureThrows()
         {
-            var sut = new DerivedFirstClassTheoremAttribute(new DelegatingFixtureFactory
-            {
-                OnCreate = mi => { throw new NotSupportedException(); }
-            });
+            var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("CallFixtureFactoryTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -116,7 +99,7 @@ namespace Jwc.Experiment
         [InlineData("InvalidReturnTypeTest")]
         public void CreateTestCommandsReturnsExceptionCommandWhenMethodReturnTypeIsInvalid(string methodName)
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -128,7 +111,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsDoesNotThrowWhenMethodReturnTypeIsValid()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ValidReturnTypeTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -139,7 +122,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsThrowsWhenMethodIsParameterized()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -151,7 +134,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsOfAbstractBaseClassReturnsCorrectTestCommand()
         {
-            var sut = new BaseFirstClassTheoremAttribute();
+            var sut = new DelegatingFirstClassTheoremAttribute();
             var method = Reflector.Wrap(typeof(SubTestClass).GetMethod("FirstClassTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -222,11 +205,22 @@ namespace Jwc.Experiment
             yield break;
         }
 
-        private class DerivedFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+        private class DelegatingFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
         {
-            public DerivedFirstClassTheoremAttribute(ITestFixtureFactory fixtureFactory)
-                : base(fixtureFactory)
+            public DelegatingFirstClassTheoremAttribute()
             {
+                OnCreateTestFixture = mi => { throw new NotSupportedException(); };
+            }
+
+            public Func<MethodInfo, ITestFixture> OnCreateTestFixture
+            {
+                get;
+                set;
+            }
+
+            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            {
+                return OnCreateTestFixture(testMethod);
             }
         }
 
