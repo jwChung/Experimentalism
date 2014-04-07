@@ -41,6 +41,20 @@ namespace Jwc.Experiment
         }
 
         [Theory]
+        [InlineData("TheoremAttribute")]
+        [InlineData("FirstClassTheoremAttribute")]
+        [InlineData("AutoFixtureAdapter")]
+        public void NugetTransformFileShouldHaveJwcExperimentUsingDirective(string originName)
+        {
+            string directory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
+            var path = directory + originName + ".cs";
+
+            var actual = File.ReadAllText(path, Encoding.UTF8).Contains("using Jwc.Experiment;");
+
+            Assert.True(actual, "Constains 'using Jwc.Experiment;'.");
+        }
+
+        [Theory]
         [InlineData("Scenario")]
         [InlineData("Person")]
         public void ThisCorrectlyGeneratesNugetTransformFilesForTest(string originName)
