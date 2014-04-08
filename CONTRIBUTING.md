@@ -16,7 +16,7 @@ Experimentalism 개발 가이드라인
 * **TDD**  
   Experimentalism은 100% TDD하에 개발되고 있습니다(코드커버리지 거의 100% 수준). Experimentalism에서는 TDD를 통한 개발을 독려하고 있습니다.
 * **SRP**  
-  소프트웨어 개발에 많은 원칙들이 있지만, Experimentalism은 그 중에서도 [SRP(Single Responsibility Principle)](http://en.wikipedia.org/wiki/Single_responsibility_principle)원칙을 가장 중요시하며 이를 지키려고 노력합니다. 개발에 참여를 원하시는 분은 항상 이점을 고려하여 주시기 바랍니다.
+  소프트웨어 개발에 많은 원칙들이 있지만, Experimentalism은 그 중에서도 [SRP(Single Responsibility Principle)](http://en.wikipedia.org/wiki/Single_responsibility_principle) 원칙을 중요시하며 이를 지키려고 노력합니다. 개발에 참여를 원하시는 분은 이점을 고려하여 주시기 바랍니다.
 
 Pull requests
 -------------
