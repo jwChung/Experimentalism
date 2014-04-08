@@ -39,16 +39,16 @@ namespace Jwc.NuGetFiles
                         testMethod.GetParameters())));
         }
 
-        private static IFixture CreateFixture()
-        {
-            return new Fixture();
-        }
-
         private static IFixture CustomizeFixture(
             IFixture fixture, IEnumerable<ParameterInfo> parameters)
         {
             return parameters.SelectMany(SelectCustomizations)
                 .Aggregate(fixture, (f, c) => f.Customize(c));
+        }
+
+        private static IFixture CreateFixture()
+        {
+            return new Fixture();
         }
 
         private static IEnumerable<ICustomization> SelectCustomizations(ParameterInfo parameter)
