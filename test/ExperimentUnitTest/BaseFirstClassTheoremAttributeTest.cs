@@ -225,20 +225,6 @@ namespace Jwc.Experiment
             yield break;
         }
 
-        private class DelegatingFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
-        {
-            public Func<MethodInfo, ITestFixture> OnCreateTestFixture
-            {
-                get;
-                set;
-            }
-
-            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
-            {
-                return OnCreateTestFixture(testMethod);
-            }
-        }
-
         public IEnumerable<ITestCase> ManyExceptionTest()
         {
             yield return new DelegatingTestCase
@@ -253,6 +239,20 @@ namespace Jwc.Experiment
             {
                 OnConvertToTestCommand = (m, f) => { throw new NotSupportedException(); }
             };
+        }
+
+        private class DelegatingFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+        {
+            public Func<MethodInfo, ITestFixture> OnCreateTestFixture
+            {
+                get;
+                set;
+            }
+
+            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            {
+                return OnCreateTestFixture(testMethod);
+            }
         }
 
         private abstract class BaseTestClass
