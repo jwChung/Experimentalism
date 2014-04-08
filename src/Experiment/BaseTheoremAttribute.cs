@@ -47,7 +47,7 @@ namespace Jwc.Experiment
 
             try
             {
-                var specifiedArgumentSet = CreateSpecifiedArgumentSet(method);
+                var specifiedArgumentSet = new SpecifiedArgumentSet(method.MethodInfo);
                 if (!specifiedArgumentSet.Any())
                 {
                     return new[] { CreateSingleTestCommand(method) };
@@ -61,26 +61,18 @@ namespace Jwc.Experiment
             }
         }
 
-        private static SpecifiedArgumentSet CreateSpecifiedArgumentSet(IMethodInfo method)
-        {
-            var dataAttributes = ((IEnumerable<DataAttribute>)method
-                .MethodInfo
-                .GetCustomAttributes(typeof(DataAttribute), false)).ToArray();
-            return new SpecifiedArgumentSet(method.MethodInfo, dataAttributes);
-        }
-
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
-            var autoArguments = new AutoArgumentCollection(
+            var arguments = new TestArgumentCollection(
                 new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
                 method.MethodInfo.GetParameters());
 
-            if (!autoArguments.HasAutoParemeters)
+            if (!arguments.HasParemeters)
             {
                 return base.EnumerateTestCommands(method).Single();
             }
 
-            return new TheoryCommand(method, autoArguments.ToArray());
+            return new TheoryCommand(method, arguments.ToArray());
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
@@ -88,11 +80,10 @@ namespace Jwc.Experiment
         {
             try
             {
-                var autoArguments = new AutoArgumentCollection(
+                var arguments = new TestArgumentCollection(
                     new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
                     method.MethodInfo.GetParameters(),
-                    specifiedArguments.Length);
-                var arguments = specifiedArguments.Concat(autoArguments);
+                    specifiedArguments);
 
                 return new TheoryCommand(method, arguments.ToArray());
             }
@@ -105,18 +96,29 @@ namespace Jwc.Experiment
         private class SpecifiedArgumentSet : IEnumerable<object[]>
         {
             private readonly MethodInfo _method;
-            private readonly DataAttribute[] _dataAttributes;
 
-            public SpecifiedArgumentSet(MethodInfo method, DataAttribute[] dataAttributes)
+            public SpecifiedArgumentSet(MethodInfo method)
             {
                 _method = method;
-                _dataAttributes = dataAttributes;
             }
 
             public IEnumerator<object[]> GetEnumerator()
             {
-                var parameterTypes = _method.GetParameters().Select(pi => pi.ParameterType).ToArray();
-                return _dataAttributes.SelectMany(da => da.GetData(_method, parameterTypes)).GetEnumerator();
+                return GetDataAttributes()
+                    .SelectMany(da => da.GetData(_method, GetParameterTypes()))
+                    .GetEnumerator();
+            }
+
+            private IEnumerable<DataAttribute> GetDataAttributes()
+            {
+                return ((IEnumerable<DataAttribute>)_method
+                    .GetCustomAttributes(typeof(DataAttribute), false))
+                    .ToArray();
+            }
+
+            private Type[] GetParameterTypes()
+            {
+                return _method.GetParameters().Select(pi => pi.ParameterType).ToArray();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -125,23 +127,23 @@ namespace Jwc.Experiment
             }
         }
 
-        private class AutoArgumentCollection : IEnumerable<object>
+        private class TestArgumentCollection : IEnumerable<object>
         {
             private readonly Lazy<ITestFixture> _fixture;
             private readonly ParameterInfo[] _parameters;
-            private readonly int _skipCount;
+            private readonly object[] _specifiedArguments;
 
-            public AutoArgumentCollection(
+            public TestArgumentCollection(
                 Lazy<ITestFixture> fixture,
                 ParameterInfo[] parameters,
-                int skipCount = 0)
+                params object[] specifiedArguments)
             {
                 _fixture = fixture;
                 _parameters = parameters;
-                _skipCount = skipCount;
+                _specifiedArguments = specifiedArguments;
             }
 
-            public bool HasAutoParemeters
+            public bool HasParemeters
             {
                 get
                 {
@@ -151,10 +153,14 @@ namespace Jwc.Experiment
 
             public IEnumerator<object> GetEnumerator()
             {
+                return _specifiedArguments.Concat(GetAutoArguments()).GetEnumerator();
+            }
+
+            private IEnumerable<object> GetAutoArguments()
+            {
                 return _parameters
-                    .Skip(_skipCount)
-                    .Select(pi => _fixture.Value.Create(pi.ParameterType))
-                    .GetEnumerator();
+                    .Skip(_specifiedArguments.Length)
+                    .Select(pi => _fixture.Value.Create(pi.ParameterType));
             }
 
             IEnumerator IEnumerable.GetEnumerator()
