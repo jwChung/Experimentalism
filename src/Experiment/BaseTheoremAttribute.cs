@@ -47,14 +47,13 @@ namespace Jwc.Experiment
 
             try
             {
-                TestDataCollection testData = CreateTestData(method);
-
-                if (!testData.Any())
+                var specifiedArgumentSet = CreateSpecifiedArgumentSet(method);
+                if (!specifiedArgumentSet.Any())
                 {
                     return new[] { CreateSingleTestCommand(method) };
                 }
 
-                return testData.Select(tcd => CreateEachTestCommand(method, tcd));
+                return specifiedArgumentSet.Select(sa => CreateEachTestCommand(method, sa));
             }
             catch (Exception exception)
             {
@@ -62,12 +61,12 @@ namespace Jwc.Experiment
             }
         }
 
-        private static TestDataCollection CreateTestData(IMethodInfo method)
+        private static SpecifiedArgumentSet CreateSpecifiedArgumentSet(IMethodInfo method)
         {
             var dataAttributes = ((IEnumerable<DataAttribute>)method
                 .MethodInfo
                 .GetCustomAttributes(typeof(DataAttribute), false)).ToArray();
-            return new TestDataCollection(method.MethodInfo, dataAttributes);
+            return new SpecifiedArgumentSet(method.MethodInfo, dataAttributes);
         }
 
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
@@ -85,17 +84,17 @@ namespace Jwc.Experiment
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
-        private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] testCaseData)
+        private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] specifiedArguments)
         {
             try
             {
                 var autoArguments = new AutoArgumentCollection(
                     new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
                     method.MethodInfo.GetParameters(),
-                    testCaseData.Length);
-                var argument = testCaseData.Concat(autoArguments);
+                    specifiedArguments.Length);
+                var arguments = specifiedArguments.Concat(autoArguments);
 
-                return new TheoryCommand(method, argument.ToArray());
+                return new TheoryCommand(method, arguments.ToArray());
             }
             catch (Exception exception)
             {
@@ -103,12 +102,12 @@ namespace Jwc.Experiment
             }
         }
 
-        private class TestDataCollection : IEnumerable<object[]>
+        private class SpecifiedArgumentSet : IEnumerable<object[]>
         {
             private readonly MethodInfo _method;
             private readonly DataAttribute[] _dataAttributes;
 
-            public TestDataCollection(MethodInfo method, DataAttribute[] dataAttributes)
+            public SpecifiedArgumentSet(MethodInfo method, DataAttribute[] dataAttributes)
             {
                 _method = method;
                 _dataAttributes = dataAttributes;
