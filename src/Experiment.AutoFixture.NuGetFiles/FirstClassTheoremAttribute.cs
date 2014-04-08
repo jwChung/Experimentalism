@@ -4,7 +4,7 @@ using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment
+namespace Jwc.NuGetFiles
 {
     /// <summary>
     /// A test attribute used to adorn methods that creates first-class 

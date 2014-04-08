@@ -2,7 +2,7 @@
 using Jwc.Experiment;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment
+namespace Jwc.NuGetFiles
 {
     /// <summary>
     /// <see cref="ISpecimenContext"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.

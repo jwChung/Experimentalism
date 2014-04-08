@@ -6,7 +6,7 @@ using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment
+namespace Jwc.NuGetFiles
 {
     /// <summary>
     /// 이 attribute는 method위에 선언되어 해당 method가 test case라는 것을

@@ -1,4 +1,5 @@
 ﻿using System;
+using Jwc.NuGetFiles;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;

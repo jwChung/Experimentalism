@@ -1,4 +1,5 @@
 ﻿using System;
+using Jwc.NuGetFiles;
 using Xunit;
 
 namespace Jwc.Experiment

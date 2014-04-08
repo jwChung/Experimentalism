@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Jwc.NuGetFiles;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Ploeh.AutoFixture.Xunit;
