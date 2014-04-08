@@ -55,17 +55,5 @@ namespace Jwc.Experiment
 
             Assert.True(File.Exists(destination), "exists.");
         }
-
-        [Theory]
-        [InlineData(_productDirectory, "TheoremAttribute")]
-        [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
-        [InlineData(_productDirectory, "AutoFixtureAdapter")]
-        [InlineData(_testDirectory, "Scenario")]
-        public void NugetTransformFileShouldHaveJwcExperimentUsingDirective(string directory, string originName)
-        {
-            var path = directory + originName + ".cs";
-            var actual = File.ReadAllText(path, Encoding.UTF8).Contains("using Jwc.Experiment;");
-            Assert.True(actual, "Constains 'using Jwc.Experiment;'.");
-        }
     }
 }
