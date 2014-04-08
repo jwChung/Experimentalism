@@ -28,7 +28,12 @@ namespace Jwc.NuGetFiles
                 throw new ArgumentNullException("testMethod");
             }
 
-            return new AutoFixtureAdapter(new SpecimenContext(new Fixture()));
+            return new AutoFixtureAdapter(new SpecimenContext(CreateFixture()));
+        }
+
+        private static IFixture CreateFixture()
+        {
+            return new Fixture();
         }
     }
 }
