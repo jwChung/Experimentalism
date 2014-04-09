@@ -48,7 +48,7 @@ namespace Jwc.NuGetFiles
         private static void VerifyGeneratingFile(string origin, string destination)
         {
             var content = File.ReadAllText(origin, Encoding.UTF8)
-                .Replace("namespace Jwc.Experiment", "namespace $rootnamespace$");
+                .Replace("namespace Jwc.NuGetFiles", "namespace $rootnamespace$");
 
             File.WriteAllText(destination, content, Encoding.UTF8);
 
