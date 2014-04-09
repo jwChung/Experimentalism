@@ -21,7 +21,7 @@ namespace Jwc.NuGetFiles
                 "mscorlib",
                 "System.Core",
                 "Jwc.Experiment",
-                "Experiment.AutoFixture",
+                "Jwc.Experiment.AutoFixture",
                 "Ploeh.AutoFixture"
             };
 

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Jwc.Experiment</RootNamespace>
-    <AssemblyName>Experiment.AutoFixtureUnitTest</AssemblyName>
+    <AssemblyName>Jwc.Experiment.AutoFixtureUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
