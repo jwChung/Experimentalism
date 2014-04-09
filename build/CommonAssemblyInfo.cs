@@ -10,14 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.1")]
-[assembly: AssemblyInformationalVersion("0.9.1")]
+[assembly: AssemblyVersion("0.9.2")]
+[assembly: AssemblyInformationalVersion("0.9.2")]
 
 /*
- * Version 0.9.1
+ * Version 0.9.2
  * 
- * Fixes returning a exception command per each test case
- * 
- * Fixes the using directive 'using Jwc.Experiment',
- * in the Scenario file of Experiment.AutoFixtureWithExample. 
+ * Releases Experiment.AutoFixture with a new assembly to simplify
+ * transform files and hide irrelevant assemblies.
  */
