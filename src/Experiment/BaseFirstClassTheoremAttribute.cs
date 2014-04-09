@@ -12,7 +12,6 @@ namespace Jwc.Experiment
     /// A test attribute used to adorn methods that creates first-class 
     /// executable test cases.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
     public abstract class BaseFirstClassTheoremAttribute : FactAttribute
     {
         /// <summary>

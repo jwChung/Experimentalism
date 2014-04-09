@@ -1,5 +1,4 @@
-﻿using System;
-using Ploeh.AutoFixture;
+﻿using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
