@@ -1,4 +1,4 @@
-namespace Jwc.Experiment
+namespace Jwc.NuGetFiles
 {
     public class Person
     {

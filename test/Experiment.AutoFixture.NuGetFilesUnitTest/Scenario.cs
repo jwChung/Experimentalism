@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.NuGetFiles;
+using Jwc.Experiment;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment
+namespace Jwc.NuGetFiles
 {
     public class Scenario
     {

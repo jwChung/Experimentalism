@@ -2,11 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using Jwc.NuGetFiles;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment
+namespace Jwc.NuGetFiles
 {
     public class AssemblyLevelTest
     {
