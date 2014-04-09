@@ -26,8 +26,7 @@ namespace Jwc.NuGetFiles
             var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
             Assert.IsType<Fixture>(context.Builder);
         }
-
-
+        
         [Fact]
         public void CreateTestFixtureAlwaysReturnsNewInstance()
         {

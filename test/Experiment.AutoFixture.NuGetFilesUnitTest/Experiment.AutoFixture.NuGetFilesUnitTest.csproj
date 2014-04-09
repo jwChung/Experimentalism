@@ -51,7 +51,6 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="FirstClassTheoremAttributeTest.cs" />
-    <Compile Include="Person.cs" />
     <Compile Include="TheoremAttributeTest.cs" />
     <Compile Include="DelegatingSpecimenContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

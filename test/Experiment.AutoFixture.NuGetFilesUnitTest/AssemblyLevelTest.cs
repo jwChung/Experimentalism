@@ -34,7 +34,6 @@ namespace Jwc.NuGetFiles
         [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
         [InlineData(_testDirectory, "Scenario")]
-        [InlineData(_testDirectory, "Person")]
         public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {
             var origin = directory + originName + ".cs";
