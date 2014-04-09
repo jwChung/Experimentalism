@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.2")]
-[assembly: AssemblyInformationalVersion("0.9.2")]
+[assembly: AssemblyVersion("0.9.3")]
+[assembly: AssemblyInformationalVersion("0.9.3")]
 
 /*
- * Version 0.9.2
+ * Version 0.9.3
  * 
- * Releases Experiment.AutoFixture with a new assembly to simplify
- * transform files and hide irrelevant assemblies.
+ * Removes an unnecessary guard clause in
+ * AutoFixtureFirstClassTheoremAttribute.
  */
