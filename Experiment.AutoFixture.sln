@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture.NuGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture.NuGetFilesUnitTest", "test\Experiment.AutoFixture.NuGetFilesUnitTest\Experiment.AutoFixture.NuGetFilesUnitTest.csproj", "{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture", "src\Experiment.AutoFixture\Experiment.AutoFixture.csproj", "{7F77A967-02AA-47FC-A42A-0382697B483A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F77A967-02AA-47FC-A42A-0382697B483A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F77A967-02AA-47FC-A42A-0382697B483A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F77A967-02AA-47FC-A42A-0382697B483A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F77A967-02AA-47FC-A42A-0382697B483A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
