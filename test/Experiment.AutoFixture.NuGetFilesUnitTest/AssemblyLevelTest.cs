@@ -21,6 +21,7 @@ namespace Jwc.NuGetFiles
                 "mscorlib",
                 "System.Core",
                 "Jwc.Experiment",
+                "Experiment.AutoFixture",
                 "Ploeh.AutoFixture"
             };
 
@@ -33,7 +34,6 @@ namespace Jwc.NuGetFiles
         [Theory]
         [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
-        [InlineData(_productDirectory, "AutoFixtureAdapter")]
         [InlineData(_testDirectory, "Scenario")]
         [InlineData(_testDirectory, "Person")]
         public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)

@@ -52,7 +52,6 @@
     <Compile Include="TheoremAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AutoFixtureAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
@@ -60,6 +59,10 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Experiment.AutoFixture\Experiment.AutoFixture.csproj">
+      <Project>{7f77a967-02aa-47fc-a42a-0382697b483a}</Project>
+      <Name>Experiment.AutoFixture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Experiment\Experiment.csproj">
       <Project>{7e0ac9ae-046f-427d-8e9c-ce0690ff8a31}</Project>
       <Name>Experiment</Name>
