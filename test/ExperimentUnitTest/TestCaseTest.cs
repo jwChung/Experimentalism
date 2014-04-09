@@ -165,11 +165,11 @@ namespace Jwc.Experiment
             Action<int> action = x => { };
             var sut = new TestCase<int>(action);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var testFixture = new FakeTestFixture();
+            var fixture = new FakeTestFixture();
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {
                 Assert.Equal(action.Method, mi);
-                return testFixture;
+                return fixture;
             };
 
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
@@ -177,7 +177,7 @@ namespace Jwc.Experiment
             var command = Assert.IsType<FirstClassCommand>(actual);
             Assert.Equal(method, command.Method);
             Assert.Equal(action, command.Delegate);
-            Assert.Equal(new object[] { testFixture.IntValue }, command.Arguments);
+            Assert.Equal(new[] { fixture.Create(typeof(int)) }, command.Arguments);
         }
 
         [Fact]
@@ -259,11 +259,11 @@ namespace Jwc.Experiment
             Action<int, string> action = (x, y) => { };
             var sut = new TestCase<int, string>(action);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var testFixture = new FakeTestFixture();
+            var fixture = new FakeTestFixture();
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {
                 Assert.Equal(action.Method, mi);
-                return testFixture;
+                return fixture;
             };
 
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
@@ -272,7 +272,7 @@ namespace Jwc.Experiment
             Assert.Equal(method, command.Method);
             Assert.Equal(action, command.Delegate);
             Assert.Equal(
-                new object[] { testFixture.IntValue, testFixture.StringValue },
+                new[] { fixture.Create(typeof(int)), fixture.Create(typeof(string)) },
                 command.Arguments);
         }
     }
