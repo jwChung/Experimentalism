@@ -24,7 +24,7 @@ namespace Jwc.Experiment
             var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();
 
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
-            Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
+            Assert.False(specifiedAssemblies.Except(actual).Any(), "Assemblies are not same.");
         }
 
         [Theory]
