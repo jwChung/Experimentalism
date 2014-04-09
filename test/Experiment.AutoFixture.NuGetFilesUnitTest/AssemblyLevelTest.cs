@@ -27,9 +27,8 @@ namespace Jwc.NuGetFiles
             };
 
             var actual = sut.GetActualReferencedAssemblies();
-            
-            Assert.Equal(specifiedAssemblies.Length, actual.Length);
-            Assert.False(specifiedAssemblies.Except(actual).Any(), "Assemblies are not same.");
+
+            Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
         [Theory]
@@ -49,9 +48,7 @@ namespace Jwc.NuGetFiles
         {
             var content = File.ReadAllText(origin, Encoding.UTF8)
                 .Replace("namespace Jwc.NuGetFiles", "namespace $rootnamespace$");
-
             File.WriteAllText(destination, content, Encoding.UTF8);
-
             Assert.True(File.Exists(destination), "exists.");
         }
     }

@@ -20,22 +20,21 @@ namespace Jwc.Experiment
             };
 
             var actual = sut.GetActualReferencedAssemblies();
-            
-            Assert.Equal(specifiedAssemblies.Length, actual.Length);
-            Assert.False(actual.Except(specifiedAssemblies).Any(), "Assemblies are not same.");
+
+            Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
         [Theory]
         [InlineData("xunit.extensions")]
-        public void SutDoesNotExposeAnyTypeOfSpecifiedReference(string name)
+        public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
             var sut = typeof(BaseTheoremAttribute).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
-            var typesNotExposed = Assembly.Load(assemblyName).GetExportedTypes();
+            var types = Assembly.Load(assemblyName).GetExportedTypes();
 
             // Exercise system and Verify outcome
-            sut.VerifyDoesNotExpose(typesNotExposed);
+            sut.VerifyDoesNotExpose(types);
         }
     }
 }
