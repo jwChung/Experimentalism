@@ -56,6 +56,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutoFixtureAdapter.cs" />
+    <Compile Include="AutoFixtureFirstClassTheoremAttribute.cs" />
     <Compile Include="AutoFixtureTheoremAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
