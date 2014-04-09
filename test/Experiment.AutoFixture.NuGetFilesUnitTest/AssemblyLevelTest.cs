@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Jwc.Experiment;
 using Xunit;
 using Xunit.Extensions;
 
@@ -19,12 +20,14 @@ namespace Jwc.NuGetFiles
             var specifiedAssemblies = new []
             {
                 "mscorlib",
+                "Jwc.Experiment",
                 "Jwc.Experiment.AutoFixture",
-                "Ploeh.AutoFixture"
+                "Ploeh.AutoFixture",
+                "xunit"
             };
 
-            var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();
-
+            var actual = sut.GetActualReferencedAssemblies();
+            
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
             Assert.False(specifiedAssemblies.Except(actual).Any(), "Assemblies are not same.");
         }

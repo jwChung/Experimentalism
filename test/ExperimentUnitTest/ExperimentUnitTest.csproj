@@ -45,6 +45,7 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />

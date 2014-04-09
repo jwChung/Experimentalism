@@ -49,6 +49,9 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
+      <Link>AssemblyExtensions.cs</Link>
+    </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="FirstClassTheoremAttributeTest.cs" />
     <Compile Include="TheoremAttributeTest.cs" />
