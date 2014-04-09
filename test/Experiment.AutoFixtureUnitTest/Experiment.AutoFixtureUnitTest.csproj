@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AutoFixtureAdapterTest.cs" />
+    <Compile Include="AutoFixtureTheoremAttributeTest.cs" />
     <Compile Include="DelegatingSpecimenContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
