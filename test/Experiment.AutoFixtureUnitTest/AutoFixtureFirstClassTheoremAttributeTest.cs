@@ -15,13 +15,6 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreatTestFixtureWithNullTestMethodThrows()
-        {
-            var sut = new FakeFirstClassTheoremAttribute();
-            Assert.Throws<ArgumentNullException>(() => sut.CreateTestFixture(null));
-        }
-
-        [Fact]
         public void CreatTestFixtureReturnsCorrectFixture()
         {
             var sut = new FakeFirstClassTheoremAttribute();
