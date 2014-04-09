@@ -9,6 +9,9 @@ namespace Jwc.NuGetFiles
 {
     public class AssemblyLevelTest
     {
+        const string _productDirectory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
+        const string _testDirectory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
+
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
@@ -26,9 +29,6 @@ namespace Jwc.NuGetFiles
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
             Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
         }
-
-        const string _productDirectory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
-        const string _testDirectory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
 
         [Theory]
         [InlineData(_productDirectory, "TheoremAttribute")]
