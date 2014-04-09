@@ -23,9 +23,7 @@
              Targets="Build;"
              Properties="Configuration=Release;
                          DefineConstants=TRACE,CI;
-                         ">
-      <Output TaskParameter="TargetOutputs" ItemName="TestAssemblies" />
-    </MSBuild>
+                         "/>
     <OnError ExecuteTargets="DeleteKeyFiles" />
   </Target>
 
