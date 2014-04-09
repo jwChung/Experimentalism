@@ -10,7 +10,7 @@ namespace Jwc.NuGetFiles
     public class AssemblyLevelTest
     {
         [Fact]
-        public void TargetAssemblyReferencesOnlySpecifiedAssemblies()
+        public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
@@ -36,7 +36,7 @@ namespace Jwc.NuGetFiles
         [InlineData(_productDirectory, "AutoFixtureAdapter")]
         [InlineData(_testDirectory, "Scenario")]
         [InlineData(_testDirectory, "Person")]
-        public void ThisCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
+        public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";

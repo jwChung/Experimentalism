@@ -6,7 +6,7 @@ namespace Jwc.Experiment
     public class AssemblyLevelTest
     {
         [Fact]
-        public void TargetAssemblyReferencesOnlySpecifiedAssemblies()
+        public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(BaseTheoremAttribute).Assembly;
             var specifiedAssemblies = new []
@@ -21,6 +21,6 @@ namespace Jwc.Experiment
 
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
             Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
-        } 
+        }
     }
 }
