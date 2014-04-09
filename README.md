@@ -214,6 +214,8 @@ Experimentalism은 아래와 같은 NuGet packages들을 배포하고 있으며,
 * [**Experimental.AutoFixture**](https://www.nuget.org/packages/Experiment.AutoFixture/)
   * [Experimental.nuget](https://www.nuget.org/packages/Experiment/)
   * [AutoFixture.nuget(v3.0.1)](https://www.nuget.org/packages/AutoFixture/3.0.1) - [license](http://autofixture.codeplex.com/license)
+  * [AutoFixture.Xunit.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
+
 * [**Experimental.AutoFixtureWithExample**](https://www.nuget.org/packages/Experiment.AutoFixtureWithExample/)
   * [Experimental.AutoFixture.nuget](https://www.nuget.org/packages/Experiment.AutoFixture/)
   * [xunit.extensions.nuget(v1.9.0.1566)](https://www.nuget.org/packages/xunit.extensions/1.9.0.1566) - [license](http://xunit.codeplex.com/license)
