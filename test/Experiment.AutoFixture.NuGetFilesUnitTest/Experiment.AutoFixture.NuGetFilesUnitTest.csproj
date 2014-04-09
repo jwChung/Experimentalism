@@ -52,7 +52,6 @@
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="FirstClassTheoremAttributeTest.cs" />
     <Compile Include="TheoremAttributeTest.cs" />
-    <Compile Include="DelegatingSpecimenContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
   </ItemGroup>
