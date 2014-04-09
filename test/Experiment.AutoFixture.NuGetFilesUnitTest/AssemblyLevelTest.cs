@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Jwc.Experiment;
 using Xunit;
 using Xunit.Extensions;
 
@@ -9,34 +10,33 @@ namespace Jwc.NuGetFiles
 {
     public class AssemblyLevelTest
     {
+        const string _productDirectory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
+        const string _testDirectory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
+
         [Fact]
-        public void TargetAssemblyReferencesOnlySpecifiedAssemblies()
+        public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 "mscorlib",
-                "System.Core",
                 "Jwc.Experiment",
-                "Ploeh.AutoFixture"
+                "Jwc.Experiment.AutoFixture",
+                "Ploeh.AutoFixture",
+                "xunit"
             };
 
-            var actual = sut.GetReferencedAssemblies().Select(an => an.Name).Distinct().ToArray();
-
+            var actual = sut.GetActualReferencedAssemblies();
+            
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
-            Assert.False(specifiedAssemblies.Except(actual).Any(), "Empty");
+            Assert.False(specifiedAssemblies.Except(actual).Any(), "Assemblies are not same.");
         }
-
-        const string _productDirectory = @"..\..\..\..\src\Experiment.AutoFixture.NuGetFiles\";
-        const string _testDirectory = @"..\..\..\..\test\Experiment.AutoFixture.NuGetFilesUnitTest\";
 
         [Theory]
         [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
-        [InlineData(_productDirectory, "AutoFixtureAdapter")]
         [InlineData(_testDirectory, "Scenario")]
-        [InlineData(_testDirectory, "Person")]
-        public void ThisCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
+        public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {
             var origin = directory + originName + ".cs";
             var destination = directory + originName + ".cs.pp";

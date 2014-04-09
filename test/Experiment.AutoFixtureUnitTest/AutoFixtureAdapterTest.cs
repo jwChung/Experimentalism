@@ -1,8 +1,7 @@
 ﻿using System;
-using Jwc.Experiment;
 using Xunit;
 
-namespace Jwc.NuGetFiles
+namespace Jwc.Experiment
 {
     public class AutoFixtureAdapterTest
     {

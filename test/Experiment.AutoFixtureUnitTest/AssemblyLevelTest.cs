@@ -10,27 +10,29 @@ namespace Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(BaseTheoremAttribute).Assembly;
+            var sut = typeof(AutoFixtureAdapter).Assembly;
             var specifiedAssemblies = new []
             {
                 "mscorlib",
                 "System.Core",
-                "xunit",
-                "xunit.extensions"
+                "Jwc.Experiment",
+                "Ploeh.AutoFixture",
+                "Ploeh.AutoFixture.Xunit",
+                "xunit"
             };
 
             var actual = sut.GetActualReferencedAssemblies();
-            
+
             Assert.Equal(specifiedAssemblies.Length, actual.Length);
-            Assert.False(actual.Except(specifiedAssemblies).Any(), "Assemblies are not same.");
+            Assert.False(specifiedAssemblies.Except(actual).Any(), "Assemblies are not same.");
         }
 
         [Theory]
-        [InlineData("xunit.extensions")]
+        [InlineData("Ploeh.AutoFixture.Xunit")]
         public void SutDoesNotExposeAnyTypeOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(BaseTheoremAttribute).Assembly;
+            var sut = typeof(AutoFixtureAdapter).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var typesNotExposed = Assembly.Load(assemblyName).GetExportedTypes();
 
