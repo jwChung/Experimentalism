@@ -21,11 +21,6 @@ namespace Jwc.Experiment
         /// </returns>
         public override ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
-            if (testMethod == null)
-            {
-                throw new ArgumentNullException("testMethod");
-            }
-
             return new AutoFixtureAdapter(new SpecimenContext(CreateFixture()));
         }
 
