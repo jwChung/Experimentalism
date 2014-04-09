@@ -36,18 +36,6 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreateTestFixtureAlwaysReturnsNewInstance()
-        {
-            var sut = new FakeAutoFixtureTheoremAttribute();
-            var dummyMethod = typeof(object).GetMethod("ToString");
-
-            var actual = sut.CreateTestFixture(dummyMethod);
-
-            Assert.NotNull(actual);
-            Assert.NotSame(sut.CreateTestFixture(dummyMethod), actual);
-        }
-
-        [Fact]
         public void CreateTestFixtureAppliesCustomizeAttribute()
         {
             var sut = new FakeAutoFixtureTheoremAttribute();

@@ -19,7 +19,6 @@ namespace Jwc.NuGetFiles
             var specifiedAssemblies = new []
             {
                 "mscorlib",
-                "System.Core",
                 "Jwc.Experiment",
                 "Jwc.Experiment.AutoFixture",
                 "Ploeh.AutoFixture"
