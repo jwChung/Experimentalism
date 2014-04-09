@@ -2,6 +2,7 @@
   <ItemGroup>
     <Projects Include="..\src\**\*.csproj" />
     <TestProjects Include="..\test\**\*.csproj" />
+    <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
     <NuGetFiles Include="*.nuspec" />
     <CommonAssemblyInfo Include="CommonAssemblyInfo.cs" />
   </ItemGroup>
