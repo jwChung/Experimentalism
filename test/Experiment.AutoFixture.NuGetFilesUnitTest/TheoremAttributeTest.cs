@@ -38,6 +38,5 @@ namespace Jwc.NuGetFiles
             Assert.NotNull(actual);
             Assert.NotSame(sut.CreateTestFixture(dummyMethod), actual);
         }
-
     }
 }

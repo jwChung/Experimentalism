@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using Jwc.Experiment;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.NuGetFiles
 {
@@ -12,26 +10,15 @@ namespace Jwc.NuGetFiles
     /// using the AutoFixture library.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+    public sealed class FirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
     {
         /// <summary>
-        /// Creates an instance of <see cref="ITestFixture" />.
+        /// Creates the fixture.
         /// </summary>
-        /// <param name="testMethod">The test method</param>
         /// <returns>
-        /// The created fixture.
+        /// The new fixture instance.
         /// </returns>
-        public override ITestFixture CreateTestFixture(MethodInfo testMethod)
-        {
-            if (testMethod == null)
-            {
-                throw new ArgumentNullException("testMethod");
-            }
-
-            return new AutoFixtureAdapter(new SpecimenContext(CreateFixture()));
-        }
-
-        private static IFixture CreateFixture()
+        protected override IFixture CreateFixture()
         {
             return new Fixture();
         }

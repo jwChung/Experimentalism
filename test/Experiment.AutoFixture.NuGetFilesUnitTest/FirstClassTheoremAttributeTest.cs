@@ -1,5 +1,4 @@
-﻿using System;
-using Jwc.Experiment;
+﻿using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
@@ -9,17 +8,10 @@ namespace Jwc.NuGetFiles
     public class FirstClassTheoremAttributeTest
     {
         [Fact]
-        public void SutIsDefaultFirstClassTheoremAttribute()
+        public void SutIsAutoFixtureFirstClassTheoremAttribute()
         {
             var sut = new FirstClassTheoremAttribute();
-            Assert.IsAssignableFrom<BaseFirstClassTheoremAttribute>(sut);
-        }
-
-        [Fact]
-        public void CreatTestFixtureWithNullTestMethodThrows()
-        {
-            var sut = new FirstClassTheoremAttribute();
-            Assert.Throws<ArgumentNullException>(() => sut.CreateTestFixture(null));
+            Assert.IsAssignableFrom<AutoFixtureFirstClassTheoremAttribute>(sut);
         }
 
         [Fact]
