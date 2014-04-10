@@ -1,4 +1,5 @@
 ﻿using System;
+using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
@@ -24,6 +25,18 @@ namespace Jwc.Experiment
             }
 
             _specimenContext = specimenContext;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoFixtureAdapter"/> class.
+        /// </summary>
+        /// <param name="fixture">The fixture.</param>
+        public AutoFixtureAdapter(IFixture fixture)
+        {
+            if (fixture == null)
+            {
+                throw new ArgumentNullException("fixture");
+            }
         }
 
         /// <summary>

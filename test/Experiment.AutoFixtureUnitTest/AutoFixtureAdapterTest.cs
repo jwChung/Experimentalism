@@ -1,4 +1,6 @@
 ﻿using System;
+using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
 namespace Jwc.Experiment
@@ -26,7 +28,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullContextThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter(null));
+            Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter((ISpecimenContext)null));
         }
 
         [Fact]
@@ -47,6 +49,12 @@ namespace Jwc.Experiment
             var actual = sut.Create(request);
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullFixtureThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter((IFixture)null));
         }
     }
 }
