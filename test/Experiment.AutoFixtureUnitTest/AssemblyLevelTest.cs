@@ -52,6 +52,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [Theory]
+        [InlineData(_productDirectory, "AutoFixtureAdapter")]
         [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
         [InlineData(_testDirectory, "Scenario")]
