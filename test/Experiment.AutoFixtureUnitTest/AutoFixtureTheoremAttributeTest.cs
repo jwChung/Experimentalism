@@ -1,6 +1,5 @@
 ﻿using System;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 
@@ -31,8 +30,7 @@ namespace Jwc.Experiment
             var actual = sut.CreateTestFixture(dummyMethod);
 
             var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
-            var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
-            Assert.IsType<Fixture>(context.Builder);
+            Assert.IsType<Fixture>(adapter.Fixture);
         }
 
         [Fact]

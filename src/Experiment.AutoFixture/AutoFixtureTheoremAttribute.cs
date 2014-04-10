@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
 using Ploeh.AutoFixture.Xunit;
 
 namespace Jwc.Experiment
@@ -33,10 +32,9 @@ namespace Jwc.Experiment
             }
 
             return new AutoFixtureAdapter(
-                new SpecimenContext(
-                    CustomizeFixture(
-                        CreateFixture(),
-                        testMethod.GetParameters())));
+                CustomizeFixture(
+                    CreateFixture(),
+                    testMethod.GetParameters()));
         }
 
         private static IFixture CustomizeFixture(

@@ -1,6 +1,5 @@
 ﻿using Jwc.Experiment;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
 namespace Jwc.NuGetFiles
@@ -23,8 +22,7 @@ namespace Jwc.NuGetFiles
             var actual = sut.CreateTestFixture(dummyMethod);
 
             var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
-            var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
-            Assert.IsType<Fixture>(context.Builder);
+            Assert.IsType<Fixture>(adapter.Fixture);
         }
     }
 }

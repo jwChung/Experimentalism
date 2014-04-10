@@ -1,4 +1,5 @@
 ﻿using System;
+using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
@@ -9,34 +10,34 @@ namespace Jwc.Experiment
     /// </summary>
     public class AutoFixtureAdapter : ITestFixture
     {
+        private readonly IFixture _fixture;
         private readonly ISpecimenContext _specimenContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoFixtureAdapter"/> class.
         /// </summary>
-        /// <param name="specimenContext">The specimen context.</param>
-        /// <exception cref="System.ArgumentNullException">specimenContext</exception>
-        public AutoFixtureAdapter(ISpecimenContext specimenContext)
+        /// <param name="fixture">The fixture.</param>
+        public AutoFixtureAdapter(IFixture fixture)
         {
-            if (specimenContext == null)
+            if (fixture == null)
             {
-                throw new ArgumentNullException("specimenContext");
+                throw new ArgumentNullException("fixture");
             }
 
-            _specimenContext = specimenContext;
+            _fixture = fixture;
+            _fixture.Inject<ITestFixture>(this);
+            _fixture.Inject(this);
+            _specimenContext = new SpecimenContext(fixture);
         }
 
         /// <summary>
-        /// Gets the specimen context.
+        /// Gets the fixture.
         /// </summary>
-        /// <value>
-        /// The specimen context.
-        /// </value>
-        public ISpecimenContext SpecimenContext
+        public IFixture Fixture
         {
             get
             {
-                return _specimenContext;
+                return _fixture;
             }
         }
 
@@ -50,7 +51,7 @@ namespace Jwc.Experiment
         /// </returns>
         public object Create(object request)
         {
-            return SpecimenContext.Resolve(request);
+            return _specimenContext.Resolve(request);
         }
     }
 }

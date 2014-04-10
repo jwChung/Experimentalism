@@ -1,5 +1,4 @@
 ﻿using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
 namespace Jwc.Experiment
@@ -22,8 +21,7 @@ namespace Jwc.Experiment
             var actual = sut.CreateTestFixture(dummyMethod);
 
             var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
-            var context = Assert.IsType<SpecimenContext>(adapter.SpecimenContext);
-            Assert.IsType<Fixture>(context.Builder);
+            Assert.IsType<Fixture>(adapter.Fixture);
         }
 
         public class FakeFirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
