@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class AutoFixtureFirstClassTheoremAttributeTest
+    public class FirstClassTheoremAttributeTest
     {
         [Fact]
         public void SutIsDefaultFirstClassTheoremAttribute()
@@ -14,7 +14,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreatTestFixtureReturnsCorrectFixture()
+        public void CreatTestFixtureReturnsCorrectTestFixture()
         {
             var sut = new TestSpecificFirstClassTheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
@@ -25,16 +25,24 @@ namespace Jwc.Experiment
             Assert.IsType<Fixture>(adapter.Fixture);
         }
 
-        public class TestSpecificFirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
+        [Fact]
+        public void CreateFixtureReturnsCorrectFixture()
+        {
+            var sut = new TestSpecificFirstClassTheoremAttribute();
+            var actual = sut.CallCreateFixture();
+            Assert.IsType<Fixture>(actual);
+        }
+
+        public class TestSpecificFirstClassTheoremAttribute : FirstClassTheoremAttribute
         {
             public ITestFixture CallCreateTestFixture(MethodInfo testMethod)
             {
                 return CreateTestFixture(testMethod);
             }
 
-            protected override IFixture CreateFixture()
+            public IFixture CallCreateFixture()
             {
-                return new Fixture();
+                return CreateFixture();
             }
         }
     }

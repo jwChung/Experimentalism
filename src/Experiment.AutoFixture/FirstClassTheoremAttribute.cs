@@ -8,7 +8,7 @@ namespace Jwc.Experiment
     /// executable test cases. This attribute supports to generate auto data
     /// using the AutoFixture library.
     /// </summary>
-    public abstract class AutoFixtureFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+    public class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
     {
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture" />.
@@ -26,6 +26,9 @@ namespace Jwc.Experiment
         /// Creates the fixture.
         /// </summary>
         /// <returns>The new fixture instance.</returns>
-        protected abstract IFixture CreateFixture();
+        protected virtual IFixture CreateFixture()
+        {
+            return new Fixture();
+        }
     }
 }
