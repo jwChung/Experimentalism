@@ -55,10 +55,10 @@ namespace Jwc.Experiment
 
         private static void AssertDoesNotExpose(MemberInfo member, ICollection<Type> typesNotExposed)
         {
-            var type = member as FieldInfo;
-            if (type != null)
+            var fieldInfo = member as FieldInfo;
+            if (fieldInfo != null)
             {
-                AssertDoesNotContain(type.FieldType, typesNotExposed);
+                AssertDoesNotContain(fieldInfo.FieldType, typesNotExposed);
                 return;
             }
 
