@@ -55,6 +55,7 @@
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AutoFixtureAdapterTest.cs" />
     <Compile Include="FirstClassTheoremAttributeTest.cs" />
+    <Compile Include="Scenario.cs" />
     <Compile Include="TheoremAttributeTest.cs" />
     <Compile Include="DelegatingSpecimenContext.cs" />
     <Compile Include="Person.cs" />
