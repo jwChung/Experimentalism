@@ -10,10 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{955D29
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture.NuGetFiles", "src\Experiment.AutoFixture.NuGetFiles\Experiment.AutoFixture.NuGetFiles.csproj", "{B78B09AD-1B2D-40E8-A4E0-15913A04B313}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture.NuGetFilesUnitTest", "test\Experiment.AutoFixture.NuGetFilesUnitTest\Experiment.AutoFixture.NuGetFilesUnitTest.csproj", "{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture", "src\Experiment.AutoFixture\Experiment.AutoFixture.csproj", "{7F77A967-02AA-47FC-A42A-0382697B483A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixtureUnitTest", "test\Experiment.AutoFixtureUnitTest\Experiment.AutoFixtureUnitTest.csproj", "{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}"
@@ -32,14 +28,6 @@ Global
 		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B78B09AD-1B2D-40E8-A4E0-15913A04B313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B78B09AD-1B2D-40E8-A4E0-15913A04B313}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B78B09AD-1B2D-40E8-A4E0-15913A04B313}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B78B09AD-1B2D-40E8-A4E0-15913A04B313}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C973EFC7-A82F-4BFB-B564-93C1E5B8186B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F77A967-02AA-47FC-A42A-0382697B483A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F77A967-02AA-47FC-A42A-0382697B483A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F77A967-02AA-47FC-A42A-0382697B483A}.Release|Any CPU.ActiveCfg = Release|Any CPU
