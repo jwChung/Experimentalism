@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Reflection;
+using Jwc.Experiment;
 using Ploeh.AutoFixture;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     /// <summary>
     /// A test attribute used to adorn methods that creates first-class 

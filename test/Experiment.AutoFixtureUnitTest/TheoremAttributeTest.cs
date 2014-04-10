@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Reflection;
+using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     public class TheoremAttributeTest
     {

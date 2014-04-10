@@ -3,10 +3,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Jwc.Experiment;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     public class AssemblyLevelTest
     {
@@ -66,7 +67,7 @@ namespace Jwc.Experiment
         private static void VerifyGeneratingFile(string origin, string destination)
         {
             var content = File.ReadAllText(origin, Encoding.UTF8)
-                .Replace("namespace Jwc.NuGetFiles", "namespace $rootnamespace$");
+                .Replace("namespace NuGet.Jwc.Experiment", "namespace $rootnamespace$");
             File.WriteAllText(destination, content, Encoding.UTF8);
             Assert.True(File.Exists(destination), "exists.");
         }

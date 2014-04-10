@@ -1,7 +1,7 @@
 ﻿using System;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     public class DelegatingSpecimenContext : ISpecimenContext
     {

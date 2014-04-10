@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     /// <summary>
     /// A test attribute declared on a test method to indicate a test case.

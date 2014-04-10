@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
+using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     public class FirstClassTheoremAttributeTest
     {
