@@ -10,6 +10,7 @@ namespace Jwc.NuGetFiles
     /// parameterized test, and supports to generate auto data using
     /// the AutoFixture library.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is part of an inheritance hierarchy and can be inherited in order to extend its behavior.")]
     [AttributeUsage(AttributeTargets.Method)]
     public class TheoremAttribute : AutoFixtureTheoremAttribute
     {
