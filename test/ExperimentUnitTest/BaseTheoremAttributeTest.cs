@@ -306,7 +306,7 @@ namespace Jwc.Experiment
                 set;
             }
 
-            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
                 return OnCreateTestFixture(testMethod);
             }

@@ -101,7 +101,7 @@ namespace Jwc.Experiment
 
         private class TheoremAttribute : BaseTheoremAttribute
         {
-            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
                 return new CustomTestFixture();
             }
@@ -109,7 +109,7 @@ namespace Jwc.Experiment
 
         private class FirstClassTheoremAttribute : BaseTheoremAttribute
         {
-            public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
                 return new CustomTestFixture();
             }

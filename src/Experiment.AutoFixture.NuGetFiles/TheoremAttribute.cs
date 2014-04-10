@@ -11,7 +11,7 @@ namespace Jwc.NuGetFiles
     /// the AutoFixture library.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class TheoremAttribute : AutoFixtureTheoremAttribute
+    public class TheoremAttribute : AutoFixtureTheoremAttribute
     {
         /// <summary>
         /// Creates the fixture.

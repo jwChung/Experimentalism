@@ -10,7 +10,7 @@ namespace Jwc.NuGetFiles
     /// using the AutoFixture library.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class FirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
+    public class FirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
     {
         /// <summary>
         /// Creates the fixture.

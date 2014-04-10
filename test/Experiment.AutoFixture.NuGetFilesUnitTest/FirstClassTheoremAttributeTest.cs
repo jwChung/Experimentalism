@@ -14,15 +14,19 @@ namespace Jwc.NuGetFiles
         }
 
         [Fact]
-        public void CreatTestFixtureReturnsCorrectFixture()
+        public void CreatFixtureReturnsCorrectFixture()
         {
-            var sut = new FirstClassTheoremAttribute();
-            var dummyMethod = typeof(object).GetMethod("ToString");
+            var sut = new TestSpecificFirstClassTheoremAttribute();
+            var actual = sut.CallCreateFixture();
+            Assert.IsType<Fixture>(actual);
+        }
 
-            var actual = sut.CreateTestFixture(dummyMethod);
-
-            var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
-            Assert.IsType<Fixture>(adapter.Fixture);
+        private class TestSpecificFirstClassTheoremAttribute : FirstClassTheoremAttribute
+        {
+            public IFixture CallCreateFixture()
+            {
+                return CreateFixture();
+            }
         }
     }
 }

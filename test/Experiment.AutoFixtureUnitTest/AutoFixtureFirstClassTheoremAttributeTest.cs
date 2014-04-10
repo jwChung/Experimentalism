@@ -1,4 +1,5 @@
-﻿using Ploeh.AutoFixture;
+﻿using System.Reflection;
+using Ploeh.AutoFixture;
 using Xunit;
 
 namespace Jwc.Experiment
@@ -18,7 +19,7 @@ namespace Jwc.Experiment
             var sut = new TestSpecificFirstClassTheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
 
-            var actual = sut.CreateTestFixture(dummyMethod);
+            var actual = sut.CallCreateTestFixture(dummyMethod);
 
             var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
             Assert.IsType<Fixture>(adapter.Fixture);
@@ -26,6 +27,11 @@ namespace Jwc.Experiment
 
         public class TestSpecificFirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
         {
+            public ITestFixture CallCreateTestFixture(MethodInfo testMethod)
+            {
+                return CreateTestFixture(testMethod);
+            }
+
             protected override IFixture CreateFixture()
             {
                 return new Fixture();

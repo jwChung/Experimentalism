@@ -14,27 +14,19 @@ namespace Jwc.NuGetFiles
         }
 
         [Fact]
-        public void CreatTestFixtureReturnsCorrectFixture()
+        public void CreatFixtureReturnsCorrectFixture()
         {
-            var sut = new TheoremAttribute();
-            var dummyMethod = typeof(object).GetMethod("ToString");
-
-            var actual = sut.CreateTestFixture(dummyMethod);
-
-            var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
-            Assert.IsType<Fixture>(adapter.Fixture);
+            var sut = new TestSpecificTheoremAttribute();
+            var actual = sut.CallCreateFixture();
+            Assert.IsType<Fixture>(actual);
         }
-        
-        [Fact]
-        public void CreateTestFixtureAlwaysReturnsNewInstance()
+
+        private class TestSpecificTheoremAttribute : TheoremAttribute
         {
-            var sut = new TheoremAttribute();
-            var dummyMethod = typeof(object).GetMethod("ToString");
-
-            var actual = sut.CreateTestFixture(dummyMethod);
-
-            Assert.NotNull(actual);
-            Assert.NotSame(sut.CreateTestFixture(dummyMethod), actual);
+            public IFixture CallCreateFixture()
+            {
+                return CreateFixture();
+            }
         }
     }
 }

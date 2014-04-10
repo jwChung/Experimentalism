@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
@@ -18,7 +19,7 @@ namespace Jwc.Experiment
         public void CreatTestFixtureWithNullTestMethodThrows()
         {
             var sut = new TestSpecificFixtureTheoremAttribute();
-            Assert.Throws<ArgumentNullException>(() => sut.CreateTestFixture(null));
+            Assert.Throws<ArgumentNullException>(() => sut.CallCreateTestFixture(null));
         }
 
         [Fact]
@@ -27,7 +28,7 @@ namespace Jwc.Experiment
             var sut = new TestSpecificFixtureTheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
 
-            var actual = sut.CreateTestFixture(dummyMethod);
+            var actual = sut.CallCreateTestFixture(dummyMethod);
 
             var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
             Assert.IsType<Fixture>(adapter.Fixture);
@@ -37,7 +38,7 @@ namespace Jwc.Experiment
         public void CreateTestFixtureAppliesCustomizeAttribute()
         {
             var sut = new TestSpecificFixtureTheoremAttribute();
-            var actual = sut.CreateTestFixture(GetType().GetMethod("FrozenTest"));
+            var actual = sut.CallCreateTestFixture(GetType().GetMethod("FrozenTest"));
             Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
 
@@ -46,7 +47,7 @@ namespace Jwc.Experiment
         {
             var sut = new TestSpecificFixtureTheoremAttribute();
 
-            var actual = sut.CreateTestFixture(GetType().GetMethod("PersonTest"));
+            var actual = sut.CallCreateTestFixture(GetType().GetMethod("PersonTest"));
 
             var name = (string)actual.Create(typeof(string));
             var age = (int)actual.Create(typeof(int));
@@ -62,7 +63,7 @@ namespace Jwc.Experiment
         {
             var sut = new TestSpecificFixtureTheoremAttribute();
 
-            var actual = sut.CreateTestFixture(GetType().GetMethod("ManyAttributeTest"));
+            var actual = sut.CallCreateTestFixture(GetType().GetMethod("ManyAttributeTest"));
 
             var person = (Person)actual.Create(typeof(Person));
             Assert.NotNull(person.Name);
@@ -83,6 +84,11 @@ namespace Jwc.Experiment
 
         private class TestSpecificFixtureTheoremAttribute : AutoFixtureTheoremAttribute
         {
+            public ITestFixture CallCreateTestFixture(MethodInfo testMethod)
+            {
+                return CreateTestFixture(testMethod);
+            }
+
             protected override IFixture CreateFixture()
             {
                 return new Fixture();

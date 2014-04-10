@@ -17,7 +17,7 @@ namespace Jwc.Experiment
         /// <returns>
         /// The created fixture.
         /// </returns>
-        public override ITestFixture CreateTestFixture(MethodInfo testMethod)
+        protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
             return new AutoFixtureAdapter(CreateFixture());
         }

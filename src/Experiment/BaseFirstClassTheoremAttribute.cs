@@ -15,17 +15,6 @@ namespace Jwc.Experiment
     public abstract class BaseFirstClassTheoremAttribute : FactAttribute
     {
         /// <summary>
-        /// Creates an instance of <see cref="ITestFixture"/>.
-        /// </summary>
-        /// <param name="testMethod">
-        /// The test method
-        /// </param>
-        /// <returns>
-        /// The created fixture.
-        /// </returns>
-        public abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
-
-        /// <summary>
         /// Enumerates the test commands represented by this test method.
         /// Derived classes should override this method to return instances of
         /// <see cref="ITestCommand" />, one per execution of a test method.
@@ -53,6 +42,17 @@ namespace Jwc.Experiment
                 return new ITestCommand[] { new ExceptionCommand(method, exception) };
             }
         }
+
+        /// <summary>
+        /// Creates an instance of <see cref="ITestFixture"/>.
+        /// </summary>
+        /// <param name="testMethod">
+        /// The test method
+        /// </param>
+        /// <returns>
+        /// The created fixture.
+        /// </returns>
+        protected abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
 
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
