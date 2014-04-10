@@ -12,10 +12,11 @@
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Experiment" version="0.0.0" />
-      <dependency id="AutoFixture.Xunit" version="3.0.1" />
     </dependencies>
   </metadata>
   <files>
+    <file src="..\packages\AutoFixture.Xunit.3.0.1\lib\net40\Ploeh.AutoFixture.Xunit.dll" target="lib\net40" />
+    <file src="..\packages\AutoFixture.Xunit.3.0.1\lib\net40\Ploeh.AutoFixture.Xunit.xml" target="lib\net40" />
     <file src="..\src\Experiment.AutoFixture\**\*.pp" target="content\net40" />
     <file src="Install.ps1" target="tools" />
   </files>
