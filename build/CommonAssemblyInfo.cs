@@ -10,16 +10,20 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.4")]
-[assembly: AssemblyInformationalVersion("0.9.4")]
+[assembly: AssemblyVersion("0.9.5")]
+[assembly: AssemblyInformationalVersion("0.9.5")]
 
 /*
- * Version 0.9.4
+ * Version 0.9.5
  * 
- * Lets AutoFixtureAdapter return itself for the request as type of
- * ITestFixture and AutoFixtureAdapter.
+ * Changes the accessibility of CreateTestFixture from public to protected.
  * 
  * BREAKING CHANGE
- * - AutoFixtureAdapter(ISpecimenContext) ->
- *   AutoFixtureAdapter(IFixture)
+ * - the member of BaseTheoremAttribute,
+ *                 BaseFirstClassTheoremAttribute,
+ *                 AutoFixtureTheoremAttribute,
+ *                 AutoFixtureFirstClassTheoremAttribute
+ *   
+ *   public ITestFixture CreateTestFixture(MethodInfo) ->
+ *   protected ITestFixture CreateTestFixture(MethodInfo)
  */
