@@ -194,7 +194,7 @@ Experiment.AutoFixture
 Experiment.AutoFixture auto data기능을 AutoFixture로부터 채용합니다. 따라서, Experiment.AutoFixture는 AutoFixture와 앞선 Experiment 라이브러리에 의존성을 가지게 됩니다.
 
 ### Source code transformations
-Experiment.AutoFixture은 *.dll 형태로 제공되지 않고, 해당 프로젝트에 소스코드 파일이 직접 추가되는 형태로 배포되어, 사용자로 하여금 특정 목적에 맞게 소스코드를 수정할 수 있게 해주는 이점을 제공합니다(customization). _Source code transformations_에 대한 자세한 사항은 NuGet의 [도움말](http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations#Source_Code_Transformations)을 참고하세요.
+Experiment.AutoFixture은 dll 형태로 제공되지 않고, 해당 프로젝트에 소스코드 파일이 직접 추가되는 형태로 배포되어, 사용자로 하여금 특정 목적에 맞게 소스코드를 수정할 수 있게 해주는 이점을 제공합니다(customization). _Source code transformations_에 대한 자세한 사항은 NuGet의 [도움말](http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations#Source_Code_Transformations)을 참고하세요.
 
 ### How to install
 Experiment.AutoFixture은 [NuGet](https://www.nuget.org/packages/Experiment.AutoFixture/)에 등록이 되어있으므로,
@@ -219,7 +219,6 @@ Experimentalism은 아래와 같은 NuGet packages들을 배포하고 있으며,
 * [**Experimental.AutoFixtureWithExample**](https://www.nuget.org/packages/Experiment.AutoFixtureWithExample/)
   * [Experimental.AutoFixture.nuget](https://www.nuget.org/packages/Experiment.AutoFixture/)
   * [xunit.extensions.nuget(v1.9.0.1566)](https://www.nuget.org/packages/xunit.extensions/1.9.0.1566) - [license](http://xunit.codeplex.com/license)
-  * [AutoFixture.Xunit.nuget(v3.0.1)](https://www.nuget.org/packages/AutoFixture.Xunit/3.0.1) - [license](http://autofixture.codeplex.com/license)
 
 Questions
 ---------
@@ -230,7 +229,7 @@ Additional references
 Experimentalism은 각 테스트 프로젝트에서 해당 프로젝트에 대한 시나리오 테스트(acceptance test)를 포함하고 있습니다. 이 시나리오 테스트들은 해당 프로젝트를 어떻게 이용하는지 간략히 잘 나타내고 있습니다. 아래 링크를 참고하세요.
 
 * [Experiment scenario tests](https://github.com/jwChung/Experimentalism/blob/master/test/ExperimentUnitTest/Scenario.cs)
-* [Experiment.AutoFixture scenario tests](https://github.com/jwChung/Experimentalism/blob/master/test/Experiment.AutoFixture.NuGetFilesUnitTest/Scenario.cs)
+* [Experiment.AutoFixture scenario tests](https://github.com/jwChung/Experimentalism/blob/master/test/Experiment.AutoFixtureUnitTest/Scenario.cs)
 
 Contributions
 -------------
@@ -239,7 +238,7 @@ Contributions
 관심이 있으신 **누구나** Experimentalism에 참여하실 수 있습니다. 특히, TDD에 관심있거나 또는 배우고자하는 분들이 참여하시면 TDD에 관한 insight를 얻을 수 있을 것으로 생각됩니다. 참여방법은 [CONTRIBUTING 문서](https://github.com/jwChung/Experimentalism/blob/master/CONTRIBUTING.md)를 통해서 확인하실 수 있습니다.
 
 ###New Contributor? Jump In!
-Experimentalism 오픈소스 참여에 익숙하지 않으신 분들은 [Issue list](https://github.com/jwChung/Experimentalism/issues?labels=jump+in)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨은 다음과 같은 의미이며, _Experimentalism 오픈소스 참여를 독려하기 위한 장치_입니다.
+Experimentalism 오픈소스 참여에 익숙하지 않으신 분들은 [Issue list](https://github.com/jwChung/Experimentalism/issues)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨은 다음과 같은 의미이며, _Experimentalism 오픈소스 참여를 독려하기 위한 장치_입니다.
 
 * 해당 이슈를 해결하는데 상대적으로 많은 시간을 할애하지 않아도 된다.
 * 상대적으로 독립적인 이슈이기 때문에 이해하기 쉽다.

@@ -59,7 +59,7 @@ Visual studio에서는 release모드에서 모든 테스트들이 성공하고, 
 
 Jump in
 --------
-Experimentalism 오픈소스 참여에 익숙하지 않으신 분들은 [Issue list](https://github.com/jwChung/Experimentalism/issues?labels=jump+in)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨은 다음과 같은 의미이며, _Experimentalism 오픈소스 참여를 독려하기 위한 장치_입니다.
+Experimentalism 오픈소스 참여에 익숙하지 않으신 분들은 [Issue list](https://github.com/jwChung/Experimentalism/issues)에서 **Jump in** 라벨이 붙은 이슈를 주목하시기 바랍니다. Jump in 라벨은 다음과 같은 의미이며, _Experimentalism 오픈소스 참여를 독려하기 위한 장치_입니다.
 
 * 해당 이슈를 해결하는데 상대적으로 많은 시간을 할애하지 않아도 된다.
 * 상대적으로 독립적인 이슈이기 때문에 이해하기 쉽다.
