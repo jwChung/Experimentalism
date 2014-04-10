@@ -25,6 +25,8 @@ namespace Jwc.Experiment
             }
 
             _fixture = fixture;
+            _fixture.Inject<ITestFixture>(this);
+            _fixture.Inject(this);
             _specimenContext = new SpecimenContext(fixture);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Ploeh.AutoFixture;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Jwc.Experiment
 {
@@ -41,6 +42,16 @@ namespace Jwc.Experiment
             var actual = sut.Fixture;
 
             Assert.Same(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(typeof(ITestFixture))]
+        [InlineData(typeof(AutoFixtureAdapter))]
+        public void CreateTestFixtureReturnsItself(Type testFixtureType)
+        {
+            var sut = new AutoFixtureAdapter(new Fixture());
+            var actual = sut.Create(testFixtureType);
+            Assert.Same(sut, actual);
         }
     }
 }
