@@ -13,7 +13,7 @@ namespace Jwc.Experiment
     /// parameterized test, and supports to generate auto data using
     /// the AutoFixture library.
     /// </summary>
-    public abstract class AutoFixtureTheoremAttribute : BaseTheoremAttribute
+    public abstract class TheoremAttribute : BaseTheoremAttribute
     {
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture"/>.

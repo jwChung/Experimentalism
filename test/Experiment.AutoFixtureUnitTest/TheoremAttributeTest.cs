@@ -6,26 +6,26 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class AutoFixtureTheoremAttributeTest
+    public class TheoremAttributeTest
     {
         [Fact]
         public void SutIsBaseTheoremAttribute()
         {
-            var sut = new TestSpecificFixtureTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             Assert.IsAssignableFrom<BaseTheoremAttribute>(sut);
         }
 
         [Fact]
         public void CreatTestFixtureWithNullTestMethodThrows()
         {
-            var sut = new TestSpecificFixtureTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             Assert.Throws<ArgumentNullException>(() => sut.CallCreateTestFixture(null));
         }
 
         [Fact]
         public void CreatTestFixtureReturnsCorrectFixture()
         {
-            var sut = new TestSpecificFixtureTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
 
             var actual = sut.CallCreateTestFixture(dummyMethod);
@@ -37,7 +37,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestFixtureAppliesCustomizeAttribute()
         {
-            var sut = new TestSpecificFixtureTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             var actual = sut.CallCreateTestFixture(GetType().GetMethod("FrozenTest"));
             Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
@@ -45,7 +45,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestFixtureAppliesComplexCustomizeAttributes()
         {
-            var sut = new TestSpecificFixtureTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
 
             var actual = sut.CallCreateTestFixture(GetType().GetMethod("PersonTest"));
 
@@ -61,7 +61,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestFixtureAppliesManyCustomizeAttributesOnSameParameter()
         {
-            var sut = new TestSpecificFixtureTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
 
             var actual = sut.CallCreateTestFixture(GetType().GetMethod("ManyAttributeTest"));
 
@@ -82,7 +82,7 @@ namespace Jwc.Experiment
         {
         }
 
-        private class TestSpecificFixtureTheoremAttribute : AutoFixtureTheoremAttribute
+        private class TestSpecificTheoremAttribute : TheoremAttribute
         {
             public ITestFixture CallCreateTestFixture(MethodInfo testMethod)
             {
