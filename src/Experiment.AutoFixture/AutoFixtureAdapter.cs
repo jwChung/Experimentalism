@@ -10,6 +10,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class AutoFixtureAdapter : ITestFixture
     {
+        private readonly IFixture _fixture;
         private readonly ISpecimenContext _specimenContext;
 
         /// <summary>
@@ -37,6 +38,8 @@ namespace Jwc.Experiment
             {
                 throw new ArgumentNullException("fixture");
             }
+
+            _fixture = fixture;
         }
 
         /// <summary>
@@ -50,6 +53,17 @@ namespace Jwc.Experiment
             get
             {
                 return _specimenContext;
+            }
+        }
+
+        /// <summary>
+        /// Gets the fixture.
+        /// </summary>
+        public IFixture Fixture
+        {
+            get
+            {
+                return _fixture;
             }
         }
 

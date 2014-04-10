@@ -56,5 +56,16 @@ namespace Jwc.Experiment
         {
             Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter((IFixture)null));
         }
+
+        [Fact]
+        public void FixtureIsCorrect()
+        {
+            var expected = new Fixture();
+            var sut = new AutoFixtureAdapter(expected);
+
+            var actual = sut.Fixture;
+
+            Assert.Same(expected, actual);
+        }
     }
 }
