@@ -29,7 +29,7 @@
       " />
 
   <Target Name="Deployment"
-          Condition=" '$(CommitAuthor)' == 'Jin-Wook Chung' and $(CommitMessage.Contains('DEPLOYMENT')) "
+          Condition=" '$(CurrentBranchName)' == 'master' and !$(CommitMessage.StartsWith('Merge pull request #')) "
           DependsOnTargets="
       NuGetVersioning;
       NuGetReleaseNotes;
