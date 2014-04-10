@@ -8,14 +8,14 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsDefaultFirstClassTheoremAttribute()
         {
-            var sut = new FakeFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             Assert.IsAssignableFrom<BaseFirstClassTheoremAttribute>(sut);
         }
 
         [Fact]
         public void CreatTestFixtureReturnsCorrectFixture()
         {
-            var sut = new FakeFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
 
             var actual = sut.CreateTestFixture(dummyMethod);
@@ -24,7 +24,7 @@ namespace Jwc.Experiment
             Assert.IsType<Fixture>(adapter.Fixture);
         }
 
-        public class FakeFirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
+        public class TestSpecificFirstClassTheoremAttribute : AutoFixtureFirstClassTheoremAttribute
         {
             protected override IFixture CreateFixture()
             {

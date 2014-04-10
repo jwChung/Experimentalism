@@ -13,14 +13,14 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateTestCommandsReturnsCorrectCommands()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             const string methodName = "TestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -37,7 +37,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsFromStaticReturnsCorrectCommands()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             const string methodName = "StaticTestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -54,14 +54,17 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsWithNullMethodInfoThrows()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null));
         }
 
         [Fact]
         public void CreateTestCommandsPassesTestFixtureToTestCase()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute { OnCreateTestFixture = mi => new FakeTestFixture() };
+            var sut = new TestSpecificFirstClassTheoremAttribute
+            {
+                OnCreateTestFixture = mi => new FakeTestFixture()
+            };
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -73,7 +76,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestCaseThrows()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ExceptionFromCreatingTestCaseTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -85,7 +88,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestFixtureThrows()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute
+            var sut = new TestSpecificFirstClassTheoremAttribute
             {
                 OnCreateTestFixture = mi => { throw new NotSupportedException(); }
             };
@@ -102,7 +105,7 @@ namespace Jwc.Experiment
         [InlineData("InvalidReturnTypeTest")]
         public void CreateTestCommandsReturnsExceptionCommandWhenMethodReturnTypeIsInvalid(string methodName)
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -114,7 +117,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsDoesNotThrowWhenMethodReturnTypeIsValid()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ValidReturnTypeTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -125,7 +128,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenMethodIsParameterized()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -137,7 +140,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsOfAbstractBaseClassReturnsCorrectTestCommand()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(typeof(SubTestClass).GetMethod("FirstClassTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -148,7 +151,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateTestCommandsReturnsCorrectExceptionCommandsWhenManyTestCasesThrows()
         {
-            var sut = new DelegatingFirstClassTheoremAttribute();
+            var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ManyExceptionTest"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -241,7 +244,7 @@ namespace Jwc.Experiment
             };
         }
 
-        private class DelegatingFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+        private class TestSpecificFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
         {
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {

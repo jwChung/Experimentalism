@@ -13,14 +13,14 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateNonParameterizedTestReturnsCorrectFactCommand()
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.CreateTestCommands(method);
@@ -35,7 +35,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         public void CreateParameterizedTestReturnsTheoryCommands(string arg1, int arg2, object arg3)
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
 
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
@@ -51,7 +51,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DelegatingTheoremAttribute { OnCreateTestFixture = mi => fixture };
+            var sut = new TestSpecificTheoremAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -70,7 +70,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DelegatingTheoremAttribute { OnCreateTestFixture = mi => fixture };
+            var sut = new TestSpecificTheoremAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -84,7 +84,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestWithInvalidCountDataThrows()
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -96,7 +96,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestWithInvalidTypeDataThrows()
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -109,7 +109,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
-            var sut = new DelegatingTheoremAttribute { OnCreateTestFixture = mi => fixture };
+            var sut = new TestSpecificTheoremAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method);
@@ -123,7 +123,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateParameterizedTestPassesCorrectParameterTypes()
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
@@ -133,7 +133,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestWithNoAutoDataDoesNotInitializeFixture(
             string arg1, int arg2, object arg3)
         {
-            var sut = new DelegatingTheoremAttribute();
+            var sut = new TestSpecificTheoremAttribute();
             var actual = sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).Single();
             Assert.IsNotType<ExceptionCommand>(actual);
@@ -144,7 +144,7 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -164,7 +164,7 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -184,7 +184,7 @@ namespace Jwc.Experiment
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -202,7 +202,7 @@ namespace Jwc.Experiment
         [Fact]
         public void CreateNonParameterizedTestDoesNotInitializeFixture()
         {
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi => { throw new NotSupportedException(); }
             };
@@ -214,7 +214,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestForSingleReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi => { throw exception; }
             };
@@ -231,7 +231,7 @@ namespace Jwc.Experiment
         public void CreateParameterizedTestForManyReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi => { throw exception; }
             };
@@ -253,7 +253,7 @@ namespace Jwc.Experiment
         {
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
             bool verified = false;
-            var sut = new DelegatingTheoremAttribute
+            var sut = new TestSpecificTheoremAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -298,7 +298,7 @@ namespace Jwc.Experiment
         {
         }
 
-        private class DelegatingTheoremAttribute : BaseTheoremAttribute
+        private class TestSpecificTheoremAttribute : BaseTheoremAttribute
         {
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {
