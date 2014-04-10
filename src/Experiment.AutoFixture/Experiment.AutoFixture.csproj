@@ -7,7 +7,7 @@
     <ProjectGuid>{7F77A967-02AA-47FC-A42A-0382697B483A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment</RootNamespace>
+    <RootNamespace>NuGet.Jwc.Experiment</RootNamespace>
     <AssemblyName>Jwc.Experiment.AutoFixture</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -56,8 +56,8 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutoFixtureAdapter.cs" />
-    <Compile Include="AutoFixtureFirstClassTheoremAttribute.cs" />
-    <Compile Include="AutoFixtureTheoremAttribute.cs" />
+    <Compile Include="FirstClassTheoremAttribute.cs" />
+    <Compile Include="TheoremAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

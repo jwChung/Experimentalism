@@ -7,7 +7,7 @@ using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.NuGetFiles
+namespace NuGet.Jwc.Experiment
 {
     public class Scenario
     {

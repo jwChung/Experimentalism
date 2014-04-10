@@ -1,14 +1,18 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using Jwc.Experiment;
 using Ploeh.AutoFixture;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     /// <summary>
     /// A test attribute used to adorn methods that creates first-class 
     /// executable test cases. This attribute supports to generate auto data
     /// using the AutoFixture library.
     /// </summary>
-    public abstract class AutoFixtureFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is part of an inheritance hierarchy and can be inherited in order to extend its behavior.")]
+    [AttributeUsage(AttributeTargets.Method)]
+    public class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
     {
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture" />.
@@ -26,6 +30,9 @@ namespace Jwc.Experiment
         /// Creates the fixture.
         /// </summary>
         /// <returns>The new fixture instance.</returns>
-        protected abstract IFixture CreateFixture();
+        protected virtual IFixture CreateFixture()
+        {
+            return new Fixture();
+        }
     }
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     /// <summary>
     /// A test attribute declared on a test method to indicate a test case.
@@ -13,7 +14,9 @@ namespace Jwc.Experiment
     /// parameterized test, and supports to generate auto data using
     /// the AutoFixture library.
     /// </summary>
-    public abstract class AutoFixtureTheoremAttribute : BaseTheoremAttribute
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is part of an inheritance hierarchy and can be inherited in order to extend its behavior.")]
+    [AttributeUsage(AttributeTargets.Method)]
+    public class TheoremAttribute : BaseTheoremAttribute
     {
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture"/>.
@@ -41,7 +44,10 @@ namespace Jwc.Experiment
         /// Creates the fixture.
         /// </summary>
         /// <returns>The new fixture instance.</returns>
-        protected abstract IFixture CreateFixture();
+        protected virtual IFixture CreateFixture()
+        {
+            return new Fixture();
+        }
 
         private static IFixture CustomizeFixture(
             IFixture fixture, IEnumerable<ParameterInfo> parameters)

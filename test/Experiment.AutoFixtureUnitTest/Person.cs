@@ -1,4 +1,4 @@
-namespace Jwc.Experiment
+namespace NuGet.Jwc.Experiment
 {
     public class Person
     {
