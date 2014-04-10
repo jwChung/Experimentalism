@@ -29,7 +29,7 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter((IFixture)null));
+            Assert.Throws<ArgumentNullException>(() => new AutoFixtureAdapter(null));
         }
 
         [Fact]

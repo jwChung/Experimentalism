@@ -29,20 +29,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets the specimen context.
-        /// </summary>
-        /// <value>
-        /// The specimen context.
-        /// </value>
-        public ISpecimenContext SpecimenContext
-        {
-            get
-            {
-                return _specimenContext;
-            }
-        }
-
-        /// <summary>
         /// Gets the fixture.
         /// </summary>
         public IFixture Fixture
@@ -63,7 +49,7 @@ namespace Jwc.Experiment
         /// </returns>
         public object Create(object request)
         {
-            return SpecimenContext.Resolve(request);
+            return _specimenContext.Resolve(request);
         }
     }
 }
