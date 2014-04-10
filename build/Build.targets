@@ -42,6 +42,9 @@
   </Target>
 
   <Target Name="NuGetVersioning" Outputs="%(NuGetFiles.FullPath)">
+    <ItemGroup>
+      <TestAssemblies Include="$(TestAssemblies)" />
+    </ItemGroup>
     <PropertyGroup>
       <Assembly>%(TestAssemblies.Identity)</Assembly>
       <NuGetFile>%(NuGetFiles.FullPath)</NuGetFile>
