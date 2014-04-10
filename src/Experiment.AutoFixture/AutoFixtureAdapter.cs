@@ -16,21 +16,6 @@ namespace Jwc.Experiment
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoFixtureAdapter"/> class.
         /// </summary>
-        /// <param name="specimenContext">The specimen context.</param>
-        /// <exception cref="System.ArgumentNullException">specimenContext</exception>
-        public AutoFixtureAdapter(ISpecimenContext specimenContext)
-        {
-            if (specimenContext == null)
-            {
-                throw new ArgumentNullException("specimenContext");
-            }
-
-            _specimenContext = specimenContext;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AutoFixtureAdapter"/> class.
-        /// </summary>
         /// <param name="fixture">The fixture.</param>
         public AutoFixtureAdapter(IFixture fixture)
         {
@@ -40,6 +25,7 @@ namespace Jwc.Experiment
             }
 
             _fixture = fixture;
+            _specimenContext = new SpecimenContext(fixture);
         }
 
         /// <summary>

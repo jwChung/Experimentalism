@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
 {
@@ -20,7 +19,7 @@ namespace Jwc.Experiment
         /// </returns>
         public override ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
-            return new AutoFixtureAdapter(new SpecimenContext(CreateFixture()));
+            return new AutoFixtureAdapter(CreateFixture());
         }
 
         /// <summary>
