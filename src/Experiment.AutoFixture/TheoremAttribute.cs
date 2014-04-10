@@ -41,7 +41,10 @@ namespace Jwc.Experiment
         /// Creates the fixture.
         /// </summary>
         /// <returns>The new fixture instance.</returns>
-        protected abstract IFixture CreateFixture();
+        protected virtual IFixture CreateFixture()
+        {
+            return new Fixture();
+        }
 
         private static IFixture CustomizeFixture(
             IFixture fixture, IEnumerable<ParameterInfo> parameters)

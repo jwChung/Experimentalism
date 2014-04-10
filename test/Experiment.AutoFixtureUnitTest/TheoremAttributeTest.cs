@@ -23,7 +23,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void CreatTestFixtureReturnsCorrectFixture()
+        public void CreatTestFixtureReturnsCorrectTestFixture()
         {
             var sut = new TestSpecificTheoremAttribute();
             var dummyMethod = typeof(object).GetMethod("ToString");
@@ -70,6 +70,14 @@ namespace Jwc.Experiment
             Assert.NotEqual(0, person.Age);
         }
 
+        [Fact]
+        public void CreateFixtureReturnsCorrectFixture()
+        {
+            var sut = new TestSpecificTheoremAttribute();
+            var actual = sut.CallCreateFixture();
+            Assert.IsType<Fixture>(actual);
+        }
+
         public void FrozenTest([Frozen] string arg)
         {
         }
@@ -89,9 +97,9 @@ namespace Jwc.Experiment
                 return CreateTestFixture(testMethod);
             }
 
-            protected override IFixture CreateFixture()
+            public IFixture CallCreateFixture()
             {
-                return new Fixture();
+                return CreateFixture();
             }
         }
     }
