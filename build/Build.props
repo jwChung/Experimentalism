@@ -2,11 +2,11 @@
   <ItemGroup>
     <Projects Include="..\src\**\*.csproj" />
     <TestProjects Include="..\test\**\*.csproj" />
-    <TestAssemblies Include="..\test\**\bin\release\*UnitTest.dll" />
     <NuGetFiles Include="*.nuspec" />
     <CommonAssemblyInfo Include="CommonAssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>
+    <TestAssemblies>..\test\**\bin\release\*UnitTest.dll</TestAssemblies>
     <NuGetPath>..\packages\NuGet.CommandLine.2.8.0\tools\NuGet.exe</NuGetPath>
     <XunitRunnerPath>..\packages\xunit.1.9.0.1566\lib\xunit.runner.msbuild.dll</XunitRunnerPath>
     <LocalNugetFeed>D:\LocalNugetFeed</LocalNugetFeed>
