@@ -10,20 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.5")]
-[assembly: AssemblyInformationalVersion("0.9.5")]
+[assembly: AssemblyVersion("0.9.6")]
+[assembly: AssemblyInformationalVersion("0.9.6")]
 
 /*
- * Version 0.9.5
+ * Version 0.9.6
  * 
- * Changes the accessibility of CreateTestFixture from public to protected.
- * 
- * BREAKING CHANGE
- * - the member of BaseTheoremAttribute,
- *                 BaseFirstClassTheoremAttribute,
- *                 AutoFixtureTheoremAttribute,
- *                 AutoFixtureFirstClassTheoremAttribute
- *   
- *   public ITestFixture CreateTestFixture(MethodInfo) ->
- *   protected ITestFixture CreateTestFixture(MethodInfo)
+ * Excludes Experiment.AutoFixture.dll from the nuget package, but instead,
+ * the features were implemented directly in the published source codes.
  */
