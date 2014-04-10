@@ -13,9 +13,14 @@ namespace Jwc.Experiment
             var sut = typeof(BaseTheoremAttribute).Assembly;
             var specifiedAssemblies = new []
             {
+                // GAC
                 "mscorlib",
                 "System.Core",
+
+                // Direct references
                 "xunit",
+
+                // Indirect references
                 "xunit.extensions"
             };
 

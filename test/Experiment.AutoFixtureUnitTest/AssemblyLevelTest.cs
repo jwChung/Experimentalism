@@ -13,12 +13,17 @@ namespace Jwc.Experiment
             var sut = typeof(AutoFixtureAdapter).Assembly;
             var specifiedAssemblies = new []
             {
+                // GAC
                 "mscorlib",
                 "System.Core",
+
+                // Direct references
+                "xunit",
                 "Jwc.Experiment",
                 "Ploeh.AutoFixture",
-                "Ploeh.AutoFixture.Xunit",
-                "xunit"
+
+                // Indirect references
+                "Ploeh.AutoFixture.Xunit"
             };
 
             var actual = sut.GetActualReferencedAssemblies();

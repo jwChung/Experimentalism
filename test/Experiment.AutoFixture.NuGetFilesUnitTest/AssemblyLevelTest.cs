@@ -19,11 +19,14 @@ namespace Jwc.NuGetFiles
             var sut = typeof(TheoremAttribute).Assembly;
             var specifiedAssemblies = new []
             {
+                // GAC
                 "mscorlib",
+
+                // Direct references
+                "xunit",
                 "Jwc.Experiment",
                 "Jwc.Experiment.AutoFixture",
-                "Ploeh.AutoFixture",
-                "xunit"
+                "Ploeh.AutoFixture"
             };
 
             var actual = sut.GetActualReferencedAssemblies();
