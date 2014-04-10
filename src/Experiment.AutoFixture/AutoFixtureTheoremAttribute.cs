@@ -37,6 +37,12 @@ namespace Jwc.Experiment
                     testMethod.GetParameters()));
         }
 
+        /// <summary>
+        /// Creates the fixture.
+        /// </summary>
+        /// <returns>The new fixture instance.</returns>
+        protected abstract IFixture CreateFixture();
+
         private static IFixture CustomizeFixture(
             IFixture fixture, IEnumerable<ParameterInfo> parameters)
         {
@@ -50,11 +56,5 @@ namespace Jwc.Experiment
                 .Cast<CustomizeAttribute>()
                 .Select(ca => ca.GetCustomization(parameter));
         }
-
-        /// <summary>
-        /// Creates the fixture.
-        /// </summary>
-        /// <returns>The new fixture instance.</returns>
-        protected abstract IFixture CreateFixture();
     }
 }
