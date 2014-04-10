@@ -20,13 +20,16 @@ namespace Jwc.Experiment
 
         public static void VerifyDoesNotExpose(this Assembly assembly, IEnumerable<Type> typesNotExposed)
         {
-            var hashSet = new HashSet<Type>(typesNotExposed);
+            var types = new HashSet<Type>(typesNotExposed);
             foreach (var type in assembly.GetExportedTypes())
             {
-                AssertDoesNotExpose(type, hashSet);
-                foreach (var member in type.GetMembers())
+                VerifyDoesNotExpose(type, types);
+                const BindingFlags bindingFlags = 
+                    BindingFlags.Public | BindingFlags.NonPublic |
+                    BindingFlags.Static | BindingFlags.Instance;
+                foreach (var member in type.GetMembers(bindingFlags))
                 {
-                    AssertDoesNotExpose(member, hashSet);
+                    VerifyDoesNotExpose(member, types);
                 }
             }
         }
@@ -43,7 +46,7 @@ namespace Jwc.Experiment
             return assemblies;
         }
 
-        private static void AssertDoesNotExpose(Type type, ICollection<Type> typesNotExposed)
+        private static void VerifyDoesNotExpose(Type type, ICollection<Type> typesNotExposed)
         {
             while (type != null)
             {
@@ -53,44 +56,62 @@ namespace Jwc.Experiment
             }
         }
 
-        private static void AssertDoesNotExpose(MemberInfo member, ICollection<Type> typesNotExposed)
+        private static void VerifyDoesNotExpose(MemberInfo member, ICollection<Type> typesNotExposed)
         {
-            var fieldInfo = member as FieldInfo;
-            if (fieldInfo != null)
-            {
-                AssertDoesNotContain(fieldInfo.FieldType, typesNotExposed);
-                return;
-            }
-
             var constructor = member as ConstructorInfo;
             if (constructor != null)
             {
-                AssertDoesNotContain(
-                    constructor.GetParameters().Select(pi => pi.ParameterType), typesNotExposed);
+                VerifyDoesNotExpose(constructor, typesNotExposed);
                 return;
             }
 
             var property = member as PropertyInfo;
             if (property != null)
             {
-                AssertDoesNotContain(property.PropertyType, typesNotExposed);
+                var getMethod = property.GetGetMethod();
+                if (getMethod != null)
+                {
+                    VerifyDoesNotExpose(getMethod, typesNotExposed);
+                }
+
+                var setMethod = property.GetSetMethod();
+                if (setMethod != null)
+                {
+                    VerifyDoesNotExpose(setMethod, typesNotExposed);
+                }
+
                 return;
             }
 
             var method = member as MethodInfo;
             if (method != null)
             {
-                AssertDoesNotContain(method.ReturnType, typesNotExposed);
-                AssertDoesNotContain(
-                    method.GetParameters().Select(pi => pi.ParameterType), typesNotExposed);
+                VerifyDoesNotExpose(method, typesNotExposed);
                 return;
             }
 
             var @event = member as EventInfo;
             if (@event != null)
             {
-                AssertDoesNotContain(@event.EventHandlerType, typesNotExposed);
+                VerifyDoesNotExpose(@event.GetAddMethod(), typesNotExposed);
+                VerifyDoesNotExpose(@event.GetRemoveMethod(), typesNotExposed);
             }
+        }
+
+        private static void VerifyDoesNotExpose(MethodBase method, ICollection<Type> typesNotExposed)
+        {
+            if (!method.IsPublic && !method.IsFamilyOrAssembly)
+            {
+                return;
+            }
+
+            var methodInfo = method as MethodInfo;
+            if (methodInfo != null)
+            {
+                AssertDoesNotContain(methodInfo.ReturnType, typesNotExposed);
+            }
+
+            AssertDoesNotContain(method.GetParameters().Select(pi => pi.ParameterType), typesNotExposed);
         }
 
         private static void AssertDoesNotContain(IEnumerable<Type> types, ICollection<Type> typesNotExposed)
@@ -103,9 +124,7 @@ namespace Jwc.Experiment
 
         private static void AssertDoesNotContain(Type type, ICollection<Type> typesNotExposed)
         {
-            Assert.False(
-                typesNotExposed.Contains(type),
-                type + " should not be exposed.");
+            Assert.False(typesNotExposed.Contains(type), type + " should not be exposed.");
         }
     }
 }
