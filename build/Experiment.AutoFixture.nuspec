@@ -12,6 +12,7 @@
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Experiment" version="0.0.0" />
+      <dependency id="AutoFixture" version="3.0.1" />
     </dependencies>
   </metadata>
   <files>
