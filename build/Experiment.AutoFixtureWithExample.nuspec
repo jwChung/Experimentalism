@@ -13,11 +13,10 @@
     <dependencies>
       <dependency id="Experiment.AutoFixture" version="0.0.0" />
       <dependency id="xunit.extensions" version="1.9.0.1566" />
-      <dependency id="AutoFixture.Xunit" version="3.0.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="..\test\Experiment.AutoFixture.NuGetFilesUnitTest\**\*.pp" target="content\net40" />
+    <file src="..\test\Experiment.AutoFixtureUnitTest\**\*.pp" target="content\net40" />
     <file src="Install.ps1" target="tools" />
   </files>
 </package>
