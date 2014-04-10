@@ -35,6 +35,9 @@
   </Target>
 
   <Target Name="UnitTest">
+    <ItemGroup>
+      <TestAssemblies Include="$(TestAssemblies)" />
+    </ItemGroup>
     <xunit Assembly="%(TestAssemblies.Identity)" />
   </Target>
 
