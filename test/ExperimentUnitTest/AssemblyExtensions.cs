@@ -70,10 +70,10 @@ namespace Jwc.Experiment
                 return;
             }
 
-            var propety = member as PropertyInfo;
-            if (propety != null)
+            var property = member as PropertyInfo;
+            if (property != null)
             {
-                AssertDoesNotContain(propety.PropertyType, typesNotExposed);
+                AssertDoesNotContain(property.PropertyType, typesNotExposed);
                 return;
             }
 

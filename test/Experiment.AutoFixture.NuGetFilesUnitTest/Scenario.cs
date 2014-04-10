@@ -14,7 +14,7 @@ namespace Jwc.NuGetFiles
         [Theorem]
         public void TheoremSupportsNonParameterizedTest()
         {
-            Assert.True(true, "excuted.");
+            Assert.True(true, "executed.");
         }
 
         [Theorem]

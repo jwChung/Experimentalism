@@ -33,7 +33,7 @@ namespace Jwc.Experiment
         [InlineData("dummy", 1, null)]
         [InlineData("dummy", 1, null)]
         [InlineData("dummy", 1, null)]
-        public void CreateParameterizedTestReturnsThoeryCommands(string arg1, int arg2, object arg3)
+        public void CreateParameterizedTestReturnsTheoryCommands(string arg1, int arg2, object arg3)
         {
             var sut = new DelegatingTheoremAttribute();
 

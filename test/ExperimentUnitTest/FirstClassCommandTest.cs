@@ -91,12 +91,12 @@ namespace Jwc.Experiment
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 new Action<int, object, string, Type>((a, b, c, d) => { }),
                 arguments);
-            var exptected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsCorrect" +
+            var expected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsCorrect" +
                             "(Int32: \"1\", Object: \"System.Object\", String: \"string\", Type: NULL)";
 
             var actual = sut.DisplayName;
 
-            Assert.Equal(exptected, actual);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
