@@ -35,7 +35,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [Fact]
-        public void CreateTestFixturePassesCorrecTestMethodToCreateFixture()
+        public void CreateTestFixturePassesCorrectTestMethodToCreateFixture()
         {
             var sut = new TestSpecificFirstClassTheoremAttribute();
             var testMethod = typeof(object).GetMethod("ToString");

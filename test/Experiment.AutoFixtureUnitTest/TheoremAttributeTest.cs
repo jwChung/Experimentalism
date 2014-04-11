@@ -80,7 +80,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [Fact]
-        public void CreateTestFixturePassesCorrecTestMethodToCreateFixture()
+        public void CreateTestFixturePassesCorrectTestMethodToCreateFixture()
         {
             var sut = new TestSpecificTheoremAttribute();
             var testMethod = typeof(object).GetMethod("ToString");
