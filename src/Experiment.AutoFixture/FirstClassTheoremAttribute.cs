@@ -23,14 +23,14 @@ namespace NuGet.Jwc.Experiment
         /// </returns>
         protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
-            return new AutoFixtureAdapter(CreateFixture());
+            return new AutoFixtureAdapter(CreateFixture(testMethod));
         }
 
         /// <summary>
         /// Creates the fixture.
         /// </summary>
         /// <returns>The new fixture instance.</returns>
-        protected virtual IFixture CreateFixture()
+        protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
             return new Fixture();
         }
