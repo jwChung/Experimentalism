@@ -181,6 +181,23 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void ConvertToTestCommandCreatesFixtureOnlyOnceIfDeclaredOnSutOfT()
+        {
+            var sut = new TestCase<int>(x => { });
+            int createdCount = 0;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                createdCount++;
+                return new FakeTestFixture();
+            };
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.ConvertToTestCommand(dummyMethod, fixtureFactory);
+
+            Assert.Equal(1, createdCount);
+        }
+
+        [Fact]
         public void SutOfT1T2IsTestCase()
         {
             var sut = new TestCase<object, int>((x, y) => { });
@@ -274,6 +291,23 @@ namespace Jwc.Experiment
             Assert.Equal(
                 new[] { fixture.Create(typeof(int)), fixture.Create(typeof(string)) },
                 command.Arguments);
+        }
+
+        [Fact]
+        public void ConvertToTestCommandCreatesFixtureOnlyOnceIfDeclaredOnSutOfT1T2()
+        {
+            var sut = new TestCase<int, string>((x, y) => { });
+            int createdCount = 0;
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
+            {
+                createdCount++;
+                return new FakeTestFixture();
+            };
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.ConvertToTestCommand(dummyMethod, fixtureFactory);
+
+            Assert.Equal(1, createdCount);
         }
     }
 }
