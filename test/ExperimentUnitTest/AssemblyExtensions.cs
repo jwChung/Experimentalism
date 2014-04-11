@@ -100,7 +100,7 @@ namespace Jwc.Experiment
 
         private static void VerifyDoesNotExpose(MethodBase method, ICollection<Type> typesNotExposed)
         {
-            if (!method.IsPublic && !method.IsFamilyOrAssembly)
+            if (!method.IsPublic && !method.IsFamily && !method.IsFamilyOrAssembly)
             {
                 return;
             }
