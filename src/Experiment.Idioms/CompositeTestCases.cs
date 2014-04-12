@@ -8,15 +8,15 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Represents composite collection of test cases.
     /// </summary>
-    public class CompositeTestCaseCollection : IEnumerable<ITestCase>
+    public class CompositeTestCases : IEnumerable<ITestCase>
     {
         private readonly IEnumerable<ITestCase>[] _testCaseSet;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompositeTestCaseCollection"/> class.
+        /// Initializes a new instance of the <see cref="CompositeTestCases"/> class.
         /// </summary>
         /// <param name="testCaseSet">The set of test cases.</param>
-        public CompositeTestCaseCollection(params IEnumerable<ITestCase>[] testCaseSet)
+        public CompositeTestCases(params IEnumerable<ITestCase>[] testCaseSet)
         {
             if (testCaseSet == null)
             {

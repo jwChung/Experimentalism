@@ -5,19 +5,19 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class CompositeTestCaseCollectionTest
+    public class CompositeTestCasesTest
     {
         [Fact]
         public void SutIsEnumerableOfTestCase()
         {
-            var sut = new CompositeTestCaseCollection();
+            var sut = new CompositeTestCases();
             Assert.IsAssignableFrom<IEnumerable<ITestCase>>(sut);
         }
 
         [Fact]
         public void InitializeWithNullTestCaseSetThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new CompositeTestCaseCollection(null));
+            Assert.Throws<ArgumentNullException>(() => new CompositeTestCases(null));
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Jwc.Experiment.Idioms
                 new ITestCase[]{ testCase2, testCase3 },
                 new ITestCase[]{ testCase4, testCase5 }
             };
-            var sut = new CompositeTestCaseCollection(testCaseSet);
+            var sut = new CompositeTestCases(testCaseSet);
 
             var actual = sut.ToArray();
 
@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms
                 new ITestCase[]{ new DelegatingTestCase() },
                 new ITestCase[]{ new DelegatingTestCase(), new DelegatingTestCase() }
             };
-            var sut = new CompositeTestCaseCollection(testCaseSet);
+            var sut = new CompositeTestCases(testCaseSet);
 
             var actual = sut.TestCaseSet;
 
