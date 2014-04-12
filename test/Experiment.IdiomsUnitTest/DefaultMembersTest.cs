@@ -89,6 +89,20 @@ namespace Jwc.Experiment.Idioms
                 "Does not contain any accessors.");
         }
 
+        [Fact]
+        public void SutDoesNotEnumeratesAnyHelperMethodsOfEvent()
+        {
+            var sut = new DefaultMembers(typeof(ClassWithTestMembers));
+            var eventInfo = typeof(ClassWithTestMembers).GetEvents().First();
+            var eventMethods = new[] { eventInfo.GetAddMethod(), eventInfo.GetRemoveMethod() };
+
+            var actual = sut.ToArray();
+
+            Assert.True(
+                eventMethods.All(a => !actual.Contains(a)),
+                "Does not contain any helper methods of event.");
+        }
+
         private class ClassWithTestMembers
         {
             public object Field;
