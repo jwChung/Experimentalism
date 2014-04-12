@@ -42,5 +42,17 @@ namespace Jwc.Experiment.Idioms
                 () => new IdiomaticTestCommand(
                     dummyMethod, new TypeElement(typeof(object)), null));
         }
+
+        [Fact]
+        public void TimeoutIsCorrect()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+
+            var actual = sut.Timeout;
+
+            Assert.Equal(0, actual);
+        }
     }
 }

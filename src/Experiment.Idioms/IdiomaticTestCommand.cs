@@ -19,7 +19,7 @@ namespace Jwc.Experiment.Idioms
             IMethodInfo method,
             IReflectionElement element,
             IReflectionVisitor<object> assertion)
-            : base(EnsureIsNotNull(method), "anonymous", 100)
+            : base(EnsureIsNotNull(method), "anonymous", 0)
         {
             if (element == null)
             {
