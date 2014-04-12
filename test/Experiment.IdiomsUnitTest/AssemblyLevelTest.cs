@@ -19,7 +19,8 @@ namespace Jwc.Experiment.Idioms
                 // Direct references
                 "Jwc.Experiment",
                 "Ploeh.Albedo",
-                "xunit"
+                "xunit",
+                "Ploeh.AutoFixture.Idioms"
 
                 // Indirect references
             };
@@ -29,8 +30,8 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
-        //[Theory]
-        //[InlineData("Jwc.Experiment")]
+        ////[Theory]
+        ////[InlineData("Ploeh.AutoFixture.Idioms")]
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
