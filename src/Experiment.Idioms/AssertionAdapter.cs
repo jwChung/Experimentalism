@@ -28,6 +28,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets the value.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AssertionAdapter", Justification="This word is a class name.")]
         public override object Value
         {
             get
