@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutIsEnumerableOfTestCase()
         {
-            var sut = new IdiomaticTestCases(new IReflectionElement[0], f => null);
+            var sut = new IdiomaticTestCases(new IReflectionElement[0], new DelegatingAssertionFactory());
             Assert.IsAssignableFrom<IEnumerable<ITestCase>>(sut);
         }
 
@@ -19,21 +19,21 @@ namespace Jwc.Experiment.Idioms
         public void InitializeWithNullReflectionElementsThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCases(null, f => null));
+                () => new IdiomaticTestCases(null, new DelegatingAssertionFactory()));
         }
 
         [Fact]
         public void InitializeWithNullAssertionFactoryThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCases(new IReflectionElement[0], null));
+                () => new IdiomaticTestCases(new IReflectionElement[0], (IAssertionFactory)null));
         }
 
         [Fact]
         public void ReflectionElementsIsCorrect()
         {
             var elements = new IReflectionElement[0];
-            var sut = new IdiomaticTestCases(elements, f => null);
+            var sut = new IdiomaticTestCases(elements, new DelegatingAssertionFactory());
 
             var actual = sut.ReflectionElements;
 
@@ -43,7 +43,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void AssertionFactoryIsCorrect()
         {
-            Func<ITestFixture, IReflectionVisitor<object>> assertionFactory = f => null;
+            var assertionFactory = new DelegatingAssertionFactory();
             var sut = new IdiomaticTestCases(new IReflectionElement[0], assertionFactory);
 
             var actual = sut.AssertionFactory;
@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Idioms
         public void SutEnumeratesCorrectTestCases()
         {
             // Fixture setup
-            Func<ITestFixture, IReflectionVisitor<object>> assertionFactory = f => null;
+            var assertionFactory = new DelegatingAssertionFactory();
             var reflectionElements = new IReflectionElement[]
             {
                 new TypeElement(typeof(object)),

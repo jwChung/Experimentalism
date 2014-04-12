@@ -13,17 +13,16 @@ namespace Jwc.Experiment.Idioms
     public class IdiomaticTestCases : IEnumerable<ITestCase>
     {
         private readonly IEnumerable<IReflectionElement> _elements;
-        private readonly Func<ITestFixture, IReflectionVisitor<object>> _assertionFactory;
+        private readonly IAssertionFactory _assertionFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticTestCases"/> class.
         /// </summary>
         /// <param name="elements">The reflection elements to be verified.</param>
         /// <param name="assertionFactory">The assertion factory.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
         public IdiomaticTestCases(
             IEnumerable<IReflectionElement> elements,
-            Func<ITestFixture, IReflectionVisitor<object>> assertionFactory)
+            IAssertionFactory assertionFactory)
         {
             if (elements == null)
             {
@@ -53,8 +52,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets the assertion factory.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
-        public Func<ITestFixture, IReflectionVisitor<object>> AssertionFactory
+        public IAssertionFactory AssertionFactory
         {
             get
             {

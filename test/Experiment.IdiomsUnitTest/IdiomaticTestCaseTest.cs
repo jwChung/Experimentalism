@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutIsTestCase()
         {
-            var sut = new IdiomaticTestCase(new TypeElement(typeof(object)), f => null);
+            var sut = new IdiomaticTestCase(new TypeElement(typeof(object)), new DelegatingAssertionFactory());
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
 
@@ -19,21 +19,21 @@ namespace Jwc.Experiment.Idioms
         public void InitializeWithNullReflectionElementThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCase(null, f => null));
+                () => new IdiomaticTestCase(null, new DelegatingAssertionFactory()));
         }
 
         [Fact]
         public void InitializeWithNullAssertionFactoryThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCase(new TypeElement(typeof(object)), null));
+                () => new IdiomaticTestCase(new TypeElement(typeof(object)), (IAssertionFactory)null));
         }
 
         [Fact]
         public void ReflectionElementIsCorrect()
         {
             var expected = new TypeElement(typeof(object));
-            var sut = new IdiomaticTestCase(expected, f => null);
+            var sut = new IdiomaticTestCase(expected, new DelegatingAssertionFactory());
 
             var actual = sut.ReflectionElement;
 
@@ -43,7 +43,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void AssertionFactoryIsCorrect()
         {
-            Func<ITestFixture, IReflectionVisitor<object>> expected = f => null;
+            IAssertionFactory expected = new DelegatingAssertionFactory();
             var sut = new IdiomaticTestCase(new TypeElement(typeof(object)), expected);
 
             var actual = sut.AssertionFactory;
@@ -59,10 +59,13 @@ namespace Jwc.Experiment.Idioms
             Func<MethodInfo, ITestFixture> fixtureFactory = mi => fakeTestFixture;
 
             var assertion = new DelegatingReflectionVisitor();
-            Func<ITestFixture, IReflectionVisitor<object>> assetionFactory = f =>
+            var assetionFactory = new DelegatingAssertionFactory
             {
-                Assert.Equal(fakeTestFixture, f);
-                return assertion;
+                OnCreate = f =>
+                {
+                    Assert.Equal(fakeTestFixture, f);
+                    return assertion;
+                }
             };
 
             var sut = new IdiomaticTestCase(new TypeElement(typeof(object)), assetionFactory);
@@ -82,8 +85,12 @@ namespace Jwc.Experiment.Idioms
         public void ConvertToTestCommandPassesCorrectMethodToFixtureFactory()
         {
             bool verify = false;
+            var assetionFactory = new DelegatingAssertionFactory
+            {
+                OnCreate = f => new DelegatingReflectionVisitor()
+            };
             var sut = new IdiomaticTestCase(
-                new TypeElement(typeof(object)), f => new DelegatingReflectionVisitor());
+                new TypeElement(typeof(object)), assetionFactory);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {
@@ -101,8 +108,12 @@ namespace Jwc.Experiment.Idioms
         public void ConvertToTestCommandCreatesFixtureOnlyOnce()
         {
             int createCount = 0;
+            var assetionFactory = new DelegatingAssertionFactory
+            {
+                OnCreate = f => new DelegatingReflectionVisitor()
+            };
             var sut = new IdiomaticTestCase(
-                new TypeElement(typeof(object)), f => new DelegatingReflectionVisitor());
+                new TypeElement(typeof(object)), assetionFactory);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {
@@ -119,7 +130,7 @@ namespace Jwc.Experiment.Idioms
         public void ConvertNullMethodToTestCommandThrows()
         {
             var sut = new IdiomaticTestCase(
-                new TypeElement(typeof(object)), f => new DelegatingReflectionVisitor());
+                new TypeElement(typeof(object)), new DelegatingAssertionFactory());
             Func<MethodInfo, ITestFixture> fixtureFactory = mi => new FakeTestFixture();
             Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, fixtureFactory));
         }
@@ -128,7 +139,7 @@ namespace Jwc.Experiment.Idioms
         public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
             var sut = new IdiomaticTestCase(
-                new TypeElement(typeof(object)), f => new DelegatingReflectionVisitor());
+                new TypeElement(typeof(object)), new DelegatingAssertionFactory());
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(method, null));
         }
