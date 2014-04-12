@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
+    <Compile Include="IdiomaticTestCaseCollection.cs" />
     <Compile Include="IdiomaticTestCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
