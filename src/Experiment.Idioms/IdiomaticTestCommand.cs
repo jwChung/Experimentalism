@@ -74,6 +74,20 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// Gets a value indicating whether a test-case instance is created.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if a test-case instance is created; otherwise, <c>false</c>.
+        /// </value>
+        public override bool ShouldCreateInstance
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// </summary>
         /// <param name="testClass"></param>
         /// <returns></returns>

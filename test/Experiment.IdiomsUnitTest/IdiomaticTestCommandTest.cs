@@ -105,5 +105,17 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(assertion, actual);
         }
+
+        [Fact]
+        public void ShouldCreateInstanceIsFalse()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+
+            var actual = sut.ShouldCreateInstance;
+
+            Assert.False(actual, "ShouldCreateInstance.");
+        }
     }
 }
