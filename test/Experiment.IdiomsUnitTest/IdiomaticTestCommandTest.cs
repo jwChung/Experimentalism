@@ -67,5 +67,43 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void MethodIsCorrect()
+        {
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new IdiomaticTestCommand(
+                method, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+
+            var actual = sut.Method;
+
+            Assert.Equal(method, actual);
+        }
+
+        [Fact]
+        public void ReflectionElementIsCorrect()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var reflectionElement = new TypeElement(typeof(object));
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, reflectionElement, new DelegatingReflectionVisitor());
+
+            var actual = sut.ReflectionElement;
+
+            Assert.Equal(reflectionElement, actual);
+        }
+
+        [Fact]
+        public void AssertionIsCorrect()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var assertion = new DelegatingReflectionVisitor();
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, new TypeElement(typeof(object)), assertion);
+
+            var actual = sut.Assertion;
+
+            Assert.Equal(assertion, actual);
+        }
     }
 }

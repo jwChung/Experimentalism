@@ -9,6 +9,10 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class IdiomaticTestCommand : TestCommand
     {
+        private readonly IMethodInfo _method;
+        private readonly IReflectionElement _element;
+        private readonly IReflectionVisitor<object> _assertion;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticTestCommand" /> class.
         /// </summary>
@@ -29,6 +33,43 @@ namespace Jwc.Experiment.Idioms
             if (assertion == null)
             {
                 throw new ArgumentNullException("assertion");
+            }
+
+            _method = method;
+            _element = element;
+            _assertion = assertion;
+        }
+
+        /// <summary>
+        /// Gets the test method.
+        /// </summary>
+        public IMethodInfo Method
+        {
+            get
+            {
+                return _method;
+            }
+        }
+
+        /// <summary>
+        /// Gets the reflection element.
+        /// </summary>
+        public IReflectionElement ReflectionElement
+        {
+            get
+            {
+                return _element;
+            }
+        }
+
+        /// <summary>
+        /// Gets the assertion.
+        /// </summary>
+        public IReflectionVisitor<object> Assertion
+        {
+            get
+            {
+                return _assertion;
             }
         }
 
