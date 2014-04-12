@@ -61,6 +61,7 @@
     <Compile Include="AllMemberRefractionsTest.cs" />
     <Compile Include="AllRefractionsTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="AssertionAdapterTest.cs" />
     <Compile Include="CompositeTestCasesTest.cs" />
     <Compile Include="DefaultMembersTest.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
