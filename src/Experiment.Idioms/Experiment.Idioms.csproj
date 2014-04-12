@@ -60,6 +60,7 @@
     <Compile Include="CompositeTestCases.cs" />
     <Compile Include="DefaultMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IAssertionFactory.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCases.cs" />
     <Compile Include="IdiomaticTestCommand.cs" />
