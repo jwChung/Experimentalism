@@ -1,4 +1,5 @@
-﻿using Ploeh.Albedo;
+﻿using System;
+using Ploeh.Albedo;
 using Ploeh.AutoFixture.Idioms;
 
 namespace Jwc.Experiment.Idioms
@@ -15,6 +16,10 @@ namespace Jwc.Experiment.Idioms
         /// <param name="assertion">The assertion.</param>
         public AssertionAdapter(IIdiomaticAssertion assertion)
         {
+            if (assertion == null)
+            {
+                throw new ArgumentNullException("assertion");
+            }
         }
 
         /// <summary>
