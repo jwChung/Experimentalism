@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -9,6 +10,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class CompositeTestCaseCollection : IEnumerable<ITestCase>
     {
+        private readonly IEnumerable<ITestCase>[] _testCaseSet;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositeTestCaseCollection"/> class.
         /// </summary>
@@ -19,6 +22,8 @@ namespace Jwc.Experiment.Idioms
             {
                 throw new ArgumentNullException("testCaseSet");
             }
+
+            _testCaseSet = testCaseSet;
         }
 
         /// <summary>
@@ -29,7 +34,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<ITestCase> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return _testCaseSet.SelectMany(cases => cases).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
