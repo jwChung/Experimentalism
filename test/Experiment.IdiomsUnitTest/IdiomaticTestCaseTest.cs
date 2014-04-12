@@ -26,5 +26,27 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(
                 () => new IdiomaticTestCase(new TypeElement(typeof(object)), null));
         }
+
+        [Fact]
+        public void ReflectionElementIsCorrect()
+        {
+            var expected = new TypeElement(typeof(object));
+            var sut = new IdiomaticTestCase(expected, f => null);
+
+            var actual = sut.ReflectionElement;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void AssertionFactoryIsCorrect()
+        {
+            Func<ITestFixture, IReflectionVisitor<object>> expected = f => null;
+            var sut = new IdiomaticTestCase(new TypeElement(typeof(object)), expected);
+
+            var actual = sut.AssertionFactory;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }

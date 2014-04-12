@@ -12,6 +12,9 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class IdiomaticTestCase : ITestCase
     {
+        private readonly IReflectionElement _element;
+        private readonly Func<ITestFixture, IReflectionVisitor<object>> _assetionFactory;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticTestCase"/> class.
         /// </summary>
@@ -25,10 +28,35 @@ namespace Jwc.Experiment.Idioms
             {
                 throw new ArgumentNullException("element");
             }
-            
+
             if (assetionFactory == null)
             {
                 throw new ArgumentNullException("assetionFactory");
+            }
+
+            _element = element;
+            _assetionFactory = assetionFactory;
+        }
+
+        /// <summary>
+        /// Gets the reflection element.
+        /// </summary>
+        public IReflectionElement ReflectionElement
+        {
+            get
+            {
+                return _element;
+            }
+        }
+
+        /// <summary>
+        /// Gets the assertion factory.
+        /// </summary>
+        public Func<ITestFixture, IReflectionVisitor<object>> AssertionFactory
+        {
+            get
+            {
+                return _assetionFactory;
             }
         }
 
