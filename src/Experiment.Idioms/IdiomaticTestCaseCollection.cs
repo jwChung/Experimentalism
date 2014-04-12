@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
@@ -10,6 +11,9 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class IdiomaticTestCaseCollection : IEnumerable<ITestCase>
     {
+        private readonly IEnumerable<IReflectionElement> _elements;
+        private readonly Func<ITestFixture, IReflectionVisitor<object>> _assertionFactory;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticTestCaseCollection"/> class.
         /// </summary>
@@ -28,6 +32,31 @@ namespace Jwc.Experiment.Idioms
             {
                 throw new ArgumentNullException("assertionFactory");
             }
+
+            _elements = elements;
+            _assertionFactory = assertionFactory;
+        }
+
+        /// <summary>
+        /// Gets the reflection elements.
+        /// </summary>
+        public IEnumerable<IReflectionElement> ReflectionElements
+        {
+            get
+            {
+                return _elements;
+            }
+        }
+
+        /// <summary>
+        /// Gets the assertion factory.
+        /// </summary>
+        public Func<ITestFixture, IReflectionVisitor<object>> AssertionFactory
+        {
+            get
+            {
+                return _assertionFactory;
+            }
         }
 
         /// <summary>
@@ -36,10 +65,11 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// A <see cref="IEnumerator{T}" /> that can be used to iterate through the collection.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public IEnumerator<ITestCase> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return ReflectionElements
+                .Select(e => new IdiomaticTestCase(e, AssertionFactory))
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
