@@ -10,17 +10,17 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Represents collection of reflection elements.
     /// </summary>
-    public class ReflectionElementCollection : IEnumerable<IReflectionElement>
+    public class ReflectionElements : IEnumerable<IReflectionElement>
     {
         private readonly IEnumerable<object> _sources;
         private readonly IReflectionElementRefraction<object>[] _refractions;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ReflectionElementCollection"/> class.
+        /// Initializes a new instance of the <see cref="ReflectionElements"/> class.
         /// </summary>
         /// <param name="sources">The sources to be refracted.</param>
         /// <param name="refractions">The reflection-element refractions.</param>
-        public ReflectionElementCollection(
+        public ReflectionElements(
             IEnumerable<object> sources, params IReflectionElementRefraction<object>[] refractions)
         {
             if (sources == null)

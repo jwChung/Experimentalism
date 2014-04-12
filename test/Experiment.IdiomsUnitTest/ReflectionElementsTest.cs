@@ -8,33 +8,33 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class ReflectionElementCollectionTest
+    public class ReflectionElementsTest
     {
         [Fact]
         public void SutIsEnumerableOfReflectionElement()
         {
-            var sut = new ReflectionElementCollection(new object[0]);
+            var sut = new ReflectionElements(new object[0]);
             Assert.IsAssignableFrom<IEnumerable<IReflectionElement>>(sut);
         }
 
         [Fact]
         public void InitializeWithNullSourcesThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ReflectionElementCollection(null));
+            Assert.Throws<ArgumentNullException>(() => new ReflectionElements(null));
         }
 
         [Fact]
         public void InitializeWithNullRefractionsThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new ReflectionElementCollection(new object[0], null));
+                () => new ReflectionElements(new object[0], null));
         }
 
         [Fact]
         public void SourcesIsCorrect()
         {
             var sources = new object[0];
-            var sut = new ReflectionElementCollection(sources, new TypeElementRefraction<object>());
+            var sut = new ReflectionElements(sources, new TypeElementRefraction<object>());
 
             var actual = sut.Sources;
 
@@ -46,7 +46,7 @@ namespace Jwc.Experiment.Idioms
         {
             var refraction1 = new TypeElementRefraction<object>();
             var refraction2 = new AssemblyElementRefraction<object>();
-            var sut = new ReflectionElementCollection(new object[0], refraction1, refraction2);
+            var sut = new ReflectionElements(new object[0], refraction1, refraction2);
 
             var actual = sut.Refractions;
 
@@ -68,7 +68,7 @@ namespace Jwc.Experiment.Idioms
                 GetType().Assembly,
                 MethodBase.GetCurrentMethod()
             };
-            var sut = new ReflectionElementCollection(sources, refraction1, refraction2);
+            var sut = new ReflectionElements(sources, refraction1, refraction2);
 
             // Exercise system
             IReflectionElement[] actual = sut.ToArray();
