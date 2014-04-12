@@ -13,29 +13,30 @@ namespace Jwc.Experiment.Idioms
     public class IdiomaticTestCase : ITestCase
     {
         private readonly IReflectionElement _element;
-        private readonly Func<ITestFixture, IReflectionVisitor<object>> _assetionFactory;
+        private readonly Func<ITestFixture, IReflectionVisitor<object>> _assertionFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticTestCase"/> class.
         /// </summary>
         /// <param name="element">The reflection element to be verified with the assertion.</param>
-        /// <param name="assetionFactory">The assetion factory.</param>
+        /// <param name="assertionFactory">The assetion factory.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification="The nested generic signature is desirable.")]
         public IdiomaticTestCase(
             IReflectionElement element,
-            Func<ITestFixture, IReflectionVisitor<object>> assetionFactory)
+            Func<ITestFixture, IReflectionVisitor<object>> assertionFactory)
         {
             if (element == null)
             {
                 throw new ArgumentNullException("element");
             }
 
-            if (assetionFactory == null)
+            if (assertionFactory == null)
             {
-                throw new ArgumentNullException("assetionFactory");
+                throw new ArgumentNullException("assertionFactory");
             }
 
             _element = element;
-            _assetionFactory = assetionFactory;
+            _assertionFactory = assertionFactory;
         }
 
         /// <summary>
@@ -52,11 +53,12 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets the assertion factory.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
         public Func<ITestFixture, IReflectionVisitor<object>> AssertionFactory
         {
             get
             {
-                return _assetionFactory;
+                return _assertionFactory;
             }
         }
 
