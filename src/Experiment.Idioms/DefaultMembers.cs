@@ -10,6 +10,7 @@ namespace Jwc.Experiment.Idioms
     /// Represents default members of a certain <see cref="Type"/> which need
     /// to verify idiomatic assertions.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class DefaultMembers : IEnumerable<MemberInfo>
     {
         private readonly Type _type;
@@ -31,6 +32,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets the target type.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification="This name is desirable to indicate the target type.")]
         public Type Type
         {
             get
