@@ -52,6 +52,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="CompositeTestCaseCollectionTest.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="IdiomaticTestCaseCollectionTest.cs" />
