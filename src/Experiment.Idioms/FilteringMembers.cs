@@ -9,6 +9,9 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class FilteringMembers : IEnumerable<MemberInfo>
     {
+        private readonly IEnumerable<MemberInfo> _targetMembers;
+        private readonly MemberInfo[] _exceptedMembers;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FilteringMembers"/> class.
         /// </summary>
@@ -18,6 +21,30 @@ namespace Jwc.Experiment.Idioms
             IEnumerable<MemberInfo> targetMembers,
             params MemberInfo[] exceptedMembers)
         {
+            _targetMembers = targetMembers;
+            _exceptedMembers = exceptedMembers;
+        }
+
+        /// <summary>
+        /// Gets the target members.
+        /// </summary>
+        public IEnumerable<MemberInfo> TargetMembers
+        {
+            get
+            {
+                return _targetMembers;
+            }
+        }
+
+        /// <summary>
+        /// Gets the excepted members.
+        /// </summary>
+        public IEnumerable<MemberInfo> ExceptedMembers
+        {
+            get
+            {
+                return _exceptedMembers;
+            }
         }
 
         /// <summary>

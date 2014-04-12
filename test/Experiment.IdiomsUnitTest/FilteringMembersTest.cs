@@ -12,5 +12,27 @@ namespace Jwc.Experiment.Idioms
             var sut = new FilteringMembers(new MemberInfo[0]);
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         }
+
+        [Fact]
+        public void TargetMembersIsCorrect()
+        {
+            var targetMembers = GetType().GetMembers();
+            var sut = new FilteringMembers(targetMembers);
+
+            var actual = sut.TargetMembers;
+
+            Assert.Equal(targetMembers, actual);
+        }
+
+        [Fact]
+        public void ExceptedMembersIsCorrect()
+        {
+            MemberInfo[] exceptedMembers = GetType().GetMembers();
+            var sut = new FilteringMembers(new MemberInfo[0], exceptedMembers);
+
+            var actual = sut.ExceptedMembers;
+
+            Assert.Equal(exceptedMembers, actual);
+        }
     }
 }
