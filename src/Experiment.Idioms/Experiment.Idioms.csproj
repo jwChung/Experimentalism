@@ -62,6 +62,7 @@
     <Compile Include="FilteringMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GuardClauseAssertionFactory.cs" />
+    <Compile Include="GuardClauseAssertionTestCases.cs" />
     <Compile Include="IAssertionFactory.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCases.cs" />
