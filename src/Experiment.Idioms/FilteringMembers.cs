@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Jwc.Experiment.Idioms
@@ -66,7 +67,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return TargetMembers.Except(ExceptedMembers).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

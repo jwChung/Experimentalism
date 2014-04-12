@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Ploeh.Albedo;
 using Xunit;
 
 namespace Jwc.Experiment.Idioms
@@ -47,6 +49,23 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(
                 () => new FilteringMembers(new MemberInfo[0], null));
+        }
+
+        [Fact]
+        public void SutEnumeratesCorrectMembers()
+        {
+            var targetMembers = GetType().GetMembers();
+            var exceptedMembers = new MemberInfo[]
+            {
+                new Methods<FilteringMembersTest>().Select(x => x.GetType()),
+                new Methods<FilteringMembersTest>().Select(x => x.SutEnumeratesCorrectMembers())
+            };
+            var expected = targetMembers.Except(exceptedMembers);
+            var sut = new FilteringMembers(targetMembers, exceptedMembers);
+
+            var actual = sut.ToArray();
+
+            Assert.Equal(expected, actual);
         }
     }
 }
