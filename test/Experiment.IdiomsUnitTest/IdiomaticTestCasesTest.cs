@@ -6,12 +6,12 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class IdiomaticTestCaseCollectionTest
+    public class IdiomaticTestCasesTest
     {
         [Fact]
         public void SutIsEnumerableOfTestCase()
         {
-            var sut = new IdiomaticTestCaseCollection(new IReflectionElement[0], f => null);
+            var sut = new IdiomaticTestCases(new IReflectionElement[0], f => null);
             Assert.IsAssignableFrom<IEnumerable<ITestCase>>(sut);
         }
 
@@ -19,21 +19,21 @@ namespace Jwc.Experiment.Idioms
         public void InitializeWithNullReflectionElementsThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCaseCollection(null, f => null));
+                () => new IdiomaticTestCases(null, f => null));
         }
 
         [Fact]
         public void InitializeWithNullAssertionFactoryThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCaseCollection(new IReflectionElement[0], null));
+                () => new IdiomaticTestCases(new IReflectionElement[0], null));
         }
 
         [Fact]
         public void ReflectionElementsIsCorrect()
         {
             var elements = new IReflectionElement[0];
-            var sut = new IdiomaticTestCaseCollection(elements, f => null);
+            var sut = new IdiomaticTestCases(elements, f => null);
 
             var actual = sut.ReflectionElements;
 
@@ -44,7 +44,7 @@ namespace Jwc.Experiment.Idioms
         public void AssertionFactoryIsCorrect()
         {
             Func<ITestFixture, IReflectionVisitor<object>> assertionFactory = f => null;
-            var sut = new IdiomaticTestCaseCollection(new IReflectionElement[0], assertionFactory);
+            var sut = new IdiomaticTestCases(new IReflectionElement[0], assertionFactory);
 
             var actual = sut.AssertionFactory;
 
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Idioms
                 new TypeElement(typeof(string))
             };
 
-            var sut = new IdiomaticTestCaseCollection(reflectionElements, assertionFactory);
+            var sut = new IdiomaticTestCases(reflectionElements, assertionFactory);
 
             // Exercise system
             var actual = sut.Cast<IdiomaticTestCase>().ToArray();

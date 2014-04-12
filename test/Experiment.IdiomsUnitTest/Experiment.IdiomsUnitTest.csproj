@@ -56,7 +56,7 @@
     <Compile Include="DelegatingReflectionVisitor.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
-    <Compile Include="IdiomaticTestCaseCollectionTest.cs" />
+    <Compile Include="IdiomaticTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

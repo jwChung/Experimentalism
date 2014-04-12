@@ -9,18 +9,18 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Represents a collection of <see cref="IdiomaticTestCase"/>
     /// </summary>
-    public class IdiomaticTestCaseCollection : IEnumerable<ITestCase>
+    public class IdiomaticTestCases : IEnumerable<ITestCase>
     {
         private readonly IEnumerable<IReflectionElement> _elements;
         private readonly Func<ITestFixture, IReflectionVisitor<object>> _assertionFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IdiomaticTestCaseCollection"/> class.
+        /// Initializes a new instance of the <see cref="IdiomaticTestCases"/> class.
         /// </summary>
         /// <param name="elements">The reflection elements to be verified.</param>
         /// <param name="assertionFactory">The assertion factory.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
-        public IdiomaticTestCaseCollection(
+        public IdiomaticTestCases(
             IEnumerable<IReflectionElement> elements,
             Func<ITestFixture, IReflectionVisitor<object>> assertionFactory)
         {
