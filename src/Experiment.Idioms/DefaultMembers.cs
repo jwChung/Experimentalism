@@ -11,6 +11,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class DefaultMembers : IEnumerable<MemberInfo>
     {
+        private readonly Type _type;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultMembers"/> class.
         /// </summary>
@@ -20,6 +22,19 @@ namespace Jwc.Experiment.Idioms
             if (type == null)
             {
                 throw new ArgumentNullException("type");
+            }
+
+            _type = type;
+        }
+
+        /// <summary>
+        /// Gets the target type.
+        /// </summary>
+        public Type Type
+        {
+            get
+            {
+                return _type;
             }
         }
 

@@ -19,5 +19,16 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(() => new DefaultMembers(null));
         }
+
+        [Fact]
+        public void TypeIsCorrect()
+        {
+            var type = GetType();
+            var sut = new DefaultMembers(type);
+
+            var actual = sut.Type;
+
+            Assert.Equal(type, actual);
+        }
     }
 }
