@@ -10,18 +10,13 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.7")]
-[assembly: AssemblyInformationalVersion("0.9.7")]
+[assembly: AssemblyVersion("0.9.8")]
+[assembly: AssemblyInformationalVersion("0.9.8")]
 
 /*
- * Version 0.9.7
+ * Version 0.9.8
  * 
- * Adds the MethodInfo parameter to the CreateFixture method of
- * TheoremAttribute and FirstClassTheoremAttribute to be used when creating
- * a fixture instance.
- * 
- * BREAKING CHANGES
- * - TheoremAttribute and FirstClassTheoremAttribute:
- *     protected IFixture CreateFixture() ->
- *     protected IFixture CreateFixture(MethodInfo)
+ * Uses single quotation mark to show the display name of `FirstClassCommand`,
+ * because double quotation mark can mislead that a value is string, but
+ * actually not.
  */
