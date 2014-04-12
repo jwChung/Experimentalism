@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Idioms
         public void ConvertToTestCommandReturnsCorrectCommand()
         {
             // Fixture setup
-            var fakeTestFixture = new FakeTestFixture();
+            var fakeTestFixture = new DelegatingTestFixture();
             Func<MethodInfo, ITestFixture> fixtureFactory = mi => fakeTestFixture;
 
             var assertion = new DelegatingReflectionVisitor();
@@ -96,7 +96,7 @@ namespace Jwc.Experiment.Idioms
             {
                 Assert.Equal(method.MethodInfo, mi);
                 verify = true;
-                return new FakeTestFixture();
+                return new DelegatingTestFixture();
             };
 
             sut.ConvertToTestCommand(method, fixtureFactory);
@@ -118,7 +118,7 @@ namespace Jwc.Experiment.Idioms
             Func<MethodInfo, ITestFixture> fixtureFactory = mi =>
             {
                 createCount++;
-                return new FakeTestFixture();
+                return new DelegatingTestFixture();
             };
 
             sut.ConvertToTestCommand(method, fixtureFactory);
@@ -131,7 +131,7 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new IdiomaticTestCase(
                 new TypeElement(typeof(object)), new DelegatingAssertionFactory());
-            Func<MethodInfo, ITestFixture> fixtureFactory = mi => new FakeTestFixture();
+            Func<MethodInfo, ITestFixture> fixtureFactory = mi => new DelegatingTestFixture();
             Assert.Throws<ArgumentNullException>(() => sut.ConvertToTestCommand(null, fixtureFactory));
         }
 

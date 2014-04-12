@@ -1,5 +1,8 @@
-﻿using Ploeh.Albedo;
+﻿using System;
+using Ploeh.Albedo;
+using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Idioms;
+using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -17,7 +20,13 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IReflectionVisitor<object> Create(ITestFixture testFixture)
         {
-            throw new System.NotImplementedException();
+            if (testFixture == null)
+            {
+                throw new ArgumentNullException("testFixture");
+            }
+
+            var fixture = (ISpecimenBuilder)testFixture.Create(typeof(Fixture));
+            return new AssertionAdapter(new GuardClauseAssertion(fixture));
         }
     }
 }

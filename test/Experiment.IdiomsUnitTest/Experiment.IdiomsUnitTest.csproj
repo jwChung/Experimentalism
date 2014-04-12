@@ -68,7 +68,7 @@
     <Compile Include="DelegatingIdiomaticAssertion.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
     <Compile Include="DelegatingTestCase.cs" />
-    <Compile Include="FakeTestFixture.cs" />
+    <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="GuardClauseAssertionFactoryTest.cs" />
     <Compile Include="IdiomaticTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCaseTest.cs" />
