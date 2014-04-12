@@ -54,5 +54,18 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(0, actual);
         }
+
+        [Fact]
+        public void DisplayNameIsCorrect()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+            const string expected = "Jwc.Experiment.Idioms.IdiomaticTestCommandTest.DisplayNameIsCorrect";
+
+            var actual = sut.DisplayName;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
