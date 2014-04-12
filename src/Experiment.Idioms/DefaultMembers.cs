@@ -55,7 +55,8 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Instance | BindingFlags.Static;
 
             var accessors = Type.GetProperties(bindingFlags).SelectMany(p => p.GetAccessors());
-            var eventMethods = Type.GetEvents(bindingFlags).SelectMany(e => new[] { e.GetAddMethod(), e.GetRemoveMethod() });
+            var eventMethods = Type.GetEvents(bindingFlags).SelectMany(
+                e => new[] { e.GetAddMethod(), e.GetRemoveMethod() });
             return Type.GetMembers(bindingFlags)
                 .Except(accessors)
                 .Except(eventMethods)
