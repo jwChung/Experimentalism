@@ -34,6 +34,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Albedo.0.11.2\lib\net35\Ploeh.Albedo.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\packages\AutoFixture.3.0.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture.Idioms">
+      <HintPath>..\..\packages\AutoFixture.Idioms.3.0.1\lib\net40\Ploeh.AutoFixture.Idioms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="xunit, Version=1.9.0.1566, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
