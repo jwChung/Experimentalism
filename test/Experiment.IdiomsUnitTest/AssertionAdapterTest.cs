@@ -31,5 +31,33 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(assertion, actual);
         }
+
+        [Fact]
+        public void VisitAssemblyElementVerifiesAssertionCorrectly()
+        {
+            bool verify = false;
+            var assembly = GetType().Assembly;
+            var assertion = new DelegatingIdiomaticAssertion
+            {
+                OnVerifyAssembly = a =>
+                {
+                    Assert.Equal(assembly, a);
+                    verify = true;
+                }
+            };
+            var sut = new AssertionAdapter(assertion);
+
+            var actual = sut.Visit(assembly.ToElement());
+
+            Assert.Equal(sut, actual);
+            Assert.True(verify, "Verify.");
+        }
+
+        [Fact]
+        public void VisitNullAssemblyThrows()
+        {
+            var sut = new AssertionAdapter(new DelegatingIdiomaticAssertion());
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((AssemblyElement)null));
+        }
     }
 }

@@ -49,5 +49,21 @@ namespace Jwc.Experiment.Idioms
                 return _assertion;
             }
         }
+
+        /// <summary>
+        /// Visits the specified assembly element.
+        /// </summary>
+        /// <param name="assemblyElement">The assembly element.</param>
+        /// <returns>The result visitor.</returns>
+        public override IReflectionVisitor<object> Visit(AssemblyElement assemblyElement)
+        {
+            if (assemblyElement == null)
+            {
+                throw new ArgumentNullException("assemblyElement");
+            }
+
+            _assertion.Verify(assemblyElement.Assembly);
+            return this;
+        }
     }
 }
