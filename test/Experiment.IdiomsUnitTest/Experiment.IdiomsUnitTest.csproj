@@ -52,6 +52,7 @@
     <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
+    <Compile Include="AllRefractionsTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="CompositeTestCasesTest.cs" />
     <Compile Include="DefaultMembersTest.cs" />
