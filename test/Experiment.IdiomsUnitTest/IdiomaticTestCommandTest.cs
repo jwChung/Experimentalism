@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using Ploeh.Albedo;
 using Xunit;
 using Xunit.Sdk;
 
@@ -10,8 +12,35 @@ namespace Jwc.Experiment.Idioms
         public void SutIsTestCommand()
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var sut = new IdiomaticTestCommand(dummyMethod, null, null);
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
             Assert.IsAssignableFrom<TestCommand>(sut);
-        } 
+        }
+
+        [Fact]
+        public void InitializeWithNullMethodThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new IdiomaticTestCommand(
+                    null, new TypeElement(typeof(object)), new DelegatingReflectionVisitor()));
+        }
+
+        [Fact]
+        public void InitializeWithNullReflectionElementThrows()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(
+                () => new IdiomaticTestCommand(
+                    dummyMethod, null, new DelegatingReflectionVisitor()));
+        }
+
+        [Fact]
+        public void InitializeWithNullAssertionThrows()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ArgumentNullException>(
+                () => new IdiomaticTestCommand(
+                    dummyMethod, new TypeElement(typeof(object)), null));
+        }
     }
 }

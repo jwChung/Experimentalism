@@ -1,4 +1,5 @@
-﻿using Ploeh.Albedo;
+﻿using System;
+using Ploeh.Albedo;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment.Idioms
@@ -18,8 +19,17 @@ namespace Jwc.Experiment.Idioms
             IMethodInfo method,
             IReflectionElement element,
             IReflectionVisitor<object> assertion)
-            : base(method, "anonymous", 100)
+            : base(EnsureIsNotNull(method), "anonymous", 100)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
+
+            if (assertion == null)
+            {
+                throw new ArgumentNullException("assertion");
+            }
         }
 
         /// <summary>
@@ -31,6 +41,16 @@ namespace Jwc.Experiment.Idioms
         public override MethodResult Execute(object testClass)
         {
             throw new System.NotImplementedException();
+        }
+
+        private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            return method;
         }
     }
 }
