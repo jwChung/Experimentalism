@@ -45,6 +45,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DelegatingReflectionVisitor.cs" />
+    <Compile Include="FakeTestFixture.cs" />
     <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

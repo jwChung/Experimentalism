@@ -75,7 +75,20 @@ namespace Jwc.Experiment.Idioms
         public ITestCommand ConvertToTestCommand(
             IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
         {
-            throw new NotImplementedException();
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            if (fixtureFactory == null)
+            {
+                throw new ArgumentNullException("fixtureFactory");
+            }
+
+            return new IdiomaticTestCommand(
+                method,
+                ReflectionElement,
+                AssertionFactory(fixtureFactory(method.MethodInfo)));
         }
     }
 }
