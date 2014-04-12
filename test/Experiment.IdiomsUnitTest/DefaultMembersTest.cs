@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
@@ -11,6 +12,12 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new DefaultMembers(typeof(object));
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullTypeThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new DefaultMembers(null));
         }
     }
 }

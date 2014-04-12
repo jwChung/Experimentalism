@@ -17,7 +17,10 @@ namespace Jwc.Experiment.Idioms
         /// <param name="type">The target type.</param>
         public DefaultMembers(Type type)
         {
-            
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
         }
 
         /// <summary>
