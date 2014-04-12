@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
@@ -33,6 +34,19 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ExceptedMembers;
 
             Assert.Equal(exceptedMembers, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullTargetMembersThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new FilteringMembers(null));
+        }
+
+        [Fact]
+        public void InitializeWithNullExceptedMembersThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new FilteringMembers(new MemberInfo[0], null));
         }
     }
 }
