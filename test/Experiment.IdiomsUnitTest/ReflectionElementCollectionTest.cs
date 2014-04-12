@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Xunit;
@@ -51,6 +53,34 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(
                 new IReflectionElementRefraction<object>[] { refraction1, refraction2 },
                 actual);
+        }
+
+        [Fact]
+        public void SutEnumeratesCorrectReflectionElements()
+        {
+            // Fixture setup
+            var refraction1 = new TypeElementRefraction<object>();
+            var refraction2 = new AssemblyElementRefraction<object>();
+            var sources = new[]
+            {
+                new object(),
+                GetType(),
+                GetType().Assembly,
+                MethodBase.GetCurrentMethod()
+            };
+            var sut = new ReflectionElementCollection(sources, refraction1, refraction2);
+
+            // Exercise system
+            IReflectionElement[] actual = sut.ToArray();
+
+            // Verify outcome
+            Assert.Equal(2, actual.Length);
+
+            var typeElement = Assert.IsType<TypeElement>(actual[0]);
+            Assert.Equal(GetType(), typeElement.Type);
+
+            var assemblyElement = Assert.IsType<AssemblyElement>(actual[1]);
+            Assert.Equal(GetType().Assembly, assemblyElement.Assembly);
         }
     }
 }

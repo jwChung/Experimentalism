@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 
@@ -69,7 +70,9 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<IReflectionElement> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return new CompositeReflectionElementRefraction<object>(Refractions.ToArray())
+                .Refract(Sources)
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
