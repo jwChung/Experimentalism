@@ -56,7 +56,7 @@ namespace Jwc.Experiment.Idioms
         /// Visits the specified assembly element.
         /// </summary>
         /// <param name="assemblyElement">The assembly element.</param>
-        /// <returns>The result visitor.</returns>
+        /// <returns>The current assertion.</returns>
         public override IReflectionVisitor<object> Visit(AssemblyElement assemblyElement)
         {
             if (assemblyElement == null)
@@ -65,6 +65,70 @@ namespace Jwc.Experiment.Idioms
             }
 
             _assertion.Verify(assemblyElement.Assembly);
+            return this;
+        }
+
+        /// <summary>
+        /// Visits the specified type element.
+        /// </summary>
+        /// <param name="typeElement">The type element.</param>
+        /// <returns>The current assertion.</returns>
+        public override IReflectionVisitor<object> Visit(TypeElement typeElement)
+        {
+            if (typeElement == null)
+            {
+                throw new ArgumentNullException("typeElement");
+            }
+
+            _assertion.Verify(typeElement.Type);
+            return this;
+        }
+
+        /// <summary>
+        /// Visits the specified constructor information element.
+        /// </summary>
+        /// <param name="constructorInfoElement">The constructor information element.</param>
+        /// <returns>The current assertion.</returns>
+        public override IReflectionVisitor<object> Visit(ConstructorInfoElement constructorInfoElement)
+        {
+            if (constructorInfoElement == null)
+            {
+                throw new ArgumentNullException("constructorInfoElement");
+            }
+
+            _assertion.Verify(constructorInfoElement.ConstructorInfo);
+            return this;
+        }
+
+        /// <summary>
+        /// Visits the specified property information element.
+        /// </summary>
+        /// <param name="propertyInfoElement">The property information element.</param>
+        /// <returns>The current assertion.</returns>
+        public override IReflectionVisitor<object> Visit(PropertyInfoElement propertyInfoElement)
+        {
+            if (propertyInfoElement == null)
+            {
+                throw new ArgumentNullException("propertyInfoElement");
+            }
+
+            _assertion.Verify(propertyInfoElement.PropertyInfo);
+            return this;
+        }
+
+        /// <summary>
+        /// Visits the specified method information element.
+        /// </summary>
+        /// <param name="methodInfoElement">The method information element.</param>
+        /// <returns>The current assertion.</returns>
+        public override IReflectionVisitor<object> Visit(MethodInfoElement methodInfoElement)
+        {
+            if (methodInfoElement == null)
+            {
+                throw new ArgumentNullException("methodInfoElement");
+            }
+
+            _assertion.Verify(methodInfoElement.MethodInfo);
             return this;
         }
     }
