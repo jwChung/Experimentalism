@@ -44,5 +44,20 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(testCase4, actual[3]);
             Assert.Equal(testCase5, actual[4]);
         }
+
+        [Fact]
+        public void TestCaseSetIsCorrect()
+        {
+            IEnumerable<ITestCase>[] testCaseSet =
+            {
+                new ITestCase[]{ new DelegatingTestCase() },
+                new ITestCase[]{ new DelegatingTestCase(), new DelegatingTestCase() }
+            };
+            var sut = new CompositeTestCaseCollection(testCaseSet);
+
+            var actual = sut.TestCaseSet;
+
+            Assert.Equal(testCaseSet, actual);
+        }
     }
 }

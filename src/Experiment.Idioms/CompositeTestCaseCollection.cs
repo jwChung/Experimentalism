@@ -27,6 +27,17 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// Gets the test-case set.
+        /// </summary>
+        public IEnumerable<IEnumerable<ITestCase>> TestCaseSet
+        {
+            get
+            {
+                return _testCaseSet;
+            }
+        }
+
+        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -34,7 +45,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<ITestCase> GetEnumerator()
         {
-            return _testCaseSet.SelectMany(cases => cases).GetEnumerator();
+            return TestCaseSet.SelectMany(cases => cases).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
