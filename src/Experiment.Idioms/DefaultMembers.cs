@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Jwc.Experiment.Idioms
@@ -45,10 +46,14 @@ namespace Jwc.Experiment.Idioms
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that
         /// can be used to iterate through the collection.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            throw new NotImplementedException();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.DeclaredOnly |
+                BindingFlags.Instance | BindingFlags.Static;
+
+            var accessors = Type.GetProperties(bindingFlags).SelectMany(p => p.GetAccessors());
+            return Type.GetMembers(bindingFlags).Except(accessors).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
