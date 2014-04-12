@@ -117,5 +117,40 @@ namespace Jwc.Experiment.Idioms
 
             Assert.False(actual, "ShouldCreateInstance.");
         }
+
+        [Fact]
+        public void ExecuteVerifiesAssertion()
+        {
+            bool verify = false;
+            var element = new TypeElement(typeof(object));
+            var assertion = new DelegatingReflectionVisitor
+            {
+                OnVisitTypeElement = e =>
+                {
+                    Assert.Equal(element, e);
+                    verify = true;
+                    return new DelegatingReflectionVisitor();
+                }
+            };
+            var sut = new IdiomaticTestCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), element, assertion);
+
+            sut.Execute(null);
+
+            Assert.True(verify, "verify.");
+        }
+
+        [Fact]
+        public void ExecuteReturnsCorrectMethodResult()
+        {
+            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var sut = new IdiomaticTestCommand(
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+
+            var actual = sut.Execute(null);
+
+            Assert.Equal(sut.DisplayName, actual.DisplayName);
+            Assert.Equal(sut.MethodName, actual.MethodName);
+        }
     }
 }

@@ -88,14 +88,14 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// Executes verifying the assertion.
         /// </summary>
-        /// <param name="testClass"></param>
-        /// <returns></returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        /// <inheritdoc />
+        /// <param name="testClass">The test class object.</param>
+        /// <returns>The result of the execution.</returns>
         public override MethodResult Execute(object testClass)
         {
-            throw new System.NotImplementedException();
+            ReflectionElement.Accept(Assertion);
+            return new PassedResult(Method, DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
