@@ -59,9 +59,12 @@ namespace Jwc.Experiment.Idioms
         public void DisplayNameIsCorrect()
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var typeElement = new TypeElement(typeof(object));
             var sut = new IdiomaticTestCommand(
-                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
-            const string expected = "Jwc.Experiment.Idioms.IdiomaticTestCommandTest.DisplayNameIsCorrect";
+                dummyMethod, typeElement, new DelegatingReflectionVisitor());
+            string expected = string.Format(
+                "Jwc.Experiment.Idioms.IdiomaticTestCommandTest.DisplayNameIsCorrect('{0}')",
+                typeElement);
 
             var actual = sut.DisplayName;
 

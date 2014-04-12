@@ -38,6 +38,8 @@ namespace Jwc.Experiment.Idioms
             _method = method;
             _element = element;
             _assertion = assertion;
+
+            DisplayName = DisplayName + "('" + element + "')";
         }
 
         /// <summary>
