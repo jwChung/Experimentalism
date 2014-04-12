@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -9,6 +10,12 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new CompositeTestCaseCollection();
             Assert.IsAssignableFrom<ITestCase>(sut);
+        }
+
+        [Fact]
+        public void InitializeWithNullTestCaseSetThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new CompositeTestCaseCollection(null));
         }
     }
 }

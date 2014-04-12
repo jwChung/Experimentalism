@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Jwc.Experiment.Idioms
@@ -8,6 +9,18 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class CompositeTestCaseCollection : IEnumerable<ITestCase>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompositeTestCaseCollection"/> class.
+        /// </summary>
+        /// <param name="testCaseSet">The set of test cases.</param>
+        public CompositeTestCaseCollection(params IEnumerable<ITestCase>[] testCaseSet)
+        {
+            if (testCaseSet == null)
+            {
+                throw new ArgumentNullException("testCaseSet");
+            }
+        }
+
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
