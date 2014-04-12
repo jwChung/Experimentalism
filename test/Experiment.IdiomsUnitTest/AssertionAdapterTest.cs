@@ -59,5 +59,12 @@ namespace Jwc.Experiment.Idioms
             var sut = new AssertionAdapter(new DelegatingIdiomaticAssertion());
             Assert.Throws<ArgumentNullException>(() => sut.Visit((AssemblyElement)null));
         }
+
+        [Fact]
+        public void ValueIsCorrect()
+        {
+            var sut = new AssertionAdapter(new DelegatingIdiomaticAssertion());
+            Assert.Throws<NotSupportedException>(() => sut.Value);
+        }
     }
 }

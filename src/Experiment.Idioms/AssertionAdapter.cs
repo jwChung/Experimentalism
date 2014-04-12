@@ -32,7 +32,9 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                throw new System.NotImplementedException();
+                throw new NotSupportedException(
+                    "This Value property does not support to return a value as the main purpose of this " +
+                    "AssertionAdapter class is to verify assertions.");
             }
         }
 
