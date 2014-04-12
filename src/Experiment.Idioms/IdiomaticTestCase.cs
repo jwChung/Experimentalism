@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Ploeh.Albedo;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment.Idioms
@@ -11,6 +12,26 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class IdiomaticTestCase : ITestCase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IdiomaticTestCase"/> class.
+        /// </summary>
+        /// <param name="element">The reflection element to be verified with the assertion.</param>
+        /// <param name="assetionFactory">The assetion factory.</param>
+        public IdiomaticTestCase(
+            IReflectionElement element,
+            Func<ITestFixture, IReflectionVisitor<object>> assetionFactory)
+        {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
+            
+            if (assetionFactory == null)
+            {
+                throw new ArgumentNullException("assetionFactory");
+            }
+        }
+
         /// <summary>
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
