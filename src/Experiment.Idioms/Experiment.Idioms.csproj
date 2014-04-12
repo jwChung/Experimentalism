@@ -48,6 +48,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="CompositeTestCases.cs" />
+    <Compile Include="DefaultMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCases.cs" />

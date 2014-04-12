@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="CompositeTestCasesTest.cs" />
+    <Compile Include="DefaultMembersTest.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
