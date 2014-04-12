@@ -92,7 +92,7 @@ namespace Jwc.Experiment
                 new Action<int, object, string, Type>((a, b, c, d) => { }),
                 arguments);
             var expected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsCorrect" +
-                            "(Int32: \"1\", Object: \"System.Object\", String: \"string\", Type: NULL)";
+                            "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
 
             var actual = sut.DisplayName;
 

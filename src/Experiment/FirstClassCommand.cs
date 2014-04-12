@@ -129,7 +129,7 @@ namespace Jwc.Experiment
 
         private static string GetArgumentValue(string typeName, object argument)
         {
-            return typeName + ": " + (argument != null ? "\"" + argument + "\"" : "NULL");
+            return typeName + ": " + (argument != null ? "'" + argument + "'" : "'NULL'");
         }
     }
 }
