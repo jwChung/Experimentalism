@@ -60,6 +60,7 @@
     <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionElementCollectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
