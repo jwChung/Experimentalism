@@ -10,12 +10,15 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class AssertionAdapter : ReflectionVisitor<object>
     {
+        private readonly IIdiomaticAssertion _assertion;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AssertionAdapter"/> class.
         /// </summary>
         /// <param name="assertion">The assertion.</param>
         public AssertionAdapter(IIdiomaticAssertion assertion)
         {
+            _assertion = assertion;
             if (assertion == null)
             {
                 throw new ArgumentNullException("assertion");
@@ -30,6 +33,20 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 throw new System.NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// Gets the assertion.
+        /// </summary>
+        /// <value>
+        /// The assertion.
+        /// </value>
+        public IIdiomaticAssertion Assertion
+        {
+            get
+            {
+                return _assertion;
             }
         }
     }

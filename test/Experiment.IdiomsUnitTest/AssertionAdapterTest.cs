@@ -20,5 +20,16 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(() => new AssertionAdapter(null));
         }
+
+        [Fact]
+        public void AssertionIsCorrect()
+        {
+            var assertion = new GuardClauseAssertion(new ArrayRelay());
+            var sut = new AssertionAdapter(assertion);
+
+            var actual = sut.Assertion;
+
+            Assert.Equal(assertion, actual);
+        }
     }
 }
