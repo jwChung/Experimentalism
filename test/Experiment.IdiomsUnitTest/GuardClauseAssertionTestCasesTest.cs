@@ -42,5 +42,13 @@ namespace Jwc.Experiment.Idioms
                 .OrderBy(t => t.FullName),
                 reflectionElements.Refractions.Select(r => r.GetType()).OrderBy(t => t.FullName));
         }
+
+        [Fact]
+        public void AssertionFactoryIsCorrect()
+        {
+            var sut = new GuardClauseAssertionTestCases(GetType());
+            var actual = sut.AssertionFactory;
+            Assert.IsType<GuardClauseAssertionFactory>(actual);
+        }
     }
 }
