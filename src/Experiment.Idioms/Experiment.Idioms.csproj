@@ -48,6 +48,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Experiment\Experiment.csproj">
+      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
+      <Name>Experiment</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

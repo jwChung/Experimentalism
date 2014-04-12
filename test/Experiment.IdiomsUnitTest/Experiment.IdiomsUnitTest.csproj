@@ -45,6 +45,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DelegatingReflectionVisitor.cs" />
+    <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\..\src\Experiment.Idioms\Experiment.Idioms.csproj">
       <Project>{7352FC70-2780-415C-9A43-F889F7B8028D}</Project>
       <Name>Experiment.Idioms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
+      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
+      <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
