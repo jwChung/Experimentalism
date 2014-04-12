@@ -59,6 +59,7 @@
     <Compile Include="AssertionAdapter.cs" />
     <Compile Include="CompositeTestCases.cs" />
     <Compile Include="DefaultMembers.cs" />
+    <Compile Include="FilteringMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GuardClauseAssertionFactory.cs" />
     <Compile Include="IAssertionFactory.cs" />
