@@ -26,7 +26,7 @@ namespace Jwc.Experiment.Idioms
         public void InitializeWithNullAssertionFactoryThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticTestCase(new TypeElement(typeof(object)), (IAssertionFactory)null));
+                () => new IdiomaticTestCase(new TypeElement(typeof(object)), null));
         }
 
         [Fact]

@@ -23,7 +23,7 @@ namespace Jwc.Experiment.Idioms
                 typeof(EventInfoElementRefraction<object>),
                 typeof(FieldInfoElementRefraction<object>),
                 typeof(MethodInfoElementRefraction<object>),
-                typeof(PropertyInfoElementRefraction<object>),
+                typeof(PropertyInfoElementRefraction<object>)
             };
             var sut = new AllMemberRefractions();
 
