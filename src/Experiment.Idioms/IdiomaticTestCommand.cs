@@ -17,7 +17,7 @@ namespace Jwc.Experiment.Idioms
         /// Initializes a new instance of the <see cref="IdiomaticTestCommand" /> class.
         /// </summary>
         /// <param name="method">The method under test.</param>
-        /// <param name="element">The reflection element to be asserted.</param>
+        /// <param name="element">The reflection element to be verified with the assertion.</param>
         /// <param name="assertion">The assertion.</param>
         public IdiomaticTestCommand(
             IMethodInfo method,
