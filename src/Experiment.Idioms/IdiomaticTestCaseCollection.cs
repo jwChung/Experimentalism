@@ -19,6 +19,7 @@ namespace Jwc.Experiment.Idioms
         /// </summary>
         /// <param name="elements">The reflection elements to be verified.</param>
         /// <param name="assertionFactory">The assertion factory.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
         public IdiomaticTestCaseCollection(
             IEnumerable<IReflectionElement> elements,
             Func<ITestFixture, IReflectionVisitor<object>> assertionFactory)
@@ -51,6 +52,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets the assertion factory.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
         public Func<ITestFixture, IReflectionVisitor<object>> AssertionFactory
         {
             get
