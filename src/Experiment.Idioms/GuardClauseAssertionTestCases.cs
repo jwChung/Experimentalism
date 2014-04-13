@@ -30,8 +30,8 @@ namespace Jwc.Experiment.Idioms
                 new FilteringMembers(
                     new FilteringMembers(
                         new TargetMembers(type, Accessibilities.Public),
-                        m => !excludedMembers.Contains(m)),
-                    m => !IsReadOnlyProperty(m)),
+                        excludedMembers.Contains),
+                    IsReadOnlyProperty),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
                 new MethodInfoElementRefraction<object>());

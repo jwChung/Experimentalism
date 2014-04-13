@@ -61,7 +61,7 @@ namespace Jwc.Experiment.Idioms
                 new Methods<FilteringMembersTest>().Select(x => x.SutEnumeratesCorrectMembers())
             };
             var expected = targetMembers.Except(excludedMembers);
-            var sut = new FilteringMembers(targetMembers, m => !excludedMembers.Contains(m));
+            var sut = new FilteringMembers(targetMembers, excludedMembers.Contains);
 
             var actual = sut.ToArray();
 

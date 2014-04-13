@@ -42,7 +42,7 @@ namespace Jwc.Experiment.Idioms
 
             var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
             var filteringMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            Assert.True(filteringMembers.All(m => !(m is MethodInfo)), "Except Condition.");
+            Assert.True(filteringMembers.All(m => !(m is MethodInfo)), "Exclude Condition.");
         }
 
         [Fact]
