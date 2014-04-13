@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ploeh.Albedo.Refraction;
 using Xunit;
 
@@ -14,24 +15,30 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsIsCorrect()
+        public void ReflectionElementsHasCorrectSources()
         {
-            // Fixture setup
             var type = GetType();
             var exceptedMembers = type.GetMembers();
             var sut = new GuardClauseAssertionTestCases(type, exceptedMembers);
 
-            // Exercise system
             var actual = sut.ReflectionElements;
 
-            // Verify outcome
             var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
             var fileterMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
             var targetMembers = Assert.IsAssignableFrom<TargetMembers>(fileterMembers.TargetMembers);
             Assert.Equal(type, targetMembers.Type);
             Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
             Assert.Equal(exceptedMembers, fileterMembers.ExceptedMembers);
+        }
 
+        [Fact]
+        public void ReflectionElementsHasCorrectRefractions()
+        {
+            var sut = new GuardClauseAssertionTestCases(GetType());
+
+            var actual = sut.ReflectionElements;
+
+            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
             Assert.Equal(
                 new[]
                 {
