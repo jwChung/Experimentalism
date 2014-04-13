@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Reflection;
-using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Xunit;
 
