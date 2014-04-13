@@ -15,7 +15,7 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                throw new System.NotImplementedException();
+                return new Accessibilities[0];
             }
         }
     }

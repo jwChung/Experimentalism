@@ -11,6 +11,14 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new AccessibilityCollectingVisitor();
             Assert.IsAssignableFrom<ReflectionVisitor<IEnumerable<Accessibilities>>>(sut);
-        } 
+        }
+
+        [Fact]
+        public void ValueIsCorrect()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            var actual = sut.Value;
+            Assert.Empty(actual);
+        }
     }
 }
