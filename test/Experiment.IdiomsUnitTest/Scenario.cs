@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
+using Ploeh.Albedo.Refraction;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
@@ -15,7 +16,9 @@ namespace Jwc.Experiment.Idioms
             return new IdiomaticTestCases(
                 new ReflectionElements(
                     new DefaultMembers(typeof(Scenario)),
-                    new AllMemberRefractions().ToArray()),
+                    new ConstructorInfoElementRefraction<object>(),
+                    new PropertyInfoElementRefraction<object>(),
+                    new MethodInfoElementRefraction<object>()),
                 new GuardClauseAssertionFactory());
         }
 
@@ -25,7 +28,9 @@ namespace Jwc.Experiment.Idioms
             return new IdiomaticTestCases(
                 new ReflectionElements(
                     new DefaultMembers(typeof(ClassWithNonGuardedMembers)),
-                    new AllMemberRefractions().ToArray()),
+                    new ConstructorInfoElementRefraction<object>(),
+                    new PropertyInfoElementRefraction<object>(),
+                    new MethodInfoElementRefraction<object>()),
                 new GuardClauseAssertionFactory());
         }
 
