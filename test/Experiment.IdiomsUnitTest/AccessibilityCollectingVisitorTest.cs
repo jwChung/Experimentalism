@@ -179,7 +179,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitMethodInfoInfoElementManyTimeProducesCorrectValues()
+        public void VisitMethodInfoElementManyTimeProducesCorrectValues()
         {
             var sut = new AccessibilityCollectingVisitor();
             const BindingFlags bindingFlags =
@@ -202,6 +202,52 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new AccessibilityCollectingVisitor();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
+        }
+
+        [Theory]
+        [EventInfoElementData]
+        public void VisitEventInfoElementProducesCorrectValue(
+            Func<EventInfo, bool> predicate, Accessibilities expected)
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var eventInfoElement = typeof(object).Assembly
+                .GetTypes().Concat(new[] { typeof(ClassWithTestMembers) })
+                .SelectMany(t => t.GetEvents(bindingFlags))
+                .Where(predicate).First().ToElement();
+
+            var actual = sut.Visit(eventInfoElement);
+
+            Assert.Empty(sut.Value);
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitEventInfoElementManyTimeProducesCorrectValues()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var eventInfos = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetEvents(bindingFlags));
+            var eventInfoElement1 = eventInfos.Where(x => x.GetAddMethod(true).IsFamily).First().ToElement();
+            var eventInfoElement2 = eventInfos.Where(x => x.GetRemoveMethod(true).IsPublic).First().ToElement();
+
+            var actual = sut.Visit(eventInfoElement1).Visit(eventInfoElement2);
+
+            Assert.Equal(
+                new[] { Accessibilities.Protected, Accessibilities.Public },
+                actual.Value.ToArray());
+        }
+
+        [Fact]
+        public void VisitNullEventInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
         }
 
         private class TypeElementDataAttribute : DataAttribute
@@ -289,6 +335,43 @@ namespace Jwc.Experiment.Idioms
                 yield return new object[]
                 {
                     new Func<MethodBase, bool>(x => x.IsPrivate), Accessibilities.Private
+                };
+            }
+        }
+
+        private class EventInfoElementDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[]
+                {
+                    new Func<EventInfo, bool>(
+                        x => x.GetAddMethod(true).IsPublic && x.GetRemoveMethod(true).IsPublic),
+                    Accessibilities.Public
+                };
+                yield return new object[]
+                {
+                    new Func<EventInfo, bool>(
+                        x => x.GetAddMethod(true).IsFamilyOrAssembly && x.GetRemoveMethod(true).IsFamilyOrAssembly),
+                    Accessibilities.ProtectedInternal
+                };
+                yield return new object[]
+                {
+                    new Func<EventInfo, bool>(
+                        x => x.GetAddMethod(true).IsFamily && x.GetRemoveMethod(true).IsFamily),
+                    Accessibilities.Protected
+                };
+                yield return new object[]
+                {
+                    new Func<EventInfo, bool>(
+                        x => x.GetAddMethod(true).IsAssembly && x.GetRemoveMethod(true).IsAssembly),
+                    Accessibilities.Internal
+                };
+                yield return new object[]
+                {
+                    new Func<EventInfo, bool>(
+                        x => x.GetAddMethod(true).IsPrivate && x.GetRemoveMethod(true).IsPrivate),
+                    Accessibilities.Private
                 };
             }
         }

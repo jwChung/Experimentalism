@@ -24,6 +24,7 @@ namespace Jwc.Experiment.Idioms
         {
         }
 
-        public event EventHandler Event;
+        public event EventHandler PublicEvent;
+        protected internal event EventHandler ProtectedInternalEvent;
     }
 }

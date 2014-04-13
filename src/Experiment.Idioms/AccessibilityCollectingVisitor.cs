@@ -160,7 +160,8 @@ namespace Jwc.Experiment.Idioms
         /// to continue the visiting process with potentially updated
         /// observations.
         /// </returns>
-        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(MethodInfoElement methodInfoElement)
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
+            MethodInfoElement methodInfoElement)
         {
             if (methodInfoElement == null)
             {
@@ -169,6 +170,29 @@ namespace Jwc.Experiment.Idioms
 
             return new AccessibilityCollectingVisitor(
                 Value.Concat(new[] { GetAccessibilities(methodInfoElement.MethodInfo) }));
+        }
+
+        /// <summary>
+        /// Allows an <see cref="EventInfoElement"/> to be visited. This method
+        /// is called when the element accepts this visitor instance.
+        /// </summary>
+        /// <param name="eventInfoElement">
+        /// The <see cref="EventInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
+            EventInfoElement eventInfoElement)
+        {
+            if (eventInfoElement == null)
+            {
+                throw new ArgumentNullException("eventInfoElement");
+            }
+
+            return Visit(eventInfoElement.EventInfo.GetAddMethod(true).ToElement());
         }
 
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)
