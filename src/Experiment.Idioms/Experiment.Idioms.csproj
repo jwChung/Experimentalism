@@ -54,7 +54,6 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AllRefractions.cs" />
     <Compile Include="AssertionAdapter.cs" />
     <Compile Include="CompositeTestCases.cs" />
     <Compile Include="DefaultMembers.cs" />
