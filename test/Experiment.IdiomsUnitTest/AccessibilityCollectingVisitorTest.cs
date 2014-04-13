@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ploeh.Albedo;
 using Xunit;
 
@@ -19,6 +20,13 @@ namespace Jwc.Experiment.Idioms
             var sut = new AccessibilityCollectingVisitor();
             var actual = sut.Value;
             Assert.Empty(actual);
+        }
+
+        [Fact]
+        public void VisitAssemblyElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<NotSupportedException>(() => sut.Visit((AssemblyElement)null));
         }
     }
 }
