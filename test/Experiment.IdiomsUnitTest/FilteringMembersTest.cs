@@ -55,13 +55,13 @@ namespace Jwc.Experiment.Idioms
         public void SutEnumeratesCorrectMembers()
         {
             var targetMembers = GetType().GetMembers();
-            var exceptedMembers = new MemberInfo[]
+            var excludedMembers = new MemberInfo[]
             {
                 new Methods<FilteringMembersTest>().Select(x => x.GetType()),
                 new Methods<FilteringMembersTest>().Select(x => x.SutEnumeratesCorrectMembers())
             };
-            var expected = targetMembers.Except(exceptedMembers);
-            var sut = new FilteringMembers(targetMembers, m => !exceptedMembers.Contains(m));
+            var expected = targetMembers.Except(excludedMembers);
+            var sut = new FilteringMembers(targetMembers, m => !excludedMembers.Contains(m));
 
             var actual = sut.ToArray();
 

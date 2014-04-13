@@ -35,8 +35,8 @@ namespace Jwc.Experiment.Idioms
         public void ReflectionElementsHasFilterToExceptCertainMembers()
         {
             var type = typeof(ClassWithTestMembers);
-            var exceptedMembers = type.GetMethods().Cast<MemberInfo>().ToArray();
-            var sut = new GuardClauseAssertionTestCases(type, exceptedMembers);
+            var excludedMembers = type.GetMethods().Cast<MemberInfo>().ToArray();
+            var sut = new GuardClauseAssertionTestCases(type, excludedMembers);
 
             var actual = sut.ReflectionElements;
 

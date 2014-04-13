@@ -17,20 +17,20 @@ namespace Jwc.Experiment.Idioms
         /// Initializes a new instance of the <see cref="GuardClauseAssertionTestCases"/> class.
         /// </summary>
         /// <param name="type">The target type whose members are verified.</param>
-        /// <param name="exceptedMembers">The excepted members.</param>
-        public GuardClauseAssertionTestCases(Type type, params MemberInfo[] exceptedMembers)
-            : base(CreateReflectionElements(type, exceptedMembers), new GuardClauseAssertionFactory())
+        /// <param name="excludedMembers">The excluded members.</param>
+        public GuardClauseAssertionTestCases(Type type, params MemberInfo[] excludedMembers)
+            : base(CreateReflectionElements(type, excludedMembers), new GuardClauseAssertionFactory())
         {
         }
 
         private static IEnumerable<IReflectionElement> CreateReflectionElements(
-            Type type, IEnumerable<MemberInfo> exceptedMembers)
+            Type type, IEnumerable<MemberInfo> excludedMembers)
         {
             return new ReflectionElements(
                 new FilteringMembers(
                     new FilteringMembers(
                         new TargetMembers(type, Accessibilities.Public),
-                        m => !exceptedMembers.Contains(m)),
+                        m => !excludedMembers.Contains(m)),
                     m => !IsReadOnlyProperty(m)),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
