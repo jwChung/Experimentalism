@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Ploeh.Albedo.Refraction;
 using Xunit;
 
@@ -28,8 +27,8 @@ namespace Jwc.Experiment.Idioms
             // Verify outcome
             var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
             var fileterMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            var defaultMembers = Assert.IsAssignableFrom<DefaultMembers>(fileterMembers.TargetMembers);
-            Assert.Equal(type, defaultMembers.Type);
+            var targetMembers = Assert.IsAssignableFrom<TargetMembers>(fileterMembers.TargetMembers);
+            Assert.Equal(type, targetMembers.Type);
             Assert.Equal(exceptedMembers, fileterMembers.ExceptedMembers);
 
             Assert.Equal(

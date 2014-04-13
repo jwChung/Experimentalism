@@ -7,26 +7,26 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class DefaultMembersTest
+    public class TargetMembersTest
     {
         [Fact]
         public void SutIsEnumerableOfMemberInfo()
         {
-            var sut = new DefaultMembers(typeof(object));
+            var sut = new TargetMembers(typeof(object));
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         }
 
         [Fact]
         public void InitializeWithNullTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new DefaultMembers(null));
+            Assert.Throws<ArgumentNullException>(() => new TargetMembers(null));
         }
 
         [Fact]
         public void TypeIsCorrect()
         {
             var type = GetType();
-            var sut = new DefaultMembers(type);
+            var sut = new TargetMembers(type);
 
             var actual = sut.Type;
 
@@ -36,7 +36,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesPublicMembersOnly()
         {
-            var sut = new DefaultMembers(typeof(ClassWithTestMembers));
+            var sut = new TargetMembers(typeof(ClassWithTestMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.All(m => m.IsPublic), "Public Only.");
         }
@@ -44,7 +44,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesAllKindsOfMemberInfo()
         {
-            var sut = new DefaultMembers(typeof(ClassWithTestMembers));
+            var sut = new TargetMembers(typeof(ClassWithTestMembers));
 
             var actual = sut.ToArray();
 
@@ -60,7 +60,7 @@ namespace Jwc.Experiment.Idioms
         {
             var type = typeof(ClassWithTestMembers);
             var toStringMethod = new Methods<ClassWithTestMembers>().Select(x => x.ToString());
-            var sut = new DefaultMembers(type);
+            var sut = new TargetMembers(type);
 
             var actual = sut.ToArray();
 
@@ -70,7 +70,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesStaticMember()
         {
-            var sut = new DefaultMembers(typeof(ClassWithTestMembers));
+            var sut = new TargetMembers(typeof(ClassWithTestMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -78,7 +78,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new DefaultMembers(typeof(ClassWithTestMembers));
+            var sut = new TargetMembers(typeof(ClassWithTestMembers));
             var accessors = new Properties<ClassWithTestMembers>()
                 .Select(x => x.Property).GetAccessors();
 
@@ -92,7 +92,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyHelperMethodsOfEvent()
         {
-            var sut = new DefaultMembers(typeof(ClassWithTestMembers));
+            var sut = new TargetMembers(typeof(ClassWithTestMembers));
             var eventInfo = typeof(ClassWithTestMembers).GetEvents().First();
             var eventMethods = new[] { eventInfo.GetAddMethod(), eventInfo.GetRemoveMethod() };
 

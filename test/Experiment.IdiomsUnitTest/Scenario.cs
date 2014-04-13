@@ -15,7 +15,7 @@ namespace Jwc.Experiment.Idioms
         {
             return new IdiomaticTestCases(
                 new ReflectionElements(
-                    new DefaultMembers(typeof(Scenario)),
+                    new TargetMembers(typeof(Scenario)),
                     new ConstructorInfoElementRefraction<object>(),
                     new PropertyInfoElementRefraction<object>(),
                     new MethodInfoElementRefraction<object>()),
@@ -27,7 +27,7 @@ namespace Jwc.Experiment.Idioms
         {
             return new IdiomaticTestCases(
                 new ReflectionElements(
-                    new DefaultMembers(typeof(ClassWithNonGuardedMembers)),
+                    new TargetMembers(typeof(ClassWithNonGuardedMembers)),
                     new ConstructorInfoElementRefraction<object>(),
                     new PropertyInfoElementRefraction<object>(),
                     new MethodInfoElementRefraction<object>()),
