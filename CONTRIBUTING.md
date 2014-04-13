@@ -39,9 +39,8 @@ Pull requests
 
 * <종류>  
     아래 여섯 가지 종류 중 하나를 반드시 명기합니다.
-    * dev: 특정 feature 구현이나 버그 fix와 같은 일련의 개발코드가 추가 되었음을 의미합니다. dev는 리팩토링과 반대되는 개념으로 [Transformation](http://blog.8thlight.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html)과 같은 의미로 사용됩니다.
-    * refactor: 코드 리팩토링을 의미합니다.
-    * test: dev와 refactor는 제품 코드와 테스트 코드가 동시에 변경이 되는 것이 일반적입니다. 반면, test는 오직 테스트 코드만 변경되었을 경우를 말합니다.
+    * dev: 특정 feature 구현이나 버그 fix와 같은 일련의 개발 활동을 의미합니다. dev는 리팩토링과 반대되는 개념으로 [Transformation](http://blog.8thlight.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html)과 같은 의미로 사용됩니다.
+    * refactor: 코드 리팩토링을 의미하며, Transformation과 반대되는 개념입니다. 코드가 수정, 추가 또는 삭제되었을 경우, **dev** 또는 **refactor**에 해당되는데 이때, 코드의 Transformation이라면 **dev**, 그렇지 않으면 **refactor**를 명기합니다.
     * docs: XML document나 개발문서의 변경을 의미합니다.
     * style: 예를 들어, 공백, 띄어쓰기 등과 같이 dev, refactor과 상관 없는 코딩 스타일 변경을 의미합니다.
     * build: 빌드스크립트 변경과 같은 빌드에 관한 사항의 변경을 의미합니다.
