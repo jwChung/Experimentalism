@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
@@ -142,16 +143,59 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("constructorInfoElement");
             }
 
-            var constructorInfo = constructorInfoElement.ConstructorInfo;
+            return new AccessibilityCollectingVisitor(
+                Value.Concat(new[] { GetAccessibilities(constructorInfoElement.ConstructorInfo) }));
+        }
+
+        /// <summary>
+        /// Allows an <see cref="MethodInfoElement"/> to be visited. 
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="methodInfoElement">
+        /// The <see cref="MethodInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(MethodInfoElement methodInfoElement)
+        {
+            if (methodInfoElement == null)
+            {
+                throw new ArgumentNullException("methodInfoElement");
+            }
+
+            return new AccessibilityCollectingVisitor(
+                Value.Concat(new[] { GetAccessibilities(methodInfoElement.MethodInfo) }));
+        }
+
+        private static Accessibilities GetAccessibilities(MethodBase constructorInfo)
+        {
             var accessibilities = Accessibilities.None;
 
-            if (constructorInfo.IsPublic) accessibilities = Accessibilities.Public;
-            else if (constructorInfo.IsFamilyOrAssembly) accessibilities = Accessibilities.ProtectedInternal;
-            else if (constructorInfo.IsFamily) accessibilities = Accessibilities.Protected;
-            else if (constructorInfo.IsAssembly) accessibilities = Accessibilities.Internal;
-            else if (constructorInfo.IsPrivate) accessibilities = Accessibilities.Private;
-
-            return new AccessibilityCollectingVisitor(Value.Concat(new[] { accessibilities }));
+            if (constructorInfo.IsPublic)
+            {
+                accessibilities = Accessibilities.Public;
+            }
+            else if (constructorInfo.IsFamilyOrAssembly)
+            {
+                accessibilities = Accessibilities.ProtectedInternal;
+            }
+            else if (constructorInfo.IsFamily)
+            {
+                accessibilities = Accessibilities.Protected;
+            }
+            else if (constructorInfo.IsAssembly)
+            {
+                accessibilities = Accessibilities.Internal;
+            }
+            else if (constructorInfo.IsPrivate)
+            {
+                accessibilities = Accessibilities.Private;
+            }
+            return accessibilities;
         }
     }
 }

@@ -159,6 +159,51 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
+        [Theory]
+        [MethodBaseElementData]
+        public void VisitMethodInfoElementProducesCorrectValue(
+            Func<MethodBase, bool> predicate, Accessibilities expected)
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var methodInfoElement = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetMethods(bindingFlags))
+                .Where(predicate).Cast<MethodInfo>().First().ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Empty(sut.Value);
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitMethodInfoInfoElementManyTimeProducesCorrectValues()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var constructorInfos = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetMethods(bindingFlags));
+            var methodInfoElement1 = constructorInfos.Where(x => x.IsFamily).First().ToElement();
+            var methodInfoElement2 = constructorInfos.Where(x => x.IsFamilyOrAssembly).First().ToElement();
+
+            var actual = sut.Visit(methodInfoElement1).Visit(methodInfoElement2);
+
+            Assert.Equal(
+                new[] { Accessibilities.Protected, Accessibilities.ProtectedInternal },
+                actual.Value.ToArray());
+        }
+
+        [Fact]
+        public void VisitNullMethodInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
+        }
+
         private class TypeElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
