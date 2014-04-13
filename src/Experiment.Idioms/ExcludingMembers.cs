@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -19,6 +20,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ExcludingMembers(IEnumerable<MemberInfo> excludedMembers)
         {
+            if (excludedMembers == null)
+            {
+                throw new ArgumentNullException("excludedMembers");
+            }
+
             _excludedMembers = excludedMembers;
         }
 
