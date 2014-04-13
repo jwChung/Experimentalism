@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Xunit;
 
@@ -15,7 +16,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsHasTargetMembers()
+        public void ReflectionElementsHasCorrectTargetMembers()
         {
             var type = GetType();
             var sut = new GuardClauseAssertionTestCases(type);
@@ -23,14 +24,15 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ReflectionElements;
 
             var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var fileterMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            var targetMembers = Assert.IsAssignableFrom<TargetMembers>(fileterMembers.TargetMembers);
+            var filteringMembers1 = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
+            var filteringMembers2 = Assert.IsAssignableFrom<FilteringMembers>(filteringMembers1.TargetMembers);
+            var targetMembers = Assert.IsAssignableFrom<TargetMembers>(filteringMembers2.TargetMembers);
             Assert.Equal(type, targetMembers.Type);
             Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
         }
 
         [Fact]
-        public void ReflectionElementsHasFilterCondition()
+        public void ReflectionElementsHasFilterToExceptCertainMembers()
         {
             var type = typeof(ClassWithTestMembers);
             var exceptedMembers = type.GetMethods().Cast<MemberInfo>().ToArray();
@@ -39,8 +41,26 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ReflectionElements;
 
             var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var fileterMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            Assert.True(fileterMembers.All(m => !(m is MethodInfo)), "Correct Condition.");
+            var filteringMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
+            Assert.True(filteringMembers.All(m => !(m is MethodInfo)), "Except Condition.");
+        }
+
+        [Fact]
+        public void ReflectionElementsHasFilterToExceptPropertiesNotHavingSetter()
+        {
+            var type = typeof(ClassWithProperties);
+            var sut = new GuardClauseAssertionTestCases(type);
+            var expected = new[]
+            {
+                new Properties<ClassWithProperties>().Select(x => x.GetSetProperty),
+                typeof(ClassWithProperties).GetProperty("SetProperty")
+            };
+
+            var actual = sut.ReflectionElements;
+
+            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
+            var filteringMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
+            Assert.Equal(expected, filteringMembers.OfType<PropertyInfo>());
         }
 
         [Fact]
@@ -68,6 +88,30 @@ namespace Jwc.Experiment.Idioms
             var sut = new GuardClauseAssertionTestCases(GetType());
             var actual = sut.AssertionFactory;
             Assert.IsType<GuardClauseAssertionFactory>(actual);
+        }
+
+        private class ClassWithProperties
+        {
+            public object GetSetProperty
+            {
+                get;
+                set;
+            }
+
+            public object GetProperty
+            {
+                get
+                {
+                    return new object();
+                }
+            }
+
+            public object SetProperty
+            {
+                set
+                {
+                }
+            }
         }
     }
 }

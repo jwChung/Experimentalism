@@ -28,8 +28,14 @@ namespace Jwc.Experiment.Idioms
         {
             return new ReflectionElements(
                 new FilteringMembers(
-                    new TargetMembers(type, Accessibilities.Public),
-                    m => !exceptedMembers.Contains(m)),
+                    new FilteringMembers(
+                        new TargetMembers(type, Accessibilities.Public),
+                        m => !exceptedMembers.Contains(m)),
+                    m =>
+                    {
+                        var property = m as PropertyInfo;
+                        return property == null || property.GetSetMethod() != null;
+                    }),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
                 new MethodInfoElementRefraction<object>());
