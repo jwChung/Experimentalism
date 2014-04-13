@@ -15,10 +15,13 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Initializes a new instance of the <see cref="ExcludingMembers"/> class.
         /// </summary>
+        /// <param name="targetMembers"></param>
         /// <param name="excludedMembers">
         /// The excluded members.
         /// </param>
-        public ExcludingMembers(IEnumerable<MemberInfo> excludedMembers)
+        public ExcludingMembers(
+            IEnumerable<MemberInfo> targetMembers,
+            IEnumerable<MemberInfo> excludedMembers)
         {
             if (excludedMembers == null)
             {

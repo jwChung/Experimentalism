@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutIsEnumerableOfMemberInfo()
         {
-            var sut = new ExcludingMembers(new MemberInfo[0]);
+            var sut = new ExcludingMembers(null, new MemberInfo[0]);
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         }
 
@@ -18,7 +18,7 @@ namespace Jwc.Experiment.Idioms
         public void ExcludedMembersIsCorrect()
         {
             var excludedMembers = GetType().GetMembers();
-            var sut = new ExcludingMembers(excludedMembers);
+            var sut = new ExcludingMembers(null, excludedMembers);
 
             var actual = sut.ExcludedMembers;
 
@@ -28,7 +28,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void InitializeWithNullExcludedMembersThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ExcludingMembers(null));
+            Assert.Throws<ArgumentNullException>(() => new ExcludingMembers(null, null));
         }
     }
 }
