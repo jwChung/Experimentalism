@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Xunit;
 
@@ -46,6 +47,18 @@ namespace Jwc.Experiment.Idioms
         public void InitializeWithNullTargetMembersThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new ExcludingMembers(null, new MemberInfo[0]));
+        }
+
+        [Fact]
+        public void SutEnumerateCorrectMembers()
+        {
+            var targetMembers = GetType().GetMembers();
+            var expected = targetMembers.Skip(2);
+            var sut = new ExcludingMembers(targetMembers, targetMembers.Take(2));
+
+            var actual = sut.ToArray();
+
+            Assert.Equal(expected, actual);
         }
     }
 }
