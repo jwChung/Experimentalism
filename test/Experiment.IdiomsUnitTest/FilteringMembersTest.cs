@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutIsEnumerableMemberInfo()
         {
-            var sut = new FilteringMembers(new MemberInfo[0]);
+            var sut = new FilteringMembers(new MemberInfo[0], m => false);
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         }
 
@@ -20,7 +20,7 @@ namespace Jwc.Experiment.Idioms
         public void TargetMembersIsCorrect()
         {
             var targetMembers = GetType().GetMembers();
-            var sut = new FilteringMembers(targetMembers);
+            var sut = new FilteringMembers(targetMembers, m => false);
 
             var actual = sut.TargetMembers;
 
@@ -28,24 +28,24 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ExceptedMembersIsCorrect()
+        public void ConditionIsCorrect()
         {
-            MemberInfo[] exceptedMembers = GetType().GetMembers();
-            var sut = new FilteringMembers(new MemberInfo[0], exceptedMembers);
+            Func<MemberInfo, bool> condition = m => false;
+            var sut = new FilteringMembers(new MemberInfo[0], condition);
 
-            var actual = sut.ExceptedMembers;
+            var actual = sut.Condition;
 
-            Assert.Equal(exceptedMembers, actual);
+            Assert.Equal(condition, actual);
         }
 
         [Fact]
         public void InitializeWithNullTargetMembersThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new FilteringMembers(null));
+            Assert.Throws<ArgumentNullException>(() => new FilteringMembers(null, m => false));
         }
 
         [Fact]
-        public void InitializeWithNullExceptedMembersThrows()
+        public void InitializeWithNullConditionThrows()
         {
             Assert.Throws<ArgumentNullException>(
                 () => new FilteringMembers(new MemberInfo[0], null));
@@ -61,7 +61,7 @@ namespace Jwc.Experiment.Idioms
                 new Methods<FilteringMembersTest>().Select(x => x.SutEnumeratesCorrectMembers())
             };
             var expected = targetMembers.Except(exceptedMembers);
-            var sut = new FilteringMembers(targetMembers, exceptedMembers);
+            var sut = new FilteringMembers(targetMembers, m => !exceptedMembers.Contains(m));
 
             var actual = sut.ToArray();
 

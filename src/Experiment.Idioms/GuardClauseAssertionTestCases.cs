@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
@@ -23,12 +24,12 @@ namespace Jwc.Experiment.Idioms
         }
 
         private static IEnumerable<IReflectionElement> CreateReflectionElements(
-            Type type, MemberInfo[] exceptedMembers)
+            Type type, IEnumerable<MemberInfo> exceptedMembers)
         {
             return new ReflectionElements(
                 new FilteringMembers(
                     new TargetMembers(type, Accessibilities.Public),
-                    exceptedMembers),
+                    m => !exceptedMembers.Contains(m)),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
                 new MethodInfoElementRefraction<object>());

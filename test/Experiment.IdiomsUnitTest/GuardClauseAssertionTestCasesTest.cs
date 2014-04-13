@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using System.Reflection;
 using Ploeh.Albedo.Refraction;
 using Xunit;
 
@@ -15,11 +15,10 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsHasCorrectSources()
+        public void ReflectionElementsHasTargetMembers()
         {
             var type = GetType();
-            var exceptedMembers = type.GetMembers();
-            var sut = new GuardClauseAssertionTestCases(type, exceptedMembers);
+            var sut = new GuardClauseAssertionTestCases(type);
 
             var actual = sut.ReflectionElements;
 
@@ -28,7 +27,20 @@ namespace Jwc.Experiment.Idioms
             var targetMembers = Assert.IsAssignableFrom<TargetMembers>(fileterMembers.TargetMembers);
             Assert.Equal(type, targetMembers.Type);
             Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
-            Assert.Equal(exceptedMembers, fileterMembers.ExceptedMembers);
+        }
+
+        [Fact]
+        public void ReflectionElementsHasFilterCondition()
+        {
+            var type = typeof(ClassWithTestMembers);
+            var exceptedMembers = type.GetMethods().Cast<MemberInfo>().ToArray();
+            var sut = new GuardClauseAssertionTestCases(type, exceptedMembers);
+
+            var actual = sut.ReflectionElements;
+
+            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
+            var fileterMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
+            Assert.True(fileterMembers.All(m => !(m is MethodInfo)), "Correct Condition.");
         }
 
         [Fact]

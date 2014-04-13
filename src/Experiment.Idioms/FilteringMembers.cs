@@ -13,29 +13,29 @@ namespace Jwc.Experiment.Idioms
     public class FilteringMembers : IEnumerable<MemberInfo>
     {
         private readonly IEnumerable<MemberInfo> _targetMembers;
-        private readonly MemberInfo[] _exceptedMembers;
+        private readonly Func<MemberInfo, bool> _condition;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FilteringMembers"/> class.
         /// </summary>
-        /// <param name="targetMembers">The target members to be excepted.</param>
-        /// <param name="exceptedMembers">The excepted members.</param>
+        /// <param name="targetMembers">The target members to be filtered.</param>
+        /// <param name="condition">The condition to filter.</param>
         public FilteringMembers(
             IEnumerable<MemberInfo> targetMembers,
-            params MemberInfo[] exceptedMembers)
+            Func<MemberInfo, bool> condition)
         {
             if (targetMembers == null)
             {
                 throw new ArgumentNullException("targetMembers");
             }
 
-            if (exceptedMembers == null)
+            if (condition == null)
             {
-                throw new ArgumentNullException("exceptedMembers");
+                throw new ArgumentNullException("condition");
             }
 
             _targetMembers = targetMembers;
-            _exceptedMembers = exceptedMembers;
+            _condition = condition;
         }
 
         /// <summary>
@@ -50,13 +50,16 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets the excepted members.
+        /// Gets the condition to filter the target members.
         /// </summary>
-        public IEnumerable<MemberInfo> ExceptedMembers
+        /// <value>
+        /// The condition.
+        /// </value>
+        public Func<MemberInfo, bool> Condition
         {
             get
             {
-                return _exceptedMembers;
+                return _condition;
             }
         }
 
@@ -68,7 +71,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            return TargetMembers.Except(ExceptedMembers).GetEnumerator();
+            return TargetMembers.Where(Condition).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
