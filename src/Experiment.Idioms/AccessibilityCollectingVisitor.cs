@@ -52,7 +52,7 @@ namespace Jwc.Experiment.Idioms
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             AssemblyElement assemblyElement)
         {
-            throw new NotSupportedException("An assembly does not has any accessibilities.");
+            throw new NotSupportedException("An assembly does not represent accessibilities.");
         }
 
         /// <summary>
@@ -193,6 +193,44 @@ namespace Jwc.Experiment.Idioms
             }
 
             return Visit(eventInfoElement.EventInfo.GetAddMethod(true).ToElement());
+        }
+
+        /// <summary>
+        /// Allows an <see cref="ParameterInfoElement"/> to be visited. 
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="parameterInfoElement">
+        /// The <see cref="ParameterInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
+            ParameterInfoElement parameterInfoElement)
+        {
+            throw new NotSupportedException("An parameter does not represent accessibilities.");
+        }
+
+        /// <summary>
+        /// Allows an <see cref="LocalVariableInfoElement"/> to be visited. 
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="localVariableInfoElement">
+        /// The <see cref="LocalVariableInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
+            LocalVariableInfoElement localVariableInfoElement)
+        {
+            throw new NotSupportedException("An local variable does not represent accessibilities.");
         }
 
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)

@@ -250,6 +250,20 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
         }
 
+        [Fact]
+        public void VisitParameterInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<NotSupportedException>(() => sut.Visit((ParameterInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitLocalVariableInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<NotSupportedException>(() => sut.Visit((LocalVariableInfoElement)null));
+        }
+
         private class TypeElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
