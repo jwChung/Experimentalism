@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Idioms
     public class Scenario
     {
         [FirstClassTheorem]
-        public IEnumerable<ITestCase> GuardClauseAssertionVerifiesGuardedClass()
+        public IEnumerable<ITestCase> GuardClauseAssertionVerifiesGuardClauses()
         {
             return new IdiomaticTestCases(
                 new ReflectionElements(
@@ -23,11 +23,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         [FirstClassTheorem(Skip="As this test fails, run explicitly.")]
-        public IEnumerable<ITestCase> GuardClauseAssertionThrowsWhenVerifyingNonGuardedClass()
+        public IEnumerable<ITestCase> GuardClauseAssertionThrowsWhenVerifyingNonGuardClauses()
         {
             return new IdiomaticTestCases(
                 new ReflectionElements(
-                    new TargetMembers(typeof(ClassWithNonGuardedMembers)),
+                    new TargetMembers(typeof(ClassWithGuardTestMembers)),
                     new ConstructorInfoElementRefraction<object>(),
                     new PropertyInfoElementRefraction<object>(),
                     new MethodInfoElementRefraction<object>()),
@@ -35,23 +35,31 @@ namespace Jwc.Experiment.Idioms
         }
 
         [FirstClassTheorem]
-        public IEnumerable<ITestCase> GuardClauseAssertionTestCasesVerifiesGuardedClass()
+        public IEnumerable<ITestCase> GuardClauseAssertionTestCasesVerifiesGuardClauses()
+        {
+            return new GuardClauseAssertionTestCases(GetType());
+        }
+
+        [FirstClassTheorem]
+        public IEnumerable<ITestCase> GuardClauseAssertionTestCasesCanExceptCertainMembers()
         {
             return new GuardClauseAssertionTestCases(
-                GetType(),
-                new Methods<Scenario>().Select(x => x.GuardClauseAssertionTestCasesVerifiesGuardedClass()));
+                typeof(ClassWithGuardTestMembers),
+                new Methods<ClassWithGuardTestMembers>().Select(x => x.NonGuardedMethod(null)));
         }
 
-        [FirstClassTheorem(Skip = "As this test fails, run explicitly.")]
-        public IEnumerable<ITestCase> GuardClauseAssertionTestCasesThrowsWhenVerifyingNonGuardedClass()
-        {
-            return new GuardClauseAssertionTestCases(typeof(ClassWithNonGuardedMembers));
-        }
-
-        private class ClassWithNonGuardedMembers
+        private class ClassWithGuardTestMembers
         {
             public void NonGuardedMethod(object arg)
             {
+            }
+
+            public void GuardedMethod(object arg)
+            {
+                if (arg == null)
+                {
+                    throw new ArgumentNullException("arg");
+                }
             }
         }
 
