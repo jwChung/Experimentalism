@@ -89,40 +89,5 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.AssertionFactory;
             Assert.IsType<GuardClauseAssertionFactory>(actual);
         }
-
-        private class ClassWithProperties
-        {
-            public object GetSetProperty
-            {
-                get;
-                set;
-            }
-
-            public object GetProperty
-            {
-                get
-                {
-                    return new object();
-                }
-            }
-
-            public object SetProperty
-            {
-                set
-                {
-                }
-            }
-
-            public object PrivateSetProperty
-            {
-                get
-                {
-                    return new object();
-                }
-                private set
-                {
-                }
-            }
-        }
     }
 }

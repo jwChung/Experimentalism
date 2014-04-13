@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Jwc.Experiment.Idioms
@@ -47,12 +48,18 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return TargetMembers.Where(
+                m =>
+                {
+                    var property = m as PropertyInfo;
+                    return property == null || property.GetSetMethod() != null;
+                })
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return GetEnumerator();
         }
     }
 }
