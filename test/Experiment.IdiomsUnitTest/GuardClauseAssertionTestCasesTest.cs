@@ -16,53 +16,30 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsHasCorrectTargetMembers()
+        public void ReflectionElementsHasCorrectRefractionSources()
         {
+            // Fixture setup
             var type = GetType();
-            var sut = new GuardClauseAssertionTestCases(type);
-
-            var actual = sut.ReflectionElements;
-
-            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var filteringMembers1 = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            var filteringMembers2 = Assert.IsAssignableFrom<FilteringMembers>(filteringMembers1.TargetMembers);
-            var targetMembers = Assert.IsAssignableFrom<TargetMembers>(filteringMembers2.TargetMembers);
-            Assert.Equal(type, targetMembers.Type);
-            Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
-        }
-
-        [Fact]
-        public void ReflectionElementsHasFilterToExceptCertainMembers()
-        {
-            var type = typeof(ClassWithTestMembers);
-            var excludedMembers = type.GetMethods().Cast<MemberInfo>().ToArray();
+            var excludedMembers = typeof(object).GetMethods().Cast<MemberInfo>().ToArray();
             var sut = new GuardClauseAssertionTestCases(type, excludedMembers);
 
+            // Excercise system
             var actual = sut.ReflectionElements;
 
+            // Verify outcome
             var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var filteringMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            Assert.True(filteringMembers.All(m => !(m is MethodInfo)), "Exclude Condition.");
+            var excludingReadOnlyProperties = Assert.IsAssignableFrom<ExcludingReadOnlyProperties>(
+                reflectionElements.Sources);
+            var excludingMembers = Assert.IsAssignableFrom<ExcludingMembers>(
+                excludingReadOnlyProperties.TargetMembers);
+
+            var targetMembers = Assert.IsAssignableFrom<TargetMembers>(excludingMembers.TargetMembers);
+            Assert.Equal(type, targetMembers.Type);
+            Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
+
+            Assert.Equal(excludedMembers, excludingMembers.ExcludedMembers);
         }
-
-        [Fact]
-        public void ReflectionElementsHasFilterToExceptPropertiesNotHavingSetter()
-        {
-            var type = typeof(ClassWithProperties);
-            var sut = new GuardClauseAssertionTestCases(type);
-            var expected = new[]
-            {
-                new Properties<ClassWithProperties>().Select(x => x.GetSetProperty),
-                typeof(ClassWithProperties).GetProperty("SetProperty")
-            };
-
-            var actual = sut.ReflectionElements;
-
-            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var filteringMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
-            Assert.Equal(expected, filteringMembers.OfType<PropertyInfo>());
-        }
-
+        
         [Fact]
         public void ReflectionElementsHasCorrectRefractions()
         {

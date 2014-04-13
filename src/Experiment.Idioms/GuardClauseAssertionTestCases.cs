@@ -27,20 +27,13 @@ namespace Jwc.Experiment.Idioms
             Type type, IEnumerable<MemberInfo> excludedMembers)
         {
             return new ReflectionElements(
-                new FilteringMembers(
-                    new FilteringMembers(
+                new ExcludingReadOnlyProperties(
+                    new ExcludingMembers(
                         new TargetMembers(type, Accessibilities.Public),
-                        excludedMembers.Contains),
-                    IsReadOnlyProperty),
+                        excludedMembers)),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
                 new MethodInfoElementRefraction<object>());
-        }
-
-        private static bool IsReadOnlyProperty(MemberInfo m)
-        {
-            var property = m as PropertyInfo;
-            return property != null && property.GetSetMethod() == null;
         }
     }
 }
