@@ -11,6 +11,17 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new ExcludingMembers(new MemberInfo[0]);
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
-        } 
+        }
+
+        [Fact]
+        public void ExcludedMembersIsCorrect()
+        {
+            var excludedMembers = GetType().GetMembers();
+            var sut = new ExcludingMembers(excludedMembers);
+
+            var actual = sut.ExcludedMembers;
+
+            Assert.Equal(excludedMembers, actual);
+        }
     }
 }

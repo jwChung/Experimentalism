@@ -9,6 +9,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class ExcludingMembers : IEnumerable<MemberInfo>
     {
+        private readonly IEnumerable<MemberInfo> _excludedMembers;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExcludingMembers"/> class.
         /// </summary>
@@ -17,7 +19,18 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ExcludingMembers(IEnumerable<MemberInfo> excludedMembers)
         {
-            
+            _excludedMembers = excludedMembers;
+        }
+
+        /// <summary>
+        /// Gets the excluded members.
+        /// </summary>
+        public IEnumerable<MemberInfo> ExcludedMembers
+        {
+            get
+            {
+                return _excludedMembers;
+            }
         }
 
         public IEnumerator<MemberInfo> GetEnumerator()
