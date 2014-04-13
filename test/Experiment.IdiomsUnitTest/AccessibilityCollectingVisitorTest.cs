@@ -264,6 +264,78 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<NotSupportedException>(() => sut.Visit((LocalVariableInfoElement)null));
         }
 
+        [Theory]
+        [PropertyInfoElementData]
+        public void VisitPropertyInfoElementProducesCorrectValue(
+            Func<PropertyInfo, bool> predicate, Accessibilities expected)
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var propertyInfoElement = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetProperties(bindingFlags))
+                .Where(predicate).First().ToElement();
+
+            var actual = sut.Visit(propertyInfoElement);
+
+            Assert.Empty(sut.Value);
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitPropertyInfoElementManyTimeProducesCorrectValues()
+        {
+            // Fixture setup
+            var sut = new AccessibilityCollectingVisitor();
+
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+
+            var propertyInfos = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetProperties(bindingFlags)).ToArray();
+
+            var propertyInfoElement1 = propertyInfos.Where(
+                x =>
+                {
+                    var getMethod = x.GetGetMethod(true);
+                    var setMethod = x.GetSetMethod(true);
+                    return getMethod != null && getMethod.IsAssembly
+                        && setMethod != null && setMethod.IsPrivate;
+                })
+                .First().ToElement();
+
+            var propertyInfoElement2 = propertyInfos.Where(
+                x =>
+                {
+                    var getMethod = x.GetGetMethod(true);
+                    var setMethod = x.GetSetMethod(true);
+                    return getMethod != null && getMethod.IsPublic
+                        && setMethod != null && setMethod.IsPrivate;
+                })
+                .First().ToElement();
+
+            // Exercise system
+            var actual = sut.Visit(propertyInfoElement1).Visit(propertyInfoElement2);
+
+            // Verify outcome
+            Assert.Equal(
+                new[]
+                {
+                    Accessibilities.Internal | Accessibilities.Private,
+                    Accessibilities.Public | Accessibilities.Private
+                },
+                actual.Value.ToArray());
+        }
+
+        [Fact]
+        public void VisitNullPropertyInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement)null));
+        }
+
         private class TypeElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -386,6 +458,76 @@ namespace Jwc.Experiment.Idioms
                     new Func<EventInfo, bool>(
                         x => x.GetAddMethod(true).IsPrivate && x.GetRemoveMethod(true).IsPrivate),
                     Accessibilities.Private
+                };
+            }
+        }
+
+        private class PropertyInfoElementDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPublic
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPublic),
+                    Accessibilities.Public
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsFamilyOrAssembly
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsFamilyOrAssembly),
+                    Accessibilities.ProtectedInternal
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsFamily
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsFamily),
+                    Accessibilities.Protected
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsAssembly),
+                    Accessibilities.Internal
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPrivate
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
+                    Accessibilities.Private
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) == null
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPublic),
+                    Accessibilities.Public
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly
+                            && x.GetSetMethod(true) == null),
+                    Accessibilities.Internal
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPublic
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
+                    Accessibilities.Public | Accessibilities.Private
+                };
+                yield return new object[]
+                {
+                    new Func<PropertyInfo, bool>(
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly
+                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
+                    Accessibilities.Internal | Accessibilities.Private
                 };
             }
         }

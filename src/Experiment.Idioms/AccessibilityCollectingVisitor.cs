@@ -148,6 +148,50 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// Allows an <see cref="PropertyInfoElement"/> to be visited. 
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="propertyInfoElement">
+        /// The <see cref="PropertyInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
+            PropertyInfoElement propertyInfoElement)
+        {
+            if (propertyInfoElement == null)
+            {
+                throw new ArgumentNullException("propertyInfoElement");
+            }
+
+            var propertyInfo = propertyInfoElement.PropertyInfo;
+
+            var getMethod = propertyInfo.GetGetMethod(true);
+            var setMethod = propertyInfo.GetSetMethod(true);
+
+            IReflectionVisitor<IEnumerable<Accessibilities>> visitor;
+            var accessibilities = Accessibilities.None;
+
+            if (getMethod != null)
+            {
+                visitor = Visit(getMethod.ToElement());
+                accessibilities |= visitor.Value.Last();
+            }
+
+            if (setMethod != null)
+            {
+                visitor = Visit(setMethod.ToElement());
+                accessibilities |= visitor.Value.Last();
+            }
+
+            return new AccessibilityCollectingVisitor(Value.Concat(new[] { accessibilities }));
+        }
+
+        /// <summary>
         /// Allows an <see cref="MethodInfoElement"/> to be visited. 
         /// This method is called when the element accepts this visitor
         /// instance.
