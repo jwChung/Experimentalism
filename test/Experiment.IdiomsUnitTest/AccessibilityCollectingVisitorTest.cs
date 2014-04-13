@@ -96,7 +96,7 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var fieldInfos = typeof(object).Assembly
-                .GetTypes().SelectMany(t => t.GetFields(bindingFlags));
+                .GetTypes().SelectMany(t => t.GetFields(bindingFlags)).ToArray();
             var fieldInfoElement1 = fieldInfos.Where(x => x.IsPublic).First().ToElement();
             var fieldInfoElement2 = fieldInfos.Where(x => x.IsPrivate).First().ToElement();
 
@@ -141,7 +141,7 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfos = typeof(object).Assembly
-                .GetTypes().SelectMany(t => t.GetConstructors(bindingFlags));
+                .GetTypes().SelectMany(t => t.GetConstructors(bindingFlags)).ToArray();
             var constructorInfoElement1 = constructorInfos.Where(x => x.IsFamily).First().ToElement();
             var constructorInfoElement2 = constructorInfos.Where(x => x.IsPrivate).First().ToElement();
 
@@ -186,7 +186,7 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfos = typeof(object).Assembly
-                .GetTypes().SelectMany(t => t.GetMethods(bindingFlags));
+                .GetTypes().SelectMany(t => t.GetMethods(bindingFlags)).ToArray();
             var methodInfoElement1 = constructorInfos.Where(x => x.IsFamily).First().ToElement();
             var methodInfoElement2 = constructorInfos.Where(x => x.IsFamilyOrAssembly).First().ToElement();
 
@@ -232,7 +232,7 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var eventInfos = typeof(object).Assembly
-                .GetTypes().SelectMany(t => t.GetEvents(bindingFlags));
+                .GetTypes().SelectMany(t => t.GetEvents(bindingFlags)).ToArray();
             var eventInfoElement1 = eventInfos.Where(x => x.GetAddMethod(true).IsFamily).First().ToElement();
             var eventInfoElement2 = eventInfos.Where(x => x.GetRemoveMethod(true).IsPublic).First().ToElement();
 
