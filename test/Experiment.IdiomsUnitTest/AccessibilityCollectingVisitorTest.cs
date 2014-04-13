@@ -114,6 +114,51 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
         }
 
+        [Theory]
+        [MethodBaseElementData]
+        public void VisitConstructorInfoElementProducesCorrectValue(
+            Func<MethodBase, bool> predicate, Accessibilities expected)
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var constructorInfoElement = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetConstructors(bindingFlags))
+                .Where(predicate).Cast<ConstructorInfo>().First().ToElement();
+
+            var actual = sut.Visit(constructorInfoElement);
+
+            Assert.Empty(sut.Value);
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitConstructorInfoElementManyTimeProducesCorrectValues()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var constructorInfos = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetConstructors(bindingFlags));
+            var constructorInfoElement1 = constructorInfos.Where(x => x.IsFamily).First().ToElement();
+            var constructorInfoElement2 = constructorInfos.Where(x => x.IsPrivate).First().ToElement();
+
+            var actual = sut.Visit(constructorInfoElement1).Visit(constructorInfoElement2);
+
+            Assert.Equal(
+                new[] { Accessibilities.Protected, Accessibilities.Private },
+                actual.Value.ToArray());
+        }
+
+        [Fact]
+        public void VisitNullConstructorInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
+        }
+
         private class TypeElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -172,6 +217,33 @@ namespace Jwc.Experiment.Idioms
                 yield return new object[]
                 {
                     new Func<FieldInfo, bool>(x => x.IsPrivate), Accessibilities.Private
+                };
+            }
+        }
+
+        private class MethodBaseElementDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[]
+                {
+                    new Func<MethodBase, bool>(x => x.IsPublic), Accessibilities.Public
+                };
+                yield return new object[]
+                {
+                    new Func<MethodBase, bool>(x => x.IsFamilyOrAssembly), Accessibilities.ProtectedInternal
+                };
+                yield return new object[]
+                {
+                    new Func<MethodBase, bool>(x => x.IsFamily), Accessibilities.Protected
+                };
+                yield return new object[]
+                {
+                    new Func<MethodBase, bool>(x => x.IsAssembly), Accessibilities.Internal
+                };
+                yield return new object[]
+                {
+                    new Func<MethodBase, bool>(x => x.IsPrivate), Accessibilities.Private
                 };
             }
         }
