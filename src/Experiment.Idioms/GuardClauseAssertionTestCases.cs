@@ -31,14 +31,16 @@ namespace Jwc.Experiment.Idioms
                     new FilteringMembers(
                         new TargetMembers(type, Accessibilities.Public),
                         m => !exceptedMembers.Contains(m)),
-                    m =>
-                    {
-                        var property = m as PropertyInfo;
-                        return property == null || property.GetSetMethod() != null;
-                    }),
+                    m => !IsReadOnlyProperty(m)),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
                 new MethodInfoElementRefraction<object>());
+        }
+
+        private static bool IsReadOnlyProperty(MemberInfo m)
+        {
+            var property = m as PropertyInfo;
+            return property != null && property.GetSetMethod() == null;
         }
     }
 }

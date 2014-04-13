@@ -112,6 +112,17 @@ namespace Jwc.Experiment.Idioms
                 {
                 }
             }
+
+            public object PrivateSetProperty
+            {
+                get
+                {
+                    return new object();
+                }
+                private set
+                {
+                }
+            }
         }
     }
 }
