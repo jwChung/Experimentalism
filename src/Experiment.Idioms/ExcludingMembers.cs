@@ -9,6 +9,7 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Represents filter to exclude specified members.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class ExcludingMembers : IEnumerable<MemberInfo>
     {
         private readonly IEnumerable<MemberInfo> _targetMembers;
