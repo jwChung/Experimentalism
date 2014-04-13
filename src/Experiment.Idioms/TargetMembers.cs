@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ploeh.Albedo.Refraction;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -13,13 +14,23 @@ namespace Jwc.Experiment.Idioms
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class TargetMembers : IEnumerable<MemberInfo>
     {
+        private readonly Accessibilities _accessibilities;
         private readonly Type _type;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TargetMembers"/> class.
         /// </summary>
         /// <param name="type">The target type.</param>
-        public TargetMembers(Type type)
+        public TargetMembers(Type type) : this(type, Accessibilities.Default)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TargetMembers"/> class.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="accessibilities">The accessibilities.</param>
+        public TargetMembers(Type type, Accessibilities accessibilities)
         {
             if (type == null)
             {
@@ -27,6 +38,7 @@ namespace Jwc.Experiment.Idioms
             }
 
             _type = type;
+            _accessibilities = accessibilities;
         }
 
         /// <summary>
@@ -42,6 +54,17 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// Gets the accessibilities.
+        /// </summary>
+        public Accessibilities Accessibilities
+        {
+            get
+            {
+                return _accessibilities;
+            }
+        }
+
+        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -51,16 +74,28 @@ namespace Jwc.Experiment.Idioms
         public IEnumerator<MemberInfo> GetEnumerator()
         {
             const BindingFlags bindingFlags =
-                BindingFlags.Public | BindingFlags.DeclaredOnly |
-                BindingFlags.Instance | BindingFlags.Static;
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static |
+                BindingFlags.DeclaredOnly;
 
             var accessors = Type.GetProperties(bindingFlags).SelectMany(p => p.GetAccessors());
             var eventMethods = Type.GetEvents(bindingFlags).SelectMany(
                 e => new[] { e.GetAddMethod(), e.GetRemoveMethod() });
+
             return Type.GetMembers(bindingFlags)
                 .Except(accessors)
                 .Except(eventMethods)
+                .Where(IsSatisfiedWithAccessibilities)
                 .GetEnumerator();
+        }
+
+        private bool IsSatisfiedWithAccessibilities(MemberInfo member)
+        {
+            var accessibilities = member.ToReflectionElement()
+                .Accept(new AccessibilityCollectingVisitor())
+                .Value.Single();
+
+            return (Accessibilities & accessibilities) != Accessibilities.None;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
