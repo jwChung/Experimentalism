@@ -72,13 +72,9 @@ namespace Jwc.Experiment.Idioms
         public void SutDoesNotEnumeratesAnyAccessors()
         {
             var sut = new TargetMembers(typeof(ClassWithTestMembers));
-            var accessors = new Properties<ClassWithTestMembers>()
-                .Select(x => x.PublicProperty).GetAccessors();
-
-            var actual = sut.ToArray();
-
+            var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(
-                accessors.All(a => !actual.Contains(a)),
+                actual.All(m => !m.Name.StartsWith("set_") && !m.Name.StartsWith("get_")),
                 "Does not contain any accessors.");
         }
 
@@ -86,14 +82,10 @@ namespace Jwc.Experiment.Idioms
         public void SutDoesNotEnumeratesAnyHelperMethodsOfEvent()
         {
             var sut = new TargetMembers(typeof(ClassWithTestMembers));
-            var eventInfo = typeof(ClassWithTestMembers).GetEvents().First();
-            var eventMethods = new[] { eventInfo.GetAddMethod(), eventInfo.GetRemoveMethod() };
-
             var actual = sut.ToArray();
-
             Assert.True(
-                eventMethods.All(a => !actual.Contains(a)),
-                "Does not contain any helper methods of event.");
+                actual.All(m => !m.Name.StartsWith("add_") && !m.Name.StartsWith("remove_")),
+                "Does not contain any helper methods of EventInfo.");
         }
 
         [Fact]
