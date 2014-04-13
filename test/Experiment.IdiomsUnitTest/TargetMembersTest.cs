@@ -102,30 +102,5 @@ namespace Jwc.Experiment.Idioms
                 eventMethods.All(a => !actual.Contains(a)),
                 "Does not contain any helper methods of event.");
         }
-
-        private class ClassWithTestMembers
-        {
-            public object Field;
-
-            public object Property
-            {
-                get;
-                set;
-            }
-
-            private void PrivateMethod()
-            {
-            }
-
-            public void PublicMethod()
-            {
-            }
-
-            public static void StaticMethod()
-            {
-            }
-
-            public event EventHandler Event;
-        }
     }
 }

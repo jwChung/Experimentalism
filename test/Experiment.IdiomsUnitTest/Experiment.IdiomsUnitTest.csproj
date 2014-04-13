@@ -61,6 +61,7 @@
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AssertionAdapterTest.cs" />
+    <Compile Include="ClassWithTestMembers.cs" />
     <Compile Include="CompositeTestCasesTest.cs" />
     <Compile Include="TargetMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
