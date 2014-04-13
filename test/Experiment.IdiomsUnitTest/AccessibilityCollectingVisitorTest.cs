@@ -69,6 +69,51 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
         }
 
+        [Theory]
+        [FieldInfoElementData]
+        public void VisitFieldInfoElementProducesCorrectValue(
+            Func<FieldInfo, bool> predicate, Accessibilities expected)
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var fieldInfoElement = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetFields(bindingFlags))
+                .Where(predicate).First().ToElement();
+
+            var actual = sut.Visit(fieldInfoElement);
+
+            Assert.Empty(sut.Value);
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitFieldInfoElementManyTimeProducesCorrectValues()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static;
+            var fieldInfos = typeof(object).Assembly
+                .GetTypes().SelectMany(t => t.GetFields(bindingFlags));
+            var fieldInfoElement1 = fieldInfos.Where(x => x.IsPublic).First().ToElement();
+            var fieldInfoElement2 = fieldInfos.Where(x => x.IsPrivate).First().ToElement();
+
+            var actual = sut.Visit(fieldInfoElement1).Visit(fieldInfoElement2);
+
+            Assert.Equal(
+                new[] { Accessibilities.Public, Accessibilities.Private },
+                actual.Value.ToArray());
+        }
+
+        [Fact]
+        public void VisitNullFieldInfoElementThrows()
+        {
+            var sut = new AccessibilityCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
+        }
+
         private class TypeElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -100,6 +145,33 @@ namespace Jwc.Experiment.Idioms
                 yield return new object[]
                 {
                     new Func<Type, bool>(x => x.IsNestedPrivate), Accessibilities.Private
+                };
+            }
+        }
+
+        private class FieldInfoElementDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[]
+                {
+                    new Func<FieldInfo, bool>(x => x.IsPublic), Accessibilities.Public
+                };
+                yield return new object[]
+                {
+                    new Func<FieldInfo, bool>(x => x.IsFamilyOrAssembly), Accessibilities.ProtectedInternal
+                };
+                yield return new object[]
+                {
+                    new Func<FieldInfo, bool>(x => x.IsFamily), Accessibilities.Protected
+                };
+                yield return new object[]
+                {
+                    new Func<FieldInfo, bool>(x => x.IsAssembly), Accessibilities.Internal
+                };
+                yield return new object[]
+                {
+                    new Func<FieldInfo, bool>(x => x.IsPrivate), Accessibilities.Private
                 };
             }
         }

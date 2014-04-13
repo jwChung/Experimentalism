@@ -87,5 +87,38 @@ namespace Jwc.Experiment.Idioms
 
             return new AccessibilityCollectingVisitor(Value.Concat(new[] { accessibilities }));
         }
+
+        /// <summary>
+        /// Allows an <see cref="FieldInfoElement"/> to be visited. 
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="fieldInfoElement">
+        /// The <see cref="FieldInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
+            FieldInfoElement fieldInfoElement)
+        {
+            if (fieldInfoElement == null)
+            {
+                throw new ArgumentNullException("fieldInfoElement");
+            }
+
+            var fieldInfo = fieldInfoElement.FieldInfo;
+            var accessibilities = Accessibilities.None;
+
+            if (fieldInfo.IsPublic) accessibilities = Accessibilities.Public;
+            else if (fieldInfo.IsFamilyOrAssembly) accessibilities = Accessibilities.ProtectedInternal;
+            else if (fieldInfo.IsFamily) accessibilities = Accessibilities.Protected;
+            else if (fieldInfo.IsAssembly) accessibilities = Accessibilities.Internal;
+            else if (fieldInfo.IsPrivate) accessibilities = Accessibilities.Private;
+
+            return new AccessibilityCollectingVisitor(Value.Concat(new[] { accessibilities }));
+        }
     }
 }
