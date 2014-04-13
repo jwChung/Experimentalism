@@ -26,7 +26,9 @@ namespace Jwc.Experiment.Idioms
             Type type, MemberInfo[] exceptedMembers)
         {
             return new ReflectionElements(
-                new FilteringMembers(new TargetMembers(type), exceptedMembers),
+                new FilteringMembers(
+                    new TargetMembers(type, Accessibilities.Public),
+                    exceptedMembers),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
                 new MethodInfoElementRefraction<object>());

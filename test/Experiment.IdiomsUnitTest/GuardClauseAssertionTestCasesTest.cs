@@ -29,6 +29,7 @@ namespace Jwc.Experiment.Idioms
             var fileterMembers = Assert.IsAssignableFrom<FilteringMembers>(reflectionElements.Sources);
             var targetMembers = Assert.IsAssignableFrom<TargetMembers>(fileterMembers.TargetMembers);
             Assert.Equal(type, targetMembers.Type);
+            Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
             Assert.Equal(exceptedMembers, fileterMembers.ExceptedMembers);
 
             Assert.Equal(
