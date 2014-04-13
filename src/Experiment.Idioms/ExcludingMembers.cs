@@ -63,6 +63,12 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="IEnumerator{T}" /> that can be used to iterate through the collection.
+        /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
             return TargetMembers.Except(ExcludedMembers).GetEnumerator();

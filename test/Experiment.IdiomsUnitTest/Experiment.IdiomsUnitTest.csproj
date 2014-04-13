@@ -64,6 +64,7 @@
     <Compile Include="ClassWithTestMembers.cs" />
     <Compile Include="CompositeTestCasesTest.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
+    <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
     <Compile Include="TargetMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
     <Compile Include="DelegatingIdiomaticAssertion.cs" />
