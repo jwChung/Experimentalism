@@ -63,6 +63,7 @@
     <Compile Include="AssertionAdapterTest.cs" />
     <Compile Include="ClassWithTestMembers.cs" />
     <Compile Include="CompositeTestCasesTest.cs" />
+    <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="TargetMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
     <Compile Include="DelegatingIdiomaticAssertion.cs" />
