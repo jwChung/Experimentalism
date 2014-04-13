@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
 
@@ -22,6 +23,13 @@ namespace Jwc.Experiment.Idioms
             var expected = sut.TargetMembers;
 
             Assert.Equal(targetMembers, expected);
+        }
+
+        [Fact]
+        public void InitializeWithNullTargetMembersThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new ExcludingReadOnlyProperties(null));
         }
     }
 }

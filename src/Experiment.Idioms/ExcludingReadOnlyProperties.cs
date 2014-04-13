@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -19,6 +20,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ExcludingReadOnlyProperties(IEnumerable<MemberInfo> targetMembers)
         {
+            if (targetMembers == null)
+            {
+                throw new ArgumentNullException("targetMembers");
+            }
+
             _targetMembers = targetMembers;
         }
 
