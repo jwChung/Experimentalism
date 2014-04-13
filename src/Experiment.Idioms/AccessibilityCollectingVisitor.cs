@@ -76,8 +76,8 @@ namespace Jwc.Experiment.Idioms
             }
 
             var type = typeElement.Type;
-            var accessibilities = Accessibilities.None;
 
+            var accessibilities = Accessibilities.None;
             if (type.IsPublic) accessibilities = Accessibilities.Public;
             else if (type.IsNotPublic) accessibilities = Accessibilities.Internal;
             else if (type.IsNestedPublic) accessibilities = Accessibilities.Public;
@@ -111,8 +111,8 @@ namespace Jwc.Experiment.Idioms
             }
 
             var fieldInfo = fieldInfoElement.FieldInfo;
-            var accessibilities = Accessibilities.None;
 
+            var accessibilities = Accessibilities.None;
             if (fieldInfo.IsPublic) accessibilities = Accessibilities.Public;
             else if (fieldInfo.IsFamilyOrAssembly) accessibilities = Accessibilities.ProtectedInternal;
             else if (fieldInfo.IsFamily) accessibilities = Accessibilities.Protected;
@@ -198,27 +198,11 @@ namespace Jwc.Experiment.Idioms
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)
         {
             var accessibilities = Accessibilities.None;
-
-            if (constructorInfo.IsPublic)
-            {
-                accessibilities = Accessibilities.Public;
-            }
-            else if (constructorInfo.IsFamilyOrAssembly)
-            {
-                accessibilities = Accessibilities.ProtectedInternal;
-            }
-            else if (constructorInfo.IsFamily)
-            {
-                accessibilities = Accessibilities.Protected;
-            }
-            else if (constructorInfo.IsAssembly)
-            {
-                accessibilities = Accessibilities.Internal;
-            }
-            else if (constructorInfo.IsPrivate)
-            {
-                accessibilities = Accessibilities.Private;
-            }
+            if (constructorInfo.IsPublic) accessibilities = Accessibilities.Public;
+            else if (constructorInfo.IsFamilyOrAssembly) accessibilities = Accessibilities.ProtectedInternal;
+            else if (constructorInfo.IsFamily) accessibilities = Accessibilities.Protected;
+            else if (constructorInfo.IsAssembly) accessibilities = Accessibilities.Internal;
+            else if (constructorInfo.IsPrivate) accessibilities = Accessibilities.Private;
             return accessibilities;
         }
     }
