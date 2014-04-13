@@ -9,6 +9,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class ExcludingReadOnlyProperties : IEnumerable<MemberInfo>
     {
+        private readonly IEnumerable<MemberInfo> _targetMembers;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExcludingReadOnlyProperties"/> class.
         /// </summary>
@@ -17,6 +19,18 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ExcludingReadOnlyProperties(IEnumerable<MemberInfo> targetMembers)
         {
+            _targetMembers = targetMembers;
+        }
+
+        /// <summary>
+        /// Gets the target members.
+        /// </summary>
+        public IEnumerable<MemberInfo> TargetMembers
+        {
+            get
+            {
+                return _targetMembers;
+            }
         }
 
         /// <summary>

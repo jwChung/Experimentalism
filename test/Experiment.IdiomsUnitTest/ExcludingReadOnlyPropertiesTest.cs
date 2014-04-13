@@ -12,5 +12,16 @@ namespace Jwc.Experiment.Idioms
             var sut = new ExcludingReadOnlyProperties(new MemberInfo[0]);
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         } 
+
+        [Fact]
+        public void TargetMembersIsCorrect()
+        {
+            var targetMembers = GetType().GetMembers();
+            var sut = new ExcludingReadOnlyProperties(targetMembers);
+
+            var expected = sut.TargetMembers;
+
+            Assert.Equal(targetMembers, expected);
+        }
     }
 }
