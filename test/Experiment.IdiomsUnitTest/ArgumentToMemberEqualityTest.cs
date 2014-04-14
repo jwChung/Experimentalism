@@ -11,6 +11,17 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new ArgumentToMemberEquality(new DelegatingTestFixture());
             Assert.IsAssignableFrom<IEqualityComparer<IReflectionElement>>(sut);
-        } 
+        }
+
+        [Fact]
+        public void TestFixtureIsCorrect()
+        {
+            var testFixture = new DelegatingTestFixture();
+            var sut = new ArgumentToMemberEquality(testFixture);
+
+            var actual = sut.TestFixture;
+
+            Assert.Equal(testFixture, actual);
+        }
     }
 }
