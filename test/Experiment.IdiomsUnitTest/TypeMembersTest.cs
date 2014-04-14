@@ -142,7 +142,7 @@ namespace Jwc.Experiment.Idioms
             Assert.True(
                 actual.All(a => a != Accessibilities.Internal), "All Not Internal.");
             Assert.True(
-                actual.All(a => a == Accessibilities.Private), "All Private.");
+                actual.All(a => (a & Accessibilities.Private) == Accessibilities.Private), "All Private.");
         }
 
         [Fact]

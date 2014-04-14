@@ -16,6 +16,10 @@ namespace Jwc.Experiment.Idioms
         {
         }
 
+        public TypeWithMembers(string arg1, int arg2)
+        {
+        }
+
         protected internal TypeWithMembers(string arg)
         {
         }
@@ -36,6 +40,25 @@ namespace Jwc.Experiment.Idioms
         {
             get;
             set;
+        }
+
+        public object ReadOnlyProperty
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public object PrivateGetProperty
+        {
+            private get
+            {
+                return null;
+            }
+            set
+            {
+            }
         }
 
         protected internal object ProtectedInternalProperty
