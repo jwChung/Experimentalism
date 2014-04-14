@@ -6,12 +6,12 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class ArgumentToPropertyEqualityTest
+    public class ParameterToPropertyEqualityComparerTest
     {
         [Fact]
         public void SutIsEqualityComparer()
         {
-            var sut = new ArgumentToPropertyEquality(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyEqualityComparer(new DelegatingTestFixture());
             Assert.IsAssignableFrom<IEqualityComparer<IReflectionElement>>(sut);
         }
 
@@ -19,7 +19,7 @@ namespace Jwc.Experiment.Idioms
         public void TestFixtureIsCorrect()
         {
             var testFixture = new DelegatingTestFixture();
-            var sut = new ArgumentToPropertyEquality(testFixture);
+            var sut = new ParameterToPropertyEqualityComparer(testFixture);
 
             var actual = sut.TestFixture;
 
@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void GetHashCodeReturnsAlwaysSameValue()
         {
-            var sut = new ArgumentToPropertyEquality(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyEqualityComparer(new DelegatingTestFixture());
             var actual = sut.GetHashCode(null);
             Assert.Equal(0, actual);
         }
@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void EqualsNonParametertToPropertyReturnsFalse()
         {
-            var sut = new ArgumentToPropertyEquality(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyEqualityComparer(new DelegatingTestFixture());
             var nonParameterInfoElement = GetType().ToElement();
             var propertyInfoElement = new Properties<TypeWithMembers>()
                 .Select(x => x.PublicProperty)
@@ -51,7 +51,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void EqualsParameterToNonPropertyReturnsFalse()
         {
-            var sut = new ArgumentToPropertyEquality(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyEqualityComparer(new DelegatingTestFixture());
             var parameterInfoElement = Constructors.Select(() => new TypeWithMembers(0))
                 .GetParameters().First().ToElement();
             var nonPropertyInfoElement = GetType().ToElement();
@@ -72,7 +72,7 @@ namespace Jwc.Experiment.Idioms
                     return 123;
                 }
             };
-            var sut = new ArgumentToPropertyEquality(testFixture);
+            var sut = new ParameterToPropertyEqualityComparer(testFixture);
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
             var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
@@ -86,7 +86,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void EqualsParameterToPropetyReturnsFalseWhenThayRepresentDifferentReflectedTypes()
         {
-            var sut = new ArgumentToPropertyEquality(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyEqualityComparer(new DelegatingTestFixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
             var propetyInfoElement = new Properties<Version>()
@@ -100,7 +100,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void EqualsParameterToPropertyReturnsFalseWhenParameterIsFromNonConstructor()
         {
-            var sut = new ArgumentToPropertyEquality(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyEqualityComparer(new DelegatingTestFixture());
             var parameterInfoElement = new Methods<TypeForPropertyEqualValue>()
                 .Select(x => x.Mehtod(null))
                 .GetParameters().First().ToElement();
@@ -115,7 +115,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void InitializeWithNullTestFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ArgumentToPropertyEquality(null));
+            Assert.Throws<ArgumentNullException>(() => new ParameterToPropertyEqualityComparer(null));
         }
     
         private class TypeForPropertyEqualValue

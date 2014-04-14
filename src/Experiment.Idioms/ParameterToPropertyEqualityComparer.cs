@@ -7,20 +7,20 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represent comaprer to determine that an argument value equals to
+    /// Represent comaprer to determine that a parameter value equals to
     /// a property value.
     /// </summary>
-    public class ArgumentToPropertyEquality : IEqualityComparer<IReflectionElement>
+    public class ParameterToPropertyEqualityComparer : IEqualityComparer<IReflectionElement>
     {
         private readonly ITestFixture _testFixture;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentToPropertyEquality" /> class.
+        /// Initializes a new instance of the <see cref="ParameterToPropertyEqualityComparer" /> class.
         /// </summary>
         /// <param name="testFixture">
         /// The test fixture to create an anonymous specimen.
         /// </param>
-        public ArgumentToPropertyEquality(ITestFixture testFixture)
+        public ParameterToPropertyEqualityComparer(ITestFixture testFixture)
         {
             if (testFixture == null)
             {
