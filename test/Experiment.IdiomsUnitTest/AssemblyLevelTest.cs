@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Reflection;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -32,15 +34,16 @@ namespace Jwc.Experiment.Idioms
 
         ////[Theory]
         ////[InlineData("Ploeh.AutoFixture")]
-        ////public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
-        ////{
-        ////    // Fixture setup
-        ////    var sut = typeof(IdiomaticTestCase).Assembly;
-        ////    var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
-        ////    var types = Assembly.Load(assemblyName).GetExportedTypes();
+        ////[InlineData("Ploeh.AutoFixture.Idioms")]
+        public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
+        {
+            // Fixture setup
+            var sut = typeof(IdiomaticTestCase).Assembly;
+            var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
+            var types = Assembly.Load(assemblyName).GetExportedTypes();
 
-        ////    // Exercise system and Verify outcome
-        ////    sut.VerifyDoesNotExpose(types);
-        ////}
+            // Exercise system and Verify outcome
+            sut.VerifyDoesNotExpose(types);
+        }
     }
 }
