@@ -7,8 +7,10 @@ namespace Jwc.Experiment.Idioms
         public object PublicField;
         protected internal object ProtectedInternalField;
         protected object ProtectedField;
-        internal object InternalField;
+        internal object InternalField = null;
+#pragma warning disable 169
         private object PrivateField;
+#pragma warning restore 169
 
         public ClassWithTestMembers()
         {
@@ -100,10 +102,12 @@ namespace Jwc.Experiment.Idioms
         {
         }
 
+#pragma warning disable 67
         public event EventHandler PublicEvent;
         protected internal event EventHandler ProtectedInternalEvent;
         protected event EventHandler ProtectedEvent;
         internal event EventHandler InternalEvent;
         private event EventHandler PrivateEvent;
+#pragma warning restore 67
     }
 }
