@@ -71,6 +71,11 @@ namespace Jwc.Experiment.Idioms
             var parameterInfo = paremeterInfoElement.ParameterInfo;
             var propertyInfo = propertyInfoElement.PropertyInfo;
 
+            if (propertyInfo.GetGetMethod(true) == null)
+            {
+                return false;
+            }
+
             var constructorInfo = parameterInfo.Member as ConstructorInfo;
             if (constructorInfo == null)
             {

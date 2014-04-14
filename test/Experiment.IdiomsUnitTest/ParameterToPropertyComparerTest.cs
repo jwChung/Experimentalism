@@ -117,7 +117,51 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(() => new ParameterToPropertyComparer(null));
         }
-    
+
+        [Fact]
+        public void EqualsParameterToWritableOnlyPropertyRetrunsFalse()
+        {
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(typeof(int), x);
+                    return 123;
+                }
+            };
+            var sut = new ParameterToPropertyComparer(testFixture);
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+                .GetParameters().First().ToElement();
+            var propetyInfoElement = typeof(TypeForPropertyEqualValue)
+                .GetProperty("WritableOnlyProperty").ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+
+            Assert.False(actual, "Not Equals.");
+        }
+
+        [Fact]
+        public void EqualsParameterToPrivateGetPropetyReturnsTrueWhenTheyHaveEqualValue()
+        {
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(typeof(int), x);
+                    return 123;
+                }
+            };
+            var sut = new ParameterToPropertyComparer(testFixture);
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+                .GetParameters().First().ToElement();
+            var propetyInfoElement = typeof(TypeForPropertyEqualValue)
+                .GetProperty("PrivateGetProperty").ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+
+            Assert.True(actual, "Equals.");
+        }
+
         private class TypeForPropertyEqualValue
         {
             private readonly int _value;
@@ -132,6 +176,24 @@ namespace Jwc.Experiment.Idioms
                 get
                 {
                     return _value;
+                }
+            }
+
+            public object WritableOnlyProperty
+            {
+                set
+                {
+                }
+            }
+
+            public object PrivateGetProperty
+            {
+                private get
+                {
+                    return _value;
+                }
+                set
+                {
                 }
             }
 
