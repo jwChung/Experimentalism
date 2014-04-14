@@ -59,6 +59,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
+    <Compile Include="ArgumentToMemberEqualityTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AssertionAdapterTest.cs" />
     <Compile Include="ClassWithProperties.cs" />

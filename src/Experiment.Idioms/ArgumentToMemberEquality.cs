@@ -1,0 +1,53 @@
+﻿using System.Collections.Generic;
+using Ploeh.Albedo;
+
+namespace Jwc.Experiment.Idioms
+{
+    /// <summary>
+    /// Represent comaprer to determine that an argument value equals to
+    /// a member(field or property) value.
+    /// </summary>
+    public class ArgumentToMemberEquality : IEqualityComparer<IReflectionElement>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArgumentToMemberEquality" /> class.
+        /// </summary>
+        /// <param name="testFixture">
+        /// The test fixture to create an anonymous specimen.
+        /// </param>
+        public ArgumentToMemberEquality(ITestFixture testFixture)
+        {
+        }
+
+        /// <summary>
+        /// Determines whether the specified objects are equal.
+        /// </summary>
+        /// <returns>
+        /// true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        /// <param name="x">
+        /// The first object of type <paramref name="x" /> to compare.
+        /// </param>
+        /// <param name="y">
+        /// The second object of type <paramref name="y" /> to compare.
+        /// </param>
+        public bool Equals(IReflectionElement x, IReflectionElement y)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns a hash code for the specified object.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the specified object.
+        /// </returns>
+        /// <param name="obj">
+        /// The <see cref="object" /> for which a hash code is to be returned.
+        /// </param>
+        public int GetHashCode(IReflectionElement obj)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

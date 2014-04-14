@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollectingVisitor.cs" />
+    <Compile Include="ArgumentToMemberEquality.cs" />
     <Compile Include="AssertionAdapter.cs" />
     <Compile Include="CompositeEnumerable.cs" />
     <Compile Include="ExcludingMembers.cs" />
