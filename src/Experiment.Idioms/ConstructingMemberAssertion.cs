@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
@@ -73,6 +76,76 @@ namespace Jwc.Experiment.Idioms
             {
                 return _memberToParameterComparer;
             }
+        }
+
+        /// <summary>
+        /// Allows an <see cref="ConstructorInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="constructorInfoElement">
+        /// The <see cref="ConstructorInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(ConstructorInfoElement constructorInfoElement)
+        {
+            if (constructorInfoElement == null)
+            {
+                throw new ArgumentNullException("constructorInfoElement");
+            }
+
+            const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+
+            var constructorInfo = constructorInfoElement.ConstructorInfo;
+            var reflectedType = constructorInfo.ReflectedType;
+            
+            var propertyInfoElements = reflectedType.GetProperties(bindingFlags)
+                .Where(pi => pi.GetGetMethod() != null)
+                .Select(pi => pi.ToElement()).ToArray();
+
+            var fieldInfoElements = reflectedType.GetFields(bindingFlags)
+                .Select(fi => fi.ToElement()).ToArray();
+
+            foreach (var parameterInfo in constructorInfo.GetParameters())
+            {
+                var parameterInfoElement = parameterInfo.ToElement();
+                if (IsSatisfied(parameterInfoElement, propertyInfoElements, fieldInfoElements))
+                {
+                    continue;
+                }
+
+                const string messageFormat =
+                    "The constructor parameter was not exposed through any fields or propertys:" +
+                    "{0}Reflected type: {1}{0}Constructor: {2}{0}Parameter: {3}";
+
+                throw new ConstructingMemberException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        messageFormat,
+                        Environment.NewLine,
+                        reflectedType,
+                        constructorInfoElement,
+                        parameterInfoElement));
+            }
+
+            return this;
+        }
+
+        private bool IsSatisfied(
+            ParameterInfoElement parameterInfoElement,
+            IEnumerable<PropertyInfoElement> properteis,
+            IEnumerable<FieldInfoElement> fields)
+        {
+            return properteis.Any(
+                property => ParameterToMemberComparer.Equals(
+                    parameterInfoElement, property))
+            || fields.Any(
+                field => ParameterToMemberComparer.Equals(
+                    parameterInfoElement, field));
         }
     }
 }

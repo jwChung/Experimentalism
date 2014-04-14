@@ -4,7 +4,9 @@ namespace Jwc.Experiment.Idioms
 {
     public class TypeWithMembers
     {
+        public static object StaticField;
         public object PublicField;
+        public object OtherPublicField;
         protected internal object ProtectedInternalField;
         protected object ProtectedField;
         internal object InternalField = null;
@@ -34,6 +36,12 @@ namespace Jwc.Experiment.Idioms
 
         private TypeWithMembers(double arg)
         {
+        }
+
+        public static object StaticProperty
+        {
+            get;
+            set;
         }
 
         public object PublicProperty
