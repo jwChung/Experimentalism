@@ -11,6 +11,12 @@ namespace Jwc.Experiment.Idioms
             set;
         }
 
+        public Func<T, int> OnGetHashCode
+        {
+            get;
+            set;
+        }
+
         public bool Equals(T x, T y)
         {
             return OnEquals(x, y);
@@ -18,7 +24,7 @@ namespace Jwc.Experiment.Idioms
 
         public int GetHashCode(T obj)
         {
-            return obj.GetHashCode();
+            return OnGetHashCode(obj);
         }
     }
 }

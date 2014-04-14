@@ -30,5 +30,25 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(() => new InverseEqualityComparer<object>(null));
         }
+
+        [Fact]
+        public void GetHashCodeReturnsHashCodeFromGivenComparer()
+        {
+            const int hashCode = 123;
+            var value = new object();
+            var equalityComparer = new DelegatingEqualityComparer<object>
+            {
+                OnGetHashCode = obj =>
+                {
+                    Assert.Equal(value, obj);
+                    return hashCode;
+                }
+            };
+            var sut = new InverseEqualityComparer<object>(equalityComparer);
+
+            var actual = sut.GetHashCode(value);
+
+            Assert.Equal(hashCode, actual);
+        }
     }
 }

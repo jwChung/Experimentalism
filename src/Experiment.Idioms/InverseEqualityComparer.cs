@@ -69,7 +69,7 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public int GetHashCode(T obj)
         {
-            throw new System.NotImplementedException();
+            return EqualityComparer.GetHashCode(obj);
         }
     }
 }
