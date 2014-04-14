@@ -9,6 +9,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class ConstructingMemberAssertion : ReflectionVisitor<object>
     {
+        private readonly IEqualityComparer<IReflectionElement> _parameterToMemberComparer;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructingMemberAssertion" /> class.
         /// </summary>
@@ -24,6 +26,7 @@ namespace Jwc.Experiment.Idioms
             IEqualityComparer<IReflectionElement> parameterToMemberComparer,
             IEqualityComparer<IReflectionElement> memberToParameterComparer)
         {
+            _parameterToMemberComparer = parameterToMemberComparer;
         }
 
         /// <summary>
@@ -34,6 +37,17 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 throw new System.NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value to comapare a parameter with a member.
+        /// </summary>
+        public IEqualityComparer<IReflectionElement> ParameterToMemberComparer
+        {
+            get
+            {
+                return _parameterToMemberComparer;
             }
         }
     }

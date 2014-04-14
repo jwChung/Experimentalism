@@ -69,6 +69,7 @@
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />
     <Compile Include="ConstructingMemberAssertionTest.cs" />
+    <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
     <Compile Include="SpecimenBuilderAdapterTest.cs" />
