@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Jwc.Experiment.Idioms
@@ -22,6 +23,12 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.EqualityComparer;
 
             Assert.Equal(equalityComparer, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullComparerThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new InverseEqualityComparer<object>(null));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -21,6 +22,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public InverseEqualityComparer(IEqualityComparer<T> equalityComparer)
         {
+            if (equalityComparer == null)
+            {
+                throw new ArgumentNullException("equalityComparer");
+            }
+
             _equalityComparer = equalityComparer;
         }
 
