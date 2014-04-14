@@ -1,5 +1,4 @@
 ﻿using System;
-using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Idioms;
 using Xunit;
 
@@ -18,21 +17,14 @@ namespace Jwc.Experiment.Idioms
         public void CreateReturnsCorrectAssertion()
         {
             var sut = new GuardClauseAssertionFactory();
-            var fixture = new Fixture();
-            var fakeTestFixture = new DelegatingTestFixture
-            {
-                OnCreate = s =>
-                {
-                    Assert.Equal(typeof(Fixture), s);
-                    return fixture;
-                }
-            };
-            
-            var actual = sut.Create(fakeTestFixture);
+            var testFixture = new DelegatingTestFixture();
+
+            var actual = sut.Create(testFixture);
 
             var assertionAdapter = Assert.IsAssignableFrom<AssertionAdapter>(actual);
             var assertion = Assert.IsAssignableFrom<GuardClauseAssertion>(assertionAdapter.Assertion);
-            Assert.Same(fixture, assertion.Builder);
+            var specimenBuilderAdpater = Assert.IsAssignableFrom<SpecimenBuilderAdapter>(assertion.Builder);
+            Assert.Equal(testFixture, specimenBuilderAdpater.TestFixture);
         }
 
         [Fact]
