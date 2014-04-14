@@ -64,6 +64,7 @@
     <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
     <Compile Include="InverseEqualityComparer.cs" />
+    <Compile Include="PropertyToParameterComparer.cs" />
     <Compile Include="SpecimenBuilderAdapter.cs" />
     <Compile Include="TypeMembers.cs" />
     <Compile Include="FilteringMembers.cs" />
