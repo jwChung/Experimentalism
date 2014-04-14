@@ -12,5 +12,16 @@ namespace Jwc.Experiment.Idioms
                 EqualityComparer<object>.Default);
             Assert.IsAssignableFrom<IEqualityComparer<object>>(sut);
         }
+
+        [Fact]
+        public void EqualityComparerIsCorrect()
+        {
+            var equalityComparer = new DelegatingEqualityComparer<object>();
+            var sut = new InverseEqualityComparer<object>(equalityComparer);
+
+            var actual = sut.EqualityComparer;
+
+            Assert.Equal(equalityComparer, actual);
+        }
     }
 }

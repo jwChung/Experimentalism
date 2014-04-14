@@ -11,14 +11,28 @@ namespace Jwc.Experiment.Idioms
     /// </typeparam>
     public class InverseEqualityComparer<T> : IEqualityComparer<T>
     {
+        private readonly IEqualityComparer<T> _equalityComparer;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="InverseEqualityComparer{T}"/> class.
         /// </summary>
         /// <param name="equalityComparer">
-        /// The equality comparer.
+        /// The equality comparer to be evaluated reversely.
         /// </param>
         public InverseEqualityComparer(IEqualityComparer<T> equalityComparer)
         {
+            _equalityComparer = equalityComparer;
+        }
+
+        /// <summary>
+        /// Gets a indicating the equality comparer.
+        /// </summary>
+        public IEqualityComparer<T> EqualityComparer
+        {
+            get
+            {
+                return _equalityComparer;
+            }
         }
 
         /// <summary>
