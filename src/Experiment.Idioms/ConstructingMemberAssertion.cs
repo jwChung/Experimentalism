@@ -10,6 +10,7 @@ namespace Jwc.Experiment.Idioms
     public class ConstructingMemberAssertion : ReflectionVisitor<object>
     {
         private readonly IEqualityComparer<IReflectionElement> _parameterToMemberComparer;
+        private readonly IEqualityComparer<IReflectionElement> _memberToParameterComparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructingMemberAssertion" /> class.
@@ -27,6 +28,7 @@ namespace Jwc.Experiment.Idioms
             IEqualityComparer<IReflectionElement> memberToParameterComparer)
         {
             _parameterToMemberComparer = parameterToMemberComparer;
+            _memberToParameterComparer = memberToParameterComparer;
         }
 
         /// <summary>
@@ -41,13 +43,24 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets a value to comapare a parameter with a member.
+        /// Gets a value to compare a parameter with a member(field or propety).
         /// </summary>
         public IEqualityComparer<IReflectionElement> ParameterToMemberComparer
         {
             get
             {
                 return _parameterToMemberComparer;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value to compare a member(field or propety) with a parameter.
+        /// </summary>
+        public IEqualityComparer<IReflectionElement> MemberToParameterComparer
+        {
+            get
+            {
+                return _memberToParameterComparer;
             }
         }
     }

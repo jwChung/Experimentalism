@@ -27,5 +27,18 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(constructorComparer, actual);
         }
+
+        [Fact]
+        public void MemberToParameterComparerIsCorrect()
+        {
+            var memberComparer = EqualityComparer<IReflectionElement>.Default;
+            var sut = new ConstructingMemberAssertion(
+                   EqualityComparer<IReflectionElement>.Default,
+                   memberComparer);
+
+            var actual = sut.MemberToParameterComparer;
+
+            Assert.Equal(memberComparer, actual);
+        }
     }
 }
