@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
@@ -21,6 +22,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ArgumentToPropertyEquality(ITestFixture testFixture)
         {
+            if (testFixture == null)
+            {
+                throw new ArgumentNullException("testFixture");
+            }
+
             _testFixture = testFixture;
         }
 

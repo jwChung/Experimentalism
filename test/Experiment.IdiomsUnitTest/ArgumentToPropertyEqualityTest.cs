@@ -111,6 +111,12 @@ namespace Jwc.Experiment.Idioms
 
             Assert.False(actual, "Not Equals.");
         }
+
+        [Fact]
+        public void InitializeWithNullTestFixtureThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ArgumentToPropertyEquality(null));
+        }
     
         private class TypeForPropertyEqualValue
         {
