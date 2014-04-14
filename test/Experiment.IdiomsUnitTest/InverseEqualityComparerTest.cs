@@ -50,5 +50,28 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(hashCode, actual);
         }
+
+        [Fact]
+        public void EqualsReturnsCorrectResultFromGivenComparer()
+        {
+            bool result = false;
+            var left = new object();
+            var right = new object();
+            var equalityComparer = new DelegatingEqualityComparer<object>
+            {
+                OnEquals = (x, y) =>
+                {
+                    Assert.Equal(right, x);
+                    Assert.Equal(left, y);
+                    result = true;
+                    return result;
+                }
+            };
+            var sut = new InverseEqualityComparer<object>(equalityComparer);
+
+            var actual = sut.Equals(left, right);
+
+            Assert.True(actual, "Equals");
+        }
     }
 }

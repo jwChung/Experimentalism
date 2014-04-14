@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public bool Equals(T x, T y)
         {
-            throw new System.NotImplementedException();
+            return EqualityComparer.Equals(y, x);
         }
 
         /// <summary>
