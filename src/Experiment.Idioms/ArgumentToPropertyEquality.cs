@@ -7,19 +7,19 @@ namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Represent comaprer to determine that an argument value equals to
-    /// a member(field or property) value.
+    /// a property value.
     /// </summary>
-    public class ArgumentToMemberEquality : IEqualityComparer<IReflectionElement>
+    public class ArgumentToPropertyEquality : IEqualityComparer<IReflectionElement>
     {
         private readonly ITestFixture _testFixture;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentToMemberEquality" /> class.
+        /// Initializes a new instance of the <see cref="ArgumentToPropertyEquality" /> class.
         /// </summary>
         /// <param name="testFixture">
         /// The test fixture to create an anonymous specimen.
         /// </param>
-        public ArgumentToMemberEquality(ITestFixture testFixture)
+        public ArgumentToPropertyEquality(ITestFixture testFixture)
         {
             _testFixture = testFixture;
         }
