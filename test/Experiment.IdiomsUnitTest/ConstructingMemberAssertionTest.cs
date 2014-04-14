@@ -169,6 +169,15 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
+        [Fact]
+        public void ValueThrowsNotSupportedException()
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default);
+            Assert.Throws<NotSupportedException>(() => sut.Value);
+        }
+
         private class NotSatisfiedConstructorInfoElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
