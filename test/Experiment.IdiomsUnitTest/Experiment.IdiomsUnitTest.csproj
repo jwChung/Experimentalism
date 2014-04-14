@@ -59,7 +59,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
-    <Compile Include="ParameterToPropertyEqualityComparerTest.cs" />
+    <Compile Include="ParameterToPropertyComparerTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AssertionAdapterTest.cs" />
     <Compile Include="DelegatingEqualityComparer.cs" />

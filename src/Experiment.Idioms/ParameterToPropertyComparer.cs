@@ -10,17 +10,17 @@ namespace Jwc.Experiment.Idioms
     /// Represent comaprer to determine that a parameter value equals to
     /// a property value.
     /// </summary>
-    public class ParameterToPropertyEqualityComparer : IEqualityComparer<IReflectionElement>
+    public class ParameterToPropertyComparer : IEqualityComparer<IReflectionElement>
     {
         private readonly ITestFixture _testFixture;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParameterToPropertyEqualityComparer" /> class.
+        /// Initializes a new instance of the <see cref="ParameterToPropertyComparer" /> class.
         /// </summary>
         /// <param name="testFixture">
         /// The test fixture to create an anonymous specimen.
         /// </param>
-        public ParameterToPropertyEqualityComparer(ITestFixture testFixture)
+        public ParameterToPropertyComparer(ITestFixture testFixture)
         {
             if (testFixture == null)
             {
