@@ -1,6 +1,6 @@
 ﻿namespace Jwc.Experiment.Idioms
 {
-    public class ClassWithProperties
+    public class TypeWithProperties
     {
         public object GetSetProperty
         {

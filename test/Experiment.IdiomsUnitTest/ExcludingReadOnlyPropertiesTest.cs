@@ -36,13 +36,13 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumerateReadOnlyProperties()
         {
-            var targetMembers = typeof(ClassWithProperties).GetProperties(
+            var targetMembers = typeof(TypeWithProperties).GetProperties(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             var sut = new ExcludingReadOnlyProperties(targetMembers);
             var expected = new[]
             {
-                typeof(ClassWithProperties).GetProperty("GetSetProperty"),
-                typeof(ClassWithProperties).GetProperty("SetProperty")
+                typeof(TypeWithProperties).GetProperty("GetSetProperty"),
+                typeof(TypeWithProperties).GetProperty("SetProperty")
             };
 
             var actual = sut.Cast<PropertyInfo>().ToArray();

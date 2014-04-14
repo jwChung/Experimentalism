@@ -2,7 +2,7 @@ using System;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class ClassWithTestMembers
+    public class TypeWithMembers
     {
         public object PublicField;
         protected internal object ProtectedInternalField;
@@ -12,23 +12,23 @@ namespace Jwc.Experiment.Idioms
         private object PrivateField;
 #pragma warning restore 169
 
-        public ClassWithTestMembers()
+        public TypeWithMembers()
         {
         }
 
-        protected internal ClassWithTestMembers(string arg)
+        protected internal TypeWithMembers(string arg)
         {
         }
 
-        protected ClassWithTestMembers(object arg)
+        protected TypeWithMembers(object arg)
         {
         }
 
-        internal ClassWithTestMembers(int arg)
+        internal TypeWithMembers(int arg)
         {
         }
 
-        private ClassWithTestMembers(double arg)
+        private TypeWithMembers(double arg)
         {
         }
 

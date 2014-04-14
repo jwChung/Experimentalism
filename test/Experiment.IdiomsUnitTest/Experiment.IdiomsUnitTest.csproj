@@ -62,8 +62,6 @@
     <Compile Include="ArgumentToMemberEqualityTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AssertionAdapterTest.cs" />
-    <Compile Include="ClassWithProperties.cs" />
-    <Compile Include="ClassWithTestMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
@@ -83,6 +81,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionElementsTest.cs" />
     <Compile Include="Scenario.cs" />
+    <Compile Include="TypeWithMembers.cs" />
+    <Compile Include="TypeWithProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
