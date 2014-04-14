@@ -60,6 +60,7 @@
     <Compile Include="CompositeTestCases.cs" />
     <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
+    <Compile Include="SpecimenBuilderAdapter.cs" />
     <Compile Include="TargetMembers.cs" />
     <Compile Include="FilteringMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
