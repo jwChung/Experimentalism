@@ -3,16 +3,30 @@
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Adapts <see cref="ITestFixture"/> to <see cref="ISpecimenBuilder"/>.
+    /// Adapts <see cref="ITestFixture" /> to <see cref="ISpecimenBuilder" />.
     /// </summary>
     public class SpecimenBuilderAdapter : ISpecimenBuilder
     {
+        private readonly ITestFixture _testFixture;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecimenBuilderAdapter"/> class.
         /// </summary>
-        /// <param name="fixture">The fixture.</param>
-        public SpecimenBuilderAdapter(ITestFixture fixture)
+        /// <param name="testFixture">The test fixture.</param>
+        public SpecimenBuilderAdapter(ITestFixture testFixture)
         {
+            _testFixture = testFixture;
+        }
+
+        /// <summary>
+        /// Gets the test fixture.
+        /// </summary>
+        public ITestFixture TestFixture
+        {
+            get
+            {
+                return _testFixture;
+            }
         }
 
         /// <summary>

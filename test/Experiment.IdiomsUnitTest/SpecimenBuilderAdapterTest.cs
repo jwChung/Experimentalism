@@ -11,5 +11,16 @@ namespace Jwc.Experiment.Idioms
             var sut = new SpecimenBuilderAdapter(new DelegatingTestFixture());
             Assert.IsAssignableFrom<ISpecimenBuilder>(sut);
         }
+
+        [Fact]
+        public void TestFixtureIsCorrect()
+        {
+            var testFixture = new DelegatingTestFixture();
+            var sut = new SpecimenBuilderAdapter(testFixture);
+
+            var actual = sut.TestFixture;
+
+            Assert.Equal(testFixture, actual);
+        }
     }
 }
