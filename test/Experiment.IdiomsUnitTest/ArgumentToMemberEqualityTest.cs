@@ -23,5 +23,13 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(testFixture, actual);
         }
+
+        [Fact]
+        public void GetHashCodeReturnsAlwaysSameValue()
+        {
+            var sut = new ArgumentToMemberEquality(new DelegatingTestFixture());
+            var actual = sut.GetHashCode(null);
+            Assert.Equal(0, actual);
+        }
     }
 }

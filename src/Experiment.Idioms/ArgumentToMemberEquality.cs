@@ -61,7 +61,7 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public int GetHashCode(IReflectionElement obj)
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
     }
 }
