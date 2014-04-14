@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ploeh.Albedo;
 using Xunit;
 
@@ -39,6 +40,24 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.MemberToParameterComparer;
 
             Assert.Equal(memberComparer, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullParameterToMemberComparerThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new ConstructingMemberAssertion(
+                    null,
+                    EqualityComparer<IReflectionElement>.Default));
+        }
+
+        [Fact]
+        public void InitializeWithNullMemberToParameterComparerThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new ConstructingMemberAssertion(
+                    EqualityComparer<IReflectionElement>.Default,
+                    null));
         }
     }
 }

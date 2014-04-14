@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
@@ -27,6 +28,16 @@ namespace Jwc.Experiment.Idioms
             IEqualityComparer<IReflectionElement> parameterToMemberComparer,
             IEqualityComparer<IReflectionElement> memberToParameterComparer)
         {
+            if (parameterToMemberComparer == null)
+            {
+                throw new ArgumentNullException("parameterToMemberComparer");
+            }
+
+            if (memberToParameterComparer == null)
+            {
+                throw new ArgumentNullException("memberToParameterComparer");
+            }
+
             _parameterToMemberComparer = parameterToMemberComparer;
             _memberToParameterComparer = memberToParameterComparer;
         }
