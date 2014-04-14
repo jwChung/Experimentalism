@@ -1,4 +1,5 @@
-﻿using Ploeh.AutoFixture.Kernel;
+﻿using System;
+using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -15,6 +16,11 @@ namespace Jwc.Experiment.Idioms
         /// <param name="testFixture">The test fixture.</param>
         public SpecimenBuilderAdapter(ITestFixture testFixture)
         {
+            if (testFixture == null)
+            {
+                throw new ArgumentNullException("testFixture");
+            }
+
             _testFixture = testFixture;
         }
 

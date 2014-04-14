@@ -1,4 +1,5 @@
-﻿using Ploeh.AutoFixture.Kernel;
+﻿using System;
+using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
 namespace Jwc.Experiment.Idioms
@@ -21,6 +22,13 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.TestFixture;
 
             Assert.Equal(testFixture, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullTestFixtureThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new SpecimenBuilderAdapter(null));
         }
     }
 }
