@@ -45,7 +45,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public object Create(object request, ISpecimenContext context)
         {
-            throw new System.NotImplementedException();
+            return TestFixture.Create(request);
         }
     }
 }

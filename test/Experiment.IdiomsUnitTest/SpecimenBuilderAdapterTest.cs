@@ -30,5 +30,25 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(
                 () => new SpecimenBuilderAdapter(null));
         }
+
+        [Fact]
+        public void CreateReturnsCorrectSpecimen()
+        {
+            var request = new object();
+            var specimen = new object();
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = r =>
+                {
+                    Assert.Equal(request, r);
+                    return specimen;
+                }
+            };
+            var sut = new SpecimenBuilderAdapter(testFixture);
+
+            var actual = sut.Create(request, null);
+
+            Assert.Equal(specimen, actual);
+        }
     }
 }
