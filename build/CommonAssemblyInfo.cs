@@ -10,13 +10,22 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.9.8")]
-[assembly: AssemblyInformationalVersion("0.9.8")]
+[assembly: AssemblyVersion("0.10.0")]
+[assembly: AssemblyInformationalVersion("0.10.0")]
 
 /*
- * Version 0.9.8
+ * Version 0.10.0
  * 
- * Uses single quotation mark to show the display name of `FirstClassCommand`,
- * because double quotation mark can mislead that a value is string, but
- * actually not.
+ * Publishes a new nuget package called 'Experiment.Idioms', which facilitates
+ * running idiomatic, regular unit-tests.
+ * 
+ * This release includes the first idiomatic-test as
+ * `GuardClauseAssertionTestCases`. This assertion verifies guard-clause
+ * assertions for all public API.
+ * 
+ * [FirstClassTheorem]
+ * public IEnumerable<ITestCase> Demo()
+ * {
+ *     return new GuardClauseAssertionTestCases(typeof(Foo));
+ * }
  */
