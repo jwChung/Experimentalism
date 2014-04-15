@@ -157,12 +157,9 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("fieldInfoElement");
             }
 
-            Type reflectedType = fieldInfoElement.FieldInfo.ReflectedType;
-            var parameterInfoElements = reflectedType.GetConstructors()
-                .SelectMany(ci => ci.GetParameters())
-                .Select(pi => pi.ToElement());
-
-            if (parameterInfoElements.Any(e => MemberToParameterComparer.Equals(fieldInfoElement, e)))
+            var reflectedType = fieldInfoElement.FieldInfo.ReflectedType;
+            if (GetParameterInfoElements(reflectedType).Any(
+                e => MemberToParameterComparer.Equals(fieldInfoElement, e)))
             {
                 return this;
             }
@@ -199,18 +196,15 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("propertyInfoElement");
             }
 
-            Type reflectedType = propertyInfoElement.PropertyInfo.ReflectedType;
-            var parameterInfoElements = reflectedType.GetConstructors()
-                .SelectMany(ci => ci.GetParameters())
-                .Select(pi => pi.ToElement());
-
-            if (parameterInfoElements.Any(e => MemberToParameterComparer.Equals(propertyInfoElement, e)))
+            var reflectedType = propertyInfoElement.PropertyInfo.ReflectedType;
+            if (GetParameterInfoElements(reflectedType).Any(
+                e => MemberToParameterComparer.Equals(propertyInfoElement, e)))
             {
                 return this;
             }
 
             const string messageFormat =
-                    "No constructors with an argument that matches the field were found:" +
+                    "No constructors with an argument that matches the property were found:" +
                     "{0}Reflected type: {1}{0}Property: {2}";
 
             throw new ConstructingMemberException(
@@ -233,6 +227,13 @@ namespace Jwc.Experiment.Idioms
             || fields.Any(
                 field => ParameterToMemberComparer.Equals(
                     parameterInfoElement, field));
+        }
+
+        private static IEnumerable<ParameterInfoElement> GetParameterInfoElements(Type reflectedType)
+        {
+            return reflectedType.GetConstructors()
+                .SelectMany(ci => ci.GetParameters())
+                .Select(pi => pi.ToElement());
         }
     }
 }
