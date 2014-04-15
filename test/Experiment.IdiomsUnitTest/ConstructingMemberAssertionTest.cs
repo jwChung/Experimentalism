@@ -210,6 +210,38 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(sut, actual);
         }
 
+        [Fact]
+        public void VisitNullPropertyInfoElementThrows()
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default);
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitNotSatisfiedPropertyInfoElementThrows()
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                new PropertyToParameterComparer(new FakeTestFixture()));
+            PropertyInfoElement propertyInfoElement = new Properties<TypeForTestProperty>()
+                .Select(x => x.NotSatisfied).ToElement();
+            Assert.Throws<ConstructingMemberException>(() => sut.Visit(propertyInfoElement));
+        }
+
+        [Theory]
+        [SatisfiedPropertyInfoElementData]
+        public void VisitSatisfiedPropertyInfoElementDoesNotThrow(
+            PropertyInfoElement propertyFieldInfoElement)
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                new PropertyToParameterComparer(new FakeTestFixture()));
+            var actual = sut.Visit(propertyFieldInfoElement);
+            Assert.Equal(sut, actual);
+        }
+
         private class NotSatisfiedConstructorInfoElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -240,6 +272,21 @@ namespace Jwc.Experiment.Idioms
                 yield return new object[]
                 {
                     new Fields<TypeForTestField>().Select(x => x.Satisfied2).ToElement()
+                };
+            }
+        }
+
+        private class SatisfiedPropertyInfoElementDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[]
+                {
+                    new Properties<TypeForTestProperty>().Select(x => x.Satisfied1).ToElement()
+                };
+                yield return new object[]
+                {
+                    new Properties<TypeForTestProperty>().Select(x => x.Satisfied2).ToElement()
                 };
             }
         }
@@ -340,6 +387,65 @@ namespace Jwc.Experiment.Idioms
             private TypeForTestField(string arg)
             {
                 NotSatisfied = arg;
+            }
+        }
+
+        private class TypeForTestProperty
+        {
+            public TypeForTestProperty()
+            {
+            }
+
+            public TypeForTestProperty(string arg1, object arg2)
+            {
+            }
+
+            public TypeForTestProperty(int value)
+            {
+                Satisfied1 = value;
+            }
+
+            public TypeForTestProperty(string arg1, int arg2, object arg3)
+            {
+                Satisfied2 = arg2;
+            }
+
+            protected internal TypeForTestProperty(object arg1, string arg2)
+            {
+                NotSatisfied = arg1;
+            }
+
+            protected TypeForTestProperty(string arg1, int arg2)
+            {
+                NotSatisfied = arg2;
+            }
+
+            internal TypeForTestProperty(object arg)
+            {
+                NotSatisfied = arg;
+            }
+
+            private TypeForTestProperty(string arg)
+            {
+                NotSatisfied = arg;
+            }
+
+            public object NotSatisfied
+            {
+                get;
+                set;
+            }
+
+            public object Satisfied1
+            {
+                get;
+                set;
+            }
+
+            public object Satisfied2
+            {
+                get;
+                set;
             }
         }
     }

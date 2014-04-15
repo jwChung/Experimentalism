@@ -180,6 +180,48 @@ namespace Jwc.Experiment.Idioms
                     fieldInfoElement));
         }
 
+        /// <summary>
+        /// Allows an <see cref="PropertyInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="propertyInfoElement">The <see cref="PropertyInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(PropertyInfoElement propertyInfoElement)
+        {
+            if (propertyInfoElement == null)
+            {
+                throw new ArgumentNullException("propertyInfoElement");
+            }
+
+            Type reflectedType = propertyInfoElement.PropertyInfo.ReflectedType;
+            var parameterInfoElements = reflectedType.GetConstructors()
+                .SelectMany(ci => ci.GetParameters())
+                .Select(pi => pi.ToElement());
+
+            if (parameterInfoElements.Any(e => MemberToParameterComparer.Equals(propertyInfoElement, e)))
+            {
+                return this;
+            }
+
+            const string messageFormat =
+                    "No constructors with an argument that matches the field were found:" +
+                    "{0}Reflected type: {1}{0}Property: {2}";
+
+            throw new ConstructingMemberException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    messageFormat,
+                    Environment.NewLine,
+                    reflectedType,
+                    propertyInfoElement));
+        }
+
         private bool IsSatisfied(
             ParameterInfoElement parameterInfoElement,
             IEnumerable<PropertyInfoElement> properteis,
