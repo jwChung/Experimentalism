@@ -8,54 +8,54 @@ namespace Jwc.Experiment.Idioms
     public class CompositeEnumerablesTest
     {
         [Fact]
-        public void SutIsEnumerableOfTestCase()
+        public void SutIsEnumerable()
         {
-            var sut = new CompositeEnumerables();
-            Assert.IsAssignableFrom<IEnumerable<ITestCase>>(sut);
+            var sut = new CompositeEnumerables<object>();
+            Assert.IsAssignableFrom<IEnumerable<object>>(sut);
         }
 
         [Fact]
-        public void InitializeWithNullTestCaseSetThrows()
+        public void InitializeWithNullItemSetThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new CompositeEnumerables(null));
+            Assert.Throws<ArgumentNullException>(() => new CompositeEnumerables<object>(null));
         }
 
         [Fact]
-        public void SutEnumeratesCorrectTestCases()
+        public void SutEnumeratesCorrectItems()
         {
-            var testCase1 = new DelegatingTestCase();
-            var testCase2 = new DelegatingTestCase();
-            var testCase3 = new DelegatingTestCase();
-            var testCase4 = new DelegatingTestCase();
-            var testCase5 = new DelegatingTestCase();
-            IEnumerable<ITestCase>[] testCaseSet =
+            var item1 = 234;
+            var item2 = 12;
+            var item3 = 865;
+            var item4 = 24;
+            var item5 = 58;
+            IEnumerable<int>[] itemSet =
             {
-                new ITestCase[]{ testCase1 },
-                new ITestCase[]{ testCase2, testCase3 },
-                new ITestCase[]{ testCase4, testCase5 }
+                new[] { item1 },
+                new[] { item2, item3 },
+                new[] { item4, item5 }
             };
-            var sut = new CompositeEnumerables(testCaseSet);
+            var sut = new CompositeEnumerables<int>(itemSet);
 
             var actual = sut.ToArray();
 
-            Assert.Equal(testCase1, actual[0]);
-            Assert.Equal(testCase2, actual[1]);
-            Assert.Equal(testCase3, actual[2]);
-            Assert.Equal(testCase4, actual[3]);
-            Assert.Equal(testCase5, actual[4]);
+            Assert.Equal(item1, actual[0]);
+            Assert.Equal(item2, actual[1]);
+            Assert.Equal(item3, actual[2]);
+            Assert.Equal(item4, actual[3]);
+            Assert.Equal(item5, actual[4]);
         }
 
         [Fact]
-        public void TestCaseSetIsCorrect()
+        public void ItemSetIsCorrect()
         {
-            IEnumerable<ITestCase>[] testCaseSet =
+            IEnumerable<string>[] testCaseSet =
             {
-                new ITestCase[]{ new DelegatingTestCase() },
-                new ITestCase[]{ new DelegatingTestCase(), new DelegatingTestCase() }
+                new[] { "aaa" },
+                new[] { "bbb", "ccc" }
             };
-            var sut = new CompositeEnumerables(testCaseSet);
+            var sut = new CompositeEnumerables<string>(testCaseSet);
 
-            var actual = sut.TestCaseSet;
+            var actual = sut.ItemSet;
 
             Assert.Equal(testCaseSet, actual);
         }
