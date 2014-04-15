@@ -57,6 +57,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollectingVisitor.cs" />
     <Compile Include="ConstructingMemberException.cs" />
+    <Compile Include="FieldToParameterComparer.cs" />
     <Compile Include="ParameterToFieldComparer.cs" />
     <Compile Include="ParameterToPropertyComparer.cs" />
     <Compile Include="AssertionAdapter.cs" />
