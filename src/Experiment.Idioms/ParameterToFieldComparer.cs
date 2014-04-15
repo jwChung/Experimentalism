@@ -9,6 +9,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class ParameterToFieldComparer : IEqualityComparer<IReflectionElement>
     {
+        private readonly ITestFixture _testFixture;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterToFieldComparer"/> class.
         /// </summary>
@@ -17,6 +19,18 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ParameterToFieldComparer(ITestFixture testFixture)
         {
+            _testFixture = testFixture;
+        }
+
+        /// <summary>
+        /// Gets a vlaue indicating the test fixture.
+        /// </summary>
+        public ITestFixture TestFixture
+        {
+            get
+            {
+                return _testFixture;
+            }
         }
 
         /// <summary>
