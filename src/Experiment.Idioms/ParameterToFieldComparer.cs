@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
@@ -53,7 +55,32 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public bool Equals(IReflectionElement x, IReflectionElement y)
         {
-            throw new System.NotImplementedException();
+            var parameterInfoElement = x as ParameterInfoElement;
+            if (parameterInfoElement == null)
+                return false;
+
+            var fieldInfoElement = y as FieldInfoElement;
+            if (fieldInfoElement == null)
+                return false;
+
+            var parameterInfo = parameterInfoElement.ParameterInfo;
+            var constructorInfo = parameterInfo.Member as ConstructorInfo;
+            var fieldInfo = fieldInfoElement.FieldInfo;
+
+            if (constructorInfo == null)
+                return false;
+
+            if (constructorInfo.ReflectedType != fieldInfo.ReflectedType)
+                return false;
+
+            var arguments = constructorInfo.GetParameters()
+                .Select(pi => TestFixture.Create(pi.ParameterType))
+                .ToArray();
+            var target = constructorInfo.Invoke(arguments);
+            var argumentValue = arguments[parameterInfo.Position];
+            var fieldValue = fieldInfo.GetValue(target);
+
+            return argumentValue.Equals(fieldValue);
         }
 
         /// <summary>
