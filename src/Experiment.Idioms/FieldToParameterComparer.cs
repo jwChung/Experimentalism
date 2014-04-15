@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Ploeh.Albedo;
+﻿using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -14,7 +13,7 @@ namespace Jwc.Experiment.Idioms
         /// </summary>
         /// <param name="testFixture">The test fixture.</param>
         public FieldToParameterComparer(ITestFixture testFixture)
-            : base(EqualityComparer<IReflectionElement>.Default)
+            : base(new ParameterToFieldComparer(testFixture))
         {
         }
     }
