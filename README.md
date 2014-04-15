@@ -215,7 +215,11 @@ Experimentalism은 아래와 같은 NuGet packages들을 배포하고 있으며,
   * [Experimental.nuget](https://www.nuget.org/packages/Experiment/)
   * [AutoFixture.nuget(v3.0.1)](https://www.nuget.org/packages/AutoFixture/3.0.1) - [license](http://autofixture.codeplex.com/license)
   * [AutoFixture.Xunit.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
-
+* [**Experimental.Idioms**](https://www.nuget.org/packages/Experiment.Idioms/)
+  * [Experimental.nuget](https://www.nuget.org/packages/Experiment/)
+  * [Albedo.nuget(v0.11.2)](https://www.nuget.org/packages/Albedo/0.11.2) - [license](https://raw2.github.com/ploeh/Albedo/master/LICENSE)
+  * [AutoFixture.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
+  * [AutoFixture.Idioms.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
 * [**Experimental.AutoFixtureWithExample**](https://www.nuget.org/packages/Experiment.AutoFixtureWithExample/)
   * [Experimental.AutoFixture.nuget](https://www.nuget.org/packages/Experiment.AutoFixture/)
   * [xunit.extensions.nuget(v1.9.0.1566)](https://www.nuget.org/packages/xunit.extensions/1.9.0.1566) - [license](http://xunit.codeplex.com/license)
