@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ploeh.Albedo;
 using Xunit;
 
@@ -22,6 +23,12 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.TestFixture;
 
             Assert.Equal(testFixture, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullTestFixtureThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ParameterToFieldComparer(null));
         }
     }
 }
