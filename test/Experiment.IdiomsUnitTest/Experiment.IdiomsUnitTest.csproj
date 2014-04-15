@@ -63,7 +63,7 @@
     <Compile Include="AssertionAdapterTest.cs" />
     <Compile Include="ClassWithProperties.cs" />
     <Compile Include="ClassWithTestMembers.cs" />
-    <Compile Include="CompositeTestCasesTest.cs" />
+    <Compile Include="CompositeEnumerablesTest.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
     <Compile Include="SpecimenBuilderAdapterTest.cs" />

@@ -57,7 +57,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollectingVisitor.cs" />
     <Compile Include="AssertionAdapter.cs" />
-    <Compile Include="CompositeTestCases.cs" />
+    <Compile Include="CompositeEnumerables.cs" />
     <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
     <Compile Include="SpecimenBuilderAdapter.cs" />
