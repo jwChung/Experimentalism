@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{D77C66
 	ProjectSection(SolutionItems) = preProject
 		build\Experiment.AutoFixture.nuspec = build\Experiment.AutoFixture.nuspec
 		build\Experiment.AutoFixtureWithExample.nuspec = build\Experiment.AutoFixtureWithExample.nuspec
+		build\Experiment.Idioms.nuspec = build\Experiment.Idioms.nuspec
 		build\Experiment.nuspec = build\Experiment.nuspec
 	EndProjectSection
 EndProject

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD942D14-856A-436B-905C-BA417767E977}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
+    <AssemblyName>Jwc.Experiment.IdiomsUnitTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ploeh.Albedo, Version=0.11.2.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Albedo.0.11.2\lib\net35\Ploeh.Albedo.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\packages\AutoFixture.3.0.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture.Idioms">
+      <HintPath>..\..\packages\AutoFixture.Idioms.3.0.1\lib\net40\Ploeh.AutoFixture.Idioms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="xunit, Version=1.9.0.1566, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions, Version=1.9.0.1566, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\build\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
+      <Link>AssemblyExtensions.cs</Link>
+    </Compile>
+    <Compile Include="AccessibilityCollectingVisitorTest.cs" />
+    <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="AssertionAdapterTest.cs" />
+    <Compile Include="ClassWithProperties.cs" />
+    <Compile Include="ClassWithTestMembers.cs" />
+    <Compile Include="CompositeTestCasesTest.cs" />
+    <Compile Include="ExcludingMembersTest.cs" />
+    <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
+    <Compile Include="SpecimenBuilderAdapterTest.cs" />
+    <Compile Include="TargetMembersTest.cs" />
+    <Compile Include="DelegatingAssertionFactory.cs" />
+    <Compile Include="DelegatingIdiomaticAssertion.cs" />
+    <Compile Include="DelegatingReflectionVisitor.cs" />
+    <Compile Include="DelegatingTestCase.cs" />
+    <Compile Include="DelegatingTestFixture.cs" />
+    <Compile Include="FilteringMembersTest.cs" />
+    <Compile Include="GuardClauseAssertionFactoryTest.cs" />
+    <Compile Include="GuardClauseAssertionTestCasesTest.cs" />
+    <Compile Include="IdiomaticTestCasesTest.cs" />
+    <Compile Include="IdiomaticTestCaseTest.cs" />
+    <Compile Include="IdiomaticTestCommandTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionElementsTest.cs" />
+    <Compile Include="Scenario.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.Idioms\Experiment.Idioms.csproj">
+      <Project>{7352FC70-2780-415C-9A43-F889F7B8028D}</Project>
+      <Name>Experiment.Idioms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
+      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
+      <Name>Experiment</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
