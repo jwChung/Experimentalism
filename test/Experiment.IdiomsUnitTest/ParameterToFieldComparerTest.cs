@@ -30,5 +30,13 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(() => new ParameterToFieldComparer(null));
         }
+
+        [Fact]
+        public void GetHashCodeReturnsAlwaysZero()
+        {
+            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var actual = sut.GetHashCode(null);
+            Assert.Equal(0, actual);
+        }
     }
 }
