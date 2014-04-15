@@ -65,11 +65,10 @@ namespace Jwc.Experiment.Idioms
 
             var parameterInfo = parameterInfoElement.ParameterInfo;
             var constructorInfo = parameterInfo.Member as ConstructorInfo;
-            var fieldInfo = fieldInfoElement.FieldInfo;
-
             if (constructorInfo == null)
                 return false;
 
+            var fieldInfo = fieldInfoElement.FieldInfo;
             if (constructorInfo.ReflectedType != fieldInfo.ReflectedType)
                 return false;
 

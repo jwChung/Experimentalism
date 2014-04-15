@@ -57,41 +57,28 @@ namespace Jwc.Experiment.Idioms
         {
             var paremeterInfoElement = x as ParameterInfoElement;
             if (paremeterInfoElement == null)
-            {
                 return false;
-            }
 
             var propertyInfoElement = y as PropertyInfoElement;
             if (propertyInfoElement == null)
-            {
-
                 return false;
-            }
 
             var parameterInfo = paremeterInfoElement.ParameterInfo;
-            var propertyInfo = propertyInfoElement.PropertyInfo;
-
-            if (propertyInfo.GetGetMethod(true) == null)
-            {
-                return false;
-            }
-
             var constructorInfo = parameterInfo.Member as ConstructorInfo;
             if (constructorInfo == null)
-            {
                 return false;
-            }
+
+            var propertyInfo = propertyInfoElement.PropertyInfo;
+            if (propertyInfo.GetGetMethod(true) == null)
+                return false;
 
             if (constructorInfo.ReflectedType != propertyInfo.ReflectedType)
-            {
                 return false;
-            }
 
             var arguments = constructorInfo.GetParameters()
                 .Select(pi => TestFixture.Create(pi.ParameterType))
                 .ToArray();
             var target = constructorInfo.Invoke(arguments);
-
             var argumentValue = arguments[parameterInfo.Position];
             var propetyValue = propertyInfo.GetValue(target, null);
 
