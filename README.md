@@ -208,20 +208,20 @@ NuGet packages and its dependencies
 -----------
 Experimentalism은 아래와 같은 NuGet packages들을 배포하고 있으며, 각 package의 의존사항을 항목으로 나열하였습니다. 각 package는 NuGet package를 의존하는 경우도 있고(.nuget 표기), 라이브러리를 NuGet package에 포함시켜 배포하는 경우도 있습니다(.dll 표기).
 
-* [**Experimental**](https://www.nuget.org/packages/Experiment/)
+* [**Experiment**](https://www.nuget.org/packages/Experiment/)
   * [xunit.nuget(v1.9.0.1566)](https://www.nuget.org/packages/xunit/1.9.0.1566) - [license](http://xunit.codeplex.com/license)
   * [xunit.extensions.dll(v1.9.0.1566)](https://github.com/xunit/xunit) - [license](http://xunit.codeplex.com/license)
-* [**Experimental.AutoFixture**](https://www.nuget.org/packages/Experiment.AutoFixture/)
-  * [Experimental.nuget](https://www.nuget.org/packages/Experiment/)
+* [**Experiment.AutoFixture**](https://www.nuget.org/packages/Experiment.AutoFixture/)
+  * [Experiment.nuget](https://www.nuget.org/packages/Experiment/)
   * [AutoFixture.nuget(v3.0.1)](https://www.nuget.org/packages/AutoFixture/3.0.1) - [license](http://autofixture.codeplex.com/license)
   * [AutoFixture.Xunit.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
-* [**Experimental.Idioms**](https://www.nuget.org/packages/Experiment.Idioms/)
-  * [Experimental.nuget](https://www.nuget.org/packages/Experiment/)
+* [**Experiment.Idioms**](https://www.nuget.org/packages/Experiment.Idioms/)
+  * [Experiment.nuget](https://www.nuget.org/packages/Experiment/)
   * [Albedo.nuget(v0.11.2)](https://www.nuget.org/packages/Albedo/0.11.2) - [license](https://raw2.github.com/ploeh/Albedo/master/LICENSE)
   * [AutoFixture.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
   * [AutoFixture.Idioms.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
-* [**Experimental.AutoFixtureWithExample**](https://www.nuget.org/packages/Experiment.AutoFixtureWithExample/)
-  * [Experimental.AutoFixture.nuget](https://www.nuget.org/packages/Experiment.AutoFixture/)
+* [**Experiment.AutoFixtureWithExample**](https://www.nuget.org/packages/Experiment.AutoFixtureWithExample/)
+  * [Experiment.AutoFixture.nuget](https://www.nuget.org/packages/Experiment.AutoFixture/)
   * [xunit.extensions.nuget(v1.9.0.1566)](https://www.nuget.org/packages/xunit.extensions/1.9.0.1566) - [license](http://xunit.codeplex.com/license)
 
 Questions
