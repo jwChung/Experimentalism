@@ -138,6 +138,48 @@ namespace Jwc.Experiment.Idioms
             return this;
         }
 
+        /// <summary>
+        /// Allows an <see cref="FieldInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="fieldInfoElement">The <see cref="FieldInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(FieldInfoElement fieldInfoElement)
+        {
+            if (fieldInfoElement == null)
+            {
+                throw new ArgumentNullException("fieldInfoElement");
+            }
+
+            Type reflectedType = fieldInfoElement.FieldInfo.ReflectedType;
+            var parameterInfoElements = reflectedType.GetConstructors()
+                .SelectMany(ci => ci.GetParameters())
+                .Select(pi => pi.ToElement());
+
+            if (parameterInfoElements.Any(e => MemberToParameterComparer.Equals(fieldInfoElement, e)))
+            {
+                return this;
+            }
+
+            const string messageFormat =
+                    "No constructors with an argument that matches the field were found:" +
+                    "{0}Reflected type: {1}{0}Field: {2}";
+
+            throw new ConstructingMemberException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    messageFormat,
+                    Environment.NewLine,
+                    reflectedType,
+                    fieldInfoElement));
+        }
+
         private bool IsSatisfied(
             ParameterInfoElement parameterInfoElement,
             IEnumerable<PropertyInfoElement> properteis,

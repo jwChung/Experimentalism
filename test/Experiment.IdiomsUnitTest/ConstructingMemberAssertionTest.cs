@@ -178,6 +178,38 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<NotSupportedException>(() => sut.Value);
         }
 
+        [Fact]
+        public void VisitNullFieldInfoElementThrows()
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default);
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitNotSatisfiedFieldInfoElementThrows()
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                new FieldToParameterComparer(new FakeTestFixture()));
+            FieldInfoElement fieldInfoElement = new Fields<TypeForTestField>()
+                .Select(x => x.NotSatisfied).ToElement();
+            Assert.Throws<ConstructingMemberException>(() => sut.Visit(fieldInfoElement));
+        }
+
+        [Theory]
+        [SatisfiedFieldInfoElementData]
+        public void VisitSatisfiedFieldInfoElementDoesNotThrow(
+            FieldInfoElement fieldInfoElement)
+        {
+            var sut = new ConstructingMemberAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                new FieldToParameterComparer(new FakeTestFixture()));
+            var actual = sut.Visit(fieldInfoElement);
+            Assert.Equal(sut, actual);
+        }
+
         private class NotSatisfiedConstructorInfoElementDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -193,6 +225,21 @@ namespace Jwc.Experiment.Idioms
                 yield return new object[]
                 {
                     Constructors.Select(() => new TypeForTestConstructor(0, 0.1)).ToElement()
+                };
+            }
+        }
+
+        private class SatisfiedFieldInfoElementDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[]
+                {
+                    new Fields<TypeForTestField>().Select(x => x.Satisfied1).ToElement()
+                };
+                yield return new object[]
+                {
+                    new Fields<TypeForTestField>().Select(x => x.Satisfied2).ToElement()
                 };
             }
         }
@@ -246,6 +293,53 @@ namespace Jwc.Experiment.Idioms
                 {
                     return _objectValue;
                 }
+            }
+        }
+
+        private class TypeForTestField
+        {
+            public object NotSatisfied;
+
+            public object Satisfied1;
+
+            public object Satisfied2;
+
+            public TypeForTestField()
+            {
+            }
+
+            public TypeForTestField(string arg1, object arg2)
+            {
+            }
+
+            public TypeForTestField(int value)
+            {
+                Satisfied1 = value;
+            }
+
+            public TypeForTestField(string arg1, int arg2, object arg3)
+            {
+                Satisfied2 = arg2;
+            }
+
+            protected internal TypeForTestField(object arg1, string arg2)
+            {
+                NotSatisfied = arg1;
+            }
+
+            protected TypeForTestField(string arg1, int arg2)
+            {
+                NotSatisfied = arg2;
+            }
+
+            internal TypeForTestField(object arg)
+            {
+                NotSatisfied = arg;
+            }
+
+            private TypeForTestField(string arg)
+            {
+                NotSatisfied = arg;
             }
         }
     }
