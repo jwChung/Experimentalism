@@ -10,15 +10,15 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     /// <typeparam name="T">The type of objects to enumerate.</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
-    public class CompositeEnumerables<T> : IEnumerable<T>
+    public class CompositeEnumerable<T> : IEnumerable<T>
     {
         private readonly IEnumerable<T>[] _itemSet;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompositeEnumerables{T}"/> class.
+        /// Initializes a new instance of the <see cref="CompositeEnumerable{T}"/> class.
         /// </summary>
         /// <param name="itemSet">The item set.</param>
-        public CompositeEnumerables(params IEnumerable<T>[] itemSet)
+        public CompositeEnumerable(params IEnumerable<T>[] itemSet)
         {
             if (itemSet == null)
             {

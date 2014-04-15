@@ -5,19 +5,19 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class CompositeEnumerablesTest
+    public class CompositeEnumerableTest
     {
         [Fact]
         public void SutIsEnumerable()
         {
-            var sut = new CompositeEnumerables<object>();
+            var sut = new CompositeEnumerable<object>();
             Assert.IsAssignableFrom<IEnumerable<object>>(sut);
         }
 
         [Fact]
         public void InitializeWithNullItemSetThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new CompositeEnumerables<object>(null));
+            Assert.Throws<ArgumentNullException>(() => new CompositeEnumerable<object>(null));
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Jwc.Experiment.Idioms
                 new[] { item2, item3 },
                 new[] { item4, item5 }
             };
-            var sut = new CompositeEnumerables<int>(itemSet);
+            var sut = new CompositeEnumerable<int>(itemSet);
 
             var actual = sut.ToArray();
 
@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms
                 new[] { "aaa" },
                 new[] { "bbb", "ccc" }
             };
-            var sut = new CompositeEnumerables<string>(testCaseSet);
+            var sut = new CompositeEnumerable<string>(testCaseSet);
 
             var actual = sut.ItemSet;
 
