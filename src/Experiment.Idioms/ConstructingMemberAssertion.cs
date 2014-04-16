@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 throw new NotSupportedException(
-                    "This Value property does not support to return a value as the main purpose of " +
+                    "This Value property isn't supported because the main purpose of " +
                     "this class is to verify whether members (property or field) are correctly " +
                     "initialized by a constructor.");
             }
