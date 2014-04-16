@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -78,6 +79,14 @@ namespace Jwc.Experiment.Idioms
             var target = constructorInfo.Invoke(arguments);
             var argumentValue = arguments[parameterInfo.Position];
             var fieldValue = fieldInfo.GetValue(target);
+
+            var enumerableArgument = argumentValue as IEnumerable;
+            var enumerableField = fieldValue as IEnumerable;
+            if (enumerableArgument != null && enumerableField != null)
+            {
+                return enumerableArgument.Cast<object>()
+                    .SequenceEqual(enumerableField.Cast<object>());    
+            }
 
             return argumentValue.Equals(fieldValue);
         }

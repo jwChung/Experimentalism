@@ -118,14 +118,42 @@ namespace Jwc.Experiment.Idioms
             Assert.False(actual, "Not Equals.");
         }
 
+        [Fact]
+        public void EqualsParameterToFieldReturnsTrueWhenTheyHaveEqualEnumerable()
+        {
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(typeof(int[]), x);
+                    return new[] { 0, 1, 2, 3, 4 };
+                }
+            };
+            var sut = new ParameterToFieldComparer(testFixture);
+            var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(new int[0]))
+                .GetParameters().First().ToElement();
+            var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
+                .Select(x => x.Values).ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, fieldInfoElement);
+
+            Assert.True(actual, "Equals.");
+        }
+
         private class TypeForFieldEqualValue
         {
+            public readonly IEnumerable<int> Values;
             private readonly int _value;
             public object Value;
 
             public TypeForFieldEqualValue(int value)
             {
                 Value = value;
+            }
+
+            public TypeForFieldEqualValue(int[] values)
+            {
+                Values = values.ToArray();
             }
 
             public object WritableOnlyProperty
