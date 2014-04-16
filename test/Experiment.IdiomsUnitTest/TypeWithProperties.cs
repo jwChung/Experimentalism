@@ -1,6 +1,6 @@
 ﻿namespace Jwc.Experiment.Idioms
 {
-    public class ClassWithProperties
+    public class TypeWithProperties
     {
         public object GetSetProperty
         {
@@ -30,6 +30,17 @@
                 return new object();
             }
             private set
+            {
+            }
+        }
+
+        public object PrivateGetProperty
+        {
+            private get
+            {
+                return new object();
+            }
+            set
             {
             }
         }

@@ -6,20 +6,20 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class ExcludingReadOnlyPropertiesTest
+    public class ExcludingWriteOnlyPropertiesTest
     {
         [Fact]
         public void SutIsEnumerableOfMemberInfo()
         {
-            var sut = new ExcludingReadOnlyProperties(new MemberInfo[0]);
+            var sut = new ExcludingWriteOnlyProperties(new MemberInfo[0]);
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
-        } 
+        }
 
         [Fact]
         public void TargetMembersIsCorrect()
         {
             var targetMembers = GetType().GetMembers();
-            var sut = new ExcludingReadOnlyProperties(targetMembers);
+            var sut = new ExcludingWriteOnlyProperties(targetMembers);
 
             var expected = sut.TargetMembers;
 
@@ -30,20 +30,20 @@ namespace Jwc.Experiment.Idioms
         public void InitializeWithNullTargetMembersThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new ExcludingReadOnlyProperties(null));
+                () => new ExcludingWriteOnlyProperties(null));
         }
 
         [Fact]
-        public void SutEnumeratesOnlyWritableProperties()
+        public void SutEnumeratesOnlyReadableProperties()
         {
             var targetMembers = typeof(TypeWithProperties).GetProperties(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            var sut = new ExcludingReadOnlyProperties(targetMembers);
+            var sut = new ExcludingWriteOnlyProperties(targetMembers);
             var expected = new[]
             {
                 typeof(TypeWithProperties).GetProperty("GetSetProperty"),
-                typeof(TypeWithProperties).GetProperty("SetProperty"),
-                typeof(TypeWithProperties).GetProperty("PrivateGetProperty")
+                typeof(TypeWithProperties).GetProperty("GetProperty"),
+                typeof(TypeWithProperties).GetProperty("PrivateSetProperty")
             };
 
             var actual = sut.Cast<PropertyInfo>().ToArray();

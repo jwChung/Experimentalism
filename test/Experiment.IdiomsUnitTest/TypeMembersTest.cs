@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesAllKindsOfMemberInfo()
         {
-            var sut = new TypeMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(TypeWithMembers));
 
             var actual = sut.ToArray();
 
@@ -51,8 +51,8 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesDeclaredMembersOnly()
         {
-            var type = typeof(ClassWithTestMembers);
-            var toStringMethod = new Methods<ClassWithTestMembers>().Select(x => x.ToString());
+            var type = typeof(TypeWithMembers);
+            var toStringMethod = new Methods<TypeWithMembers>().Select(x => x.ToString());
             var sut = new TypeMembers(type);
 
             var actual = sut.ToArray();
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesStaticMember()
         {
-            var sut = new TypeMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(TypeWithMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -71,7 +71,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new TypeMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(TypeWithMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(
                 actual.All(m => !m.Name.StartsWith("set_") && !m.Name.StartsWith("get_")),
@@ -81,7 +81,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyHelperMethodsOfEvent()
         {
-            var sut = new TypeMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(TypeWithMembers));
             var actual = sut.ToArray();
             Assert.True(
                 actual.All(m => !m.Name.StartsWith("add_") && !m.Name.StartsWith("remove_")),
@@ -125,7 +125,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersForPrivateAccessibilities()
         {
-            var sut = new TypeMembers(typeof(ClassWithTestMembers), Accessibilities.Private);
+            var sut = new TypeMembers(typeof(TypeWithMembers), Accessibilities.Private);
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
@@ -142,13 +142,13 @@ namespace Jwc.Experiment.Idioms
             Assert.True(
                 actual.All(a => a != Accessibilities.Internal), "All Not Internal.");
             Assert.True(
-                actual.All(a => a == Accessibilities.Private), "All Private.");
+                actual.All(a => (a & Accessibilities.Private) == Accessibilities.Private), "All Private.");
         }
 
         [Fact]
         public void SutEnumeratesCorrectMembersForProtectedAccessibilities()
         {
-            var sut = new TypeMembers(typeof(ClassWithTestMembers), Accessibilities.Protected);
+            var sut = new TypeMembers(typeof(TypeWithMembers), Accessibilities.Protected);
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
@@ -172,7 +172,7 @@ namespace Jwc.Experiment.Idioms
         public void SutEnumeratesCorrectMembersForInternalAndPrivateAccessibilities()
         {
             var sut = new TypeMembers(
-                typeof(ClassWithTestMembers),
+                typeof(TypeWithMembers),
                 Accessibilities.Internal | Accessibilities.Private);
 
             var actual = sut.Select(

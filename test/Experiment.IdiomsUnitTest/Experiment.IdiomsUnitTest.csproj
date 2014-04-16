@@ -59,11 +59,26 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
+    <Compile Include="ConstantEqualityComparerTest.cs" />
+    <Compile Include="ConstructingMemberAssertionFactoryTest.cs" />
+    <Compile Include="ConstructingMemberAssertionTestCasesTest.cs" />
+    <Compile Include="ConstructingMemberExceptionTest.cs" />
+    <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
+    <Compile Include="FakeTestFixture.cs" />
+    <Compile Include="FieldToParameterComparerTest.cs" />
+    <Compile Include="OrEqualityComparer.cs" />
+    <Compile Include="ParameterToFieldComparerTest.cs" />
+    <Compile Include="ParameterToPropertyComparerTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AssertionAdapterTest.cs" />
-    <Compile Include="ClassWithProperties.cs" />
-    <Compile Include="ClassWithTestMembers.cs" />
+    <Compile Include="DelegatingEqualityComparer.cs" />
+    <Compile Include="InverseEqualityComparerTest.cs" />
+    <Compile Include="PropertyToParameterComparerTest.cs" />
+    <Compile Include="TypeWithProperties.cs" />
+    <Compile Include="TypeWithMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />
+    <Compile Include="ConstructingMemberAssertionTest.cs" />
+    <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
     <Compile Include="SpecimenBuilderAdapterTest.cs" />

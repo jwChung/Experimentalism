@@ -16,7 +16,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsHasCorrectRefractionSourcesWhenInitializeWithType()
+        public void ReflectionElementsHasCorrectRefractionSourcesWhenInitializedWithType()
         {
             // Fixture setup
             var type = GetType();
@@ -42,7 +42,7 @@ namespace Jwc.Experiment.Idioms
         }
         
         [Fact]
-        public void ReflectionElementsHasCorrectRefractionsWhenInitializeWithType()
+        public void ReflectionElementsHasCorrectRefractionsWhenInitializedWithType()
         {
             var sut = new GuardClauseAssertionTestCases(GetType());
 
@@ -61,7 +61,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AssertionFactoryIsCorrectWhenInitializeWithType()
+        public void AssertionFactoryIsCorrectWhenInitializedWithType()
         {
             var sut = new GuardClauseAssertionTestCases(GetType());
             var actual = sut.AssertionFactory;
@@ -80,7 +80,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ExcludedMembersIsCorrectWhenInitializeWithType()
+        public void ExcludedMembersIsCorrectWhenInitializedWithType()
         {
             MemberInfo[] excludedMembers = GetType().GetMembers();
             var sut = new GuardClauseAssertionTestCases(GetType(), excludedMembers);
@@ -91,7 +91,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsHasCorrectRefractionSourcesWhenInitializeWithAssembly()
+        public void ReflectionElementsHasCorrectRefractionSourcesWhenInitializedWithAssembly()
         {
             // Fixture setup
             var assembly = typeof(object).Assembly;
@@ -123,7 +123,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ReflectionElementsHasCorrectRefractionsWhenInitializeWithAssembly()
+        public void ReflectionElementsHasCorrectRefractionsWhenInitializedWithAssembly()
         {
             var sut = new GuardClauseAssertionTestCases(GetType().Assembly);
 
@@ -142,7 +142,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AssertionFactoryIsCorrectWhenInitializeWithAssembly()
+        public void AssertionFactoryIsCorrectWhenInitializedWithAssembly()
         {
             var sut = new GuardClauseAssertionTestCases(GetType().Assembly);
             var actual = sut.AssertionFactory;
@@ -161,7 +161,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ExcludedMembersIsCorrectWhenInitializeWithAssembly()
+        public void ExcludedMembersIsCorrectWhenInitializedWithAssembly()
         {
             MemberInfo[] excludedMembers = GetType().GetMembers();
             var sut = new GuardClauseAssertionTestCases(GetType().Assembly, excludedMembers);

@@ -2,9 +2,11 @@ using System;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class ClassWithTestMembers
+    public class TypeWithMembers
     {
+        public static object StaticField;
         public object PublicField;
+        public object OtherPublicField;
         protected internal object ProtectedInternalField;
         protected object ProtectedField;
         internal object InternalField = null;
@@ -12,30 +14,59 @@ namespace Jwc.Experiment.Idioms
         private object PrivateField;
 #pragma warning restore 169
 
-        public ClassWithTestMembers()
+        public TypeWithMembers()
         {
         }
 
-        protected internal ClassWithTestMembers(string arg)
+        public TypeWithMembers(string arg1, int arg2)
         {
         }
 
-        protected ClassWithTestMembers(object arg)
+        protected internal TypeWithMembers(string arg)
         {
         }
 
-        internal ClassWithTestMembers(int arg)
+        protected TypeWithMembers(object arg)
         {
         }
 
-        private ClassWithTestMembers(double arg)
+        internal TypeWithMembers(int arg)
         {
+        }
+
+        private TypeWithMembers(double arg)
+        {
+        }
+
+        public static object StaticProperty
+        {
+            get;
+            set;
         }
 
         public object PublicProperty
         {
             get;
             set;
+        }
+
+        public object ReadOnlyProperty
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public object PrivateGetProperty
+        {
+            private get
+            {
+                return null;
+            }
+            set
+            {
+            }
         }
 
         protected internal object ProtectedInternalProperty

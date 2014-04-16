@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
@@ -48,6 +49,12 @@ namespace Jwc.Experiment.Idioms
                 new Methods<TypeWithGuardTestMembers>().Select(x => x.NonGuardedMethod(null)));
         }
 
+        [FirstClassTheorem]
+        public IEnumerable<ITestCase> ConstructingMemberAssertionTestCasesVerifiesMembersInitiazliedByConstructor()
+        {
+            return new ConstructingMemberAssertionTestCases(typeof(TypeWithMembersInitializedByConstructor));
+        }
+
         private class TypeWithGuardTestMembers
         {
             public void NonGuardedMethod(object arg)
@@ -59,6 +66,44 @@ namespace Jwc.Experiment.Idioms
                 if (arg == null)
                 {
                     throw new ArgumentNullException("arg");
+                }
+            }
+        }
+
+        private class TypeWithMembersInitializedByConstructor
+        {
+            private readonly int _x;
+            private readonly IList<object> _y;
+            private readonly string _z;
+
+            public TypeWithMembersInitializedByConstructor(int x, object[] y, string z)
+            {
+                _x = x;
+                _y = y.ToList();
+                _z = z;
+            }
+
+            public int X
+            {
+                get
+                {
+                    return _x;
+                }
+            }
+
+            public IEnumerable<object> Y
+            {
+                get
+                {
+                    return _y;
+                }
+            }
+
+            public object Z
+            {
+                get
+                {
+                    return _z;
                 }
             }
         }
