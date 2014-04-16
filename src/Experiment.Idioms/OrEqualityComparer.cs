@@ -8,6 +8,8 @@ namespace Jwc.Experiment.Idioms
     /// <typeparam name="T">The compared type.</typeparam>
     public class OrEqualityComparer<T> : IEqualityComparer<T>
     {
+        private readonly IEqualityComparer<T>[] _equalityComparers;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OrEqualityComparer{T}"/> class.
         /// </summary>
@@ -16,6 +18,18 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public OrEqualityComparer(params IEqualityComparer<T>[] equalityComparers)
         {
+            _equalityComparers = equalityComparers;
+        }
+
+        /// <summary>
+        /// Gets a value indicating the equality comparers.
+        /// </summary>
+        public IEnumerable<IEqualityComparer<T>> EqualityComparers
+        {
+            get
+            {
+                return _equalityComparers;
+            }
         }
 
         /// <summary>
