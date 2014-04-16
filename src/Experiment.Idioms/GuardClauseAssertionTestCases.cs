@@ -30,6 +30,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets a value indicating the type.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This name is desirable to indicate the target type.")]
         public Type Type
         {
             get
