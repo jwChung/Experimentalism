@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo.Refraction;
 using Xunit;
@@ -64,6 +65,17 @@ namespace Jwc.Experiment.Idioms
             var sut = new GuardClauseAssertionTestCases(GetType());
             var actual = sut.AssertionFactory;
             Assert.IsType<GuardClauseAssertionFactory>(actual);
+        }
+
+        [Fact]
+        public void TypeIsCorrect()
+        {
+            Type type = GetType();
+            var sut = new GuardClauseAssertionTestCases(type);
+
+            var actual = sut.Type;
+
+            Assert.Equal(type, actual);
         }
     }
 }
