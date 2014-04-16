@@ -61,6 +61,7 @@
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="ConstantEqualityComparerTest.cs" />
     <Compile Include="ConstructingMemberAssertionFactoryTest.cs" />
+    <Compile Include="ConstructingMemberAssertionTestCasesTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />
     <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
