@@ -33,5 +33,16 @@
             {
             }
         }
+
+        public object PrivateGetProperty
+        {
+            private get
+            {
+                return new object();
+            }
+            set
+            {
+            }
+        }
     }
 }

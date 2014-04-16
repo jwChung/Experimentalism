@@ -62,6 +62,7 @@
     <Compile Include="ConstantEqualityComparerTest.cs" />
     <Compile Include="ConstructingMemberAssertionFactoryTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />
+    <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
     <Compile Include="OrEqualityComparer.cs" />
