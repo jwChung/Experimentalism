@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -18,6 +19,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public OrEqualityComparer(params IEqualityComparer<T>[] equalityComparers)
         {
+            if (equalityComparers == null)
+            {
+                throw new ArgumentNullException("equalityComparers");
+            }
+
             _equalityComparers = equalityComparers;
         }
 
