@@ -31,6 +31,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets a value indicating the equality comparers.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
         public IEnumerable<IEqualityComparer<T>> EqualityComparers
         {
             get
