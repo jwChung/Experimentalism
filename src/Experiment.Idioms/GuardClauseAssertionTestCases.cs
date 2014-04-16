@@ -13,6 +13,7 @@ namespace Jwc.Experiment.Idioms
     public class GuardClauseAssertionTestCases : IdiomaticTestCases
     {
         private readonly Type _type;
+        private readonly MemberInfo[] _excludedMembers;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GuardClauseAssertionTestCases"/> class.
@@ -23,6 +24,7 @@ namespace Jwc.Experiment.Idioms
             : base(CreateReflectionElements(type, excludedMembers), new GuardClauseAssertionFactory())
         {
             _type = type;
+            _excludedMembers = excludedMembers;
         }
 
         /// <summary>
@@ -33,6 +35,17 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 return _type;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the excluded members.
+        /// </summary>
+        public IEnumerable<MemberInfo> ExcludedMembers
+        {
+            get
+            {
+                return _excludedMembers;
             }
         }
 

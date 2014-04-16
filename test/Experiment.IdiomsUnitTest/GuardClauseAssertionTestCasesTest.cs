@@ -77,5 +77,16 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(type, actual);
         }
+
+        [Fact]
+        public void ExcludedMembersIsCorrect()
+        {
+            MemberInfo[] excludedMembers = GetType().GetMembers();
+            var sut = new GuardClauseAssertionTestCases(GetType(), excludedMembers);
+
+            var actual = sut.ExcludedMembers;
+
+            Assert.Equal(excludedMembers, actual);
+        }
     }
 }
