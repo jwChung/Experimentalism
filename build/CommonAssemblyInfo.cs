@@ -14,13 +14,20 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.11.0")]
 
 /*
- * Version 0.11.0
+ * Version 0.12.0
  * 
- * Supports guard clause test-cases on assembly level.
- * 
- * [FirstClassTheorem]
- * public IEnumerable<ITestCase> Demo()
- * {
- *     return new GuardClauseAssertionTestCases(typeof(Foo).Assembly);
- * }
+ * - [NEW] ConstructingMemberAssertionTestCases
+ *   This verifies members initialized correctly by a constructor.
+ *   
+ *   [FirstClassTheorem]
+ *   public IEnumerable<ITestCase> DemoOnTypeLevel()
+ *   {
+ *       return new GuardClauseAssertionTestCases(typeof(Foo));
+ *   }
+ *   
+ *   [FirstClassTheorem]
+ *   public IEnumerable<ITestCase> DemoOnAssemblyLevel()
+ *   {
+ *       return new GuardClauseAssertionTestCases(typeof(Foo).Assembly);
+ *   }
  */
