@@ -73,9 +73,9 @@ namespace Jwc.Experiment.Idioms
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeOfPropertyEqualValue(0))
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
-            var propetyInfoElement = new Properties<TypeOfPropertyEqualValue>()
+            var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Value).ToElement();
 
             var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
@@ -87,7 +87,7 @@ namespace Jwc.Experiment.Idioms
         public void EqualsParameterToPropetyReturnsFalseWhenThayRepresentDifferentReflectedTypes()
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
-            var parameterInfoElement = Constructors.Select(() => new TypeOfPropertyEqualValue(0))
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
             var propetyInfoElement = new Properties<Version>()
                 .Select(x => x.Major).ToElement();
@@ -101,10 +101,10 @@ namespace Jwc.Experiment.Idioms
         public void EqualsParameterToPropertyReturnsFalseWhenParameterIsFromNonConstructor()
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
-            var parameterInfoElement = new Methods<TypeOfPropertyEqualValue>()
+            var parameterInfoElement = new Methods<TypeForPropertyEqualValue>()
                 .Select(x => x.Mehtod(null))
                 .GetParameters().First().ToElement();
-            var propertyInfoElement = new Properties<TypeOfPropertyEqualValue>()
+            var propertyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Value).ToElement();
 
             var actual = sut.Equals(parameterInfoElement, propertyInfoElement);
@@ -130,9 +130,9 @@ namespace Jwc.Experiment.Idioms
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeOfPropertyEqualValue(0))
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
-            var propetyInfoElement = typeof(TypeOfPropertyEqualValue)
+            var propetyInfoElement = typeof(TypeForPropertyEqualValue)
                 .GetProperty("WritableOnlyProperty").ToElement();
 
             var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
@@ -152,9 +152,9 @@ namespace Jwc.Experiment.Idioms
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeOfPropertyEqualValue(0))
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
-            var propetyInfoElement = typeof(TypeOfPropertyEqualValue)
+            var propetyInfoElement = typeof(TypeForPropertyEqualValue)
                 .GetProperty("PrivateGetProperty").ToElement();
 
             var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
@@ -162,13 +162,49 @@ namespace Jwc.Experiment.Idioms
             Assert.True(actual, "Equals.");
         }
 
-        private class TypeOfPropertyEqualValue
+        [Fact]
+        public void EqualsParameterToPrivateGetPropetyReturnsTrueWhenTheyHaveEqualEnumerable()
+        {
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(typeof(int[]), x);
+                    return new[] { 1, 2, 3, 4 };
+                }
+            };
+            var sut = new ParameterToPropertyComparer(testFixture);
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(new int[0]))
+                .GetParameters().First().ToElement();
+            var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
+                .Select(x => x.Values).ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+
+            Assert.True(actual, "Equals.");
+        }
+
+        private class TypeForPropertyEqualValue
         {
             private readonly int _value;
+            private int[] _values;
 
-            public TypeOfPropertyEqualValue(int value)
+            public TypeForPropertyEqualValue(int value)
             {
                 _value = value;
+            }
+
+            public TypeForPropertyEqualValue(int[] values)
+            {
+                _values = values.ToArray();
+            }
+
+            public IEnumerable<int> Values
+            {
+                get
+                {
+                    return _values;
+                }
             }
 
             public object Value
