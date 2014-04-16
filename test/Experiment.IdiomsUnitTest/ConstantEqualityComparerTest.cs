@@ -22,5 +22,13 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(value, actual);
         }
+
+        [Fact]
+        public void GetHashCodeAlwaysReturnsZero()
+        {
+            var sut = new ConstantEqualityComparer<object>(false);
+            var actual = sut.GetHashCode(null);
+            Assert.Equal(0, actual);
+        }
     }
 }
