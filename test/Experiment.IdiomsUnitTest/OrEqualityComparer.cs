@@ -34,5 +34,13 @@ namespace Jwc.Experiment.Idioms
         {
             Assert.Throws<ArgumentNullException>(() => new OrEqualityComparer<object>(null));
         }
+
+        [Fact]
+        public void GetHashCodeAlwaysReturnsZero()
+        {
+            var sut = new OrEqualityComparer<object>();
+            var actual = sut.GetHashCode(null);
+            Assert.Equal(0, actual);
+        }
     }
 }
