@@ -27,11 +27,12 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ReflectionElements;
 
             // Verify outcome
-            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var excludingReadOnlyProperties = Assert.IsAssignableFrom<ExcludingReadOnlyProperties>(
-                reflectionElements.Sources);
             var excludingMembers = Assert.IsAssignableFrom<ExcludingMembers>(
-                excludingReadOnlyProperties.TargetMembers);
+                Assert.IsAssignableFrom<ExcludingReadOnlyProperties>(
+                    Assert.IsAssignableFrom<ReflectionElements>(
+                        actual)
+                    .Sources)
+                .TargetMembers);
 
             var targetMembers = Assert.IsAssignableFrom<TypeMembers>(excludingMembers.TargetMembers);
             Assert.Equal(type, targetMembers.Type);
@@ -101,11 +102,12 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ReflectionElements;
 
             // Verify outcome
-            var reflectionElements = Assert.IsAssignableFrom<ReflectionElements>(actual);
-            var excludingReadOnlyProperties = Assert.IsAssignableFrom<ExcludingReadOnlyProperties>(
-                reflectionElements.Sources);
             var excludingMembers = Assert.IsAssignableFrom<ExcludingMembers>(
-                excludingReadOnlyProperties.TargetMembers);
+                Assert.IsAssignableFrom<ExcludingReadOnlyProperties>(
+                    Assert.IsAssignableFrom<ReflectionElements>(
+                        actual)
+                    .Sources)
+                .TargetMembers);
 
             var compositeEnumerable = Assert.IsAssignableFrom<CompositeEnumerable<MemberInfo>>(
                 excludingMembers.TargetMembers);
