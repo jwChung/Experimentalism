@@ -91,6 +91,11 @@ namespace Jwc.Experiment.Idioms
         private static IEnumerable<IReflectionElement> CreateReflectionElements(
             Assembly assembly, IEnumerable<MemberInfo> excludedMembers)
         {
+            if (assembly == null)
+            {
+                throw new ArgumentNullException("assembly");
+            }
+
             var typeMemberses = assembly.GetExportedTypes()
                 .Select(t => new TypeMembers(t, Accessibilities.Public))
                 .Cast<IEnumerable<MemberInfo>>()

@@ -168,5 +168,12 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(excludedMembers, actual);
         }
+
+        [Fact]
+        public void InitializeWithNullAssemblyThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new GuardClauseAssertionTestCases((Assembly)null));
+        }
     }
 }
