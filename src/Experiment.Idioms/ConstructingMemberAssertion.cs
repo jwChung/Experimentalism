@@ -122,7 +122,7 @@ namespace Jwc.Experiment.Idioms
                 }
 
                 const string messageFormat =
-                    "The constructor parameter was not exposed through any fields or propertys:" +
+                    "The constructor parameter was not exposed through any fields or properties:" +
                     "{0}Reflected type: {1}{0}Constructor: {2}{0}Parameter: {3}";
 
                 throw new ConstructingMemberException(
