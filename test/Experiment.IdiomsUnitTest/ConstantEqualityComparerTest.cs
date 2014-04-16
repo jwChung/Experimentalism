@@ -30,5 +30,14 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.GetHashCode(null);
             Assert.Equal(0, actual);
         }
+
+        [Fact]
+        public void EqualsReturnsCorrectConstantValue()
+        {
+            bool value = true;
+            var sut = new ConstantEqualityComparer<object>(value);
+            var actual = sut.Equals(null, null);
+            Assert.Equal(value, actual);
+        }
     }
 }
