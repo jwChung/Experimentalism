@@ -34,7 +34,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutDoesNotEnumerateReadOnlyProperties()
+        public void SutEnumeratesOnlyWritableProperties()
         {
             var targetMembers = typeof(TypeWithProperties).GetProperties(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
