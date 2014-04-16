@@ -59,6 +59,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
+    <Compile Include="ConstantEqualityComparerTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
