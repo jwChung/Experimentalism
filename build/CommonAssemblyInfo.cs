@@ -10,11 +10,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.10.3")]
-[assembly: AssemblyInformationalVersion("0.10.3")]
+[assembly: AssemblyVersion("0.11.0")]
+[assembly: AssemblyInformationalVersion("0.11.0")]
 
 /*
- * Version 0.10.3
+ * Version 0.11.0
  * 
- * Renames TargetMembers to TypeMembers to clarify.
+ * Supports guard clause test-cases on assembly level.
+ * 
+ * [FirstClassTheorem]
+ * public IEnumerable<ITestCase> Demo()
+ * {
+ *     return new GuardClauseAssertionTestCases(typeof(Foo).Assembly);
+ * }
  */
