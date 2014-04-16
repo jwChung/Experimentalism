@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -52,7 +53,7 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public bool Equals(T x, T y)
         {
-            throw new System.NotImplementedException();
+            return EqualityComparers.Any(e => e.Equals(x, y));
         }
 
         /// <summary>
