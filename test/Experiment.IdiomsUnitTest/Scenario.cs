@@ -27,7 +27,7 @@ namespace Jwc.Experiment.Idioms
         {
             return new IdiomaticTestCases(
                 new ReflectionElements(
-                    new TypeMembers(typeof(ClassWithGuardTestMembers)),
+                    new TypeMembers(typeof(TypeWithGuardTestMembers)),
                     new ConstructorInfoElementRefraction<object>(),
                     new PropertyInfoElementRefraction<object>(),
                     new MethodInfoElementRefraction<object>()),
@@ -44,11 +44,11 @@ namespace Jwc.Experiment.Idioms
         public IEnumerable<ITestCase> GuardClauseAssertionTestCasesCanExceptCertainMembers()
         {
             return new GuardClauseAssertionTestCases(
-                typeof(ClassWithGuardTestMembers),
-                new Methods<ClassWithGuardTestMembers>().Select(x => x.NonGuardedMethod(null)));
+                typeof(TypeWithGuardTestMembers),
+                new Methods<TypeWithGuardTestMembers>().Select(x => x.NonGuardedMethod(null)));
         }
 
-        private class ClassWithGuardTestMembers
+        private class TypeWithGuardTestMembers
         {
             public void NonGuardedMethod(object arg)
             {
