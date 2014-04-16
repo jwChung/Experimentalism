@@ -8,6 +8,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class PropertyToParameterComparer : InverseEqualityComparer<IReflectionElement>
     {
+        private readonly ITestFixture _testFixture;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyToParameterComparer" /> class.
         /// </summary>
@@ -15,6 +17,18 @@ namespace Jwc.Experiment.Idioms
         public PropertyToParameterComparer(ITestFixture testFixture)
             : base(new ParameterToPropertyComparer(testFixture))
         {
+            _testFixture = testFixture;
+        }
+
+        /// <summary>
+        /// Gets a value indicating the test fixture.
+        /// </summary>
+        public ITestFixture TestFixture
+        {
+            get
+            {
+                return _testFixture;
+            }
         }
     }
 }

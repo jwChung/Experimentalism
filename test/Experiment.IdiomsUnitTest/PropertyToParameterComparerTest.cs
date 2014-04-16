@@ -23,5 +23,16 @@ namespace Jwc.Experiment.Idioms
             var comparer = Assert.IsAssignableFrom<ParameterToPropertyComparer>(actual);
             Assert.Equal(testFixture, comparer.TestFixture);
         }
+
+        [Fact]
+        public void TestFixtureIsCorrect()
+        {
+            var testFixture = new DelegatingTestFixture();
+            var sut = new PropertyToParameterComparer(testFixture);
+
+            var actual = sut.TestFixture;
+
+            Assert.Equal(testFixture, actual);
+        }
     }
 }
