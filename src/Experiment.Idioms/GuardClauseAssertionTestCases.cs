@@ -78,14 +78,8 @@ namespace Jwc.Experiment.Idioms
         private static IEnumerable<IReflectionElement> CreateReflectionElements(
             Type type, IEnumerable<MemberInfo> excludedMembers)
         {
-            return new ReflectionElements(
-                new ExcludingReadOnlyProperties(
-                    new ExcludingMembers(
-                        new TypeMembers(type, Accessibilities.Public),
-                        excludedMembers)),
-                new ConstructorInfoElementRefraction<object>(),
-                new PropertyInfoElementRefraction<object>(),
-                new MethodInfoElementRefraction<object>());
+            return CreateReflectionElements(
+                new TypeMembers(type, Accessibilities.Public), excludedMembers);
         }
 
         private static IEnumerable<IReflectionElement> CreateReflectionElements(
@@ -101,10 +95,17 @@ namespace Jwc.Experiment.Idioms
                 .Cast<IEnumerable<MemberInfo>>()
                 .ToArray();
 
+            return CreateReflectionElements(
+                new CompositeEnumerable<MemberInfo>(typeMemberses), excludedMembers);
+        }
+
+        private static IEnumerable<IReflectionElement> CreateReflectionElements(
+            IEnumerable<MemberInfo> members, IEnumerable<MemberInfo> excludedMembers)
+        {
             return new ReflectionElements(
                 new ExcludingReadOnlyProperties(
                     new ExcludingMembers(
-                        new CompositeEnumerable<MemberInfo>(typeMemberses),
+                        members,
                         excludedMembers)),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
