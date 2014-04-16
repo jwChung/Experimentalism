@@ -10,6 +10,17 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new ConstantEqualityComparer<object>(false);
             Assert.IsAssignableFrom<IEqualityComparer<object>>(sut);
-        } 
+        }
+
+        [Fact]
+        public void ValueIsCorrect()
+        {
+            bool value = true;
+            var sut = new ConstantEqualityComparer<object>(value);
+
+            var actual = sut.Value;
+
+            Assert.Equal(value, actual);
+        }
     }
 }

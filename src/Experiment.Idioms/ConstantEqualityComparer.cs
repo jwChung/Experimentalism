@@ -9,12 +9,26 @@ namespace Jwc.Experiment.Idioms
     /// <typeparam name="T">The compared type.</typeparam>
     public class ConstantEqualityComparer<T> : IEqualityComparer<T>
     {
+        private readonly bool _value;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstantEqualityComparer{T}"/> class.
         /// </summary>
         /// <param name="value">The constant value.</param>
         public ConstantEqualityComparer(bool value)
         {
+            _value = value;
+        }
+
+        /// <summary>
+        /// Gets a value indicating the constant.
+        /// </summary>
+        public bool Value
+        {
+            get
+            {
+                return _value;
+            }
         }
 
         /// <summary>
