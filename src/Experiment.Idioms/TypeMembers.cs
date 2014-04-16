@@ -12,25 +12,25 @@ namespace Jwc.Experiment.Idioms
     /// to verify idiomatic assertions.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
-    public class TargetMembers : IEnumerable<MemberInfo>
+    public class TypeMembers : IEnumerable<MemberInfo>
     {
         private readonly Accessibilities _accessibilities;
         private readonly Type _type;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TargetMembers"/> class.
+        /// Initializes a new instance of the <see cref="TypeMembers"/> class.
         /// </summary>
         /// <param name="type">The target type.</param>
-        public TargetMembers(Type type) : this(type, Accessibilities.Default)
+        public TypeMembers(Type type) : this(type, Accessibilities.Default)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TargetMembers"/> class.
+        /// Initializes a new instance of the <see cref="TypeMembers"/> class.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="accessibilities">The accessibilities.</param>
-        public TargetMembers(Type type, Accessibilities accessibilities)
+        public TypeMembers(Type type, Accessibilities accessibilities)
         {
             if (type == null)
             {

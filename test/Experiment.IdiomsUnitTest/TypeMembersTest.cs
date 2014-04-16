@@ -8,26 +8,26 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class TargetMembersTest
+    public class TypeMembersTest
     {
         [Fact]
         public void SutIsEnumerableOfMemberInfo()
         {
-            var sut = new TargetMembers(typeof(object));
+            var sut = new TypeMembers(typeof(object));
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         }
 
         [Fact]
         public void InitializeModestCtorWithNullTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TargetMembers(null));
+            Assert.Throws<ArgumentNullException>(() => new TypeMembers(null));
         }
 
         [Fact]
         public void TypeIsCorrectWhenInitializedWithModestCtor()
         {
             var type = GetType();
-            var sut = new TargetMembers(type);
+            var sut = new TypeMembers(type);
 
             var actual = sut.Type;
 
@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesAllKindsOfMemberInfo()
         {
-            var sut = new TargetMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(ClassWithTestMembers));
 
             var actual = sut.ToArray();
 
@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms
         {
             var type = typeof(ClassWithTestMembers);
             var toStringMethod = new Methods<ClassWithTestMembers>().Select(x => x.ToString());
-            var sut = new TargetMembers(type);
+            var sut = new TypeMembers(type);
 
             var actual = sut.ToArray();
 
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesStaticMember()
         {
-            var sut = new TargetMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(ClassWithTestMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -71,7 +71,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new TargetMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(ClassWithTestMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(
                 actual.All(m => !m.Name.StartsWith("set_") && !m.Name.StartsWith("get_")),
@@ -81,7 +81,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyHelperMethodsOfEvent()
         {
-            var sut = new TargetMembers(typeof(ClassWithTestMembers));
+            var sut = new TypeMembers(typeof(ClassWithTestMembers));
             var actual = sut.ToArray();
             Assert.True(
                 actual.All(m => !m.Name.StartsWith("add_") && !m.Name.StartsWith("remove_")),
@@ -91,7 +91,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void AccessibilitiesIsCorrectWhenInitializedWithModestCtor()
         {
-            var sut = new TargetMembers(typeof(object));
+            var sut = new TypeMembers(typeof(object));
             var actual = sut.Accessibilities;
             Assert.Equal(Accessibilities.Default, actual);
         }
@@ -100,7 +100,7 @@ namespace Jwc.Experiment.Idioms
         public void TypeIsCorrectWhenInitializedWithGreedyCtor()
         {
             var type = GetType();
-            var sut = new TargetMembers(type, Accessibilities.Default);
+            var sut = new TypeMembers(type, Accessibilities.Default);
 
             var actual = sut.Type;
 
@@ -111,7 +111,7 @@ namespace Jwc.Experiment.Idioms
         public void AccessibilitiesIsCorrectWhenInitializedWithGreedyCtor()
         {
             var accessibilities = Accessibilities.Private;
-            var sut = new TargetMembers(typeof(object), accessibilities);
+            var sut = new TypeMembers(typeof(object), accessibilities);
             var actual = sut.Accessibilities;
             Assert.Equal(accessibilities, actual);
         }
@@ -119,13 +119,13 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void InitializeGreedyCtorWithNullTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TargetMembers(null, Accessibilities.Default));
+            Assert.Throws<ArgumentNullException>(() => new TypeMembers(null, Accessibilities.Default));
         }
 
         [Fact]
         public void SutEnumeratesCorrectMembersForPrivateAccessibilities()
         {
-            var sut = new TargetMembers(typeof(ClassWithTestMembers), Accessibilities.Private);
+            var sut = new TypeMembers(typeof(ClassWithTestMembers), Accessibilities.Private);
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
@@ -148,7 +148,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersForProtectedAccessibilities()
         {
-            var sut = new TargetMembers(typeof(ClassWithTestMembers), Accessibilities.Protected);
+            var sut = new TypeMembers(typeof(ClassWithTestMembers), Accessibilities.Protected);
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
@@ -171,7 +171,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersForInternalAndPrivateAccessibilities()
         {
-            var sut = new TargetMembers(
+            var sut = new TypeMembers(
                 typeof(ClassWithTestMembers),
                 Accessibilities.Internal | Accessibilities.Private);
 

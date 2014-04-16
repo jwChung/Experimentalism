@@ -32,7 +32,7 @@ namespace Jwc.Experiment.Idioms
             var excludingMembers = Assert.IsAssignableFrom<ExcludingMembers>(
                 excludingReadOnlyProperties.TargetMembers);
 
-            var targetMembers = Assert.IsAssignableFrom<TargetMembers>(excludingMembers.TargetMembers);
+            var targetMembers = Assert.IsAssignableFrom<TypeMembers>(excludingMembers.TargetMembers);
             Assert.Equal(type, targetMembers.Type);
             Assert.Equal(Accessibilities.Public, targetMembers.Accessibilities);
 

@@ -67,7 +67,7 @@
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
     <Compile Include="SpecimenBuilderAdapterTest.cs" />
-    <Compile Include="TargetMembersTest.cs" />
+    <Compile Include="TypeMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
     <Compile Include="DelegatingIdiomaticAssertion.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />

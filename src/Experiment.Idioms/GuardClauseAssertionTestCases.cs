@@ -28,7 +28,7 @@ namespace Jwc.Experiment.Idioms
             return new ReflectionElements(
                 new ExcludingReadOnlyProperties(
                     new ExcludingMembers(
-                        new TargetMembers(type, Accessibilities.Public),
+                        new TypeMembers(type, Accessibilities.Public),
                         excludedMembers)),
                 new ConstructorInfoElementRefraction<object>(),
                 new PropertyInfoElementRefraction<object>(),
