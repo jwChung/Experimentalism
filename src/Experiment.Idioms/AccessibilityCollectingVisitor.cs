@@ -56,7 +56,7 @@ namespace Jwc.Experiment.Idioms
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             AssemblyElement assemblyElement)
         {
-            throw new NotSupportedException("An assembly does not represent accessibilities.");
+            return this;
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace Jwc.Experiment.Idioms
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             ParameterInfoElement parameterInfoElement)
         {
-            throw new NotSupportedException("An parameter does not represent accessibilities.");
+            return this;
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Jwc.Experiment.Idioms
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             LocalVariableInfoElement localVariableInfoElement)
         {
-            throw new NotSupportedException("An local variable does not represent accessibilities.");
+            return this;
         }
 
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)

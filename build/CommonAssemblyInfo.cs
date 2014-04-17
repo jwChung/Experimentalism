@@ -18,4 +18,8 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] Changes constructor accessiblity of AccessibilityCollectingVisitor
  *   from private to protected.
+ *
+ * - [FIX] AccessibilityCollectingVisitor returns visitor itself instead of
+ *   throwing NotSupprotedException, when Visit method is called with
+ *   ReflectionElements which does not have any accessiblities.
  */
