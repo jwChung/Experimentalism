@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollectingVisitor.cs" />
+    <Compile Include="RestrictingReferenceAssertion.cs" />
     <Compile Include="ConstantEqualityComparer.cs" />
     <Compile Include="ConstructingMemberAssertionFactory.cs" />
     <Compile Include="ConstructingMemberAssertionTestCases.cs" />
