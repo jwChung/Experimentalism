@@ -107,6 +107,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.AutoFixture\Experiment.AutoFixture.csproj">
+      <Project>{7f77a967-02aa-47fc-a42a-0382697b483a}</Project>
+      <Name>Experiment.AutoFixture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Experiment.Idioms\Experiment.Idioms.csproj">
       <Project>{7352FC70-2780-415C-9A43-F889F7B8028D}</Project>
       <Name>Experiment.Idioms</Name>
@@ -119,6 +123,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

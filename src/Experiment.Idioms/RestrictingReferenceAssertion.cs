@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 
@@ -66,7 +68,53 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public override IReflectionVisitor<object> Visit(AssemblyElement assemblyElement)
         {
-            throw new NotImplementedException();
+            if (assemblyElement == null)
+            {
+                throw new ArgumentNullException("assemblyElement");
+            }
+
+            var assembly = assemblyElement.Assembly;
+            var assemblies = GetReferencedAssemblies(assembly);
+            if (AreEquivalent(assemblies))
+            {
+                return this;
+            }
+
+            throw new RestrictingReferenceException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "The actual referenced assemblies are different from the specified assemblies:{0}" +
+                    "Actual   : {1}{0}" +
+                    "Specified: {2}",
+                    Environment.NewLine,
+                    GetAssembyJoinedString(assemblies),
+                    GetAssembyJoinedString(Assemblies)));
+        }
+
+        private static Assembly[] GetReferencedAssemblies(Assembly assembly)
+        {
+            var assembliesFromTypes = GetAssembliesFromTypes(assembly);
+            return assembly.GetReferencedAssemblies()
+                .Select(Assembly.Load).Concat(assembliesFromTypes)
+                .Distinct().Except(new[] { assembly }).ToArray();
+        }
+
+        private bool AreEquivalent(ICollection<Assembly> assemblies)
+        {
+            return assemblies.Count == _assemblies.Length
+                && !assemblies.Except(_assemblies).Any();
+        }
+
+        private static IEnumerable<Assembly> GetAssembliesFromTypes(Assembly assembly)
+        {
+            return assembly.GetExportedTypes()
+                .SelectMany(t => t.GetReferencedAssemblies())
+                .Aggregate(new HashSet<Assembly>(), (s, a) => { s.Add(a); return s; });
+        }
+
+        private static string GetAssembyJoinedString(IEnumerable<Assembly> assemblies)
+        {
+            return "{" + string.Join(", ", assemblies.Select(a => a.GetName().Name).OrderBy(n => n)) + " }";
         }
     }
 }
