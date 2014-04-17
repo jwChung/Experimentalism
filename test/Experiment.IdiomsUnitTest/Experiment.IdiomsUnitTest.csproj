@@ -77,6 +77,7 @@
     <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />
     <Compile Include="TypeExtensionsTest.cs" />
+    <Compile Include="RestrictingReferenceExceptionTest.cs" />
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />
