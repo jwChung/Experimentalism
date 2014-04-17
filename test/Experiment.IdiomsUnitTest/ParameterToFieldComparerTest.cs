@@ -143,7 +143,9 @@ namespace Jwc.Experiment.Idioms
         private class TypeForFieldEqualValue
         {
             public readonly IEnumerable<int> Values;
+#pragma warning disable 649
             private readonly int _value;
+#pragma warning restore 649
             public object Value;
 
             public TypeForFieldEqualValue(int value)
