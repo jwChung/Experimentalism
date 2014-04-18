@@ -78,6 +78,7 @@
     <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
+    <Compile Include="Idioms\HidingReferenceAssertionTest.cs" />
     <Compile Include="OrEqualityComparer.cs" />
     <Compile Include="ParameterToFieldComparerTest.cs" />
     <Compile Include="ParameterToPropertyComparerTest.cs" />
