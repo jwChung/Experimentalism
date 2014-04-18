@@ -31,4 +31,7 @@ using System.Runtime.InteropServices;
  *       var assertion = new RestrictingReferenceAssertion();
  *       assertion.Visit(typeof(IEnumerable<object>).Assembly.ToElement());
  *   }  
+ *   
+ * - [FIX] Splits the Jwc.Experiment.Idioms namespace to Jwc.Experiment and
+ *   Jwc.Experiment.Idioms. (BREAKING-CHANGE)
  */
