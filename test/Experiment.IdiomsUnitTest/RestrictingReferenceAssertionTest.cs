@@ -70,6 +70,13 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Visit((AssemblyElement)null));
         }
 
+        [Fact]
+        public void ValueThrowsNotSupportedException()
+        {
+            var sut = new RestrictingReferenceAssertion();
+            Assert.Throws<NotSupportedException>(() => sut.Value);
+        }
+
         private class ReferencedDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)

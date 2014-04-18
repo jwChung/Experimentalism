@@ -36,10 +36,9 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                //throw new NotSupportedException(
-                //    "This Value property isn't supported because the main purpose of " +
-                //    "this class is to verify whether only specified assemblies are referenced.");
-                return null;
+                throw new NotSupportedException(
+                    "This Value property isn't supported because the main purpose of this class is " +
+                    "to verify whether specified assemblies are same with specified assemblies.");
             }
         }
 
