@@ -49,12 +49,43 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Allows <see cref="FieldInfoElement" /> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="fieldInfoElements">
+        /// The <see cref="FieldInfoElement" /> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            params FieldInfoElement[] fieldInfoElements)
+        {
+            if (fieldInfoElements == null)
+            {
+                throw new ArgumentNullException("fieldInfoElements");
+            }
+            
+            foreach (var fieldInfoElement in fieldInfoElements)
+            {
+                FieldInfo fieldInfo = fieldInfoElement.FieldInfo;
+                if (fieldInfo.ReflectedType == fieldInfo.DeclaringType)
+                {
+                    Visit(fieldInfoElement);
+                }
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Allows an <see cref="FieldInfoElement" /> to be visited.
         /// This method is called when the element accepts this visitor
         /// instance.
         /// </summary>
         /// <param name="fieldInfoElement">
-        /// The <see cref="T:Ploeh.Albedo.FieldInfoElement" /> being visited.
+        /// The <see cref="FieldInfoElement" /> being visited.
         /// </param>
         /// <returns>
         /// A <see cref="IReflectionVisitor{T}" /> instance which can be used

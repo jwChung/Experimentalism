@@ -12,6 +12,10 @@ namespace Jwc.Experiment
 {
     public class DirectReferenceCollectingVisitorTest
     {
+        private const BindingFlags _bindingFlags =
+            BindingFlags.Static | BindingFlags.Instance |
+            BindingFlags.Public | BindingFlags.NonPublic;
+
         [Fact]
         public void SutIsReflectionVisitor()
         {
@@ -36,6 +40,7 @@ namespace Jwc.Experiment
             var sut = new TestSpecificDirectReferenceCollectingVisitor
             {
                 OnVisitFiledInfoElement = e => dummyVisitor,
+                OnVisitConstructorInfoElement = e => dummyVisitor,
                 OnVisitMethodInfoElement = e => dummyVisitor
             };
 
@@ -210,6 +215,37 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((LocalVariableInfoElement)null));
         }
 
+        [Fact]
+        public void VisitNonDeclaredFieldInfoElementsFiltersIt()
+        {
+            var fieldInfoElements = typeof(SubTypeWithMembers).GetFields(_bindingFlags)
+                .Select(f => f.ToElement()).ToArray();
+            var sut = new DirectReferenceCollectingVisitor();
+
+            var actual = sut.Visit(fieldInfoElements);
+
+            Assert.Empty(actual.Value);
+        }
+
+        [Fact]
+        public void VisitDeclaredFieldInfoElementsDoesNotFilterIt()
+        {
+            var fieldInfoElements = typeof(TypeWithMembers).GetFields(_bindingFlags)
+                .Select(f => f.ToElement()).ToArray();
+            var sut = new DirectReferenceCollectingVisitor();
+
+            var actual = sut.Visit(fieldInfoElements);
+
+            Assert.NotEmpty(actual.Value);
+        }
+
+        [Fact]
+        public void VisitNullFieldInfoElementsThrows()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement[])null));
+        }
+
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
@@ -345,7 +381,6 @@ namespace Jwc.Experiment
                         typeof(Fixture).Assembly
                     }
                 };
-
                 yield return new object[]
                 {
                     typeof(IEnumerable<TypeImplementingHierarchical>),
@@ -360,13 +395,18 @@ namespace Jwc.Experiment
             }
         }
 
+        private class SubTypeWithMembers : TypeWithMembers
+        {
+        }
+
         private class TypeForCollectingReference
         {
             public TypeImplementingMultiple Field;
 
             public TypeImplementingMultiple ReturnMethod()
             {
-                return new TypeImplementingMultiple();
+                var typeImplementingMultiple = new TypeImplementingMultiple();
+                return typeImplementingMultiple;
             }
 
             public void ParameterizedMethod(TypeImplementingMultiple arg)
