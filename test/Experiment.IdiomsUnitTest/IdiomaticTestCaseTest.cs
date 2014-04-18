@@ -58,7 +58,7 @@ namespace Jwc.Experiment
             var fakeTestFixture = new DelegatingTestFixture();
             Func<MethodInfo, ITestFixture> fixtureFactory = mi => fakeTestFixture;
 
-            var assertion = new DelegatingReflectionVisitor();
+            var assertion = new DelegatingReflectionVisitor<object>();
             var assetionFactory = new DelegatingAssertionFactory
             {
                 OnCreate = f =>
@@ -87,7 +87,7 @@ namespace Jwc.Experiment
             bool verify = false;
             var assetionFactory = new DelegatingAssertionFactory
             {
-                OnCreate = f => new DelegatingReflectionVisitor()
+                OnCreate = f => new DelegatingReflectionVisitor<object>()
             };
             var sut = new IdiomaticTestCase(
                 new TypeElement(typeof(object)), assetionFactory);
@@ -110,7 +110,7 @@ namespace Jwc.Experiment
             int createCount = 0;
             var assetionFactory = new DelegatingAssertionFactory
             {
-                OnCreate = f => new DelegatingReflectionVisitor()
+                OnCreate = f => new DelegatingReflectionVisitor<object>()
             };
             var sut = new IdiomaticTestCase(
                 new TypeElement(typeof(object)), assetionFactory);

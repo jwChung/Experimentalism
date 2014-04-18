@@ -13,7 +13,7 @@ namespace Jwc.Experiment
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new IdiomaticTestCommand(
-                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor<object>());
             Assert.IsAssignableFrom<TestCommand>(sut);
         }
 
@@ -22,7 +22,7 @@ namespace Jwc.Experiment
         {
             Assert.Throws<ArgumentNullException>(
                 () => new IdiomaticTestCommand(
-                    null, new TypeElement(typeof(object)), new DelegatingReflectionVisitor()));
+                    null, new TypeElement(typeof(object)), new DelegatingReflectionVisitor<object>()));
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Jwc.Experiment
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ArgumentNullException>(
                 () => new IdiomaticTestCommand(
-                    dummyMethod, null, new DelegatingReflectionVisitor()));
+                    dummyMethod, null, new DelegatingReflectionVisitor<object>()));
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace Jwc.Experiment
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new IdiomaticTestCommand(
-                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor<object>());
 
             var actual = sut.Timeout;
 
@@ -61,7 +61,7 @@ namespace Jwc.Experiment
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var typeElement = new TypeElement(typeof(object));
             var sut = new IdiomaticTestCommand(
-                dummyMethod, typeElement, new DelegatingReflectionVisitor());
+                dummyMethod, typeElement, new DelegatingReflectionVisitor<object>());
             string expected = string.Format(
                 "Jwc.Experiment.IdiomaticTestCommandTest.DisplayNameIsCorrect('{0}')",
                 typeElement);
@@ -76,7 +76,7 @@ namespace Jwc.Experiment
         {
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new IdiomaticTestCommand(
-                method, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+                method, new TypeElement(typeof(object)), new DelegatingReflectionVisitor<object>());
 
             var actual = sut.Method;
 
@@ -89,7 +89,7 @@ namespace Jwc.Experiment
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var reflectionElement = new TypeElement(typeof(object));
             var sut = new IdiomaticTestCommand(
-                dummyMethod, reflectionElement, new DelegatingReflectionVisitor());
+                dummyMethod, reflectionElement, new DelegatingReflectionVisitor<object>());
 
             var actual = sut.ReflectionElement;
 
@@ -100,7 +100,7 @@ namespace Jwc.Experiment
         public void AssertionIsCorrect()
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var assertion = new DelegatingReflectionVisitor();
+            var assertion = new DelegatingReflectionVisitor<object>();
             var sut = new IdiomaticTestCommand(
                 dummyMethod, new TypeElement(typeof(object)), assertion);
 
@@ -114,7 +114,7 @@ namespace Jwc.Experiment
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new IdiomaticTestCommand(
-                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor<object>());
 
             var actual = sut.ShouldCreateInstance;
 
@@ -126,13 +126,13 @@ namespace Jwc.Experiment
         {
             bool verify = false;
             var element = new TypeElement(typeof(object));
-            var assertion = new DelegatingReflectionVisitor
+            var assertion = new DelegatingReflectionVisitor<object>
             {
                 OnVisitTypeElement = e =>
                 {
                     Assert.Equal(element, e);
                     verify = true;
-                    return new DelegatingReflectionVisitor();
+                    return new DelegatingReflectionVisitor<object>();
                 }
             };
             var sut = new IdiomaticTestCommand(
@@ -148,7 +148,7 @@ namespace Jwc.Experiment
         {
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new IdiomaticTestCommand(
-                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor());
+                dummyMethod, new TypeElement(typeof(object)), new DelegatingReflectionVisitor<object>());
 
             var actual = sut.Execute(null);
 
