@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Ploeh.Albedo;
 
@@ -20,6 +21,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public HidingReferenceAssertion(params Assembly[] assemblies)
         {
+            if (assemblies == null)
+            {
+                throw new ArgumentNullException("assemblies");
+            }
+
             _assemblies = assemblies;
         }
 

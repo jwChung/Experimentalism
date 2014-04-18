@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ploeh.Albedo;
 using Xunit;
 
@@ -26,6 +27,13 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Assemblies;
 
             Assert.Equal(assemblies, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullAssembliesThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new HidingReferenceAssertion(null));
         }
     }
 }
