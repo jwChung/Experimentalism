@@ -33,7 +33,7 @@ namespace Jwc.Experiment
             Type type, Assembly[] expected)
         {
             var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
-            var sut = new TestSpecificDirectReferenceCollectingVisitor()
+            var sut = new TestSpecificDirectReferenceCollectingVisitor
             {
                 OnVisitFiledInfoElement = e => dummyVisitor,
                 OnVisitMethodInfoElement = e => dummyVisitor
@@ -103,10 +103,10 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectAssemblies()
         {
             var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
-            var sut = new TestSpecificDirectReferenceCollectingVisitor()
+            var sut = new TestSpecificDirectReferenceCollectingVisitor
             {
                 OnVisitParameterInfoElement = e => dummyVisitor,
-                OnVisitLocalVariableInfoElements = e => dummyVisitor
+                OnVisitLocalVariableInfoElement = e => dummyVisitor
             };
             var expected = new[]
             {
@@ -154,14 +154,6 @@ namespace Jwc.Experiment
         {
             var sut = new DirectReferenceCollectingVisitor();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
-        }
-
-        [Fact]
-        public void VisitLocalVariableElementsReturnsSutItself()
-        {
-            var sut = new DirectReferenceCollectingVisitor();
-            var actual = sut.Visit((LocalVariableInfoElement[])null);
-            Assert.Equal(sut, actual);
         }
 
         [Fact]
@@ -226,7 +218,7 @@ namespace Jwc.Experiment
                 OnVisitConstructorInfoElement = e => base.Visit(e);
                 OnVisitMethodInfoElement = e => base.Visit(e);
                 OnVisitParameterInfoElement = e => base.Visit(e);
-                OnVisitLocalVariableInfoElements = e => base.Visit(e);
+                OnVisitLocalVariableInfoElement = e => base.Visit(e);
             }
 
             public Func<FieldInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
@@ -257,8 +249,8 @@ namespace Jwc.Experiment
                 set;
             }
 
-            public Func<LocalVariableInfoElement[], IReflectionVisitor<IEnumerable<Assembly>>>
-                OnVisitLocalVariableInfoElements
+            public Func<LocalVariableInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
+                OnVisitLocalVariableInfoElement
             {
                 get;
                 set;
@@ -289,9 +281,9 @@ namespace Jwc.Experiment
             }
 
             public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
-                params LocalVariableInfoElement[] localVariableInfoElement)
+                LocalVariableInfoElement localVariableInfoElement)
             {
-                return OnVisitLocalVariableInfoElements(localVariableInfoElement);
+                return OnVisitLocalVariableInfoElement(localVariableInfoElement);
             }
         }
 

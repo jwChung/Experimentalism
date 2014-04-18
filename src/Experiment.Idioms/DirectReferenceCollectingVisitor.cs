@@ -100,23 +100,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Allows <see cref="LocalVariableInfoElement" /> instances to be 'visited'.
-        /// This method is called when the elements 'accepts' this visitor instance.
-        /// </summary>
-        /// <param name="localVariableInfoElements">
-        /// The <see cref="LocalVariableInfoElement" /> instances being visited.
-        /// </param>
-        /// <returns>
-        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
-        /// used to continue the visiting process with potentially updated observations.
-        /// </returns>
-        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
-            params LocalVariableInfoElement[] localVariableInfoElements)
-        {
-            return this;
-        }
-
-        /// <summary>
         /// Allows an <see cref="ParameterInfoElement" /> to be visited.
         /// This method is called when the element accepts this visitor
         /// instance.
