@@ -18,7 +18,9 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Initializes a new instance of the <see cref="RestrictingReferenceAssertion"/> class.
         /// </summary>
-        /// <param name="assemblies">The assemblies which elements only reference.</param>
+        /// <param name="assemblies">
+        /// The assemblies which are only referenced from elements.
+        /// </param>
         public RestrictingReferenceAssertion(params Assembly[] assemblies)
         {
             if (assemblies == null)
