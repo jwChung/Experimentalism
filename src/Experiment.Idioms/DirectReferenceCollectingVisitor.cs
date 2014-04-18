@@ -62,8 +62,11 @@ namespace Jwc.Experiment
             }
 
             var type = typeElement.Type;
-            var assemblies = GetReferencedAssemblies(type)
-                .Concat(base.Visit(typeElement).Value).Distinct();
+            var assemblies = Value
+                .Concat(GetReferencedAssemblies(type))
+                .Concat(base.Visit(typeElement).Value)
+                .Distinct();
+
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 
@@ -89,7 +92,10 @@ namespace Jwc.Experiment
             }
 
             Type fieldType = fieldInfoElement.FieldInfo.FieldType;
-            var assemblies = GetReferencedAssemblies(fieldType).Distinct();
+            var assemblies = Value
+                .Concat(GetReferencedAssemblies(fieldType))
+                .Distinct();
+
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 
@@ -114,8 +120,12 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("methodInfoElement");
             }
 
-            var assemblies = GetReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType)
-                .Concat(base.Visit(methodInfoElement).Value).Distinct();
+            IEnumerable<Assembly> enumerable = base.Visit(methodInfoElement).Value;
+            var assemblies = Value
+                .Concat(GetReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType))
+                .Concat(enumerable)
+                .Distinct();
+
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 
@@ -158,7 +168,10 @@ namespace Jwc.Experiment
             }
 
             Type parameterType = parameterInfoElement.ParameterInfo.ParameterType;
-            var assemblies = GetReferencedAssemblies(parameterType).Distinct();
+            var assemblies = Value
+                .Concat(GetReferencedAssemblies(parameterType))
+                .Distinct();
+
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 

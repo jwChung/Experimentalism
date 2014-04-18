@@ -32,9 +32,14 @@ namespace Jwc.Experiment
         public void VisitTypeEelementCollectsCorrectAssemblies(
             Type type, Assembly[] expected)
         {
-            var sut = new TestSpecificDirectReferenceCollectingVisitor();
-            sut.OnVisitFiledInfoElement = e => sut;
-            sut.OnVisitMethodInfoElement = e => sut;
+            var assembly = typeof(TheoryAttribute).Assembly;
+            expected = expected.Concat(new[] { assembly }).Distinct().ToArray();
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly)
+            {
+                OnVisitFiledInfoElement = e => dummyVisitor,
+                OnVisitMethodInfoElement = e => dummyVisitor
+            };
 
             var actual = sut.Visit(type.ToElement());
 
@@ -74,11 +79,13 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitFieldInfoElementCollectsCorrectAssemblies()
         {
-            var sut = new DirectReferenceCollectingVisitor();
+            var assembly = typeof(TheoryAttribute).Assembly;
+            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly);
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
+                assembly,
                 typeof(ISpecimenContext).Assembly
             };
             var fieldInfoElements = new Fields<TypeForCollectingReference>()
@@ -100,10 +107,17 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementCollectsCorrectAssemblies()
         {
-            var sut = new DirectReferenceCollectingVisitor();
+            var assembly = typeof(TheoryAttribute).Assembly;
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly)
+            {
+                OnVisitParameterInfoElement = e => dummyVisitor,
+                OnVisitLocalVariableInfoElements = e => dummyVisitor
+            };
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
+                assembly,
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
@@ -162,11 +176,13 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitParameterInfoElementCollectsCorrectAssemblies()
         {
-            var sut = new DirectReferenceCollectingVisitor();
+            var assembly = typeof(TheoryAttribute).Assembly;
+            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly);
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
+                assembly,
                 typeof(ISpecimenContext).Assembly
             };
             var parameterInfoElement = new Methods<TypeForCollectingReference>()
@@ -200,6 +216,7 @@ namespace Jwc.Experiment
                 OnVisitConstructorInfoElement = e => base.Visit(e);
                 OnVisitMethodInfoElement = e => base.Visit(e);
                 OnVisitParameterInfoElement = e => base.Visit(e);
+                OnVisitLocalVariableInfoElements = e => base.Visit(e);
             }
 
             public Func<FieldInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
@@ -230,6 +247,13 @@ namespace Jwc.Experiment
                 set;
             }
 
+            public Func<LocalVariableInfoElement[], IReflectionVisitor<IEnumerable<Assembly>>>
+                OnVisitLocalVariableInfoElements
+            {
+                get;
+                set;
+            }
+
             public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
                 FieldInfoElement fieldInfoElement)
             {
@@ -252,6 +276,12 @@ namespace Jwc.Experiment
                 ParameterInfoElement parameterInfoElement)
             {
                 return OnVisitParameterInfoElement(parameterInfoElement);
+            }
+
+            public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+                params LocalVariableInfoElement[] localVariableInfoElement)
+            {
+                return OnVisitLocalVariableInfoElements(localVariableInfoElement);
             }
         }
 
