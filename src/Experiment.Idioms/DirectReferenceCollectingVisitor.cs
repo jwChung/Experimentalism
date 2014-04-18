@@ -142,6 +142,37 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Allows <see cref="EventInfoElement" /> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="eventInfoElements">
+        /// The <see cref="EventInfoElement" /> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            params EventInfoElement[] eventInfoElements)
+        {
+            if (eventInfoElements == null)
+            {
+                throw new ArgumentNullException("eventInfoElements");
+            }
+
+            foreach (var eventInfoElement in eventInfoElements)
+            {
+                var eventInfo = eventInfoElement.EventInfo;
+                if (eventInfo.ReflectedType == eventInfo.DeclaringType)
+                {
+                    Visit(eventInfoElement);
+                }
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Allows an <see cref="FieldInfoElement" /> to be visited.
         /// This method is called when the element accepts this visitor
         /// instance.

@@ -308,6 +308,37 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement[])null));
         }
 
+        [Fact]
+        public void VisitNonDeclaredEventInfoElementsFiltersIt()
+        {
+            var eventInfoElements = typeof(SubTypeWithMembers).GetEvents(_bindingFlags)
+                .Select(x => x.ToElement()).ToArray();
+            var sut = new DirectReferenceCollectingVisitor();
+
+            var actual = sut.Visit(eventInfoElements);
+
+            Assert.Empty(actual.Value);
+        }
+
+        [Fact]
+        public void VisitDeclaredEventInfoElementsDoesNotFilterIt()
+        {
+            var eventInfoElements = typeof(TypeWithMembers).GetEvents(_bindingFlags)
+                .Select(x => x.ToElement()).ToArray();
+            var sut = new DirectReferenceCollectingVisitor();
+
+            var actual = sut.Visit(eventInfoElements);
+
+            Assert.NotEmpty(actual.Value);
+        }
+
+        [Fact]
+        public void VisitNullEventInfoElementsThrows()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement[])null));
+        }
+
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
