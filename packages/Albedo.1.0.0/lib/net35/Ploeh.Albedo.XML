@@ -21,7 +21,7 @@
             Accepts the <see cref="T:Ploeh.Albedo.IReflectionVisitor`1"/> as per the 
             visitor pattern http://en.wikipedia.org/wiki/Visitor_pattern
             </summary>
-            <typeparam name="T">The type of observation(s) of the vistor</typeparam>
+            <typeparam name="T">The type of observation(s) of the visitor</typeparam>
             <param name="visitor">The visitor to accept</param>
             <returns></returns>
         </member>
@@ -305,7 +305,7 @@
             <see cref="T:System.Reflection.PropertyInfo"/> or
             <see cref="T:System.Reflection.ParameterInfo"/>, into their respective
             <strong>IReflectionElement</strong> Adapters. However, because of the
-            existense of <see cref="T:Ploeh.Albedo.NullReflectionElement"/>, an optional strategy
+            existence of <see cref="T:Ploeh.Albedo.NullReflectionElement"/>, an optional strategy
             might be to return a <strong>NullReflectionElement</strong> instance
             for any source object that doesn't have an appropriate
             <strong>IReflectionElement</strong> Adapter.
@@ -547,7 +547,7 @@
             Accepts the <see cref="T:Ploeh.Albedo.IReflectionVisitor`1"/> visitor.
             </summary>
             <typeparam name="T">
-            The type of observation(s) of the vistor.
+            The type of observation(s) of the visitor.
             </typeparam>
             <param name="visitor">The visitor to accept.</param>
             <returns></returns>
@@ -685,7 +685,7 @@
             <see cref="T:Ploeh.Albedo.NullReflectionElement"/> is returned.
             </para>
             <para>
-            For a stricter converion, you can use
+            For a stricter conversion, you can use
             <see cref="M:Ploeh.Albedo.Refraction.Conversions.ToReflectionElement``1(``0)"/>.
             </para>
             </remarks>
@@ -717,7 +717,7 @@
             an <see cref="T:System.ArgumentException"/> is thrown.
             </para>
             <para>
-            For a weaker, but more robust converion, you can use
+            For a weaker, but more robust conversion, you can use
             <see cref="M:Ploeh.Albedo.Refraction.Conversions.AsReflectionElement``1(``0)"/>.
             </para>
             </remarks>
