@@ -16,7 +16,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                throw new System.NotImplementedException();
+                return new Assembly[0];
             }
         }
     }

@@ -13,5 +13,13 @@ namespace Jwc.Experiment
             var sut = new DirectReferenceCollectingVisitor();
             Assert.IsAssignableFrom<IReflectionVisitor<IEnumerable<Assembly>>>(sut);
         }
+
+        [Fact]
+        public void ValueIsCorrect()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            var actual = sut.Value;
+            Assert.Empty(actual);
+        }
     }
 }
