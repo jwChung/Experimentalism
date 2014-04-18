@@ -6,7 +6,7 @@ using System.Reflection;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents default members of a certain <see cref="Type"/> which need

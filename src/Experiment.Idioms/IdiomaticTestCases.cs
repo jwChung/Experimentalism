@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents a collection of <see cref="IdiomaticTestCase"/>

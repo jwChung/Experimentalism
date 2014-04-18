@@ -4,7 +4,7 @@ using Ploeh.Albedo;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class IdiomaticTestCommandTest
     {
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Idioms
             var sut = new IdiomaticTestCommand(
                 dummyMethod, typeElement, new DelegatingReflectionVisitor());
             string expected = string.Format(
-                "Jwc.Experiment.Idioms.IdiomaticTestCommandTest.DisplayNameIsCorrect('{0}')",
+                "Jwc.Experiment.IdiomaticTestCommandTest.DisplayNameIsCorrect('{0}')",
                 typeElement);
 
             var actual = sut.DisplayName;

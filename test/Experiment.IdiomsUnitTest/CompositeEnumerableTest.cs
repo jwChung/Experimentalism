@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class CompositeEnumerableTest
     {

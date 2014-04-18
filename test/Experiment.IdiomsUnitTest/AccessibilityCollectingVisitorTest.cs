@@ -6,7 +6,7 @@ using Ploeh.Albedo;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class AccessibilityCollectingVisitorTest
     {

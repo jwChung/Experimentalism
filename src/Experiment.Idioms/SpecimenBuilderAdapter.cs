@@ -1,7 +1,7 @@
 ﻿using System;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Adapts <see cref="ITestFixture" /> to <see cref="ISpecimenBuilder" />.

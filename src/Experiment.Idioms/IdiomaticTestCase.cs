@@ -3,7 +3,7 @@ using System.Reflection;
 using Ploeh.Albedo;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents a idiomatic test case that can be turned into an

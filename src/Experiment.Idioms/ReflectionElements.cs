@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents collection of reflection elements.

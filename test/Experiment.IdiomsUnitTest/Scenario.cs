@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment.Idioms;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Ploeh.AutoFixture;
@@ -9,7 +10,7 @@ using Ploeh.AutoFixture.Kernel;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class Scenario
     {

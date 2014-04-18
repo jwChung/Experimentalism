@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Ploeh.AutoFixture.Idioms;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class DelegatingIdiomaticAssertion : IdiomaticAssertion
     {

@@ -7,7 +7,7 @@
     <ProjectGuid>{CD942D14-856A-436B-905C-BA417767E977}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
     <AssemblyName>Jwc.Experiment.IdiomsUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,8 +62,8 @@
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="ConstantEqualityComparerTest.cs" />
-    <Compile Include="ConstructingMemberAssertionFactoryTest.cs" />
-    <Compile Include="ConstructingMemberAssertionTestCasesTest.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionTestCasesTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />
     <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
@@ -78,11 +78,11 @@
     <Compile Include="PropertyToParameterComparerTest.cs" />
     <Compile Include="TypeExtensionsTest.cs" />
     <Compile Include="RestrictingReferenceExceptionTest.cs" />
-    <Compile Include="RestrictingReferenceAssertionTest.cs" />
+    <Compile Include="Idioms\RestrictingReferenceAssertionTest.cs" />
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />
-    <Compile Include="ConstructingMemberAssertionTest.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionTest.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
@@ -94,8 +94,8 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="FilteringMembersTest.cs" />
-    <Compile Include="GuardClauseAssertionFactoryTest.cs" />
-    <Compile Include="GuardClauseAssertionTestCasesTest.cs" />
+    <Compile Include="Idioms\GuardClauseAssertionFactoryTest.cs" />
+    <Compile Include="Idioms\GuardClauseAssertionTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />

@@ -7,7 +7,7 @@
     <ProjectGuid>{7352FC70-2780-415C-9A43-F889F7B8028D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
     <AssemblyName>Jwc.Experiment.Idioms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -56,10 +56,10 @@
     </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollectingVisitor.cs" />
-    <Compile Include="RestrictingReferenceAssertion.cs" />
+    <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />
     <Compile Include="ConstantEqualityComparer.cs" />
-    <Compile Include="ConstructingMemberAssertionFactory.cs" />
-    <Compile Include="ConstructingMemberAssertionTestCases.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionFactory.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionTestCases.cs" />
     <Compile Include="ConstructingMemberException.cs" />
     <Compile Include="ExcludingWriteOnlyProperties.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="ParameterToPropertyComparer.cs" />
     <Compile Include="AssertionAdapter.cs" />
     <Compile Include="CompositeEnumerable.cs" />
-    <Compile Include="ConstructingMemberAssertion.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertion.cs" />
     <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
     <Compile Include="InverseEqualityComparer.cs" />
@@ -79,8 +79,8 @@
     <Compile Include="TypeMembers.cs" />
     <Compile Include="FilteringMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="GuardClauseAssertionFactory.cs" />
-    <Compile Include="GuardClauseAssertionTestCases.cs" />
+    <Compile Include="Idioms\GuardClauseAssertionFactory.cs" />
+    <Compile Include="Idioms\GuardClauseAssertionTestCases.cs" />
     <Compile Include="IAssertionFactory.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCases.cs" />

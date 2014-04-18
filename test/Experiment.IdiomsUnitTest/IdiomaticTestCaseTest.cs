@@ -4,7 +4,7 @@ using Ploeh.Albedo;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class IdiomaticTestCaseTest
     {
