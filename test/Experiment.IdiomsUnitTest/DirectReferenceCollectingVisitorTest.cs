@@ -32,7 +32,7 @@ namespace Jwc.Experiment
         public void VisitTypeEelementCollectsCorrectAssemblies(
             Type type, Assembly[] expected)
         {
-            var sut = new DirectReferenceCollectingVisitor();
+            var sut = new TestSpecificDirectReferenceCollectingVisitor();
 
             var actual = sut.Visit(type.ToElement());
 
@@ -69,15 +69,51 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
         }
 
+        [Fact]
+        public void VisitFieldInfoElementCollectsCorrectAssemblies()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            var expected = new[]
+            {
+                typeof(TypeImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var fieldInfoElements = new Fields<TypeForCollectingReference>()
+                .Select(x => x.Field).ToElement();
+
+            var actual = sut.Visit(fieldInfoElements);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitNulFieldInfoElementThrows()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
+        }
+
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
+                : this(new Assembly[0])
             {
             }
 
             public TestSpecificDirectReferenceCollectingVisitor(params Assembly[] assemblies)
                 : base(assemblies)
             {
+                OnVisitFiledInfoElement = e => this;
+                OnVisitConstructorInfoElement = e => this;
+            }
+
+            public Func<FieldInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
+                OnVisitFiledInfoElement
+            {
+                get;
+                set;
             }
 
             public Func<ConstructorInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
@@ -85,6 +121,12 @@ namespace Jwc.Experiment
             {
                 get;
                 set;
+            }
+
+            public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+                FieldInfoElement fieldInfoElement)
+            {
+                return OnVisitFiledInfoElement(fieldInfoElement);
             }
 
             public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
@@ -104,11 +146,11 @@ namespace Jwc.Experiment
                 };
                 yield return new object[]
                 {
-                    typeof(TypeExtensionsTest),
+                    typeof(DirectReferenceCollectingVisitorTest),
                     new[]
                     {
                         typeof(object).Assembly,
-                        typeof(TypeExtensionsTest).Assembly
+                        typeof(DirectReferenceCollectingVisitorTest).Assembly
                     }
                 };
                 yield return new object[]
@@ -165,6 +207,11 @@ namespace Jwc.Experiment
                     }
                 };
             }
+        }
+
+        private class TypeForCollectingReference
+        {
+            public TypeImplementingMultiple Field;
         }
 
         public class TypeImplementingMultiple : IDisposable, ISpecimenContext

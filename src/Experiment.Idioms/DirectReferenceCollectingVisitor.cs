@@ -68,6 +68,31 @@ namespace Jwc.Experiment
                 assemblies.Concat(base.Visit(typeElement).Value).Distinct());
         }
 
+        /// <summary>
+        /// Allows an <see cref="FieldInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="fieldInfoElement">
+        /// The <see cref="T:Ploeh.Albedo.FieldInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            FieldInfoElement fieldInfoElement)
+        {
+            if (fieldInfoElement == null)
+            {
+                throw new ArgumentNullException("fieldInfoElement");
+            }
+
+            var assemblies = GetReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType).Distinct();
+            return new DirectReferenceCollectingVisitor(assemblies);
+        }
+
         private static IEnumerable<Assembly> GetReferencedAssemblies(Type type)
         {
             return new[] { type }
