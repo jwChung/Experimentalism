@@ -33,6 +33,8 @@ namespace Jwc.Experiment
             Type type, Assembly[] expected)
         {
             var sut = new TestSpecificDirectReferenceCollectingVisitor();
+            sut.OnVisitFiledInfoElement = e => sut;
+            sut.OnVisitMethodInfoElement = e => sut;
 
             var actual = sut.Visit(type.ToElement());
 
@@ -89,10 +91,64 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void VisitNulFieldInfoElementThrows()
+        public void VisitNullFieldInfoElementThrows()
         {
             var sut = new DirectReferenceCollectingVisitor();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectAssemblies()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            var expected = new[]
+            {
+                typeof(TypeImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ReturnMethod()).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementCallsBaseMethod()
+        {
+            // Fixture setup
+            var method = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ParameterizedMethod(null));
+            var methodParameter = method.GetParameters().First();
+            var parameterAssembly = methodParameter.ParameterType.Assembly;
+            
+            ParameterInfo parameter = null;
+            var visitor = new TestSpecificDirectReferenceCollectingVisitor(parameterAssembly);
+            var sut = new TestSpecificDirectReferenceCollectingVisitor
+            {
+                OnVisitParameterInfoElement = p =>
+                {
+                    parameter = p.ParameterInfo;
+                    return visitor;
+                }
+            };
+            
+            // Exercise system
+            var actual = sut.Visit(method.ToElement());
+
+            // Verify outcome
+            Assert.Equal(new[] {typeof(object).Assembly, parameterAssembly }, actual.Value);
+            Assert.Equal(parameter, methodParameter);
+        }
+
+        [Fact]
+        public void VisitNullMethodInfoElementThrows()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
         }
 
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
@@ -105,8 +161,10 @@ namespace Jwc.Experiment
             public TestSpecificDirectReferenceCollectingVisitor(params Assembly[] assemblies)
                 : base(assemblies)
             {
-                OnVisitFiledInfoElement = e => this;
-                OnVisitConstructorInfoElement = e => this;
+                OnVisitFiledInfoElement = e => base.Visit(e);
+                OnVisitConstructorInfoElement = e => base.Visit(e);
+                OnVisitMethodInfoElement = e => base.Visit(e);
+                OnVisitParameterInfoElement = e => base.Visit(e);
             }
 
             public Func<FieldInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
@@ -123,6 +181,20 @@ namespace Jwc.Experiment
                 set;
             }
 
+            public Func<MethodInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
+                OnVisitMethodInfoElement
+            {
+                get;
+                set;
+            }
+
+            public Func<ParameterInfoElement, IReflectionVisitor<IEnumerable<Assembly>>>
+                OnVisitParameterInfoElement
+            {
+                get;
+                set;
+            }
+
             public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
                 FieldInfoElement fieldInfoElement)
             {
@@ -133,6 +205,18 @@ namespace Jwc.Experiment
                 ConstructorInfoElement constructorInfoElement)
             {
                 return OnVisitConstructorInfoElement(constructorInfoElement);
+            }
+
+            public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+                MethodInfoElement methodInfoElement)
+            {
+                return OnVisitMethodInfoElement(methodInfoElement);
+            }
+
+            public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+                ParameterInfoElement parameterInfoElement)
+            {
+                return OnVisitParameterInfoElement(parameterInfoElement);
             }
         }
 
@@ -212,6 +296,15 @@ namespace Jwc.Experiment
         private class TypeForCollectingReference
         {
             public TypeImplementingMultiple Field;
+
+            public TypeImplementingMultiple ReturnMethod()
+            {
+                return null;
+            }
+
+            public void ParameterizedMethod(TypeImplementingMultiple arg)
+            {
+            }
         }
 
         public class TypeImplementingMultiple : IDisposable, ISpecimenContext

@@ -62,10 +62,9 @@ namespace Jwc.Experiment
             }
 
             var type = typeElement.Type;
-            var assemblies = GetReferencedAssemblies(type);
-
-            return new DirectReferenceCollectingVisitor(
-                assemblies.Concat(base.Visit(typeElement).Value).Distinct());
+            var assemblies = GetReferencedAssemblies(type)
+                .Concat(base.Visit(typeElement).Value).Distinct();
+            return new DirectReferenceCollectingVisitor(assemblies);
         }
 
         /// <summary>
@@ -90,6 +89,32 @@ namespace Jwc.Experiment
             }
 
             var assemblies = GetReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType).Distinct();
+            return new DirectReferenceCollectingVisitor(assemblies);
+        }
+
+        /// <summary>
+        /// Allows an <see cref="MethodInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="methodInfoElement">
+        /// The <see cref="MethodInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            MethodInfoElement methodInfoElement)
+        {
+            if (methodInfoElement == null)
+            {
+                throw new ArgumentNullException("methodInfoElement");
+            }
+
+            var assemblies = GetReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType)
+                .Concat(base.Visit(methodInfoElement).Value).Distinct();
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 
