@@ -14,20 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.12.0")]
 
 /*
- * Version 0.12.0
+ * Version 0.12.1
  * 
- * - [NEW] ConstructingMemberAssertionTestCases
- *   This verifies members initialized correctly by a constructor.
- *   
- *   [FirstClassTheorem]
- *   public IEnumerable<ITestCase> DemoOnTypeLevel()
- *   {
- *       return new GuardClauseAssertionTestCases(typeof(Foo));
- *   }
- *   
- *   [FirstClassTheorem]
- *   public IEnumerable<ITestCase> DemoOnAssemblyLevel()
- *   {
- *       return new GuardClauseAssertionTestCases(typeof(Foo).Assembly);
- *   }
+ * - [FIX] Changes constructor accessiblity of AccessibilityCollectingVisitor
+ *   from private to protected.
  */
