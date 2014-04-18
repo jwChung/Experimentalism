@@ -69,10 +69,41 @@ namespace Jwc.Experiment
             
             foreach (var fieldInfoElement in fieldInfoElements)
             {
-                FieldInfo fieldInfo = fieldInfoElement.FieldInfo;
+                var fieldInfo = fieldInfoElement.FieldInfo;
                 if (fieldInfo.ReflectedType == fieldInfo.DeclaringType)
                 {
                     Visit(fieldInfoElement);
+                }
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Allows <see cref="PropertyInfoElement"/> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="propertyInfoElements">
+        /// The <see cref="PropertyInfoElement"/> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}"/> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            params PropertyInfoElement[] propertyInfoElements)
+        {
+            if (propertyInfoElements == null)
+            {
+                throw new ArgumentNullException("propertyInfoElements");
+            }
+
+            foreach (var propertyInfoElement in propertyInfoElements)
+            {
+                var propertyInfo = propertyInfoElement.PropertyInfo;
+                if (propertyInfo.ReflectedType == propertyInfo.DeclaringType)
+                {
+                    Visit(propertyInfoElement);
                 }
             }
 
