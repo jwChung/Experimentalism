@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
@@ -9,6 +10,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class HidingReferenceAssertion : ReflectionVisitor<object>
     {
+        private readonly Assembly[] _assemblies;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HidingReferenceAssertion"/> class.
         /// </summary>
@@ -17,6 +20,7 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public HidingReferenceAssertion(params Assembly[] assemblies)
         {
+            _assemblies = assemblies;
         }
 
         /// <summary>
@@ -27,6 +31,18 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 throw new System.NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the assemblies which are not referenced from
+        /// elements.
+        /// </summary>
+        public IEnumerable<Assembly> Assemblies
+        {
+            get
+            {
+                return _assemblies;
             }
         }
     }

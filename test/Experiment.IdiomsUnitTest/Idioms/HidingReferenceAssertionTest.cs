@@ -1,4 +1,5 @@
-﻿using Ploeh.Albedo;
+﻿using System.Linq;
+using Ploeh.Albedo;
 using Xunit;
 
 namespace Jwc.Experiment.Idioms
@@ -10,6 +11,21 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new HidingReferenceAssertion();
             Assert.IsAssignableFrom<IReflectionVisitor<object>>(sut);
+        }
+
+        [Fact]
+        public void AssembliesIsCorrect()
+        {
+            var assemblies = new[]
+            {
+                typeof(object).Assembly,
+                typeof(Enumerable).Assembly
+            };
+            var sut = new HidingReferenceAssertion(assemblies);
+
+            var actual = sut.Assemblies;
+
+            Assert.Equal(assemblies, actual);
         }
     }
 }
