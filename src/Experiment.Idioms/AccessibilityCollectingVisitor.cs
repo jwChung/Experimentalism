@@ -20,7 +20,11 @@ namespace Jwc.Experiment.Idioms
         {
         }
 
-        private AccessibilityCollectingVisitor(IEnumerable<Accessibilities> values)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccessibilityCollectingVisitor"/> class.
+        /// </summary>
+        /// <param name="values">The value.</param>
+        protected AccessibilityCollectingVisitor(IEnumerable<Accessibilities> values)
         {
             _values = values;
         }
