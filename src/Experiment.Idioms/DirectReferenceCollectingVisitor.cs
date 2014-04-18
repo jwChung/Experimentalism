@@ -111,6 +111,37 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Allows <see cref="MethodInfoElement"/> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="methodInfoElements">
+        /// The <see cref="MethodInfoElement"/> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}"/> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            params MethodInfoElement[] methodInfoElements)
+        {
+            if (methodInfoElements == null)
+            {
+                throw new ArgumentNullException("methodInfoElements");
+            }
+
+            foreach (var methodInfoElement in methodInfoElements)
+            {
+                var methodInfo = methodInfoElement.MethodInfo;
+                if (methodInfo.ReflectedType == methodInfo.DeclaringType)
+                {
+                    Visit(methodInfoElement);
+                }
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Allows an <see cref="FieldInfoElement" /> to be visited.
         /// This method is called when the element accepts this visitor
         /// instance.
