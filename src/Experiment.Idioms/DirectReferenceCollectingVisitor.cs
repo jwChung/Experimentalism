@@ -88,7 +88,8 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fieldInfoElement");
             }
 
-            var assemblies = GetReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType).Distinct();
+            Type fieldType = fieldInfoElement.FieldInfo.FieldType;
+            var assemblies = GetReferencedAssemblies(fieldType).Distinct();
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 
@@ -133,6 +134,32 @@ namespace Jwc.Experiment
             params LocalVariableInfoElement[] localVariableInfoElements)
         {
             return this;
+        }
+
+        /// <summary>
+        /// Allows an <see cref="ParameterInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="parameterInfoElement">
+        /// The <see cref="ParameterInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            ParameterInfoElement parameterInfoElement)
+        {
+            if (parameterInfoElement == null)
+            {
+                throw new ArgumentNullException("parameterInfoElement");
+            }
+
+            Type parameterType = parameterInfoElement.ParameterInfo.ParameterType;
+            var assemblies = GetReferencedAssemblies(parameterType).Distinct();
+            return new DirectReferenceCollectingVisitor(assemblies);
         }
 
         private static IEnumerable<Assembly> GetReferencedAssemblies(Type type)

@@ -159,6 +159,33 @@ namespace Jwc.Experiment
             Assert.Equal(sut, actual);
         }
 
+        [Fact]
+        public void VisitParameterInfoElementCollectsCorrectAssemblies()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            var expected = new[]
+            {
+                typeof(TypeImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var parameterInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ParameterizedMethod(null)).GetParameters()
+                .First().ToElement();
+
+            var actual = sut.Visit(parameterInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitNullParameterInfoElementThrows()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((ParameterInfoElement)null));
+        }
+
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
