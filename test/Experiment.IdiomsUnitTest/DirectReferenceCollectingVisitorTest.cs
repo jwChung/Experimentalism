@@ -32,10 +32,8 @@ namespace Jwc.Experiment
         public void VisitTypeEelementCollectsCorrectAssemblies(
             Type type, Assembly[] expected)
         {
-            var assembly = typeof(TheoryAttribute).Assembly;
-            expected = expected.Concat(new[] { assembly }).Distinct().ToArray();
             var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
-            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly)
+            var sut = new TestSpecificDirectReferenceCollectingVisitor()
             {
                 OnVisitFiledInfoElement = e => dummyVisitor,
                 OnVisitMethodInfoElement = e => dummyVisitor
@@ -53,13 +51,12 @@ namespace Jwc.Experiment
         {
             ConstructorInfo constructor = null;
             var type = typeof(object);
-            var visitor = new TestSpecificDirectReferenceCollectingVisitor(type.Assembly);
             var sut = new TestSpecificDirectReferenceCollectingVisitor
             {
                 OnVisitConstructorInfoElement = c =>
                 {
                     constructor = c.ConstructorInfo;
-                    return visitor;
+                    return new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
                 }
             };
             
@@ -79,13 +76,11 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitFieldInfoElementCollectsCorrectAssemblies()
         {
-            var assembly = typeof(TheoryAttribute).Assembly;
-            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly);
+            var sut = new TestSpecificDirectReferenceCollectingVisitor();
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
-                assembly,
                 typeof(ISpecimenContext).Assembly
             };
             var fieldInfoElements = new Fields<TypeForCollectingReference>()
@@ -107,9 +102,8 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementCollectsCorrectAssemblies()
         {
-            var assembly = typeof(TheoryAttribute).Assembly;
             var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
-            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly)
+            var sut = new TestSpecificDirectReferenceCollectingVisitor()
             {
                 OnVisitParameterInfoElement = e => dummyVisitor,
                 OnVisitLocalVariableInfoElements = e => dummyVisitor
@@ -117,7 +111,6 @@ namespace Jwc.Experiment
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
-                assembly,
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
@@ -134,19 +127,17 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCallsBaseMethod()
         {
             // Fixture setup
+            bool verify = false;
             var method = new Methods<TypeForCollectingReference>()
                 .Select(x => x.ParameterizedMethod(null));
-            var methodParameter = method.GetParameters().First();
-            var parameterAssembly = methodParameter.ParameterType.Assembly;
-            
-            ParameterInfo parameter = null;
-            var visitor = new TestSpecificDirectReferenceCollectingVisitor(parameterAssembly);
+            ParameterInfo parameter = method.GetParameters().First();
             var sut = new TestSpecificDirectReferenceCollectingVisitor
             {
                 OnVisitParameterInfoElement = p =>
                 {
-                    parameter = p.ParameterInfo;
-                    return visitor;
+                    Assert.Equal(parameter, p.ParameterInfo);
+                    verify = true;
+                    return new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
                 }
             };
             
@@ -154,8 +145,8 @@ namespace Jwc.Experiment
             var actual = sut.Visit(method.ToElement());
 
             // Verify outcome
-            Assert.Equal(new[] {typeof(object).Assembly, parameterAssembly }, actual.Value);
-            Assert.Equal(parameter, methodParameter);
+            Assert.Equal(new[] {typeof(object).Assembly }, actual.Value);
+            Assert.True(verify, "Verify.");
         }
 
         [Fact]
@@ -176,13 +167,11 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitParameterInfoElementCollectsCorrectAssemblies()
         {
-            var assembly = typeof(TheoryAttribute).Assembly;
-            var sut = new TestSpecificDirectReferenceCollectingVisitor(assembly);
+            var sut = new TestSpecificDirectReferenceCollectingVisitor();
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
-                assembly,
                 typeof(ISpecimenContext).Assembly
             };
             var parameterInfoElement = new Methods<TypeForCollectingReference>()
@@ -205,12 +194,6 @@ namespace Jwc.Experiment
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
-                : this(new Assembly[0])
-            {
-            }
-
-            public TestSpecificDirectReferenceCollectingVisitor(params Assembly[] assemblies)
-                : base(assemblies)
             {
                 OnVisitFiledInfoElement = e => base.Visit(e);
                 OnVisitConstructorInfoElement = e => base.Visit(e);

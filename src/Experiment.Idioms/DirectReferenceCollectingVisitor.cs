@@ -11,27 +11,9 @@ namespace Jwc.Experiment
     /// </summary>
     public class DirectReferenceCollectingVisitor : ReflectionVisitor<IEnumerable<Assembly>>
     {
-        private readonly IEnumerable<Assembly> _assemblies;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DirectReferenceCollectingVisitor"/> class.
-        /// </summary>
-        public DirectReferenceCollectingVisitor()
-            : this(new Assembly[0])
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DirectReferenceCollectingVisitor"/> class.
-        /// </summary>
-        /// <param name="assemblies">
-        /// The assemblies.
-        /// </param>
-        protected DirectReferenceCollectingVisitor(IEnumerable<Assembly> assemblies)
-        {
-            _assemblies = assemblies;
-        }
-
+        private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
+        private readonly HashSet<Type> _types = new HashSet<Type>();
+        
         /// <summary>
         /// Gets the observation or value produced by this instance.
         /// </summary>
@@ -61,13 +43,9 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("typeElement");
             }
 
-            var type = typeElement.Type;
-            var assemblies = Value
-                .Concat(GetReferencedAssemblies(type))
-                .Concat(base.Visit(typeElement).Value)
-                .Distinct();
-
-            return new DirectReferenceCollectingVisitor(assemblies);
+            AddReferencedAssemblies(typeElement.Type);
+            base.Visit(typeElement);
+            return this;
         }
 
         /// <summary>
@@ -91,12 +69,8 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fieldInfoElement");
             }
 
-            Type fieldType = fieldInfoElement.FieldInfo.FieldType;
-            var assemblies = Value
-                .Concat(GetReferencedAssemblies(fieldType))
-                .Distinct();
-
-            return new DirectReferenceCollectingVisitor(assemblies);
+            AddReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType);
+            return this;
         }
 
         /// <summary>
@@ -120,13 +94,9 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("methodInfoElement");
             }
 
-            IEnumerable<Assembly> enumerable = base.Visit(methodInfoElement).Value;
-            var assemblies = Value
-                .Concat(GetReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType))
-                .Concat(enumerable)
-                .Distinct();
-
-            return new DirectReferenceCollectingVisitor(assemblies);
+            AddReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType);
+            base.Visit(methodInfoElement);
+            return this;
         }
 
         /// <summary>
@@ -167,12 +137,24 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("parameterInfoElement");
             }
 
-            Type parameterType = parameterInfoElement.ParameterInfo.ParameterType;
-            var assemblies = Value
-                .Concat(GetReferencedAssemblies(parameterType))
-                .Distinct();
+            AddReferencedAssemblies(parameterInfoElement.ParameterInfo.ParameterType);
+            return this;
+        }
 
-            return new DirectReferenceCollectingVisitor(assemblies);
+        private void AddReferencedAssemblies(Type type)
+        {
+            if (_types.Contains(type))
+            {
+                return;
+            }
+
+            foreach (var assembly in GetReferencedAssemblies(type))
+            {
+                if (!_assemblies.Contains(assembly))
+                {
+                    _assemblies.Add(assembly);    
+                }
+            }
         }
 
         private static IEnumerable<Assembly> GetReferencedAssemblies(Type type)
