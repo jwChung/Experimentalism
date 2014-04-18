@@ -6,6 +6,8 @@ using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
+using Xunit;
+using Xunit.Extensions;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -53,6 +55,17 @@ namespace Jwc.Experiment.Idioms
         public IEnumerable<ITestCase> ConstructingMemberAssertionTestCasesVerifiesMembersInitiazliedByConstructor()
         {
             return new ConstructingMemberAssertionTestCases(typeof(TypeWithMembersInitializedByConstructor));
+        }
+
+        [Fact]
+        public void RestrictingReferenceAssertionVerifyReferencedAssemblies()
+        {
+            var assertion = new RestrictingReferenceAssertion(
+                /* mscorlib */ typeof(object).Assembly,
+                /* System.Core */ typeof(Enumerable).Assembly,
+                /* xunit */ typeof(FactAttribute).Assembly,
+                /* xunit.extensions */ typeof(TheoryAttribute).Assembly);
+            assertion.Visit(typeof(BaseTheoremAttribute).Assembly.ToElement());
         }
 
         private class TypeWithGuardTestMembers
