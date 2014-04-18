@@ -71,6 +71,7 @@
     <Compile Include="ConstantEqualityComparerTest.cs" />
     <Compile Include="MockExtensions.cs" />
     <Compile Include="ReferenceCollectingVisitorTest.cs" />
+    <Compile Include="HidingReferenceExceptionTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionTestCasesTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />
