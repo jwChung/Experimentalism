@@ -191,6 +191,33 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ParameterInfoElement)null));
         }
 
+        [Fact]
+        public void VisitLocalVariableInfoElementCollectsCorrectAssemblies()
+        {
+            var sut = new TestSpecificDirectReferenceCollectingVisitor();
+            var expected = new[]
+            {
+                typeof(TypeImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var localVariableInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ReturnMethod()).GetMethodBody()
+                .LocalVariables.Single().ToElement();
+
+            var actual = sut.Visit(localVariableInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitNullLocalVariableInfoElementThrows()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((LocalVariableInfoElement)null));
+        }
+
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
@@ -347,7 +374,7 @@ namespace Jwc.Experiment
 
             public TypeImplementingMultiple ReturnMethod()
             {
-                return null;
+                return new TypeImplementingMultiple();
             }
 
             public void ParameterizedMethod(TypeImplementingMultiple arg)
