@@ -118,6 +118,23 @@ namespace Jwc.Experiment
             return new DirectReferenceCollectingVisitor(assemblies);
         }
 
+        /// <summary>
+        /// Allows <see cref="LocalVariableInfoElement" /> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="localVariableInfoElements">
+        /// The <see cref="LocalVariableInfoElement" /> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            params LocalVariableInfoElement[] localVariableInfoElements)
+        {
+            return this;
+        }
+
         private static IEnumerable<Assembly> GetReferencedAssemblies(Type type)
         {
             return new[] { type }

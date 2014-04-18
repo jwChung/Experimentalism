@@ -151,6 +151,14 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
         }
 
+        [Fact]
+        public void VisitLocalVariableElementsReturnsSutItself()
+        {
+            var sut = new DirectReferenceCollectingVisitor();
+            var actual = sut.Visit((LocalVariableInfoElement[])null);
+            Assert.Equal(sut, actual);
+        }
+
         private class TestSpecificDirectReferenceCollectingVisitor : DirectReferenceCollectingVisitor
         {
             public TestSpecificDirectReferenceCollectingVisitor()
