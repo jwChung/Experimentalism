@@ -62,7 +62,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="ConstantEqualityComparerTest.cs" />
-    <Compile Include="DirectReferenceCollectingVisitorTest.cs" />
+    <Compile Include="ReferenceCollectingVisitorTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionTestCasesTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />

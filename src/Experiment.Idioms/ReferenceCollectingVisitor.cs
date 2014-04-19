@@ -9,7 +9,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents <see cref="IReflectionVisitor{T}"/> to collect direct references.
     /// </summary>
-    public class DirectReferenceCollectingVisitor : ReflectionVisitor<IEnumerable<Assembly>>
+    public class ReferenceCollectingVisitor : ReflectionVisitor<IEnumerable<Assembly>>
     {
         private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
         private readonly HashSet<Type> _types = new HashSet<Type>();
