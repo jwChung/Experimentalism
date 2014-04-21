@@ -434,6 +434,61 @@ namespace Jwc.Experiment
             Assert.Empty(expected.Except(actual.Value));
         }
 
+        [Fact]
+        public void VisitConstructorInfoElementCollectsCorrectAssembliesForMethodBody()
+        {
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificReferenceCollectingVisitor
+            {
+                OnVisitParameterInfoElement = e => dummyVisitor,
+                OnVisitLocalVariableInfoElement = e => dummyVisitor
+            };
+            var expected = new[]
+            {
+                typeof(IDisposable).Assembly,
+                GetType().Assembly,
+                typeof(Fixture).Assembly
+            };
+            var constructorInfoElement = Constructors.Select(() => new TypeForCollectingReference()).ToElement();
+
+            var actual = sut.Visit(constructorInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitConstructorInfoElementCallsBaseMethod()
+        {
+            bool verify = false;
+            var constructorInfoElement = Constructors.Select(
+                () => new TypeForCollectingReference(null)).ToElement();
+            var parameter = constructorInfoElement.ConstructorInfo.GetParameters().Single();
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificReferenceCollectingVisitor
+            {
+                OnVisitLocalVariableInfoElement = e => dummyVisitor,
+                OnVisitParameterInfoElement = e =>
+                {
+                    Assert.Equal(e.ParameterInfo, parameter);
+                    verify = true;
+                    return dummyVisitor;
+                }
+            };
+
+            var actual = sut.Visit(constructorInfoElement);
+
+            Assert.Equal(sut, actual);
+            Assert.True(verify, "Verify.");
+        }
+
+        [Fact]
+        public void VisitNullConstructorInfoElementThrows()
+        {
+            var sut = new ReferenceCollectingVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
+        }
+
         private class TestSpecificReferenceCollectingVisitor : ReferenceCollectingVisitor
         {
             public TestSpecificReferenceCollectingVisitor()
@@ -589,6 +644,15 @@ namespace Jwc.Experiment
 
         private class TypeForCollectingReference
         {
+            public TypeForCollectingReference()
+            {
+                PrivateMethod1(null);
+            }
+
+            public TypeForCollectingReference(object arg)
+            {
+            }
+
             public TypeImplementingMultiple Field;
 
             public TypeImplementingMultiple ReturnMethod()

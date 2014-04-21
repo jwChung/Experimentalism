@@ -81,6 +81,32 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Allows an <see cref="ConstructorInfoElement"/> to be visited. 
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="constructorInfoElement">
+        /// The <see cref="ConstructorInfoElement"/> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            ConstructorInfoElement constructorInfoElement)
+        {
+            if (constructorInfoElement == null)
+            {
+                throw new ArgumentNullException("constructorInfoElement");
+            }
+
+            VisitMethodBody(constructorInfoElement.ConstructorInfo);
+            base.Visit(constructorInfoElement);
+            return this;
+        }
+
+        /// <summary>
         /// Allows <see cref="PropertyInfoElement"/> instances to be 'visited'.
         /// This method is called when the elements 'accepts' this visitor instance.
         /// </summary>
