@@ -94,7 +94,8 @@ namespace Jwc.Experiment.Idioms
                         typeof(FactAttribute).Assembly,
                         typeof(Fixture).Assembly,
                         typeof(GuardClauseAssertion).Assembly,
-                        typeof(ILPattern).Assembly
+                        typeof(ILPattern).Assembly,
+                        typeof(ISet<object>).Assembly
                     }
                 };
 

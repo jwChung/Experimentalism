@@ -307,6 +307,9 @@ namespace Jwc.Experiment
 
         private void VisitMethodBody(MethodBase methodBase)
         {
+            if (methodBase.GetMethodBody() == null)
+                return;
+
             var methodBases = methodBase.GetInstructions()
                 .Select(i => i.Operand).OfType<MethodBase>();
 

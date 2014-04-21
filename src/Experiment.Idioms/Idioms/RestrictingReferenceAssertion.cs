@@ -94,23 +94,15 @@ namespace Jwc.Experiment.Idioms
 
         private static Assembly[] GetReferencedAssemblies(Assembly assembly)
         {
-            var assembliesFromTypes = GetAssembliesFromTypes(assembly);
-            return assembly.GetReferencedAssemblies()
-                .Select(Assembly.Load).Concat(assembliesFromTypes)
-                .Distinct().Except(new[] { assembly }).ToArray();
+            return new ReferenceCollectingVisitor()
+                .Visit(assembly.ToElement()).Value
+                .Except(new[] { assembly }).ToArray();
         }
 
         private bool AreEquivalent(ICollection<Assembly> assemblies)
         {
             return assemblies.Count == _assemblies.Length
                 && !assemblies.Except(_assemblies).Any();
-        }
-
-        private static IEnumerable<Assembly> GetAssembliesFromTypes(Assembly assembly)
-        {
-            return assembly.GetExportedTypes()
-                .SelectMany(t => t.GetReferencedAssemblies())
-                .Aggregate(new HashSet<Assembly>(), (s, a) => { s.Add(a); return s; });
         }
 
         private static string GetAssembyJoinedString(IEnumerable<Assembly> assemblies)
