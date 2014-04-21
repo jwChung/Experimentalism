@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mono.Reflection;
 using Ploeh.Albedo;
 
 namespace Jwc.Experiment
@@ -218,8 +219,13 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("methodInfoElement");
             }
 
-            AddReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType);
+            MethodInfo methodInfo = methodInfoElement.MethodInfo;
+            AddReferencedAssemblies(methodInfo.ReturnType);
+            
+            VisitMethodBody(methodInfo);
+
             base.Visit(methodInfoElement);
+
             return this;
         }
 
@@ -271,6 +277,24 @@ namespace Jwc.Experiment
 
             AddReferencedAssemblies(localVariableInfoElement.LocalVariableInfo.LocalType);
             return this;
+        }
+
+        private void VisitMethodBody(MethodBase methodBase)
+        {
+            var methodBases = methodBase.GetInstructions()
+                .Select(i => i.Operand).OfType<MethodBase>();
+
+            foreach (var methodBaseInMethodBody in methodBases)
+            {
+                AddReferencedAssemblies(methodBaseInMethodBody.ReflectedType);
+                var method = methodBaseInMethodBody as MethodInfo;
+
+                if (method != null)
+                    AddReferencedAssemblies(method.ReturnType);
+
+                foreach (var parameter in methodBaseInMethodBody.GetParameters())
+                    AddReferencedAssemblies(parameter.ParameterType);
+            }
         }
 
         private void AddReferencedAssemblies(Type type)

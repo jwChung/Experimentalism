@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Mono.Reflection;
 using NuGet.Jwc.Experiment;
 using Ploeh.Albedo;
 using Ploeh.AutoFixture;
@@ -92,7 +93,8 @@ namespace Jwc.Experiment.Idioms
                         typeof(IReflectionElement).Assembly,
                         typeof(FactAttribute).Assembly,
                         typeof(Fixture).Assembly,
-                        typeof(GuardClauseAssertion).Assembly
+                        typeof(GuardClauseAssertion).Assembly,
+                        typeof(ILPattern).Assembly
                     }
                 };
 

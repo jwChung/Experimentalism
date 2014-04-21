@@ -339,6 +339,101 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement[])null));
         }
 
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectAssembliesForMethodCallInMethodBody()
+        {
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificReferenceCollectingVisitor
+            {
+                OnVisitParameterInfoElement = e => dummyVisitor,
+                OnVisitLocalVariableInfoElement = e => dummyVisitor
+            };
+            var expected = new[]
+            {
+                typeof(IDisposable).Assembly,
+                typeof(Enumerable).Assembly
+            };
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.MethodCallInMethodBody()).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectAssembliesForConstructInMethodBody()
+        {
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificReferenceCollectingVisitor
+            {
+                OnVisitParameterInfoElement = e => dummyVisitor,
+                OnVisitLocalVariableInfoElement = e => dummyVisitor
+            };
+            var expected = new[]
+            {
+                typeof(IDisposable).Assembly,
+                GetType().Assembly,
+                typeof(Fixture).Assembly
+            };
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ConstructInMethodBody()).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectAssembliesForReturnValueInMethodBody()
+        {
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificReferenceCollectingVisitor
+            {
+                OnVisitParameterInfoElement = e => dummyVisitor,
+                OnVisitLocalVariableInfoElement = e => dummyVisitor
+            };
+            var expected = new[]
+            {
+                typeof(IDisposable).Assembly,
+                GetType().Assembly,
+                typeof(Fixture).Assembly
+            };
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.RetrunValueInMethodBody()).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectAssembliesForPassParameterInMethodBody()
+        {
+            var dummyVisitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>(new Assembly[0]);
+            var sut = new TestSpecificReferenceCollectingVisitor
+            {
+                OnVisitParameterInfoElement = e => dummyVisitor,
+                OnVisitLocalVariableInfoElement = e => dummyVisitor
+            };
+            var expected = new[]
+            {
+                typeof(IDisposable).Assembly,
+                GetType().Assembly,
+                typeof(Fixture).Assembly
+            };
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.PassParameterInMethodBody()).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(expected.Length, actual.Value.Count());
+            Assert.Empty(expected.Except(actual.Value));
+        }
+
         private class TestSpecificReferenceCollectingVisitor : ReferenceCollectingVisitor
         {
             public TestSpecificReferenceCollectingVisitor()
@@ -506,9 +601,33 @@ namespace Jwc.Experiment
             {
             }
 
-            public object MethodBodyTestMethod()
+            public object MethodCallInMethodBody()
             {
                 return new[] { "a", "b" }.ToArray();
+            }
+
+            public void ConstructInMethodBody()
+            {
+                PrivateMethod1(new Fixture());
+            }
+
+            public void RetrunValueInMethodBody()
+            {
+                PrivateMethod2();
+            }
+
+            public void PassParameterInMethodBody()
+            {
+                PrivateMethod1(null);
+            }
+
+            private void PrivateMethod1(Fixture fixture)
+            {
+            }
+
+            private Fixture PrivateMethod2()
+            {
+                return null;
             }
         }
 
