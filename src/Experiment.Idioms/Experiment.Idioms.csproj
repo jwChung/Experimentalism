@@ -79,7 +79,6 @@
     <Compile Include="PropertyToParameterComparer.cs" />
     <Compile Include="RestrictingReferenceException.cs" />
     <Compile Include="SpecimenBuilderAdapter.cs" />
-    <Compile Include="TypeExtensions.cs" />
     <Compile Include="TypeMembers.cs" />
     <Compile Include="FilteringMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
