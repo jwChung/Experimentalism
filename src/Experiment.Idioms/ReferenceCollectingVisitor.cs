@@ -328,11 +328,18 @@ namespace Jwc.Experiment
 
         private void AddReferencedAssemblies(Type type)
         {
-            if (_types.Contains(type))
-                return;
+            lock (_types)
+            {
+                if (_types.Contains(type))
+                    return;
+                _types.Add(type);
+            }
 
-            foreach (var assembly in GetReferencedAssemblies(type))
-                _assemblies.Add(assembly);
+            lock (_assemblies)
+            {
+                foreach (var assembly in GetReferencedAssemblies(type))
+                    _assemblies.Add(assembly);
+            }
         }
 
         private static IEnumerable<Assembly> GetReferencedAssemblies(Type type)

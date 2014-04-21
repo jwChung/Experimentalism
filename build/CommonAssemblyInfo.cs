@@ -14,7 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.13.1")]
 
 /*
- * Version 0.13.1
+ * Version 0.13.2
  * 
- * - [FIX] Fixes missing the Mono.Reflection.dll reference.
+ * - [FIX] Makes ReferenceCollectingVisitor tread-safe and improves its
+ *   performance.
  */
