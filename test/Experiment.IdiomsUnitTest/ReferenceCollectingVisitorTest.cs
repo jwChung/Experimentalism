@@ -653,7 +653,9 @@ namespace Jwc.Experiment
             {
             }
 
+#pragma warning disable 649
             public TypeImplementingMultiple Field;
+#pragma warning restore 649
 
             public TypeImplementingMultiple ReturnMethod()
             {
