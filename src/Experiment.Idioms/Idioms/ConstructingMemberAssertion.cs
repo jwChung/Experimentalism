@@ -121,14 +121,13 @@ namespace Jwc.Experiment.Idioms
                     continue;
                 }
 
-                const string messageFormat =
-                    "The constructor parameter was not exposed through any fields or properties:" +
-                    "{0}Reflected type: {1}{0}Constructor: {2}{0}Parameter: {3}";
-
                 throw new ConstructingMemberException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        messageFormat,
+                        "The constructor parameter was not exposed through any fields or properties:{0}" +
+                        "Reflected type: {1}{0}" +
+                        "Constructor: {2}{0}" +
+                        "Parameter: {3}",
                         Environment.NewLine,
                         reflectedType,
                         constructorInfoElement,
@@ -164,14 +163,12 @@ namespace Jwc.Experiment.Idioms
                 return this;
             }
 
-            const string messageFormat =
-                    "No constructors with an argument that matches the field were found:" +
-                    "{0}Reflected type: {1}{0}Field: {2}";
-
             throw new ConstructingMemberException(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    messageFormat,
+                    "No constructors with an argument that matches the field were found:{0}" +
+                    "Reflected type: {1}{0}" +
+                    "Field: {2}",
                     Environment.NewLine,
                     reflectedType,
                     fieldInfoElement));

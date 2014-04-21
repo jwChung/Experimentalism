@@ -7,7 +7,7 @@
     <ProjectGuid>{CD942D14-856A-436B-905C-BA417767E977}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
     <AssemblyName>Jwc.Experiment.IdiomsUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,11 +29,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ploeh.Albedo, Version=0.11.2.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
+    <Reference Include="Mono.Reflection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Albedo.0.11.2\lib\net35\Ploeh.Albedo.dll</HintPath>
+      <HintPath>..\..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.Albedo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Albedo.1.0.0\lib\net35\Ploeh.Albedo.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\..\packages\AutoFixture.3.0.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
@@ -60,8 +66,9 @@
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="ConstantEqualityComparerTest.cs" />
-    <Compile Include="ConstructingMemberAssertionFactoryTest.cs" />
-    <Compile Include="ConstructingMemberAssertionTestCasesTest.cs" />
+    <Compile Include="ReferenceCollectingVisitorTest.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionTestCasesTest.cs" />
     <Compile Include="ConstructingMemberExceptionTest.cs" />
     <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
@@ -74,10 +81,12 @@
     <Compile Include="DelegatingEqualityComparer.cs" />
     <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />
+    <Compile Include="RestrictingReferenceExceptionTest.cs" />
+    <Compile Include="Idioms\RestrictingReferenceAssertionTest.cs" />
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />
-    <Compile Include="ConstructingMemberAssertionTest.cs" />
+    <Compile Include="Idioms\ConstructingMemberAssertionTest.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
@@ -89,8 +98,8 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="FilteringMembersTest.cs" />
-    <Compile Include="GuardClauseAssertionFactoryTest.cs" />
-    <Compile Include="GuardClauseAssertionTestCasesTest.cs" />
+    <Compile Include="Idioms\GuardClauseAssertionFactoryTest.cs" />
+    <Compile Include="Idioms\GuardClauseAssertionTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />
@@ -99,9 +108,14 @@
     <Compile Include="Scenario.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.AutoFixture\Experiment.AutoFixture.csproj">
+      <Project>{7f77a967-02aa-47fc-a42a-0382697b483a}</Project>
+      <Name>Experiment.AutoFixture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Experiment.Idioms\Experiment.Idioms.csproj">
       <Project>{7352FC70-2780-415C-9A43-F889F7B8028D}</Project>
       <Name>Experiment.Idioms</Name>
@@ -114,6 +128,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

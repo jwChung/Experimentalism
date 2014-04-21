@@ -1,6 +1,6 @@
 ﻿using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represent comaprer to determine that a field value equals to

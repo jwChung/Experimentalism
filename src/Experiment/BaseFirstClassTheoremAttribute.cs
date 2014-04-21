@@ -62,7 +62,7 @@ namespace Jwc.Experiment
                 throw new ArgumentException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        "The supplied method '{0}' does not be parameterless.",
+                        "The supplied method '{0}' is not parameterless.",
                         methodInfo),
                     "method");
             }

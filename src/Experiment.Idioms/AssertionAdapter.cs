@@ -2,7 +2,7 @@
 using Ploeh.Albedo;
 using Ploeh.AutoFixture.Idioms;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents an assertion to adapt <see cref="IIdiomaticAssertion"/>

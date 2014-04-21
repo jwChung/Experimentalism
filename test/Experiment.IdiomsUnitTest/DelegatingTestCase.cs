@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class DelegatingTestCase : ITestCase
     {

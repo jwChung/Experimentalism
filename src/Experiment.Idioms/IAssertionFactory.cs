@@ -1,6 +1,6 @@
 ﻿using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents an assertion factory.

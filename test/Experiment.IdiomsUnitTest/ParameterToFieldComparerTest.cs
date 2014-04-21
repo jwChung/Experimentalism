@@ -4,7 +4,7 @@ using System.Linq;
 using Ploeh.Albedo;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class ParameterToFieldComparerTest
     {
@@ -143,7 +143,9 @@ namespace Jwc.Experiment.Idioms
         private class TypeForFieldEqualValue
         {
             public readonly IEnumerable<int> Values;
+#pragma warning disable 649
             private readonly int _value;
+#pragma warning restore 649
             public object Value;
 
             public TypeForFieldEqualValue(int value)

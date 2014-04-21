@@ -4,7 +4,7 @@ using Ploeh.Albedo;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class IdiomaticTestCaseTest
     {
@@ -58,7 +58,7 @@ namespace Jwc.Experiment.Idioms
             var fakeTestFixture = new DelegatingTestFixture();
             Func<MethodInfo, ITestFixture> fixtureFactory = mi => fakeTestFixture;
 
-            var assertion = new DelegatingReflectionVisitor();
+            var assertion = new DelegatingReflectionVisitor<object>();
             var assetionFactory = new DelegatingAssertionFactory
             {
                 OnCreate = f =>
@@ -87,7 +87,7 @@ namespace Jwc.Experiment.Idioms
             bool verify = false;
             var assetionFactory = new DelegatingAssertionFactory
             {
-                OnCreate = f => new DelegatingReflectionVisitor()
+                OnCreate = f => new DelegatingReflectionVisitor<object>()
             };
             var sut = new IdiomaticTestCase(
                 new TypeElement(typeof(object)), assetionFactory);
@@ -110,7 +110,7 @@ namespace Jwc.Experiment.Idioms
             int createCount = 0;
             var assetionFactory = new DelegatingAssertionFactory
             {
-                OnCreate = f => new DelegatingReflectionVisitor()
+                OnCreate = f => new DelegatingReflectionVisitor<object>()
             };
             var sut = new IdiomaticTestCase(
                 new TypeElement(typeof(object)), assetionFactory);

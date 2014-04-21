@@ -93,8 +93,8 @@ namespace Jwc.Experiment
             var @event = member as EventInfo;
             if (@event != null)
             {
-                VerifyDoesNotExpose(@event.GetAddMethod(), typesNotExposed);
-                VerifyDoesNotExpose(@event.GetRemoveMethod(), typesNotExposed);
+                VerifyDoesNotExpose(@event.GetAddMethod(true), typesNotExposed);
+                VerifyDoesNotExpose(@event.GetRemoveMethod(true), typesNotExposed);
             }
         }
 

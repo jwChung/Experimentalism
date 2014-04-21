@@ -122,9 +122,8 @@ namespace Jwc.Experiment
 
         private IEnumerable<string> GetArgumentValues()
         {
-            var arguments = Arguments.ToArray();
             return Delegate.Method.GetParameters().Select(pi =>
-                GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
+                GetArgumentValue(pi.ParameterType.Name, _arguments[pi.Position]));
         }
 
         private static string GetArgumentValue(string typeName, object argument)

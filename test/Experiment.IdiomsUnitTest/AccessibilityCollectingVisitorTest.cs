@@ -6,7 +6,7 @@ using Ploeh.Albedo;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class AccessibilityCollectingVisitorTest
     {
@@ -26,10 +26,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitAssemblyElementThrows()
+        public void VisitAssemblyElementReturnsSutItself()
         {
             var sut = new AccessibilityCollectingVisitor();
-            Assert.Throws<NotSupportedException>(() => sut.Visit((AssemblyElement)null));
+            var actual = sut.Visit((AssemblyElement)null);
+            Assert.Equal(sut, actual);
         }
 
         [Theory]
@@ -251,17 +252,19 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitParameterInfoElementThrows()
+        public void VisitParameterInfoElementReturnsSutItself()
         {
             var sut = new AccessibilityCollectingVisitor();
-            Assert.Throws<NotSupportedException>(() => sut.Visit((ParameterInfoElement)null));
+            var actual = sut.Visit((ParameterInfoElement)null);
+            Assert.Equal(sut, actual);
         }
 
         [Fact]
-        public void VisitLocalVariableInfoElementThrows()
+        public void VisitLocalVariableInfoElementReturnsSutItself()
         {
             var sut = new AccessibilityCollectingVisitor();
-            Assert.Throws<NotSupportedException>(() => sut.Visit((LocalVariableInfoElement)null));
+            var actual = sut.Visit((LocalVariableInfoElement)null);
+            Assert.Equal(sut, actual);
         }
 
         [Theory]

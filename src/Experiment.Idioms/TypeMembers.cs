@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents default members of a certain <see cref="Type"/> which need
@@ -14,6 +15,8 @@ namespace Jwc.Experiment.Idioms
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class TypeMembers : IEnumerable<MemberInfo>
     {
+        private readonly IReflectionVisitor<IEnumerable<Accessibilities>> _accessibilityCollectingVisitor
+            = new AccessibilityCollectingVisitor();
         private readonly Accessibilities _accessibilities;
         private readonly Type _type;
 
@@ -92,7 +95,7 @@ namespace Jwc.Experiment.Idioms
         private bool IsSatisfiedWithAccessibilities(MemberInfo member)
         {
             var accessibilities = member.ToReflectionElement()
-                .Accept(new AccessibilityCollectingVisitor())
+                .Accept(_accessibilityCollectingVisitor)
                 .Value.Single();
 
             return (Accessibilities & accessibilities) != Accessibilities.None;

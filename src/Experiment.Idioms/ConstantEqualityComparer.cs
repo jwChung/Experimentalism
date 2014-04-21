@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represent <see cref="IEqualityComparer{T}" /> always returning a constant

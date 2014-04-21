@@ -2,7 +2,7 @@
 using Ploeh.Albedo;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents a test command for idiom.

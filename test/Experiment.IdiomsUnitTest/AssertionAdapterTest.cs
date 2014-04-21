@@ -5,7 +5,7 @@ using Ploeh.AutoFixture.Idioms;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class AssertionAdapterTest
     {

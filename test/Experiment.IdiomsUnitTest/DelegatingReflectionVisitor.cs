@@ -1,30 +1,37 @@
 using System;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
-    public class DelegatingReflectionVisitor : ReflectionVisitor<object>
+    public class DelegatingReflectionVisitor<T> : ReflectionVisitor<T>
     {
-        public DelegatingReflectionVisitor()
+        private readonly T _value;
+
+        public DelegatingReflectionVisitor() : this(default(T))
         {
-            OnVisitTypeElement = e => this;
         }
 
-        public override object Value
+        public DelegatingReflectionVisitor(T value)
+        {
+            _value = value;
+            OnVisitTypeElement = e => base.Visit(e);
+        }
+
+        public override T Value
         {
             get
             {
-                throw new NotSupportedException();
+                return _value;
             }
         }
 
-        public Func<TypeElement, IReflectionVisitor<object>> OnVisitTypeElement
+        public Func<TypeElement, IReflectionVisitor<T>> OnVisitTypeElement
         {
             get;
             set;
         }
 
-        public override IReflectionVisitor<object> Visit(TypeElement typeElement)
+        public override IReflectionVisitor<T> Visit(TypeElement typeElement)
         {
             return OnVisitTypeElement(typeElement);
         }

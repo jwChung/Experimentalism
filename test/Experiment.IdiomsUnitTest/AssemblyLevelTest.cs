@@ -3,7 +3,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class AssemblyLevelTest
     {
@@ -25,6 +25,7 @@ namespace Jwc.Experiment.Idioms
                 "Ploeh.AutoFixture.Idioms",
 
                 // Indirect references
+                "Mono.Reflection"
             };
 
             var actual = sut.GetActualReferencedAssemblies();
@@ -32,9 +33,8 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
         }
 
-        ////[Theory]
-        ////[InlineData("Ploeh.AutoFixture")]
-        ////[InlineData("Ploeh.AutoFixture.Idioms")]
+        [Theory]
+        [InlineData("Mono.Reflection")]
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
