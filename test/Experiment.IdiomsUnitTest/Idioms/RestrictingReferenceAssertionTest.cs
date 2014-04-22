@@ -78,6 +78,32 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<NotSupportedException>(() => sut.Value);
         }
 
+        [Theory]
+        [ReferencedData]
+        public void VerifyDoesNotThrowWhenAllReferencesAreSpecified(
+            Assembly assembly, Assembly[] assemblies)
+        {
+            var sut = new RestrictingReferenceAssertion(assemblies);
+            Assert.DoesNotThrow(() => sut.Verify(assembly));
+        }
+
+        [Theory]
+        [ReferencedData]
+        public void VerifyThrowsWhenAnyReferenceIsNotSpecified(
+             Assembly assembly, Assembly[] assemblies)
+        {
+            var sut = new RestrictingReferenceAssertion(
+                assemblies.Except(new[] { assemblies[1] }).ToArray());
+            Assert.Throws<RestrictingReferenceException>(() => sut.Verify(assembly));
+        }
+
+        [Fact]
+        public void VerifyNullAssemblyThrows()
+        {
+            var sut = new RestrictingReferenceAssertion();
+            Assert.Throws<ArgumentNullException>(() => sut.Verify(null));
+        }
+
         private class ReferencedDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
