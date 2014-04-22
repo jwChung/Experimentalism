@@ -66,7 +66,7 @@ namespace Jwc.Experiment
                 /* System.Core */ typeof(Enumerable).Assembly,
                 /* xunit */ typeof(FactAttribute).Assembly,
                 /* xunit.extensions */ typeof(TheoryAttribute).Assembly);
-            assertion.Visit(typeof(BaseTheoremAttribute).Assembly.ToElement());
+            assertion.Verify(typeof(BaseTheoremAttribute).Assembly);
         }
 
         private class TypeWithGuardTestMembers
