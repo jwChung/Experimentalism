@@ -45,8 +45,7 @@ namespace Jwc.Experiment
             }
 
             AddReferencedAssemblies(typeElement.Type);
-            base.Visit(typeElement);
-            return this;
+            return base.Visit(typeElement);
         }
 
         /// <summary>
@@ -68,16 +67,11 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("fieldInfoElements");
             }
             
-            foreach (var fieldInfoElement in fieldInfoElements)
-            {
-                var fieldInfo = fieldInfoElement.FieldInfo;
-                if (fieldInfo.ReflectedType == fieldInfo.DeclaringType)
-                {
-                    Visit(fieldInfoElement);
-                }
-            }
+            var elements = fieldInfoElements
+                .Where(e => e.FieldInfo.ReflectedType == e.FieldInfo.DeclaringType)
+                .ToArray();
 
-            return this;
+            return base.Visit(elements);
         }
 
         /// <summary>
@@ -102,8 +96,7 @@ namespace Jwc.Experiment
             }
 
             VisitMethodBody(constructorInfoElement.ConstructorInfo);
-            base.Visit(constructorInfoElement);
-            return this;
+            return base.Visit(constructorInfoElement);
         }
 
         /// <summary>
@@ -125,16 +118,11 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("propertyInfoElements");
             }
 
-            foreach (var propertyInfoElement in propertyInfoElements)
-            {
-                var propertyInfo = propertyInfoElement.PropertyInfo;
-                if (propertyInfo.ReflectedType == propertyInfo.DeclaringType)
-                {
-                    Visit(propertyInfoElement);
-                }
-            }
+            var elements = propertyInfoElements
+                .Where(e => e.PropertyInfo.ReflectedType == e.PropertyInfo.DeclaringType)
+                .ToArray();
 
-            return this;
+            return base.Visit(elements);
         }
 
         /// <summary>
@@ -156,16 +144,11 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("methodInfoElements");
             }
 
-            foreach (var methodInfoElement in methodInfoElements)
-            {
-                var methodInfo = methodInfoElement.MethodInfo;
-                if (methodInfo.ReflectedType == methodInfo.DeclaringType)
-                {
-                    Visit(methodInfoElement);
-                }
-            }
+            var elements = methodInfoElements
+                .Where(e => e.MethodInfo.ReflectedType == e.MethodInfo.DeclaringType)
+                .ToArray();
 
-            return this;
+            return base.Visit(elements);
         }
 
         /// <summary>
@@ -187,16 +170,11 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("eventInfoElements");
             }
 
-            foreach (var eventInfoElement in eventInfoElements)
-            {
-                var eventInfo = eventInfoElement.EventInfo;
-                if (eventInfo.ReflectedType == eventInfo.DeclaringType)
-                {
-                    Visit(eventInfoElement);
-                }
-            }
+            var elements = eventInfoElements
+                .Where(e => e.EventInfo.ReflectedType == e.EventInfo.DeclaringType)
+                .ToArray();
 
-            return this;
+            return base.Visit(elements);
         }
 
         /// <summary>
@@ -249,10 +227,7 @@ namespace Jwc.Experiment
             AddReferencedAssemblies(methodInfo.ReturnType);
             
             VisitMethodBody(methodInfo);
-
-            base.Visit(methodInfoElement);
-
-            return this;
+            return base.Visit(methodInfoElement);
         }
 
         /// <summary>

@@ -5,23 +5,16 @@ namespace Jwc.Experiment
 {
     public class DelegatingReflectionVisitor<T> : ReflectionVisitor<T>
     {
-        private readonly T _value;
-
-        public DelegatingReflectionVisitor() : this(default(T))
+        public DelegatingReflectionVisitor()
         {
-        }
-
-        public DelegatingReflectionVisitor(T value)
-        {
-            _value = value;
-            OnVisitTypeElement = e => base.Visit(e);
+            OnVisitTypeElement = e => this;
         }
 
         public override T Value
         {
             get
             {
-                return _value;
+                throw new NotSupportedException();
             }
         }
 
