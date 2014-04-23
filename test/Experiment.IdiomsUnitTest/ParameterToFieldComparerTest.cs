@@ -90,7 +90,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void EqualsParameterToFieldReturnsFalseWhenThayRepresentDifferentReflectedTypes()
+        public void EqualsParameterToFieldReturnsFalseWhenTheyRepresentDifferentReflectedTypes()
         {
             var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(0))
