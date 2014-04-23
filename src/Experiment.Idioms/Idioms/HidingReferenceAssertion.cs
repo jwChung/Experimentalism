@@ -234,6 +234,15 @@ namespace Jwc.Experiment.Idioms
             return base.Visit(methodInfoElement);
         }
 
+        /// <summary>
+        /// Verifies the specified assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        public void Verify(Assembly assembly)
+        {
+            Visit(assembly.ToElement());
+        }
+
         private void EnsureReferencesAreNotSpecified(IReflectionElement reflectionElement)
         {
             var asemblies = reflectionElement.Accept(_elementReferenceCollectingVisitor).Value.ToArray();
