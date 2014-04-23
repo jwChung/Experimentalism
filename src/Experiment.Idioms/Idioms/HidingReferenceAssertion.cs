@@ -8,8 +8,8 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represents assertions to verify that specified assemblies are not
-    /// directly referenced.
+    /// Represents assertions to verify that specified assemblies should not
+    /// be exposed from public API.
     /// </summary>
     public class HidingReferenceAssertion : ReflectionVisitor<object>
     {
@@ -23,7 +23,7 @@ namespace Jwc.Experiment.Idioms
         /// Initializes a new instance of the <see cref="HidingReferenceAssertion"/> class.
         /// </summary>
         /// <param name="assemblies">
-        /// The assemblies which are not referenced from elements.
+        /// The assemblies which should not be exposed from public API.
         /// </param>
         public HidingReferenceAssertion(params Assembly[] assemblies)
         {
@@ -44,13 +44,13 @@ namespace Jwc.Experiment.Idioms
             {
                 throw new NotSupportedException(
                     "This Value property isn't supported because the main purpose of this class is " +
-                    "to verify that specified assemblies are not directly referenced.");
+                    "to verify that specified assemblies are not exposed from public API.");
             }
         }
 
         /// <summary>
-        /// Gets a value indicating the assemblies which are not referenced from
-        /// elements.
+        /// Gets a value indicating the assemblies which should not be exposed
+        /// from public API.
         /// </summary>
         public IEnumerable<Assembly> Assemblies
         {
@@ -250,7 +250,8 @@ namespace Jwc.Experiment.Idioms
                 throw new HidingReferenceException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        "The assembly '{0}' should be hidden, but is exposed in the member '{1}'.",
+                        "The assembly '{0}' should not be exposed from public API, " +
+                        "but is exposed from the member '{1}'.",
                         assembly,
                         reflectionElement));
             }
