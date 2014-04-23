@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
@@ -233,11 +234,15 @@ namespace Jwc.Experiment.Idioms
 
         private void EnsureReferencesAreNotSpecified(IReflectionElement reflectionElement)
         {
-            var asemblies = reflectionElement.Accept(_elementReferenceCollectingVisitor).Value;
-            if (!Assemblies.Any(asemblies.Contains))
-                return;
-
-            throw new HidingReferenceException();
+            var asemblies = reflectionElement.Accept(_elementReferenceCollectingVisitor).Value.ToArray();
+            foreach (var assembly in Assemblies.Where(asemblies.Contains)) {
+                throw new HidingReferenceException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "The assembly '{0}' should be hidden, but is exposed in the member '{1}'.",
+                        assembly,
+                        reflectionElement));
+            }
         }
 
         private T[] GetVisibleReflectionElements<T>(IEnumerable<T> typeElements)
