@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Jwc.Experiment.Idioms;
+using Mono.Reflection;
 using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Ploeh.AutoFixture;
@@ -59,7 +60,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void RestrictingReferenceAssertionVerifyReferencedAssemblies()
+        public void RestrictingReferenceAssertionVerifiesAssembliesCorrectlyReferenced()
         {
             var assertion = new RestrictingReferenceAssertion(
                 /* mscorlib */ typeof(object).Assembly,
@@ -67,6 +68,13 @@ namespace Jwc.Experiment
                 /* xunit */ typeof(FactAttribute).Assembly,
                 /* xunit.extensions */ typeof(TheoryAttribute).Assembly);
             assertion.Verify(typeof(BaseTheoremAttribute).Assembly);
+        }
+
+        [Fact]
+        public void HidingReferenceAssertionVerifiesSpecifiedAssembliesNotExposed()
+        {
+            var assertion = new HidingReferenceAssertion(typeof(ILPattern).Assembly);
+            assertion.Verify(typeof(ConstructingMemberAssertion).Assembly);
         }
 
         private class TypeWithGuardTestMembers
