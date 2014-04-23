@@ -12,7 +12,7 @@
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Experiment" version="0.0.0" />
-      <dependency id="Albedo" version="1.0.0" />
+      <dependency id="Albedo" version="1.0.1" />
     </dependencies>
     <references>
       <reference file="Jwc.Experiment.Idioms.dll" />

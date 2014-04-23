@@ -37,9 +37,9 @@
     <Reference Include="Mono.Reflection">
       <HintPath>..\..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.Albedo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
+    <Reference Include="Ploeh.Albedo, Version=1.0.1.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Albedo.1.0.0\lib\net35\Ploeh.Albedo.dll</HintPath>
+      <HintPath>..\..\packages\Albedo.1.0.1\lib\net35\Ploeh.Albedo.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\..\packages\AutoFixture.3.0.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
