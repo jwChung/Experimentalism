@@ -8,7 +8,8 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents <see cref="IReflectionVisitor{T}"/> to collect direct references.
+    /// Represents <see cref="IReflectionVisitor{T}"/> to collect references
+    /// for a given assembly.
     /// </summary>
     public class ReferenceCollectingVisitor : ReflectionVisitor<IEnumerable<Assembly>>
     {
@@ -95,7 +96,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("constructorInfoElement");
             }
 
-            VisitMethodBody(constructorInfoElement.ConstructorInfo);
+            Visit(constructorInfoElement.ConstructorInfo);
             return base.Visit(constructorInfoElement);
         }
 
@@ -226,7 +227,7 @@ namespace Jwc.Experiment
             MethodInfo methodInfo = methodInfoElement.MethodInfo;
             AddReferencedAssemblies(methodInfo.ReturnType);
             
-            VisitMethodBody(methodInfo);
+            Visit(methodInfo);
             return base.Visit(methodInfoElement);
         }
 
@@ -280,8 +281,15 @@ namespace Jwc.Experiment
             return this;
         }
 
-        private void VisitMethodBody(MethodBase methodBase)
+        /// <summary>
+        /// Visits the specified method base.
+        /// </summary>
+        /// <param name="methodBase">The method base.</param>
+        protected virtual void Visit(MethodBase methodBase)
         {
+            if (methodBase == null)
+                throw new ArgumentNullException("methodBase");
+
             if (methodBase.GetMethodBody() == null)
                 return;
 

@@ -154,7 +154,7 @@ namespace Jwc.Experiment
             };
             var localVariableInfoElement = new Methods<TypeForCollectingReference>()
                 .Select(x => x.ReturnMethod()).GetMethodBody()
-                .LocalVariables.Single().ToElement();
+                .LocalVariables.First().ToElement();
 
             var actual = sut.Visit(localVariableInfoElement);
 
@@ -535,100 +535,6 @@ namespace Jwc.Experiment
                     }
                 };
             }
-        }
-
-        private class SubTypeWithMembers : TypeWithMembers
-        {
-        }
-
-        private class TypeForCollectingReference
-        {
-            public TypeForCollectingReference(int arg)
-            {
-                PrivateMethod1(null);
-            }
-
-            public TypeForCollectingReference(object arg)
-            {
-            }
-
-#pragma warning disable 649
-            public TypeImplementingMultiple Field;
-#pragma warning restore 649
-
-            public TypeImplementingMultiple ReturnMethod()
-            {
-                var typeImplementingMultiple = new TypeImplementingMultiple();
-                return typeImplementingMultiple;
-            }
-
-            public void ParameterizedMethod(TypeImplementingMultiple arg)
-            {
-            }
-
-            public object MethodCallInMethodBody()
-            {
-                return new[] { "a", "b" }.ToArray();
-            }
-
-            public void ConstructInMethodBody()
-            {
-                PrivateMethod1(new Fixture());
-            }
-
-            public void RetrunValueInMethodBody()
-            {
-                PrivateMethod2();
-            }
-
-            public void PassParameterInMethodBody()
-            {
-                PrivateMethod1(null);
-            }
-
-            private void PrivateMethod1(Fixture fixture)
-            {
-            }
-
-            private Fixture PrivateMethod2()
-            {
-                return null;
-            }
-        }
-
-        public class TypeImplementingMultiple : IDisposable, ISpecimenContext
-        {
-            public void Dispose()
-            {
-                throw new NotSupportedException();
-            }
-
-            public object Resolve(object request)
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        public class TypeImplementingHierarchical : IDisposable, IHierarchical
-        {
-            public void Dispose()
-            {
-                throw new NotSupportedException();
-            }
-
-            public object Resolve(object request)
-            {
-                throw new NotSupportedException();
-            }
-
-            public IReflectionVisitor<T> Accept<T>(IReflectionVisitor<T> visitor)
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        public interface IHierarchical : ISpecimenContext, IReflectionElement
-        {
         }
     }
 }

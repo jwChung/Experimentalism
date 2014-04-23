@@ -16,18 +16,28 @@ using System.Runtime.InteropServices;
 /*
  * Version 0.14.0
  * 
- * - [FIX] Makes ReferenceCollectingVisitor tread-safe and improves its
+ * - [FIX] Makes `ReferenceCollectingVisitor` tread-safe and improves its
  *   performance.
  *   
- * - [NEW] Introduces the new RestrictingReferenceAssertion.Verify(Assembly)
+ * - [NEW] Introduces the new `RestrictingReferenceAssertion.Verify(Assembly)`
  *   method to be used to verify that all references of a given assembly are
  *   correctly specified, instead of using
- *   RestrictingReferenceAssertion.Visit(AssemblyElement).
+ *   `RestrictingReferenceAssertion.Visit(AssemblyElement)`.
  *   
  *   [Fact]
  *   public void Demo()
  *   {
  *       var assertion = new RestrictingReferenceAssertion();
- *       assertion.Verify(typeof(IEnumerable&lt;object&gt;).Assembly);
+ *       assertion.Verify(typeof(IEnumerable<object>).Assembly);
+ *   }
+ *   
+ * - [NEW] Introduces the assertion class `HidingReferenceAssertion` to verify
+ *   that specified assemblies are not directly referenced.
+ *   
+ *   [Fact]
+ *   public void Demo()
+ *   {
+ *       var assertion = new HidingReferenceAssertion(typeof(Enumerable).Assembly);
+ *       assertion.Verify(typeof(IEnumerable<object>).Assembly);
  *   }
  */

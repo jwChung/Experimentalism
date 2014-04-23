@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents a verification error thrown when testing whether an assembly
+    /// Represents a verification error when testing whether an assembly
     /// references only given assemblies.
     /// </summary>
     [Serializable]
