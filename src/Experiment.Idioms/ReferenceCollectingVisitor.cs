@@ -287,6 +287,9 @@ namespace Jwc.Experiment
         /// <param name="methodBase">The method base.</param>
         protected virtual void Visit(MethodBase methodBase)
         {
+            if (methodBase == null)
+                throw new ArgumentNullException("methodBase");
+
             if (methodBase.GetMethodBody() == null)
                 return;
 
