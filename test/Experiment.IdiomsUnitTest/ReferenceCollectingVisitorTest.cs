@@ -154,7 +154,7 @@ namespace Jwc.Experiment
             };
             var localVariableInfoElement = new Methods<TypeForCollectingReference>()
                 .Select(x => x.ReturnMethod()).GetMethodBody()
-                .LocalVariables.Single().ToElement();
+                .LocalVariables.First().ToElement();
 
             var actual = sut.Visit(localVariableInfoElement);
 
