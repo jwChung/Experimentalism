@@ -237,28 +237,6 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitConstructorInfoEelementThrowsIfAnyAssemblyIsSpecified()
-        {
-            var sut = new HidingReferenceAssertion(typeof(Fixture).Assembly);
-            var constructorInfoElement = Constructors.Select(() => new TypeForCollectingReference(0)).ToElement();
-            Assert.Throws<HidingReferenceException>(() => sut.Visit(constructorInfoElement));
-        }
-
-        [Fact]
-        public void VisitConstructorInfoEelementThrowsIfAllAssemblisAreNotSpecified()
-        {
-            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<HidingReferenceAssertion>(typeof(FactAttribute).Assembly) { CallBase = true }.Object;
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
-            var constructorInfoElement = Constructors.Select(() => new TypeForCollectingReference(0)).ToElement();
-
-            var actual = sut.Visit(constructorInfoElement);
-
-            Assert.Equal(visitor, actual);
-        }
-
-        [Fact]
         public void VisitMethodInfoEelementThrowsIfAnyAssemblyIsSpecified()
         {
             var sut = new HidingReferenceAssertion(typeof(TypeImplementingMultiple).Assembly);

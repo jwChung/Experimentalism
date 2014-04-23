@@ -128,5 +128,13 @@ namespace Jwc.Experiment
         {
             return base.Visit(new LocalVariableInfoElement[0]);
         }
+
+        /// <summary>
+        /// Visits the specified method base.
+        /// </summary>
+        /// <param name="methodBase">The method base.</param>
+        protected override void Visit(MethodBase methodBase)
+        {
+        }
     }
 }

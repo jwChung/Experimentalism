@@ -89,5 +89,19 @@ namespace Jwc.Experiment
             Assert.Equal(sut, actual);
             sut.ToMock().Verify(x => x.Visit(It.IsAny<LocalVariableInfoElement>()), Times.Never());
         }
+
+        [Fact]
+        public void VisitMethodInfoElementDoesNotRelayMethodBody()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ConstructInMethodBody()).ToElement();
+            var expected = new[] { typeof(object).Assembly };
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(sut, actual);
+            Assert.Equal(expected, sut.Value);
+        }
     }
 }

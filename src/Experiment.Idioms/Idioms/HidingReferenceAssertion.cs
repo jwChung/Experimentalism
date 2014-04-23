@@ -213,25 +213,6 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows an <see cref="ConstructorInfoElement" /> to be visited.
-        /// This method is called when the element accepts this visitor
-        /// instance.
-        /// </summary>
-        /// <param name="constructorInfoElement">
-        /// The <see cref="ConstructorInfoElement" /> being visited.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
-        /// </returns>
-        public override IReflectionVisitor<object> Visit(ConstructorInfoElement constructorInfoElement)
-        {
-            EnsureReferencesAreNotSpecified(constructorInfoElement);
-            return base.Visit(constructorInfoElement);
-        }
-
-        /// <summary>
         /// Allows an <see cref="MethodInfoElement" /> to be visited.
         /// This method is called when the element accepts this visitor
         /// instance.
