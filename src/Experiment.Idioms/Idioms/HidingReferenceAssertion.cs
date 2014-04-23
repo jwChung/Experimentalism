@@ -42,7 +42,9 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                throw new System.NotImplementedException();
+                throw new NotSupportedException(
+                    "This Value property isn't supported because the main purpose of this class is " +
+                    "to verify that specified assemblies are not directly referenced.");
             }
         }
 

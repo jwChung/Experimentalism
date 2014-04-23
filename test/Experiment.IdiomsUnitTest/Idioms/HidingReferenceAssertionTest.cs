@@ -260,6 +260,13 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(visitor, actual);
         }
 
+        [Fact]
+        public void ValueThrowsNotSupportedException()
+        {
+            var sut = new HidingReferenceAssertion();
+            Assert.Throws<NotSupportedException>(() => sut.Value);
+        }
+
         private static void AssertAreVisibleElements(IEnumerable<IReflectionElement> reflectionElements)
         {
             var result = reflectionElements.ToArray();
