@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollectingVisitor.cs" />
+    <Compile Include="ElementReferenceCollectingVisitor.cs" />
     <Compile Include="HidingReferenceException.cs" />
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />

@@ -8,7 +8,8 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents <see cref="IReflectionVisitor{T}"/> to collect direct references.
+    /// Represents <see cref="IReflectionVisitor{T}"/> to collect references
+    /// for a given assembly.
     /// </summary>
     public class ReferenceCollectingVisitor : ReflectionVisitor<IEnumerable<Assembly>>
     {
