@@ -70,6 +70,7 @@
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="ConstantEqualityComparerTest.cs" />
     <Compile Include="ElementReferenceCollectingVisitorTest.cs" />
+    <Compile Include="IHierarchical.cs" />
     <Compile Include="MockExtensions.cs" />
     <Compile Include="ReferenceCollectingVisitorTest.cs" />
     <Compile Include="HidingReferenceExceptionTest.cs" />
@@ -90,6 +91,10 @@
     <Compile Include="PropertyToParameterComparerTest.cs" />
     <Compile Include="RestrictingReferenceExceptionTest.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertionTest.cs" />
+    <Compile Include="SubTypeWithMembers.cs" />
+    <Compile Include="TypeForCollectingReference.cs" />
+    <Compile Include="TypeImplementingHierarchical.cs" />
+    <Compile Include="TypeImplementingMultiple.cs" />
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="CompositeEnumerableTest.cs" />

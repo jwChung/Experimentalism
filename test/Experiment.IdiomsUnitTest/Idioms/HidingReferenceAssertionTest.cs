@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Moq;
 using Ploeh.Albedo;
+using Ploeh.AutoFixture;
 using Xunit;
 
 namespace Jwc.Experiment.Idioms
@@ -177,6 +178,108 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(sut, actual);
             sut.ToMock().Verify(x => x.Visit(It.IsAny<LocalVariableInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitTypeEelementThrowsIfAnyAssemblyIsSpecified()
+        {
+            // Fixture setup
+            Type type = typeof(SpecimenBuilderAdapter);
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            var sut = new Mock<HidingReferenceAssertion>(typeof(Fixture).Assembly) { CallBase = true }.Object;
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<MethodInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<EventInfoElement>())).Returns(visitor);
+
+            // Exercise system and Verify outcome
+            Assert.Throws<HidingReferenceException>(() => sut.Visit(type.ToElement()));
+        }
+
+        [Fact]
+        public void VisitTypeEelementDoesNotThrowIfAllAssemblisAreNotSpecified()
+        {
+            Type type = typeof(SpecimenBuilderAdapter);
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            var sut = new Mock<HidingReferenceAssertion>(typeof(BaseTheoremAttribute).Assembly)
+            { CallBase = true }.Object;
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<MethodInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<EventInfoElement>())).Returns(visitor);
+
+            var actual = sut.Visit(type.ToElement());
+
+            Assert.Equal(visitor, actual);
+        }
+
+        [Fact]
+        public void VisitFieldInfoEelementThrowsIfAnyAssemblyIsSpecified()
+        {
+            var sut = new HidingReferenceAssertion(typeof(TypeImplementingMultiple).Assembly);
+            var fieldInfoElement = new Fields<TypeForCollectingReference>()
+                .Select(x => x.Field).ToElement();
+            Assert.Throws<HidingReferenceException>(() => sut.Visit(fieldInfoElement));
+        }
+
+        [Fact]
+        public void VisitFieldInfoEelementThrowsIfAllAssemblisAreNotSpecified()
+        {
+            var sut = new HidingReferenceAssertion(typeof(FactAttribute).Assembly);
+            var fieldInfoElement = new Fields<TypeForCollectingReference>()
+                .Select(x => x.Field).ToElement();
+
+            var actual = sut.Visit(fieldInfoElement);
+
+            Assert.Equal(sut, actual);
+        }
+
+        [Fact]
+        public void VisitConstructorInfoEelementThrowsIfAnyAssemblyIsSpecified()
+        {
+            var sut = new HidingReferenceAssertion(typeof(Fixture).Assembly);
+            var constructorInfoElement = Constructors.Select(() => new TypeForCollectingReference(0)).ToElement();
+            Assert.Throws<HidingReferenceException>(() => sut.Visit(constructorInfoElement));
+        }
+
+        [Fact]
+        public void VisitConstructorInfoEelementThrowsIfAllAssemblisAreNotSpecified()
+        {
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            var sut = new Mock<HidingReferenceAssertion>(typeof(FactAttribute).Assembly) { CallBase = true }.Object;
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
+            var constructorInfoElement = Constructors.Select(() => new TypeForCollectingReference(0)).ToElement();
+
+            var actual = sut.Visit(constructorInfoElement);
+
+            Assert.Equal(visitor, actual);
+        }
+
+        [Fact]
+        public void VisitMethodInfoEelementThrowsIfAnyAssemblyIsSpecified()
+        {
+            var sut = new HidingReferenceAssertion(typeof(TypeImplementingMultiple).Assembly);
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ReturnMethod()).ToElement();
+            Assert.Throws<HidingReferenceException>(() => sut.Visit(methodInfoElement));
+        }
+
+        [Fact]
+        public void VisitMethodInfoEelementThrowsIfAllAssemblisAreNotSpecified()
+        {
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            var sut = new Mock<HidingReferenceAssertion>(typeof(FactAttribute).Assembly) { CallBase = true }.Object;
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
+            var methodInfoElement = new Methods<TypeForCollectingReference>()
+                .Select(x => x.ReturnMethod(0)).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(visitor, actual);
         }
 
         private static void AssertAreVisibleElements(IEnumerable<IReflectionElement> reflectionElements)

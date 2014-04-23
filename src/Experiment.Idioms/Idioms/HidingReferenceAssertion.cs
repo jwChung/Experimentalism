@@ -14,6 +14,8 @@ namespace Jwc.Experiment.Idioms
     {
         private readonly AccessibilityCollectingVisitor _accessibilityCollectingVisitor
             = new AccessibilityCollectingVisitor();
+        private readonly ElementReferenceCollectingVisitor _elementReferenceCollectingVisitor
+            = new ElementReferenceCollectingVisitor();
         private readonly Assembly[] _assemblies;
 
         /// <summary>
@@ -172,6 +174,89 @@ namespace Jwc.Experiment.Idioms
             params LocalVariableInfoElement[] localVariableInfoElements)
         {
             return base.Visit(new LocalVariableInfoElement[0]);
+        }
+
+        /// <summary>
+        /// Allows an <see cref="TypeElement" /> to be visited. This method is
+        /// called when the element accepts this visitor instance.
+        /// </summary>
+        /// <param name="typeElement">
+        /// The <see cref="TypeElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(TypeElement typeElement)
+        {
+            EnsureReferencesAreNotSpecified(typeElement);
+            return base.Visit(typeElement);
+        }
+
+        /// <summary>
+        /// Allows an <see cref="FieldInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="fieldInfoElement">The <see cref="FieldInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(FieldInfoElement fieldInfoElement)
+        {
+            EnsureReferencesAreNotSpecified(fieldInfoElement);
+            return base.Visit(fieldInfoElement);
+        }
+
+        /// <summary>
+        /// Allows an <see cref="ConstructorInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="constructorInfoElement">
+        /// The <see cref="ConstructorInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(ConstructorInfoElement constructorInfoElement)
+        {
+            EnsureReferencesAreNotSpecified(constructorInfoElement);
+            return base.Visit(constructorInfoElement);
+        }
+
+        /// <summary>
+        /// Allows an <see cref="MethodInfoElement" /> to be visited.
+        /// This method is called when the element accepts this visitor
+        /// instance.
+        /// </summary>
+        /// <param name="methodInfoElement">
+        /// The <see cref="MethodInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
+        /// to continue the visiting process with potentially updated
+        /// observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(MethodInfoElement methodInfoElement)
+        {
+            EnsureReferencesAreNotSpecified(methodInfoElement);
+            return base.Visit(methodInfoElement);
+        }
+
+        private void EnsureReferencesAreNotSpecified(IReflectionElement reflectionElement)
+        {
+            var asemblies = reflectionElement.Accept(_elementReferenceCollectingVisitor).Value;
+            if (!Assemblies.Any(asemblies.Contains))
+                return;
+
+            throw new HidingReferenceException();
         }
 
         private T[] GetVisibleReflectionElements<T>(IEnumerable<T> typeElements)
