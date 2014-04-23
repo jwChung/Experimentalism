@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using Moq;
+using Ploeh.Albedo;
+using Xunit;
 
 namespace Jwc.Experiment
 {
@@ -9,6 +11,83 @@ namespace Jwc.Experiment
         {
             var sut = new ElementReferenceCollectingVisitor();
             Assert.IsAssignableFrom<ReferenceCollectingVisitor>(sut);
+        }
+
+        [Fact]
+        public void VisitFieldInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((FieldInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<FieldInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitConstructorInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((ConstructorInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<ConstructorInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitPropertyInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((PropertyInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<PropertyInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((MethodInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<MethodInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitEventInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((EventInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<EventInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitParameterInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((ParameterInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<ParameterInfoElement>()), Times.Never());
+        }
+
+        [Fact]
+        public void VisitLocalVariableInfoElementsPassesEmptyToBaseMethod()
+        {
+            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+
+            var actual = sut.Visit((LocalVariableInfoElement[])null);
+
+            Assert.Equal(sut, actual);
+            sut.ToMock().Verify(x => x.Visit(It.IsAny<LocalVariableInfoElement>()), Times.Never());
         }
     }
 }
