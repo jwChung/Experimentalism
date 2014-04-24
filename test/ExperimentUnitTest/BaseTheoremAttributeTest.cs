@@ -267,6 +267,19 @@ namespace Jwc.Experiment
 
             Assert.True(verified, "verified");
         }
+
+        [Fact]
+        public void CreateParameterizedTestWithExceptionDataReturnsCorrectCommands()
+        {
+            var sut = new TestSpecificTheoremAttribute();
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithExceptionData"));
+
+            var actual = sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(2, actual.Length);
+            var command = Assert.IsAssignableFrom<ExceptionCommand>(actual[1]);
+            Assert.IsType<NotSupportedException>(command.Exception);
+        }
         
         [InlineData]
         [InlineData]
@@ -298,6 +311,11 @@ namespace Jwc.Experiment
         {
         }
 
+        [ExceptionData]
+        public void ParameterizedWithExceptionData(string arg1, int arg2)
+        {
+        }
+
         private class TestSpecificTheoremAttribute : BaseTheoremAttribute
         {
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
@@ -318,6 +336,15 @@ namespace Jwc.Experiment
             {
                 Assert.Equal(new[] { typeof(string), typeof(int) }, parameterTypes);
                 yield return new object[] { "dummy", 1 };
+            }
+        }
+
+        private class ExceptionDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                yield return new object[] { "dummy", 1 };
+                throw new NotSupportedException();
             }
         }
     }

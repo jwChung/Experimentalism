@@ -18,4 +18,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] Improves performance for creating test commands in
  *   `BaseFirstClassTheoremAttribute`.
+ *   
+ * - [FIX] Fixes an exception thrown when creating test data in
+ *   `BaseTheoremAttribute`.
  */

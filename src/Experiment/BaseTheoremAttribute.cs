@@ -29,10 +29,49 @@ namespace Jwc.Experiment
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
-            {
                 throw new ArgumentNullException("method");
-            }
 
+            var enumerator = GetTestCommands(method).GetEnumerator();
+
+            Func<IMethodInfo, ITestCommand> exceptionCommandFunc;
+
+            while (TryMoveNext(enumerator, out exceptionCommandFunc))
+                yield return enumerator.Current;
+
+            if (exceptionCommandFunc != null)
+                yield return exceptionCommandFunc.Invoke(method);
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="ITestFixture"/>.
+        /// </summary>
+        /// <param name="testMethod">
+        /// The test method
+        /// </param>
+        /// <returns>
+        /// The created fixture.
+        /// </returns>
+        protected abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
+
+        private static bool TryMoveNext(
+            IEnumerator<ITestCommand> enumerator,
+            out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
+        {
+            try
+            {
+                var moveNext = enumerator.MoveNext();
+                exceptionCommandFunc = null;
+                return moveNext;
+            }
+            catch (Exception exception)
+            {
+                exceptionCommandFunc = m => new ExceptionCommand(m, exception);
+                return false;
+            }
+        }
+
+        private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
+        {
             try
             {
                 var specifiedArgumentSet = new SpecifiedArgumentSet(method.MethodInfo);
@@ -49,17 +88,6 @@ namespace Jwc.Experiment
             }
         }
 
-        /// <summary>
-        /// Creates an instance of <see cref="ITestFixture"/>.
-        /// </summary>
-        /// <param name="testMethod">
-        /// The test method
-        /// </param>
-        /// <returns>
-        /// The created fixture.
-        /// </returns>
-        protected abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
-
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var arguments = new TestArgumentCollection(
@@ -67,9 +95,7 @@ namespace Jwc.Experiment
                 method.MethodInfo.GetParameters());
 
             if (!arguments.HasParemeters)
-            {
                 return base.EnumerateTestCommands(method).Single();
-            }
 
             return new TheoryCommand(method, arguments.ToArray());
         }
