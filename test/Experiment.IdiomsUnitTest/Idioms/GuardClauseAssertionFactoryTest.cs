@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -22,13 +21,6 @@ namespace Jwc.Experiment.Idioms
 
             var assertion = Assert.IsAssignableFrom<GuardClauseAssertion>(actual);
             Assert.Equal(testFixture, assertion.TestFixture);
-        }
-
-        [Fact]
-        public void CreateWithNullTestFixtureThrows()
-        {
-            var sut = new GuardClauseAssertionFactory();
-            Assert.Throws<ArgumentNullException>(() => sut.Create(null));
         }
     }
 }

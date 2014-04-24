@@ -1,5 +1,4 @@
-﻿using System;
-using Ploeh.Albedo;
+﻿using Ploeh.Albedo;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -17,11 +16,6 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IReflectionVisitor<object> Create(ITestFixture testFixture)
         {
-            if (testFixture == null)
-            {
-                throw new ArgumentNullException("testFixture");
-            }
-
             return new GuardClauseAssertion(testFixture);
         }
     }
