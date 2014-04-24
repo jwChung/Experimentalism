@@ -267,17 +267,6 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<NotSupportedException>(() => sut.Value);
         }
 
-        [Fact]
-        public void VerifyAssemblyCallsVerifyAssemblyElement()
-        {
-            var sut = new Mock<HidingReferenceAssertion>() { CallBase = true }.Object;
-            var assembly = typeof(object).Assembly;
-
-            sut.Verify(assembly);
-
-            sut.ToMock().Verify(x => x.Visit(It.Is<AssemblyElement>(p => p.Assembly == assembly)));
-        }
-
         private static void AssertAreVisibleElements(IEnumerable<IReflectionElement> reflectionElements)
         {
             var result = reflectionElements.ToArray();

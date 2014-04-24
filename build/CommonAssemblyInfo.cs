@@ -23,4 +23,16 @@ using System.Runtime.InteropServices;
  *   method or constructor has appropriate Guard Clauses in place.
  *   
  * - [FIX] Lets `ConstructingMemberAssertion` accept only relevant elements.
+ * 
+ * - [FIX] Deletes the `Verify(Assemlby)` method in `HidingReferenceAssertion`
+ *   and `RestrictingReferenceAssertion` to keep consistency with other
+ *   assertions. Instead use the `AssemblyElement.Accept(IReflectionVisitor<object>)`
+ *   method as the demo below. (BREAKING-CHANGE)
+ *   
+ *   [Fact]
+ *   public void Demo()
+ *   {
+ *       var assertion = new RestrictingReferenceAssertion();
+ *       typeof(IEnumerable<object>).Assembly.ToElement().Accept(assertion);
+ *   }
  */

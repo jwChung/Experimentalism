@@ -67,14 +67,14 @@ namespace Jwc.Experiment
                 /* System.Core */ typeof(Enumerable).Assembly,
                 /* xunit */ typeof(FactAttribute).Assembly,
                 /* xunit.extensions */ typeof(TheoryAttribute).Assembly);
-            assertion.Verify(typeof(BaseTheoremAttribute).Assembly);
+            typeof(BaseTheoremAttribute).Assembly.ToElement().Accept(assertion);
         }
 
         [Fact]
         public void HidingReferenceAssertionVerifiesSpecifiedAssembliesNotExposed()
         {
             var assertion = new HidingReferenceAssertion(typeof(ILPattern).Assembly);
-            assertion.Verify(typeof(ConstructingMemberAssertion).Assembly);
+            typeof(ConstructingMemberAssertion).Assembly.ToElement().Accept(assertion);
         }
 
         private class TypeWithGuardTestMembers

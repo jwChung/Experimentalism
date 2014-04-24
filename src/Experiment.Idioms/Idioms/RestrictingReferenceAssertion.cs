@@ -56,15 +56,6 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Verifies the specified assembly.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        public void Verify(Assembly assembly)
-        {
-            Visit(assembly.ToElement());
-        }
-
-        /// <summary>
         /// Allows an <see cref="AssemblyElement" /> to be visited.
         /// This method is called when the element accepts this visitor
         /// instance.
