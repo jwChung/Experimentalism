@@ -25,7 +25,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ParameterToMemberComparerIsCorrect()
+        public void ParameterToMemberComparerIsCorrectWhenInitializedWithGreedyCtor()
         {
             var constructorComparer = new DelegatingReflectionElementComparer();
             var sut = new ConstructingMemberAssertion(
@@ -38,7 +38,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void MemberToParameterComparerIsCorrect()
+        public void MemberToParameterComparerIsCorrectWhenInitializedWithGreedyCtor()
         {
             var memberComparer = EqualityComparer<IReflectionElement>.Default;
             var sut = new ConstructingMemberAssertion(
@@ -353,6 +353,51 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(visitor, actual);
             AssertArePublicElements(expectedElements);
             Assert.True(expectedElements.All(e => e.PropertyInfo.GetGetMethod() != null));
+        }
+
+        [Fact]
+        public void ParameterToMemberComparerIsCorrectWhenInitializedWithModestCtor()
+        {
+            var testFixture = new DelegatingTestFixture();
+            var sut = new ConstructingMemberAssertion(testFixture);
+
+            var actual = sut.ParameterToMemberComparer;
+
+            var comparers = Assert.IsAssignableFrom<OrEqualityComparer<IReflectionElement>>(actual)
+                .EqualityComparers.ToArray();
+            Assert.Equal(2, comparers.Length);
+            var comparers1 = Assert.IsAssignableFrom<ParameterToPropertyComparer>(comparers[0]);
+            Assert.Equal(testFixture, comparers1.TestFixture);
+            var comparers2 = Assert.IsAssignableFrom<ParameterToFieldComparer>(comparers[1]);
+            Assert.Equal(testFixture, comparers2.TestFixture);
+        }
+
+        [Fact]
+        public void MemberToParameterComparerIsCorrectWhenInitializedWithModestCtor()
+        {
+            var testFixture = new DelegatingTestFixture();
+            var sut = new ConstructingMemberAssertion(testFixture);
+
+            var actual = sut.MemberToParameterComparer;
+
+            var comparers = Assert.IsAssignableFrom<OrEqualityComparer<IReflectionElement>>(actual)
+                .EqualityComparers.ToArray();
+            Assert.Equal(2, comparers.Length);
+            var comparers1 = Assert.IsAssignableFrom<PropertyToParameterComparer>(comparers[0]);
+            Assert.Equal(testFixture, comparers1.TestFixture);
+            var comparers2 = Assert.IsAssignableFrom<FieldToParameterComparer>(comparers[1]);
+            Assert.Equal(testFixture, comparers2.TestFixture);
+        }
+
+        [Fact]
+        public void TestFixtureIsCorrect()
+        {
+            var testFixture = new DelegatingTestFixture();
+            var sut = new ConstructingMemberAssertion(testFixture);
+
+            var actual = sut.TestFixture;
+
+            Assert.Equal(testFixture, actual);
         }
 
         private static void AssertArePublicElements(IEnumerable<IReflectionElement> reflectionElements)

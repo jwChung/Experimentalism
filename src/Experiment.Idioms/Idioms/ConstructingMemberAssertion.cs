@@ -15,6 +15,7 @@ namespace Jwc.Experiment.Idioms
     {
         private readonly AccessibilityCollectingVisitor _accessibilityCollectingVisitor
             = new AccessibilityCollectingVisitor();
+        private readonly ITestFixture _testFixture;
         private readonly IEqualityComparer<IReflectionElement> _parameterToMemberComparer;
         private readonly IEqualityComparer<IReflectionElement> _memberToParameterComparer;
 
@@ -45,6 +46,23 @@ namespace Jwc.Experiment.Idioms
 
             _parameterToMemberComparer = parameterToMemberComparer;
             _memberToParameterComparer = memberToParameterComparer;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConstructingMemberAssertion"/> class.
+        /// </summary>
+        /// <param name="testFixture">
+        /// The test fixture.
+        /// </param>
+        public ConstructingMemberAssertion(ITestFixture testFixture) : this(
+            new OrEqualityComparer<IReflectionElement>(
+                    new ParameterToPropertyComparer(testFixture),
+                    new ParameterToFieldComparer(testFixture)),
+            new OrEqualityComparer<IReflectionElement>(
+                    new PropertyToParameterComparer(testFixture),
+                    new FieldToParameterComparer(testFixture)))
+        {
+            _testFixture = testFixture;
         }
 
         /// <summary>
@@ -80,6 +98,17 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 return _memberToParameterComparer;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the test fixture.
+        /// </summary>
+        public ITestFixture TestFixture
+        {
+            get
+            {
+                return _testFixture;
             }
         }
 
