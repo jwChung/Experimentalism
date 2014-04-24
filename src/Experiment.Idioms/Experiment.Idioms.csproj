@@ -61,6 +61,7 @@
     <Compile Include="AccessibilityCollectingVisitor.cs" />
     <Compile Include="ElementReferenceCollectingVisitor.cs" />
     <Compile Include="HidingReferenceException.cs" />
+    <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />
     <Compile Include="ConstantEqualityComparer.cs" />

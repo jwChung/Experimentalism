@@ -1,5 +1,4 @@
 ﻿using System;
-using Ploeh.AutoFixture.Idioms;
 using Xunit;
 
 namespace Jwc.Experiment.Idioms
@@ -22,7 +21,8 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Create(testFixture);
 
             var assertionAdapter = Assert.IsAssignableFrom<AssertionAdapter>(actual);
-            var assertion = Assert.IsAssignableFrom<GuardClauseAssertion>(assertionAdapter.Assertion);
+            var assertion = Assert.IsAssignableFrom<Ploeh.AutoFixture.Idioms.GuardClauseAssertion>(
+                assertionAdapter.Assertion);
             var specimenBuilderAdpater = Assert.IsAssignableFrom<SpecimenBuilderAdapter>(assertion.Builder);
             Assert.Equal(testFixture, specimenBuilderAdpater.TestFixture);
         }

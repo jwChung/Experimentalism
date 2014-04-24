@@ -119,7 +119,7 @@ namespace Jwc.Experiment.Idioms
                         typeof(IReflectionElement).Assembly,
                         typeof(FactAttribute).Assembly,
                         typeof(Fixture).Assembly,
-                        typeof(GuardClauseAssertion).Assembly,
+                        typeof(IIdiomaticAssertion).Assembly,
                         typeof(ILPattern).Assembly,
                         typeof(ISet<object>).Assembly
                     }

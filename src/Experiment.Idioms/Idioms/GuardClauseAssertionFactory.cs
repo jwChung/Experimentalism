@@ -1,6 +1,5 @@
 ﻿using System;
 using Ploeh.Albedo;
-using Ploeh.AutoFixture.Idioms;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -24,7 +23,7 @@ namespace Jwc.Experiment.Idioms
             }
 
             return new AssertionAdapter(
-                new GuardClauseAssertion(
+                new Ploeh.AutoFixture.Idioms.GuardClauseAssertion(
                     new SpecimenBuilderAdapter(testFixture)));
         }
     }
