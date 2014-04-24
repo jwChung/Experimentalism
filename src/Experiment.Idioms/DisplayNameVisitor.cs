@@ -43,8 +43,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Visits the specified assembly element to collect a dispaly name of
-        /// an assembly element.
+        /// Visits an assembly element to collect a dispaly name of it.
         /// </summary>
         /// <param name="assemblyElement">
         /// The assembly element whose display name is collected.
@@ -59,6 +58,24 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("assemblyElement");
 
             return new DisplayNameVisitor(Value.Concat(new[] { assemblyElement.ToString() }));
+        }
+
+        /// <summary>
+        /// Visits a type element to collect a dispaly name of it.
+        /// </summary>
+        /// <param name="typeElement">
+        /// The type element whose display name is collected.
+        /// </param>
+        /// <returns>
+        /// The visitor which collected a display name.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<string>> Visit(
+            TypeElement typeElement)
+        {
+            if (typeElement == null)
+                throw new ArgumentNullException("typeElement");
+
+            return new DisplayNameVisitor(Value.Concat(new[] { typeElement.ToString() }));
         }
     }
 }

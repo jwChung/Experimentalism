@@ -53,5 +53,36 @@ namespace Jwc.Experiment
 
             Assert.Equal(2, actual2.Value.Count());
         }
+
+        [Fact]
+        public void VisitTypeElementCollectsCorrectName()
+        {
+            var sut = new DisplayNameVisitor();
+            var type = typeof(string);
+            var expected = type.ToElement().ToString();
+
+            var actual = sut.Visit(type.ToElement());
+
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitManyTypeElementsCollectsCorrectNames()
+        {
+            var sut = new DisplayNameVisitor();
+            var type = typeof(object);
+
+            var actual1 = sut.Visit(type.ToElement());
+            var actual2 = actual1.Visit(type.ToElement());
+
+            Assert.Equal(2, actual2.Value.Count());
+        }
+
+        [Fact]
+        public void VisitNullTypeElementThrows()
+        {
+            var sut = new DisplayNameVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
+        }
     }
 }
