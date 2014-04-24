@@ -1,7 +1,4 @@
-﻿using Ploeh.AutoFixture.Idioms;
-using Ploeh.AutoFixture.Kernel;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Encapsulates a unit test that verifies that a method or constructor has
@@ -16,7 +13,7 @@ namespace Jwc.Experiment.Idioms
         /// The test fixture.
         /// </param>
         public GuardClauseAssertion(ITestFixture testFixture)
-            : base(new WritablePropertyAssertion(new ArrayRelay()))
+            : base(new Ploeh.AutoFixture.Idioms.GuardClauseAssertion(new SpecimenBuilderAdapter(testFixture)))
         {
         }
     }
