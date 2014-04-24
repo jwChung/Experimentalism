@@ -77,5 +77,31 @@ namespace Jwc.Experiment
 
             return new DisplayNameVisitor(Value.Concat(new[] { typeElement.ToString() }));
         }
+
+        /// <summary>
+        /// Visits a constructor element to collect a dispaly name of it.
+        /// </summary>
+        /// <param name="constructorInfoElement">
+        /// The constructor element whose display name is collected.
+        /// </param>
+        /// <returns>
+        /// The visitor which collected a display name.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<string>> Visit(
+            ConstructorInfoElement constructorInfoElement)
+        {
+            if (constructorInfoElement == null)
+                throw new ArgumentNullException("constructorInfoElement");
+
+            var constructorInfo = constructorInfoElement.ConstructorInfo;
+
+            var displayName = string.Format(
+                CultureInfo.CurrentCulture,
+                "[[{0}][{1}]] (constructor)",
+                constructorInfo.ReflectedType,
+                constructorInfo);
+
+            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+        }
     }
 }
