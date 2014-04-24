@@ -14,8 +14,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.14.0")]
 
 /*
- * Version 0.14.1
+ * Version 0.15.0
  * 
  * - [FIX] Slightly improves the message of `HidingReferenceException` in
  *   `HidingReferenceAssertion`.
+ * 
+ * - [NEW] Introduces the new `GuardClauseAssertion` class to verify that a
+ *   method or constructor has appropriate Guard Clauses in place.
+ *   
+ * - [FIX] Lets `ConstructingMemberAssertion` accept only relevant elements.
  */
