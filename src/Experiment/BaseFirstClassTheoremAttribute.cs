@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -9,7 +10,7 @@ using Xunit.Sdk;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// A test attribute used to adorn methods that creates first-class 
+    /// A test attribute used to adorn methods that creates first-class
     /// executable test cases.
     /// </summary>
     public abstract class BaseFirstClassTheoremAttribute : FactAttribute
@@ -23,28 +24,25 @@ namespace Jwc.Experiment
         /// <returns>
         /// The test commands which will execute the test runs for the given method
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from creating test commands.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from creating test commands.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
-            {
                 throw new ArgumentNullException("method");
-            }
 
-            try
-            {
-                return CreateTestCases(method)
-                    .Select(tc => ConvertToTestCommand(method, tc))
-                    .ToArray();
-            }
-            catch (Exception exception)
-            {
-                return new ITestCommand[] { new ExceptionCommand(method, exception) };
-            }
+            var enumerator = GetTestCommands(method).GetEnumerator();
+
+            Func<IMethodInfo, ITestCommand> exceptionCommandFunc;
+
+            while (TryMoveNext(enumerator, out exceptionCommandFunc))
+                yield return enumerator.Current;
+
+            if (exceptionCommandFunc != null)
+                yield return exceptionCommandFunc.Invoke(method);
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="ITestFixture"/>.
+        /// Creates an instance of <see cref="ITestFixture" />.
         /// </summary>
         /// <param name="testMethod">
         /// The test method
@@ -53,6 +51,35 @@ namespace Jwc.Experiment
         /// The created fixture.
         /// </returns>
         protected abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
+
+        private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
+        {
+            try
+            {
+                return CreateTestCases(method).Select(tc => ConvertToTestCommand(method, tc));
+            }
+            catch (Exception exception)
+            {
+                return new ITestCommand[] { new ExceptionCommand(method, exception) };
+            }
+        }
+
+        private static bool TryMoveNext(
+            IEnumerator<ITestCommand> enumerator,
+            out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
+        {
+            try
+            {
+                var moveNext = enumerator.MoveNext();
+                exceptionCommandFunc = null;
+                return moveNext;
+            }
+            catch (Exception exception)
+            {
+                exceptionCommandFunc = m => new ExceptionCommand(m, exception);
+                return false;
+            }
+        }
 
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
         {
@@ -66,6 +93,7 @@ namespace Jwc.Experiment
                         methodInfo),
                     "method");
             }
+
             if (!IsReturnTypeValid(methodInfo.ReturnType))
             {
                 throw new ArgumentException(
@@ -77,11 +105,10 @@ namespace Jwc.Experiment
             }
 
             var testCases = methodInfo.Invoke(CreateReflectedObject(methodInfo), null);
-
             return (IEnumerable<ITestCase>)testCases;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from ConvertToTestCommand.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from ConvertToTestCommand.")]
         private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
         {
             try

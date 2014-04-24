@@ -55,7 +55,7 @@ namespace Jwc.Experiment
         public void CreateTestCommandsWithNullMethodInfoThrows()
         {
             var sut = new TestSpecificFirstClassTheoremAttribute();
-            Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null));
+            Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null).ToArray());
         }
 
         [Fact]
@@ -79,9 +79,10 @@ namespace Jwc.Experiment
             var sut = new TestSpecificFirstClassTheoremAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ExceptionFromCreatingTestCaseTest"));
 
-            var actual = sut.CreateTestCommands(method).Single();
+            var actual = sut.CreateTestCommands(method).ToArray();
 
-            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.Equal(2, actual.Length);
+            var command = Assert.IsType<ExceptionCommand>(actual[1]);
             Assert.IsType<NotSupportedException>(command.Exception);
         }
 
