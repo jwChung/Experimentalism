@@ -111,8 +111,7 @@ namespace Jwc.Experiment
             private IEnumerable<DataAttribute> GetDataAttributes()
             {
                 return ((IEnumerable<DataAttribute>)_method
-                    .GetCustomAttributes(typeof(DataAttribute), false))
-                    .ToArray();
+                    .GetCustomAttributes(typeof(DataAttribute), false));
             }
 
             private Type[] GetParameterTypes()
