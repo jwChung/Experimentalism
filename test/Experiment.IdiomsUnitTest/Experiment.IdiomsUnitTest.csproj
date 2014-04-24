@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
     <Compile Include="ConstantEqualityComparerTest.cs" />
+    <Compile Include="DisplayNameVisitorTest.cs" />
     <Compile Include="ElementReferenceCollectingVisitorTest.cs" />
     <Compile Include="Idioms\GuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
