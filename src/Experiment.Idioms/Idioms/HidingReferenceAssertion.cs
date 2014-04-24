@@ -257,10 +257,10 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        private T[] GetVisibleReflectionElements<T>(IEnumerable<T> typeElements)
+        private T[] GetVisibleReflectionElements<T>(IEnumerable<T> reflectionElements)
             where T : IReflectionElement
         {
-            return typeElements.Where(IsVisible).ToArray();
+            return reflectionElements.Where(IsVisible).ToArray();
         }
 
         private bool IsVisible<T>(T e) where T : IReflectionElement

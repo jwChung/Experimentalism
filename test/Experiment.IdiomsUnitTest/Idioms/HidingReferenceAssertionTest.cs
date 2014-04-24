@@ -45,7 +45,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitAssemblyElementsPassesVisibleElementsToBaseMethod()
+        public void VisitTypeElementsPassesVisibleElementsToBaseMethod()
         {
             var sut = new Mock<HidingReferenceAssertion> { CallBase = true }.Object;
             var visitor = new Mock<HidingReferenceAssertion> { CallBase = true }.Object;
