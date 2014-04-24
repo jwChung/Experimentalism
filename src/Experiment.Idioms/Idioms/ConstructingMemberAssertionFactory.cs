@@ -16,13 +16,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IReflectionVisitor<object> Create(ITestFixture testFixture)
         {
-            return new ConstructingMemberAssertion(
-                new OrEqualityComparer<IReflectionElement>(
-                    new ParameterToPropertyComparer(testFixture),
-                    new ParameterToFieldComparer(testFixture)),
-                new OrEqualityComparer<IReflectionElement>(
-                    new PropertyToParameterComparer(testFixture),
-                    new FieldToParameterComparer(testFixture)));
+            return new ConstructingMemberAssertion(testFixture);
         }
     }
 }

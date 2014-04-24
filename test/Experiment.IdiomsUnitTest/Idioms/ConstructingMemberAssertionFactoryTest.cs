@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Ploeh.Albedo;
-using Xunit;
+﻿using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -16,31 +14,13 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void CreateReturnsCorrectConstructingMemberAssertion()
         {
-            // Fixture setup
             var testFixture = new DelegatingTestFixture();
             var sut = new ConstructingMemberAssertionFactory();
 
-            // Exercise system
             var actual = sut.Create(testFixture);
 
-            // Verify outcome
             var assertion = Assert.IsAssignableFrom<ConstructingMemberAssertion>(actual);
-
-            var comparers1 = Assert.IsAssignableFrom<OrEqualityComparer<IReflectionElement>>(
-                assertion.ParameterToMemberComparer).EqualityComparers.ToArray();
-            Assert.Equal(2, comparers1.Length);
-            var comparers11 = Assert.IsAssignableFrom<ParameterToPropertyComparer>(comparers1[0]);
-            Assert.Equal(testFixture, comparers11.TestFixture);
-            var comparers12 = Assert.IsAssignableFrom<ParameterToFieldComparer>(comparers1[1]);
-            Assert.Equal(testFixture, comparers12.TestFixture);
-
-            var comparers2 = Assert.IsAssignableFrom<OrEqualityComparer<IReflectionElement>>(
-                assertion.MemberToParameterComparer).EqualityComparers.ToArray();
-            Assert.Equal(2, comparers1.Length);
-            var comparers21 = Assert.IsAssignableFrom<PropertyToParameterComparer>(comparers2[0]);
-            Assert.Equal(testFixture, comparers21.TestFixture);
-            var comparers22 = Assert.IsAssignableFrom<FieldToParameterComparer>(comparers2[1]);
-            Assert.Equal(testFixture, comparers22.TestFixture);
+            Assert.Equal(testFixture, assertion.TestFixture);
         }
     }
 }
