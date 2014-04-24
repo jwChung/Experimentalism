@@ -13,6 +13,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class ConstructingMemberAssertion : ReflectionVisitor<object>
     {
+        private readonly AccessibilityCollectingVisitor _accessibilityCollectingVisitor
+            = new AccessibilityCollectingVisitor();
         private readonly IEqualityComparer<IReflectionElement> _parameterToMemberComparer;
         private readonly IEqualityComparer<IReflectionElement> _memberToParameterComparer;
 
@@ -79,6 +81,75 @@ namespace Jwc.Experiment.Idioms
             {
                 return _memberToParameterComparer;
             }
+        }
+
+        /// <summary>
+        /// Allows <see cref="TypeElement" /> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="typeElements">
+        /// The <see cref="T:Ploeh.Albedo.TypeElement" /> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(
+            params TypeElement[] typeElements)
+        {
+            return base.Visit(GetPublicReflectionElements(typeElements));
+        }
+
+        /// <summary>
+        /// Allows <see cref="FieldInfoElement" /> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="fieldInfoElements">
+        /// The <see cref="FieldInfoElement" /> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(
+            params FieldInfoElement[] fieldInfoElements)
+        {
+            return base.Visit(GetPublicReflectionElements(fieldInfoElements));
+        }
+
+        /// <summary>
+        /// Allows <see cref="ConstructorInfoElement" /> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="constructorInfoElements">
+        /// The <see cref="ConstructorInfoElement" /> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(
+            params ConstructorInfoElement[] constructorInfoElements)
+        {
+            return base.Visit(GetPublicReflectionElements(constructorInfoElements));
+        }
+
+        /// <summary>
+        /// Allows <see cref="PropertyInfoElement"/> instances to be 'visited'.
+        /// This method is called when the elements 'accepts' this visitor instance.
+        /// </summary>
+        /// <param name="propertyInfoElements">
+        /// The <see cref="PropertyInfoElement"/> instances being visited.
+        /// </param>
+        /// <returns>
+        /// A (potentially) new <see cref="IReflectionVisitor{T}"/> instance which can be
+        /// used to continue the visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<object> Visit(
+            params PropertyInfoElement[] propertyInfoElements)
+        {
+            var elements = propertyInfoElements.Where(e => e.PropertyInfo.GetGetMethod() != null).ToArray();
+            return base.Visit(elements);
         }
 
         /// <summary>
@@ -211,6 +282,18 @@ namespace Jwc.Experiment.Idioms
                     Environment.NewLine,
                     reflectedType,
                     propertyInfoElement));
+        }
+
+        private T[] GetPublicReflectionElements<T>(IEnumerable<T> reflectionElements)
+            where T : IReflectionElement
+        {
+            return reflectionElements.Where(IsPublic).ToArray();
+        }
+
+        private bool IsPublic<T>(T e) where T : IReflectionElement
+        {
+            var accessibilities = e.Accept(_accessibilityCollectingVisitor).Value.Single();
+            return (accessibilities & Accessibilities.Public) == Accessibilities.Public;
         }
 
         private bool IsSatisfied(

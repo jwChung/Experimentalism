@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Moq;
 using Ploeh.Albedo;
 using Xunit;
 using Xunit.Extensions;
@@ -10,6 +11,10 @@ namespace Jwc.Experiment.Idioms
 {
     public class ConstructingMemberAssertionTest
     {
+        private const BindingFlags _bindingFlags =
+           BindingFlags.Static | BindingFlags.Instance |
+           BindingFlags.Public | BindingFlags.NonPublic;
+
         [Fact]
         public void SutIsReflectionVisitor()
         {
@@ -240,6 +245,128 @@ namespace Jwc.Experiment.Idioms
                 new PropertyToParameterComparer(new FakeTestFixture()));
             var actual = sut.Visit(propertyFieldInfoElement);
             Assert.Equal(sut, actual);
+        }
+
+        [Fact]
+        public void VisitTypeElementsPassesPublicElementsToBaseMethod()
+        {
+            // Fixture setup
+            var sut = new Mock<ConstructingMemberAssertion>(
+               EqualityComparer<IReflectionElement>.Default,
+               EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+            var visitor = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+
+            var expectedElements = new List<TypeElement>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<TypeElement>())).Returns(visitor)
+                .Callback<TypeElement>(expectedElements.Add);
+            visitor.ToMock().Setup(x => x.Visit(It.IsAny<TypeElement>())).Returns(visitor)
+                .Callback<TypeElement>(expectedElements.Add);
+            var typeElements = typeof(object).Assembly.GetTypes().Select(t => t.ToElement()).ToArray();
+
+            // Exercise system
+            var actual = sut.Visit(typeElements);
+
+            // Verify outcome
+            Assert.Equal(visitor, actual);
+            AssertArePublicElements(expectedElements);
+        }
+
+        [Fact]
+        public void VisitFieldInfoElementsPassesPublicElementsToBaseMethod()
+        {
+            // Fixture setup
+            var sut = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+            var visitor = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+
+            var expectedElements = new List<FieldInfoElement>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor)
+                .Callback<FieldInfoElement>(expectedElements.Add);
+            visitor.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor)
+                .Callback<FieldInfoElement>(expectedElements.Add);
+            var fieldInfoElements = typeof(TypeWithMembers).GetFields(_bindingFlags)
+                .Select(c => c.ToElement()).ToArray();
+
+            // Exercise system
+            var actual = sut.Visit(fieldInfoElements);
+
+            // Verify outcome
+            Assert.Equal(visitor, actual);
+            AssertArePublicElements(expectedElements);
+        }
+
+        [Fact]
+        public void VisitConstructorInfoElementsPassesPublicElementsToBaseMethod()
+        {
+            // Fixture setup
+            var sut = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+            var visitor = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+
+            var expectedElements = new List<ConstructorInfoElement>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Returns(visitor)
+                .Callback<ConstructorInfoElement>(expectedElements.Add);
+            visitor.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Returns(visitor)
+                .Callback<ConstructorInfoElement>(expectedElements.Add);
+            var constructorInfoElements = typeof(TypeWithMembers).GetConstructors(_bindingFlags)
+                .Select(c => c.ToElement()).ToArray();
+
+            // Exercise system
+            var actual = sut.Visit(constructorInfoElements);
+
+            // Verify outcome
+            Assert.Equal(visitor, actual);
+            AssertArePublicElements(expectedElements);
+        }
+
+        [Fact]
+        public void VisitPropertyInfoElementsPassesPublicReadableElementsToBaseMethod()
+        {
+            // Fixture setup
+            var sut = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+            var visitor = new Mock<ConstructingMemberAssertion>(
+                EqualityComparer<IReflectionElement>.Default,
+                EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+
+            var expectedElements = new List<PropertyInfoElement>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor)
+                .Callback<PropertyInfoElement>(expectedElements.Add);
+            visitor.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor)
+                .Callback<PropertyInfoElement>(expectedElements.Add);
+            var propertyInfoElements = typeof(TypeWithMembers).GetProperties(_bindingFlags)
+                .Select(c => c.ToElement()).ToArray();
+
+            // Exercise system
+            var actual = sut.Visit(propertyInfoElements);
+
+            // Verify outcome
+            Assert.Equal(visitor, actual);
+            AssertArePublicElements(expectedElements);
+            Assert.True(expectedElements.All(e => e.PropertyInfo.GetGetMethod() != null));
+        }
+
+        private static void AssertArePublicElements(IEnumerable<IReflectionElement> reflectionElements)
+        {
+            var result = reflectionElements.ToArray();
+
+            Assert.True(
+                result.ToArray().All(e => (GetAccessibilities(e) & Accessibilities.Public) == Accessibilities.Public),
+                "Public");
+        }
+
+        private static Accessibilities GetAccessibilities(IReflectionElement e)
+        {
+            return e.Accept(new AccessibilityCollectingVisitor()).Value.Single();
         }
 
         private class NotSatisfiedConstructorInfoElementDataAttribute : DataAttribute
