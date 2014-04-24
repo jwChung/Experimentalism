@@ -25,7 +25,6 @@ namespace Jwc.Experiment
         /// <returns>
         /// The test commands which will execute the test runs for the given method
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
@@ -53,6 +52,7 @@ namespace Jwc.Experiment
         /// </returns>
         protected abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private static bool TryMoveNext(
             IEnumerator<ITestCommand> enumerator,
             out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
@@ -70,15 +70,14 @@ namespace Jwc.Experiment
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
         {
             try
             {
                 var specifiedArgumentSet = new SpecifiedArgumentSet(method.MethodInfo);
                 if (!specifiedArgumentSet.Any())
-                {
                     return new[] { CreateSingleTestCommand(method) };
-                }
 
                 return specifiedArgumentSet.Select(sa => CreateEachTestCommand(method, sa));
             }

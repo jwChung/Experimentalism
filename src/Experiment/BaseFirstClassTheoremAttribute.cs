@@ -24,7 +24,6 @@ namespace Jwc.Experiment
         /// <returns>
         /// The test commands which will execute the test runs for the given method
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from creating test commands.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)
@@ -52,6 +51,7 @@ namespace Jwc.Experiment
         /// </returns>
         protected abstract ITestFixture CreateTestFixture(MethodInfo testMethod);
 
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
         {
             try
@@ -64,6 +64,7 @@ namespace Jwc.Experiment
             }
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private static bool TryMoveNext(
             IEnumerator<ITestCommand> enumerator,
             out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
@@ -108,7 +109,7 @@ namespace Jwc.Experiment
             return (IEnumerable<ITestCase>)testCases;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown from ConvertToTestCommand.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
         private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
         {
             try
