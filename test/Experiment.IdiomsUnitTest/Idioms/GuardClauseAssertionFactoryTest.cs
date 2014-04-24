@@ -20,11 +20,8 @@ namespace Jwc.Experiment.Idioms
 
             var actual = sut.Create(testFixture);
 
-            var assertionAdapter = Assert.IsAssignableFrom<AssertionAdapter>(actual);
-            var assertion = Assert.IsAssignableFrom<Ploeh.AutoFixture.Idioms.GuardClauseAssertion>(
-                assertionAdapter.Assertion);
-            var specimenBuilderAdpater = Assert.IsAssignableFrom<SpecimenBuilderAdapter>(assertion.Builder);
-            Assert.Equal(testFixture, specimenBuilderAdpater.TestFixture);
+            var assertion = Assert.IsAssignableFrom<GuardClauseAssertion>(actual);
+            Assert.Equal(testFixture, assertion.TestFixture);
         }
 
         [Fact]

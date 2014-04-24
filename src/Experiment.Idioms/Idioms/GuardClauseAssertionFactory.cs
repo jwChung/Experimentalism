@@ -22,9 +22,7 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("testFixture");
             }
 
-            return new AssertionAdapter(
-                new Ploeh.AutoFixture.Idioms.GuardClauseAssertion(
-                    new SpecimenBuilderAdapter(testFixture)));
+            return new GuardClauseAssertion(testFixture);
         }
     }
 }
