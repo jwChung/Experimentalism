@@ -119,5 +119,38 @@ namespace Jwc.Experiment
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
+        [Fact]
+        public void VisitFieldInfoElementCollectsCorrectName()
+        {
+            var sut = new DisplayNameVisitor();
+            var fieldInfo = typeof(TypeWithMembers).GetFields().First();
+            var expected = string.Format(
+                "[[{0}][{1}]] (field)",
+                fieldInfo.ReflectedType,
+                fieldInfo);
+
+            var actual = sut.Visit(fieldInfo.ToElement());
+
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitManyFieldInfoElementsCollectsCorrectNames()
+        {
+            var sut = new DisplayNameVisitor();
+            var fieldInfo = typeof(TypeWithMembers).GetFields().First();
+
+            var actual1 = sut.Visit(fieldInfo.ToElement());
+            var actual2 = actual1.Visit(fieldInfo.ToElement());
+
+            Assert.Equal(2, actual2.Value.Count());
+        }
+
+        [Fact]
+        public void VisitNullFieldInfoElementThrows()
+        {
+            var sut = new DisplayNameVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
+        }
     }
 }

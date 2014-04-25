@@ -79,6 +79,32 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        /// Visits a field element to collect a dispaly name of it.
+        /// </summary>
+        /// <param name="fieldInfoElement">
+        /// The field element whose display name is collected.
+        /// </param>
+        /// <returns>
+        /// The visitor which collected a display name.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<string>> Visit(
+            FieldInfoElement fieldInfoElement)
+        {
+            if (fieldInfoElement == null)
+                throw new ArgumentNullException("fieldInfoElement");
+
+            var fieldInfo = fieldInfoElement.FieldInfo;
+
+            var displayName = string.Format(
+                CultureInfo.CurrentCulture,
+                "[[{0}][{1}]] (field)",
+                fieldInfo.ReflectedType,
+                fieldInfo);
+
+            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+        }
+
+        /// <summary>
         /// Visits a constructor element to collect a dispaly name of it.
         /// </summary>
         /// <param name="constructorInfoElement">
