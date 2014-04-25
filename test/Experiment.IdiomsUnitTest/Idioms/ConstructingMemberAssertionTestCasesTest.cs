@@ -149,7 +149,7 @@ namespace Jwc.Experiment.Idioms
                 .TargetMembers)
             .ItemSet.Cast<TypeMembers>().ToArray();
             Assert.Equal(
-                assembly.GetExportedTypes(),
+                assembly.GetExportedTypes().Where(t => !t.IsInterface),
                 compositeTypeMembers.Select(t => t.Type));
             Assert.True(compositeTypeMembers.All(t => t.Accessibilities == Accessibilities.Public));
         }

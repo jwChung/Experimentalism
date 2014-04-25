@@ -99,6 +99,7 @@ namespace Jwc.Experiment.Idioms
             }
 
             var typeMemberses = assembly.GetExportedTypes()
+                .Where(t => !t.IsInterface)
                 .Select(t => new TypeMembers(t, Accessibilities.Public))
                 .Cast<IEnumerable<MemberInfo>>()
                 .ToArray();
