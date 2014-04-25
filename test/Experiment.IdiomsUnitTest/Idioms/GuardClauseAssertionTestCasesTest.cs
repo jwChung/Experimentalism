@@ -112,7 +112,7 @@ namespace Jwc.Experiment.Idioms
             var compositeEnumerable = Assert.IsAssignableFrom<CompositeEnumerable<MemberInfo>>(
                 excludingMembers.TargetMembers);
             Assert.Equal(
-                assembly.GetExportedTypes(),
+                assembly.GetExportedTypes().Where(t => !t.IsInterface),
                 compositeEnumerable.ItemSet.Cast<TypeMembers>().Select(t => t.Type));
             Assert.True(
                 compositeEnumerable.ItemSet.Cast<TypeMembers>()
