@@ -192,13 +192,5 @@ namespace Jwc.Experiment
             Assert.True(
                 actual.Any(a => a == Accessibilities.Private), "Any Private.");
         }
-
-        [Fact]
-        public void SutEnumeratesEmptyMembersForInterfaceType()
-        {
-            var sut = new TypeMembers(typeof(IReflectionVisitor<object>), Accessibilities.All);
-            var actual = sut.ToArray();
-            Assert.Empty(actual);
-        }
     }
 }
