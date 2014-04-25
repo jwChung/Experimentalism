@@ -206,10 +206,10 @@ namespace Jwc.Experiment
         public void VisitManyMethodInfoElementsCollectsCorrectNames()
         {
             var sut = new DisplayNameVisitor();
-            var propertyInfo = typeof(TypeWithMembers).GetMethods().First();
+            var methodInfo = typeof(TypeWithMembers).GetMethods().First();
 
-            var actual1 = sut.Visit(propertyInfo.ToElement());
-            var actual2 = actual1.Visit(propertyInfo.ToElement());
+            var actual1 = sut.Visit(methodInfo.ToElement());
+            var actual2 = actual1.Visit(methodInfo.ToElement());
 
             Assert.Equal(2, actual2.Value.Count());
         }
@@ -219,6 +219,40 @@ namespace Jwc.Experiment
         {
             var sut = new DisplayNameVisitor();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitEventInfoElementCollectsCorrectName()
+        {
+            var sut = new DisplayNameVisitor();
+            var eventInfo = typeof(TypeWithMembers).GetEvents().First();
+            var expected = string.Format(
+                "[[{0}][{1}]] (event)",
+                eventInfo.ReflectedType,
+                eventInfo);
+
+            var actual = sut.Visit(eventInfo.ToElement());
+
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitManyEventInfoElementsCollectsCorrectNames()
+        {
+            var sut = new DisplayNameVisitor();
+            var eventInfo = typeof(TypeWithMembers).GetEvents().First();
+
+            var actual1 = sut.Visit(eventInfo.ToElement());
+            var actual2 = actual1.Visit(eventInfo.ToElement());
+
+            Assert.Equal(2, actual2.Value.Count());
+        }
+
+        [Fact]
+        public void VisitNullEventInfoElementThrows()
+        {
+            var sut = new DisplayNameVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
         }
     }
 }

@@ -181,5 +181,31 @@ namespace Jwc.Experiment
 
             return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
         }
+
+        /// <summary>
+        /// Visits an event element to collect a dispaly name of it.
+        /// </summary>
+        /// <param name="eventInfoElement">
+        /// The event element whose display name is collected.
+        /// </param>
+        /// <returns>
+        /// The visitor which collected a display name.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<string>> Visit(
+            EventInfoElement eventInfoElement)
+        {
+            if (eventInfoElement == null)
+                throw new ArgumentNullException("eventInfoElement");
+
+            var eventInfo = eventInfoElement.EventInfo;
+
+            var displayName = string.Format(
+                CultureInfo.CurrentCulture,
+                "[[{0}][{1}]] (event)",
+                eventInfo.ReflectedType,
+                eventInfo);
+
+            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+        }
     }
 }
