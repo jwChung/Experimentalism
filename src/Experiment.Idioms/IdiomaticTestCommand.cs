@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Ploeh.Albedo;
 using Xunit.Sdk;
 
@@ -39,7 +40,8 @@ namespace Jwc.Experiment
             _element = element;
             _assertion = assertion;
 
-            DisplayName = DisplayName + "('" + element + "')";
+            var displayName = element.Accept(new DisplayNameVisitor()).Value.Single();
+            DisplayName = DisplayName + "('" + displayName + "')";
         }
 
         /// <summary>
