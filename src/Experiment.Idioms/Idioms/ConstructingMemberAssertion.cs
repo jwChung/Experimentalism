@@ -56,11 +56,11 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public ConstructingMemberAssertion(ITestFixture testFixture) : this(
             new OrEqualityComparer<IReflectionElement>(
-                    new ParameterToPropertyComparer(testFixture),
-                    new ParameterToFieldComparer(testFixture)),
+                new ParameterToPropertyComparer(testFixture),
+                new ParameterToFieldComparer(testFixture)),
             new OrEqualityComparer<IReflectionElement>(
-                    new PropertyToParameterComparer(testFixture),
-                    new FieldToParameterComparer(testFixture)))
+                new PropertyToParameterComparer(testFixture),
+                new FieldToParameterComparer(testFixture)))
         {
             _testFixture = testFixture;
         }
