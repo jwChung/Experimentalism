@@ -14,8 +14,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.15.4")]
 
 /*
- * Version 0.15.4
+ * Version 0.15.5
  * 
- * - [FIX] Fixes excluding interfaces from verifying
- *   `ConstructingMemberAssertion` and `GuardClauseAssertion`.
+ * - [FIX] Lets the idiomatic test-cases(ConstructingMemberAssertionTestCases,
+ *   GuardClauseAssertionTestCases) consider only class types rather than
+ *   interface types.
  */
