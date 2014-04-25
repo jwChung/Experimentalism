@@ -319,9 +319,9 @@ namespace Jwc.Experiment.Idioms
             return reflectionElements.Where(IsPublic).ToArray();
         }
 
-        private bool IsPublic<T>(T e) where T : IReflectionElement
+        private bool IsPublic<T>(T reflectionElement) where T : IReflectionElement
         {
-            var accessibilities = e.Accept(_accessibilityCollectingVisitor).Value.Single();
+            var accessibilities = reflectionElement.Accept(_accessibilityCollectingVisitor).Value.Single();
             return (accessibilities & Accessibilities.Public) == Accessibilities.Public;
         }
 
