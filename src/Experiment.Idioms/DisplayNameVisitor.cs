@@ -159,19 +159,19 @@ namespace Jwc.Experiment
         /// <summary>
         /// Visits a method element to collect a dispaly name of it.
         /// </summary>
-        /// <param name="metodInfoElement">
+        /// <param name="methodInfoElement">
         /// The method element whose display name is collected.
         /// </param>
         /// <returns>
         /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
-            MethodInfoElement metodInfoElement)
+            MethodInfoElement methodInfoElement)
         {
-            if (metodInfoElement == null)
-                throw new ArgumentNullException("metodInfoElement");
+            if (methodInfoElement == null)
+                throw new ArgumentNullException("methodInfoElement");
 
-            var methodInfo = metodInfoElement.MethodInfo;
+            var methodInfo = methodInfoElement.MethodInfo;
 
             var displayName = string.Format(
                 CultureInfo.CurrentCulture,
