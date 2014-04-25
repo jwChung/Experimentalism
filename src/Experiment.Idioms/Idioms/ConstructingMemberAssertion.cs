@@ -126,7 +126,7 @@ namespace Jwc.Experiment.Idioms
         public override IReflectionVisitor<object> Visit(
             params TypeElement[] typeElements)
         {
-            return base.Visit(GetPublicReflectionElements(typeElements));
+            return base.Visit(GetPublicReflectionElements(typeElements.Where(e => !e.Type.IsInterface)));
         }
 
         /// <summary>

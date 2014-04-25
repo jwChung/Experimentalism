@@ -400,6 +400,27 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(testFixture, actual);
         }
 
+        [Fact]
+        public void VisitTypeElementsPassesOnlyClassElementsToBaseMethod()
+        {
+            // Fixture setup
+            var sut = new Mock<ConstructingMemberAssertion>(
+               EqualityComparer<IReflectionElement>.Default,
+               EqualityComparer<IReflectionElement>.Default) { CallBase = true }.Object;
+            
+            var expectedElements = new List<TypeElement>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<TypeElement>())).Returns(sut)
+                .Callback<TypeElement>(expectedElements.Add);
+
+            var typeElements = typeof(object).Assembly.GetTypes().Select(t => t.ToElement()).ToArray();
+
+            // Exercise system
+            sut.Visit(typeElements);
+
+            // Verify outcome
+            Assert.True(expectedElements.All(e => !e.Type.IsInterface), "All Not Interfaces");
+        }
+
         private static void AssertArePublicElements(IEnumerable<IReflectionElement> reflectionElements)
         {
             var result = reflectionElements.ToArray();

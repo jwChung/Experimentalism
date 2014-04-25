@@ -14,7 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.15.3")]
 
 /*
- * Version 0.15.3
+ * Version 0.15.4
  * 
- * - [FIX] Lets idiomatic-test ignore members of an interface type.
+ * - [FIX] Fixes excluding interfaces from verifying
+ *   `ConstructingMemberAssertion` and `GuardClauseAssertion`.
  */
