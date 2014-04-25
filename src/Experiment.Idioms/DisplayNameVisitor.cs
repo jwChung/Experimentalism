@@ -129,5 +129,31 @@ namespace Jwc.Experiment
 
             return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
         }
+
+        /// <summary>
+        /// Visits a property element to collect a dispaly name of it.
+        /// </summary>
+        /// <param name="propertyInfoElement">
+        /// The property element whose display name is collected.
+        /// </param>
+        /// <returns>
+        /// The visitor which collected a display name.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<string>> Visit(
+            PropertyInfoElement propertyInfoElement)
+        {
+            if (propertyInfoElement == null)
+                throw new ArgumentNullException("propertyInfoElement");
+
+            var propertyInfo = propertyInfoElement.PropertyInfo;
+
+            var displayName = string.Format(
+                CultureInfo.CurrentCulture,
+                "[[{0}][{1}]] (property)",
+                propertyInfo.ReflectedType,
+                propertyInfo);
+
+            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+        }
     }
 }
