@@ -76,10 +76,22 @@ namespace Jwc.Experiment
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
+            if (Type.IsInterface)
+                return GetEmptyEnumerator();
+            return GetEnumeratorImpl();
+        }
+
+        private static IEnumerator<MemberInfo> GetEmptyEnumerator()
+        {
+            return Enumerable.Empty<MemberInfo>().GetEnumerator();
+        }
+
+        private IEnumerator<MemberInfo> GetEnumeratorImpl()
+        {
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
-                BindingFlags.Instance | BindingFlags.Static |
-                BindingFlags.DeclaredOnly;
+                    BindingFlags.Instance | BindingFlags.Static |
+                    BindingFlags.DeclaredOnly;
 
             var accessors = Type.GetProperties(bindingFlags).SelectMany(p => p.GetAccessors(true));
             var eventMethods = Type.GetEvents(bindingFlags).SelectMany(

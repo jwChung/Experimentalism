@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.15.2")]
 
 /*
- * Version 0.15.2
+ * Version 0.15.3
  * 
- * - [FIX] Improves a display name of a member verified by idiomatic test.
+ * - [FIX] Lets idiomatic-test ignore members of an interface type.
  */
