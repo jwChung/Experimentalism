@@ -186,5 +186,39 @@ namespace Jwc.Experiment
             var sut = new DisplayNameVisitor();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement)null));
         }
+
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectName()
+        {
+            var sut = new DisplayNameVisitor();
+            var methodInfo = typeof(TypeWithMembers).GetMethods().First();
+            var expected = string.Format(
+                "[[{0}][{1}]] (method)",
+                methodInfo.ReflectedType,
+                methodInfo);
+
+            var actual = sut.Visit(methodInfo.ToElement());
+
+            Assert.Equal(expected, actual.Value.Single());
+        }
+
+        [Fact]
+        public void VisitManyMethodInfoElementsCollectsCorrectNames()
+        {
+            var sut = new DisplayNameVisitor();
+            var propertyInfo = typeof(TypeWithMembers).GetMethods().First();
+
+            var actual1 = sut.Visit(propertyInfo.ToElement());
+            var actual2 = actual1.Visit(propertyInfo.ToElement());
+
+            Assert.Equal(2, actual2.Value.Count());
+        }
+
+        [Fact]
+        public void VisitNullMethodInfoElementThrows()
+        {
+            var sut = new DisplayNameVisitor();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
+        }
     }
 }

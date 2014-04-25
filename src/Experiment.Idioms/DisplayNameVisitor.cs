@@ -155,5 +155,31 @@ namespace Jwc.Experiment
 
             return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
         }
+
+        /// <summary>
+        /// Visits a method element to collect a dispaly name of it.
+        /// </summary>
+        /// <param name="metodInfoElement">
+        /// The method element whose display name is collected.
+        /// </param>
+        /// <returns>
+        /// The visitor which collected a display name.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<string>> Visit(
+            MethodInfoElement metodInfoElement)
+        {
+            if (metodInfoElement == null)
+                throw new ArgumentNullException("metodInfoElement");
+
+            var methodInfo = metodInfoElement.MethodInfo;
+
+            var displayName = string.Format(
+                CultureInfo.CurrentCulture,
+                "[[{0}][{1}]] (method)",
+                methodInfo.ReflectedType,
+                methodInfo);
+
+            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+        }
     }
 }
