@@ -14,11 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.15.1")]
 
 /*
- * Version 0.15.1
+ * Version 0.15.2
  * 
- * - [FIX] Improves performance for creating test commands in
- *   `BaseFirstClassTheoremAttribute`.
- *   
- * - [FIX] Fixes an exception thrown when creating test data in
- *   `BaseTheoremAttribute`.
+ * - [FIX] Improves a display name of a member verified by idiomatic test.
  */

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 using Xunit;
@@ -154,6 +155,24 @@ namespace Jwc.Experiment
 
             Assert.Equal(sut.DisplayName, actual.DisplayName);
             Assert.Equal(sut.MethodName, actual.MethodName);
+        }
+
+        [Fact]
+        public void DisplayNameIsCorrectForConstructor()
+        {
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var constructorInfoElement = typeof(TypeWithMembers).GetConstructors().First().ToElement();
+            var sut = new IdiomaticTestCommand(
+                method, constructorInfoElement, new DelegatingReflectionVisitor<object>());
+            string expected = string.Format(
+                "Jwc.Experiment.IdiomaticTestCommandTest.DisplayNameIsCorrectForConstructor" +
+                "('[[{0}][{1}]] (constructor)')",
+                constructorInfoElement.ConstructorInfo.ReflectedType,
+                constructorInfoElement.ConstructorInfo);
+
+            var actual = sut.DisplayName;
+
+            Assert.Equal(expected, actual);
         }
     }
 }
