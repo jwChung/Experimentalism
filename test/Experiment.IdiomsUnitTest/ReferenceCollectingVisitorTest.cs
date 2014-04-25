@@ -48,8 +48,7 @@ namespace Jwc.Experiment
             var actual = sut.Visit(type.ToElement());
 
             Assert.Equal(visitor, actual);
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(sut.Value.Except(expected));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -74,8 +73,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Visit(fieldInfoElements);
 
-            Assert.Equal(expected.Length, actual.Value.Count());
-            Assert.Empty(expected.Except(actual.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -104,8 +102,7 @@ namespace Jwc.Experiment
             var actual = sut.Visit(methodInfoElement);
 
             Assert.Equal(visitor, actual);
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(expected.Except(sut.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
         
         [Fact]
@@ -131,8 +128,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Visit(parameterInfoElement);
 
-            Assert.Equal(expected.Length, actual.Value.Count());
-            Assert.Empty(expected.Except(actual.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -158,8 +154,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Visit(localVariableInfoElement);
 
-            Assert.Equal(expected.Length, actual.Value.Count());
-            Assert.Empty(expected.Except(actual.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -310,8 +305,7 @@ namespace Jwc.Experiment
 
             sut.Visit(methodInfoElement);
 
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(expected.Except(sut.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -332,8 +326,7 @@ namespace Jwc.Experiment
 
             sut.Visit(methodInfoElement);
 
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(expected.Except(sut.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -354,8 +347,7 @@ namespace Jwc.Experiment
 
             sut.Visit(methodInfoElement);
 
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(expected.Except(sut.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -376,8 +368,7 @@ namespace Jwc.Experiment
 
             sut.Visit(methodInfoElement);
 
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(expected.Except(sut.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -398,8 +389,7 @@ namespace Jwc.Experiment
             var actual = sut.Visit(constructorInfoElement);
 
             Assert.Equal(visitor, actual);
-            Assert.Equal(expected.Length, sut.Value.Count());
-            Assert.Empty(expected.Except(sut.Value));
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
         
         [Fact]
