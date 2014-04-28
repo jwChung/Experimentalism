@@ -68,7 +68,6 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectingVisitorTest.cs" />
-    <Compile Include="ConstantEqualityComparerTest.cs" />
     <Compile Include="DisplayNameVisitorTest.cs" />
     <Compile Include="ElementReferenceCollectingVisitorTest.cs" />
     <Compile Include="Idioms\GuardClauseAssertionTest.cs" />

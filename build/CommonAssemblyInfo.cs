@@ -19,4 +19,7 @@ using System.Runtime.InteropServices;
  * - [FIX] Lets the idiomatic test-cases(ConstructingMemberAssertionTestCases,
  *   GuardClauseAssertionTestCases) consider only class types rather than
  *   interface types.
+ *   
+ * - [FIX, BREAKING-CHANGE] Deletes the unused class -
+ *   `ConstantEqualityComparer`.
  */

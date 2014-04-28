@@ -65,7 +65,6 @@
     <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />
-    <Compile Include="ConstantEqualityComparer.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionFactory.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionTestCases.cs" />
     <Compile Include="ConstructingMemberException.cs" />
