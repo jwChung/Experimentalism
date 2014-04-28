@@ -6,15 +6,15 @@ namespace Jwc.Experiment
     /// <summary>
     /// Adapts <see cref="ITestFixture" /> to <see cref="ISpecimenBuilder" />.
     /// </summary>
-    public class SpecimenBuilderAdapter : ISpecimenBuilder
+    public class SpecimenBuilder : ISpecimenBuilder
     {
         private readonly ITestFixture _testFixture;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecimenBuilderAdapter"/> class.
+        /// Initializes a new instance of the <see cref="SpecimenBuilder"/> class.
         /// </summary>
         /// <param name="testFixture">The test fixture.</param>
-        public SpecimenBuilderAdapter(ITestFixture testFixture)
+        public SpecimenBuilder(ITestFixture testFixture)
         {
             if (testFixture == null)
             {

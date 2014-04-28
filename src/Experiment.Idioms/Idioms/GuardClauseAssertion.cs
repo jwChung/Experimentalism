@@ -21,7 +21,7 @@ namespace Jwc.Experiment.Idioms
         /// The test fixture.
         /// </param>
         public GuardClauseAssertion(ITestFixture testFixture)
-            : base(new Ploeh.AutoFixture.Idioms.GuardClauseAssertion(new SpecimenBuilderAdapter(testFixture)))
+            : base(new Ploeh.AutoFixture.Idioms.GuardClauseAssertion(new SpecimenBuilder(testFixture)))
         {
             _testFixture = testFixture;
         }

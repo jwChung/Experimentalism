@@ -184,7 +184,7 @@ namespace Jwc.Experiment.Idioms
         public void VisitTypeEelementThrowsIfAnyAssemblyIsSpecified()
         {
             // Fixture setup
-            Type type = typeof(SpecimenBuilderAdapter);
+            Type type = typeof(SpecimenBuilder);
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             var sut = new Mock<HidingReferenceAssertion>(typeof(Fixture).Assembly) { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
@@ -200,7 +200,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitTypeEelementDoesNotThrowIfAllAssemblisAreNotSpecified()
         {
-            Type type = typeof(SpecimenBuilderAdapter);
+            Type type = typeof(SpecimenBuilder);
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             var sut = new Mock<HidingReferenceAssertion>(typeof(BaseTheoremAttribute).Assembly)
             { CallBase = true }.Object;

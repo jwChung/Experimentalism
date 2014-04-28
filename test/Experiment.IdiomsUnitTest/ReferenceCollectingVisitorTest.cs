@@ -484,10 +484,10 @@ namespace Jwc.Experiment
                 };
                 yield return new object[]
                 {
-                    typeof(SpecimenBuilderAdapter),
+                    typeof(SpecimenBuilder),
                     new[]
                     {
-                        typeof(SpecimenBuilderAdapter).Assembly,
+                        typeof(SpecimenBuilder).Assembly,
                         typeof(object).Assembly,
                         typeof(Fixture).Assembly
                     }

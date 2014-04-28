@@ -22,4 +22,6 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX, BREAKING-CHANGE] Deletes the unused class -
  *   `ConstantEqualityComparer`.
+ *   
+ * - [FIX, BREAKING-CHANGE] Renames SpecimenBuilderAdapter to SpecimenBuilder.
  */

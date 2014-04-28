@@ -103,7 +103,7 @@
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
-    <Compile Include="SpecimenBuilderAdapterTest.cs" />
+    <Compile Include="SpecimenBuilderTest.cs" />
     <Compile Include="TypeMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
     <Compile Include="DelegatingIdiomaticAssertion.cs" />

@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Assertion;
 
             var assertion = Assert.IsAssignableFrom<Ploeh.AutoFixture.Idioms.GuardClauseAssertion>(actual);
-            var builder = Assert.IsAssignableFrom<SpecimenBuilderAdapter>(assertion.Builder);
+            var builder = Assert.IsAssignableFrom<SpecimenBuilder>(assertion.Builder);
             Assert.Equal(testFixture, builder.TestFixture);
         }
 

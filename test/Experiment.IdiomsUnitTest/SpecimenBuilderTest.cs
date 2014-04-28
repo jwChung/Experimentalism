@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class SpecimenBuilderAdapterTest
+    public class SpecimenBuilderTest
     {
         [Fact]
         public void SutIsSpecimenBuilder()
         {
-            var sut = new SpecimenBuilderAdapter(new DelegatingTestFixture());
+            var sut = new SpecimenBuilder(new DelegatingTestFixture());
             Assert.IsAssignableFrom<ISpecimenBuilder>(sut);
         }
 
@@ -17,7 +17,7 @@ namespace Jwc.Experiment
         public void TestFixtureIsCorrect()
         {
             var testFixture = new DelegatingTestFixture();
-            var sut = new SpecimenBuilderAdapter(testFixture);
+            var sut = new SpecimenBuilder(testFixture);
 
             var actual = sut.TestFixture;
 
@@ -28,7 +28,7 @@ namespace Jwc.Experiment
         public void InitializeWithNullTestFixtureThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new SpecimenBuilderAdapter(null));
+                () => new SpecimenBuilder(null));
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace Jwc.Experiment
                     return specimen;
                 }
             };
-            var sut = new SpecimenBuilderAdapter(testFixture);
+            var sut = new SpecimenBuilder(testFixture);
 
             var actual = sut.Create(request, null);
 
