@@ -130,7 +130,7 @@ namespace Jwc.Experiment
             }
         }
 
-        private class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+        private class FirstClassTheoremAttribute : FirstClassTheoremBaseAttribute
         {
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {

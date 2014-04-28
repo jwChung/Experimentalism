@@ -13,7 +13,7 @@ namespace Jwc.Experiment
     /// A test attribute used to adorn methods that creates first-class
     /// executable test cases.
     /// </summary>
-    public abstract class BaseFirstClassTheoremAttribute : FactAttribute
+    public abstract class FirstClassTheoremBaseAttribute : FactAttribute
     {
         /// <summary>
         /// Enumerates the test commands represented by this test method.

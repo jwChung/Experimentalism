@@ -52,7 +52,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestCase.cs" />
     <Compile Include="ITestFixture.cs" />
-    <Compile Include="BaseFirstClassTheoremAttribute.cs" />
+    <Compile Include="FirstClassTheoremBaseAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheoremBaseAttribute.cs" />
     <Compile Include="TestCase.cs" />

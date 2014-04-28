@@ -19,7 +19,7 @@ namespace Jwc.Experiment
         /// </summary>
         /// <param name="method">
         /// The test method which this instance is associated. This will
-        /// likely be the method adorned with an <see cref="BaseFirstClassTheoremAttribute"/>
+        /// likely be the method adorned with an <see cref="FirstClassTheoremBaseAttribute"/>
         /// </param>
         /// <param name="delegate">
         /// The test case to be invoked when the test is executed.

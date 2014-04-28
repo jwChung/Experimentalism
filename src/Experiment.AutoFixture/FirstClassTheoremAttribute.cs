@@ -12,7 +12,7 @@ namespace NuGet.Jwc.Experiment
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is part of an inheritance hierarchy and can be inherited in order to extend its behavior.")]
     [AttributeUsage(AttributeTargets.Method)]
-    public class FirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+    public class FirstClassTheoremAttribute : FirstClassTheoremBaseAttribute
     {
         /// <summary>
         /// Creates an instance of <see cref="ITestFixture" />.

@@ -11,7 +11,7 @@ namespace NuGet.Jwc.Experiment
         public void SutIsDefaultFirstClassTheoremAttribute()
         {
             var sut = new TestSpecificFirstClassTheoremAttribute();
-            Assert.IsAssignableFrom<BaseFirstClassTheoremAttribute>(sut);
+            Assert.IsAssignableFrom<FirstClassTheoremBaseAttribute>(sut);
         }
 
         [Fact]

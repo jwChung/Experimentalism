@@ -8,7 +8,7 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class BaseFirstClassTheoremAttributeTest
+    public class FirstClassTheoremBaseAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
@@ -245,7 +245,7 @@ namespace Jwc.Experiment
             };
         }
 
-        private class TestSpecificFirstClassTheoremAttribute : BaseFirstClassTheoremAttribute
+        private class TestSpecificFirstClassTheoremAttribute : FirstClassTheoremBaseAttribute
         {
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {

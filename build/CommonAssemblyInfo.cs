@@ -27,4 +27,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX, BREAKING-CHANGE] Renames BaseTheoremAttribute to
  *   TheoremBaseAttribute.
+ *   
+ * - [FIX, BREAKING-CHANGE] Renames BaseFirstClassTheoremAttribute to
+ *   FirstClassTheoremBaseAttribute.
  */
