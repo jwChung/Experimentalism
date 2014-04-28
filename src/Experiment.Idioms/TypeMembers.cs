@@ -77,9 +77,8 @@ namespace Jwc.Experiment
         public IEnumerator<MemberInfo> GetEnumerator()
         {
             const BindingFlags bindingFlags =
-                BindingFlags.Public | BindingFlags.NonPublic |
-                    BindingFlags.Instance | BindingFlags.Static |
-                    BindingFlags.DeclaredOnly;
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance |
+                BindingFlags.Static | BindingFlags.DeclaredOnly;
 
             var accessors = Type.GetProperties(bindingFlags).SelectMany(p => p.GetAccessors(true));
             var eventMethods = Type.GetEvents(bindingFlags).SelectMany(
