@@ -89,7 +89,7 @@ namespace Jwc.Experiment.Idioms
                     {
                         typeof(object).Assembly,
                         typeof(Enumerable).Assembly,
-                        typeof(BaseTheoremAttribute).Assembly,
+                        typeof(TheoremBaseAttribute).Assembly,
                         typeof(IReflectionElement).Assembly,
                         typeof(FactAttribute).Assembly,
                         typeof(Fixture).Assembly,
@@ -106,7 +106,7 @@ namespace Jwc.Experiment.Idioms
                     {
                         typeof(object).Assembly,
                         typeof(Enumerable).Assembly,
-                        typeof(BaseTheoremAttribute).Assembly,
+                        typeof(TheoremBaseAttribute).Assembly,
                         typeof(Fixture).Assembly,
                         Assembly.LoadFrom(Path.GetFullPath("Ploeh.AutoFixture.Xunit.dll")),
                         typeof(FactAttribute).Assembly

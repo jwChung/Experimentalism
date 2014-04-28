@@ -202,7 +202,7 @@ namespace Jwc.Experiment.Idioms
         {
             Type type = typeof(SpecimenBuilder);
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<HidingReferenceAssertion>(typeof(BaseTheoremAttribute).Assembly)
+            var sut = new Mock<HidingReferenceAssertion>(typeof(TheoremBaseAttribute).Assembly)
             { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Returns(visitor);

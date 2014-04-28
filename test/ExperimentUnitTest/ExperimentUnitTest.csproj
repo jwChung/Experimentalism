@@ -54,7 +54,7 @@
     <Compile Include="FirstClassCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
-    <Compile Include="BaseTheoremAttributeTest.cs" />
+    <Compile Include="TheoremBaseAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
   </ItemGroup>
   <ItemGroup>

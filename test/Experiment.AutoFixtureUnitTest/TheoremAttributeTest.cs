@@ -13,7 +13,7 @@ namespace NuGet.Jwc.Experiment
         public void SutIsBaseTheoremAttribute()
         {
             var sut = new TestSpecificTheoremAttribute();
-            Assert.IsAssignableFrom<BaseTheoremAttribute>(sut);
+            Assert.IsAssignableFrom<TheoremBaseAttribute>(sut);
         }
 
         [Fact]

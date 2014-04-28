@@ -67,7 +67,7 @@ namespace Jwc.Experiment
                 /* System.Core */ typeof(Enumerable).Assembly,
                 /* xunit */ typeof(FactAttribute).Assembly,
                 /* xunit.extensions */ typeof(TheoryAttribute).Assembly);
-            typeof(BaseTheoremAttribute).Assembly.ToElement().Accept(assertion);
+            typeof(TheoremBaseAttribute).Assembly.ToElement().Accept(assertion);
         }
 
         [Fact]

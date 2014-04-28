@@ -14,7 +14,7 @@ namespace Jwc.Experiment
     /// 지칭하게 되며, non-parameterized test 뿐 아니라 parameterized test에도
     /// 사용될 수 있다.
     /// </summary>
-    public abstract class BaseTheoremAttribute : FactAttribute
+    public abstract class TheoremBaseAttribute : FactAttribute
     {
         /// <summary>
         /// Enumerates the test commands represented by this test method.

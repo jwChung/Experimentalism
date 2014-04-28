@@ -24,4 +24,7 @@ using System.Runtime.InteropServices;
  *   `ConstantEqualityComparer`.
  *   
  * - [FIX, BREAKING-CHANGE] Renames SpecimenBuilderAdapter to SpecimenBuilder.
+ * 
+ * - [FIX, BREAKING-CHANGE] Renames BaseTheoremAttribute to
+ *   TheoremBaseAttribute.
  */

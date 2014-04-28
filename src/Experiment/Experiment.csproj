@@ -54,7 +54,7 @@
     <Compile Include="ITestFixture.cs" />
     <Compile Include="BaseFirstClassTheoremAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseTheoremAttribute.cs" />
+    <Compile Include="TheoremBaseAttribute.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="TestCase.Generic.cs">
       <AutoGen>True</AutoGen>
