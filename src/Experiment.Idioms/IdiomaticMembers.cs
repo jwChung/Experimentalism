@@ -11,6 +11,7 @@ namespace Jwc.Experiment
     /// Represents members of a certain <see cref="Type"/> which will be
     /// verified by idiomatic assertions.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class IdiomaticMembers : IEnumerable<MemberInfo>
     {
         private const BindingFlags _bindingFlags =
@@ -46,6 +47,7 @@ namespace Jwc.Experiment
         /// <summary>
         /// Gets a value indicating the type to enumerate members.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This name is desirable to indicate the target type.")]
         public Type Type
         {
             get
