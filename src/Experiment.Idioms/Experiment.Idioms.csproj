@@ -62,6 +62,7 @@
     <Compile Include="DisplayNameVisitor.cs" />
     <Compile Include="ElementReferenceCollector.cs" />
     <Compile Include="HidingReferenceException.cs" />
+    <Compile Include="IdiomaticMembers.cs" />
     <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />
