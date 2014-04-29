@@ -16,7 +16,7 @@ namespace Jwc.Experiment
     public class TypeMembers : IEnumerable<MemberInfo>
     {
         private readonly IReflectionVisitor<IEnumerable<Accessibilities>> _accessibilityCollectingVisitor
-            = new AccessibilityCollectingVisitor();
+            = new AccessibilityCollector();
         private readonly Accessibilities _accessibilities;
         private readonly Type _type;
 

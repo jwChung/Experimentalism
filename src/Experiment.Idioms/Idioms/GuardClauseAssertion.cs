@@ -10,8 +10,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class GuardClauseAssertion : AssertionAdapter
     {
-        private readonly AccessibilityCollectingVisitor _accessibilityCollectingVisitor
-            = new AccessibilityCollectingVisitor();
+        private readonly AccessibilityCollector _accessibilityCollector
+            = new AccessibilityCollector();
         private readonly ITestFixture _testFixture;
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Jwc.Experiment.Idioms
 
         private bool IsPublic<T>(T e) where T : IReflectionElement
         {
-            var accessibilities = e.Accept(_accessibilityCollectingVisitor).Value.Single();
+            var accessibilities = e.Accept(_accessibilityCollector).Value.Single();
             return (accessibilities & Accessibilities.Public) == Accessibilities.Public;
         }
     }

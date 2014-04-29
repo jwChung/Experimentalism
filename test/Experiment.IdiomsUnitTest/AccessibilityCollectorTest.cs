@@ -8,19 +8,19 @@ using Xunit.Extensions;
 
 namespace Jwc.Experiment
 {
-    public class AccessibilityCollectingVisitorTest
+    public class AccessibilityCollectorTest
     {
         [Fact]
         public void SutIsReflectionVisitor()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.IsAssignableFrom<ReflectionVisitor<IEnumerable<Accessibilities>>>(sut);
         }
 
         [Fact]
         public void ValueIsCorrect()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             var actual = sut.Value;
             Assert.Empty(actual);
         }
@@ -28,7 +28,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitAssemblyElementReturnsSutItself()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             var actual = sut.Visit((AssemblyElement)null);
             Assert.Equal(sut, actual);
         }
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
         public void VisitTypeElementProducesCorrectValue(
             Func<Type, bool> predicate, Accessibilities expected)
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             var typeElement = typeof(object).Assembly
                 .GetTypes().Where(predicate).First().ToElement();
 
@@ -51,7 +51,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitTypeElementManyTimeProducesCorrectValues()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             var types = typeof(object).Assembly.GetTypes();
             var typeElement1 = types.Where(x => x.IsPublic).First().ToElement();
             var typeElement2 = types.Where(x => x.IsNotPublic).First().ToElement();
@@ -66,7 +66,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullTypeElementThrows()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
         }
 
@@ -75,7 +75,7 @@ namespace Jwc.Experiment
         public void VisitFieldInfoElementProducesCorrectValue(
             Func<FieldInfo, bool> predicate, Accessibilities expected)
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -92,7 +92,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitFieldInfoElementManyTimeProducesCorrectValues()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -111,7 +111,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullFieldInfoElementThrows()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
         }
 
@@ -120,7 +120,7 @@ namespace Jwc.Experiment
         public void VisitConstructorInfoElementProducesCorrectValue(
             Func<MethodBase, bool> predicate, Accessibilities expected)
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -137,7 +137,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitConstructorInfoElementManyTimeProducesCorrectValues()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -156,7 +156,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullConstructorInfoElementThrows()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
@@ -165,7 +165,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementProducesCorrectValue(
             Func<MethodBase, bool> predicate, Accessibilities expected)
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -182,7 +182,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementManyTimeProducesCorrectValues()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -201,7 +201,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullMethodInfoElementThrows()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
         }
 
@@ -210,7 +210,7 @@ namespace Jwc.Experiment
         public void VisitEventInfoElementProducesCorrectValue(
             Func<EventInfo, bool> predicate, Accessibilities expected)
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -228,7 +228,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitEventInfoElementManyTimeProducesCorrectValues()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -247,14 +247,14 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullEventInfoElementThrows()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
         }
 
         [Fact]
         public void VisitParameterInfoElementReturnsSutItself()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             var actual = sut.Visit((ParameterInfoElement)null);
             Assert.Equal(sut, actual);
         }
@@ -262,7 +262,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitLocalVariableInfoElementReturnsSutItself()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             var actual = sut.Visit((LocalVariableInfoElement)null);
             Assert.Equal(sut, actual);
         }
@@ -272,7 +272,7 @@ namespace Jwc.Experiment
         public void VisitPropertyInfoElementProducesCorrectValue(
             Func<PropertyInfo, bool> predicate, Accessibilities expected)
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
@@ -290,7 +290,7 @@ namespace Jwc.Experiment
         public void VisitPropertyInfoElementManyTimeProducesCorrectValues()
         {
             // Fixture setup
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
 
             const BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
@@ -335,7 +335,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullPropertyInfoElementThrows()
         {
-            var sut = new AccessibilityCollectingVisitor();
+            var sut = new AccessibilityCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement)null));
         }
 

@@ -129,7 +129,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
-                    .Accept(new AccessibilityCollectingVisitor())
+                    .Accept(new AccessibilityCollector())
                     .Value.Single())
                 .ToArray();
 
@@ -152,7 +152,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
-                    .Accept(new AccessibilityCollectingVisitor())
+                    .Accept(new AccessibilityCollector())
                     .Value.Single())
                 .ToArray();
 
@@ -177,7 +177,7 @@ namespace Jwc.Experiment
 
             var actual = sut.Select(
                 m => m.ToReflectionElement()
-                    .Accept(new AccessibilityCollectingVisitor())
+                    .Accept(new AccessibilityCollector())
                     .Value.Single())
                 .ToArray();
 

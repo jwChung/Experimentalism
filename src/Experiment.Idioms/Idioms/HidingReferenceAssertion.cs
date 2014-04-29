@@ -13,8 +13,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class HidingReferenceAssertion : ReflectionVisitor<object>
     {
-        private readonly AccessibilityCollectingVisitor _accessibilityCollectingVisitor
-            = new AccessibilityCollectingVisitor();
+        private readonly AccessibilityCollector _accessibilityCollector
+            = new AccessibilityCollector();
         private readonly ElementReferenceCollectingVisitor _elementReferenceCollectingVisitor
             = new ElementReferenceCollectingVisitor();
         private readonly Assembly[] _assemblies;
@@ -256,7 +256,7 @@ namespace Jwc.Experiment.Idioms
 
         private bool IsVisible<T>(T reflectionElement) where T : IReflectionElement
         {
-            var accessibilities = reflectionElement.Accept(_accessibilityCollectingVisitor).Value.Single();
+            var accessibilities = reflectionElement.Accept(_accessibilityCollector).Value.Single();
             return (accessibilities & (Accessibilities.Public | Accessibilities.Protected)) != Accessibilities.None;
         }
     }

@@ -67,7 +67,7 @@
     <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
-    <Compile Include="AccessibilityCollectingVisitorTest.cs" />
+    <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="DisplayNameVisitorTest.cs" />
     <Compile Include="ElementReferenceCollectingVisitorTest.cs" />
     <Compile Include="Idioms\GuardClauseAssertionTest.cs" />

@@ -432,7 +432,7 @@ namespace Jwc.Experiment.Idioms
 
         private static Accessibilities GetAccessibilities(IReflectionElement e)
         {
-            return e.Accept(new AccessibilityCollectingVisitor()).Value.Single();
+            return e.Accept(new AccessibilityCollector()).Value.Single();
         }
 
         private class NotSatisfiedConstructorInfoElementDataAttribute : DataAttribute

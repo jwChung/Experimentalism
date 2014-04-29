@@ -30,4 +30,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX, BREAKING-CHANGE] Renames BaseFirstClassTheoremAttribute to
  *   FirstClassTheoremBaseAttribute.
+ *   
+ * - [FIX, BREAKING-CHANGE] Renames AccessibilityCollectingVisitor to
+ *   AccessibilityCollector.
  */
