@@ -60,7 +60,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="DisplayNameVisitor.cs" />
-    <Compile Include="ElementReferenceCollectingVisitor.cs" />
+    <Compile Include="ElementReferenceCollector.cs" />
     <Compile Include="HidingReferenceException.cs" />
     <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />

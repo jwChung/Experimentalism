@@ -36,4 +36,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX, BREAKING-CHANGE] Renames ReferenceCollectingVisitor to
  *   ReferenceCollector.
+ *   
+ * - [FIX, BREAKING-CHANGE] Renames ElementReferenceCollectingVisitor to
+ *   ElementReferenceCollector.
  */

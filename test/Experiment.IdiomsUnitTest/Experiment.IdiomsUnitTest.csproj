@@ -69,7 +69,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="DisplayNameVisitorTest.cs" />
-    <Compile Include="ElementReferenceCollectingVisitorTest.cs" />
+    <Compile Include="ElementReferenceCollectorTest.cs" />
     <Compile Include="Idioms\GuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MockExtensions.cs" />

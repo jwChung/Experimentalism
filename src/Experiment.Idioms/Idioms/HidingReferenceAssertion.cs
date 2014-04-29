@@ -15,8 +15,8 @@ namespace Jwc.Experiment.Idioms
     {
         private readonly AccessibilityCollector _accessibilityCollector
             = new AccessibilityCollector();
-        private readonly ElementReferenceCollectingVisitor _elementReferenceCollectingVisitor
-            = new ElementReferenceCollectingVisitor();
+        private readonly ElementReferenceCollector _elementReferenceCollector
+            = new ElementReferenceCollector();
         private readonly Assembly[] _assemblies;
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Jwc.Experiment.Idioms
         
         private void EnsureReferencesAreNotSpecified(IReflectionElement reflectionElement)
         {
-            var asemblies = reflectionElement.Accept(_elementReferenceCollectingVisitor).Value.ToArray();
+            var asemblies = reflectionElement.Accept(_elementReferenceCollector).Value.ToArray();
             foreach (var assembly in Assemblies.Where(asemblies.Contains)) {
                 throw new HidingReferenceException(
                     string.Format(

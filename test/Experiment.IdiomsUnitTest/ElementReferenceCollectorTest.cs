@@ -4,19 +4,19 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class ElementReferenceCollectingVisitorTest
+    public class ElementReferenceCollectorTest
     {
         [Fact]
         public void SutIsReferenceCollectingVisitor()
         {
-            var sut = new ElementReferenceCollectingVisitor();
+            var sut = new ElementReferenceCollector();
             Assert.IsAssignableFrom<ReferenceCollector>(sut);
         }
 
         [Fact]
         public void VisitFieldInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((FieldInfoElement[])null);
 
@@ -27,7 +27,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitConstructorInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((ConstructorInfoElement[])null);
 
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitPropertyInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((PropertyInfoElement[])null);
 
@@ -49,7 +49,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((MethodInfoElement[])null);
 
@@ -60,7 +60,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitEventInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((EventInfoElement[])null);
 
@@ -71,7 +71,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitParameterInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((ParameterInfoElement[])null);
 
@@ -82,7 +82,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitLocalVariableInfoElementsPassesEmptyToBaseMethod()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
 
             var actual = sut.Visit((LocalVariableInfoElement[])null);
 
@@ -93,7 +93,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementDoesNotRelayMethodBody()
         {
-            var sut = new Mock<ElementReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ElementReferenceCollector> { CallBase = true }.Object;
             var methodInfoElement = new Methods<TypeForCollectingReference>()
                 .Select(x => x.ConstructInMethodBody()).ToElement();
             var expected = new[] { typeof(object).Assembly };
