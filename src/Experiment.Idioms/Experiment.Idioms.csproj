@@ -71,6 +71,7 @@
     <Compile Include="ConstructingMemberException.cs" />
     <Compile Include="ExcludingWriteOnlyProperties.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
+    <Compile Include="IIdiomaticMemberAssertion.cs" />
     <Compile Include="MemberKindCollector.cs" />
     <Compile Include="ReferenceCollector.cs" />
     <Compile Include="MemberKinds.cs" />
