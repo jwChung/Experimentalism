@@ -71,6 +71,7 @@
     <Compile Include="ExcludingWriteOnlyProperties.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
     <Compile Include="ReferenceCollector.cs" />
+    <Compile Include="MemberKinds.cs" />
     <Compile Include="OrEqualityComparer.cs" />
     <Compile Include="ParameterToFieldComparer.cs" />
     <Compile Include="ParameterToPropertyComparer.cs" />
