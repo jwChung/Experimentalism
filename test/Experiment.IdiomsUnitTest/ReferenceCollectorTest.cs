@@ -11,7 +11,7 @@ using Xunit.Extensions;
 
 namespace Jwc.Experiment
 {
-    public class ReferenceCollectingVisitorTest
+    public class ReferenceCollectorTest
     {
         private const BindingFlags _bindingFlags =
             BindingFlags.Static | BindingFlags.Instance |
@@ -20,14 +20,14 @@ namespace Jwc.Experiment
         [Fact]
         public void SutIsReflectionVisitor()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.IsAssignableFrom<IReflectionVisitor<IEnumerable<Assembly>>>(sut);
         }
 
         [Fact]
         public void ValueIsCorrect()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             var actual = sut.Value;
             Assert.Empty(actual);
         }
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
             Type type, Assembly[] expected)
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
@@ -54,14 +54,14 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullTypeElementThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
         }
 
         [Fact]
         public void VisitFieldInfoElementCollectsCorrectAssemblies()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
@@ -79,7 +79,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullFieldInfoElementThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
         }
 
@@ -87,7 +87,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectAssemblies()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
@@ -108,14 +108,14 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullMethodInfoElementThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
         }
 
         [Fact]
         public void VisitParameterInfoElementCollectsCorrectAssemblies()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
@@ -134,14 +134,14 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullParameterInfoElementThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ParameterInfoElement)null));
         }
 
         [Fact]
         public void VisitLocalVariableInfoElementCollectsCorrectAssemblies()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             var expected = new[]
             {
                 typeof(TypeImplementingMultiple).Assembly,
@@ -160,7 +160,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullLocalVariableInfoElementThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((LocalVariableInfoElement)null));
         }
 
@@ -169,7 +169,7 @@ namespace Jwc.Experiment
         {
             var fieldInfoElements = typeof(SubTypeWithMembers).GetFields(_bindingFlags)
                 .Select(f => f.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(fieldInfoElements);
 
@@ -181,7 +181,7 @@ namespace Jwc.Experiment
         {
             var fieldInfoElements = typeof(TypeWithMembers).GetFields(_bindingFlags)
                 .Select(f => f.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(fieldInfoElements);
 
@@ -191,7 +191,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullFieldInfoElementsThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement[])null));
         }
 
@@ -200,7 +200,7 @@ namespace Jwc.Experiment
         {
             var propertyInfoElements = typeof(SubTypeWithMembers).GetProperties(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             
             var actual = sut.Visit(propertyInfoElements);
 
@@ -212,7 +212,7 @@ namespace Jwc.Experiment
         {
             var propertyInfoElements = typeof(TypeWithMembers).GetProperties(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(propertyInfoElements);
 
@@ -222,7 +222,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullPropertyInfoElementsThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement[])null));
         }
 
@@ -231,7 +231,7 @@ namespace Jwc.Experiment
         {
             var methodInfoElements = typeof(SubTypeWithMembers).GetMethods(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(methodInfoElements);
 
@@ -243,7 +243,7 @@ namespace Jwc.Experiment
         {
             var methodInfoElements = typeof(TypeWithMembers).GetMethods(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(methodInfoElements);
 
@@ -253,7 +253,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullMethodInfoElementsThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement[])null));
         }
 
@@ -262,7 +262,7 @@ namespace Jwc.Experiment
         {
             var eventInfoElements = typeof(SubTypeWithMembers).GetEvents(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(eventInfoElements);
 
@@ -274,7 +274,7 @@ namespace Jwc.Experiment
         {
             var eventInfoElements = typeof(TypeWithMembers).GetEvents(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
 
             var actual = sut.Visit(eventInfoElements);
 
@@ -284,7 +284,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullEventInfoElementsThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement[])null));
         }
 
@@ -292,7 +292,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectAssembliesForMethodCallInMethodBody()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
@@ -312,7 +312,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectAssembliesForConstructInMethodBody()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
@@ -333,7 +333,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectAssembliesForReturnValueInMethodBody()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
@@ -354,7 +354,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectAssembliesForPassParameterInMethodBody()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
@@ -375,7 +375,7 @@ namespace Jwc.Experiment
         public void VisitConstructorInfoElementCollectsCorrectAssembliesForMethodBody()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
@@ -395,14 +395,14 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNullConstructorInfoElementThrows()
         {
-            var sut = new ReferenceCollectingVisitor();
+            var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
         [Fact]
         public void VisitFieldInfoElementsCallsBaseMethod()
         {
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
             var fieldInfoElements = typeof(TypeWithMembers).GetFields(_bindingFlags)
@@ -416,7 +416,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitPropertyInfoElementsCallsBaseMethod()
         {
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
             var propertyInfoElements = typeof(TypeWithMembers).GetProperties(_bindingFlags)
@@ -430,7 +430,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementsCallsBaseMethod()
         {
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<MethodInfoElement>())).Returns(visitor);
             var methodInfoElements = typeof(TypeWithMembers).GetMethods(_bindingFlags)
@@ -444,7 +444,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitEventInfoElementsCallsBaseMethod()
         {
-            var sut = new Mock<ReferenceCollectingVisitor> { CallBase = true }.Object;
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<EventInfoElement>())).Returns(visitor);
             var eventInfoElements = typeof(TypeWithMembers).GetEvents(_bindingFlags)
@@ -465,11 +465,11 @@ namespace Jwc.Experiment
                 };
                 yield return new object[]
                 {
-                    typeof(ReferenceCollectingVisitorTest),
+                    typeof(ReferenceCollectorTest),
                     new[]
                     {
                         typeof(object).Assembly,
-                        typeof(ReferenceCollectingVisitorTest).Assembly
+                        typeof(ReferenceCollectorTest).Assembly
                     }
                 };
                 yield return new object[]

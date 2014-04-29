@@ -94,7 +94,7 @@ namespace Jwc.Experiment.Idioms
 
         private static Assembly[] GetReferencedAssemblies(Assembly assembly)
         {
-            return new ReferenceCollectingVisitor()
+            return new ReferenceCollector()
                 .Visit(assembly.ToElement()).Value
                 .Except(new[] { assembly }).ToArray();
         }

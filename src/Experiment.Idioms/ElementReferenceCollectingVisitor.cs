@@ -8,7 +8,7 @@ namespace Jwc.Experiment
     /// Represents <see cref="IReflectionVisitor{T}" /> to collect references
     /// for a given assembly on only element level.
     /// </summary>
-    public class ElementReferenceCollectingVisitor : ReferenceCollectingVisitor
+    public class ElementReferenceCollectingVisitor : ReferenceCollector
     {
         /// <summary>
         /// Allows <see cref="FieldInfoElement" /> instances to be 'visited'.

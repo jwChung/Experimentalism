@@ -11,7 +11,7 @@ namespace Jwc.Experiment
     /// Represents <see cref="IReflectionVisitor{T}"/> to collect references
     /// for a given assembly.
     /// </summary>
-    public class ReferenceCollectingVisitor : ReflectionVisitor<IEnumerable<Assembly>>
+    public class ReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
         private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
         private readonly HashSet<Type> _types = new HashSet<Type>();

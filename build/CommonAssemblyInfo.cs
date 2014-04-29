@@ -33,4 +33,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX, BREAKING-CHANGE] Renames AccessibilityCollectingVisitor to
  *   AccessibilityCollector.
+ *   
+ * - [FIX, BREAKING-CHANGE] Renames ReferenceCollectingVisitor to
+ *   ReferenceCollector.
  */

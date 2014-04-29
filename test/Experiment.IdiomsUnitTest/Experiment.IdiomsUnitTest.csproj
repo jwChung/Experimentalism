@@ -73,7 +73,7 @@
     <Compile Include="Idioms\GuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MockExtensions.cs" />
-    <Compile Include="ReferenceCollectingVisitorTest.cs" />
+    <Compile Include="ReferenceCollectorTest.cs" />
     <Compile Include="HidingReferenceExceptionTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionTestCasesTest.cs" />

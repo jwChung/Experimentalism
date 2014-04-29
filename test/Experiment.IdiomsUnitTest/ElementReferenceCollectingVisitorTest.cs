@@ -10,7 +10,7 @@ namespace Jwc.Experiment
         public void SutIsReferenceCollectingVisitor()
         {
             var sut = new ElementReferenceCollectingVisitor();
-            Assert.IsAssignableFrom<ReferenceCollectingVisitor>(sut);
+            Assert.IsAssignableFrom<ReferenceCollector>(sut);
         }
 
         [Fact]
