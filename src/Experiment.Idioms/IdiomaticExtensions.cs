@@ -29,5 +29,24 @@ namespace Jwc.Experiment
         {
             return new IdiomaticMembers(type, memberKinds);
         }
+
+        /// <summary>
+        /// Verifies members with an idiomatic member assertion.
+        /// </summary>
+        /// <param name="members">The members.</param>
+        /// <param name="assertion">The assertion.</param>
+        public static void Verify(this IEnumerable<MemberInfo> members, IIdiomaticMemberAssertion assertion)
+        {
+            if (members == null)
+                throw new ArgumentNullException("members");
+
+            if (assertion == null)
+                throw new ArgumentNullException("assertion");
+
+            foreach (var member in members)
+            {
+                assertion.Verify(member);
+            }
+        }
     }
 }

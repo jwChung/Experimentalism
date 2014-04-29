@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using System;
+using System.Linq;
+using Moq;
+using Xunit;
 
 namespace Jwc.Experiment
 {
@@ -27,6 +30,30 @@ namespace Jwc.Experiment
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
+        }
+
+        [Fact]
+        public void VerifyIdiomaticMemberAssertionCorrectlyVerifiesAssertion()
+        {
+            var members = typeof(object).GetMembers();
+            var assertion = Mock.Of<IIdiomaticMemberAssertion>();
+
+            members.Verify(assertion);
+
+            members.ToList().ForEach(m => assertion.ToMock().Verify(x => x.Verify(m)));
+        }
+
+        [Fact]
+        public void VerifyIdiomaticMemberAssertionWithNullMembersThrows()
+        {
+            var assertion = Mock.Of<IIdiomaticMemberAssertion>();
+            Assert.Throws<ArgumentNullException>(() => IdiomaticExtensions.Verify(null, assertion));
+        }
+
+        [Fact]
+        public void VerifyNullIdiomaticMemberAssertionThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => typeof(object).GetMembers().Verify(null));
         }
     }
 }
