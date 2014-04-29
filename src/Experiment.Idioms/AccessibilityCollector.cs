@@ -41,25 +41,6 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Allows an <see cref="AssemblyElement"/> to be visited. 
-        /// This method is called when the element accepts this visitor
-        /// instance.
-        /// </summary>
-        /// <param name="assemblyElement">
-        /// The <see cref="AssemblyElement"/> being visited.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
-        /// </returns>
-        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
-            AssemblyElement assemblyElement)
-        {
-            return this; // TODO: delete
-        }
-
-        /// <summary>
         /// Allows an <see cref="TypeElement"/> to be visited. This method is
         /// called when the element accepts this visitor instance.
         /// </summary>
@@ -242,45 +223,7 @@ namespace Jwc.Experiment
 
             return Visit(eventInfoElement.EventInfo.GetAddMethod(true).ToElement());
         }
-
-        /// <summary>
-        /// Allows an <see cref="ParameterInfoElement"/> to be visited. 
-        /// This method is called when the element accepts this visitor
-        /// instance.
-        /// </summary>
-        /// <param name="parameterInfoElement">
-        /// The <see cref="ParameterInfoElement"/> being visited.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
-        /// </returns>
-        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
-            ParameterInfoElement parameterInfoElement)
-        {
-            return this; // TODO: delete
-        }
-
-        /// <summary>
-        /// Allows an <see cref="LocalVariableInfoElement"/> to be visited. 
-        /// This method is called when the element accepts this visitor
-        /// instance.
-        /// </summary>
-        /// <param name="localVariableInfoElement">
-        /// The <see cref="LocalVariableInfoElement"/> being visited.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
-        /// </returns>
-        public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
-            LocalVariableInfoElement localVariableInfoElement)
-        {
-            return this; // TODO: delete
-        }
-
+        
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)
         {
             var accessibilities = Accessibilities.None;

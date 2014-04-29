@@ -25,14 +25,6 @@ namespace Jwc.Experiment
             Assert.Empty(actual);
         }
 
-        [Fact]
-        public void VisitAssemblyElementReturnsSutItself()
-        {
-            var sut = new AccessibilityCollector();
-            var actual = sut.Visit((AssemblyElement)null);
-            Assert.Equal(sut, actual);
-        }
-
         [Theory]
         [TypeElementData]
         public void VisitTypeElementProducesCorrectValue(
