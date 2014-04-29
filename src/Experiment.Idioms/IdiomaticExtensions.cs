@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Jwc.Experiment
@@ -47,6 +48,25 @@ namespace Jwc.Experiment
             {
                 assertion.Verify(member);
             }
+        }
+
+        /// <summary>
+        /// Converts members to idiomatic test cases with an idiomatic member
+        /// assertion.
+        /// </summary>
+        /// <param name="members">The members.</param>
+        /// <param name="assertion">The assertion.</param>
+        /// <returns>The test cases.</returns>
+        public static IEnumerable<ITestCase> ToIdiomaticTestCases(
+            this IEnumerable<MemberInfo> members, IIdiomaticMemberAssertion assertion)
+        {
+            if (members == null)
+                throw new ArgumentNullException("members");
+
+            if (assertion == null)
+                throw new ArgumentNullException("assertion");
+
+            return members.Select(m => new TestCase(() => assertion.Verify(m)));
         }
     }
 }
