@@ -56,7 +56,7 @@ namespace Jwc.Experiment
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             AssemblyElement assemblyElement)
         {
-            return this;
+            return this; // TODO: delete
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace Jwc.Experiment
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             ParameterInfoElement parameterInfoElement)
         {
-            return this;
+            return this; // TODO: delete
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Jwc.Experiment
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             LocalVariableInfoElement localVariableInfoElement)
         {
-            return this;
+            return this; // TODO: delete
         }
 
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)
