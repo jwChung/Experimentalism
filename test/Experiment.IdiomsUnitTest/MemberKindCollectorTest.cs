@@ -102,7 +102,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(getSetPropertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.GetSetProperty }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.Property }, actual.Value);
         }
 
         [Fact]

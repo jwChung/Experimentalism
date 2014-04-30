@@ -140,13 +140,15 @@ namespace Jwc.Experiment.Idioms
 
         private static MemberKinds GetPropertyType(PropertyInfo property)
         {
-            if (property.GetGetMethod() == null)
-                return MemberKinds.SetProperty;
+            var memberKinds = MemberKinds.None;
 
-            if (property.GetSetMethod() == null)
-                return MemberKinds.GetProperty;
+            if (property.GetGetMethod() != null)
+                memberKinds |= MemberKinds.GetProperty;
 
-            return MemberKinds.GetSetProperty;
+            if (property.GetSetMethod() != null)
+                memberKinds |= MemberKinds.SetProperty;
+
+            return memberKinds;
         }
     }
 }

@@ -34,24 +34,19 @@ namespace Jwc.Experiment.Idioms
         SetProperty = 8,
 
         /// <summary>
-        /// The get set property
-        /// </summary>
-        GetSetProperty = 0x10,
-
-        /// <summary>
         /// The property
         /// </summary>
-        Property = GetProperty | SetProperty | GetSetProperty,
+        Property = GetProperty | SetProperty,
 
         /// <summary>
         /// The method
         /// </summary>
-        Method = 0x20,
+        Method = 0x10,
 
         /// <summary>
         /// The event
         /// </summary>
-        Event = 0x40,
+        Event = 0x20,
 
         /// <summary>
         /// All
