@@ -329,10 +329,10 @@ namespace Jwc.Experiment.Idioms
         {
             return new[] { type }
                 .Concat(type.GetGenericArguments())
-                .SelectMany(GetReferenceAssembliesFromAncestors);
+                .SelectMany(GetReferencedAssembliesFromAncestors);
         }
 
-        private static IEnumerable<Assembly> GetReferenceAssembliesFromAncestors(Type type)
+        private static IEnumerable<Assembly> GetReferencedAssembliesFromAncestors(Type type)
         {
             return ReferencedAssembliesFromBaseTypes(type)
                 .Concat(GetReferencedAssembliesFromInterfaces(type));
