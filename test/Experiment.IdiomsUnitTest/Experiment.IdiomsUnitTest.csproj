@@ -92,7 +92,6 @@
     <Compile Include="ClassForCollectingReference.cs" />
     <Compile Include="ClassImplementingHierarchical.cs" />
     <Compile Include="ClassImplementingMultiple.cs" />
-    <Compile Include="TypeWithProperties.cs" />
     <Compile Include="ClassWithMembers.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="SpecimenBuilderTest.cs" />
