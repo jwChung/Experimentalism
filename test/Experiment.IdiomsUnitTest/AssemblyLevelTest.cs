@@ -10,7 +10,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(IdiomaticTestCase).Assembly;
+            var sut = typeof(IIdiomaticMemberAssertion).Assembly;
             var specifiedAssemblies = new []
             {
                 // GAC
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(IdiomaticTestCase).Assembly;
+            var sut = typeof(IIdiomaticMemberAssertion).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var types = Assembly.Load(assemblyName).GetExportedTypes();
 
