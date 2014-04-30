@@ -82,7 +82,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IAssertionFactory.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
-    <Compile Include="IdiomaticTestCases.cs" />
     <Compile Include="IdiomaticTestCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionElements.cs" />
