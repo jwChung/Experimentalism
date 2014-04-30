@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Moq;
 using Ploeh.Albedo;
 using Xunit;
 using Xunit.Extensions;
@@ -188,6 +189,33 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new MemberInitializationAssertion(new FakeTestFixture());
             Assert.Throws<MemberInitializationException>(() => sut.Verify(type));
+        }
+
+        [Fact]
+        public void SutIsIdiomaticAssemblyAssertion()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+        }
+
+        [Fact]
+        public void VerifyAssemblyCorrectlyVerifies()
+        {
+            // Fixture setup
+            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture()).Object;
+
+            var types = new List<MemberInfo>();
+            sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
+
+            var assembly = typeof(TheoremBaseAttribute).Assembly;
+
+            var expected = assembly.GetExportedTypes();
+
+            // Exercise system
+            sut.Verify(assembly);
+
+            // Verify outcome
+            Assert.Equal(expected, types);
         }
 
         private class SatisfiedConstructorDataAttribute : DataAttribute

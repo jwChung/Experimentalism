@@ -11,7 +11,8 @@ namespace Jwc.Experiment.Idioms
     /// Encapsulates a unit test that verifies that members (property or field)
     /// are correctly intialized by a constructor.
     /// </summary>
-    public class MemberInitializationAssertion : IdiomaticMemberAssertion, IIdiomaticTypeAssertion
+    public class MemberInitializationAssertion :
+        IdiomaticMemberAssertion, IIdiomaticTypeAssertion, IIdiomaticAssemblyAssertion
     {
         private readonly ITestFixture _testFixture;
         private readonly IEqualityComparer<IReflectionElement> _parameterToMemberComparer;
@@ -93,13 +94,25 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// verifies that members (property or field) of all types of an
+        /// specified assembly are correctly intialized by a constructor of
+        /// a certain type in the assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        public void Verify(Assembly assembly)
+        {
+            foreach (var type in assembly.GetExportedTypes())
+                Verify(type);
+        }
+
+        /// <summary>
         /// verifies that members (property or field) of a specified type
         /// are correctly intialized by a constructor of the type.
         /// </summary>
         /// <param name="type">
         /// The type.
         /// </param>
-        public void Verify(Type type)
+        public virtual void Verify(Type type)
         {
             foreach (var member in type.GetIdiomaticMembers())
                 Verify(member);
