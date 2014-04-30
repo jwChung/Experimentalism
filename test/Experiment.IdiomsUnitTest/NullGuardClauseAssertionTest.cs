@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Moq;
 using Ploeh.Albedo;
 using Ploeh.AutoFixture.Idioms;
 using Xunit;
@@ -66,6 +69,33 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
             Assert.Throws<GuardClauseException>(() => sut.Verify(typeof(ClassWithUnguardedMembers)));
+        }
+
+        [Fact]
+        public void SutIsIdiomaticAssemblyAssertion()
+        {
+            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+        }
+
+        [Fact]
+        public void VerifyAssemblyCorrectlyVerifies()
+        {
+            // Fixture setup
+            var sut = new Mock<NullGuardClauseAssertion>(new DelegatingTestFixture()).Object;
+
+            var types = new List<MemberInfo>();
+            sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
+
+            var assembly = typeof(TheoremBaseAttribute).Assembly;
+
+            var expected = assembly.GetExportedTypes();
+
+            // Exercise system
+            sut.Verify(assembly);
+
+            // Verify outcome
+            Assert.Equal(expected, types);
         }
 
         private class ClassWithGuardedMembers
