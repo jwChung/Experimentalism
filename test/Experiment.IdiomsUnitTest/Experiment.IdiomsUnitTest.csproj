@@ -78,7 +78,6 @@
     <Compile Include="MemberKindCollectorTest.cs" />
     <Compile Include="MockExtensions.cs" />
     <Compile Include="ReferenceCollectorTest.cs" />
-    <Compile Include="HidingReferenceExceptionTest.cs" />
     <Compile Include="MemberInitializationExceptionTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
