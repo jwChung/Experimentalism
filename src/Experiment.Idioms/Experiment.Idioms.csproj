@@ -62,6 +62,7 @@
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="IdiomaticMembers.cs" />
     <Compile Include="IdiomaticMemberAssertion.cs" />
+    <Compile Include="IIdiomaticAssemblyAssertion.cs" />
     <Compile Include="IIdiomaticTypeAssertion.cs" />
     <Compile Include="MemberInitializationAssertion.cs" />
     <Compile Include="NullGuardClauseAssertion.cs" />
