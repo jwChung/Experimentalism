@@ -55,6 +55,12 @@ namespace Jwc.Experiment.Idioms
                 .Select(m => new TestCase<ITestFixture>(f => new MemberInitializationAssertion(f).Verify(m)));
         }
 
+        [Fact]
+        public void NullGuardClasuseAssertionCorrectlyVerifiesType()
+        {
+            new NullGuardClauseAssertion(new FakeTestFixture()).Verify(typeof(Random));
+        }
+
         private class ClassForNullGuardClause
         {
             public ClassForNullGuardClause(object arg)
