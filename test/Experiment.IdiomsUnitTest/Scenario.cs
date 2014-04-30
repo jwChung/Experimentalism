@@ -61,6 +61,21 @@ namespace Jwc.Experiment.Idioms
             new NullGuardClauseAssertion(new FakeTestFixture()).Verify(typeof(Random));
         }
 
+        [Fact]
+        public void RestrictiveAssertionCorrectlyVerifiesAssembly()
+        {
+            new RestrictiveReferenceAssertion(
+                    Assembly.Load("mscorlib"),
+                    typeof(Uri).Assembly, // System.dll
+                    typeof(Enumerable).Assembly, // System.Core.dll
+                    Assembly.Load("Jwc.Experiment"),
+                    Assembly.Load("Ploeh.Albedo"),
+                    Assembly.Load("Ploeh.AutoFixture"),
+                    Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                    Assembly.Load("Mono.Reflection"))
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+        }
+
         private class ClassForNullGuardClause
         {
             public ClassForNullGuardClause(object arg)
