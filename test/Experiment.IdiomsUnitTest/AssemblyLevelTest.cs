@@ -20,7 +20,6 @@ namespace Jwc.Experiment
                 // Direct references
                 "Jwc.Experiment",
                 "Ploeh.Albedo",
-                "xunit",
                 "Ploeh.AutoFixture",
                 "Ploeh.AutoFixture.Idioms",
 
