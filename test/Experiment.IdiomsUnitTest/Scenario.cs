@@ -45,20 +45,6 @@ namespace Jwc.Experiment
             return new GuardClauseAssertionTestCases(GetType());
         }
 
-        [FirstClassTheorem]
-        public IEnumerable<ITestCase> GuardClauseAssertionTestCasesCanExceptCertainMembers()
-        {
-            return new GuardClauseAssertionTestCases(
-                typeof(TypeWithGuardTestMembers),
-                new Methods<TypeWithGuardTestMembers>().Select(x => x.NonGuardedMethod(null)));
-        }
-
-        [FirstClassTheorem]
-        public IEnumerable<ITestCase> ConstructingMemberAssertionTestCasesVerifiesMembersInitiazliedByConstructor()
-        {
-            return new ConstructingMemberAssertionTestCases(typeof(TypeWithMembersInitializedByConstructor));
-        }
-
         [Fact]
         public void RestrictingReferenceAssertionVerifiesAssembliesCorrectlyReferenced()
         {

@@ -71,7 +71,6 @@
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionFactory.cs" />
-    <Compile Include="Idioms\ConstructingMemberAssertionTestCases.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="ExcludingWriteOnlyProperties.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
