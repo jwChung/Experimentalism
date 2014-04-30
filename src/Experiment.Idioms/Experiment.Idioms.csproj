@@ -59,7 +59,6 @@
     </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
-    <Compile Include="DisplayNameVisitor.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="IdiomaticMembers.cs" />
     <Compile Include="IdiomaticMemberAssertion.cs" />
