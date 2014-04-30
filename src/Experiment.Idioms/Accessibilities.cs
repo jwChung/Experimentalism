@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Specifies flags than represents accessibilities.

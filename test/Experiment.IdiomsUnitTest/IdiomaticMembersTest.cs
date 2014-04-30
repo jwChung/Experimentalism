@@ -6,7 +6,7 @@ using Ploeh.Albedo;
 using Ploeh.Albedo.Refraction;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class IdiomaticMembersTest
     {

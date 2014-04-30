@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Represetns a display name of a reflection member.

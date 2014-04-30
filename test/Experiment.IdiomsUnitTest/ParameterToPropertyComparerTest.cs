@@ -4,7 +4,7 @@ using System.Linq;
 using Ploeh.Albedo;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class ParameterToPropertyComparerTest
     {

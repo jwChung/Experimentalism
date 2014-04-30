@@ -3,7 +3,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class AssemblyLevelTest
     {

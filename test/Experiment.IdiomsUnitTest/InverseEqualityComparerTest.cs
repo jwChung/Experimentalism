@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class InverseEqualityComparerTest
     {

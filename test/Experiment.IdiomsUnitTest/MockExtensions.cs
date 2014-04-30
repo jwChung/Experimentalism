@@ -1,6 +1,6 @@
 using Moq;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public static class MockExtensions
     {

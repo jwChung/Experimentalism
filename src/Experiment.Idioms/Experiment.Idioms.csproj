@@ -7,7 +7,7 @@
     <ProjectGuid>{7352FC70-2780-415C-9A43-F889F7B8028D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment</RootNamespace>
+    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
     <AssemblyName>Jwc.Experiment.Idioms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,9 +62,9 @@
     <Compile Include="DisplayNameVisitor.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="IdiomaticMembers.cs" />
-    <Compile Include="Idioms2\IdiomaticMemberAssertion.cs" />
-    <Compile Include="Idioms2\MemberInitializationAssertion.cs" />
-    <Compile Include="Idioms2\NullGuardClauseAssertion.cs" />
+    <Compile Include="IdiomaticMemberAssertion.cs" />
+    <Compile Include="MemberInitializationAssertion.cs" />
+    <Compile Include="NullGuardClauseAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
     <Compile Include="IIdiomaticMemberAssertion.cs" />
@@ -94,9 +94,7 @@
       <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Idioms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

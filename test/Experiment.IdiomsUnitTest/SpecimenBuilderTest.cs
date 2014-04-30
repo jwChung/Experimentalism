@@ -2,7 +2,7 @@
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class SpecimenBuilderTest
     {

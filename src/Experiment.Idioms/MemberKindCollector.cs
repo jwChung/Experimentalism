@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Represents a class to collect <see cref="MemberKinds"/>.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class DelegatingTestFixture : ITestFixture
     {

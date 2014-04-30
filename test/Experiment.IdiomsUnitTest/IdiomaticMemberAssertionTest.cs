@@ -4,7 +4,7 @@ using Moq;
 using Ploeh.Albedo;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms2
+namespace Jwc.Experiment.Idioms
 {
     public class IdiomaticMemberAssertionTest
     {

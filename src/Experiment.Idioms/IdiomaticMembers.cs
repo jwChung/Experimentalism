@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo.Refraction;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Represents members of a certain <see cref="Type"/> which will be

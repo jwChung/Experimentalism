@@ -5,7 +5,7 @@ using System.Reflection;
 using Mono.Reflection;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Represents <see cref="IReflectionVisitor{T}"/> to collect references

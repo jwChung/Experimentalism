@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.Idioms2;
 using Ploeh.Albedo;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class Scenario
     {

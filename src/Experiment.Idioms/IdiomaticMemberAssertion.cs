@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Jwc.Experiment.Idioms2
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Base implementation of <see cref="IIdiomaticMemberAssertion"/>.

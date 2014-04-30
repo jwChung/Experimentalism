@@ -1,7 +1,7 @@
 using System;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class DelegatingReflectionVisitor<T> : ReflectionVisitor<T>
     {

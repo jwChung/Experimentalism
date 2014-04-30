@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class DelegatingReflectionElementComparer : IEqualityComparer<IReflectionElement>
     {

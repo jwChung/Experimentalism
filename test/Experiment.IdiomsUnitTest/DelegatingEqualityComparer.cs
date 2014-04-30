@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class DelegatingEqualityComparer<T> : IEqualityComparer<T>
     {

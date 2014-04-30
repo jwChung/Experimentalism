@@ -9,7 +9,7 @@ using Ploeh.AutoFixture.Kernel;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class ReferenceCollectorTest
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using Moq;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Idioms
 {
     public class IdiomaticExtensionsTest
     {
