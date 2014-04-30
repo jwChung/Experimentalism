@@ -98,7 +98,6 @@
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
-    <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
     <Compile Include="SpecimenBuilderTest.cs" />
     <Compile Include="TypeMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
