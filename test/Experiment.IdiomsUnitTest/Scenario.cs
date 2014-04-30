@@ -12,13 +12,13 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void NullGuardClasuseAssertionCorrectlyVerifiesMember()
         {
-            typeof(ClassWithGuardedMembers)
+            typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
                 .Except(
                     new MemberInfo[]
                     {
-                        Constructors.Select(() => new ClassWithGuardedMembers("anonymous")),
-                        new Properties<ClassWithGuardedMembers>().Select(x => x.UnguradedProperty)
+                        Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
+                        new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
                 .ToList()
                 .ForEach(new NullGuardClauseAssertion(new FakeTestFixture()).Verify);
@@ -27,13 +27,13 @@ namespace Jwc.Experiment.Idioms
         [FirstClassTheorem]
         public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
         {
-            return typeof(ClassWithGuardedMembers)
+            return typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
                 .Except(
                     new MemberInfo[]
                     {
-                        Constructors.Select(() => new ClassWithGuardedMembers("anonymous")),
-                        new Properties<ClassWithGuardedMembers>().Select(x => x.UnguradedProperty)
+                        Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
+                        new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
                 .Select(m => new TestCase<ITestFixture>(f => new NullGuardClauseAssertion(f).Verify(m)));
         }
@@ -55,15 +55,15 @@ namespace Jwc.Experiment.Idioms
                 .Select(m => new TestCase<ITestFixture>(f => new MemberInitializationAssertion(f).Verify(m)));
         }
 
-        private class ClassWithGuardedMembers
+        private class ClassForNullGuardClause
         {
-            public ClassWithGuardedMembers(object arg)
+            public ClassForNullGuardClause(object arg)
             {
                 if (arg == null)
                     throw new ArgumentNullException("arg");
             }
 
-            public ClassWithGuardedMembers(string arg)
+            public ClassForNullGuardClause(string arg)
             {
             }
 
