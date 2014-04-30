@@ -92,7 +92,6 @@
     <Compile Include="TypeMembers.cs" />
     <Compile Include="FilteringMembers.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Idioms\GuardClauseAssertionFactory.cs" />
     <Compile Include="IAssertionFactory.cs" />
     <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCases.cs" />

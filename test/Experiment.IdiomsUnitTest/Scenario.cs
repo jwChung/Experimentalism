@@ -15,30 +15,6 @@ namespace Jwc.Experiment
 {
     public class Scenario
     {
-        [FirstClassTheorem]
-        public IEnumerable<ITestCase> GuardClauseAssertionVerifiesGuardClauses()
-        {
-            return new IdiomaticTestCases(
-                new ReflectionElements(
-                    new TypeMembers(typeof(Scenario)),
-                    new ConstructorInfoElementRefraction<object>(),
-                    new PropertyInfoElementRefraction<object>(),
-                    new MethodInfoElementRefraction<object>()),
-                new GuardClauseAssertionFactory());
-        }
-
-        [FirstClassTheorem(Skip="As this test fails, run explicitly.")]
-        public IEnumerable<ITestCase> GuardClauseAssertionThrowsWhenVerifyingNonGuardClauses()
-        {
-            return new IdiomaticTestCases(
-                new ReflectionElements(
-                    new TypeMembers(typeof(TypeWithGuardTestMembers)),
-                    new ConstructorInfoElementRefraction<object>(),
-                    new PropertyInfoElementRefraction<object>(),
-                    new MethodInfoElementRefraction<object>()),
-                new GuardClauseAssertionFactory());
-        }
-
         [Fact]
         public void RestrictingReferenceAssertionVerifiesAssembliesCorrectlyReferenced()
         {
