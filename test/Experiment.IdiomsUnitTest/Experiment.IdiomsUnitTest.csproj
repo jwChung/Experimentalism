@@ -80,7 +80,6 @@
     <Compile Include="ReferenceCollectorTest.cs" />
     <Compile Include="HidingReferenceExceptionTest.cs" />
     <Compile Include="MemberInitializationExceptionTest.cs" />
-    <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
     <Compile Include="OrEqualityComparer.cs" />
