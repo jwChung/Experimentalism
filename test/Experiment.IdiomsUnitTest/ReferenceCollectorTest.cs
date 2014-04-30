@@ -64,7 +64,7 @@ namespace Jwc.Experiment
             var sut = new ReferenceCollector();
             var expected = new[]
             {
-                typeof(TypeImplementingMultiple).Assembly,
+                typeof(ClassImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
@@ -92,7 +92,7 @@ namespace Jwc.Experiment
             sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
             var expected = new[]
             {
-                typeof(TypeImplementingMultiple).Assembly,
+                typeof(ClassImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
@@ -118,7 +118,7 @@ namespace Jwc.Experiment
             var sut = new ReferenceCollector();
             var expected = new[]
             {
-                typeof(TypeImplementingMultiple).Assembly,
+                typeof(ClassImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
@@ -144,7 +144,7 @@ namespace Jwc.Experiment
             var sut = new ReferenceCollector();
             var expected = new[]
             {
-                typeof(TypeImplementingMultiple).Assembly,
+                typeof(ClassImplementingMultiple).Assembly,
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
@@ -494,10 +494,10 @@ namespace Jwc.Experiment
                 };
                 yield return new object[]
                 {
-                    typeof(TypeImplementingMultiple),
+                    typeof(ClassImplementingMultiple),
                     new[]
                     {
-                        typeof(TypeImplementingMultiple).Assembly,
+                        typeof(ClassImplementingMultiple).Assembly,
                         typeof(IDisposable).Assembly,
                         typeof(ISpecimenContext).Assembly
                     }
@@ -507,7 +507,7 @@ namespace Jwc.Experiment
                     typeof(ClassImplementingHierarchical),
                     new[]
                     {
-                        typeof(TypeImplementingMultiple).Assembly,
+                        typeof(ClassImplementingMultiple).Assembly,
                         typeof(IDisposable).Assembly,
                         typeof(IReflectionElement).Assembly,
                         typeof(Fixture).Assembly
@@ -518,7 +518,7 @@ namespace Jwc.Experiment
                     typeof(List<ClassImplementingHierarchical>),
                     new[]
                     {
-                        typeof(TypeImplementingMultiple).Assembly,
+                        typeof(ClassImplementingMultiple).Assembly,
                         typeof(IDisposable).Assembly,
                         typeof(IReflectionElement).Assembly,
                         typeof(Fixture).Assembly

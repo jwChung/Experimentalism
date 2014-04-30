@@ -91,7 +91,7 @@
     <Compile Include="SubTypeWithMembers.cs" />
     <Compile Include="ClassForCollectingReference.cs" />
     <Compile Include="ClassImplementingHierarchical.cs" />
-    <Compile Include="TypeImplementingMultiple.cs" />
+    <Compile Include="ClassImplementingMultiple.cs" />
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />

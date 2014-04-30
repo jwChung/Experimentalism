@@ -3,7 +3,7 @@ using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment
 {
-    public class TypeImplementingMultiple : IDisposable, ISpecimenContext
+    public class ClassImplementingMultiple : IDisposable, ISpecimenContext
     {
         public void Dispose()
         {

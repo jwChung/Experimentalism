@@ -15,21 +15,21 @@ namespace Jwc.Experiment
         }
 
 #pragma warning disable 649
-        public TypeImplementingMultiple Field;
+        public ClassImplementingMultiple Field;
 #pragma warning restore 649
 
-        public TypeImplementingMultiple ReturnMethod()
+        public ClassImplementingMultiple ReturnMethod()
         {
-            var typeImplementingMultiple = new TypeImplementingMultiple();
+            var typeImplementingMultiple = new ClassImplementingMultiple();
             return typeImplementingMultiple;
         }
 
-        public TypeImplementingMultiple ReturnMethod(int arg)
+        public ClassImplementingMultiple ReturnMethod(int arg)
         {
             return null;
         }
 
-        public void ParameterizedMethod(TypeImplementingMultiple arg)
+        public void ParameterizedMethod(ClassImplementingMultiple arg)
         {
         }
 
