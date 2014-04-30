@@ -39,7 +39,7 @@ namespace Jwc.Experiment
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
             var nonParameterInfoElement = GetType().ToElement();
-            var propertyInfoElement = new Properties<TypeWithMembers>()
+            var propertyInfoElement = new Properties<ClassWithMembers>()
                 .Select(x => x.PublicProperty)
                 .ToElement();
 
@@ -52,7 +52,7 @@ namespace Jwc.Experiment
         public void EqualsParameterToNonPropertyReturnsFalse()
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
-            var parameterInfoElement = Constructors.Select(() => new TypeWithMembers(0))
+            var parameterInfoElement = Constructors.Select(() => new ClassWithMembers(0))
                 .GetParameters().First().ToElement();
             var nonPropertyInfoElement = GetType().ToElement();
 

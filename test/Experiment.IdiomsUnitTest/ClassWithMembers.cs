@@ -2,7 +2,7 @@ using System;
 
 namespace Jwc.Experiment
 {
-    public class TypeWithMembers
+    public class ClassWithMembers
     {
         public static object StaticField;
         public object PublicField;
@@ -14,27 +14,27 @@ namespace Jwc.Experiment
         private object PrivateField;
 #pragma warning restore 169
 
-        public TypeWithMembers()
+        public ClassWithMembers()
         {
         }
 
-        public TypeWithMembers(string arg1, int arg2)
+        public ClassWithMembers(string arg1, int arg2)
         {
         }
 
-        protected internal TypeWithMembers(string arg)
+        protected internal ClassWithMembers(string arg)
         {
         }
 
-        protected TypeWithMembers(object arg)
+        protected ClassWithMembers(object arg)
         {
         }
 
-        internal TypeWithMembers(int arg)
+        internal ClassWithMembers(int arg)
         {
         }
 
-        private TypeWithMembers(double arg)
+        private ClassWithMembers(double arg)
         {
         }
 

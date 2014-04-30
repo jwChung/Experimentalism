@@ -10,7 +10,7 @@ namespace Jwc.Experiment
         [Fact]
         public void GetIdiomaticMembersReturnsCorrectMembers()
         {
-            var type = typeof(TypeWithMembers);
+            var type = typeof(ClassWithMembers);
 
             var actual = type.GetIdiomaticMembers();
 
@@ -22,7 +22,7 @@ namespace Jwc.Experiment
         [Fact]
         public void GetIdiomaticMembersWithMemberKindsReturnsCorrectMembers()
         {
-            var type = typeof(TypeWithMembers);
+            var type = typeof(ClassWithMembers);
             var memberKinds = MemberKinds.Event;
 
             var actual = type.GetIdiomaticMembers(memberKinds);

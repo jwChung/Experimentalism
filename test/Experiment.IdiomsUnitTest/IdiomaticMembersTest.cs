@@ -69,7 +69,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesAllKindsOfMember()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers));
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers));
 
             var actual = sut.ToArray();
 
@@ -83,8 +83,8 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesOnlyDeclaredMembers()
         {
-            var nonDeclaredMember = new Methods<TypeWithMembers>().Select(x => x.ToString());
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers));
+            var nonDeclaredMember = new Methods<ClassWithMembers>().Select(x => x.ToString());
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers));
 
             var actual = sut.ToArray();
 
@@ -94,7 +94,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesStaticMembers()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers));
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers));
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -102,7 +102,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers));
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers));
 
             var actual = sut.OfType<MethodInfo>().ToArray();
 
@@ -113,7 +113,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutDoesNotEnumeratesAnyEventMethods()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers));
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers));
 
             var actual = sut.ToArray();
 
@@ -124,7 +124,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesOnlyPublicMembers()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers));
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers));
 
             var actual = sut.ToArray();
 
@@ -135,7 +135,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesNoMembersWhenMemberKindsIsNone()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers), MemberKinds.None);
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.None);
             var actual = sut.ToArray();
             Assert.Empty(actual);
         }
@@ -143,7 +143,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesOnlyPropertiesWhenMemberKindsIsProperty()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers), MemberKinds.Property);
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Property);
 
             var actual = sut.ToArray();
 
@@ -154,7 +154,7 @@ namespace Jwc.Experiment
         [Fact]
         public void SutEnumeratesCorrectMembersWhenMemberKindsIsConstructorOrMethod()
         {
-            var sut = new IdiomaticMembers(typeof(TypeWithMembers), MemberKinds.Constructor | MemberKinds.Method);
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Constructor | MemberKinds.Method);
 
             var actual = sut.ToArray();
 

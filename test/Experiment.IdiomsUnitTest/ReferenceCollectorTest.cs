@@ -167,7 +167,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNonDeclaredFieldInfoElementsFiltersIt()
         {
-            var fieldInfoElements = typeof(SubTypeWithMembers).GetFields(_bindingFlags)
+            var fieldInfoElements = typeof(SubClassWithMembers).GetFields(_bindingFlags)
                 .Select(f => f.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -179,7 +179,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitDeclaredFieldInfoElementsDoesNotFilterIt()
         {
-            var fieldInfoElements = typeof(TypeWithMembers).GetFields(_bindingFlags)
+            var fieldInfoElements = typeof(ClassWithMembers).GetFields(_bindingFlags)
                 .Select(f => f.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -198,7 +198,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNonDeclaredPropertyInfoElementsFiltersIt()
         {
-            var propertyInfoElements = typeof(SubTypeWithMembers).GetProperties(_bindingFlags)
+            var propertyInfoElements = typeof(SubClassWithMembers).GetProperties(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
             
@@ -210,7 +210,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitDeclaredPropertyInfoElementsDoesNotFilterIt()
         {
-            var propertyInfoElements = typeof(TypeWithMembers).GetProperties(_bindingFlags)
+            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -229,7 +229,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNonDeclaredMethodInfoElementsFiltersIt()
         {
-            var methodInfoElements = typeof(SubTypeWithMembers).GetMethods(_bindingFlags)
+            var methodInfoElements = typeof(SubClassWithMembers).GetMethods(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -241,7 +241,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitDeclaredMethodInfoElementsDoesNotFilterIt()
         {
-            var methodInfoElements = typeof(TypeWithMembers).GetMethods(_bindingFlags)
+            var methodInfoElements = typeof(ClassWithMembers).GetMethods(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -260,7 +260,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitNonDeclaredEventInfoElementsFiltersIt()
         {
-            var eventInfoElements = typeof(SubTypeWithMembers).GetEvents(_bindingFlags)
+            var eventInfoElements = typeof(SubClassWithMembers).GetEvents(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -272,7 +272,7 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitDeclaredEventInfoElementsDoesNotFilterIt()
         {
-            var eventInfoElements = typeof(TypeWithMembers).GetEvents(_bindingFlags)
+            var eventInfoElements = typeof(ClassWithMembers).GetEvents(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -405,7 +405,7 @@ namespace Jwc.Experiment
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
-            var fieldInfoElements = typeof(TypeWithMembers).GetFields(_bindingFlags)
+            var fieldInfoElements = typeof(ClassWithMembers).GetFields(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(fieldInfoElements);
@@ -419,7 +419,7 @@ namespace Jwc.Experiment
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
-            var propertyInfoElements = typeof(TypeWithMembers).GetProperties(_bindingFlags)
+            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(propertyInfoElements);
@@ -433,7 +433,7 @@ namespace Jwc.Experiment
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<MethodInfoElement>())).Returns(visitor);
-            var methodInfoElements = typeof(TypeWithMembers).GetMethods(_bindingFlags)
+            var methodInfoElements = typeof(ClassWithMembers).GetMethods(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(methodInfoElements);
@@ -447,7 +447,7 @@ namespace Jwc.Experiment
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<EventInfoElement>())).Returns(visitor);
-            var eventInfoElements = typeof(TypeWithMembers).GetEvents(_bindingFlags)
+            var eventInfoElements = typeof(ClassWithMembers).GetEvents(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(eventInfoElements);

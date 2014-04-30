@@ -19,7 +19,7 @@ namespace Jwc.Experiment.Idioms2
         public void VerifyFieldMemberCallsVerifyField()
         {
             var sut = new Mock<IdiomaticMemberAssertion> { CallBase = true }.Object;
-            var field = new Fields<TypeWithMembers>().Select(x => x.PublicField);
+            var field = new Fields<ClassWithMembers>().Select(x => x.PublicField);
 
             sut.Verify((MemberInfo)field);
 
@@ -30,7 +30,7 @@ namespace Jwc.Experiment.Idioms2
         public void VerifyConstructorMemberCallsVerifyConstructor()
         {
             var sut = new Mock<IdiomaticMemberAssertion> { CallBase = true }.Object;
-            var constructor = Constructors.Select(() => new TypeWithMembers());
+            var constructor = Constructors.Select(() => new ClassWithMembers());
 
             sut.Verify((MemberInfo)constructor);
 
@@ -41,7 +41,7 @@ namespace Jwc.Experiment.Idioms2
         public void VerifyPropertyMemberCallsVerifyProperty()
         {
             var sut = new Mock<IdiomaticMemberAssertion> { CallBase = true }.Object;
-            var property = new Properties<TypeWithMembers>().Select(x => x.PublicProperty);
+            var property = new Properties<ClassWithMembers>().Select(x => x.PublicProperty);
 
             sut.Verify((MemberInfo)property);
 
@@ -52,7 +52,7 @@ namespace Jwc.Experiment.Idioms2
         public void VerifyMethodMemberCallsVerifyMethod()
         {
             var sut = new Mock<IdiomaticMemberAssertion> { CallBase = true }.Object;
-            var method = new Methods<TypeWithMembers>().Select(x => x.PublicMethod());
+            var method = new Methods<ClassWithMembers>().Select(x => x.PublicMethod());
 
             sut.Verify((MemberInfo)method);
 
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Idioms2
         public void VerifyMethodMemberCallsVerifyEvent()
         {
             var sut = new Mock<IdiomaticMemberAssertion> { CallBase = true }.Object;
-            var @event = typeof(TypeWithMembers).GetEvents().First();
+            var @event = typeof(ClassWithMembers).GetEvents().First();
 
             sut.Verify((MemberInfo)@event);
 

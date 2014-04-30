@@ -27,8 +27,8 @@ namespace Jwc.Experiment
         public void VisitFieldInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var constructorInfoElement = typeof(TypeWithMembers).GetConstructors().First().ToElement();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
+            var constructorInfoElement = typeof(ClassWithMembers).GetConstructors().First().ToElement();
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
 
             var actual = sut.Visit(constructorInfoElement).Visit(fieldInfoElement);
 
@@ -47,8 +47,8 @@ namespace Jwc.Experiment
         public void VisitConstructorInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
-            var constructorInfoElement = typeof(TypeWithMembers).GetConstructors().First().ToElement();
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
+            var constructorInfoElement = typeof(ClassWithMembers).GetConstructors().First().ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(constructorInfoElement);
 
@@ -67,8 +67,8 @@ namespace Jwc.Experiment
         public void VisitGetPropertyInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
-            var getPropertyInfoElement = typeof(TypeWithMembers).GetProperties()
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
+            var getPropertyInfoElement = typeof(ClassWithMembers).GetProperties()
                 .First(p => p.GetSetMethod() == null).ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(getPropertyInfoElement);
@@ -81,8 +81,8 @@ namespace Jwc.Experiment
         public void VisitSetPropertyInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
-            var setPropertyInfoElement = typeof(TypeWithMembers).GetProperties()
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
+            var setPropertyInfoElement = typeof(ClassWithMembers).GetProperties()
                 .First(p => p.GetGetMethod() == null).ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(setPropertyInfoElement);
@@ -95,8 +95,8 @@ namespace Jwc.Experiment
         public void VisitGetSetPropertyInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
-            var getSetPropertyInfoElement = typeof(TypeWithMembers).GetProperties()
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
+            var getSetPropertyInfoElement = typeof(ClassWithMembers).GetProperties()
                 .First(p => p.GetGetMethod() != null && p.GetSetMethod() != null).ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(getSetPropertyInfoElement);
@@ -116,8 +116,8 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
-            var methodInfoElement = typeof(TypeWithMembers).GetMethods().First().ToElement();
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
+            var methodInfoElement = typeof(ClassWithMembers).GetMethods().First().ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(methodInfoElement);
 
@@ -136,8 +136,8 @@ namespace Jwc.Experiment
         public void VisitEventInfoElementCollectsCorrectMemberTypes()
         {
             var sut = new MemberKindCollector();
-            var fieldInfoElement = typeof(TypeWithMembers).GetFields().First().ToElement();
-            var eventInfoElement = typeof(TypeWithMembers).GetEvents().First().ToElement();
+            var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
+            var eventInfoElement = typeof(ClassWithMembers).GetEvents().First().ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(eventInfoElement);
 

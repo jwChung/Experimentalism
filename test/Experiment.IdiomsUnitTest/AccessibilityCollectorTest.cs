@@ -207,7 +207,7 @@ namespace Jwc.Experiment
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var eventInfoElement = typeof(object).Assembly
-                .GetTypes().Concat(new[] { typeof(TypeWithMembers) })
+                .GetTypes().Concat(new[] { typeof(ClassWithMembers) })
                 .SelectMany(t => t.GetEvents(bindingFlags))
                 .Where(predicate).First().ToElement();
 

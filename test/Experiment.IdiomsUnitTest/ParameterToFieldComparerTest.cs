@@ -45,7 +45,7 @@ namespace Jwc.Experiment
         {
             var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
             var nonParameterInfoElement = GetType().ToElement();
-            var fieldInfoElement = new Fields<TypeWithMembers>()
+            var fieldInfoElement = new Fields<ClassWithMembers>()
                 .Select(x => x.PublicField)
                 .ToElement();
 
@@ -58,7 +58,7 @@ namespace Jwc.Experiment
         public void EqualsParameterToNonFieldReturnsFalse()
         {
             var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
-            var parameterInfoElement = Constructors.Select(() => new TypeWithMembers(0))
+            var parameterInfoElement = Constructors.Select(() => new ClassWithMembers(0))
                 .GetParameters().First().ToElement();
             var nonFieldInfoElement = GetType().ToElement();
 
@@ -95,7 +95,7 @@ namespace Jwc.Experiment
             var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(0))
                 .GetParameters().First().ToElement();
-            var fieldInfoElement = new Fields<TypeWithMembers>()
+            var fieldInfoElement = new Fields<ClassWithMembers>()
                 .Select(x => x.PublicField).ToElement();
 
             var actual = sut.Equals(parameterInfoElement, fieldInfoElement);
@@ -110,7 +110,7 @@ namespace Jwc.Experiment
             var parameterInfoElement = new Methods<TypeForFieldEqualValue>()
                 .Select(x => x.Mehtod(null))
                 .GetParameters().First().ToElement();
-            var fieldInfoElement = new Fields<TypeWithMembers>()
+            var fieldInfoElement = new Fields<ClassWithMembers>()
                 .Select(x => x.PublicField).ToElement();
 
             var actual = sut.Equals(parameterInfoElement, fieldInfoElement);

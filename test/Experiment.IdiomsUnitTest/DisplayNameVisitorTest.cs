@@ -123,7 +123,7 @@ namespace Jwc.Experiment
         public void VisitFieldInfoElementCollectsCorrectName()
         {
             var sut = new DisplayNameVisitor();
-            var fieldInfo = typeof(TypeWithMembers).GetFields().First();
+            var fieldInfo = typeof(ClassWithMembers).GetFields().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (field)",
                 fieldInfo.ReflectedType,
@@ -138,7 +138,7 @@ namespace Jwc.Experiment
         public void VisitManyFieldInfoElementsCollectsCorrectNames()
         {
             var sut = new DisplayNameVisitor();
-            var fieldInfo = typeof(TypeWithMembers).GetFields().First();
+            var fieldInfo = typeof(ClassWithMembers).GetFields().First();
 
             var actual1 = sut.Visit(fieldInfo.ToElement());
             var actual2 = actual1.Visit(fieldInfo.ToElement());
@@ -157,7 +157,7 @@ namespace Jwc.Experiment
         public void VisitPropertyInfoElementCollectsCorrectName()
         {
             var sut = new DisplayNameVisitor();
-            var propertyInfo = typeof(TypeWithMembers).GetProperties().First();
+            var propertyInfo = typeof(ClassWithMembers).GetProperties().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (property)",
                 propertyInfo.ReflectedType,
@@ -172,7 +172,7 @@ namespace Jwc.Experiment
         public void VisitManyPropertyInfoElementsCollectsCorrectNames()
         {
             var sut = new DisplayNameVisitor();
-            var propertyInfo = typeof(TypeWithMembers).GetProperties().First();
+            var propertyInfo = typeof(ClassWithMembers).GetProperties().First();
 
             var actual1 = sut.Visit(propertyInfo.ToElement());
             var actual2 = actual1.Visit(propertyInfo.ToElement());
@@ -191,7 +191,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementCollectsCorrectName()
         {
             var sut = new DisplayNameVisitor();
-            var methodInfo = typeof(TypeWithMembers).GetMethods().First();
+            var methodInfo = typeof(ClassWithMembers).GetMethods().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (method)",
                 methodInfo.ReflectedType,
@@ -206,7 +206,7 @@ namespace Jwc.Experiment
         public void VisitManyMethodInfoElementsCollectsCorrectNames()
         {
             var sut = new DisplayNameVisitor();
-            var methodInfo = typeof(TypeWithMembers).GetMethods().First();
+            var methodInfo = typeof(ClassWithMembers).GetMethods().First();
 
             var actual1 = sut.Visit(methodInfo.ToElement());
             var actual2 = actual1.Visit(methodInfo.ToElement());
@@ -225,7 +225,7 @@ namespace Jwc.Experiment
         public void VisitEventInfoElementCollectsCorrectName()
         {
             var sut = new DisplayNameVisitor();
-            var eventInfo = typeof(TypeWithMembers).GetEvents().First();
+            var eventInfo = typeof(ClassWithMembers).GetEvents().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (event)",
                 eventInfo.ReflectedType,
@@ -240,7 +240,7 @@ namespace Jwc.Experiment
         public void VisitManyEventInfoElementsCollectsCorrectNames()
         {
             var sut = new DisplayNameVisitor();
-            var eventInfo = typeof(TypeWithMembers).GetEvents().First();
+            var eventInfo = typeof(ClassWithMembers).GetEvents().First();
 
             var actual1 = sut.Visit(eventInfo.ToElement());
             var actual2 = actual1.Visit(eventInfo.ToElement());
