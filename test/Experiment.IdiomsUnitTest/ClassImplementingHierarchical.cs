@@ -3,7 +3,7 @@ using Ploeh.Albedo;
 
 namespace Jwc.Experiment
 {
-    public class TypeImplementingHierarchical : IDisposable, IHierarchical
+    public class ClassImplementingHierarchical : IDisposable, IHierarchical
     {
         public void Dispose()
         {

@@ -504,7 +504,7 @@ namespace Jwc.Experiment
                 };
                 yield return new object[]
                 {
-                    typeof(TypeImplementingHierarchical),
+                    typeof(ClassImplementingHierarchical),
                     new[]
                     {
                         typeof(TypeImplementingMultiple).Assembly,
@@ -515,7 +515,7 @@ namespace Jwc.Experiment
                 };
                 yield return new object[]
                 {
-                    typeof(List<TypeImplementingHierarchical>),
+                    typeof(List<ClassImplementingHierarchical>),
                     new[]
                     {
                         typeof(TypeImplementingMultiple).Assembly,
