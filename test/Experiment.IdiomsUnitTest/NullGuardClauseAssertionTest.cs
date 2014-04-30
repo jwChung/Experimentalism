@@ -32,24 +32,45 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VerityGuardedMethodDoesNotThrow()
+        public void VerifyGuardedMethodDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var guardedMethod = new Methods<ClassForGuardClause>().Select(x => x.GuardedMethod(null, null));
+            var guardedMethod = new Methods<ClassWithGuardedMembers>().Select(x => x.Method(null, null));
             Assert.DoesNotThrow(() => sut.Verify(guardedMethod));
         }
 
         [Fact]
-        public void VerityUnguardedMethodThrows()
+        public void VerifyUnguardedMethodThrows()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var unguardedMethod = new Methods<ClassForGuardClause>().Select(x => x.UnguardedMethod(null, null));
+            var unguardedMethod = new Methods<ClassWithUnguardedMembers>().Select(x => x.Method(null, null));
             Assert.Throws<GuardClauseException>(() => sut.Verify(unguardedMethod));
         }
 
-        private class ClassForGuardClause
+        [Fact]
+        public void SutIsIdiomaticTypeAssertion()
         {
-            public void GuardedMethod(string arg1, object arg2)
+            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
+        }
+
+        [Fact]
+        public void VerifyGuardedTypeDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(typeof(ClassWithGuardedMembers)));
+        }
+
+        [Fact]
+        public void VerifyUnguardedTypeThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.Throws<GuardClauseException>(() => sut.Verify(typeof(ClassWithUnguardedMembers)));
+        }
+
+        private class ClassWithGuardedMembers
+        {
+            public void Method(string arg1, object arg2)
             {
                 if (arg1 == null)
                     throw new ArgumentNullException("arg1");
@@ -57,8 +78,11 @@ namespace Jwc.Experiment.Idioms
                 if (arg2 == null)
                     throw new ArgumentNullException("arg2");
             }
+        }
 
-            public void UnguardedMethod(string arg1, object arg2)
+        private class ClassWithUnguardedMembers
+        {
+            public void Method(string arg1, object arg2)
             {
                 if (arg1 == null)
                     throw new ArgumentNullException("arg1");
