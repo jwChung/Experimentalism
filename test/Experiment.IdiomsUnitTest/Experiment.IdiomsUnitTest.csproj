@@ -98,7 +98,6 @@
     <Compile Include="TypeImplementingMultiple.cs" />
     <Compile Include="TypeWithProperties.cs" />
     <Compile Include="TypeWithMembers.cs" />
-    <Compile Include="CompositeEnumerableTest.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="ExcludingMembersTest.cs" />
     <Compile Include="ExcludingReadOnlyPropertiesTest.cs" />
