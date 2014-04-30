@@ -82,7 +82,6 @@
     <Compile Include="MockExtensions.cs" />
     <Compile Include="ReferenceCollectorTest.cs" />
     <Compile Include="HidingReferenceExceptionTest.cs" />
-    <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
     <Compile Include="MemberInitializationExceptionTest.cs" />
     <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
