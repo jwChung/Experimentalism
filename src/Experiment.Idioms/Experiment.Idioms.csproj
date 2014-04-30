@@ -67,7 +67,6 @@
     <Compile Include="Idioms2\IdiomaticMemberAssertion.cs" />
     <Compile Include="Idioms2\MemberInitializationAssertion.cs" />
     <Compile Include="Idioms2\NullGuardClauseAssertion.cs" />
-    <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="ExcludingWriteOnlyProperties.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
@@ -110,7 +109,9 @@
       <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Idioms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
