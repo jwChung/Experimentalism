@@ -2,24 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.Idioms;
-using Mono.Reflection;
-using Ploeh.Albedo;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
-using Xunit;
 
 namespace Jwc.Experiment
 {
     public class Scenario
     {
-        [Fact]
-        public void HidingReferenceAssertionVerifiesSpecifiedAssembliesNotExposed()
-        {
-            var assertion = new HidingReferenceAssertion(typeof(ILPattern).Assembly);
-            typeof(ConstructingMemberAssertion).Assembly.ToElement().Accept(assertion);
-        }
-
         private class TypeWithGuardTestMembers
         {
             public void NonGuardedMethod(object arg)

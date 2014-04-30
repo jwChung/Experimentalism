@@ -68,7 +68,6 @@
     <Compile Include="Idioms2\MemberInitializationAssertion.cs" />
     <Compile Include="Idioms2\NullGuardClauseAssertion.cs" />
     <Compile Include="Idioms\GuardClauseAssertion.cs" />
-    <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="ExcludingWriteOnlyProperties.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
