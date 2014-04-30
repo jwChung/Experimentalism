@@ -221,7 +221,7 @@ namespace Jwc.Experiment.Idioms
                     continue;
                 }
 
-                throw new ConstructingMemberException(
+                throw new MemberInitializationException(
                     string.Format(
                         CultureInfo.CurrentCulture,
                         "The constructor parameter was not exposed through any fields or properties:{0}" +
@@ -263,7 +263,7 @@ namespace Jwc.Experiment.Idioms
                 return this;
             }
 
-            throw new ConstructingMemberException(
+            throw new MemberInitializationException(
                 string.Format(
                     CultureInfo.CurrentCulture,
                     "No constructors with an argument that matches the field were found:{0}" +
@@ -304,7 +304,7 @@ namespace Jwc.Experiment.Idioms
                     "No constructors with an argument that matches the property were found:" +
                     "{0}Reflected type: {1}{0}Property: {2}";
 
-            throw new ConstructingMemberException(
+            throw new MemberInitializationException(
                 string.Format(
                     CultureInfo.CurrentCulture,
                     messageFormat,

@@ -82,7 +82,7 @@
     <Compile Include="HidingReferenceExceptionTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionFactoryTest.cs" />
     <Compile Include="Idioms\ConstructingMemberAssertionTestCasesTest.cs" />
-    <Compile Include="ConstructingMemberExceptionTest.cs" />
+    <Compile Include="MemberInitializationExceptionTest.cs" />
     <Compile Include="ExcludingWriteOnlyPropertiesTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />

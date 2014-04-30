@@ -8,27 +8,27 @@ namespace Jwc.Experiment
     /// are correctly intialized by a constructor.
     /// </summary>
     [Serializable]
-    public class ConstructingMemberException : Exception
+    public class MemberInitializationException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConstructingMemberException"/> class.
+        /// Initializes a new instance of the <see cref="MemberInitializationException"/> class.
         /// </summary>
-        public ConstructingMemberException()
+        public MemberInitializationException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConstructingMemberException"/> class.
+        /// Initializes a new instance of the <see cref="MemberInitializationException"/> class.
         /// </summary>
         /// <param name="message">
         /// The message that describes the error.
         /// </param>
-        public ConstructingMemberException(string message) : base(message)
+        public MemberInitializationException(string message) : base(message)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConstructingMemberException"/> class.
+        /// Initializes a new instance of the <see cref="MemberInitializationException"/> class.
         /// </summary>
         /// <param name="message">
         /// The exception message.
@@ -36,12 +36,12 @@ namespace Jwc.Experiment
         /// <param name="inner">
         /// The inner exception.
         /// </param>
-        public ConstructingMemberException(string message, Exception inner) : base(message, inner)
+        public MemberInitializationException(string message, Exception inner) : base(message, inner)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConstructingMemberException" /> class.
+        /// Initializes a new instance of the <see cref="MemberInitializationException" /> class.
         /// </summary>
         /// <param name="info">
         /// The <see cref="SerializationInfo" /> that holds the serialized object
@@ -51,7 +51,7 @@ namespace Jwc.Experiment
         /// The <see cref="StreamingContext" /> that contains contextual information
         /// about the source or destination.
         /// </param>
-        protected ConstructingMemberException(
+        protected MemberInitializationException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {

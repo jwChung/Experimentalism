@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class ConstructingMemberExceptionTest
+    public class MemberInitializationExceptionTest
     {
         [Fact]
         public void SutIsException()
         {
-            var sut = new ConstructingMemberException();
+            var sut = new MemberInitializationException();
             Assert.IsAssignableFrom<Exception>(sut);
         }
     }

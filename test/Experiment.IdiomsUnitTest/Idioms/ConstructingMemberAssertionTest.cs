@@ -98,7 +98,7 @@ namespace Jwc.Experiment.Idioms
             };
 
             // Exercise system and Verify outcome
-            Assert.Throws<ConstructingMemberException>(() => sut.Visit(constructorInfoElement));
+            Assert.Throws<MemberInitializationException>(() => sut.Visit(constructorInfoElement));
             Assert.Equal(expected, memberInfos.OrderBy(mi => mi.Name).Distinct());
         }
 
@@ -132,7 +132,7 @@ namespace Jwc.Experiment.Idioms
             };
 
             // Exercise system and Verify outcome
-            Assert.Throws<ConstructingMemberException>(() => sut.Visit(constructorInfoElement));
+            Assert.Throws<MemberInitializationException>(() => sut.Visit(constructorInfoElement));
             Assert.Equal(expected, memberInfos.OrderBy(mi => mi.Name).Distinct());
         }
 
@@ -162,7 +162,7 @@ namespace Jwc.Experiment.Idioms
             var sut = new ConstructingMemberAssertion(
                 new ParameterToPropertyComparer(new FakeTestFixture()),
                 EqualityComparer<IReflectionElement>.Default);
-            Assert.Throws<ConstructingMemberException>(() => sut.Visit(constructorInfoElement));
+            Assert.Throws<MemberInitializationException>(() => sut.Visit(constructorInfoElement));
         }
 
         [Fact]
@@ -200,7 +200,7 @@ namespace Jwc.Experiment.Idioms
                 new FieldToParameterComparer(new FakeTestFixture()));
             FieldInfoElement fieldInfoElement = new Fields<TypeForTestField>()
                 .Select(x => x.NotSatisfied).ToElement();
-            Assert.Throws<ConstructingMemberException>(() => sut.Visit(fieldInfoElement));
+            Assert.Throws<MemberInitializationException>(() => sut.Visit(fieldInfoElement));
         }
 
         [Theory]
@@ -232,7 +232,7 @@ namespace Jwc.Experiment.Idioms
                 new PropertyToParameterComparer(new FakeTestFixture()));
             PropertyInfoElement propertyInfoElement = new Properties<TypeForTestProperty>()
                 .Select(x => x.NotSatisfied).ToElement();
-            Assert.Throws<ConstructingMemberException>(() => sut.Visit(propertyInfoElement));
+            Assert.Throws<MemberInitializationException>(() => sut.Visit(propertyInfoElement));
         }
 
         [Theory]
