@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="DisplayNameVisitorTest.cs" />
-    <Compile Include="ElementReferenceCollectorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
     <Compile Include="Idioms2\IdiomaticMemberAssertionTest.cs" />
