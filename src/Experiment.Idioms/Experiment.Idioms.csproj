@@ -84,7 +84,6 @@
     <Compile Include="IdiomaticTestCase.cs" />
     <Compile Include="IdiomaticTestCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionElements.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
