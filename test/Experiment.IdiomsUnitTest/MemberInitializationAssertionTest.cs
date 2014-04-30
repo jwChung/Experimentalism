@@ -163,6 +163,33 @@ namespace Jwc.Experiment.Idioms
             Assert.Throws<ArgumentNullException>(() => sut.Verify((ConstructorInfo)null));
         }
 
+        [Fact]
+        public void SutIsIdiomaticTypeAssertion()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
+        }
+
+        [Theory]
+        [InlineData(typeof(SatisfiedConstructorDataAttribute.ClassForSatisfiedConstructors))]
+        public void VerifySatisfiedTypeDoesNotThrow(Type type)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(type));
+        }
+
+        [Theory]
+        [InlineData(typeof(SatisfiedFieldDataAttribute.ClassForSatisfiedFields))]
+        [InlineData(typeof(SatisfiedPropertyDataAttribute.ClassForSatisfiedProperties))]
+        [InlineData(typeof(UnsatisfiedConstructorDataAttribute.ClassForUnsatisfiedConstructors))]
+        [InlineData(typeof(UnsatisfiedFieldDataAttribute.ClassForUnsatisfiedFields))]
+        [InlineData(typeof(UnsatisfiedPropertyDataAttribute.ClassForUnsatisfiedProperties))]
+        public void VerifyUnsatisfiedTypeThrows(Type type)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.Throws<MemberInitializationException>(() => sut.Verify(type));
+        }
+
         private class SatisfiedConstructorDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -170,7 +197,7 @@ namespace Jwc.Experiment.Idioms
                 return typeof(ClassForSatisfiedConstructors).GetConstructors().Select(c => new object[] { c });
             }
 
-            private class ClassForSatisfiedConstructors
+            public class ClassForSatisfiedConstructors
             {
                 public readonly string StringValue;
                 public readonly int IntValue;
@@ -223,7 +250,7 @@ namespace Jwc.Experiment.Idioms
                 return typeof(ClassForUnsatisfiedConstructors).GetConstructors().Select(c => new object[] { c });
             }
 
-            private class ClassForUnsatisfiedConstructors
+            public class ClassForUnsatisfiedConstructors
             {
                 public readonly string StringValue;
 
@@ -256,7 +283,7 @@ namespace Jwc.Experiment.Idioms
                 return typeof(ClassForSatisfiedFields).GetFields().Select(c => new object[] { c });
             }
 
-            private class ClassForSatisfiedFields
+            public class ClassForSatisfiedFields
             {
                 public readonly object ObjectValue;
                 public readonly string StringValue;
@@ -282,7 +309,7 @@ namespace Jwc.Experiment.Idioms
                 return typeof(ClassForUnsatisfiedFields).GetFields().Select(c => new object[] { c });
             }
 
-            private class ClassForUnsatisfiedFields
+            public class ClassForUnsatisfiedFields
             {
                 public readonly object ObjectValue;
                 public readonly string StringValue;
@@ -305,7 +332,7 @@ namespace Jwc.Experiment.Idioms
                 return typeof(ClassForSatisfiedProperties).GetProperties().Select(c => new object[] { c });
             }
 
-            private class ClassForSatisfiedProperties
+            public class ClassForSatisfiedProperties
             {
                 private readonly int _intValue;
 
@@ -349,7 +376,7 @@ namespace Jwc.Experiment.Idioms
                 return typeof(ClassForUnsatisfiedProperties).GetProperties().Select(c => new object[] { c });
             }
 
-            private class ClassForUnsatisfiedProperties
+            public class ClassForUnsatisfiedProperties
             {
                 public ClassForUnsatisfiedProperties(object objectValue, string stringValue)
                 {
