@@ -101,6 +101,9 @@ namespace Jwc.Experiment.Idioms
         /// <param name="assembly">The assembly.</param>
         public void Verify(Assembly assembly)
         {
+            if (assembly == null)
+                throw new ArgumentNullException("assembly");
+
             foreach (var type in assembly.GetExportedTypes())
                 Verify(type);
         }
@@ -125,6 +128,9 @@ namespace Jwc.Experiment.Idioms
         /// <param name="field">The field.</param>
         public override void Verify(FieldInfo field)
         {
+            if (field == null)
+                throw new ArgumentNullException("field");
+
             var fieldInfoElement = field.ToElement();
             var parameterInfoElements = GetParameterInfoElements(field.ReflectedType);
 
@@ -185,6 +191,9 @@ namespace Jwc.Experiment.Idioms
         /// <param name="property">The property.</param>
         public override void Verify(PropertyInfo property)
         {
+            if (property == null)
+                throw new ArgumentNullException("property");
+
             var propertyInfoElement = property.ToElement();
             var parameterInfoElements = GetParameterInfoElements(property.ReflectedType);
 

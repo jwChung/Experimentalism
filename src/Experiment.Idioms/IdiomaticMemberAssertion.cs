@@ -58,6 +58,7 @@ namespace Jwc.Experiment.Idioms
         /// specified property.
         /// </summary>
         /// <param name="property">The property.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Property", Justification = "This word 'property' is desiable to show reflection information of a certain property.")]
         public virtual void Verify(PropertyInfo property)
         {
         }
@@ -76,6 +77,7 @@ namespace Jwc.Experiment.Idioms
         /// specified event.
         /// </summary>
         /// <param name="event">The event.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "event", Justification = "This word 'event' is desiable to show reflection information of a certain event.")]
         public virtual void Verify(EventInfo @event)
         {
         }

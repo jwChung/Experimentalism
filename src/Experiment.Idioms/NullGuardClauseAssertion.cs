@@ -49,6 +49,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public void Verify(Assembly assembly)
         {
+            if (assembly == null)
+                throw new ArgumentNullException("assembly");
+
             foreach (var type in assembly.GetExportedTypes())
                 Verify(type);
         }

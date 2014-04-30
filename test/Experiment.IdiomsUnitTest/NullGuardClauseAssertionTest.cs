@@ -98,6 +98,13 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(expected, types);
         }
 
+        [Fact]
+        public void VerifyNullAssemblyThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
+        }
+
         private class ClassWithGuardedMembers
         {
             public void Method(string arg1, object arg2)

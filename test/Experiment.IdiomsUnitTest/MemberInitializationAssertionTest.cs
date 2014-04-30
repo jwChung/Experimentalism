@@ -217,6 +217,29 @@ namespace Jwc.Experiment.Idioms
             // Verify outcome
             Assert.Equal(expected, types);
         }
+        
+        [Fact]
+        public void VerifyNullAssemblyThrows()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
+        }
+
+        [Fact]
+        public void VerifyNullPropertyThrows()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var exception = Assert.Throws<ArgumentNullException>(() => sut.Verify((PropertyInfo)null));
+            Assert.Equal("property", exception.ParamName);
+        }
+
+        [Fact]
+        public void VerifyNullFieldThrows()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var exception = Assert.Throws<ArgumentNullException>(() => sut.Verify((FieldInfo)null));
+            Assert.Equal("field", exception.ParamName);
+        }
 
         private class SatisfiedConstructorDataAttribute : DataAttribute
         {
