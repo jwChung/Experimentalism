@@ -68,7 +68,7 @@ namespace Jwc.Experiment
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
-            var fieldInfoElements = new Fields<TypeForCollectingReference>()
+            var fieldInfoElements = new Fields<ClassForCollectingReference>()
                 .Select(x => x.Field).ToElement();
 
             var actual = sut.Visit(fieldInfoElements);
@@ -96,7 +96,7 @@ namespace Jwc.Experiment
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
-            var methodInfoElement = new Methods<TypeForCollectingReference>()
+            var methodInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.ReturnMethod()).ToElement();
 
             var actual = sut.Visit(methodInfoElement);
@@ -122,7 +122,7 @@ namespace Jwc.Experiment
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
-            var parameterInfoElement = new Methods<TypeForCollectingReference>()
+            var parameterInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.ParameterizedMethod(null)).GetParameters()
                 .First().ToElement();
 
@@ -148,7 +148,7 @@ namespace Jwc.Experiment
                 typeof(IDisposable).Assembly,
                 typeof(ISpecimenContext).Assembly
             };
-            var localVariableInfoElement = new Methods<TypeForCollectingReference>()
+            var localVariableInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.ReturnMethod()).GetMethodBody()
                 .LocalVariables.First().ToElement();
 
@@ -300,7 +300,7 @@ namespace Jwc.Experiment
                 typeof(IDisposable).Assembly,
                 typeof(Enumerable).Assembly
             };
-            var methodInfoElement = new Methods<TypeForCollectingReference>()
+            var methodInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.MethodCallInMethodBody()).ToElement();
 
             sut.Visit(methodInfoElement);
@@ -321,7 +321,7 @@ namespace Jwc.Experiment
                 GetType().Assembly,
                 typeof(Fixture).Assembly
             };
-            var methodInfoElement = new Methods<TypeForCollectingReference>()
+            var methodInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.ConstructInMethodBody()).ToElement();
 
             sut.Visit(methodInfoElement);
@@ -342,7 +342,7 @@ namespace Jwc.Experiment
                 GetType().Assembly,
                 typeof(Fixture).Assembly
             };
-            var methodInfoElement = new Methods<TypeForCollectingReference>()
+            var methodInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.RetrunValueInMethodBody()).ToElement();
 
             sut.Visit(methodInfoElement);
@@ -363,7 +363,7 @@ namespace Jwc.Experiment
                 GetType().Assembly,
                 typeof(Fixture).Assembly
             };
-            var methodInfoElement = new Methods<TypeForCollectingReference>()
+            var methodInfoElement = new Methods<ClassForCollectingReference>()
                 .Select(x => x.PassParameterInMethodBody()).ToElement();
 
             sut.Visit(methodInfoElement);
@@ -384,7 +384,7 @@ namespace Jwc.Experiment
                 GetType().Assembly,
                 typeof(Fixture).Assembly
             };
-            var constructorInfoElement = Constructors.Select(() => new TypeForCollectingReference(0)).ToElement();
+            var constructorInfoElement = Constructors.Select(() => new ClassForCollectingReference(0)).ToElement();
 
             var actual = sut.Visit(constructorInfoElement);
 

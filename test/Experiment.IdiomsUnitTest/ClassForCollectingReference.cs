@@ -3,14 +3,14 @@ using Ploeh.AutoFixture;
 
 namespace Jwc.Experiment
 {
-    public class TypeForCollectingReference
+    public class ClassForCollectingReference
     {
-        public TypeForCollectingReference(int arg)
+        public ClassForCollectingReference(int arg)
         {
             PrivateMethod1(null);
         }
 
-        public TypeForCollectingReference(object arg)
+        public ClassForCollectingReference(object arg)
         {
         }
 

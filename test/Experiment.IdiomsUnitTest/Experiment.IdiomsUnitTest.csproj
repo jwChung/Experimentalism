@@ -89,7 +89,7 @@
     <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />
     <Compile Include="SubTypeWithMembers.cs" />
-    <Compile Include="TypeForCollectingReference.cs" />
+    <Compile Include="ClassForCollectingReference.cs" />
     <Compile Include="TypeImplementingHierarchical.cs" />
     <Compile Include="TypeImplementingMultiple.cs" />
     <Compile Include="TypeWithProperties.cs" />
