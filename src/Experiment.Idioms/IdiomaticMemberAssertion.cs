@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
         /// specified member.
         /// </summary>
         /// <param name="member">The member.</param>
-        public void Verify(MemberInfo member)
+        public virtual void Verify(MemberInfo member)
         {
             var field = member as FieldInfo;
             if (field != null)
