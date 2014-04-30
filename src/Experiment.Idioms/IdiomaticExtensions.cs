@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Jwc.Experiment.Idioms
@@ -29,44 +28,6 @@ namespace Jwc.Experiment.Idioms
         public static IEnumerable<MemberInfo> GetIdiomaticMembers(this Type type, MemberKinds memberKinds)
         {
             return new IdiomaticMembers(type, memberKinds);
-        }
-
-        /// <summary>
-        /// Verifies members with an idiomatic member assertion.
-        /// </summary>
-        /// <param name="members">The members.</param>
-        /// <param name="assertion">The assertion.</param>
-        public static void Verify(this IEnumerable<MemberInfo> members, IIdiomaticMemberAssertion assertion)
-        {
-            if (members == null)
-                throw new ArgumentNullException("members");
-
-            if (assertion == null)
-                throw new ArgumentNullException("assertion");
-
-            foreach (var member in members)
-            {
-                assertion.Verify(member);
-            }
-        }
-
-        /// <summary>
-        /// Converts members to idiomatic test cases with an idiomatic member
-        /// assertion.
-        /// </summary>
-        /// <param name="members">The members.</param>
-        /// <param name="assertion">The assertion.</param>
-        /// <returns>The test cases.</returns>
-        public static IEnumerable<ITestCase> ToTestCases(
-            this IEnumerable<MemberInfo> members, IIdiomaticMemberAssertion assertion)
-        {
-            if (members == null)
-                throw new ArgumentNullException("members");
-
-            if (assertion == null)
-                throw new ArgumentNullException("assertion");
-
-            return members.Select(m => new TestCase(() => assertion.Verify(m)));
         }
     }
 }

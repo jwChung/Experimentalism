@@ -5,7 +5,14 @@ namespace Jwc.Experiment.Idioms
 {
     public class FakeTestFixture : ITestFixture
     {
-        readonly ISpecimenContext _context = new SpecimenContext(new Fixture());
+        private readonly ISpecimenContext _context;
+
+        public FakeTestFixture()
+        {
+            var fixture = new Fixture();
+            fixture.Inject<ITestFixture>(this);
+            _context = new SpecimenContext(fixture);
+        }
 
         public object Create(object request)
         {

@@ -10,10 +10,8 @@ namespace Jwc.Experiment.Idioms
     public class Scenario
     {
         [Fact]
-        public void VerifyNullGuardClasuseAssertionCorrectlyVerifies()
+        public void NullGuardClasuseAssertionCorrectlyVerifiesMember()
         {
-            var assertion = new NullGuardClauseAssertion(new FakeTestFixture());
-
             typeof(ClassWithGuardedMembers)
                 .GetIdiomaticMembers()
                 .Except(
@@ -22,14 +20,13 @@ namespace Jwc.Experiment.Idioms
                         Constructors.Select(() => new ClassWithGuardedMembers("anonymous")),
                         new Properties<ClassWithGuardedMembers>().Select(x => x.UnguradedProperty)
                     })
-                .Verify(assertion);
+                .ToList()
+                .ForEach(new NullGuardClauseAssertion(new FakeTestFixture()).Verify);
         }
 
         [FirstClassTheorem]
-        public IEnumerable<ITestCase> MembersToTestCasesWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
+        public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
         {
-            var assertion = new NullGuardClauseAssertion(new FakeTestFixture());
-
             return typeof(ClassWithGuardedMembers)
                 .GetIdiomaticMembers()
                 .Except(
@@ -38,27 +35,24 @@ namespace Jwc.Experiment.Idioms
                         Constructors.Select(() => new ClassWithGuardedMembers("anonymous")),
                         new Properties<ClassWithGuardedMembers>().Select(x => x.UnguradedProperty)
                     })
-                .ToTestCases(assertion);
+                .Select(m => new TestCase<ITestFixture>(f => new NullGuardClauseAssertion(f).Verify(m)));
         }
 
         [Fact]
-        public void VerifyMemberInitializationAssertionCorrectlyVerifies()
+        public void MemberInitializationAssertionCorrectlyVerifiesMember()
         {
-            var assertion = new MemberInitializationAssertion(new FakeTestFixture());
-
             typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers()
-                .Verify(assertion);
+                .ToList()
+                .ForEach(new MemberInitializationAssertion(new FakeTestFixture()).Verify);
         }
 
         [FirstClassTheorem]
-        public IEnumerable<ITestCase> MembersToTestCasesWithMemberInitializationAssertionCorrectlyCreatesTestCases()
+        public IEnumerable<ITestCase> SutWithMemberInitializationAssertionCorrectlyCreatesTestCases()
         {
-            var assertion = new MemberInitializationAssertion(new FakeTestFixture());
-
             return typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers()
-                .ToTestCases(assertion);
+                .Select(m => new TestCase<ITestFixture>(f => new MemberInitializationAssertion(f).Verify(m)));
         }
 
         private class ClassWithGuardedMembers
