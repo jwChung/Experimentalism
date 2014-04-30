@@ -57,7 +57,7 @@ namespace Jwc.Experiment
         /// <param name="members">The members.</param>
         /// <param name="assertion">The assertion.</param>
         /// <returns>The test cases.</returns>
-        public static IEnumerable<ITestCase> ToIdiomaticTestCases(
+        public static IEnumerable<ITestCase> ToTestCases(
             this IEnumerable<MemberInfo> members, IIdiomaticMemberAssertion assertion)
         {
             if (members == null)

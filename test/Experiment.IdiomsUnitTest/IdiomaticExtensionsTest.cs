@@ -57,12 +57,12 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void MembersToIdiomaticTestCasesReturnsCorrectTestCases()
+        public void MembersToTestCasesReturnsCorrectTestCases()
         {
             var members = typeof(object).GetMembers().ToArray();
             var assertion = Mock.Of<IIdiomaticMemberAssertion>();
 
-            var actual = members.ToIdiomaticTestCases(assertion);
+            var actual = members.ToTestCases(assertion);
 
             int i = 0;
             foreach (TestCase testCase in actual.Cast<TestCase>())
@@ -75,18 +75,18 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void NullMemersToIdiomaticTestCasesThrows()
+        public void NullMemersToTestCasesThrows()
         {
             var assertion = Mock.Of<IIdiomaticMemberAssertion>();
             var exception = Assert.Throws<ArgumentNullException>(
-                () => IdiomaticExtensions.ToIdiomaticTestCases(null, assertion));
+                () => IdiomaticExtensions.ToTestCases(null, assertion));
             Assert.Equal("members", exception.ParamName);
         }
 
         [Fact]
-        public void MemersToIdiomaticTestCasesWithNullIdiomaticMemberAssertionThrows()
+        public void MemersToTestCasesWithNullIdiomaticMemberAssertionThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(object).GetMembers().ToIdiomaticTestCases(null));
+            Assert.Throws<ArgumentNullException>(() => typeof(object).GetMembers().ToTestCases(null));
         }
     }
 }
