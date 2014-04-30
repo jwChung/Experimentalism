@@ -80,7 +80,6 @@
     <Compile Include="ParameterToPropertyComparer.cs" />
     <Compile Include="AssertionAdapter.cs" />
     <Compile Include="CompositeEnumerable.cs" />
-    <Compile Include="Idioms\ConstructingMemberAssertion.cs" />
     <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
     <Compile Include="InverseEqualityComparer.cs" />
