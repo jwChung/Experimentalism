@@ -76,7 +76,6 @@
     <Compile Include="OrEqualityComparer.cs" />
     <Compile Include="ParameterToFieldComparer.cs" />
     <Compile Include="ParameterToPropertyComparer.cs" />
-    <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
     <Compile Include="InverseEqualityComparer.cs" />
     <Compile Include="PropertyToParameterComparer.cs" />
