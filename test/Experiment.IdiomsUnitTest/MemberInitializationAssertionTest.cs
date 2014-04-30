@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Idioms
     public class MemberInitializationAssertionTest
     {
         [Fact]
-        public void SutIsReflectionVisitor()
+        public void SutIsIdiomaticMemberAssertion()
         {
             var sut = new MemberInitializationAssertion(
                 EqualityComparer<IReflectionElement>.Default,
