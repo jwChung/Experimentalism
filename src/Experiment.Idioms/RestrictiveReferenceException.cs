@@ -7,6 +7,7 @@ namespace Jwc.Experiment.Idioms
     /// Represents a verification error when testing whether all references of
     /// a certain assembly are specified.
     /// </summary>
+    [Serializable]
     public class RestrictiveReferenceException : Exception
     {
         /// <summary>

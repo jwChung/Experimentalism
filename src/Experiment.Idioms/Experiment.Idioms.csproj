@@ -78,6 +78,7 @@
     <Compile Include="InverseEqualityComparer.cs" />
     <Compile Include="PropertyToParameterComparer.cs" />
     <Compile Include="RestrictiveReferenceException.cs" />
+    <Compile Include="RestrictiveReferenceAssertion.cs" />
     <Compile Include="SpecimenBuilder.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
