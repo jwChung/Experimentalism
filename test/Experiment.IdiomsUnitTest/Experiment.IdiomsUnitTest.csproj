@@ -97,7 +97,6 @@
     <Compile Include="TypeWithMembers.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="SpecimenBuilderTest.cs" />
-    <Compile Include="TypeMembersTest.cs" />
     <Compile Include="DelegatingAssertionFactory.cs" />
     <Compile Include="DelegatingIdiomaticAssertion.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
