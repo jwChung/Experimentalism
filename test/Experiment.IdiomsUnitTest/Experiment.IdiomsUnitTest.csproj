@@ -88,7 +88,6 @@
     <Compile Include="DelegatingEqualityComparer.cs" />
     <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />
-    <Compile Include="RestrictingReferenceExceptionTest.cs" />
     <Compile Include="SubTypeWithMembers.cs" />
     <Compile Include="TypeForCollectingReference.cs" />
     <Compile Include="TypeImplementingHierarchical.cs" />
