@@ -39,12 +39,6 @@ namespace Jwc.Experiment
                 new GuardClauseAssertionFactory());
         }
 
-        [FirstClassTheorem]
-        public IEnumerable<ITestCase> GuardClauseAssertionTestCasesVerifiesGuardClauses()
-        {
-            return new GuardClauseAssertionTestCases(GetType());
-        }
-
         [Fact]
         public void RestrictingReferenceAssertionVerifiesAssembliesCorrectlyReferenced()
         {

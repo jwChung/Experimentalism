@@ -117,7 +117,6 @@
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="FilteringMembersTest.cs" />
     <Compile Include="Idioms\GuardClauseAssertionFactoryTest.cs" />
-    <Compile Include="Idioms\GuardClauseAssertionTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCasesTest.cs" />
     <Compile Include="IdiomaticTestCaseTest.cs" />
     <Compile Include="IdiomaticTestCommandTest.cs" />
