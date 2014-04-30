@@ -5,27 +5,14 @@ using System.Reflection;
 using Jwc.Experiment.Idioms;
 using Mono.Reflection;
 using Ploeh.Albedo;
-using Ploeh.Albedo.Refraction;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Jwc.Experiment
 {
     public class Scenario
     {
-        [Fact]
-        public void RestrictingReferenceAssertionVerifiesAssembliesCorrectlyReferenced()
-        {
-            var assertion = new RestrictingReferenceAssertion(
-                /* mscorlib */ typeof(object).Assembly,
-                /* System.Core */ typeof(Enumerable).Assembly,
-                /* xunit */ typeof(FactAttribute).Assembly,
-                /* xunit.extensions */ typeof(TheoryAttribute).Assembly);
-            typeof(TheoremBaseAttribute).Assembly.ToElement().Accept(assertion);
-        }
-
         [Fact]
         public void HidingReferenceAssertionVerifiesSpecifiedAssembliesNotExposed()
         {
