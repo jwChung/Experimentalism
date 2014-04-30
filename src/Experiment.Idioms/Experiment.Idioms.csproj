@@ -77,7 +77,6 @@
     <Compile Include="OrEqualityComparer.cs" />
     <Compile Include="ParameterToFieldComparer.cs" />
     <Compile Include="ParameterToPropertyComparer.cs" />
-    <Compile Include="AssertionAdapter.cs" />
     <Compile Include="CompositeEnumerable.cs" />
     <Compile Include="ExcludingMembers.cs" />
     <Compile Include="ExcludingReadOnlyProperties.cs" />
