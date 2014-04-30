@@ -147,7 +147,7 @@ namespace Jwc.Experiment.Idioms
 
             var actual = sut.ToArray();
 
-            var result = actual.All(m => (GetMemberKinds(m) & MemberKinds.Property) != MemberKinds.None);
+            var result = actual.All(IsProperty);
             Assert.True(result, "Only Properties.");
         }
 
@@ -164,6 +164,17 @@ namespace Jwc.Experiment.Idioms
             Assert.True(result, "Constructor or Method.");
         }
 
+        [Fact]
+        public void SutEnumeratesWritablePropertiesWhenMemberKindsIsGetProperty()
+        {
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.GetProperty);
+
+            var actual = sut.ToArray();
+
+            var result = actual.All(IsWritableProperty);
+            Assert.True(result, "Only Properties.");
+        }
+
         private static Accessibilities GetAccessibilities(MemberInfo member)
         {
             return member.ToReflectionElement().Accept(new AccessibilityCollector()).Value.Single();
@@ -172,6 +183,19 @@ namespace Jwc.Experiment.Idioms
         private static MemberKinds GetMemberKinds(MemberInfo member)
         {
             return member.ToReflectionElement().Accept(new MemberKindCollector()).Value.Single();
+        }
+
+        private static bool IsProperty(MemberInfo member)
+        {
+            return GetMemberKinds(member) == MemberKinds.GetProperty
+                || GetMemberKinds(member) == MemberKinds.SetProperty
+                || GetMemberKinds(member) == MemberKinds.Property;
+        }
+
+        private static bool IsWritableProperty(MemberInfo member)
+        {
+            return GetMemberKinds(member) == MemberKinds.GetProperty
+                || GetMemberKinds(member) == MemberKinds.Property;
         }
     }
 }
