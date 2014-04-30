@@ -72,6 +72,7 @@
     <Compile Include="ElementReferenceCollectorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
+    <Compile Include="Idioms2\NullGuardClauseAssertionTest.cs" />
     <Compile Include="Idioms\GuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MemberKindCollectorTest.cs" />

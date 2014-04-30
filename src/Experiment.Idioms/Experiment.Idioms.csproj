@@ -64,6 +64,7 @@
     <Compile Include="HidingReferenceException.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="IdiomaticMembers.cs" />
+    <Compile Include="Idioms2\NullGuardClauseAssertion.cs" />
     <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="Idioms\HidingReferenceAssertion.cs" />
     <Compile Include="Idioms\RestrictingReferenceAssertion.cs" />
@@ -114,6 +115,7 @@
       <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
