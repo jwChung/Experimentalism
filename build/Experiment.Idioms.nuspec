@@ -30,8 +30,7 @@
     <file src="..\packages\AutoFixture.Idioms.3.0.1\lib\net40\Ploeh.AutoFixture.Idioms.dll" target="lib\net40" />
     <file src="..\packages\AutoFixture.Idioms.3.0.1\lib\net40\Ploeh.AutoFixture.Idioms.xml" target="lib\net40" />
     <file src="..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll" target="lib\net40" />
-    <file src="..\src\Experiment.Idioms\**\*.cs" target="src" />
-    <file src="..\src\Experiment\**\*.cs" target="src" />
+    <file src="..\src\**\*.cs" target="src" />
     <file src="Install.ps1" target="tools" />
   </files>
 </package>
