@@ -14,17 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.16.0")]
 
 /*
- * Version 0.16.0
+ * Version 0.16.1
  * 
- * - [NEW, BREAKING-CHANGE] Replaces all the old idiomatic assertions with new
- *   assertions to provide simpler and more useful API.
- *   
- *      GuardClauseAssertion          -> NullGuardClauseAssertion
- *      ConstructingMemberAssertion   -> MemberInitializationAssertion
- *      RestrictingReferenceAssertion -> RestrictiveReferenceAssertion
- *      HidingReferenceAssertion      -> IndirectReferenceAssertion
- *      
- * - [FIX, BREAKING-CHANGE] Rearrange namespace:
- *   Introduces the new namespace 'Jwc.Experiment.Idioms.Assertions' and
- *   rearrages namespaces.
+ * - [FIX, BREAKING-CHANGE] Introduces the new `ITestFixtureFactory` insterface,
+ *   which is replaced `Func<MethodInfo, ITestFixture>`.
  */
