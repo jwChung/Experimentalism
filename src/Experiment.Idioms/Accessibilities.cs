@@ -39,6 +39,11 @@ namespace Jwc.Experiment.Idioms
         ProtectedInternal = Protected | Internal,
 
         /// <summary>
+        /// The public or protected accessibility.
+        /// </summary>
+        Exposed = Public | Protected,
+
+        /// <summary>
         /// The all accessibilities.
         /// </summary>
         All = Public | Protected | Internal | Private,

@@ -58,7 +58,7 @@ namespace Jwc.Experiment.Idioms
         /// <param name="type">The type.</param>
         public virtual void Verify(Type type)
         {
-            var members = new TypeMembers(type, MemberKinds.All, Accessibilities.Public | Accessibilities.Protected);
+            var members = new TypeMembers(type, MemberKinds.All, Accessibilities.Exposed);
 
             foreach (var member in members)
                 Verify(member);
@@ -133,8 +133,7 @@ namespace Jwc.Experiment.Idioms
 
         private bool IsExposed(Type type)
         {
-            return (GetAccessibilities(type) & (Accessibilities.Public | Accessibilities.Protected))
-                != Accessibilities.None;
+            return (GetAccessibilities(type) & Accessibilities.Exposed) != Accessibilities.None;
         }
 
         private static IEnumerable<Assembly> GetReferences(IReflectionElement reflectionElement)
