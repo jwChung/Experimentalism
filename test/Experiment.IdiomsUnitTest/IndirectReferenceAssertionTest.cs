@@ -255,7 +255,6 @@ namespace Jwc.Experiment.Idioms
             
             var expected = new TypeMembers(
                 type,
-                MemberKinds.All,
                 Accessibilities.Protected | Accessibilities.Public);
 
             // Exercise system

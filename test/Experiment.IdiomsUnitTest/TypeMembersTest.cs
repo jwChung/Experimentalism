@@ -169,7 +169,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesAllKindsOfMember()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -184,7 +184,7 @@ namespace Jwc.Experiment.Idioms
         public void SutEnumeratesOnlyDeclaredMembers()
         {
             var nonDeclaredMember = new Methods<ClassWithMembers>().Select(x => x.ToString());
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -194,7 +194,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesStaticMembers()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -202,7 +202,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
 
             var actual = sut.OfType<MethodInfo>().ToArray();
 
@@ -213,7 +213,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyEventMethods()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -271,7 +271,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesNoMembersWhenAccessibilitiesIsNone()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.Default, Accessibilities.None);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.None);
             var actual = sut.ToArray();
             Assert.Empty(actual);
         }
@@ -279,7 +279,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersWhenAccessibilitiesIsProtected()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.Default, Accessibilities.Protected);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.Protected);
 
             var actual = sut.ToArray();
 
@@ -294,7 +294,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesOnlyPublicMembersWhenAccessibilitiesIsPublic()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.Public);
+            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.Public);
 
             var actual = sut.ToArray();
 

@@ -58,7 +58,7 @@ namespace Jwc.Experiment.Idioms
         /// <param name="type">The type.</param>
         public virtual void Verify(Type type)
         {
-            var members = new TypeMembers(type, MemberKinds.All, Accessibilities.Exposed);
+            var members = new TypeMembers(type, Accessibilities.Exposed);
 
             foreach (var member in members)
                 Verify(member);
