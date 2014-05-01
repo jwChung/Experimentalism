@@ -72,13 +72,13 @@ namespace Jwc.Experiment
         /// <param name="method">
         /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
         /// </param>
-        /// <param name="fixtureFactory">
+        /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
         /// </param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory)
         {
             if (method == null)
             {
@@ -157,25 +157,25 @@ namespace Jwc.Experiment
         /// <param name="method">
         /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
         /// </param>
-        /// <param name="fixtureFactory">
+        /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
         /// </param>
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, Func<MethodInfo, ITestFixture> fixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory)
         {
             if (method == null)
             {
                 throw new ArgumentNullException("method");
             }
 
-            if (fixtureFactory == null)
+            if (testFixtureFactory == null)
             {
-                throw new ArgumentNullException("fixtureFactory");
+                throw new ArgumentNullException("testFixtureFactory");
             }
 
-            var fixture = fixtureFactory(Delegate.Method);
+            var fixture = testFixtureFactory.Create(Delegate.Method);
             var arguments = new[]
             {
                 fixture.Create(typeof(T))

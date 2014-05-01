@@ -47,6 +47,7 @@
     </Compile>
     <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />

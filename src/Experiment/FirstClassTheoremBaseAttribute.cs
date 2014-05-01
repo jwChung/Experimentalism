@@ -114,7 +114,7 @@ namespace Jwc.Experiment
         {
             try
             {
-                return testCase.ConvertToTestCommand(method, CreateTestFixture);
+                return testCase.ConvertToTestCommand(method, new TestFixtureFactory(CreateTestFixture));
             }
             catch (Exception exception)
             {
@@ -137,6 +137,21 @@ namespace Jwc.Experiment
             return methodInfo.IsStatic
                 ? null
                 : Activator.CreateInstance(methodInfo.ReflectedType);
+        }
+
+        private class TestFixtureFactory : ITestFixtureFactory
+        {
+            private readonly Func<MethodInfo, ITestFixture> _testFixtureFactory;
+
+            public TestFixtureFactory(Func<MethodInfo, ITestFixture> testFixtureFactory)
+            {
+                _testFixtureFactory = testFixtureFactory;
+            }
+
+            public ITestFixture Create(MethodInfo testMethod)
+            {
+                return _testFixtureFactory(testMethod);
+            }
         }
     }
 }
