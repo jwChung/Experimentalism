@@ -37,6 +37,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
+        public void InitializeModestCtorWithNullTypeAndAccessibilitiesThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new TypeMembers(null, Accessibilities.Default));
+        }
+
+        [Fact]
         public void TypeIsCorrectWhenInitializedWithModestCtor()
         {
             var type = GetType();
@@ -63,6 +70,17 @@ namespace Jwc.Experiment.Idioms
         {
             var expected = typeof(string);
             var sut = new TypeMembers(expected, MemberKinds.All, Accessibilities.Default);
+
+            var actual = sut.Type;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TypeIsCorrectWhenInitializedWithModestCtorWithAccessibilities()
+        {
+            var expected = typeof(string);
+            var sut = new TypeMembers(expected, Accessibilities.Default);
 
             var actual = sut.Type;
 
@@ -100,6 +118,17 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
+        public void MemberKindsIsCorrectWhenInitializedWithModestCtorWithAccessibilities()
+        {
+            var expected = MemberKinds.All;
+            var sut = new TypeMembers(GetType(), Accessibilities.Default);
+
+            var actual = sut.MemberKinds;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void AccessibilitiesIsCorrectWhenInitializedWithModestCtor()
         {
             var sut = new TypeMembers(GetType());
@@ -120,6 +149,17 @@ namespace Jwc.Experiment.Idioms
         {
             var accessibilities = Accessibilities.Private;
             var sut = new TypeMembers(GetType(), MemberKinds.Default, accessibilities);
+
+            var actual = sut.Accessibilities;
+
+            Assert.Equal(accessibilities, actual);
+        }
+
+        [Fact]
+        public void AccessibilitiesIsCorrectWhenInitializedWithModestCtorWithAccessibilities()
+        {
+            var accessibilities = Accessibilities.ProtectedInternal;
+            var sut = new TypeMembers(GetType(), accessibilities);
 
             var actual = sut.Accessibilities;
 

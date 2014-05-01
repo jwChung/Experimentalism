@@ -48,6 +48,16 @@ namespace Jwc.Experiment.Idioms
         /// Initializes a new instance of the <see cref="TypeMembers" /> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
+        /// <param name="accessibilities">The accessibilities to filter members.</param>
+        public TypeMembers(Type type, Accessibilities accessibilities)
+            : this(type, MemberKinds.Default, accessibilities)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TypeMembers" /> class.
+        /// </summary>
+        /// <param name="type">A type to enumerate members.</param>
         /// <param name="memberKinds">Member kinds to filter members.</param>
         /// <param name="accessibilities">The accessibilities to filter members.</param>
         public TypeMembers(Type type, MemberKinds memberKinds, Accessibilities accessibilities)
