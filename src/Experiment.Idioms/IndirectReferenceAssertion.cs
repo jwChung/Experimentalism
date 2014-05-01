@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
@@ -45,6 +46,9 @@ namespace Jwc.Experiment.Idioms
         /// <param name="assembly">The assembly.</param>
         public void Verify(Assembly assembly)
         {
+            if (assembly == null)
+                throw new ArgumentNullException("assembly");
+
             var types = assembly.GetTypes().Where(IsExposed);
 
             foreach (var type in types)
@@ -123,12 +127,13 @@ namespace Jwc.Experiment.Idioms
 
             throw new IndirectReferenceException(
                 string.Format(
-                "The indirect reference should not be exposed through the API.{0}" +
-                "Indirect reference: {1}{0}" + 
-                "API(exposing)     : {2}{0}",
-                Environment.NewLine,
-                reference,
-                reflectionElement.Accept(new DisplayNameVisitor()).Value.Single()));
+                    CultureInfo.CurrentCulture,
+                    "The indirect reference should not be exposed through the API.{0}" +
+                    "Indirect reference: {1}{0}" + 
+                    "API(exposing)     : {2}{0}",
+                    Environment.NewLine,
+                    reference,
+                    reflectionElement.Accept(new DisplayNameVisitor()).Value.Single()));
         }
 
         private bool IsExposed(Type type)

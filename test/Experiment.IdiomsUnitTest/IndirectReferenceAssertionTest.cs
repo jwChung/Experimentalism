@@ -290,6 +290,13 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(expected, types);
         }
 
+        [Fact]
+        public void VerifyNullAssemblyThrows()
+        {
+            var sut = new IndirectReferenceAssertion();
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
+        }
+
         private static bool IsExposed(Type type)
         {
             var accessibilityCollector = new AccessibilityCollector();
