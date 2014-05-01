@@ -46,6 +46,6 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// The default accessibilities.
         /// </summary>
-        Default = Public | Protected
+        Default = Public
     }
 }
