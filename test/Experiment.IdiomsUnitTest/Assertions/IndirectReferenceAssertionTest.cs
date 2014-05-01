@@ -308,7 +308,9 @@ namespace Jwc.Experiment.Idioms.Assertions
 
         private class ClassForIndirectReference
         {
+#pragma warning disable 649
             public Fixture Field;
+#pragma warning restore 649
 
             public ClassForIndirectReference()
             {
@@ -330,7 +332,9 @@ namespace Jwc.Experiment.Idioms.Assertions
             {
             }
 
+#pragma warning disable 67
             public event Func<IIdiomaticTypeAssertion> Event;
+#pragma warning restore 67
         }
     }
 }
