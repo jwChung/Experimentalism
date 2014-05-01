@@ -69,7 +69,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
-    <Compile Include="IdiomaticMembersTest.cs" />
+    <Compile Include="TypeMembersTest.cs" />
     <Compile Include="IdiomaticMemberAssertionTest.cs" />
     <Compile Include="IndirectReferenceExceptionTest.cs" />
     <Compile Include="MemberInitializationAssertionTest.cs" />

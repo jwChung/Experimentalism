@@ -8,39 +8,39 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class IdiomaticMembersTest
+    public class TypeMembersTest
     {
         [Fact]
         public void SutIsEnumerable()
         {
-            var sut = new IdiomaticMembers(typeof(object));
+            var sut = new TypeMembers(typeof(object));
             Assert.IsAssignableFrom<IEnumerable<MemberInfo>>(sut);
         }
 
         [Fact]
         public void InitializeModestCtorWithNullTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new IdiomaticMembers(null));
+            Assert.Throws<ArgumentNullException>(() => new TypeMembers(null));
         }
 
         [Fact]
         public void InitializeModestCtorWithNullTypeAndMemberKindsThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new IdiomaticMembers(null, MemberKinds.Field));
+            Assert.Throws<ArgumentNullException>(() => new TypeMembers(null, MemberKinds.Field));
         }
 
         [Fact]
         public void InitializeGreedyCtorWithNullTypeAndMemberKindsThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new IdiomaticMembers(null, MemberKinds.Field, Accessibilities.Default));
+                () => new TypeMembers(null, MemberKinds.Field, Accessibilities.Default));
         }
 
         [Fact]
         public void TypeIsCorrectWhenInitializedWithModestCtor()
         {
             var type = GetType();
-            var sut = new IdiomaticMembers(type);
+            var sut = new TypeMembers(type);
 
             var actual = sut.Type;
 
@@ -51,7 +51,7 @@ namespace Jwc.Experiment.Idioms
         public void TypeIsCorrectWhenInitializedWithModestCtorWithMemberKinds()
         {
             var expected = typeof(int);
-            var sut = new IdiomaticMembers(expected, MemberKinds.All);
+            var sut = new TypeMembers(expected, MemberKinds.All);
 
             var actual = sut.Type;
 
@@ -62,7 +62,7 @@ namespace Jwc.Experiment.Idioms
         public void TypeIsCorrectWhenInitializedWithGreedyCtorWithMemberKinds()
         {
             var expected = typeof(string);
-            var sut = new IdiomaticMembers(expected, MemberKinds.All, Accessibilities.Default);
+            var sut = new TypeMembers(expected, MemberKinds.All, Accessibilities.Default);
 
             var actual = sut.Type;
 
@@ -72,7 +72,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void MemberKindsIsCorrectWhenInitializedWithModestCtor()
         {
-            var sut = new IdiomaticMembers(GetType());
+            var sut = new TypeMembers(GetType());
             var actual = sut.MemberKinds;
             Assert.Equal(MemberKinds.All, actual);
         }
@@ -81,7 +81,7 @@ namespace Jwc.Experiment.Idioms
         public void MemberKindsIsCorrectWhenInitializedWithModestCtorWithMemberKinds()
         {
             var expected = MemberKinds.Event;
-            var sut = new IdiomaticMembers(GetType(), expected);
+            var sut = new TypeMembers(GetType(), expected);
 
             var actual = sut.MemberKinds;
 
@@ -92,7 +92,7 @@ namespace Jwc.Experiment.Idioms
         public void MemberKindsIsCorrectWhenInitializedWithGreedyCtorWithMemberKinds()
         {
             var expected = MemberKinds.Event;
-            var sut = new IdiomaticMembers(GetType(), expected, Accessibilities.Default);
+            var sut = new TypeMembers(GetType(), expected, Accessibilities.Default);
 
             var actual = sut.MemberKinds;
 
@@ -102,7 +102,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void AccessibilitiesIsCorrectWhenInitializedWithModestCtor()
         {
-            var sut = new IdiomaticMembers(GetType());
+            var sut = new TypeMembers(GetType());
             var actual = sut.Accessibilities;
             Assert.Equal(Accessibilities.Public, actual);
         }
@@ -110,7 +110,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void AccessibilitiesIsCorrectWhenInitializedWithModestCtorWithMemberKinds()
         {
-            var sut = new IdiomaticMembers(GetType(), MemberKinds.Default);
+            var sut = new TypeMembers(GetType(), MemberKinds.Default);
             var actual = sut.Accessibilities;
             Assert.Equal(Accessibilities.Public, actual);
         }
@@ -119,7 +119,7 @@ namespace Jwc.Experiment.Idioms
         public void AccessibilitiesIsCorrectWhenInitializedWithGreedyCtorWithMemberKinds()
         {
             var accessibilities = Accessibilities.Private;
-            var sut = new IdiomaticMembers(GetType(), MemberKinds.Default, accessibilities);
+            var sut = new TypeMembers(GetType(), MemberKinds.Default, accessibilities);
 
             var actual = sut.Accessibilities;
 
@@ -129,7 +129,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesAllKindsOfMember()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -144,7 +144,7 @@ namespace Jwc.Experiment.Idioms
         public void SutEnumeratesOnlyDeclaredMembers()
         {
             var nonDeclaredMember = new Methods<ClassWithMembers>().Select(x => x.ToString());
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -154,7 +154,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesStaticMembers()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -162,7 +162,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
 
             var actual = sut.OfType<MethodInfo>().ToArray();
 
@@ -173,7 +173,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyEventMethods()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -184,7 +184,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesNoMembersWhenMemberKindsIsNone()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.None, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.None, Accessibilities.All);
             var actual = sut.ToArray();
             Assert.Empty(actual);
         }
@@ -192,7 +192,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesOnlyPropertiesWhenMemberKindsIsProperty()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Property, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.Property, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -204,7 +204,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersWhenMemberKindsIsConstructorOrMethod()
         {
-            var sut = new IdiomaticMembers(
+            var sut = new TypeMembers(
                 typeof(ClassWithMembers),
                 MemberKinds.Constructor | MemberKinds.Method,
                 Accessibilities.All);
@@ -220,7 +220,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesWritablePropertiesWhenMemberKindsIsGetProperty()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.GetProperty, Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.GetProperty, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -231,7 +231,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesNoMembersWhenAccessibilitiesIsNone()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Default, Accessibilities.None);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.Default, Accessibilities.None);
             var actual = sut.ToArray();
             Assert.Empty(actual);
         }
@@ -239,7 +239,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersWhenAccessibilitiesIsProtected()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Default, Accessibilities.Protected);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.Default, Accessibilities.Protected);
 
             var actual = sut.ToArray();
 
@@ -254,7 +254,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesOnlyPublicMembersWhenAccessibilitiesIsPublic()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.Public);
+            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.All, Accessibilities.Public);
 
             var actual = sut.ToArray();
 

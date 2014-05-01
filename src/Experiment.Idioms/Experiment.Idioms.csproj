@@ -60,7 +60,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
-    <Compile Include="IdiomaticMembers.cs" />
+    <Compile Include="TypeMembers.cs" />
     <Compile Include="IdiomaticMemberAssertion.cs" />
     <Compile Include="IIdiomaticAssemblyAssertion.cs" />
     <Compile Include="IIdiomaticTypeAssertion.cs" />

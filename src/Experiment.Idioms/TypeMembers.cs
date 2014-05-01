@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
     /// verified by idiomatic assertions.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
-    public class IdiomaticMembers : IEnumerable<MemberInfo>
+    public class TypeMembers : IEnumerable<MemberInfo>
     {
         private const BindingFlags _bindingFlags =
             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
@@ -26,31 +26,31 @@ namespace Jwc.Experiment.Idioms
         private readonly Accessibilities _accessibilities;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IdiomaticMembers"/> class.
+        /// Initializes a new instance of the <see cref="TypeMembers"/> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
-        public IdiomaticMembers(Type type)
+        public TypeMembers(Type type)
             : this(type, MemberKinds.Default)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IdiomaticMembers"/> class.
+        /// Initializes a new instance of the <see cref="TypeMembers"/> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
         /// <param name="memberKinds">Member kinds to filter members.</param>
-        public IdiomaticMembers(Type type, MemberKinds memberKinds)
+        public TypeMembers(Type type, MemberKinds memberKinds)
             : this(type, memberKinds, Accessibilities.Default)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
+        /// Initializes a new instance of the <see cref="TypeMembers" /> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
         /// <param name="memberKinds">Member kinds to filter members.</param>
         /// <param name="accessibilities">The accessibilities to filter members.</param>
-        public IdiomaticMembers(Type type, MemberKinds memberKinds, Accessibilities accessibilities)
+        public TypeMembers(Type type, MemberKinds memberKinds, Accessibilities accessibilities)
         {
             if (type == null)
                 throw new ArgumentNullException("type");

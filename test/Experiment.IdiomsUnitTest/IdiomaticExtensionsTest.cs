@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.GetIdiomaticMembers();
 
-            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
+            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(MemberKinds.All, members.MemberKinds);
         }
@@ -24,7 +24,7 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.GetIdiomaticMembers(memberKinds);
 
-            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
+            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
         }
