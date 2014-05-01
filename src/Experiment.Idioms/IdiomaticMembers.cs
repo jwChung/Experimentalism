@@ -15,11 +15,15 @@ namespace Jwc.Experiment.Idioms
     public class IdiomaticMembers : IEnumerable<MemberInfo>
     {
         private const BindingFlags _bindingFlags =
-            BindingFlags.Public | BindingFlags.DeclaredOnly |
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
             BindingFlags.Static | BindingFlags.Instance;
+
+        private static readonly MemberKindCollector _memberKindCollector = new MemberKindCollector();
+        private readonly AccessibilityCollector _accessibilityCollector = new AccessibilityCollector();
 
         private readonly Type _type;
         private readonly MemberKinds _memberKinds;
+        private readonly Accessibilities _accessibilities;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticMembers"/> class.
@@ -34,14 +38,26 @@ namespace Jwc.Experiment.Idioms
         /// Initializes a new instance of the <see cref="IdiomaticMembers"/> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
-        /// <param name="memberKinds">Member kinds to be enumerated.</param>
+        /// <param name="memberKinds">Member kinds to filter members.</param>
         public IdiomaticMembers(Type type, MemberKinds memberKinds)
+            : this(type, memberKinds, Accessibilities.Default)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
+        /// </summary>
+        /// <param name="type">A type to enumerate members.</param>
+        /// <param name="memberKinds">Member kinds to filter members.</param>
+        /// <param name="accessibilities">The accessibilities to filter members.</param>
+        public IdiomaticMembers(Type type, MemberKinds memberKinds, Accessibilities accessibilities)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
 
             _type = type;
             _memberKinds = memberKinds;
+            _accessibilities = accessibilities;
         }
 
         /// <summary>
@@ -53,6 +69,17 @@ namespace Jwc.Experiment.Idioms
             get
             {
                 return _type;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the accessibilities.
+        /// </summary>
+        public Accessibilities Accessibilities
+        {
+            get
+            {
+                return _accessibilities;
             }
         }
 
@@ -80,6 +107,7 @@ namespace Jwc.Experiment.Idioms
                 .Except(GetAccessors())
                 .Except(GetEventMethods())
                 .Where(IsSpecifiedMemberKind)
+                .Where(IsSpecifiedAccessibilites)
                 .GetEnumerator();
         }
 
@@ -90,13 +118,13 @@ namespace Jwc.Experiment.Idioms
 
         private IEnumerable<MethodInfo> GetAccessors()
         {
-            return Type.GetProperties(_bindingFlags).SelectMany(p => p.GetAccessors());
+            return Type.GetProperties(_bindingFlags).SelectMany(p => p.GetAccessors(true));
         }
 
         private IEnumerable<MethodInfo> GetEventMethods()
         {
             return Type.GetEvents(_bindingFlags).SelectMany(
-                e => new[] { e.GetAddMethod(), e.GetRemoveMethod() });
+                e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
         }
 
         private bool IsSpecifiedMemberKind(MemberInfo member)
@@ -104,9 +132,19 @@ namespace Jwc.Experiment.Idioms
             return (GetMemberKinds(member) & MemberKinds) != MemberKinds.None;
         }
 
+        private bool IsSpecifiedAccessibilites(MemberInfo member)
+        {
+            return (GetAccessibilities(member) & Accessibilities) != Accessibilities.None;
+        }
+
+        private Accessibilities GetAccessibilities(MemberInfo member)
+        {
+            return member.ToReflectionElement().Accept(_accessibilityCollector).Value.Single();
+        }
+
         private static MemberKinds GetMemberKinds(MemberInfo member)
         {
-            return member.ToReflectionElement().Accept(new MemberKindCollector()).Value.Single();
+            return member.ToReflectionElement().Accept(_memberKindCollector).Value.Single();
         }
     }
 }
