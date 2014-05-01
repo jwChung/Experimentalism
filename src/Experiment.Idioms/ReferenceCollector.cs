@@ -96,7 +96,7 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("constructorInfoElement");
             }
 
-            Visit(constructorInfoElement.ConstructorInfo);
+            VisitMethodBody(constructorInfoElement.ConstructorInfo);
             return base.Visit(constructorInfoElement);
         }
 
@@ -227,7 +227,7 @@ namespace Jwc.Experiment.Idioms
             MethodInfo methodInfo = methodInfoElement.MethodInfo;
             AddReferencedAssemblies(methodInfo.ReturnType);
             
-            Visit(methodInfo);
+            VisitMethodBody(methodInfo);
             return base.Visit(methodInfoElement);
         }
 
@@ -282,10 +282,10 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Visits the specified method base.
+        /// Visits the method body of a method-base.
         /// </summary>
-        /// <param name="methodBase">The method base.</param>
-        protected virtual void Visit(MethodBase methodBase)
+        /// <param name="methodBase">The method-base.</param>
+        protected virtual void VisitMethodBody(MethodBase methodBase)
         {
             if (methodBase == null)
                 throw new ArgumentNullException("methodBase");
@@ -308,7 +308,7 @@ namespace Jwc.Experiment.Idioms
                     AddReferencedAssemblies(parameter.ParameterType);
             }
         }
-
+        
         private void AddReferencedAssemblies(Type type)
         {
             lock (_types)
