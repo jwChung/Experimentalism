@@ -65,6 +65,7 @@
     <Compile Include="IIdiomaticAssemblyAssertion.cs" />
     <Compile Include="IIdiomaticTypeAssertion.cs" />
     <Compile Include="IndirectReferenceException.cs" />
+    <Compile Include="IndirectReferenceAssertion.cs" />
     <Compile Include="MemberInitializationAssertion.cs" />
     <Compile Include="NullGuardClauseAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
