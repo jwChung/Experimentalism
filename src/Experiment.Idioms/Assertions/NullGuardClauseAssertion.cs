@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Ploeh.AutoFixture.Idioms;
+using Ploeh.AutoFixture.Kernel;
 
 namespace Jwc.Experiment.Idioms.Assertions
 {
@@ -77,6 +78,21 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void Verify(MemberInfo member)
         {
             _assertion.Verify(member);
+        }
+
+        private class SpecimenBuilder : ISpecimenBuilder
+        {
+            private readonly ITestFixture _testFixture;
+
+            public SpecimenBuilder(ITestFixture testFixture)
+            {
+                _testFixture = testFixture;
+            }
+
+            public object Create(object request, ISpecimenContext context)
+            {
+                return _testFixture.Create(request);
+            }
         }
     }
 }

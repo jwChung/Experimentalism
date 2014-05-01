@@ -232,16 +232,6 @@ namespace Jwc.Experiment.Idioms
                 };
                 yield return new object[]
                 {
-                    typeof(SpecimenBuilder),
-                    new[]
-                    {
-                        typeof(SpecimenBuilder).Assembly,
-                        typeof(object).Assembly,
-                        typeof(Fixture).Assembly
-                    }
-                };
-                yield return new object[]
-                {
                     typeof(ClassImplementingMultiple),
                     new[]
                     {

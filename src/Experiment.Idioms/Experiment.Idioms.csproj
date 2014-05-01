@@ -83,7 +83,6 @@
     <Compile Include="PropertyToParameterComparer.cs" />
     <Compile Include="RestrictiveReferenceException.cs" />
     <Compile Include="Assertions\RestrictiveReferenceAssertion.cs" />
-    <Compile Include="SpecimenBuilder.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,11 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.16.1")]
 
 /*
- * Version 0.16.1
+ * Version 0.16.2
  * 
- * - [FIX, BREAKING-CHANGE] Introduces the new `ITestFixtureFactory` insterface,
- *   which is replaced `Func<MethodInfo, ITestFixture>`.
- *   
- * - [FIX] Lets IndirectReferenceAssertion verify whether a base type of a
- *   certain type exposes any indirect reference.
+ * - [FIX, BEAKING-CHANGE] Conceals the SpecimenBuilder class from public API.
  */

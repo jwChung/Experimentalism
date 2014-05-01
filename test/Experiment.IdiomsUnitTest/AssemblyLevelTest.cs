@@ -21,10 +21,10 @@ namespace Jwc.Experiment.Idioms
                 // Direct references
                 "Jwc.Experiment",
                 "Ploeh.Albedo",
+                
+                // Indirect references
                 "Ploeh.AutoFixture",
                 "Ploeh.AutoFixture.Idioms",
-
-                // Indirect references
                 "Mono.Reflection"
             };
 
@@ -34,8 +34,9 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Theory]
-        [InlineData("Mono.Reflection")]
+        [InlineData("Ploeh.AutoFixture")]
         [InlineData("Ploeh.AutoFixture.Idioms")]
+        [InlineData("Mono.Reflection")]
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
