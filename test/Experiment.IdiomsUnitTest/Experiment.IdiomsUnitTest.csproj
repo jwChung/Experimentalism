@@ -71,6 +71,7 @@
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
     <Compile Include="IdiomaticMemberAssertionTest.cs" />
+    <Compile Include="IndirectReferenceExceptionTest.cs" />
     <Compile Include="MemberInitializationAssertionTest.cs" />
     <Compile Include="NullGuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
