@@ -65,7 +65,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void ParameterToMemberComparerIsCorrectWhenInitializedByTestFixture()
+        public void ParameterToMemberComparerIsCorrectWhenInitializedWithTestFixture()
         {
             var testFixture = new DelegatingTestFixture();
             var sut = new MemberInitializationAssertion(testFixture);
@@ -82,7 +82,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void MemberToParameterComparerIsCorrectWhenInitializedByTestFixture()
+        public void MemberToParameterComparerIsCorrectWhenInitializedWithTestFixture()
         {
             var testFixture = new DelegatingTestFixture();
             var sut = new MemberInitializationAssertion(testFixture);

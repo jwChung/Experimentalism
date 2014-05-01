@@ -43,7 +43,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedByAction()
+        public void DelegateIsCorrectWhenInitializedWithAction()
         {
             Action action = () => { };
             var sut = new TestCase(action);
@@ -54,7 +54,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedByFunc()
+        public void DelegateIsCorrectWhenInitializedWithFunc()
         {
             Func<object> func = () => null;
             var sut = new TestCase(func);
@@ -123,7 +123,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedByActionOfT()
+        public void DelegateIsCorrectWhenInitializedWithActionOfT()
         {
             Action<object> action = x => { };
             var sut = new TestCase<object>(action);
@@ -134,7 +134,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedByFuncOfT()
+        public void DelegateIsCorrectWhenInitializedWithFuncOfT()
         {
             Func<int, object> func = x => null;
             var sut = new TestCase<int>(func);
@@ -233,7 +233,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedByActionOfT1T2()
+        public void DelegateIsCorrectWhenInitializedWithActionOfT1T2()
         {
             Action<object, int> action = (x, y) => { };
             var sut = new TestCase<object, int>(action);
@@ -244,7 +244,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedByFuncOfT1T2()
+        public void DelegateIsCorrectWhenInitializedWithFuncOfT1T2()
         {
             Func<int, string, object> func = (x, y) => null;
             var sut = new TestCase<int, string>(func);
