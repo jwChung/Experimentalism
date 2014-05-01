@@ -2,7 +2,7 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment.Idioms.Assertions
 {
     public class RestrictiveReferenceAssertionTest
     {

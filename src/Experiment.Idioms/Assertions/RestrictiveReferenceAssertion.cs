@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
     /// Encapsulates a unit test that verifies that all references of an assembly

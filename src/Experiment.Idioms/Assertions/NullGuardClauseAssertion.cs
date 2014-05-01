@@ -2,7 +2,7 @@
 using System.Reflection;
 using Ploeh.AutoFixture.Idioms;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
     /// Encapsulates a unit test that verifies that a method or constructor has

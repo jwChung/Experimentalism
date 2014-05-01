@@ -7,7 +7,7 @@ using Ploeh.Albedo;
 using Ploeh.AutoFixture;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment.Idioms.Assertions
 {
     public class IndirectReferenceAssertionTest
     {

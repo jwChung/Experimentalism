@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
 using Xunit.Extensions;
 
