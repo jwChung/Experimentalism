@@ -90,6 +90,9 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(MethodInfoElement methodInfoElement)
         {
+            if (methodInfoElement == null)
+                throw new ArgumentNullException("methodInfoElement");
+
             var references = Value
                 .Concat(base.Visit(methodInfoElement).Value)
                 .Concat(GetReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType));
