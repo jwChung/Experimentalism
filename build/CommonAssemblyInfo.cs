@@ -14,29 +14,17 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.15.4")]
 
 /*
- * Version 0.15.5
+ * Version 0.16.0
  * 
- * - [FIX] Lets the idiomatic test-cases(ConstructingMemberAssertionTestCases,
- *   GuardClauseAssertionTestCases) consider only class types rather than
- *   interface types.
+ * - [NEW, BREAKING-CHANGE] Replaces all the old idiomatic assertions with new
+ *   assertions to provide simpler and more useful API.
  *   
- * - [FIX, BREAKING-CHANGE] Deletes the unused class -
- *   `ConstantEqualityComparer`.
- *   
- * - [FIX, BREAKING-CHANGE] Renames SpecimenBuilderAdapter to SpecimenBuilder.
- * 
- * - [FIX, BREAKING-CHANGE] Renames BaseTheoremAttribute to
- *   TheoremBaseAttribute.
- *   
- * - [FIX, BREAKING-CHANGE] Renames BaseFirstClassTheoremAttribute to
- *   FirstClassTheoremBaseAttribute.
- *   
- * - [FIX, BREAKING-CHANGE] Renames AccessibilityCollectingVisitor to
- *   AccessibilityCollector.
- *   
- * - [FIX, BREAKING-CHANGE] Renames ReferenceCollectingVisitor to
- *   ReferenceCollector.
- *   
- * - [FIX, BREAKING-CHANGE] Renames ElementReferenceCollectingVisitor to
- *   ElementReferenceCollector.
+ *      GuardClauseAssertion          -> NullGuardClauseAssertion
+ *      ConstructingMemberAssertion   -> MemberInitializationAssertion
+ *      RestrictingReferenceAssertion -> RestrictiveReferenceAssertion
+ *      HidingReferenceAssertion      -> IndirectReferenceAssertion
+ *      
+ * - [FIX, BREAKING-CHANGE] Rearrange namespace:
+ *   Introduces the new namespace 'Jwc.Experiment.Idioms.Assertions' and
+ *   rearrages namespaces.
  */
