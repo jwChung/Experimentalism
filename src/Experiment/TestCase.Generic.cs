@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment
