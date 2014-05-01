@@ -15,6 +15,7 @@ namespace Jwc.Experiment.Idioms
     {
         private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
         private readonly HashSet<Type> _types = new HashSet<Type>();
+        private readonly MemberReferenceCollector _memberReferenceCollector = new MemberReferenceCollector();
         
         /// <summary>
         /// Gets the observation or value produced by this instance.
@@ -320,35 +321,10 @@ namespace Jwc.Experiment.Idioms
 
             lock (_assemblies)
             {
-                foreach (var assembly in GetReferencedAssemblies(type))
+                var assemblies = type.ToElement().Accept(_memberReferenceCollector).Value;
+                foreach (var assembly in assemblies)
                     _assemblies.Add(assembly);
             }
-        }
-
-        private static IEnumerable<Assembly> GetReferencedAssemblies(Type type)
-        {
-            return new[] { type }
-                .Concat(type.GetGenericArguments())
-                .SelectMany(GetReferencedAssembliesFromAncestors);
-        }
-
-        private static IEnumerable<Assembly> GetReferencedAssembliesFromAncestors(Type type)
-        {
-            return ReferencedAssembliesFromBaseTypes(type)
-                .Concat(GetReferencedAssembliesFromInterfaces(type));
-        }
-
-        private static IEnumerable<Assembly> ReferencedAssembliesFromBaseTypes(Type type)
-        {
-            var assemblies = new[] { type.Assembly };
-            return type.BaseType == null
-                ? assemblies
-                : assemblies.Concat(ReferencedAssembliesFromBaseTypes(type.BaseType));
-        }
-
-        private static IEnumerable<Assembly> GetReferencedAssembliesFromInterfaces(Type type)
-        {
-            return type.GetInterfaces().Select(i => i.Assembly);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Jwc.Experiment.Idioms.Assertions
     public class IndirectReferenceAssertion
         : IdiomaticMemberAssertion, IIdiomaticTypeAssertion, IIdiomaticAssemblyAssertion
     {
+        private readonly MemberReferenceCollector _memberReferenceCollector = new MemberReferenceCollector();
         private readonly AccessibilityCollector _accessibilityCollector = new AccessibilityCollector();
         private readonly Assembly[] _indirectReferences;
 
@@ -142,27 +143,14 @@ namespace Jwc.Experiment.Idioms.Assertions
             return (GetAccessibilities(type) & Accessibilities.Exposed) != Accessibilities.None;
         }
 
-        private static IEnumerable<Assembly> GetReferences(IReflectionElement reflectionElement)
+        private IEnumerable<Assembly> GetReferences(IReflectionElement reflectionElement)
         {
-            return reflectionElement.Accept(new ElementReferenceCollector()).Value;
+            return reflectionElement.Accept(_memberReferenceCollector).Value;
         }
 
         private Accessibilities GetAccessibilities(Type type)
         {
             return type.ToElement().Accept(_accessibilityCollector).Value.Single();
-        }
-
-        private class ElementReferenceCollector : ReferenceCollector
-        {
-            protected override void VisitMethodBody(MethodBase methodBase)
-            {
-            }
-
-            public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
-                params LocalVariableInfoElement[] localVariableInfoElements)
-            {
-                return this;
-            }
         }
     }
 }

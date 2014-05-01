@@ -7,7 +7,6 @@ using Ploeh.Albedo;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -31,12 +30,18 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Value;
             Assert.Empty(actual);
         }
-        
-        [Theory]
-        [ReferenceCollectingData]
-        public void VisitTypeElementCollectsCorrectAssemblies(
-            Type type, Assembly[] expected)
+
+        [Fact]
+        public void VisitTypeElementCollectsCorrectAssemblies()
         {
+            var type = typeof(List<ClassImplementingHierarchical>);
+            var expected = new[]
+            {
+                typeof(ClassImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(IReflectionElement).Assembly,
+                typeof(Fixture).Assembly
+            };
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
@@ -453,78 +458,6 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(eventInfoElements);
 
             Assert.Equal(visitor, actual);
-        }
-
-        private class ReferenceCollectingDataAttribute : DataAttribute
-        {
-            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
-            {
-                yield return new object[]
-                {
-                    typeof(object), new[] { typeof(object).Assembly }
-                };
-                yield return new object[]
-                {
-                    typeof(ReferenceCollectorTest),
-                    new[]
-                    {
-                        typeof(object).Assembly,
-                        typeof(ReferenceCollectorTest).Assembly
-                    }
-                };
-                yield return new object[]
-                {
-                    typeof(TheoryAttribute),
-                    new[]
-                    {
-                        typeof(FactAttribute).Assembly,
-                        typeof(object).Assembly,
-                        typeof(TheoryAttribute).Assembly
-                    }
-                };
-                yield return new object[]
-                {
-                    typeof(SpecimenBuilder),
-                    new[]
-                    {
-                        typeof(SpecimenBuilder).Assembly,
-                        typeof(object).Assembly,
-                        typeof(Fixture).Assembly
-                    }
-                };
-                yield return new object[]
-                {
-                    typeof(ClassImplementingMultiple),
-                    new[]
-                    {
-                        typeof(ClassImplementingMultiple).Assembly,
-                        typeof(IDisposable).Assembly,
-                        typeof(ISpecimenContext).Assembly
-                    }
-                };
-                yield return new object[]
-                {
-                    typeof(ClassImplementingHierarchical),
-                    new[]
-                    {
-                        typeof(ClassImplementingMultiple).Assembly,
-                        typeof(IDisposable).Assembly,
-                        typeof(IReflectionElement).Assembly,
-                        typeof(Fixture).Assembly
-                    }
-                };
-                yield return new object[]
-                {
-                    typeof(List<ClassImplementingHierarchical>),
-                    new[]
-                    {
-                        typeof(ClassImplementingMultiple).Assembly,
-                        typeof(IDisposable).Assembly,
-                        typeof(IReflectionElement).Assembly,
-                        typeof(Fixture).Assembly
-                    }
-                };
-            }
         }
     }
 }
