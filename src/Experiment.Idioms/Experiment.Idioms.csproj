@@ -60,6 +60,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="DisplayNameVisitor.cs" />
+    <Compile Include="MemberReferenceCollector.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="TypeMembers.cs" />
     <Compile Include="Assertions\IdiomaticMemberAssertion.cs" />

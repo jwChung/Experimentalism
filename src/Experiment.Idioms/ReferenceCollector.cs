@@ -8,8 +8,8 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represents <see cref="IReflectionVisitor{T}"/> to collect references
-    /// for a given assembly.
+    /// Represents <see cref="IReflectionVisitor{T}"/> to collect reference
+    /// assemblies for a given reflection meta-data.
     /// </summary>
     public class ReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {

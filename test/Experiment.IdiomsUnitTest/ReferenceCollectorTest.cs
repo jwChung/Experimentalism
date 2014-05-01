@@ -34,7 +34,7 @@ namespace Jwc.Experiment.Idioms
         
         [Theory]
         [ReferenceCollectingData]
-        public void VisitTypeEelementCollectsCorrectAssemblies(
+        public void VisitTypeElementCollectsCorrectAssemblies(
             Type type, Assembly[] expected)
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
