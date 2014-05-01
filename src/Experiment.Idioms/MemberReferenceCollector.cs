@@ -29,6 +29,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public MemberReferenceCollector(IEnumerable<Assembly> references)
         {
+            if (references == null)
+                throw new ArgumentNullException("references");
+
             _references = references;
         }
 
