@@ -116,6 +116,7 @@ namespace Jwc.Experiment.Idioms
             return Type.GetMembers(_bindingFlags)
                 .Except(GetAccessors())
                 .Except(GetEventMethods())
+                .Where(m => !(m is Type))
                 .Where(IsSpecifiedMemberKind)
                 .Where(IsSpecifiedAccessibilites)
                 .GetEnumerator();

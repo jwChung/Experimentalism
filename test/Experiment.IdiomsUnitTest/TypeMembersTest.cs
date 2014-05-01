@@ -301,6 +301,14 @@ namespace Jwc.Experiment.Idioms
             var result = actual.All(m => (GetAccessibilities(m) & Accessibilities.Public) == Accessibilities.Public);
             Assert.True(result, "Enumerate only public members.");
         }
+
+        [Fact]
+        public void SutDoesNotEnumeratNestedTypes()
+        {
+            var sut = new TypeMembers(typeof(IndirectReferenceAssertionTest), Accessibilities.Public);
+            var actual = sut.ToArray();
+            Assert.True(actual.All(m => !(m is Type)), "No Types.");
+        }
         
         private static Accessibilities GetAccessibilities(MemberInfo member)
         {
