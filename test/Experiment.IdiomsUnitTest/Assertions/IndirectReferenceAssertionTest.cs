@@ -313,6 +313,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             public ClassForIndirectReference()
             {
                 var fixture = new Fixture();
+                fixture.ToString();
             }
 
             public ClassForIndirectReference(IIdiomaticTypeAssertion arg1, object arg2)

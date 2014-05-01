@@ -120,7 +120,8 @@ namespace Jwc.Experiment.Idioms.Assertions
 
         private void EnsureNotExpose(IReflectionElement reflectionElement)
         {
-            var reference = GetReferences(reflectionElement).FirstOrDefault(r => IndirectReferences.Contains(r));
+            var references = GetReferences(reflectionElement);
+            var reference = references.FirstOrDefault(r => IndirectReferences.Contains(r));
 
             if (reference == null)
                 return;
@@ -155,6 +156,12 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             protected override void VisitMethodBody(MethodBase methodBase)
             {
+            }
+
+            public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+                params LocalVariableInfoElement[] localVariableInfoElements)
+            {
+                return this;
             }
         }
     }
