@@ -45,7 +45,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeIsCorrectWhenInitializedWithModestCtor()
+        public void TypeIsCorrectWhenInitializedByModestCtor()
         {
             var type = GetType();
             var sut = new TypeMembers(type);
@@ -56,7 +56,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeIsCorrectWhenInitializedWithModestCtorWithMemberKinds()
+        public void TypeIsCorrectWhenInitializedByModestCtorWithMemberKinds()
         {
             var expected = typeof(int);
             var sut = new TypeMembers(expected, MemberKinds.All);
@@ -67,7 +67,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeIsCorrectWhenInitializedWithGreedyCtorWithMemberKinds()
+        public void TypeIsCorrectWhenInitializedByGreedyCtorWithMemberKinds()
         {
             var expected = typeof(string);
             var sut = new TypeMembers(expected, MemberKinds.All, Accessibilities.Default);
@@ -78,7 +78,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeIsCorrectWhenInitializedWithModestCtorWithAccessibilities()
+        public void TypeIsCorrectWhenInitializedByModestCtorWithAccessibilities()
         {
             var expected = typeof(string);
             var sut = new TypeMembers(expected, Accessibilities.Default);
@@ -89,7 +89,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void MemberKindsIsCorrectWhenInitializedWithModestCtor()
+        public void MemberKindsIsCorrectWhenInitializedByModestCtor()
         {
             var sut = new TypeMembers(GetType());
             var actual = sut.MemberKinds;
@@ -97,7 +97,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void MemberKindsIsCorrectWhenInitializedWithModestCtorWithMemberKinds()
+        public void MemberKindsIsCorrectWhenInitializedByModestCtorWithMemberKinds()
         {
             var expected = MemberKinds.Event;
             var sut = new TypeMembers(GetType(), expected);
@@ -108,7 +108,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void MemberKindsIsCorrectWhenInitializedWithGreedyCtorWithMemberKinds()
+        public void MemberKindsIsCorrectWhenInitializedByGreedyCtorWithMemberKinds()
         {
             var expected = MemberKinds.Event;
             var sut = new TypeMembers(GetType(), expected, Accessibilities.Default);
@@ -119,7 +119,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void MemberKindsIsCorrectWhenInitializedWithModestCtorWithAccessibilities()
+        public void MemberKindsIsCorrectWhenInitializedByModestCtorWithAccessibilities()
         {
             var expected = MemberKinds.All;
             var sut = new TypeMembers(GetType(), Accessibilities.Default);
@@ -130,7 +130,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedWithModestCtor()
+        public void AccessibilitiesIsCorrectWhenInitializedByModestCtor()
         {
             var sut = new TypeMembers(GetType());
             var actual = sut.Accessibilities;
@@ -138,7 +138,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedWithModestCtorWithMemberKinds()
+        public void AccessibilitiesIsCorrectWhenInitializedByModestCtorWithMemberKinds()
         {
             var sut = new TypeMembers(GetType(), MemberKinds.Default);
             var actual = sut.Accessibilities;
@@ -146,7 +146,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedWithGreedyCtorWithMemberKinds()
+        public void AccessibilitiesIsCorrectWhenInitializedByGreedyCtorWithMemberKinds()
         {
             var accessibilities = Accessibilities.Private;
             var sut = new TypeMembers(GetType(), MemberKinds.Default, accessibilities);
@@ -157,7 +157,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedWithModestCtorWithAccessibilities()
+        public void AccessibilitiesIsCorrectWhenInitializedByModestCtorWithAccessibilities()
         {
             var accessibilities = Accessibilities.ProtectedInternal;
             var sut = new TypeMembers(GetType(), accessibilities);

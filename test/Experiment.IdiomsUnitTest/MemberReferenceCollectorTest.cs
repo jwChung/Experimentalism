@@ -21,7 +21,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ValueIsCorrectWhenInitializedWithModestCtor()
+        public void ValueIsCorrectWhenInitializedByModestCtor()
         {
             var sut = new MemberReferenceCollector();
             var actual = sut.Value;
@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void ValueIsCorrectWhenInitializedWithGreedyCtor()
+        public void ValueIsCorrectWhenInitializedByGreedyCtor()
         {
             var references = new[] { typeof(object).Assembly, typeof(object).Assembly, typeof(Enumerable).Assembly };
             var sut = new MemberReferenceCollector(references);
