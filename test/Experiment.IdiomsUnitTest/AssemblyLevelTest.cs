@@ -34,6 +34,7 @@ namespace Jwc.Experiment.Idioms
 
         [Theory]
         [InlineData("Mono.Reflection")]
+        [InlineData("Ploeh.AutoFixture.Idioms")]
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup

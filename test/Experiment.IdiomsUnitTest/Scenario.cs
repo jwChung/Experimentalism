@@ -65,15 +65,30 @@ namespace Jwc.Experiment.Idioms
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
-                    Assembly.Load("mscorlib"),
-                    typeof(Uri).Assembly, // System.dll
-                    typeof(Enumerable).Assembly, // System.Core.dll
-                    Assembly.Load("Jwc.Experiment"),
-                    Assembly.Load("Ploeh.Albedo"),
-                    Assembly.Load("Ploeh.AutoFixture"),
-                    Assembly.Load("Ploeh.AutoFixture.Idioms"),
-                    Assembly.Load("Mono.Reflection"))
-                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+                Assembly.Load("mscorlib"),
+                typeof(Uri).Assembly, // System.dll
+                typeof(Enumerable).Assembly, // System.Core.dll
+                Assembly.Load("Jwc.Experiment"),
+                Assembly.Load("Ploeh.Albedo"),
+                Assembly.Load("Ploeh.AutoFixture"),
+                Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                Assembly.Load("Mono.Reflection"))
+            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+        }
+
+        [Fact]
+        public void IndirectAssertionCorrectlyVerifiesAssembly()
+        {
+            new IndirectReferenceAssertion(
+                ////Assembly.Load("mscorlib"),
+                typeof(Uri).Assembly,
+                typeof(Enumerable).Assembly,
+                ////Assembly.Load("Jwc.Experiment"),
+                ////Assembly.Load("Ploeh.Albedo"),
+                ////Assembly.Load("Ploeh.AutoFixture"),
+                Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                Assembly.Load("Mono.Reflection"))
+            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         private class ClassForNullGuardClause
