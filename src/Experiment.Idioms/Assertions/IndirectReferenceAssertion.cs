@@ -51,7 +51,6 @@ namespace Jwc.Experiment.Idioms.Assertions
                 throw new ArgumentNullException("assembly");
 
             var types = assembly.GetTypes().Where(IsExposed);
-
             foreach (var type in types)
                 Verify(type);
         }
@@ -63,8 +62,9 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// <param name="type">The type.</param>
         public virtual void Verify(Type type)
         {
-            var members = new TypeMembers(type, Accessibilities.Exposed);
+            EnsureNotExpose(type.ToElement());
 
+            var members = new TypeMembers(type, Accessibilities.Exposed);
             foreach (var member in members)
                 Verify(member);
         }

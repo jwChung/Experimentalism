@@ -18,4 +18,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX, BREAKING-CHANGE] Introduces the new `ITestFixtureFactory` insterface,
  *   which is replaced `Func<MethodInfo, ITestFixture>`.
+ *   
+ * - [FIX] Lets IndirectReferenceAssertion verify whether a base type of a
+ *   certain type exposes any indirect reference.
  */

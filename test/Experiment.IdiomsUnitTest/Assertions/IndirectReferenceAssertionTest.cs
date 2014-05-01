@@ -297,6 +297,22 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
         }
 
+        [Fact]
+        public void VerifyTypeThrowsWhenBaseTypeExposesAnyIndirectReference()
+        {
+            // Fixture setup
+            var indirectReferences = new[]
+            {
+                Assembly.Load("Jwc.Experiment.Idioms")
+            };
+            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var type = typeof(ClassForIndirectReference);
+
+            // Exercise system and Verify outcome
+            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(type));
+            Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
+        }
+
         private static bool IsExposed(Type type)
         {
             var accessibilityCollector = new AccessibilityCollector();
@@ -306,7 +322,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                 != Accessibilities.None;
         }
 
-        private class ClassForIndirectReference
+        private class ClassForIndirectReference : IdiomaticMemberAssertion
         {
 #pragma warning disable 649
             public Fixture Field;
