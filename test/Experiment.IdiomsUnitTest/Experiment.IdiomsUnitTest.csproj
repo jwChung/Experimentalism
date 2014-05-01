@@ -68,6 +68,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
+    <Compile Include="DisplayNameVisitorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="TypeMembersTest.cs" />
     <Compile Include="IdiomaticMemberAssertionTest.cs" />
