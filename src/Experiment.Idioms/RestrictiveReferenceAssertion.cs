@@ -57,7 +57,7 @@ namespace Jwc.Experiment.Idioms
                     CultureInfo.CurrentCulture,
                     "The reference of the assembly is not specified through the restrictive references.{0}" +
                     "Reference: {1}{0}" +
-                    "Assembly:  {2}{0}" +
+                    "Assembly : {2}{0}" +
                     "Restrictive references:{0}{3}",
                     Environment.NewLine,
                     reference,

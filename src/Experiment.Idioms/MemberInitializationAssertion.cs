@@ -143,7 +143,7 @@ namespace Jwc.Experiment.Idioms
                     "No constructors with an argument that matches the field were found.{0}" +
                     "Declaring type: {1}{0}" +
                     "Reflected type: {2}{0}" +
-                    "Field: {3}",
+                    "Field         : {3}",
                     Environment.NewLine,
                     field.DeclaringType,
                     field.ReflectedType,
@@ -174,9 +174,9 @@ namespace Jwc.Experiment.Idioms
                     string.Format(
                         CultureInfo.CurrentCulture,
                         "The constructor parameter was not exposed through any fields or properties.{0}" +
-                        "Type: {1}{0}" +
+                        "Type       : {1}{0}" +
                         "Constructor: {2}{0}" +
-                        "Parameter: {3}",
+                        "Parameter  : {3}",
                         Environment.NewLine,
                         constructor.DeclaringType,
                         constructor,
@@ -206,7 +206,7 @@ namespace Jwc.Experiment.Idioms
                     "No constructors with an argument that matches the property were found.{0}" +
                     "Declaring type: {1}{0}" +
                     "Reflected type: {2}{0}" +
-                    "Property: {3}",
+                    "Property      : {3}",
                     Environment.NewLine,
                     property.DeclaringType,
                     property.ReflectedType,
