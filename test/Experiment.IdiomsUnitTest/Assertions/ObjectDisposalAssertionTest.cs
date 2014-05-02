@@ -133,7 +133,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             var members = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
             var type = typeof(ClassWithMembers);
-            var expected = type.GetIdiomaticInstanceMembers();
+            var expected = type.ToInstanceMembers();
 
             sut.Verify(type);
 

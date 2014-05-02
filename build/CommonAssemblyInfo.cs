@@ -19,4 +19,9 @@ using System.Runtime.InteropServices;
  * - [NEW] Introduces the FixtureFactory class to centralize creating a fixture.
  * 
  * - [FIX-BREAKING-CHANGE] Renames AutoFixtureAdapter to AutoFixture.
+ * 
+ * - [FIX-BREAKING-CHANGE] Renames some extension methods to clarify.
+ *      GetIdiomaticMembers         -> ToMembers
+ *      GetIdiomaticInstanceMembers -> ToInstanceMembers
+ *      GetIdiomaticStaticMembers   -> ToStaticMembers
  */
