@@ -58,6 +58,12 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
+        public object PrivateSetProperty
+        {
+            get;
+            private set;
+        }
+
         public object PrivateGetProperty
         {
             private get

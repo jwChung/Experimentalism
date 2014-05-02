@@ -14,7 +14,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.16.1")]
 
 /*
- * Version 0.16.2
+ * Version 0.17.0
  * 
  * - [FIX, BEAKING-CHANGE] Conceals the SpecimenBuilder class from public API.
+ * 
+ * - [NEW] Provides ObjectDisposalAssertion to test that a meber correctly
+ *   implements IDisposable.
  */

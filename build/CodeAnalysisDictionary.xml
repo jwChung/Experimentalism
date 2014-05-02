@@ -3,6 +3,7 @@
   <Words>
     <Recognized>
       <Word>Jwc</Word>
+      <Word>ObjectDisposedException</Word>
     </Recognized>
     <Unrecognized>
       <Word></Word>
