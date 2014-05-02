@@ -10,24 +10,48 @@ namespace Jwc.Experiment.Idioms
     public static class IdiomaticExtensions
     {
         /// <summary>
-        /// Gets idiomatic members.
-        /// </summary>
-        /// <param name="type">A type to enumerate the idiomatic members.</param>
-        /// <returns>The idiomatic members.</returns>
-        public static IEnumerable<MemberInfo> GetIdiomaticMembers(this Type type)
-        {
-            return new TypeMembers(type);
-        }
-
-        /// <summary>
         /// Gets idiomatic members corresponding to member kinds.
         /// </summary>
         /// <param name="type">A type to enumerate the idiomatic members.</param>
         /// <param name="memberKinds">The member kinds.</param>
         /// <returns>The idiomatic members.</returns>
-        public static IEnumerable<MemberInfo> GetIdiomaticMembers(this Type type, MemberKinds memberKinds)
+        public static IEnumerable<MemberInfo> GetIdiomaticMembers(
+            this Type type,
+            MemberKinds memberKinds = MemberKinds.All)
         {
-            return new TypeMembers(type, memberKinds: memberKinds);
+            return new TypeMembers(type, memberKinds);
+        }
+
+        /// <summary>
+        /// Gets idiomatic instance members corresponding to member kinds.
+        /// </summary>
+        /// <param name="type">A type to enumerate the idiomatic instance members.</param>
+        /// <param name="memberKinds">The instance member kinds.</param>
+        /// <returns>The idiomatic instance members.</returns>
+        public static IEnumerable<MemberInfo> GetIdiomaticInstanceMembers(
+            this Type type,
+            MemberKinds memberKinds = MemberKinds.All)
+        {
+            return new TypeMembers(
+                type,
+                memberKinds,
+                bindingFlags: TypeMembers.DefaultBindingFlags & ~BindingFlags.Static);
+        }
+
+        /// <summary>
+        /// Gets idiomatic static members corresponding to member kinds.
+        /// </summary>
+        /// <param name="type">A type to enumerate the idiomatic static members.</param>
+        /// <param name="memberKinds">The static member kinds.</param>
+        /// <returns>The idiomatic static members.</returns>
+        public static IEnumerable<MemberInfo> GetIdiomaticStaticMembers(
+            this Type type,
+            MemberKinds memberKinds = MemberKinds.All)
+        {
+            return new TypeMembers(
+                type,
+                memberKinds,
+                bindingFlags: TypeMembers.DefaultBindingFlags & ~BindingFlags.Instance);
         }
     }
 }

@@ -18,8 +18,11 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX-BEAKING-CHANGE] Conceals the SpecimenBuilder class from public API.
  * 
- * - [NEW] Provides ObjectDisposalAssertion to test that a meber correctly
+ * - [NEW] Provides ObjectDisposalAssertion to test that a member correctly
  *   implements IDisposable.
  *   
  * - [FIX-BEAKING-CHANGE] Renames DisplayNameVisitor to DisplayNameCollector.
+ * 
+ * - [NEW] Adds new extensions methods to IdiomaticExtensions for selecting
+ *   members to verify idiomatic assertions.
  */
