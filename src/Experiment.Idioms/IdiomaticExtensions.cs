@@ -7,7 +7,6 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Defines idiomatic extension methods.
     /// </summary>
-    [CLSCompliant(false)] 
     public static class IdiomaticExtensions
     {
         /// <summary>
