@@ -60,7 +60,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="Assertions\ObjectDisposalAssertion.cs" />
-    <Compile Include="DisplayNameVisitor.cs" />
+    <Compile Include="DisplayNameCollector.cs" />
     <Compile Include="MemberReferenceCollector.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />

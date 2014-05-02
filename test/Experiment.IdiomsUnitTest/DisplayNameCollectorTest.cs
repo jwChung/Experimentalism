@@ -6,19 +6,19 @@ using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
-    public class DisplayNameVisitorTest
+    public class DisplayNameCollectorTest
     {
         [Fact]
         public void SutIsReflectionVisitor()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.IsAssignableFrom<IReflectionVisitor<IEnumerable<string>>>(sut);
         }
 
         [Fact]
         public void ValueIsCorrect()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var actual = sut.Value;
             Assert.Empty(actual);
         }
@@ -26,7 +26,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitAssemblyElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var assembly = typeof(object).Assembly;
             var expected = assembly.ToElement().ToString();
 
@@ -38,14 +38,14 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullAssemblyElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((AssemblyElement)null));
         }
 
         [Fact]
         public void VisitManyAssemblyElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var assembly = typeof(object).Assembly;
 
             var actual1 = sut.Visit(assembly.ToElement());
@@ -57,7 +57,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitTypeElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var type = typeof(string);
             var expected = type.ToElement().ToString();
 
@@ -69,7 +69,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitManyTypeElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var type = typeof(object);
 
             var actual1 = sut.Visit(type.ToElement());
@@ -81,14 +81,14 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullTypeElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
         }
 
         [Fact]
         public void VisitConstructorInfoElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var constructorInfo = typeof(string).GetConstructors().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (constructor)",
@@ -103,7 +103,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitManyConstructorInfoElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var constructorInfo = typeof(string).GetConstructors().First();
 
             var actual1 = sut.Visit(constructorInfo.ToElement());
@@ -115,14 +115,14 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullConstructorInfoElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
         [Fact]
         public void VisitFieldInfoElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var fieldInfo = typeof(ClassWithMembers).GetFields().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (field)",
@@ -137,7 +137,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitManyFieldInfoElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var fieldInfo = typeof(ClassWithMembers).GetFields().First();
 
             var actual1 = sut.Visit(fieldInfo.ToElement());
@@ -149,14 +149,14 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullFieldInfoElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement)null));
         }
 
         [Fact]
         public void VisitPropertyInfoElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var propertyInfo = typeof(ClassWithMembers).GetProperties().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (property)",
@@ -171,7 +171,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitManyPropertyInfoElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var propertyInfo = typeof(ClassWithMembers).GetProperties().First();
 
             var actual1 = sut.Visit(propertyInfo.ToElement());
@@ -183,14 +183,14 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullPropertyInfoElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement)null));
         }
 
         [Fact]
         public void VisitMethodInfoElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var methodInfo = typeof(ClassWithMembers).GetMethods().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (method)",
@@ -205,7 +205,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitManyMethodInfoElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var methodInfo = typeof(ClassWithMembers).GetMethods().First();
 
             var actual1 = sut.Visit(methodInfo.ToElement());
@@ -217,14 +217,14 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullMethodInfoElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
         }
 
         [Fact]
         public void VisitEventInfoElementCollectsCorrectName()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var eventInfo = typeof(ClassWithMembers).GetEvents().First();
             var expected = string.Format(
                 "[[{0}][{1}]] (event)",
@@ -239,7 +239,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitManyEventInfoElementsCollectsCorrectNames()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             var eventInfo = typeof(ClassWithMembers).GetEvents().First();
 
             var actual1 = sut.Visit(eventInfo.ToElement());
@@ -251,7 +251,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNullEventInfoElementThrows()
         {
-            var sut = new DisplayNameVisitor();
+            var sut = new DisplayNameCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
         }
     }

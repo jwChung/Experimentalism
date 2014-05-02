@@ -9,24 +9,24 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Represetns a display name of a reflection member.
     /// </summary>
-    public class DisplayNameVisitor : ReflectionVisitor<IEnumerable<string>>
+    public class DisplayNameCollector : ReflectionVisitor<IEnumerable<string>>
     {
         private readonly IEnumerable<string> _displayNames;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DisplayNameVisitor"/> class.
+        /// Initializes a new instance of the <see cref="DisplayNameCollector"/> class.
         /// </summary>
-        public DisplayNameVisitor() : this(new string[0])
+        public DisplayNameCollector() : this(new string[0])
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DisplayNameVisitor"/> class.
+        /// Initializes a new instance of the <see cref="DisplayNameCollector"/> class.
         /// </summary>
         /// <param name="displayNames">
         /// The collected display names.
         /// </param>
-        protected DisplayNameVisitor(IEnumerable<string> displayNames)
+        protected DisplayNameCollector(IEnumerable<string> displayNames)
         {
             _displayNames = displayNames;
         }
@@ -57,7 +57,7 @@ namespace Jwc.Experiment.Idioms
             if (assemblyElement == null)
                 throw new ArgumentNullException("assemblyElement");
 
-            return new DisplayNameVisitor(Value.Concat(new[] { assemblyElement.ToString() }));
+            return new DisplayNameCollector(Value.Concat(new[] { assemblyElement.ToString() }));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Jwc.Experiment.Idioms
             if (typeElement == null)
                 throw new ArgumentNullException("typeElement");
 
-            return new DisplayNameVisitor(Value.Concat(new[] { typeElement.ToString() }));
+            return new DisplayNameCollector(Value.Concat(new[] { typeElement.ToString() }));
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Jwc.Experiment.Idioms
                 fieldInfo.ReflectedType,
                 fieldInfo);
 
-            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Jwc.Experiment.Idioms
                 constructorInfo.ReflectedType,
                 constructorInfo);
 
-            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Jwc.Experiment.Idioms
                 propertyInfo.ReflectedType,
                 propertyInfo);
 
-            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Jwc.Experiment.Idioms
                 methodInfo.ReflectedType,
                 methodInfo);
 
-            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Jwc.Experiment.Idioms
                 eventInfo.ReflectedType,
                 eventInfo);
 
-            return new DisplayNameVisitor(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
         }
     }
 }

@@ -16,8 +16,10 @@ using System.Runtime.InteropServices;
 /*
  * Version 0.17.0
  * 
- * - [FIX, BEAKING-CHANGE] Conceals the SpecimenBuilder class from public API.
+ * - [FIX-BEAKING-CHANGE] Conceals the SpecimenBuilder class from public API.
  * 
  * - [NEW] Provides ObjectDisposalAssertion to test that a meber correctly
  *   implements IDisposable.
+ *   
+ * - [FIX-BEAKING-CHANGE] Renames DisplayNameVisitor to DisplayNameCollector.
  */

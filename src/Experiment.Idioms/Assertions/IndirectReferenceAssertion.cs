@@ -135,7 +135,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                     "API(exposing)     : {2}{0}",
                     Environment.NewLine,
                     reference,
-                    reflectionElement.Accept(new DisplayNameVisitor()).Value.Single()));
+                    reflectionElement.Accept(new DisplayNameCollector()).Value.Single()));
         }
 
         private bool IsExposed(Type type)

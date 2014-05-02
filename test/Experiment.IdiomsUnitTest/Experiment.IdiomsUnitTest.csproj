@@ -65,7 +65,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="Assertions\ObjectDisposalAssertionTest.cs" />
-    <Compile Include="DisplayNameVisitorTest.cs" />
+    <Compile Include="DisplayNameCollectorTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
