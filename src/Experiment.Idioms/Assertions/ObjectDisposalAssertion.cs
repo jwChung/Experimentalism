@@ -49,7 +49,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// </param>
         public void Verify(Type type)
         {
-            var members = type.GetIdiomaticInstanceMembers(MemberKinds.Property | MemberKinds.Method);
+            var members = type.GetIdiomaticInstanceMembers();
             foreach (var member in members)
                 Verify(member);
         }
