@@ -64,7 +64,8 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             EnsureNotExpose(type.ToElement());
 
-            var members = new TypeMembers(type, Accessibilities.Exposed);
+            var members = new TypeMembers(type, accessibilities: Accessibilities.Exposed);
+
             foreach (var member in members)
                 Verify(member);
         }

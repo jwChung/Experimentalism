@@ -255,7 +255,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             
             var expected = new TypeMembers(
                 type,
-                Accessibilities.Protected | Accessibilities.Public);
+                accessibilities: Accessibilities.Protected | Accessibilities.Public);
 
             // Exercise system
             sut.Verify(type);

@@ -27,7 +27,7 @@ namespace Jwc.Experiment.Idioms
         /// <returns>The idiomatic members.</returns>
         public static IEnumerable<MemberInfo> GetIdiomaticMembers(this Type type, MemberKinds memberKinds)
         {
-            return new TypeMembers(type, memberKinds);
+            return new TypeMembers(type, memberKinds: memberKinds);
         }
     }
 }

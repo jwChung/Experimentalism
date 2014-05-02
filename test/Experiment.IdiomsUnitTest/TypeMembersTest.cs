@@ -19,33 +19,23 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void InitializeModestCtorWithNullTypeThrows()
+        public void DefaultBindingFlagsIsCorrect()
+        {
+            BindingFlags expected =
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
+            BindingFlags.Static | BindingFlags.Instance;
+            var actual = TypeMembers.DefaultBindingFlags;
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void InitializeWithNullTypeThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TypeMembers(null));
         }
 
         [Fact]
-        public void InitializeModestCtorWithNullTypeAndMemberKindsThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => new TypeMembers(null, MemberKinds.Field));
-        }
-
-        [Fact]
-        public void InitializeGreedyCtorWithNullTypeAndMemberKindsThrows()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => new TypeMembers(null, MemberKinds.Field, Accessibilities.Default));
-        }
-
-        [Fact]
-        public void InitializeModestCtorWithNullTypeAndAccessibilitiesThrows()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => new TypeMembers(null, Accessibilities.Default));
-        }
-
-        [Fact]
-        public void TypeIsCorrectWhenInitializedByModestCtor()
+        public void TypeIsCorrect()
         {
             var type = GetType();
             var sut = new TypeMembers(type);
@@ -56,100 +46,32 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeIsCorrectWhenInitializedByModestCtorWithMemberKinds()
+        public void MemberKindsIsCorrect()
         {
-            var expected = typeof(int);
-            var sut = new TypeMembers(expected, MemberKinds.All);
+            var memberKinds = MemberKinds.Method;
+            var sut = new TypeMembers(GetType(), memberKinds);
+
+            var actual = sut.MemberKinds;
+
+            Assert.Equal(memberKinds, actual);
+        }
+
+        [Fact]
+        public void MemberKindsCorrectDefaultValue()
+        {
+            var type = GetType();
+            var sut = new TypeMembers(type);
 
             var actual = sut.Type;
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(type, actual);
         }
-
+        
         [Fact]
-        public void TypeIsCorrectWhenInitializedByGreedyCtorWithMemberKinds()
+        public void AccessibilitiesIsCorrect()
         {
-            var expected = typeof(string);
-            var sut = new TypeMembers(expected, MemberKinds.All, Accessibilities.Default);
-
-            var actual = sut.Type;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void TypeIsCorrectWhenInitializedByModestCtorWithAccessibilities()
-        {
-            var expected = typeof(string);
-            var sut = new TypeMembers(expected, Accessibilities.Default);
-
-            var actual = sut.Type;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void MemberKindsIsCorrectWhenInitializedByModestCtor()
-        {
-            var sut = new TypeMembers(GetType());
-            var actual = sut.MemberKinds;
-            Assert.Equal(MemberKinds.All, actual);
-        }
-
-        [Fact]
-        public void MemberKindsIsCorrectWhenInitializedByModestCtorWithMemberKinds()
-        {
-            var expected = MemberKinds.Event;
-            var sut = new TypeMembers(GetType(), expected);
-
-            var actual = sut.MemberKinds;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void MemberKindsIsCorrectWhenInitializedByGreedyCtorWithMemberKinds()
-        {
-            var expected = MemberKinds.Event;
-            var sut = new TypeMembers(GetType(), expected, Accessibilities.Default);
-
-            var actual = sut.MemberKinds;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void MemberKindsIsCorrectWhenInitializedByModestCtorWithAccessibilities()
-        {
-            var expected = MemberKinds.All;
-            var sut = new TypeMembers(GetType(), Accessibilities.Default);
-
-            var actual = sut.MemberKinds;
-
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedByModestCtor()
-        {
-            var sut = new TypeMembers(GetType());
-            var actual = sut.Accessibilities;
-            Assert.Equal(Accessibilities.Public, actual);
-        }
-
-        [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedByModestCtorWithMemberKinds()
-        {
-            var sut = new TypeMembers(GetType(), MemberKinds.Default);
-            var actual = sut.Accessibilities;
-            Assert.Equal(Accessibilities.Public, actual);
-        }
-
-        [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedByGreedyCtorWithMemberKinds()
-        {
-            var accessibilities = Accessibilities.Private;
-            var sut = new TypeMembers(GetType(), MemberKinds.Default, accessibilities);
+            var accessibilities = Accessibilities.Protected;
+            var sut = new TypeMembers(GetType(), accessibilities: accessibilities);
 
             var actual = sut.Accessibilities;
 
@@ -157,20 +79,41 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void AccessibilitiesIsCorrectWhenInitializedByModestCtorWithAccessibilities()
+        public void AccessibilitiesReturnsCorrectDefaultValue()
         {
-            var accessibilities = Accessibilities.ProtectedInternal;
-            var sut = new TypeMembers(GetType(), accessibilities);
-
+            var sut = new TypeMembers(GetType());
             var actual = sut.Accessibilities;
-
-            Assert.Equal(accessibilities, actual);
+            Assert.Equal(Accessibilities.Public, actual);
         }
 
         [Fact]
-        public void SutEnumeratesAllKindsOfMember()
+        public void BindingFalgsIsCorrect()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
+            var bindingFlags = BindingFlags.IgnoreReturn;
+            var sut = new TypeMembers(GetType(), bindingFlags: bindingFlags);
+
+            var actual = sut.BindingFlags;
+
+            Assert.Equal(bindingFlags, actual);
+        }
+
+        [Fact]
+        public void BindingFalgsReturnsCorrectValue()
+        {
+            var sut = new TypeMembers(GetType());
+            BindingFlags bindingFlags =
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
+            BindingFlags.Static | BindingFlags.Instance;
+
+            var actual = sut.BindingFlags;
+
+            Assert.Equal(bindingFlags, actual);
+        }
+
+        [Fact]
+        public void SutEnumeratesAllKindsOfMemberWhenMemberKindsIsDefault()
+        {
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -182,10 +125,10 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutEnumeratesOnlyDeclaredMembers()
+        public void SutEnumeratesOnlyDeclaredMembersWhenBindingFlagsIsDefault()
         {
             var nonDeclaredMember = new Methods<ClassWithMembers>().Select(x => x.ToString());
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -193,9 +136,9 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutEnumeratesStaticMembers()
+        public void SutEnumeratesStaticMembersWhenBindingFlagsIsDefault()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
             var actual = sut.OfType<MethodInfo>().ToArray();
             Assert.True(actual.Any(m => m.IsStatic), "Static Member.");
         }
@@ -203,7 +146,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyAccessors()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
 
             var actual = sut.OfType<MethodInfo>().ToArray();
 
@@ -214,7 +157,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratesAnyEventMethods()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.All);
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -225,7 +168,8 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesNoMembersWhenMemberKindsIsNone()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.None, Accessibilities.All);
+            var sut = new TypeMembers(
+                typeof(ClassWithMembers), MemberKinds.None, Accessibilities.All);
             var actual = sut.ToArray();
             Assert.Empty(actual);
         }
@@ -233,7 +177,8 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesOnlyPropertiesWhenMemberKindsIsProperty()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.Property, Accessibilities.All);
+            var sut = new TypeMembers(
+                typeof(ClassWithMembers), MemberKinds.Property, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -246,9 +191,7 @@ namespace Jwc.Experiment.Idioms
         public void SutEnumeratesCorrectMembersWhenMemberKindsIsConstructorOrMethod()
         {
             var sut = new TypeMembers(
-                typeof(ClassWithMembers),
-                MemberKinds.Constructor | MemberKinds.Method,
-                Accessibilities.All);
+                typeof(ClassWithMembers), MemberKinds.Constructor | MemberKinds.Method, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -261,7 +204,8 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesWritablePropertiesWhenMemberKindsIsGetProperty()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), MemberKinds.GetProperty, Accessibilities.All);
+            var sut = new TypeMembers(
+                typeof(ClassWithMembers), MemberKinds.GetProperty, Accessibilities.All);
 
             var actual = sut.ToArray();
 
@@ -272,7 +216,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesNoMembersWhenAccessibilitiesIsNone()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.None);
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.None);
             var actual = sut.ToArray();
             Assert.Empty(actual);
         }
@@ -280,7 +224,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesCorrectMembersWhenAccessibilitiesIsProtected()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.Protected);
+            var sut = new TypeMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.Protected);
 
             var actual = sut.ToArray();
 
@@ -295,7 +239,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesOnlyPublicMembersWhenAccessibilitiesIsPublic()
         {
-            var sut = new TypeMembers(typeof(ClassWithMembers), Accessibilities.Public);
+            var sut = new TypeMembers(typeof(ClassWithMembers));
 
             var actual = sut.ToArray();
 
@@ -306,9 +250,51 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutDoesNotEnumeratNestedTypes()
         {
-            var sut = new TypeMembers(typeof(IndirectReferenceAssertionTest), Accessibilities.Public);
+            var sut = new TypeMembers(typeof(IndirectReferenceAssertionTest));
             var actual = sut.ToArray();
             Assert.True(actual.All(m => !(m is Type)), "No Types.");
+        }
+
+        [Fact]
+        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotInstanceAndMemberKindsIsEvent()
+        {
+            var sut = new TypeMembers(
+                typeof(ClassWithMembers),
+                MemberKinds.Event,
+                Accessibilities.All,
+                TypeMembers.DefaultBindingFlags & ~BindingFlags.Instance);
+            var actual = sut.ToArray();
+            Assert.True(actual.Cast<EventInfo>().All(ei => ei.GetAddMethod(true).IsStatic));
+        }
+
+        [Fact]
+        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotDeclaredOnlyAndMemberKindsIsEventAndMethod()
+        {
+            var sut = new TypeMembers(
+                typeof(SubClassWithMembers),
+                MemberKinds.Event | MemberKinds.Method,
+                Accessibilities.All,
+                TypeMembers.DefaultBindingFlags & ~BindingFlags.DeclaredOnly);
+
+            var actual = sut.ToArray();
+
+            var result = actual.All(m => !m.Name.StartsWith("add_") && !m.Name.StartsWith("remove_"));
+            Assert.True(result, "Do not enumerate any helper methods of EventInfo.");
+        }
+
+        [Fact]
+        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotDeclaredOnlyAndMemberKindsIsPropertyAndMethod()
+        {
+            var sut = new TypeMembers(
+                typeof(SubClassWithMembers),
+                MemberKinds.Property | MemberKinds.Method,
+                Accessibilities.All,
+                TypeMembers.DefaultBindingFlags & ~BindingFlags.DeclaredOnly);
+
+            var actual = sut.ToArray();
+
+            var result = actual.All(m => !m.Name.StartsWith("get_") && !m.Name.StartsWith("set_"));
+            Assert.True(result, "Do not enumerate any accessors.");
         }
         
         private static Accessibilities GetAccessibilities(MemberInfo member)

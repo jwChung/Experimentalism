@@ -14,7 +14,10 @@ namespace Jwc.Experiment.Idioms
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class TypeMembers : IEnumerable<MemberInfo>
     {
-        private const BindingFlags _bindingFlags =
+        /// <summary>
+        /// The default binding flags to be used to select members.
+        /// </summary>
+        public const BindingFlags DefaultBindingFlags =
             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
             BindingFlags.Static | BindingFlags.Instance;
 
@@ -24,35 +27,7 @@ namespace Jwc.Experiment.Idioms
         private readonly Type _type;
         private readonly MemberKinds _memberKinds;
         private readonly Accessibilities _accessibilities;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TypeMembers"/> class.
-        /// </summary>
-        /// <param name="type">A type to enumerate members.</param>
-        public TypeMembers(Type type)
-            : this(type, MemberKinds.Default)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TypeMembers"/> class.
-        /// </summary>
-        /// <param name="type">A type to enumerate members.</param>
-        /// <param name="memberKinds">Member kinds to filter members.</param>
-        public TypeMembers(Type type, MemberKinds memberKinds)
-            : this(type, memberKinds, Accessibilities.Default)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TypeMembers" /> class.
-        /// </summary>
-        /// <param name="type">A type to enumerate members.</param>
-        /// <param name="accessibilities">The accessibilities to filter members.</param>
-        public TypeMembers(Type type, Accessibilities accessibilities)
-            : this(type, MemberKinds.Default, accessibilities)
-        {
-        }
+        private readonly BindingFlags _bindingFlags;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeMembers" /> class.
@@ -60,7 +35,12 @@ namespace Jwc.Experiment.Idioms
         /// <param name="type">A type to enumerate members.</param>
         /// <param name="memberKinds">Member kinds to filter members.</param>
         /// <param name="accessibilities">The accessibilities to filter members.</param>
-        public TypeMembers(Type type, MemberKinds memberKinds, Accessibilities accessibilities)
+        /// <param name="bindingFlags">The binding flags to filter members.</param>
+        public TypeMembers(
+            Type type,
+            MemberKinds memberKinds = MemberKinds.Default,
+            Accessibilities accessibilities = Accessibilities.Public,
+            BindingFlags bindingFlags = DefaultBindingFlags)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
@@ -68,6 +48,7 @@ namespace Jwc.Experiment.Idioms
             _type = type;
             _memberKinds = memberKinds;
             _accessibilities = accessibilities;
+            _bindingFlags = bindingFlags;
         }
 
         /// <summary>
@@ -105,6 +86,17 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
+        /// Gets value indicating the binding flags.
+        /// </summary>
+        public BindingFlags BindingFlags
+        {
+            get
+            {
+                return _bindingFlags;
+            }
+        }
+
+        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -113,7 +105,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            return Type.GetMembers(_bindingFlags)
+            return Type.GetMembers(BindingFlags)
                 .Except(GetAccessors())
                 .Except(GetEventMethods())
                 .Where(m => !(m is Type))
@@ -129,12 +121,12 @@ namespace Jwc.Experiment.Idioms
 
         private IEnumerable<MethodInfo> GetAccessors()
         {
-            return Type.GetProperties(_bindingFlags).SelectMany(p => p.GetAccessors(true));
+            return Type.GetProperties(BindingFlags).SelectMany(p => p.GetAccessors(true));
         }
 
         private IEnumerable<MethodInfo> GetEventMethods()
         {
-            return Type.GetEvents(_bindingFlags).SelectMany(
+            return Type.GetEvents(BindingFlags).SelectMany(
                 e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
         }
 
