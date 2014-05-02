@@ -93,23 +93,25 @@ namespace Jwc.Experiment.Idioms.Assertions
             try
             {
                 method.Invoke(owner, GetArguments(method.GetParameters()));
-
-                throw new ObjectDisposalException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        "After the owner of the method is disposed, the method does not throw " +
-                        "ObjectDisposedException.{0}" +
-                        "Owner : {1}{0}" +
-                        "Method: {2}",
-                        Environment.NewLine,
-                        method.ReflectedType,
-                        method));
             }
             catch (TargetInvocationException exception)
             {
-                if (!(exception.InnerException is ObjectDisposedException))
-                    throw exception.InnerException;
+                if (exception.InnerException is ObjectDisposedException)
+                    return;
+
+                throw;
             }
+
+            throw new ObjectDisposalException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "After the owner of the method is disposed, the method does not throw " +
+                    "ObjectDisposedException.{0}" +
+                    "Owner : {1}{0}" +
+                    "Method: {2}",
+                    Environment.NewLine,
+                    method.ReflectedType,
+                    method));
         }
 
         private IDisposable GetOwner(MethodInfo method)

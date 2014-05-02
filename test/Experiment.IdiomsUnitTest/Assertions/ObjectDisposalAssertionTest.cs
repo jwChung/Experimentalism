@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Moq;
 using Ploeh.Albedo;
@@ -69,7 +70,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             var sut = new ObjectDisposalAssertion(new FakeTestFixture());
             var method = new Methods<ClassForDisposable>().Select(x => x.ThrowNotSupportedException());
-            Assert.Throws<NotSupportedException>(() => sut.Verify(method));
+            Assert.Throws<TargetInvocationException>(() => sut.Verify(method));
         }
 
         [Fact]
@@ -136,7 +137,7 @@ namespace Jwc.Experiment.Idioms.Assertions
 
             sut.Verify(type);
 
-            Assert.Equal(expected, members);
+            Assert.Equal(expected.OrderBy(m => m.Name), members.OrderBy(m => m.Name));
         }
         
         private class ClassForDisposable : IDisposable
