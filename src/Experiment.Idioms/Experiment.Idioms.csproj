@@ -62,6 +62,7 @@
     <Compile Include="DisplayNameVisitor.cs" />
     <Compile Include="MemberReferenceCollector.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
+    <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="TypeMembers.cs" />
     <Compile Include="Assertions\IdiomaticMemberAssertion.cs" />
     <Compile Include="Assertions\IIdiomaticAssemblyAssertion.cs" />
