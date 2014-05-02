@@ -17,6 +17,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// The default binding flags to be used to select members.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
         public const BindingFlags DefaultBindingFlags =
             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
             BindingFlags.Static | BindingFlags.Instance;
@@ -36,6 +37,9 @@ namespace Jwc.Experiment.Idioms
         /// <param name="memberKinds">Member kinds to filter members.</param>
         /// <param name="accessibilities">The accessibilities to filter members.</param>
         /// <param name="bindingFlags">The binding flags to filter members.</param>
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This case of default prameters is an exception to define only one constructor.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
         public TypeMembers(
             Type type,
             MemberKinds memberKinds = MemberKinds.Default,
@@ -88,6 +92,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// Gets value indicating the binding flags.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
         public BindingFlags BindingFlags
         {
             get
