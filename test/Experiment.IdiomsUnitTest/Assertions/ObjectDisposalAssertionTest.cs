@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Moq;
 using Ploeh.Albedo;
@@ -13,6 +14,13 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             var sut = new ObjectDisposalAssertion(new FakeTestFixture());
             Assert.IsAssignableFrom<IIdiomaticMemberAssertion>(sut);
+        }
+
+        [Fact]
+        public void SutIsIdiomaticTypeAssertion()
+        {
+            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
         }
 
         [Fact]
@@ -115,6 +123,20 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             var sut = new ObjectDisposalAssertion(new FakeTestFixture());
             Assert.Throws<ArgumentNullException>(() => sut.Verify((PropertyInfo)null));
+        }
+
+        [Fact]
+        public void VerifyTypeVerifiesCorrectMembers()
+        {
+            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
+            var members = new List<MemberInfo>();
+            sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
+            var type = typeof(ClassWithMembers);
+            var expected = type.GetIdiomaticInstanceMembers(MemberKinds.Property | MemberKinds.Method);
+
+            sut.Verify(type);
+
+            Assert.Equal(expected, members);
         }
         
         private class ClassForDisposable : IDisposable

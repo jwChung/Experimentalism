@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Idioms.Assertions
     /// Encapsulates a unit test that verifies that members throw
     /// <see cref="ObjectDisposedException"/> after its owner(object) is disposed.
     /// </summary>
-    public class ObjectDisposalAssertion : IdiomaticMemberAssertion
+    public class ObjectDisposalAssertion : IdiomaticMemberAssertion, IIdiomaticTypeAssertion
     {
         private readonly ITestFixture _testFixture;
 
@@ -37,6 +37,21 @@ namespace Jwc.Experiment.Idioms.Assertions
             {
                 return _testFixture;
             }
+        }
+
+        /// <summary>
+        /// Verifies that instance preperties and methods of a given type throw
+        /// <see cref="ObjectDisposedException" /> after the instance of th type
+        /// is disposed.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        public void Verify(Type type)
+        {
+            var members = type.GetIdiomaticInstanceMembers(MemberKinds.Property | MemberKinds.Method);
+            foreach (var member in members)
+                Verify(member);
         }
 
         /// <summary>
