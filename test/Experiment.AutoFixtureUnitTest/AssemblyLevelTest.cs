@@ -55,6 +55,7 @@ namespace NuGet.Jwc.Experiment
         [InlineData(_productDirectory, "AutoFixtureAdapter")]
         [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
+        [InlineData(_productDirectory, "FixtureFactory")]
         [InlineData(_testDirectory, "Scenario")]
         public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {

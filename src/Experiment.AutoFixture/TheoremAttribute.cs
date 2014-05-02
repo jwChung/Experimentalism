@@ -46,7 +46,7 @@ namespace NuGet.Jwc.Experiment
         /// <returns>The new fixture instance.</returns>
         protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
-            return new Fixture();
+            return FixtureFactory.Create(testMethod);
         }
 
         private static IFixture CustomizeFixture(
