@@ -22,7 +22,7 @@ namespace NuGet.Jwc.Experiment
 
             var actual = sut.CallCreateTestFixture(dummyMethod);
 
-            var adapter = Assert.IsType<AutoFixtureAdapter>(actual);
+            var adapter = Assert.IsType<AutoFixture>(actual);
             Assert.IsType<Fixture>(adapter.Fixture);
         }
 

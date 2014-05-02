@@ -34,7 +34,7 @@ namespace NuGet.Jwc.Experiment
                 throw new ArgumentNullException("testMethod");
             }
 
-            return new AutoFixtureAdapter(
+            return new AutoFixture(
                 CustomizeFixture(
                     CreateFixture(testMethod),
                     testMethod.GetParameters()));

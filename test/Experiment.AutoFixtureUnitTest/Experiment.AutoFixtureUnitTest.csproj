@@ -53,7 +53,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
-    <Compile Include="AutoFixtureAdapterTest.cs" />
+    <Compile Include="AutoFixtureTest.cs" />
     <Compile Include="FirstClassTheoremAttributeTest.cs" />
     <Compile Include="FixtureFactoryTest.cs" />
     <Compile Include="Scenario.cs" />

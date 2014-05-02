@@ -55,7 +55,7 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AutoFixtureAdapter.cs" />
+    <Compile Include="AutoFixture.cs" />
     <Compile Include="FirstClassTheoremAttribute.cs" />
     <Compile Include="FixtureFactory.cs" />
     <Compile Include="TheoremAttribute.cs" />

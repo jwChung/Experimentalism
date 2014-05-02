@@ -17,4 +17,6 @@ using System.Runtime.InteropServices;
  * Version 0.18.0
  * 
  * - [NEW] Introduces the FixtureFactory class to centralize creating a fixture.
+ * 
+ * - [FIX-BREAKING-CHANGE] Renames AutoFixtureAdapter to AutoFixture.
  */

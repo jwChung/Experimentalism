@@ -17,7 +17,7 @@ namespace NuGet.Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(AutoFixtureAdapter).Assembly;
+            var sut = typeof(AutoFixture).Assembly;
             var specifiedAssemblies = new []
             {
                 // GAC
@@ -43,7 +43,7 @@ namespace NuGet.Jwc.Experiment
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(AutoFixtureAdapter).Assembly;
+            var sut = typeof(AutoFixture).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var types = Assembly.Load(assemblyName).GetExportedTypes();
 
@@ -52,7 +52,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [Theory]
-        [InlineData(_productDirectory, "AutoFixtureAdapter")]
+        [InlineData(_productDirectory, "AutoFixture")]
         [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FirstClassTheoremAttribute")]
         [InlineData(_productDirectory, "FixtureFactory")]
