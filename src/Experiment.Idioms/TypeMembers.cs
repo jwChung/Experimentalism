@@ -114,8 +114,8 @@ namespace Jwc.Experiment.Idioms
                 .Except(GetAccessors())
                 .Except(GetEventMethods())
                 .Where(m => !(m is Type))
-                .Where(IsSpecifiedMemberKind)
-                .Where(IsSpecifiedAccessibilites)
+                .Where(IsSpecifiedByMemberKind)
+                .Where(IsSpecifiedByAccessibilites)
                 .GetEnumerator();
         }
 
@@ -135,12 +135,12 @@ namespace Jwc.Experiment.Idioms
                 e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
         }
 
-        private bool IsSpecifiedMemberKind(MemberInfo member)
+        private bool IsSpecifiedByMemberKind(MemberInfo member)
         {
             return (GetMemberKinds(member) & MemberKinds) != MemberKinds.None;
         }
 
-        private bool IsSpecifiedAccessibilites(MemberInfo member)
+        private bool IsSpecifiedByAccessibilites(MemberInfo member)
         {
             return (GetAccessibilities(member) & Accessibilities) != Accessibilities.None;
         }
