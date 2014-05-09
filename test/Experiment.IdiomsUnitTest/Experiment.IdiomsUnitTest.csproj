@@ -69,7 +69,7 @@
     <Compile Include="MemberReferenceCollectorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
-    <Compile Include="TypeMembersTest.cs" />
+    <Compile Include="IdiomaticMembersTest.cs" />
     <Compile Include="Assertions\IdiomaticMemberAssertionTest.cs" />
     <Compile Include="IndirectReferenceExceptionTest.cs" />
     <Compile Include="Assertions\IndirectReferenceAssertionTest.cs" />

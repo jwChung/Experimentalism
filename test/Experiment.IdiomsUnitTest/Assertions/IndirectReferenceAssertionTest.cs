@@ -253,7 +253,7 @@ namespace Jwc.Experiment.Idioms.Assertions
 
             var type = typeof(ClassWithMembers);
             
-            var expected = new TypeMembers(
+            var expected = new IdiomaticMembers(
                 type,
                 accessibilities: Accessibilities.Protected | Accessibilities.Public);
 

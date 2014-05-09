@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
     /// verified by idiomatic assertions.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
-    public class TypeMembers : IEnumerable<MemberInfo>
+    public class IdiomaticMembers : IEnumerable<MemberInfo>
     {
         /// <summary>
         /// The default binding flags to be used to select members.
@@ -31,7 +31,7 @@ namespace Jwc.Experiment.Idioms
         private readonly BindingFlags _bindingFlags;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypeMembers" /> class.
+        /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
         /// <param name="memberKinds">Member kinds to filter members.</param>
@@ -40,7 +40,7 @@ namespace Jwc.Experiment.Idioms
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This case of default prameters is an exception to define only one constructor.")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
-        public TypeMembers(
+        public IdiomaticMembers(
             Type type,
             MemberKinds memberKinds = MemberKinds.Default,
             Accessibilities accessibilities = Accessibilities.Public,

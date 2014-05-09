@@ -20,4 +20,7 @@ using System.Runtime.InteropServices;
  *      ToMembers         -> ToIdiomaticMembers
  *      ToInstanceMembers -> ToIdiomaticInstanceMembers
  *      ToStaticMembers   -> ToIdiomaticStaticMembers
+ *      
+ * - [FIX-BREAKING-CHANGE] Renames `TypeMembers` to `IdiomaticMembers` to
+ *   clarify
  */

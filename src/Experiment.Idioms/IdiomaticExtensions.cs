@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public static IEnumerable<MemberInfo> ToIdiomaticMembers(this Type type, MemberKinds memberKinds)
         {
-            return new TypeMembers(type, memberKinds);
+            return new IdiomaticMembers(type, memberKinds);
         }
 
         /// <summary>
@@ -69,10 +69,10 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public static IEnumerable<MemberInfo> ToIdiomaticInstanceMembers(this Type type, MemberKinds memberKinds)
         {
-            return new TypeMembers(
+            return new IdiomaticMembers(
                 type,
                 memberKinds,
-                bindingFlags: TypeMembers.DefaultBindingFlags & ~BindingFlags.Static);
+                bindingFlags: IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Static);
         }
 
         /// <summary>
@@ -104,10 +104,10 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public static IEnumerable<MemberInfo> ToIdiomaticStaticMembers(this Type type, MemberKinds memberKinds)
         {
-            return new TypeMembers(
+            return new IdiomaticMembers(
                 type,
                 memberKinds,
-                bindingFlags: TypeMembers.DefaultBindingFlags & ~BindingFlags.Instance);
+                bindingFlags: IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Instance);
         }
     }
 }

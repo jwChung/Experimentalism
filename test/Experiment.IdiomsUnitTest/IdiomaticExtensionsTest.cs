@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.ToIdiomaticMembers();
 
-            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
+            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(MemberKinds.All, members.MemberKinds);
         }
@@ -25,7 +25,7 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.ToIdiomaticMembers(memberKinds);
 
-            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
+            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
         }
@@ -37,10 +37,10 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.ToIdiomaticInstanceMembers();
 
-            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
+            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(MemberKinds.All, members.MemberKinds);
-            Assert.Equal(TypeMembers.DefaultBindingFlags & ~BindingFlags.Static, members.BindingFlags);
+            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Static, members.BindingFlags);
         }
 
         [Fact]
@@ -51,10 +51,10 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.ToIdiomaticInstanceMembers(memberKinds);
 
-            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
+            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
-            Assert.Equal(TypeMembers.DefaultBindingFlags & ~BindingFlags.Static, members.BindingFlags);
+            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Static, members.BindingFlags);
         }
 
         [Fact]
@@ -64,10 +64,10 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.ToIdiomaticStaticMembers();
 
-            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
+            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(MemberKinds.All, members.MemberKinds);
-            Assert.Equal(TypeMembers.DefaultBindingFlags & ~BindingFlags.Instance, members.BindingFlags);
+            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Instance, members.BindingFlags);
         }
 
         [Fact]
@@ -78,10 +78,10 @@ namespace Jwc.Experiment.Idioms
 
             var actual = type.ToIdiomaticStaticMembers(memberKinds);
 
-            var members = Assert.IsAssignableFrom<TypeMembers>(actual);
+            var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
-            Assert.Equal(TypeMembers.DefaultBindingFlags & ~BindingFlags.Instance, members.BindingFlags);
+            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Instance, members.BindingFlags);
         }
     }
 }
