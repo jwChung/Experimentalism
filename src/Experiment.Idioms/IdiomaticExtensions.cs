@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Idioms
     public static class IdiomaticExtensions
     {
         /// <summary>
-        /// Converts a type to idiomatic members corresponding to member kinds.
+        /// Converts a type to idiomatic members.
         /// </summary>
         /// <param name="type">
         /// A type to enumerate the idiomatic members.
@@ -18,9 +18,9 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToMembers(this Type type)
+        public static IEnumerable<MemberInfo> ToIdiomaticMembers(this Type type)
         {
-            return ToMembers(type, MemberKinds.All);
+            return ToIdiomaticMembers(type, MemberKinds.All);
         }
 
         /// <summary>
@@ -35,14 +35,13 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToMembers(this Type type, MemberKinds memberKinds)
+        public static IEnumerable<MemberInfo> ToIdiomaticMembers(this Type type, MemberKinds memberKinds)
         {
             return new TypeMembers(type, memberKinds);
         }
 
         /// <summary>
-        /// Converts a type to idiomatic instance members corresponding to member
-        /// kinds.
+        /// Converts a type to idiomatic instance members.
         /// </summary>
         /// <param name="type">
         /// A type to enumerate the idiomatic instance members.
@@ -50,14 +49,14 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic instance members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToInstanceMembers(this Type type)
+        public static IEnumerable<MemberInfo> ToIdiomaticInstanceMembers(this Type type)
         {
-            return ToInstanceMembers(type, MemberKinds.All);
+            return ToIdiomaticInstanceMembers(type, MemberKinds.All);
         }
-        
+
         /// <summary>
-        /// Converts a type to idiomatic instance members corresponding to member
-        /// kinds.
+        /// Converts a type to idiomatic instance members corresponding to
+        /// member kinds.
         /// </summary>
         /// <param name="type">
         /// A type to enumerate the idiomatic instance members.
@@ -68,7 +67,7 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic instance members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToInstanceMembers(this Type type, MemberKinds memberKinds)
+        public static IEnumerable<MemberInfo> ToIdiomaticInstanceMembers(this Type type, MemberKinds memberKinds)
         {
             return new TypeMembers(
                 type,
@@ -77,8 +76,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Converts a type to idiomatic static members corresponding to member
-        /// kinds.
+        /// Converts a type to idiomatic static members.
         /// </summary>
         /// <param name="type">
         /// A type to enumerate the idiomatic static members.
@@ -86,9 +84,9 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic static members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToStaticMembers(this Type type)
+        public static IEnumerable<MemberInfo> ToIdiomaticStaticMembers(this Type type)
         {
-            return ToStaticMembers(type, MemberKinds.All);
+            return ToIdiomaticStaticMembers(type, MemberKinds.All);
         }
 
         /// <summary>
@@ -104,7 +102,7 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic static members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToStaticMembers(this Type type, MemberKinds memberKinds)
+        public static IEnumerable<MemberInfo> ToIdiomaticStaticMembers(this Type type, MemberKinds memberKinds)
         {
             return new TypeMembers(
                 type,

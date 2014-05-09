@@ -6,11 +6,11 @@ namespace Jwc.Experiment.Idioms
     public class IdiomaticExtensionsTest
     {
         [Fact]
-        public void TypeToMembersReturnsCorrectMembers()
+        public void TypeToIdiomaticMembersReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
 
-            var actual = type.ToMembers();
+            var actual = type.ToIdiomaticMembers();
 
             var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
@@ -18,12 +18,12 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeToMembersWithMemberKindsReturnsCorrectMembers()
+        public void TypeToIdiomaticMembersWithMemberKindsReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
             var memberKinds = MemberKinds.Event;
 
-            var actual = type.ToMembers(memberKinds);
+            var actual = type.ToIdiomaticMembers(memberKinds);
 
             var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
@@ -31,11 +31,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeToInstanceMembersReturnsCorrectMembers()
+        public void TypeToIdiomaticInstanceMembersReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
 
-            var actual = type.ToInstanceMembers();
+            var actual = type.ToIdiomaticInstanceMembers();
 
             var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
@@ -44,12 +44,12 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeToInstanceMembersWithMemberKindsReturnsCorrectMembers()
+        public void TypeToIdiomaticInstanceMembersWithMemberKindsReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
             var memberKinds = MemberKinds.Method;
 
-            var actual = type.ToInstanceMembers(memberKinds);
+            var actual = type.ToIdiomaticInstanceMembers(memberKinds);
 
             var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
@@ -58,11 +58,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeToStaticMembersReturnsCorrectMembers()
+        public void TypeToIdiomaticStaticMembersReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
 
-            var actual = type.ToStaticMembers();
+            var actual = type.ToIdiomaticStaticMembers();
 
             var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);
@@ -71,12 +71,12 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeToStaticMembersWithMemberKindsReturnsCorrectMembers()
+        public void TypeToIdiomaticStaticMembersWithMemberKindsReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
             var memberKinds = MemberKinds.Method;
 
-            var actual = type.ToStaticMembers(memberKinds);
+            var actual = type.ToIdiomaticStaticMembers(memberKinds);
 
             var members = Assert.IsAssignableFrom<TypeMembers>(actual);
             Assert.Equal(type, members.Type);

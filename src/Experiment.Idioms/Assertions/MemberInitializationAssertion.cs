@@ -117,7 +117,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// </param>
         public virtual void Verify(Type type)
         {
-            foreach (var member in type.ToMembers())
+            foreach (var member in type.ToIdiomaticMembers())
                 Verify(member);
         }
 

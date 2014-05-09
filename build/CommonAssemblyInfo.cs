@@ -14,14 +14,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.18.0")]
 
 /*
- * Version 0.18.0
- * 
- * - [NEW] Introduces the FixtureFactory class to centralize creating a fixture.
- * 
- * - [FIX-BREAKING-CHANGE] Renames AutoFixtureAdapter to AutoFixture.
+ * Version 0.18.1
  * 
  * - [FIX-BREAKING-CHANGE] Renames some extension methods to clarify.
- *      GetIdiomaticMembers         -> ToMembers
- *      GetIdiomaticInstanceMembers -> ToInstanceMembers
- *      GetIdiomaticStaticMembers   -> ToStaticMembers
+ *      ToMembers         -> ToIdiomaticMembers
+ *      ToInstanceMembers -> ToIdiomaticInstanceMembers
+ *      ToStaticMembers   -> ToIdiomaticStaticMembers
  */
