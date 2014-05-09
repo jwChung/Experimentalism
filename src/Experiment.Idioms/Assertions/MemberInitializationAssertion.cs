@@ -137,14 +137,15 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (parameterInfoElements.Any(p => MemberToParameterComparer.Equals(fieldInfoElement, p)))
                 return;
 
+            var messageFormat = @"No constructors with an argument that matches the field were found.
+Declaring type: {0}
+Reflected type: {1}
+Field         : {2}";
+
             throw new MemberInitializationException(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    "No constructors with an argument that matches the field were found.{0}" +
-                    "Declaring type: {1}{0}" +
-                    "Reflected type: {2}{0}" +
-                    "Field         : {3}",
-                    Environment.NewLine,
+                    messageFormat,
                     field.DeclaringType,
                     field.ReflectedType,
                     fieldInfoElement));
@@ -170,14 +171,15 @@ namespace Jwc.Experiment.Idioms.Assertions
                 if (memberElements.Any(m => ParameterToMemberComparer.Equals(parameterInfoElement, m)))
                     continue;
 
+                var messageFormat = @"The constructor parameter was not exposed through any fields or properties.
+Type       : {0}
+Constructor: {1}
+Parameter  : {2}";
+
                 throw new MemberInitializationException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        "The constructor parameter was not exposed through any fields or properties.{0}" +
-                        "Type       : {1}{0}" +
-                        "Constructor: {2}{0}" +
-                        "Parameter  : {3}",
-                        Environment.NewLine,
+                        messageFormat,
                         constructor.DeclaringType,
                         constructor,
                         parameterInfoElement.ParameterInfo));
@@ -200,14 +202,15 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (parameterInfoElements.Any(p => MemberToParameterComparer.Equals(propertyInfoElement, p)))
                 return;
 
+            var messageFormat = @"No constructors with an argument that matches the property were found.
+Declaring type: {0}
+Reflected type: {1}
+Property      : {2}";
+
             throw new MemberInitializationException(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    "No constructors with an argument that matches the property were found.{0}" +
-                    "Declaring type: {1}{0}" +
-                    "Reflected type: {2}{0}" +
-                    "Property      : {3}",
-                    Environment.NewLine,
+                    messageFormat,
                     property.DeclaringType,
                     property.ReflectedType,
                     propertyInfoElement));

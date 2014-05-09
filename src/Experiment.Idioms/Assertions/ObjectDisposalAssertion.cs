@@ -102,14 +102,14 @@ namespace Jwc.Experiment.Idioms.Assertions
                 throw;
             }
 
+            var messageFormat = @"After the owner of the method is disposed, the method does not throw ObjectDisposedException.
+Owner : {0}
+Method: {1}";
+
             throw new ObjectDisposalException(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    "After the owner of the method is disposed, the method does not throw " +
-                    "ObjectDisposedException.{0}" +
-                    "Owner : {1}{0}" +
-                    "Method: {2}",
-                    Environment.NewLine,
+                    messageFormat,
                     method.ReflectedType,
                     method));
         }
@@ -120,13 +120,14 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (disposable != null)
                 return disposable;
 
+            var messageFormat = @"The owner(object) of the method does not implement IDisposable.
+Owner : {0}
+Method: {1}";
+
             throw new ArgumentException(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    "The owner(object) of the method does not implement IDisposable.{0}" + 
-                    "Owner : {1}{0}" + 
-                    "Method: {2}",
-                    Environment.NewLine,
+                    messageFormat,
                     method.ReflectedType,
                     method));
         }

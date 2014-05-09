@@ -52,17 +52,20 @@ namespace Jwc.Experiment.Idioms.Assertions
                 if (RestrictiveReferences.Contains(reference))
                     continue;
 
+                var messageFormat = @"The reference of the assembly is not specified through the restrictive references.
+Reference: {1}
+Assembly : {2}
+Restrictive references:
+{3}";
+
                 throw new RestrictiveReferenceException(
                     string.Format(
-                    CultureInfo.CurrentCulture,
-                    "The reference of the assembly is not specified through the restrictive references.{0}" +
-                    "Reference: {1}{0}" +
-                    "Assembly : {2}{0}" +
-                    "Restrictive references:{0}{3}",
-                    Environment.NewLine,
-                    reference,
-                    assembly,
-                    GetRestrictiveReferenceString()));
+                        CultureInfo.CurrentCulture,
+                        messageFormat,
+                        Environment.NewLine,
+                        reference,
+                        assembly,
+                        GetRestrictiveReferenceString()));
             }
         }
 

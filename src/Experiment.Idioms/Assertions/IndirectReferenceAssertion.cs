@@ -128,13 +128,14 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (reference == null)
                 return;
 
+            var messageFormat = @"The indirect reference should not be exposed through the API.
+Indirect reference: {0}
+API(exposing)     : {1}";
+
             throw new IndirectReferenceException(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    "The indirect reference should not be exposed through the API.{0}" +
-                    "Indirect reference: {1}{0}" + 
-                    "API(exposing)     : {2}{0}",
-                    Environment.NewLine,
+                    messageFormat,
                     reference,
                     reflectionElement.Accept(new DisplayNameCollector()).Value.Single()));
         }
