@@ -30,7 +30,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("method");
 
             var enumerator = GetTestCommands(method).GetEnumerator();
-
+            
             Func<IMethodInfo, ITestCommand> exceptionCommandFunc;
 
             while (TryMoveNext(enumerator, out exceptionCommandFunc))

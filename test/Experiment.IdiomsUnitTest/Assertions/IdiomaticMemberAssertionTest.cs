@@ -60,7 +60,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void VerifyMethodMemberCallsVerifyEvent()
+        public void VerifyEventMemberCallsVerifyEvent()
         {
             var sut = new Mock<IdiomaticMemberAssertion> { CallBase = true }.Object;
             var @event = typeof(ClassWithMembers).GetEvents().First();

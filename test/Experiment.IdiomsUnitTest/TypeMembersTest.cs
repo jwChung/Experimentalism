@@ -268,7 +268,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotDeclaredOnlyAndMemberKindsIsEventAndMethod()
+        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotDeclaredOnlyAndMemberKindsIsEventOrMethod()
         {
             var sut = new TypeMembers(
                 typeof(SubClassWithMembers),
@@ -283,7 +283,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotDeclaredOnlyAndMemberKindsIsPropertyAndMethod()
+        public void SutEnumeratesCorrectMembersWhenBindingFlagsIsNotDeclaredOnlyAndMemberKindsIsPropertyOrMethod()
         {
             var sut = new TypeMembers(
                 typeof(SubClassWithMembers),
