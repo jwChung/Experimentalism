@@ -53,16 +53,15 @@ namespace Jwc.Experiment.Idioms.Assertions
                     continue;
 
                 var messageFormat = @"The reference of the assembly is not specified through the restrictive references.
-Reference: {1}
-Assembly : {2}
+Reference: {0}
+Assembly : {1}
 Restrictive references:
-{3}";
+{2}";
 
                 throw new RestrictiveReferenceException(
                     string.Format(
                         CultureInfo.CurrentCulture,
                         messageFormat,
-                        Environment.NewLine,
                         reference,
                         assembly,
                         GetRestrictiveReferenceString()));

@@ -26,8 +26,6 @@ namespace Jwc.Experiment.Idioms
         /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This case of default prameters is an exception to define only one constructor.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
         public IdiomaticMembers(Type type) : this(type, MemberKinds.Default)
         {
         }
@@ -37,8 +35,6 @@ namespace Jwc.Experiment.Idioms
         /// </summary>
         /// <param name="type">A type to enumerate members.</param>
         /// <param name="memberKinds">Member kinds to filter members.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This case of default prameters is an exception to define only one constructor.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
         public IdiomaticMembers(
             Type type,
             MemberKinds memberKinds)
