@@ -11,19 +11,27 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class MemberKindCollector : ReflectionVisitor<IEnumerable<MemberKinds>>
     {
-        private readonly IEnumerable<MemberKinds> _values;
+        private readonly IEnumerable<MemberKinds> _memberKinds;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberKindCollector"/> class.
+        /// Initializes a new instance of the <see cref="MemberKindCollector"/>
+        /// class.
         /// </summary>
         public MemberKindCollector()
             : this(new MemberKinds[0])
         {
         }
 
-        private MemberKindCollector(IEnumerable<MemberKinds> values)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberKindCollector"/>
+        /// class.
+        /// </summary>
+        /// <param name="memberKinds">
+        /// The initial member kinds.
+        /// </param>
+        public MemberKindCollector(IEnumerable<MemberKinds> memberKinds)
         {
-            _values = values;
+            _memberKinds = memberKinds;
         }
 
         /// <summary>
@@ -33,7 +41,7 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _values;
+                return _memberKinds;
             }
         }
 
@@ -54,7 +62,11 @@ namespace Jwc.Experiment.Idioms
             if (fieldInfoElement == null)
                 throw new ArgumentNullException("fieldInfoElement");
 
-            return new MemberKindCollector(Value.Concat(new[] { MemberKinds.Field }));
+            var memberKinds = fieldInfoElement.FieldInfo.IsStatic
+                ? MemberKinds.StaticField
+                : MemberKinds.Field;
+
+            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
 
         /// <summary>
@@ -74,7 +86,11 @@ namespace Jwc.Experiment.Idioms
             if (constructorInfoElement == null)
                 throw new ArgumentNullException("constructorInfoElement");
 
-            return new MemberKindCollector(Value.Concat(new[] { MemberKinds.Constructor }));
+            var memberKinds = constructorInfoElement.ConstructorInfo.IsStatic
+                ? MemberKinds.StaticConstructor
+                : MemberKinds.Constructor;
+
+            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
 
         /// <summary>
@@ -95,7 +111,7 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("propertyInfoElement");
 
             return new MemberKindCollector(
-                Value.Concat(new[] { GetPropertyType(propertyInfoElement.PropertyInfo) }));
+                Value.Concat(new[] { GetPropertyKinds(propertyInfoElement.PropertyInfo) }));
         }
 
         /// <summary>
@@ -115,7 +131,11 @@ namespace Jwc.Experiment.Idioms
             if (methodInfoElement == null)
                 throw new ArgumentNullException("methodInfoElement");
 
-            return new MemberKindCollector(Value.Concat(new[] { MemberKinds.Method }));
+            var memberKinds = methodInfoElement.MethodInfo.IsStatic
+                ? MemberKinds.StaticMethod
+                : MemberKinds.Method;
+
+            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
 
         /// <summary>
@@ -135,18 +155,34 @@ namespace Jwc.Experiment.Idioms
             if (eventInfoElement == null)
                 throw new ArgumentNullException("eventInfoElement");
 
-            return new MemberKindCollector(Value.Concat(new[] { MemberKinds.Event }));
+            var memberKinds = eventInfoElement.EventInfo.GetAddMethod(true).IsStatic
+                ? MemberKinds.StaticEvent
+                : MemberKinds.Event;
+
+            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
 
-        private static MemberKinds GetPropertyType(PropertyInfo property)
+        private static MemberKinds GetPropertyKinds(PropertyInfo property)
         {
             var memberKinds = MemberKinds.None;
 
-            if (property.GetGetMethod(true) != null)
-                memberKinds |= MemberKinds.GetProperty;
+            var getMethod = property.GetGetMethod(true);
+            if (getMethod != null)
+            {
+                if (getMethod.IsStatic)
+                    memberKinds |= MemberKinds.StaticGetProperty;
+                else
+                    memberKinds |= MemberKinds.GetProperty;
+            }
 
-            if (property.GetSetMethod(true) != null)
-                memberKinds |= MemberKinds.SetProperty;
+            var setMethod = property.GetSetMethod(true);
+            if (setMethod != null)
+            {
+                if (setMethod.IsStatic)
+                    memberKinds |= MemberKinds.StaticSetProperty;
+                else
+                    memberKinds |= MemberKinds.SetProperty;
+            }
 
             return memberKinds;
         }

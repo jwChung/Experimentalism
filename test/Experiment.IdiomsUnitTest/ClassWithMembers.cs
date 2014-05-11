@@ -14,6 +14,10 @@ namespace Jwc.Experiment.Idioms
         private object PrivateField;
 #pragma warning restore 169
 
+        static ClassWithMembers()
+        {
+        }
+
         public ClassWithMembers()
         {
         }
@@ -44,6 +48,21 @@ namespace Jwc.Experiment.Idioms
             set;
         }
 
+        public static object StaticReadOnlyProperty
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public static object StaticWriteOnlyProperty
+        {
+            set
+            {
+            }
+        }
+
         public object PublicProperty
         {
             get;
@@ -64,7 +83,6 @@ namespace Jwc.Experiment.Idioms
             {
             }
         }
-
 
         public object PrivateSetProperty
         {
@@ -148,6 +166,7 @@ namespace Jwc.Experiment.Idioms
         }
 
 #pragma warning disable 67
+        public static event EventHandler StaticEvent;
         public event EventHandler PublicEvent;
         protected internal event EventHandler ProtectedInternalEvent;
         protected event EventHandler ProtectedEvent;
