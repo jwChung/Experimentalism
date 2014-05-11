@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Moq;
 using Ploeh.Albedo;
+using Ploeh.Albedo.Refraction;
 using Ploeh.AutoFixture;
 using Xunit;
 
@@ -252,16 +253,13 @@ namespace Jwc.Experiment.Idioms.Assertions
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
 
             var type = typeof(ClassWithMembers);
-            
-            var expected = new IdiomaticMembers(
-                type,
-                accessibilities: Accessibilities.Protected | Accessibilities.Public);
+            var expected = GetExposedMembers(type);
 
             // Exercise system
             sut.Verify(type);
 
             // Verify outcome
-            Assert.Equal(expected, members);
+            Assert.Equal(expected.OrderBy(m => m.Name), members.OrderBy(m => m.Name));
         }
 
         [Fact]
@@ -313,13 +311,33 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
         }
 
-        private static bool IsExposed(Type type)
+        private static IEnumerable<MemberInfo> GetExposedMembers(Type type)
         {
-            var accessibilityCollector = new AccessibilityCollector();
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
+                BindingFlags.Static | BindingFlags.Instance;
 
-            return (type.ToElement().Accept(accessibilityCollector).Value.Single()
-                & (Accessibilities.Public | Accessibilities.Protected))
-                != Accessibilities.None;
+            var accessors = type.GetProperties(bindingFlags)
+                .SelectMany(p => p.GetAccessors(true));
+
+            var eventMethods = type.GetEvents(bindingFlags)
+                .SelectMany(e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
+
+            return type.GetMembers(bindingFlags)
+                .Except(accessors)
+                .Except(eventMethods)
+                .Where(m => !(m is Type))
+                .Where(IsExposed);
+        }
+
+        private static bool IsExposed(MemberInfo member)
+        {
+            return (GetAccessibilities(member) & Accessibilities.Exposed) != Accessibilities.None;
+        }
+
+        private static Accessibilities GetAccessibilities(MemberInfo member)
+        {
+            return member.ToReflectionElement().Accept(new AccessibilityCollector()).Value.Single();
         }
 
         private class ClassForIndirectReference : IdiomaticMemberAssertion

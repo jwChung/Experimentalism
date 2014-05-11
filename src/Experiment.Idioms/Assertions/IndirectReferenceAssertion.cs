@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
+using Ploeh.Albedo.Refraction;
 
 namespace Jwc.Experiment.Idioms.Assertions
 {
@@ -64,9 +65,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             EnsureNotExpose(type.ToElement());
 
-            var members = new IdiomaticMembers(type, accessibilities: Accessibilities.Exposed);
-
-            foreach (var member in members)
+            foreach (var member in GetExposedMembers(type))
                 Verify(member);
         }
 
@@ -140,9 +139,28 @@ API(exposing)     : {1}";
                     reflectionElement.Accept(new DisplayNameCollector()).Value.Single()));
         }
 
-        private bool IsExposed(Type type)
+        private IEnumerable<MemberInfo> GetExposedMembers(Type type)
         {
-            return (GetAccessibilities(type) & Accessibilities.Exposed) != Accessibilities.None;
+            const BindingFlags bindingFlags =
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
+                BindingFlags.Static | BindingFlags.Instance;
+
+            var accessors = type.GetProperties(bindingFlags)
+                .SelectMany(p => p.GetAccessors(true));
+
+            var eventMethods = type.GetEvents(bindingFlags)
+                .SelectMany(e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
+
+            return type.GetMembers(bindingFlags)
+                .Except(accessors)
+                .Except(eventMethods)
+                .Where(m => !(m is Type))
+                .Where(IsExposed);
+        }
+
+        private bool IsExposed(MemberInfo member)
+        {
+            return (GetAccessibilities(member) & Accessibilities.Exposed) != Accessibilities.None;
         }
 
         private IEnumerable<Assembly> GetReferences(IReflectionElement reflectionElement)
@@ -150,9 +168,9 @@ API(exposing)     : {1}";
             return reflectionElement.Accept(_memberReferenceCollector).Value;
         }
 
-        private Accessibilities GetAccessibilities(Type type)
+        private Accessibilities GetAccessibilities(MemberInfo member)
         {
-            return type.ToElement().Accept(_accessibilityCollector).Value.Single();
+            return member.ToReflectionElement().Accept(_accessibilityCollector).Value.Single();
         }
     }
 }
