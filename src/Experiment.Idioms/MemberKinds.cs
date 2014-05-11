@@ -61,7 +61,7 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// The static property
         /// </summary>
-        StaticProperty = GetProperty | SetProperty,
+        StaticProperty = StaticGetProperty | StaticSetProperty,
 
         /// <summary>
         /// The static get property

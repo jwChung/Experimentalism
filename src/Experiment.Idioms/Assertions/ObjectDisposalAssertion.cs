@@ -49,7 +49,8 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// </param>
         public void Verify(Type type)
         {
-            var members = type.ToIdiomaticInstanceMembers();
+            var members = new IdiomaticMembers(type, MemberKinds.InstanceMembers);
+
             foreach (var member in members)
                 Verify(member);
         }
