@@ -67,17 +67,6 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets a value indicating the accessibilities.
-        /// </summary>
-        public Accessibilities Accessibilities
-        {
-            get
-            {
-                return _accessibilities;
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating the member kinds to be enumerated.
         /// </summary>
         public MemberKinds MemberKinds
@@ -144,7 +133,7 @@ namespace Jwc.Experiment.Idioms
         private bool IsSpecifiedByAccessibilites(MemberInfo member)
         {
             var accessibilities = GetAccessibilities(member);
-            return (accessibilities & Accessibilities) != Accessibilities.None;
+            return (accessibilities & _accessibilities) != Accessibilities.None;
         }
 
         private Accessibilities GetAccessibilities(MemberInfo member)

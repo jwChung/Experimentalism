@@ -68,25 +68,6 @@ namespace Jwc.Experiment.Idioms
         }
         
         [Fact]
-        public void AccessibilitiesIsCorrect()
-        {
-            var accessibilities = Accessibilities.Protected;
-            var sut = new IdiomaticMembers(GetType(), accessibilities: accessibilities);
-
-            var actual = sut.Accessibilities;
-
-            Assert.Equal(accessibilities, actual);
-        }
-
-        [Fact]
-        public void AccessibilitiesReturnsCorrectDefaultValue()
-        {
-            var sut = new IdiomaticMembers(GetType());
-            var actual = sut.Accessibilities;
-            Assert.Equal(Accessibilities.Public, actual);
-        }
-
-        [Fact]
         public void BindingFalgsIsCorrect()
         {
             var bindingFlags = BindingFlags.IgnoreReturn;
