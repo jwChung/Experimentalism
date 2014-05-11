@@ -142,10 +142,10 @@ namespace Jwc.Experiment.Idioms
         {
             var memberKinds = MemberKinds.None;
 
-            if (property.GetGetMethod() != null)
+            if (property.GetGetMethod(true) != null)
                 memberKinds |= MemberKinds.GetProperty;
 
-            if (property.GetSetMethod() != null)
+            if (property.GetSetMethod(true) != null)
                 memberKinds |= MemberKinds.SetProperty;
 
             return memberKinds;

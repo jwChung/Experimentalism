@@ -37,7 +37,6 @@ namespace Jwc.Experiment.Idioms
         /// <param name="memberKinds">Member kinds to filter members.</param>
         /// <param name="accessibilities">The accessibilities to filter members.</param>
         /// <param name="bindingFlags">The binding flags to filter members.</param>
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This case of default prameters is an exception to define only one constructor.")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
         public IdiomaticMembers(
@@ -137,12 +136,15 @@ namespace Jwc.Experiment.Idioms
 
         private bool IsSpecifiedByMemberKind(MemberInfo member)
         {
-            return (GetMemberKinds(member) & MemberKinds) != MemberKinds.None;
+            var memberKinds = (GetMemberKinds(member) & MemberKinds);
+            var isSpecifiedByMemberKind = memberKinds != MemberKinds.None;
+            return isSpecifiedByMemberKind;
         }
 
         private bool IsSpecifiedByAccessibilites(MemberInfo member)
         {
-            return (GetAccessibilities(member) & Accessibilities) != Accessibilities.None;
+            var accessibilities = GetAccessibilities(member);
+            return (accessibilities & Accessibilities) != Accessibilities.None;
         }
 
         private Accessibilities GetAccessibilities(MemberInfo member)
@@ -152,7 +154,8 @@ namespace Jwc.Experiment.Idioms
 
         private static MemberKinds GetMemberKinds(MemberInfo member)
         {
-            return member.ToReflectionElement().Accept(_memberKindCollector).Value.Single();
+            var memberKinds = member.ToReflectionElement().Accept(_memberKindCollector).Value.Single();
+            return memberKinds;
         }
     }
 }

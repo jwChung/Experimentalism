@@ -111,7 +111,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutEnumeratesAllKindsOfMemberWhenMemberKindsIsDefault()
+        public void SutEnumeratesAllKindsOfMembersWhenMemberKindsIsDefault()
         {
             var sut = new IdiomaticMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
 
@@ -144,7 +144,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void SutDoesNotEnumeratesAnyAccessors()
+        public void SutDoesNotEnumerateAnyAccessors()
         {
             var sut = new IdiomaticMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);
 

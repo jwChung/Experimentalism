@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Ploeh.Albedo;
 using Xunit;
 
@@ -24,7 +25,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitFieldInfoElementCollectsCorrectMemberTypes()
+        public void VisitFieldInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var constructorInfoElement = typeof(ClassWithMembers).GetConstructors().First().ToElement();
@@ -44,7 +45,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitConstructorInfoElementCollectsCorrectMemberTypes()
+        public void VisitConstructorInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
@@ -64,7 +65,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitGetPropertyInfoElementCollectsCorrectMemberTypes()
+        public void VisitGetPropertyInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
@@ -78,12 +79,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitSetPropertyInfoElementCollectsCorrectMemberTypes()
+        public void VisitSetPropertyInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
             var setPropertyInfoElement = typeof(ClassWithMembers).GetProperties()
-                .First(p => p.GetGetMethod() == null).ToElement();
+                .First(p => p.GetGetMethod(true) == null)
+                .ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(setPropertyInfoElement);
 
@@ -92,7 +94,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitGetSetPropertyInfoElementCollectsCorrectMemberTypes()
+        public void VisitGetSetPropertyInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
@@ -113,7 +115,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitMethodInfoElementCollectsCorrectMemberTypes()
+        public void VisitMethodInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
@@ -133,7 +135,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void VisitEventInfoElementCollectsCorrectMemberTypes()
+        public void VisitEventInfoElementCollectsCorrectMemberKind()
         {
             var sut = new MemberKindCollector();
             var fieldInfoElement = typeof(ClassWithMembers).GetFields().First().ToElement();
@@ -150,6 +152,21 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new MemberKindCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitNonPublicPropertyInfoElementCollectsCorrectMemberKind()
+        {
+            var sut = new MemberKindCollector();
+            var propertyInfoElement = typeof(ClassWithMembers)
+                .GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                .First(p => p.GetGetMethod(true) != null && p.GetSetMethod(true) != null)
+                .ToElement();
+
+            var actual = sut.Visit(propertyInfoElement);
+
+            Assert.NotSame(sut, actual);
+            Assert.Equal(new[] { MemberKinds.Property }, actual.Value);
         }
     }
 }

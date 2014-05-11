@@ -22,5 +22,8 @@ using System.Runtime.InteropServices;
  *      ToStaticMembers   -> ToIdiomaticStaticMembers
  *      
  * - [FIX-BREAKING-CHANGE] Renames `TypeMembers` to `IdiomaticMembers` to
- *   clarify
+ *   clarify.
+ *   
+ * - [FIX] Fixes considering private accessors of a property in
+ *   `MemberKindCollector`.
  */

@@ -58,6 +58,14 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
+        public object WriteOnlyProperty
+        {
+            set
+            {
+            }
+        }
+
+
         public object PrivateSetProperty
         {
             get;
@@ -123,7 +131,7 @@ namespace Jwc.Experiment.Idioms
         {
         }
 
-        protected internal static void ProtectedInternalMStaticMethod()
+        protected internal static void ProtectedInternalStaticMethod()
         {
         }
 
