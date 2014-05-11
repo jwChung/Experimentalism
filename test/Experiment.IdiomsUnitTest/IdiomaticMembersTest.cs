@@ -68,30 +68,6 @@ namespace Jwc.Experiment.Idioms
         }
         
         [Fact]
-        public void BindingFalgsIsCorrect()
-        {
-            var bindingFlags = BindingFlags.IgnoreReturn;
-            var sut = new IdiomaticMembers(GetType(), bindingFlags: bindingFlags);
-
-            var actual = sut.BindingFlags;
-
-            Assert.Equal(bindingFlags, actual);
-        }
-
-        [Fact]
-        public void BindingFalgsReturnsCorrectValue()
-        {
-            var sut = new IdiomaticMembers(GetType());
-            BindingFlags bindingFlags =
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
-            BindingFlags.Static | BindingFlags.Instance;
-
-            var actual = sut.BindingFlags;
-
-            Assert.Equal(bindingFlags, actual);
-        }
-
-        [Fact]
         public void SutEnumeratesAllKindsOfMembersWhenMemberKindsIsDefault()
         {
             var sut = new IdiomaticMembers(typeof(ClassWithMembers), accessibilities: Accessibilities.All);

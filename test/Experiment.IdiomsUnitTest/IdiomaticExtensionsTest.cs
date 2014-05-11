@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Xunit;
+﻿using Xunit;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -40,7 +39,6 @@ namespace Jwc.Experiment.Idioms
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(MemberKinds.All, members.MemberKinds);
-            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Static, members.BindingFlags);
         }
 
         [Fact]
@@ -54,7 +52,6 @@ namespace Jwc.Experiment.Idioms
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
-            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Static, members.BindingFlags);
         }
 
         [Fact]
@@ -67,7 +64,6 @@ namespace Jwc.Experiment.Idioms
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(MemberKinds.All, members.MemberKinds);
-            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Instance, members.BindingFlags);
         }
 
         [Fact]
@@ -81,7 +77,6 @@ namespace Jwc.Experiment.Idioms
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
             Assert.Equal(memberKinds, members.MemberKinds);
-            Assert.Equal(IdiomaticMembers.DefaultBindingFlags & ~BindingFlags.Instance, members.BindingFlags);
         }
     }
 }

@@ -78,18 +78,6 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets value indicating the binding flags.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "This word is desiable to express the meaning.")]
-        public BindingFlags BindingFlags
-        {
-            get
-            {
-                return _bindingFlags;
-            }
-        }
-
-        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
@@ -98,7 +86,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            return Type.GetMembers(BindingFlags)
+            return Type.GetMembers(_bindingFlags)
                 .Except(GetAccessors())
                 .Except(GetEventMethods())
                 .Where(m => !(m is Type))
@@ -114,12 +102,12 @@ namespace Jwc.Experiment.Idioms
 
         private IEnumerable<MethodInfo> GetAccessors()
         {
-            return Type.GetProperties(BindingFlags).SelectMany(p => p.GetAccessors(true));
+            return Type.GetProperties(_bindingFlags).SelectMany(p => p.GetAccessors(true));
         }
 
         private IEnumerable<MethodInfo> GetEventMethods()
         {
-            return Type.GetEvents(BindingFlags).SelectMany(
+            return Type.GetEvents(_bindingFlags).SelectMany(
                 e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
         }
 
