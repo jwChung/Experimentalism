@@ -24,6 +24,8 @@ using System.Runtime.InteropServices;
  * - [FIX-BREAKING-CHANGE] Renames `TypeMembers` to `IdiomaticMembers` to
  *   clarify.
  *   
- * - [FIX] Fixes considering private accessors of a property in
+ * - [FIX] Fixes the error for private accessors of a property in
  *   `MemberKindCollector`.
+ *   
+ * - [FIX-BREAKING-CHANGE] Simplifies the constructor of `IdiomaticMembers`.
  */
