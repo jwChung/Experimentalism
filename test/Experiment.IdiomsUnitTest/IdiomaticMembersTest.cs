@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void MemberKindsIsCorrectWhenInitializedByGreedyCtor()
         {
-            var memberKinds = MemberKinds.Method;
+            var memberKinds = MemberKinds.InstanceMethod;
             var sut = new IdiomaticMembers(GetType(), memberKinds);
 
             var actual = sut.MemberKinds;
@@ -137,33 +137,37 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutEnumeratesOnlyPropertiesWhenMemberKindsIsProperty()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Property);
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.InstanceProperty);
             var actual = sut.ToArray();
-            Assert.True(actual.All(m => (GetMemberKinds(m) & MemberKinds.Property) != MemberKinds.None), "Property.");
+            Assert.True(
+                actual.All(m => (GetMemberKinds(m) & MemberKinds.InstanceProperty) != MemberKinds.None),
+                "Property.");
         }
 
         [Fact]
         public void SutEnumeratesCorrectMembersWhenMemberKindsIsConstructorOrMethod()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.Constructor | MemberKinds.Method);
+            var sut = new IdiomaticMembers(
+                typeof(ClassWithMembers),
+                MemberKinds.InstanceConstructor | MemberKinds.InstanceMethod);
 
             var actual = sut.ToArray();
 
             var result = actual.All(
-                m => GetMemberKinds(m) == MemberKinds.Constructor
-                    || GetMemberKinds(m) == MemberKinds.Method);
+                m => GetMemberKinds(m) == MemberKinds.InstanceConstructor
+                    || GetMemberKinds(m) == MemberKinds.InstanceMethod);
             Assert.True(result, "Constructor or Method.");
         }
 
         [Fact]
         public void SutEnumeratesWritablePropertiesWhenMemberKindsIsGetProperty()
         {
-            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.GetProperty);
+            var sut = new IdiomaticMembers(typeof(ClassWithMembers), MemberKinds.InstanceGetProperty);
 
             var actual = sut.ToArray();
 
-            Assert.True(actual.Any(m => GetMemberKinds(m) == MemberKinds.GetProperty), "GetProperty.");
-            Assert.True(actual.Any(m => GetMemberKinds(m) == MemberKinds.Property), "Property.");
+            Assert.True(actual.Any(m => GetMemberKinds(m) == MemberKinds.InstanceGetProperty), "GetProperty.");
+            Assert.True(actual.Any(m => GetMemberKinds(m) == MemberKinds.InstanceProperty), "Property.");
         }
         
         [Fact]

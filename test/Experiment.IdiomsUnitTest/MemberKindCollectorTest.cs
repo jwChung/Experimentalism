@@ -27,7 +27,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void ValueIsCorrectWhenInitializedWithMemberKinds()
         {
-            var memberKinds = new[] { MemberKinds.Property, MemberKinds.StaticField};
+            var memberKinds = new[] { MemberKinds.InstanceProperty, MemberKinds.StaticField};
             var sut = new MemberKindCollector(memberKinds);
 
             var actual = sut.Value;
@@ -45,7 +45,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(constructorInfoElement).Visit(fieldInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Constructor, MemberKinds.Field }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceConstructor, MemberKinds.InstanceField }, actual.Value);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(constructorInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.Constructor }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.InstanceConstructor }, actual.Value);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(getPropertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.GetProperty }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.InstanceGetProperty }, actual.Value);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(setPropertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.SetProperty }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.InstanceSetProperty }, actual.Value);
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(getSetPropertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.Property }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.InstanceProperty }, actual.Value);
         }
 
         [Fact]
@@ -140,7 +140,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(methodInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.Method }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.InstanceMethod }, actual.Value);
         }
 
         [Fact]
@@ -162,7 +162,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(fieldInfoElement).Visit(eventInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.Event }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.InstanceEvent }, actual.Value);
         }
 
         [Fact]
@@ -184,7 +184,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(propertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Property }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceProperty }, actual.Value);
         }
 
         [Fact]
@@ -218,7 +218,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitStaticGetPropertyInfoElementCollectsCorrectMemberKind()
         {
-            var sut = new MemberKindCollector(new[] { MemberKinds.Field });
+            var sut = new MemberKindCollector(new[] { MemberKinds.InstanceField });
             var getPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .First(p => p.GetSetMethod() == null).ToElement();
@@ -226,13 +226,13 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(getPropertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.StaticGetProperty }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.StaticGetProperty }, actual.Value);
         }
 
         [Fact]
         public void VisitStaticSetPropertyInfoElementCollectsCorrectMemberKind()
         {
-            var sut = new MemberKindCollector(new[] { MemberKinds.Field });
+            var sut = new MemberKindCollector(new[] { MemberKinds.InstanceField });
             var setPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .First(p => p.GetGetMethod() == null).ToElement();
@@ -240,13 +240,13 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(setPropertyInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.StaticSetProperty }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.StaticSetProperty }, actual.Value);
         }
 
         [Fact]
         public void VisitStaticMethodInfoElementCollectsCorrectMemberKind()
         {
-            var sut = new MemberKindCollector(new[] { MemberKinds.Field });
+            var sut = new MemberKindCollector(new[] { MemberKinds.InstanceField });
             var methodInfoElement = typeof(ClassWithMembers)
                 .GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .First().ToElement();
@@ -254,13 +254,13 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(methodInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.StaticMethod }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.StaticMethod }, actual.Value);
         }
         
         [Fact]
         public void VisitStaticEventInfoElementCollectsCorrectMemberKind()
         {
-            var sut = new MemberKindCollector(new[] { MemberKinds.Field });
+            var sut = new MemberKindCollector(new[] { MemberKinds.InstanceField });
             var eventInfoElement = typeof(ClassWithMembers)
                 .GetEvents(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
                 .First().ToElement();
@@ -268,7 +268,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(eventInfoElement);
 
             Assert.NotSame(sut, actual);
-            Assert.Equal(new[] { MemberKinds.Field, MemberKinds.StaticEvent }, actual.Value);
+            Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.StaticEvent }, actual.Value);
         }
     }
 }

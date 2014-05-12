@@ -20,7 +20,7 @@ namespace Jwc.Experiment.Idioms
         public void TypeToIdiomaticMembersWithMemberKindsReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
-            var memberKinds = MemberKinds.Event;
+            var memberKinds = MemberKinds.InstanceEvent;
 
             var actual = type.ToIdiomaticMembers(memberKinds);
 

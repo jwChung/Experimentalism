@@ -64,7 +64,7 @@ namespace Jwc.Experiment.Idioms
 
             var memberKinds = fieldInfoElement.FieldInfo.IsStatic
                 ? MemberKinds.StaticField
-                : MemberKinds.Field;
+                : MemberKinds.InstanceField;
 
             return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
@@ -88,7 +88,7 @@ namespace Jwc.Experiment.Idioms
 
             var memberKinds = constructorInfoElement.ConstructorInfo.IsStatic
                 ? MemberKinds.StaticConstructor
-                : MemberKinds.Constructor;
+                : MemberKinds.InstanceConstructor;
 
             return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
@@ -133,7 +133,7 @@ namespace Jwc.Experiment.Idioms
 
             var memberKinds = methodInfoElement.MethodInfo.IsStatic
                 ? MemberKinds.StaticMethod
-                : MemberKinds.Method;
+                : MemberKinds.InstanceMethod;
 
             return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
@@ -157,7 +157,7 @@ namespace Jwc.Experiment.Idioms
 
             var memberKinds = eventInfoElement.EventInfo.GetAddMethod(true).IsStatic
                 ? MemberKinds.StaticEvent
-                : MemberKinds.Event;
+                : MemberKinds.InstanceEvent;
 
             return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
         }
@@ -172,7 +172,7 @@ namespace Jwc.Experiment.Idioms
                 if (getMethod.IsStatic)
                     memberKinds |= MemberKinds.StaticGetProperty;
                 else
-                    memberKinds |= MemberKinds.GetProperty;
+                    memberKinds |= MemberKinds.InstanceGetProperty;
             }
 
             var setMethod = property.GetSetMethod(true);
@@ -181,7 +181,7 @@ namespace Jwc.Experiment.Idioms
                 if (setMethod.IsStatic)
                     memberKinds |= MemberKinds.StaticSetProperty;
                 else
-                    memberKinds |= MemberKinds.SetProperty;
+                    memberKinds |= MemberKinds.InstanceSetProperty;
             }
 
             return memberKinds;

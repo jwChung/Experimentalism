@@ -16,37 +16,37 @@ namespace Jwc.Experiment.Idioms
         /// <summary>
         /// The instance field
         /// </summary>
-        Field = 1,
+        InstanceField = 1,
 
         /// <summary>
         /// The instance constructor
         /// </summary>
-        Constructor = 2,
-
-        /// <summary>
-        /// The instance property
-        /// </summary>
-        Property = GetProperty | SetProperty,
+        InstanceConstructor = 2,
 
         /// <summary>
         /// The instance get property
         /// </summary>
-        GetProperty = 4,
+        InstanceGetProperty = 4,
 
         /// <summary>
         /// The instance set property
         /// </summary>
-        SetProperty = 8,
+        InstanceSetProperty = 8,
+
+        /// <summary>
+        /// The instance property
+        /// </summary>
+        InstanceProperty = InstanceGetProperty | InstanceSetProperty,
 
         /// <summary>
         /// The instance method
         /// </summary>
-        Method = 0x10,
+        InstanceMethod = 0x10,
 
         /// <summary>
         /// The instance event
         /// </summary>
-        Event = 0x20,
+        InstanceEvent = 0x20,
 
         /// <summary>
         /// The static field
@@ -59,11 +59,6 @@ namespace Jwc.Experiment.Idioms
         StaticConstructor = 0x80,
 
         /// <summary>
-        /// The static property
-        /// </summary>
-        StaticProperty = StaticGetProperty | StaticSetProperty,
-
-        /// <summary>
         /// The static get property
         /// </summary>
         StaticGetProperty = 0x100,
@@ -72,6 +67,11 @@ namespace Jwc.Experiment.Idioms
         /// The static set property
         /// </summary>
         StaticSetProperty = 0x200,
+
+        /// <summary>
+        /// The static property
+        /// </summary>
+        StaticProperty = StaticGetProperty | StaticSetProperty,
 
         /// <summary>
         /// The static method
@@ -84,19 +84,54 @@ namespace Jwc.Experiment.Idioms
         StaticEvent = 0x800,
 
         /// <summary>
+        /// The field
+        /// </summary>
+        Field = InstanceField | StaticField,
+
+        /// <summary>
+        /// The constructor
+        /// </summary>
+        Constructor = InstanceConstructor | StaticConstructor,
+
+        /// <summary>
+        /// The get property
+        /// </summary>
+        GetProperty = InstanceGetProperty | StaticGetProperty,
+
+        /// <summary>
+        /// The set property
+        /// </summary>
+        SetProperty = InstanceSetProperty | StaticSetProperty,
+
+        /// <summary>
+        /// The property
+        /// </summary>
+        Property = InstanceProperty | StaticProperty,
+
+        /// <summary>
+        /// The method
+        /// </summary>
+        Method = InstanceMethod | StaticMethod,
+
+        /// <summary>
+        /// The event
+        /// </summary>
+        Event = InstanceEvent | StaticEvent,
+
+        /// <summary>
+        /// The instance members
+        /// </summary>
+        Instance = InstanceField | InstanceConstructor | InstanceProperty | InstanceMethod | InstanceEvent,
+
+        /// <summary>
+        /// The instance members
+        /// </summary>
+        Static = StaticField | StaticConstructor | StaticProperty | StaticMethod | StaticEvent,
+
+        /// <summary>
         /// All
         /// </summary>
-        All = InstanceMembers | StaticMembers,
-
-        /// <summary>
-        /// The instance members
-        /// </summary>
-        InstanceMembers = Field | Constructor | Property | Method | Event,
-
-        /// <summary>
-        /// The instance members
-        /// </summary>
-        StaticMembers = StaticField | StaticConstructor | StaticProperty | StaticMethod | StaticEvent,
+        All = Instance | Static,
 
         /// <summary>
         /// The default
