@@ -3,13 +3,13 @@
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represents kinds of idiomatic member.
+    /// Represents kinds of idiomatic members.
     /// </summary>
     [Flags]
     public enum MemberKinds
     {
         /// <summary>
-        /// The none
+        /// None
         /// </summary>
         None = 0,
 
@@ -119,22 +119,22 @@ namespace Jwc.Experiment.Idioms
         Event = InstanceEvent | StaticEvent,
 
         /// <summary>
-        /// The instance members
+        /// All the instance members
         /// </summary>
         Instance = InstanceField | InstanceConstructor | InstanceProperty | InstanceMethod | InstanceEvent,
 
         /// <summary>
-        /// The instance members
+        /// All the static members
         /// </summary>
         Static = StaticField | StaticConstructor | StaticProperty | StaticMethod | StaticEvent,
 
         /// <summary>
-        /// All
+        /// All the members
         /// </summary>
         All = Instance | Static,
 
         /// <summary>
-        /// The default
+        /// The default members (All)
         /// </summary>
         Default = All
     }
