@@ -45,8 +45,8 @@ namespace Jwc.Experiment.Idioms
         {
             var sut = new AccessibilityCollector();
             var types = typeof(object).Assembly.GetTypes();
-            var typeElement1 = types.Where(x => x.IsPublic).First().ToElement();
-            var typeElement2 = types.Where(x => x.IsNotPublic).First().ToElement();
+            var typeElement1 = types.First(x => x.IsPublic).ToElement();
+            var typeElement2 = types.First(x => x.IsNotPublic).ToElement();
 
             var actual = sut.Visit(typeElement1).Visit(typeElement2);
 
@@ -90,8 +90,8 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Instance | BindingFlags.Static;
             var fieldInfos = typeof(object).Assembly
                 .GetTypes().SelectMany(t => t.GetFields(bindingFlags)).ToArray();
-            var fieldInfoElement1 = fieldInfos.Where(x => x.IsPublic).First().ToElement();
-            var fieldInfoElement2 = fieldInfos.Where(x => x.IsPrivate).First().ToElement();
+            var fieldInfoElement1 = fieldInfos.First(x => x.IsPublic).ToElement();
+            var fieldInfoElement2 = fieldInfos.First(x => x.IsPrivate).ToElement();
 
             var actual = sut.Visit(fieldInfoElement1).Visit(fieldInfoElement2);
 
@@ -135,8 +135,8 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfos = typeof(object).Assembly
                 .GetTypes().SelectMany(t => t.GetConstructors(bindingFlags)).ToArray();
-            var constructorInfoElement1 = constructorInfos.Where(x => x.IsFamily).First().ToElement();
-            var constructorInfoElement2 = constructorInfos.Where(x => x.IsPrivate).First().ToElement();
+            var constructorInfoElement1 = constructorInfos.First(x => x.IsFamily).ToElement();
+            var constructorInfoElement2 = constructorInfos.First(x => x.IsPrivate).ToElement();
 
             var actual = sut.Visit(constructorInfoElement1).Visit(constructorInfoElement2);
 
@@ -180,8 +180,8 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfos = typeof(object).Assembly
                 .GetTypes().SelectMany(t => t.GetMethods(bindingFlags)).ToArray();
-            var methodInfoElement1 = constructorInfos.Where(x => x.IsFamily).First().ToElement();
-            var methodInfoElement2 = constructorInfos.Where(x => x.IsFamilyOrAssembly).First().ToElement();
+            var methodInfoElement1 = constructorInfos.First(x => x.IsFamily).ToElement();
+            var methodInfoElement2 = constructorInfos.First(x => x.IsFamilyOrAssembly).ToElement();
 
             var actual = sut.Visit(methodInfoElement1).Visit(methodInfoElement2);
 
@@ -226,8 +226,8 @@ namespace Jwc.Experiment.Idioms
                 BindingFlags.Instance | BindingFlags.Static;
             var eventInfos = typeof(object).Assembly
                 .GetTypes().SelectMany(t => t.GetEvents(bindingFlags)).ToArray();
-            var eventInfoElement1 = eventInfos.Where(x => x.GetAddMethod(true).IsFamily).First().ToElement();
-            var eventInfoElement2 = eventInfos.Where(x => x.GetRemoveMethod(true).IsPublic).First().ToElement();
+            var eventInfoElement1 = eventInfos.First(x => x.GetAddMethod(true).IsFamily).ToElement();
+            var eventInfoElement2 = eventInfos.First(x => x.GetRemoveMethod(true).IsPublic).ToElement();
 
             var actual = sut.Visit(eventInfoElement1).Visit(eventInfoElement2);
 

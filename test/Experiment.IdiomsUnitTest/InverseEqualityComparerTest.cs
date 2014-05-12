@@ -54,7 +54,6 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void EqualsReturnsCorrectResultFromGivenComparer()
         {
-            bool result = false;
             var left = new object();
             var right = new object();
             var equalityComparer = new DelegatingEqualityComparer<object>
@@ -63,8 +62,7 @@ namespace Jwc.Experiment.Idioms
                 {
                     Assert.Equal(right, x);
                     Assert.Equal(left, y);
-                    result = true;
-                    return result;
+                    return true;
                 }
             };
             var sut = new InverseEqualityComparer<object>(equalityComparer);
