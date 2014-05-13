@@ -14,7 +14,7 @@ namespace Jwc.Experiment.Idioms
         public void NullGuardClasuseAssertionCorrectlyVerifiesMember()
         {
             typeof(ClassForNullGuardClause)
-                .ToIdiomaticMembers()
+                .GetIdiomaticMembers()
                 .Except(
                     new MemberInfo[]
                     {
@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
         public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassForNullGuardClause)
-                .ToIdiomaticMembers()
+                .GetIdiomaticMembers()
                 .Except(
                     new MemberInfo[]
                     {
@@ -43,7 +43,7 @@ namespace Jwc.Experiment.Idioms
         public void MemberInitializationAssertionCorrectlyVerifiesMember()
         {
             typeof(ClassWithMembersInitializedByConstructor)
-                .ToIdiomaticMembers()
+                .GetIdiomaticMembers()
                 .ToList()
                 .ForEach(new MemberInitializationAssertion(new FakeTestFixture()).Verify);
         }
@@ -52,7 +52,7 @@ namespace Jwc.Experiment.Idioms
         public IEnumerable<ITestCase> SutWithMemberInitializationAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
-                .ToIdiomaticMembers()
+                .GetIdiomaticMembers()
                 .Select(m => new TestCase<ITestFixture>(f => new MemberInitializationAssertion(f).Verify(m)));
         }
 

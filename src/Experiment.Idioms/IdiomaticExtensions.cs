@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Idioms
     public static class IdiomaticExtensions
     {
         /// <summary>
-        /// Converts a type to idiomatic members.
+        /// Gets idiomatic members of a type.
         /// </summary>
         /// <param name="type">
         /// A type to enumerate the idiomatic members.
@@ -18,13 +18,13 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToIdiomaticMembers(this Type type)
+        public static IEnumerable<MemberInfo> GetIdiomaticMembers(this Type type)
         {
             return new IdiomaticMembers(type);
         }
 
         /// <summary>
-        /// Converts a type to idiomatic members corresponding to member kinds.
+        /// Gets idiomatic members of a type corresponding to member kinds.
         /// </summary>
         /// <param name="type">
         /// A type to enumerate the idiomatic members.
@@ -35,7 +35,7 @@ namespace Jwc.Experiment.Idioms
         /// <returns>
         /// The idiomatic members.
         /// </returns>
-        public static IEnumerable<MemberInfo> ToIdiomaticMembers(this Type type, MemberKinds memberKinds)
+        public static IEnumerable<MemberInfo> GetIdiomaticMembers(this Type type, MemberKinds memberKinds)
         {
             return new IdiomaticMembers(type, memberKinds);
         }

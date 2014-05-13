@@ -17,9 +17,7 @@ using System.Runtime.InteropServices;
  * Version 0.18.1
  * 
  * - [FIX-BREAKING-CHANGE] Renames some extension methods to clarify.
- *      ToMembers         -> ToIdiomaticMembers
- *      ToInstanceMembers -> ToIdiomaticInstanceMembers
- *      ToStaticMembers   -> ToIdiomaticStaticMembers
+ *      ToMembers -> GetIdiomaticMembers
  *      
  * - [FIX-BREAKING-CHANGE] Renames `TypeMembers` to `IdiomaticMembers` to
  *   clarify.

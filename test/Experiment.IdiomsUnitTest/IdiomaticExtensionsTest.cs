@@ -5,11 +5,11 @@ namespace Jwc.Experiment.Idioms
     public class IdiomaticExtensionsTest
     {
         [Fact]
-        public void TypeToIdiomaticMembersReturnsCorrectMembers()
+        public void GetIdiomaticMembersReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
 
-            var actual = type.ToIdiomaticMembers();
+            var actual = type.GetIdiomaticMembers();
 
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
@@ -17,12 +17,12 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Fact]
-        public void TypeToIdiomaticMembersWithMemberKindsReturnsCorrectMembers()
+        public void GetIdiomaticMembersWithMemberKindsReturnsCorrectMembers()
         {
             var type = typeof(ClassWithMembers);
             var memberKinds = MemberKinds.InstanceEvent;
 
-            var actual = type.ToIdiomaticMembers(memberKinds);
+            var actual = type.GetIdiomaticMembers(memberKinds);
 
             var members = Assert.IsAssignableFrom<IdiomaticMembers>(actual);
             Assert.Equal(type, members.Type);
