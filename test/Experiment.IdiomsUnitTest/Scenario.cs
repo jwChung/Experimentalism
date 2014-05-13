@@ -36,7 +36,7 @@ namespace Jwc.Experiment.Idioms
                         Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
-                .Select(m => new TestCase<ITestFixture>(f => new NullGuardClauseAssertion(f).Verify(m)));
+                .Select(m => new TestCase<NullGuardClauseAssertion>(a => a.Verify(m)));
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms
         {
             return typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers()
-                .Select(m => new TestCase<ITestFixture>(f => new MemberInitializationAssertion(f).Verify(m)));
+                .Select(m => new TestCase<MemberInitializationAssertion>(a => a.Verify(m)));
         }
 
         [Fact]
