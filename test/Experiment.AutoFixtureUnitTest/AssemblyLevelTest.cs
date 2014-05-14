@@ -25,7 +25,6 @@ namespace NuGet.Jwc.Experiment
                 "System.Core",
 
                 // Direct references
-                "xunit",
                 "Jwc.Experiment",
                 "Ploeh.AutoFixture",
 
@@ -53,7 +52,6 @@ namespace NuGet.Jwc.Experiment
 
         [Theory]
         [InlineData(_productDirectory, "AutoFixture")]
-        [InlineData(_productDirectory, "TheoremAttribute")]
         [InlineData(_productDirectory, "FixtureFactory")]
         [InlineData(_testDirectory, "Scenario")]
         public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)

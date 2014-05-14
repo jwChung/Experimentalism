@@ -58,7 +58,6 @@
     <Compile Include="AutoFixture.cs" />
     <Compile Include="FixtureFactory.cs" />
     <Compile Include="AutoFixtureFactory.cs" />
-    <Compile Include="TheoremAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
