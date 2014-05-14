@@ -217,7 +217,7 @@ Experimentalism은 아래와 같은 NuGet packages들을 배포하고 있으며,
   * [AutoFixture.Xunit.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
 * [**Experiment.Idioms**](https://www.nuget.org/packages/Experiment.Idioms/)
   * [Experiment.dll](https://www.nuget.org/packages/Experiment/)
-  * [Albedo.nuget(v1.0.1)](https://www.nuget.org/packages/Albedo/1.0.1) - [license](https://raw2.github.com/ploeh/Albedo/master/LICENSE)
+  * [Albedo.dll(v1.0.1)](https://www.nuget.org/packages/Albedo/1.0.1) - [license](https://raw2.github.com/ploeh/Albedo/master/LICENSE)
   * [AutoFixture.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
   * [AutoFixture.Idioms.dll(v3.0.1)](https://github.com/AutoFixture/AutoFixture) - [license](http://autofixture.codeplex.com/license)
   * [Mono.Reflection.dll(v1.0.0)](https://github.com/jbevain/mono.reflection) - [license](http://opensource.org/licenses/mit-license.php)

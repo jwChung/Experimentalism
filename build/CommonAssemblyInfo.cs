@@ -14,16 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.18.1")]
 
 /*
- * Version 0.18.1
+ * Version 0.18.2
  * 
- * - [FIX-BREAKING-CHANGE] Renames some extension methods to clarify.
- *      ToMembers -> GetIdiomaticMembers
- *      
- * - [FIX-BREAKING-CHANGE] Renames `TypeMembers` to `IdiomaticMembers` to
- *   clarify.
- *   
- * - [FIX] Fixes the error for private accessors of a property in
- *   `MemberKindCollector`.
- *   
- * - [FIX-BREAKING-CHANGE] Simplifies the constructor of `IdiomaticMembers`.
+ * - [FIX-BREAKING-CHANGE] Treats the Albedo reference in Experiment.Idioms as
+ *   indirect reference.
  */

@@ -10,9 +10,6 @@
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
     <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
     <releaseNotes>releaseNotes</releaseNotes>
-    <dependencies>
-      <dependency id="Albedo" version="1.0.1" />
-    </dependencies>
     <references>
       <reference file="Jwc.Experiment.Idioms.dll" />
       <reference file="Jwc.Experiment.dll" />
@@ -30,6 +27,8 @@
     <file src="..\packages\AutoFixture.Idioms.3.0.1\lib\net40\Ploeh.AutoFixture.Idioms.dll" target="lib\net40" />
     <file src="..\packages\AutoFixture.Idioms.3.0.1\lib\net40\Ploeh.AutoFixture.Idioms.xml" target="lib\net40" />
     <file src="..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll" target="lib\net40" />
+    <file src="..\packages\Albedo.1.0.1\lib\net35\Ploeh.Albedo.dll" target="lib\net40" />
+    <file src="..\packages\Albedo.1.0.1\lib\net35\Ploeh.Albedo.xml" target="lib\net40" />
     <file src="..\src\**\*.cs" target="src" />
     <file src="Install.ps1" target="tools" />
   </files>
