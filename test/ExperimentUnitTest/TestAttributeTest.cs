@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
@@ -285,6 +286,7 @@ namespace Jwc.Experiment
         [InlineData("CreateParameterizedTestWithoutTestFixtureFactoryAttributeReturnsExceptionCommand")]
         [InlineData("CreateParameterizedTestWithTestFixtureFactoryAttributeReturnsCorrectCommand")]
         [InlineData("CreateParameterizedTestSeveralTimesCreatesTestFixtureFactoryOnlyOnce")]
+        [InlineData("CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultiThreads")]
         public void RunTestInIndependentAppDomin(string testMethod)
         {
             var appDomainSetup = new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory };
@@ -348,7 +350,28 @@ namespace Jwc.Experiment
 
             Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
         }
-        
+
+        public void CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultiThreads()
+        {
+            // Fixture setup
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
+
+            var threads = new Thread[20];
+            for (int i = 0; i < threads.Length; i++)
+                threads[i] = new Thread(() => sut.CreateTestCommands(method).ToArray());
+
+            // Exercise system
+            foreach (var thread in threads)
+                thread.Start();
+
+            foreach (var thread in threads)
+                thread.Join();
+
+            // Verify outcome
+            Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)

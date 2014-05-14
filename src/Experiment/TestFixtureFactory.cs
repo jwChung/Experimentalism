@@ -8,11 +8,18 @@ namespace Jwc.Experiment
     internal static class TestFixtureFactory
     {
         private static ITestFixtureFactory _testFixtureFactory;
+        private static readonly object _lockObj = new object();
 
         public static ITestFixture Create(MethodInfo testMethod)
         {
             if (_testFixtureFactory == null)
-                _testFixtureFactory = CreateTestFixtureFactory(testMethod.ReflectedType.Assembly);
+            {
+                lock (_lockObj)
+                {
+                    if (_testFixtureFactory == null)
+                        _testFixtureFactory = CreateTestFixtureFactory(testMethod.ReflectedType.Assembly);
+                }
+            }
 
             return _testFixtureFactory.Create(testMethod);
         }
@@ -40,7 +47,7 @@ namespace Jwc.Experiment
                     String.Format(
                         CultureInfo.CurrentCulture,
                         "To create auto data, explicitly declare TestFixtureDeclarationAttribute " +
-                            "on the test assembly '{0}'.",
+                        "on the test assembly '{0}'.",
                         testMethod.ReflectedType.Assembly));
             }
         }
