@@ -4,6 +4,7 @@
     <Recognized>
       <Word>Jwc</Word>
       <Word>ObjectDisposedException</Word>
+      <Word>TestFixtureDeclarationAttribute</Word>
     </Recognized>
     <Unrecognized>
       <Word></Word>

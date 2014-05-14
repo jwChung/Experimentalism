@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +12,8 @@ namespace Jwc.Experiment
     /// A test attribute used to adorn methods that creates first-class
     /// executable test cases.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
     public class FirstClassTestAttribute : FactAttribute
     {
         /// <summary>
@@ -54,7 +55,7 @@ namespace Jwc.Experiment
             return TestFixtureFactory.Create(testMethod);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
         {
             try
@@ -67,7 +68,7 @@ namespace Jwc.Experiment
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private static bool TryMoveNext(
             IEnumerator<ITestCommand> enumerator,
             out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
@@ -112,7 +113,7 @@ namespace Jwc.Experiment
             return (IEnumerable<ITestCase>)testCases;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
         private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
         {
             try

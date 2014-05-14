@@ -10,7 +10,7 @@ namespace Jwc.Experiment
     /// every instance of <see cref="ITestFixture"/> for all the tests.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public class TestFixtureDeclarationAttribute : Attribute
+    public sealed class TestFixtureDeclarationAttribute : Attribute
     {
         private readonly Type _type;
 
@@ -41,6 +41,7 @@ namespace Jwc.Experiment
         /// Gets a value indicating the type implementing
         /// <see cref="ITestFixtureFactory"/>.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This name is desiable to express a ITestFixture type.")]
         public Type Type
         {
             get

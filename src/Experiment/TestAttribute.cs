@@ -10,10 +10,12 @@ using Xunit.Sdk;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// 이 attribute는 method위에 선언되어 해당 method가 test case라는 것을
+    /// 이 attribute는 method위에 선언되어 해당 method가 test라는 것을
     /// 지칭하게 되며, non-parameterized test 뿐 아니라 parameterized test에도
     /// 사용될 수 있다.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
     public class TestAttribute : FactAttribute
     {
         /// <summary>

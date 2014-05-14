@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Jwc.Experiment;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
@@ -56,6 +57,13 @@ namespace NuGet.Jwc.Experiment
             var person = (Person)actual.Create(typeof(Person));
             Assert.NotNull(person.Name);
             Assert.NotEqual(0, person.Age);
+        }
+
+        [Fact]
+        public void CreateWithNullTestMethodThrows()
+        {
+            var sut = new AutoFixtureFactory();
+            Assert.Throws<ArgumentNullException>(() => sut.Create(null));
         }
         
         public void FrozenTest([Frozen] string arg)

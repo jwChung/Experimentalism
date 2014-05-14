@@ -33,6 +33,9 @@ namespace Jwc.Experiment
         {
             ITestFixture ITestFixtureFactory.Create(MethodInfo testMethod)
             {
+                if (testMethod == null)
+                    throw new ArgumentNullException("testMethod");
+
                 throw new NotSupportedException(
                     String.Format(
                         CultureInfo.CurrentCulture,

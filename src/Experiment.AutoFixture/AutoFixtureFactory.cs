@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +26,9 @@ namespace NuGet.Jwc.Experiment
         /// </returns>
         public ITestFixture Create(MethodInfo testMethod)
         {
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
             var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
             var fixture = new Fixture().Customize(cutomization);
             return new AutoFixture(fixture);
