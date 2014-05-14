@@ -45,11 +45,11 @@ namespace NuGet.Jwc.Experiment
 
             public void Customize(IFixture fixture)
             {
-                _parameters.SelectMany(SelectCustomizations)
+                _parameters.SelectMany(GetCustomizations)
                     .Aggregate(fixture, (f, c) => f.Customize(c));
             }
 
-            private static IEnumerable<ICustomization> SelectCustomizations(ParameterInfo parameter)
+            private static IEnumerable<ICustomization> GetCustomizations(ParameterInfo parameter)
             {
                 return parameter.GetCustomAttributes(typeof(CustomizeAttribute), false)
                     .Cast<CustomizeAttribute>()
