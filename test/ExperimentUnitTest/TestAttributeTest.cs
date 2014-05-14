@@ -9,7 +9,7 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment
 {
-    public class TestAttributeTest : MarshalByRefObject
+    public class TestAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
@@ -287,21 +287,9 @@ namespace Jwc.Experiment
         [InlineData("CreateParameterizedTestWithTestFixtureFactoryAttributeReturnsCorrectCommand")]
         [InlineData("CreateParameterizedTestSeveralTimesCreatesTestFixtureFactoryOnlyOnce")]
         [InlineData("CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultiThreads")]
-        public void RunTestInIndependentAppDomin(string testMethod)
+        public void RunTestWithStaticFixture(string testMethod)
         {
-            var appDomainSetup = new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory };
-            var appDomain = AppDomain.CreateDomain(testMethod, null, appDomainSetup);
-            try
-            {
-                var target = appDomain.CreateInstanceAndUnwrap(
-                    Assembly.GetExecutingAssembly().FullName,
-                    GetType().FullName);
-                GetType().GetMethod(testMethod).Invoke(target, new object[0]);
-            }
-            finally
-            {
-                AppDomain.Unload(appDomain);
-            }
+            GetType().GetMethod(testMethod).Execute();
         }
 
         public void CreateParameterizedTestWithoutTestFixtureFactoryAttributeReturnsExceptionCommand()
