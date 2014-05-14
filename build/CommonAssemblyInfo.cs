@@ -14,8 +14,14 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.18.2")]
 
 /*
- * Version 0.18.2
+ * Version 0.19.0
  * 
- * - [FIX-BREAKING-CHANGE] Treats the Albedo reference in Experiment.Idioms as
- *   indirect reference.
+ * - [NEW] Test fixture declaration using attribute:
+ *   Introduces the new model to create test fixture. Using the
+ *   TestFixtureDeclaration attribute, a type of ITestFixtureFactory can be
+ *   declared and will be used to create a factory for test fixture.
+ *   
+ *      BREAKING-CHANGE: TheoremAttriute            -> TestAttribute
+ *      BREAKING-CHANGE: FirstClassTheoremAttriute  -> FirstClassTestAttribute
+ *      NEW:             TestFixtureDeclarationAttribute
  */
