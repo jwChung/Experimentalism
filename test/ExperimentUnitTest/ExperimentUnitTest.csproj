@@ -51,11 +51,13 @@
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
+    <Compile Include="DelegatingStaticTestFixtureFactory.cs" />
     <Compile Include="FirstClassTheoremBaseAttributeTest.cs" />
     <Compile Include="FirstClassCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureFactoryAttributeTest.cs" />
+    <Compile Include="TestAttributeTest.cs" />
     <Compile Include="TheoremBaseAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
   </ItemGroup>
