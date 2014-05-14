@@ -10,18 +10,18 @@ namespace Jwc.Experiment
     /// every instance of <see cref="ITestFixture"/> for all the tests.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public class TestFixtureFactoryAttribute : Attribute
+    public class TestFixtureDeclarationAttribute : Attribute
     {
         private readonly Type _type;
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="TestFixtureFactoryAttribute"/> class.
+        /// <see cref="TestFixtureDeclarationAttribute"/> class.
         /// </summary>
         /// <param name="type">
         /// The type implementing <see cref="ITestFixtureFactory"/>.
         /// </param>
-        public TestFixtureFactoryAttribute(Type type)
+        public TestFixtureDeclarationAttribute(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException("type");

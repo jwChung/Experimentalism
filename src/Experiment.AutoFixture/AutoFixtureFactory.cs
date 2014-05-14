@@ -5,7 +5,7 @@ using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 
-[assembly: TestFixtureFactory(typeof(NuGet.Jwc.Experiment.AutoFixtureFactory))]
+[assembly: TestFixtureDeclaration(typeof(NuGet.Jwc.Experiment.AutoFixtureFactory))]
 
 namespace NuGet.Jwc.Experiment
 {
