@@ -52,7 +52,7 @@ namespace NuGet.Jwc.Experiment
 
         [Theory]
         [InlineData(_productDirectory, "AutoFixture")]
-        [InlineData(_productDirectory, "FixtureFactory")]
+        [InlineData(_productDirectory, "AutoFixtureFactory")]
         [InlineData(_testDirectory, "Scenario")]
         public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {
@@ -66,7 +66,7 @@ namespace NuGet.Jwc.Experiment
         private static void VerifyGeneratingFile(string origin, string destination)
         {
             var content = File.ReadAllText(origin, Encoding.UTF8)
-                .Replace("namespace NuGet.Jwc.Experiment", "namespace $rootnamespace$");
+                .Replace("NuGet.Jwc.Experiment", "$rootnamespace$");
             File.WriteAllText(destination, content, Encoding.UTF8);
             Assert.True(File.Exists(destination), "exists.");
         }

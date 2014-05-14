@@ -54,7 +54,6 @@
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="AutoFixtureTest.cs" />
-    <Compile Include="FixtureFactoryTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="AutoFixtureFactoryTest.cs" />
     <Compile Include="DelegatingSpecimenContext.cs" />

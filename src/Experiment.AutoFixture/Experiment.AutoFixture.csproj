@@ -56,7 +56,6 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutoFixture.cs" />
-    <Compile Include="FixtureFactory.cs" />
     <Compile Include="AutoFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
