@@ -59,7 +59,6 @@
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="TestFixtureDeclarationAttribute.cs" />
     <Compile Include="TestAttribute.cs" />
-    <Compile Include="TheoremBaseAttribute.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="TestCase.Generic.cs">
       <AutoGen>True</AutoGen>

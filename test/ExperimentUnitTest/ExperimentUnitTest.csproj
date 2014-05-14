@@ -59,7 +59,6 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureDeclarationAttributeTest.cs" />
     <Compile Include="TestAttributeTest.cs" />
-    <Compile Include="TheoremBaseAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
