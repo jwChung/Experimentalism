@@ -6,7 +6,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     public class TestCase : ITestCase
     {
@@ -69,7 +69,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -91,7 +91,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     public class TestCase<T> : ITestCase
     {
@@ -154,7 +154,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.

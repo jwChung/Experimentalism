@@ -6,7 +6,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2> : ITestCase
@@ -70,7 +70,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -103,7 +103,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3> : ITestCase
@@ -167,7 +167,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -201,7 +201,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4> : ITestCase
@@ -265,7 +265,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -300,7 +300,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5> : ITestCase
@@ -364,7 +364,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -400,7 +400,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6> : ITestCase
@@ -464,7 +464,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -501,7 +501,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7> : ITestCase
@@ -565,7 +565,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -603,7 +603,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8> : ITestCase
@@ -667,7 +667,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -706,7 +706,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9> : ITestCase
@@ -770,7 +770,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -810,7 +810,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ITestCase
@@ -874,7 +874,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -915,7 +915,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : ITestCase
@@ -979,7 +979,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -1021,7 +1021,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : ITestCase
@@ -1085,7 +1085,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -1128,7 +1128,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : ITestCase
@@ -1192,7 +1192,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -1236,7 +1236,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : ITestCase
@@ -1300,7 +1300,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -1345,7 +1345,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : ITestCase
@@ -1409,7 +1409,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.
@@ -1455,7 +1455,7 @@ namespace Jwc.Experiment
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassTheoremBaseAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification="This rule is suppressed to provide auto data to test method.")]
     public class TestCase<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : ITestCase
@@ -1519,7 +1519,7 @@ namespace Jwc.Experiment
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTheoremBaseAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.

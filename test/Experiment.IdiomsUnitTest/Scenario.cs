@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment;
+using Jwc.Experiment.Idioms;
 using Jwc.Experiment.Idioms.Assertions;
 using Ploeh.Albedo;
 using Xunit;
+
+[assembly: TestFixtureDeclaration(typeof(Scenario.FakeTestFixtureFactory))]
 
 namespace Jwc.Experiment.Idioms
 {
@@ -25,7 +29,7 @@ namespace Jwc.Experiment.Idioms
                 .ForEach(new NullGuardClauseAssertion(new FakeTestFixture()).Verify);
         }
 
-        [FirstClassTheorem]
+        [FirstClassTest]
         public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -48,7 +52,7 @@ namespace Jwc.Experiment.Idioms
                 .ForEach(new MemberInitializationAssertion(new FakeTestFixture()).Verify);
         }
 
-        [FirstClassTheorem]
+        [FirstClassTest]
         public IEnumerable<ITestCase> SutWithMemberInitializationAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
@@ -164,9 +168,9 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        private class FirstClassTheoremAttribute : FirstClassTheoremBaseAttribute
+        internal class FakeTestFixtureFactory : ITestFixtureFactory
         {
-            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            public ITestFixture Create(MethodInfo testMethod)
             {
                 return new FakeTestFixture();
             }
