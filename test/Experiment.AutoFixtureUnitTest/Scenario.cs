@@ -79,8 +79,7 @@ namespace NuGet.Jwc.Experiment
             };
 
             return testCases.Select(
-                tc => new TestCase(
-                    () => Assert.Equal(tc.Z, tc.X + tc.Y)));
+                c => new TestCase(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
         [FirstClassTest]
