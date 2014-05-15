@@ -49,9 +49,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="xunit">
-      <HintPath>..\..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">

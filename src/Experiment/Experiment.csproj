@@ -36,12 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="xunit">
-      <HintPath>..\..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
@@ -51,9 +45,6 @@
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
