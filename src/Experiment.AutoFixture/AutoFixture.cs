@@ -6,7 +6,7 @@ using Ploeh.AutoFixture.Kernel;
 namespace NuGet.Jwc.Experiment
 {
     /// <summary>
-    /// <see cref="ISpecimenContext"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.
+    /// <see cref="IFixture"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.
     /// auto data기능을 AutoFixture library로부터 채용하게 된다.
     /// </summary>
     public class AutoFixture : ITestFixture
