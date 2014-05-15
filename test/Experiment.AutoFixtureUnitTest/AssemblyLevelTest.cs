@@ -53,7 +53,6 @@ namespace NuGet.Jwc.Experiment
         [Theory]
         [InlineData(_productDirectory, "AutoFixture")]
         [InlineData(_productDirectory, "AutoFixtureFactory")]
-        [InlineData(_testDirectory, "Scenario")]
         public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
         {
             var origin = directory + originName + ".cs";

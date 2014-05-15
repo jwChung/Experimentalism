@@ -12,9 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{D77C6607-00C0-44C3-B0B9-D23A2B6DABDA}"
 	ProjectSection(SolutionItems) = preProject
 		build\Experiment.AutoFixture.nuspec = build\Experiment.AutoFixture.nuspec
-		build\Experiment.AutoFixtureWithExample.nuspec = build\Experiment.AutoFixtureWithExample.nuspec
 		build\Experiment.Idioms.nuspec = build\Experiment.Idioms.nuspec
-		build\Experiment.nuspec = build\Experiment.nuspec
+		build\Experiment.Xunit.nuspec = build\Experiment.Xunit.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC-4A95-4D59-951B-61C4ABCEAAC2}"
