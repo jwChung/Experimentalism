@@ -46,8 +46,8 @@ namespace Jwc.Experiment.Xunit
                 throw new NotSupportedException(
                     String.Format(
                         CultureInfo.CurrentCulture,
-                        "To create auto data, explicitly declare TestFixtureFactoryTypeAttribute " +
-                        "on the test assembly '{0}'.",
+                        "To create auto data, explicitly declare TestFixtureFactoryTypeAttribute on the test " +
+                        "assembly '{0}' or override the CreateTestFixture(MethodInfo) method.",
                         testMethod.ReflectedType.Assembly));
             }
         }
