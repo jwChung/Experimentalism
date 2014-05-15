@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "src\Experiment\Experiment.csproj", "{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentUnitTest", "test\ExperimentUnitTest\ExperimentUnitTest.csproj", "{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{955D29E5-839E-4E13-B1C7-280876B6AE25}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,10 +24,6 @@ Global
 		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7352FC70-2780-415C-9A43-F889F7B8028D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7352FC70-2780-415C-9A43-F889F7B8028D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7352FC70-2780-415C-9A43-F889F7B8028D}.Release|Any CPU.ActiveCfg = Release|Any CPU
