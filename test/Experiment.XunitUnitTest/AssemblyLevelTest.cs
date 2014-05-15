@@ -3,14 +3,14 @@ using System.Reflection;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     public class AssemblyLevelTest
     {
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(ITestFixture).Assembly;
+            var sut = typeof(ExamAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 // GAC
@@ -34,7 +34,7 @@ namespace Jwc.Experiment
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(ITestFixture).Assembly;
+            var sut = typeof(ExamAttribute).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var types = Assembly.Load(assemblyName).GetExportedTypes();
 

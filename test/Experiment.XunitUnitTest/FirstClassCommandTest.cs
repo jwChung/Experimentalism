@@ -3,7 +3,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     public class FirstClassCommandTest
     {
@@ -91,7 +91,7 @@ namespace Jwc.Experiment
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 new Action<int, object, string, Type>((a, b, c, d) => { }),
                 arguments);
-            var expected = "Jwc.Experiment.FirstClassCommandTest.DisplayNameIsCorrect" +
+            var expected = "Jwc.Experiment.Xunit.FirstClassCommandTest.DisplayNameIsCorrect" +
                             "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
 
             var actual = sut.DisplayName;

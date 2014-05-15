@@ -3,7 +3,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     public class ExceptionCommandTest
     {
@@ -33,7 +33,7 @@ namespace Jwc.Experiment
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 new Exception());
             var actual = sut.DisplayName;
-            Assert.Equal("Jwc.Experiment.ExceptionCommandTest.DisplayNameIsCorrect", actual);
+            Assert.Equal("Jwc.Experiment.Xunit.ExceptionCommandTest.DisplayNameIsCorrect", actual);
         }
 
         [Fact]

@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     public static class TestMethodExtensions
     {

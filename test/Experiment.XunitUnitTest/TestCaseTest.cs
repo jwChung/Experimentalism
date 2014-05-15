@@ -3,7 +3,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     public class TestCaseTest
     {

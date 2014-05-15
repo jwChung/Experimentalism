@@ -43,10 +43,36 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
+      <Link>AssemblyExtensions.cs</Link>
+    </Compile>
+    <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="DelegatingStaticTestFixtureFactory.cs" />
+    <Compile Include="DelegatingTestCase.cs" />
+    <Compile Include="DelegatingTestFixtureFactory.cs" />
+    <Compile Include="ExamAttributeTest.cs" />
+    <Compile Include="ExceptionCommandTest.cs" />
+    <Compile Include="FakeTestFixture.cs" />
+    <Compile Include="FirstClassCommandTest.cs" />
+    <Compile Include="FirstClassExamAttributeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenario.cs" />
+    <Compile Include="TestCaseTest.cs" />
+    <Compile Include="TestFixtureFactoryTypeAttributeTest.cs" />
+    <Compile Include="TestMethodExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.Xunit\Experiment.Xunit.csproj">
+      <Project>{d178dcd9-76a9-4eeb-b850-4e48c70ba07d}</Project>
+      <Name>Experiment.Xunit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
+      <Project>{7e0ac9ae-046f-427d-8e9c-ce0690ff8a31}</Project>
+      <Name>Experiment</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     public class TestFixtureFactoryTypeAttributeTest
     {
