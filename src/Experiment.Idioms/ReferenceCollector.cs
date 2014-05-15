@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Mono.Reflection;
 using Ploeh.Albedo;
 
@@ -16,6 +17,7 @@ namespace Jwc.Experiment.Idioms
         private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
         private readonly HashSet<Type> _types = new HashSet<Type>();
         private readonly MemberReferenceCollector _memberReferenceCollector = new MemberReferenceCollector();
+        private readonly ReaderWriterLockSlim _lockSlim = new ReaderWriterLockSlim();
         
         /// <summary>
         /// Gets the observation or value produced by this instance.
@@ -24,7 +26,15 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _assemblies;
+                _lockSlim.EnterReadLock();
+                try
+                {
+                    return _assemblies.ToArray();
+                }
+                finally
+                {
+                    _lockSlim.ExitReadLock();
+                }
             }
         }
 
@@ -312,18 +322,28 @@ namespace Jwc.Experiment.Idioms
         
         private void AddReferencedAssemblies(Type type)
         {
-            lock (_types)
+            _lockSlim.EnterUpgradeableReadLock();
+            try
             {
                 if (_types.Contains(type))
                     return;
-                _types.Add(type);
-            }
 
-            lock (_assemblies)
-            {
                 var assemblies = type.ToElement().Accept(_memberReferenceCollector).Value;
-                foreach (var assembly in assemblies)
-                    _assemblies.Add(assembly);
+                _lockSlim.EnterWriteLock();
+                try
+                {
+                    foreach (var assembly in assemblies)
+                        _assemblies.Add(assembly);
+                    _types.Add(type);
+                }
+                finally
+                {
+                    _lockSlim.ExitWriteLock();
+                }
+            }
+            finally
+            {
+                _lockSlim.ExitUpgradeableReadLock();
             }
         }
     }
