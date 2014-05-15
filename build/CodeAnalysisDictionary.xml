@@ -6,6 +6,8 @@
       <Word>ObjectDisposedException</Word>
       <Word>TestFixtureFactoryTypeAttribute</Word>
       <Word>Xunit</Word>
+      <Word>CreateTestFixture</Word>
+      <Word>MethodInfo</Word>
     </Recognized>
     <Unrecognized>
       <Word></Word>
