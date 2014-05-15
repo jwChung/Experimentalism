@@ -52,7 +52,7 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="DelegatingStaticTestFixtureFactory.cs" />
-    <Compile Include="FirstClassTestAttributeTest.cs" />
+    <Compile Include="FirstClassExamAttributeTest.cs" />
     <Compile Include="FirstClassCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />

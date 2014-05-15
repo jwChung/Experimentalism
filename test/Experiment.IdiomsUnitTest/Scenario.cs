@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
                 .ForEach(new NullGuardClauseAssertion(new FakeTestFixture()).Verify);
         }
 
-        [FirstClassTest]
+        [FirstClassExam]
         public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -52,7 +52,7 @@ namespace Jwc.Experiment.Idioms
                 .ForEach(new MemberInitializationAssertion(new FakeTestFixture()).Verify);
         }
 
-        [FirstClassTest]
+        [FirstClassExam]
         public IEnumerable<ITestCase> SutWithMemberInitializationAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)

@@ -41,14 +41,14 @@ namespace Jwc.Experiment
             Assert.Equal(5678, arg2);
         }
 
-        [FirstClassTestWithCustomFixture]
+        [FirstClassExamWithCustomFixture]
         public IEnumerable<ITestCase> FirstClassTheoremSupportsTestCasesForYieldReturn()
         {
             yield return new TestCase(() => Assert.Equal(3, 2 + 1));
             yield return new TestCase(() => Assert.Equal(10, 3 + 7));
         }
 
-        [FirstClassTestWithCustomFixture]
+        [FirstClassExamWithCustomFixture]
         public ITestCase[] FirstClassTheoremSupportsTestCasesForArray()
         {
             var testCases = new[]
@@ -62,7 +62,7 @@ namespace Jwc.Experiment
                 .Cast<ITestCase>().ToArray();
         }
 
-        [FirstClassTestWithCustomFixture]
+        [FirstClassExamWithCustomFixture]
         public IEnumerable<ITestCase> FirstClassTheoremSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
@@ -75,7 +75,7 @@ namespace Jwc.Experiment
                 c => new TestCase(() => new Scenario().TheoremSupportsParameterizedTest(c.X, c.Y)));
         }
 
-        [FirstClassTestWithCustomFixture]
+        [FirstClassExamWithCustomFixture]
         public IEnumerable<ITestCase> FirstClassTheoremWithCustomFixtureSupportsTestCasesWithAutoData()
         {
             yield return new TestCase<string, int>(
@@ -103,7 +103,7 @@ namespace Jwc.Experiment
             }
         }
 
-        private class FirstClassTestWithCustomFixtureAttribute : FirstClassTestAttribute
+        private class FirstClassExamWithCustomFixtureAttribute : FirstClassExamAttribute
         {
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {

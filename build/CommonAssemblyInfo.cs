@@ -22,6 +22,6 @@ using System.Runtime.InteropServices;
  *   declared and will be used to create a factory for test fixture.
  *   
  *      BREAKING-CHANGE: TheoremAttriute            -> ExamAttribute
- *      BREAKING-CHANGE: FirstClassTheoremAttriute  -> FirstClassTestAttribute
+ *      BREAKING-CHANGE: FirstClassTheoremAttriute  -> FirstClassExamAttribute
  *      NEW:             TestFixtureDeclarationAttribute
  */

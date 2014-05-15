@@ -68,7 +68,7 @@ namespace NuGet.Jwc.Experiment
             Assert.Equal(age, person.Age);
         }
 
-        [FirstClassTest]
+        [FirstClassExam]
         public IEnumerable<ITestCase> FirstClassTheoremSupportsManyTestCases()
         {
             var testCases = new[]
@@ -82,7 +82,7 @@ namespace NuGet.Jwc.Experiment
                 c => new TestCase(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
-        [FirstClassTest]
+        [FirstClassExam]
         public IEnumerable<ITestCase> FirstClassTheoremWithCustomFixtureSupportsTestCasesWithAutoData()
         {
             yield return new TestCase<string>(x => Assert.NotNull(x));
