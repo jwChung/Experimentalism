@@ -7,7 +7,7 @@ using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// 이 attribute는 method위에 선언되어 해당 method가 test라는 것을

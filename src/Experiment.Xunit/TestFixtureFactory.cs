@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     internal static class TestFixtureFactory
     {

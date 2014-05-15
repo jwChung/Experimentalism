@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// Exception 테스트커멘드를 나타냄.

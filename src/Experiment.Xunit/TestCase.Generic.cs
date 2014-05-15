@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an

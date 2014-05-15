@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// Represents a test command for first class tests.

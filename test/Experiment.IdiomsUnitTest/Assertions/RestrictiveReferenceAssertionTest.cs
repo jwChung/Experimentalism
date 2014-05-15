@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
@@ -36,7 +37,8 @@ namespace Jwc.Experiment.Idioms.Assertions
                 typeof(object).Assembly,
                 typeof(Enumerable).Assembly,
                 typeof(FactAttribute).Assembly,
-                typeof(TheoryAttribute).Assembly
+                typeof(TheoryAttribute).Assembly,
+                typeof(ITestFixture).Assembly
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
             Assert.DoesNotThrow(() => sut.Verify(typeof(ExamAttribute).Assembly));

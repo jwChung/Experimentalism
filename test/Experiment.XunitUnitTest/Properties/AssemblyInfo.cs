@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using Jwc.Experiment;
 using Jwc.Experiment.Xunit;
 
 [assembly: AssemblyTitle("Experiment.XunitUnitTest")]

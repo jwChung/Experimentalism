@@ -6,7 +6,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// A test attribute used to adorn methods that creates first-class

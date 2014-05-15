@@ -48,8 +48,21 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ExamAttribute.cs" />
+    <Compile Include="ExceptionCommand.cs" />
+    <Compile Include="FirstClassCommand.cs" />
+    <Compile Include="FirstClassExamAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ITestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCase.cs" />
+    <Compile Include="TestCase.Generic.cs">
+      <DependentUpon>TestCase.Generic.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TestFixtureFactory.cs" />
+    <Compile Include="TestFixtureFactoryTypeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
@@ -58,6 +71,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TestCase.Generic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestCase.cs</DependentUpon>
+      <LastGenOutput>TestCase.Generic.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Experiment\Experiment.csproj">
+      <Project>{7e0ac9ae-046f-427d-8e9c-ce0690ff8a31}</Project>
+      <Name>Experiment</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

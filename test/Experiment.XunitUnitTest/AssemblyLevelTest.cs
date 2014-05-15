@@ -19,6 +19,7 @@ namespace Jwc.Experiment.Xunit
 
                 // Direct references
                 "xunit",
+                "Jwc.Experiment",
 
                 // Indirect references
                 "xunit.extensions"

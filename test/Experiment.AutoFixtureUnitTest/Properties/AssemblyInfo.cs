@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using Jwc.Experiment;
+using Jwc.Experiment.Xunit;
 using NuGet.Jwc.Experiment;
 
 [assembly: AssemblyTitle("Experiment.AutoFixtureUnitTest")]

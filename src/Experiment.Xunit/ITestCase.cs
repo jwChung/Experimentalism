@@ -1,6 +1,6 @@
 ﻿using Xunit.Sdk;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// Represents a test-case that can be turned into an xUnit.net

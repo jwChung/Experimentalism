@@ -47,31 +47,13 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ExceptionCommand.cs" />
-    <Compile Include="FirstClassCommand.cs" />
-    <Compile Include="FirstClassExamAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ITestCase.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFixtureFactory.cs" />
-    <Compile Include="TestFixtureFactoryTypeAttribute.cs" />
-    <Compile Include="ExamAttribute.cs" />
-    <Compile Include="TestCase.cs" />
-    <Compile Include="TestCase.Generic.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestCase.Generic.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TestCase.Generic.tt">
-      <DependentUpon>TestCase.cs</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCase.Generic.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">

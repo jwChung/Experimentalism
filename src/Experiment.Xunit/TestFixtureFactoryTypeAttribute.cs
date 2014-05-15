@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Jwc.Experiment
+namespace Jwc.Experiment.Xunit
 {
     /// <summary>
     /// An attribute to declare a type implementing the

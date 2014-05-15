@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Jwc.Experiment.Xunit;
 using Moq;
 using Ploeh.Albedo;
 using Ploeh.AutoFixture.Idioms;
