@@ -58,7 +58,7 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="TestMethodExtensions.cs" />
     <Compile Include="TestFixtureDeclarationAttributeTest.cs" />
-    <Compile Include="TestAttributeTest.cs" />
+    <Compile Include="ExamAttributeTest.cs" />
     <Compile Include="TestCaseTest.cs" />
   </ItemGroup>
   <ItemGroup>

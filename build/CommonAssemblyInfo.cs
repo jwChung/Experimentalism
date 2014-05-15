@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
  *   TestFixtureDeclaration attribute, a type of ITestFixtureFactory can be
  *   declared and will be used to create a factory for test fixture.
  *   
- *      BREAKING-CHANGE: TheoremAttriute            -> TestAttribute
+ *      BREAKING-CHANGE: TheoremAttriute            -> ExamAttribute
  *      BREAKING-CHANGE: FirstClassTheoremAttriute  -> FirstClassTestAttribute
  *      NEW:             TestFixtureDeclarationAttribute
  */

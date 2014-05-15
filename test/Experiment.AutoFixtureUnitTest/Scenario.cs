@@ -11,13 +11,13 @@ namespace NuGet.Jwc.Experiment
 {
     public class Scenario
     {
-        [Test]
+        [Exam]
         public void TheoremSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [Test]
+        [Exam]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void TheoremSupportsParameterizedTest(string arg1, int arg2)
@@ -26,7 +26,7 @@ namespace NuGet.Jwc.Experiment
             Assert.Equal(1234, arg2);
         }
 
-        [Test]
+        [Exam]
         public void TheoremSupportsParameterizedTestWithAutoData(
             string arg1, Type arg2)
         {
@@ -34,7 +34,7 @@ namespace NuGet.Jwc.Experiment
             Assert.NotNull(arg2);
         }
 
-        [Test]
+        [Exam]
         [InlineData("expected")]
         public void TheoremSupportsParameterizedTestWithMixedData(
             string arg1, object arg2)
@@ -43,14 +43,14 @@ namespace NuGet.Jwc.Experiment
             Assert.NotNull(arg2);
         }
 
-        [Test]
+        [Exam]
         public void TheoremSupportsFrozenAttributeOfAutoFixtureXunit(
             [Frozen] string arg1, string arg2)
         {
             Assert.Same(arg1, arg2);
         }
 
-        [Test]
+        [Exam]
         public void TheoremSupportsModestAttributeOfAutoFixtureXunit(
             [Modest] Person person)
         {
@@ -58,7 +58,7 @@ namespace NuGet.Jwc.Experiment
             Assert.Equal(0, person.Age);
         }
 
-        [Test]
+        [Exam]
         public void TheoremSupportsGreedyAttributeOfAutoFixtureXunit(
             [Frozen] string name,
             [Frozen] int age,

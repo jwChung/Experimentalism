@@ -39,7 +39,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                 typeof(TheoryAttribute).Assembly
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
-            Assert.DoesNotThrow(() => sut.Verify(typeof(TestAttribute).Assembly));
+            Assert.DoesNotThrow(() => sut.Verify(typeof(ExamAttribute).Assembly));
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                 typeof(TheoryAttribute).Assembly
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
-            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(TestAttribute).Assembly));
+            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(ExamAttribute).Assembly));
         }
     }
 }
