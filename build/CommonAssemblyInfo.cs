@@ -16,12 +16,20 @@ using System.Runtime.InteropServices;
 /*
  * Version 0.19.0
  * 
- * - [NEW] Test fixture declaration using attribute:
+ * - [NEW] Declaration of test fixture factory using attribute
  *   Introduces the new model to create test fixture. Using the
- *   TestFixtureDeclaration attribute, a type of ITestFixtureFactory can be
- *   declared and will be used to create a factory for test fixture.
+ *   TestFixtureFactoryType attribute, a type of ITestFixtureFactory can be
+ *   defined and will be used to create a factory for test fixture.
  *   
- *      BREAKING-CHANGE: TheoremAttriute            -> ExamAttribute
- *      BREAKING-CHANGE: FirstClassTheoremAttriute  -> FirstClassExamAttribute
- *      NEW:             TestFixtureFactoryTypeAttribute
+ * - [FIX] Renames the test attributes. (BREAKING CHANGE)
+ *   TheoremAttriute -> ExamAttribute
+ *   FirstClassTheoremAttriute -> FirstClassExamAttribute
+ *
+ * - [FIX] Splits the Experiment project to Experiment and Experiment.Xunit
+ *   projects. (BREAKING CHANGE)
+ * 
+ * - [FIX] Rearrages nuget packages to reflect the splited projects.
+ *   (BREAKING CHANGE)
+ *   Publishes the new package 'Experiment.Xunit', and deletes the packages
+ *   'Experiment.AutoFixtureWithExample' and 'Experiment'.
  */
