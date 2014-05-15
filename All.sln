@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Idioms", "src\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.IdiomsUnitTest", "test\Experiment.IdiomsUnitTest\Experiment.IdiomsUnitTest.csproj", "{CD942D14-856A-436B-905C-BA417767E977}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Xunit", "src\Experiment.Xunit\Experiment.Xunit.csproj", "{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{CD942D14-856A-436B-905C-BA417767E977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD942D14-856A-436B-905C-BA417767E977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD942D14-856A-436B-905C-BA417767E977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{B0139B4D-E570-4EAC-B760-4C01D33CDEF9} = {0C3DF458-C908-4D2E-9A4D-BCF7D1C760FB}
 		{7352FC70-2780-415C-9A43-F889F7B8028D} = {E102D7D2-FF22-43DC-A273-DF690515C276}
 		{CD942D14-856A-436B-905C-BA417767E977} = {0C3DF458-C908-4D2E-9A4D-BCF7D1C760FB}
+		{D178DCD9-76A9-4EEB-B850-4E48C70BA07D} = {E102D7D2-FF22-43DC-A273-DF690515C276}
 	EndGlobalSection
 EndGlobal
