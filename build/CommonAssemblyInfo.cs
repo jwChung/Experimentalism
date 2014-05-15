@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.18.2")]
-[assembly: AssemblyInformationalVersion("0.18.2")]
+[assembly: AssemblyVersion("0.19.0")]
+[assembly: AssemblyInformationalVersion("0.19.0")]
 
 /*
  * Version 0.19.0
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
  * - [FIX] Splits the Experiment project to Experiment and Experiment.Xunit
  *   projects. (BREAKING CHANGE)
  * 
- * - [FIX] Rearrages nuget packages to reflect the splited projects.
+ * - [NEW] Rearrages nuget packages to reflect the splited projects.
  *   (BREAKING CHANGE)
  *   Publishes the new package 'Experiment.Xunit', and deletes the packages
  *   'Experiment.AutoFixtureWithExample' and 'Experiment'.
