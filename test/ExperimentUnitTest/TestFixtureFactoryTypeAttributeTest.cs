@@ -4,19 +4,19 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class TestFixtureDeclarationAttributeTest
+    public class TestFixtureFactoryTypeAttributeTest
     {
         [Fact]
         public void SutIsAttribute()
         {
-            var sut = new TestFixtureDeclarationAttribute(typeof(DelegatingTestFixtureFactory));
+            var sut = new TestFixtureFactoryTypeAttribute(typeof(DelegatingTestFixtureFactory));
             Assert.IsAssignableFrom<Attribute>(sut);
         }
 
         [Fact]
         public void SutHasCorrectAttributeUsage()
         {
-            var attributeUsage = typeof(TestFixtureDeclarationAttribute)
+            var attributeUsage = typeof(TestFixtureFactoryTypeAttribute)
                 .GetCustomAttributes(typeof(AttributeUsageAttribute), false)
                 .Cast<AttributeUsageAttribute>().Single();
             Assert.False(attributeUsage.AllowMultiple);
@@ -26,20 +26,20 @@ namespace Jwc.Experiment
         [Fact]
         public void InitializeWithNullTypeThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestFixtureDeclarationAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new TestFixtureFactoryTypeAttribute(null));
         }
 
         [Fact]
         public void InitializeWithInvalidTypeThrows()
         {
-            Assert.Throws<ArgumentException>(() => new TestFixtureDeclarationAttribute(typeof(object)));
+            Assert.Throws<ArgumentException>(() => new TestFixtureFactoryTypeAttribute(typeof(object)));
         }
 
         [Fact]
         public void TypeIsCorrect()
         {
             var type = typeof(DelegatingTestFixtureFactory);
-            var sut = new TestFixtureDeclarationAttribute(type);
+            var sut = new TestFixtureFactoryTypeAttribute(type);
 
             var actual = sut.Type;
 

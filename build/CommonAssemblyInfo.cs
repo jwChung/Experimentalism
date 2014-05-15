@@ -23,5 +23,5 @@ using System.Runtime.InteropServices;
  *   
  *      BREAKING-CHANGE: TheoremAttriute            -> ExamAttribute
  *      BREAKING-CHANGE: FirstClassTheoremAttriute  -> FirstClassExamAttribute
- *      NEW:             TestFixtureDeclarationAttribute
+ *      NEW:             TestFixtureFactoryTypeAttribute
  */

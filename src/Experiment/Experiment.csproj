@@ -56,7 +56,7 @@
     <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFixtureFactory.cs" />
-    <Compile Include="TestFixtureDeclarationAttribute.cs" />
+    <Compile Include="TestFixtureFactoryTypeAttribute.cs" />
     <Compile Include="ExamAttribute.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="TestCase.Generic.cs">

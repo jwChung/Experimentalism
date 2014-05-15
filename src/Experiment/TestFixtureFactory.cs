@@ -27,8 +27,8 @@ namespace Jwc.Experiment
         private static ITestFixtureFactory CreateTestFixtureFactory(Assembly testAssembly)
         {
             var attribute = testAssembly
-                .GetCustomAttributes(typeof(TestFixtureDeclarationAttribute), false)
-                .Cast<TestFixtureDeclarationAttribute>().SingleOrDefault();
+                .GetCustomAttributes(typeof(TestFixtureFactoryTypeAttribute), false)
+                .Cast<TestFixtureFactoryTypeAttribute>().SingleOrDefault();
 
             if (attribute == null)
                 return new NotSupportedTestFixtureFactory();
@@ -46,7 +46,7 @@ namespace Jwc.Experiment
                 throw new NotSupportedException(
                     String.Format(
                         CultureInfo.CurrentCulture,
-                        "To create auto data, explicitly declare TestFixtureDeclarationAttribute " +
+                        "To create auto data, explicitly declare TestFixtureFactoryTypeAttribute " +
                         "on the test assembly '{0}'.",
                         testMethod.ReflectedType.Assembly));
             }

@@ -170,7 +170,7 @@ namespace Jwc.Experiment
             });
         }
 
-        [Fact(Skip = "Explicitly run this test without TestFixtureDeclarationAttribute in which the line should be commented out.")]
+        [Fact(Skip = "Explicitly run this test without TestFixtureFactoryTypeAttribute in which the line should be commented out.")]
         public void CreateTestCommandsWithoutTestFixtureFactoryAttributeRetrunsExceptionCommand()
         {
             var sut = new FirstClassExamAttribute();
@@ -181,7 +181,7 @@ namespace Jwc.Experiment
 
             var command = Assert.IsType<ExceptionCommand>(actual);
             var exception = Assert.IsType<NotSupportedException>(command.Exception);
-            Assert.Contains("TestFixtureDeclarationAttribute", exception.Message);
+            Assert.Contains("TestFixtureFactoryTypeAttribute", exception.Message);
         }
 
         [Theory]
