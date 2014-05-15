@@ -12,7 +12,7 @@ namespace NuGet.Jwc.Experiment
     public class Scenario
     {
         [Exam]
-        public void TheoremSupportsNonParameterizedTest()
+        public void ExamSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
@@ -20,14 +20,14 @@ namespace NuGet.Jwc.Experiment
         [Exam]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void TheoremSupportsParameterizedTest(string arg1, int arg2)
+        public void ExamSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);
         }
 
         [Exam]
-        public void TheoremSupportsParameterizedTestWithAutoData(
+        public void ExamSupportsParameterizedTestWithAutoData(
             string arg1, Type arg2)
         {
             Assert.NotNull(arg1);
@@ -36,7 +36,7 @@ namespace NuGet.Jwc.Experiment
 
         [Exam]
         [InlineData("expected")]
-        public void TheoremSupportsParameterizedTestWithMixedData(
+        public void ExamSupportsParameterizedTestWithMixedData(
             string arg1, object arg2)
         {
             Assert.Equal("expected", arg1);
@@ -44,14 +44,14 @@ namespace NuGet.Jwc.Experiment
         }
 
         [Exam]
-        public void TheoremSupportsFrozenAttributeOfAutoFixtureXunit(
+        public void ExamSupportsFrozenAttributeOfAutoFixtureXunit(
             [Frozen] string arg1, string arg2)
         {
             Assert.Same(arg1, arg2);
         }
 
         [Exam]
-        public void TheoremSupportsModestAttributeOfAutoFixtureXunit(
+        public void ExamSupportsModestAttributeOfAutoFixtureXunit(
             [Modest] Person person)
         {
             Assert.Null(person.Name);
@@ -59,7 +59,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [Exam]
-        public void TheoremSupportsGreedyAttributeOfAutoFixtureXunit(
+        public void ExamSupportsGreedyAttributeOfAutoFixtureXunit(
             [Frozen] string name,
             [Frozen] int age,
             [Greedy] Person person)
@@ -69,7 +69,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [FirstClassExam]
-        public IEnumerable<ITestCase> FirstClassTheoremSupportsManyTestCases()
+        public IEnumerable<ITestCase> FirstClassExamSupportsManyTestCases()
         {
             var testCases = new[]
             {
@@ -83,7 +83,7 @@ namespace NuGet.Jwc.Experiment
         }
 
         [FirstClassExam]
-        public IEnumerable<ITestCase> FirstClassTheoremWithCustomFixtureSupportsTestCasesWithAutoData()
+        public IEnumerable<ITestCase> FirstClassExamWithCustomFixtureSupportsTestCasesWithAutoData()
         {
             yield return new TestCase<string>(x => Assert.NotNull(x));
             yield return new TestCase<int>(x => Assert.True(x > 0, "x > 0"));
