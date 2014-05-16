@@ -14,22 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.19.0")]
 
 /*
- * Version 0.19.0
+ * Version 0.19.1
  * 
- * - [NEW] Declaration of test fixture factory using attribute
- *   Introduces the new model to create test fixture. Using the
- *   TestFixtureFactoryType attribute, a type of ITestFixtureFactory can be
- *   defined and will be used to create a factory for test fixture.
- *   
- * - [FIX] Renames the test attributes. (BREAKING CHANGE)
- *   TheoremAttriute -> ExamAttribute
- *   FirstClassTheoremAttriute -> FirstClassExamAttribute
- *
- * - [FIX] Splits the Experiment project to Experiment and Experiment.Xunit
- *   projects. (BREAKING CHANGE)
- * 
- * - [NEW] Rearrages nuget packages to reflect the splited projects.
- *   (BREAKING CHANGE)
- *   Publishes the new package 'Experiment.Xunit', and deletes the packages
- *   'Experiment.AutoFixtureWithExample' and 'Experiment'.
+ * - [FIX] Publishes Experiment.AutoFixture as library(dll) form, instead of
+ *   transform source files(nuget). (BREAKING-CHANGE)
  */
