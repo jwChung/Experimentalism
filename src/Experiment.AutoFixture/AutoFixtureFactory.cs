@@ -27,13 +27,22 @@ namespace NuGet.Jwc.Experiment
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
-            return new AutoFixture(CreateFixture(testMethod));
+            var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
+            return new AutoFixture(CreateFixture(testMethod).Customize(cutomization));
         }
 
-        private static IFixture CreateFixture(MethodInfo testMethod)
+        /// <summary>
+        /// Creates a fixture with a test method.
+        /// </summary>
+        /// <param name="testMethod">
+        /// The test method.
+        /// </param>
+        /// <returns>
+        /// The new fixture.
+        /// </returns>
+        protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
-            var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
-            return new Fixture().Customize(cutomization);
+            return new Fixture();
         }
 
         private class ParameterAttributeCutomization : ICustomization

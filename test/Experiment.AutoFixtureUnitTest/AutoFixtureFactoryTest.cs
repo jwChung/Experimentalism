@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Jwc.Experiment;
+using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 
@@ -65,6 +66,36 @@ namespace NuGet.Jwc.Experiment
             var sut = new AutoFixtureFactory();
             Assert.Throws<ArgumentNullException>(() => sut.Create(null));
         }
+
+        [Fact]
+        public void CreateCorrectlyUsesCreateFixtureMethod()
+        {
+            var expected = new Fixture();
+            var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
+            var sut = new DelegatingAutoFixtureFactory
+            {
+                OnCreateFixture = m =>
+                {
+                    Assert.Equal(testMethod, m);
+                    return expected;
+                }
+            };
+
+            var actual = sut.Create(testMethod);
+
+            Assert.Same(expected, ((AutoFixture)actual).Fixture);
+        }
+
+        [Fact]
+        public void CreateAppliesCustomizeAttributeToCustomizedFixture()
+        {
+            var fixture = new Fixture();
+            var sut = new DelegatingAutoFixtureFactory { OnCreateFixture = m => fixture };
+
+            sut.Create(GetType().GetMethod("FrozenTest"));
+
+            Assert.Same(fixture.Create<string>(), fixture.Create<string>());
+        }
         
         public void FrozenTest([Frozen] string arg)
         {
@@ -76,6 +107,20 @@ namespace NuGet.Jwc.Experiment
 
         public void ManyAttributeTest([Greedy][Frozen] Person person)
         {
+        }
+        
+        private class DelegatingAutoFixtureFactory : AutoFixtureFactory
+        {
+            public Func<MethodInfo, IFixture> OnCreateFixture
+            {
+                get;
+                set;
+            }
+
+            protected override IFixture CreateFixture(MethodInfo testMethod)
+            {
+                return OnCreateFixture(testMethod);
+            }
         }
     }
 }
