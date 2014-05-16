@@ -6,6 +6,7 @@
     <version>0.0.0</version>
     <authors>Jin-Wook Chung</authors>
     <description>Experiment is a base library to support parameterized tests with auto data.</description>
+    <copyright>(c) 2014 Jin-Wook Chung</copyright>
     <tags>unit-testing tdd xunit</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
     <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
