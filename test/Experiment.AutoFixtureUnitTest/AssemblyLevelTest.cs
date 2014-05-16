@@ -10,7 +10,7 @@ namespace Jwc.Experiment.AutoFixture
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(AutoFixture).Assembly;
+            var sut = typeof(TestFixture).Assembly;
             var specifiedAssemblies = new []
             {
                 // GAC
@@ -35,7 +35,7 @@ namespace Jwc.Experiment.AutoFixture
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(AutoFixture).Assembly;
+            var sut = typeof(TestFixture).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var types = Assembly.Load(assemblyName).GetExportedTypes();
 

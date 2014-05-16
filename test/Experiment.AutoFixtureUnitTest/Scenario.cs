@@ -8,7 +8,7 @@ using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-[assembly: TestFixtureFactoryType(typeof(AutoFixtureFactory))]
+[assembly: TestFixtureFactoryType(typeof(TestFixtureFactory))]
 
 namespace Jwc.Experiment.AutoFixture
 {

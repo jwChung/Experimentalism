@@ -8,16 +8,16 @@ namespace Jwc.Experiment.AutoFixture
     /// <see cref="IFixture"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.
     /// auto data기능을 AutoFixture library로부터 채용하게 된다.
     /// </summary>
-    public class AutoFixture : ITestFixture
+    public class TestFixture : ITestFixture
     {
         private readonly IFixture _fixture;
         private readonly ISpecimenContext _specimenContext;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutoFixture"/> class.
+        /// Initializes a new instance of the <see cref="TestFixture"/> class.
         /// </summary>
         /// <param name="fixture">The fixture.</param>
-        public AutoFixture(IFixture fixture)
+        public TestFixture(IFixture fixture)
         {
             if (fixture == null)
             {

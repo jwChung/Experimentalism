@@ -10,7 +10,7 @@ namespace Jwc.Experiment.AutoFixture
     /// <summary>
     /// Represent the default factory for <see cref="ITestFixtureFactory"/>.
     /// </summary>
-    public class AutoFixtureFactory : ITestFixtureFactory
+    public class TestFixtureFactory : ITestFixtureFactory
     {
         /// <summary>
         /// Creates a test fixture.
@@ -27,7 +27,7 @@ namespace Jwc.Experiment.AutoFixture
                 throw new ArgumentNullException("testMethod");
 
             var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
-            return new AutoFixture(CreateFixture(testMethod).Customize(cutomization));
+            return new TestFixture(CreateFixture(testMethod).Customize(cutomization));
         }
 
         /// <summary>

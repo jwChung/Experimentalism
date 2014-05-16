@@ -53,9 +53,9 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AssemblyLevelTest.cs" />
-    <Compile Include="AutoFixtureTest.cs" />
+    <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
-    <Compile Include="AutoFixtureFactoryTest.cs" />
+    <Compile Include="TestFixtureFactoryTest.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

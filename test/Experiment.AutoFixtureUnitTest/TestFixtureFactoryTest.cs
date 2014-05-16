@@ -6,27 +6,27 @@ using Xunit;
 
 namespace Jwc.Experiment.AutoFixture
 {
-    public class AutoFixtureFactoryTest
+    public class TestFixtureFactoryTest
     {
         [Fact]
         public void SutIsTestFixtureFactory()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = new TestFixtureFactory();
             Assert.IsAssignableFrom<ITestFixtureFactory>(sut);
         }
 
         [Fact]
         public void CreateReturnCorrectTestFixture()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = new TestFixtureFactory();
             var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
-            Assert.IsAssignableFrom<AutoFixture>(actual);
+            Assert.IsAssignableFrom<TestFixture>(actual);
         }
 
         [Fact]
         public void CreateAppliesCustomizeAttribute()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = new TestFixtureFactory();
             var actual = sut.Create(GetType().GetMethod("FrozenTest"));
             Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
@@ -34,7 +34,7 @@ namespace Jwc.Experiment.AutoFixture
         [Fact]
         public void CreateAppliesComplexCustomizeAttributes()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = new TestFixtureFactory();
 
             var actual = sut.Create(GetType().GetMethod("PersonTest"));
 
@@ -50,7 +50,7 @@ namespace Jwc.Experiment.AutoFixture
         [Fact]
         public void CreateAppliesManyCustomizeAttributesOnSameParameter()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = new TestFixtureFactory();
 
             var actual = sut.Create(GetType().GetMethod("ManyAttributeTest"));
 
@@ -62,7 +62,7 @@ namespace Jwc.Experiment.AutoFixture
         [Fact]
         public void CreateWithNullTestMethodThrows()
         {
-            var sut = new AutoFixtureFactory();
+            var sut = new TestFixtureFactory();
             Assert.Throws<ArgumentNullException>(() => sut.Create(null));
         }
 
@@ -71,7 +71,7 @@ namespace Jwc.Experiment.AutoFixture
         {
             var expected = new Fixture();
             var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
-            var sut = new DelegatingAutoFixtureFactory
+            var sut = new DelegatingTestFixtureFactory
             {
                 OnCreateFixture = m =>
                 {
@@ -82,14 +82,14 @@ namespace Jwc.Experiment.AutoFixture
 
             var actual = sut.Create(testMethod);
 
-            Assert.Same(expected, ((AutoFixture)actual).Fixture);
+            Assert.Same(expected, ((TestFixture)actual).Fixture);
         }
 
         [Fact]
         public void CreateAppliesCustomizeAttributeToCustomizedFixture()
         {
             var fixture = new Fixture();
-            var sut = new DelegatingAutoFixtureFactory { OnCreateFixture = m => fixture };
+            var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => fixture };
 
             sut.Create(GetType().GetMethod("FrozenTest"));
 
@@ -108,7 +108,7 @@ namespace Jwc.Experiment.AutoFixture
         {
         }
         
-        private class DelegatingAutoFixtureFactory : AutoFixtureFactory
+        private class DelegatingTestFixtureFactory : TestFixtureFactory
         {
             public Func<MethodInfo, IFixture> OnCreateFixture
             {

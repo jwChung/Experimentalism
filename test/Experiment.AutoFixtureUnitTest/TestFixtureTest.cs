@@ -5,12 +5,12 @@ using Xunit.Extensions;
 
 namespace Jwc.Experiment.AutoFixture
 {
-    public class AutoFixtureTest
+    public class TestFixtureTest
     {
         [Fact]
         public void SutIsTestFixture()
         {
-            var sut = new AutoFixture(new Fixture());
+            var sut = new TestFixture(new Fixture());
             Assert.IsAssignableFrom<ITestFixture>(sut);
         }
 
@@ -20,7 +20,7 @@ namespace Jwc.Experiment.AutoFixture
             var request = typeof(object);
             var fixture = new Fixture();
             var expected = fixture.Freeze<object>();
-            var sut = new AutoFixture(fixture);
+            var sut = new TestFixture(fixture);
 
             var actual = sut.Create(request);
 
@@ -30,14 +30,14 @@ namespace Jwc.Experiment.AutoFixture
         [Fact]
         public void InitializeWithNullFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new AutoFixture(null));
+            Assert.Throws<ArgumentNullException>(() => new TestFixture(null));
         }
 
         [Fact]
         public void FixtureIsCorrect()
         {
             var expected = new Fixture();
-            var sut = new AutoFixture(expected);
+            var sut = new TestFixture(expected);
 
             var actual = sut.Fixture;
 
@@ -46,10 +46,10 @@ namespace Jwc.Experiment.AutoFixture
 
         [Theory]
         [InlineData(typeof(ITestFixture))]
-        [InlineData(typeof(AutoFixture))]
+        [InlineData(typeof(TestFixture))]
         public void CreateTestFixtureReturnsItself(Type testFixtureType)
         {
-            var sut = new AutoFixture(new Fixture());
+            var sut = new TestFixture(new Fixture());
             var actual = sut.Create(testFixtureType);
             Assert.Same(sut, actual);
         }
