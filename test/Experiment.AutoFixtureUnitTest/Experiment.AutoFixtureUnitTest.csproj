@@ -56,7 +56,6 @@
     <Compile Include="AutoFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="AutoFixtureFactoryTest.cs" />
-    <Compile Include="DelegatingSpecimenContext.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
