@@ -47,7 +47,7 @@ namespace Jwc.Experiment.Xunit
                     String.Format(
                         CultureInfo.CurrentCulture,
                         "To create auto data, explicitly declare TestFixtureFactoryTypeAttribute on the test " +
-                        "assembly '{0}' or override the CreateTestFixture(MethodInfo) method.",
+                        "assembly '{0}' or override the CreateTestFixture(MethodInfo) method of the test attribute.",
                         testMethod.ReflectedType.Assembly));
             }
         }
