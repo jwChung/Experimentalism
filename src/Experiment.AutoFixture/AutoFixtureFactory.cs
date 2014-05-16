@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Xunit;
 
-namespace NuGet.Jwc.Experiment
+namespace Jwc.Experiment.AutoFixture
 {
     /// <summary>
     /// Represent the default factory for <see cref="ITestFixtureFactory"/>.

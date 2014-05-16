@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment.AutoFixture;
 using Jwc.Experiment.Xunit;
-using NuGet.Jwc.Experiment;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
 [assembly: TestFixtureFactoryType(typeof(AutoFixtureFactory))]
 
-namespace NuGet.Jwc.Experiment
+namespace Jwc.Experiment.AutoFixture
 {
     public class Scenario
     {

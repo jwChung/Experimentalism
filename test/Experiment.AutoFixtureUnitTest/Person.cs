@@ -1,4 +1,4 @@
-namespace NuGet.Jwc.Experiment
+namespace Jwc.Experiment.AutoFixture
 {
     public class Person
     {

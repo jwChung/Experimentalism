@@ -1,9 +1,8 @@
 ﻿using System;
-using Jwc.Experiment;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace NuGet.Jwc.Experiment
+namespace Jwc.Experiment.AutoFixture
 {
     /// <summary>
     /// <see cref="IFixture"/>를 <see cref="ITestFixture"/> 인터페이스에 맞춘다.

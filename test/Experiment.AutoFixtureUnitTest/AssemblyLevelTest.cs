@@ -1,19 +1,12 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using Jwc.Experiment;
 using Xunit;
 using Xunit.Extensions;
 
-namespace NuGet.Jwc.Experiment
+namespace Jwc.Experiment.AutoFixture
 {
     public class AssemblyLevelTest
     {
-        const string _productDirectory = @"..\..\..\..\src\Experiment.AutoFixture\";
-        const string _testDirectory = @"..\..\..\..\test\Experiment.AutoFixtureUnitTest\";
-
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
@@ -48,26 +41,6 @@ namespace NuGet.Jwc.Experiment
 
             // Exercise system and Verify outcome
             sut.VerifyDoesNotExpose(types);
-        }
-
-        [Theory]
-        [InlineData(_productDirectory, "AutoFixture")]
-        [InlineData(_productDirectory, "AutoFixtureFactory")]
-        public void SutCorrectlyGeneratesNugetTransformFiles(string directory, string originName)
-        {
-            var origin = directory + originName + ".cs";
-            var destination = directory + originName + ".cs.pp";
-            Assert.True(File.Exists(origin), "exists.");
-            VerifyGeneratingFile(origin, destination);
-        }
-
-        [Conditional("CI")]
-        private static void VerifyGeneratingFile(string origin, string destination)
-        {
-            var content = File.ReadAllText(origin, Encoding.UTF8)
-                .Replace("NuGet.Jwc.Experiment", "$rootnamespace$");
-            File.WriteAllText(destination, content, Encoding.UTF8);
-            Assert.True(File.Exists(destination), "exists.");
         }
     }
 }
