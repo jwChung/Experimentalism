@@ -133,7 +133,7 @@ public void AddTest(int a, int b, int expected)
 하지만 Attribute Tabular Test는 Tabular Test에서는 없는 문제점이 있는데, 그것은 type-safe 방식이 아니라는 점이다. 그래서 Experiment에서는 Tabular Test와 Attribute Tabular Test의 장점만을 살릴 수 있는 First class test 방식을 지원합니다. First class test 방식에서는 Eager Test 문제를 해결함과 동시에 type-safe 방식을 지원하는 장점을 가집니다.
 
 ```c#
-[FirstClassTheorem]
+[FirstClassExam]
 public IEnumerable<ITestCase> AddTest()
 {
     var testCases = new[]
@@ -151,7 +151,7 @@ public IEnumerable<ITestCase> AddTest()
 또한, First class test 방식은 아래와 같이 anonymous 값을 넘겨주는 auto data 기능도 제공합니다.
 
 ```c#
-[FirstClassTheorem]
+[FirstClassExam]
 public IEnumerable<ITestCase> FirstClassTestWithAutoDataTest()
 {
     yield return new TestCase<string, object>(
@@ -174,7 +174,7 @@ Credits
 -------
 
 ###Third-party libraries
-Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습니다. 아래에서 각각의 라이브러리에서 언급되는 라이센스 전문은 LICENSE.txt 파일 또는 각 소스파일의 헤더형태로 제공되므로 이를 참고하시기 바랍니다.
+Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습니다. 아래의 각 라이브러리에서 언급되는 라이센스 전문은 LICENSE.txt 파일 또는 각 소스파일의 헤더형태로 제공되므로 이를 참고할 수 있습니다.
 
 * xunit 1.9.0.1566  
   Website:      https://github.com/xunit/xunit  
