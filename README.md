@@ -163,13 +163,6 @@ public IEnumerable<ITestCase> FirstClassTestWithAutoDataTest()
 }
 ```
 
-Experiment.AutoFixture
-----------------------
-Experiment.AutoFixture는 [AutoFixture 라이브러리](https://github.com/AutoFixture/AutoFixture)를 이용하여 auto data기능을 제공합니다.
-
-### Source code transformations
-Experiment.AutoFixture은 dll 형태로 제공되지 않고, 해당 프로젝트에 소스코드 파일이 직접 추가되는 형태로 배포되어, 사용자로 하여금 특정 목적에 맞게 소스코드를 수정할 수 있게 해주는 이점을 제공합니다(customization). _Source code transformations_에 대한 자세한 사항은 NuGet의 [도움말](http://docs.nuget.org/docs/creating-packages/configuration-file-and-source-code-transformations#Source_Code_Transformations)을 참고하세요.
-
 Credits
 -------
 
