@@ -15,7 +15,6 @@
       <dependency id="xunit" version="1.9.0.1566" />
     </dependencies>
     <references>
-      <reference file="Jwc.Experiment.dll" />
       <reference file="Jwc.Experiment.Xunit.dll" />
     </references>
   </metadata>

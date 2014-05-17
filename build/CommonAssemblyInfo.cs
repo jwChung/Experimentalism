@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.19.1")]
 
 /*
- * Version 0.19.1
+ * Version 0.19.2
  * 
- * - [FIX] Publishes Experiment.AutoFixture as library(dll) form, instead of
- *   transform source files(nuget). (BREAKING-CHANGE)
+ * - [FIX] Removes the direct reference 'Jwc.Experiment' from
+ *   'Jwc.Experiment.Xunit'. (BREAKING-CHANGE)
  */
