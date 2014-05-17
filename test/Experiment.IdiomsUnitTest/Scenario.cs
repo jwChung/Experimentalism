@@ -6,7 +6,6 @@ using Jwc.Experiment.Idioms;
 using Jwc.Experiment.Idioms.Assertions;
 using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
-using Xunit;
 
 [assembly: TestFixtureFactoryType(typeof(Scenario.FakeTestFixtureFactory))]
 
@@ -14,8 +13,9 @@ namespace Jwc.Experiment.Idioms
 {
     public class Scenario
     {
-        [Fact]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesMember()
+        [Exam]
+        public void NullGuardClasuseAssertionCorrectlyVerifiesMember(
+            NullGuardClauseAssertion assertion)
         {
             typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -26,7 +26,7 @@ namespace Jwc.Experiment.Idioms
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
                 .ToList()
-                .ForEach(new NullGuardClauseAssertion(new FakeTestFixture()).Verify);
+                .ForEach(assertion.Verify);
         }
 
         [FirstClassExam]
@@ -43,13 +43,14 @@ namespace Jwc.Experiment.Idioms
                 .Select(m => new TestCase<NullGuardClauseAssertion>(a => a.Verify(m)));
         }
 
-        [Fact]
-        public void MemberInitializationAssertionCorrectlyVerifiesMember()
+        [Exam]
+        public void MemberInitializationAssertionCorrectlyVerifiesMember(
+            MemberInitializationAssertion assertion)
         {
             typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers()
                 .ToList()
-                .ForEach(new MemberInitializationAssertion(new FakeTestFixture()).Verify);
+                .ForEach(assertion.Verify);
         }
 
         [FirstClassExam]
@@ -60,13 +61,14 @@ namespace Jwc.Experiment.Idioms
                 .Select(m => new TestCase<MemberInitializationAssertion>(a => a.Verify(m)));
         }
 
-        [Fact]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesType()
+        [Exam]
+        public void NullGuardClasuseAssertionCorrectlyVerifiesType(
+            NullGuardClauseAssertion assertion)
         {
-            new NullGuardClauseAssertion(new FakeTestFixture()).Verify(typeof(Random));
+            assertion.Verify(typeof(Random));
         }
 
-        [Fact]
+        [Exam]
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
@@ -81,7 +83,7 @@ namespace Jwc.Experiment.Idioms
             .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        [Fact]
+        [Exam]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
