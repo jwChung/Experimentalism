@@ -179,17 +179,17 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright 2013 Outercurve Foundation  
   License:      Apache 2.0
 
-* AutoFixture 3.0.1  
+* AutoFixture 3.18.7
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* AutoFixture.Xunit 3.0.1  
+* AutoFixture.Xunit 3.18.7
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* AutoFixture.Idioms 3.0.1  
+* AutoFixture.Idioms 3.18.7
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
