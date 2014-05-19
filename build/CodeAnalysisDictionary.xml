@@ -7,7 +7,7 @@
       <Word>TestFixtureFactoryTypeAttribute</Word>
       <Word>Xunit</Word>
       <Word>CreateTestFixture</Word>
-      <Word>MethodInfo</Word>
+      <Word>ITestFixture</Word>
     </Recognized>
     <Unrecognized>
       <Word></Word>
