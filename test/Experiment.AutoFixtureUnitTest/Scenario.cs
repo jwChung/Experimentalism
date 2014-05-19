@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Jwc.Experiment.AutoFixture;
 using Jwc.Experiment.Xunit;
-using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
 

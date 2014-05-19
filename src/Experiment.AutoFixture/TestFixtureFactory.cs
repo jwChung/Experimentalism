@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Xunit;
 
 namespace Jwc.Experiment.AutoFixture
 {

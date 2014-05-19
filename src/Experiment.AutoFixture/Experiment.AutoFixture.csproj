@@ -49,6 +49,10 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CustomizeAttribute.cs" />
+    <Compile Include="FrozenAttribute.cs" />
+    <Compile Include="GreedyAttribute.cs" />
+    <Compile Include="ModestAttribute.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />

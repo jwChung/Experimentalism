@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Xunit;
 using Xunit;
 
 namespace Jwc.Experiment.AutoFixture
