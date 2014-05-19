@@ -18,4 +18,9 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] Removes the direct reference 'Jwc.Experiment' from
  *   'Jwc.Experiment.Xunit'. (BREAKING-CHANGE)
+ *   
+ * - [FIX] Improts some customize attributes from the AutoFixture project
+ *   (https://github.com/AutoFixture/AutoFixture) to customize a test fixture
+ *   through test parameters, and removes the reference 'AutoFixture.Xuit' from
+ *   'Jwc.Experiment.Xunit'. (BREAKING-CHANGE)
  */
