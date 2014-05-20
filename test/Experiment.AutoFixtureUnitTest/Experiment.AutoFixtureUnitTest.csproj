@@ -61,6 +61,7 @@
     <Compile Include="FrozenAttributeTest.cs" />
     <Compile Include="GreedyAttributeTest.cs" />
     <Compile Include="ModestAttributeTest.cs" />
+    <Compile Include="NoAutoPropertiesAttributeTest.cs" />
     <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureFactoryTest.cs" />

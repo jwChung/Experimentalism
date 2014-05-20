@@ -21,4 +21,6 @@ using System.Runtime.InteropServices;
  *   
  * - [NEW] Implements AutoPropertiesAttribute to explicitly set auto-properties
  *   of a specimen.
+ *   
+ * - [NEW] Imports NoAutoPropertiesAttribute from AutoFixture.Xunit.
  */

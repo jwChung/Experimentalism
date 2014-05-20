@@ -50,6 +50,7 @@
     <Compile Include="FrozenAttribute.cs" />
     <Compile Include="GreedyAttribute.cs" />
     <Compile Include="ModestAttribute.cs" />
+    <Compile Include="NoAutoPropertiesAttribute.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
