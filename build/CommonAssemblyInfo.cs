@@ -14,13 +14,17 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.19.1")]
 
 /*
- * Version 0.19.2
+ * Version 0.20.0
  * 
  * - [FIX] Removes the direct reference 'Jwc.Experiment' from
  *   'Jwc.Experiment.Xunit'. (BREAKING-CHANGE)
  *   
- * - [FIX] Improts some customize attributes from the AutoFixture project
+ * - [NEW] Improts some customize attributes from the AutoFixture project
  *   (https://github.com/AutoFixture/AutoFixture) to customize a test fixture
  *   through test parameters, and removes the reference 'AutoFixture.Xuit' from
  *   'Jwc.Experiment.Xunit'. (BREAKING-CHANGE)
+ *   
+ * - [NEW] Updates AutoFixture and AutoFixture.Idioms to v3.18.7 to support null
+ *   gurad clauses for generic and to use debugging symbols and its source
+ *   codes.
  */
