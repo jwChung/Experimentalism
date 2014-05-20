@@ -46,14 +46,14 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Exam]
-        public void ExamSupportsFrozenAttributeOfAutoFixtureXunit(
+        public void FrozenAttributeFreezesInstanceOfCertainType(
             [Frozen] string arg1, string arg2)
         {
             Assert.Same(arg1, arg2);
         }
 
         [Exam]
-        public void ExamSupportsModestAttributeOfAutoFixtureXunit(
+        public void ModestAttributeUsesModestCtorToConstructInstanceOfCertainType(
             [Modest] Person person)
         {
             Assert.Null(person.Name);
@@ -61,7 +61,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Exam]
-        public void ExamSupportsGreedyAttributeOfAutoFixtureXunit(
+        public void GreedyAttributeUsesGreedyCtorToConstructInstanceOfCertainType(
             [Frozen] string name,
             [Frozen] int age,
             [Greedy] Person person)
