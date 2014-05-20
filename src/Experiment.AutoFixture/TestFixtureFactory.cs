@@ -40,7 +40,7 @@ namespace Jwc.Experiment.AutoFixture
         /// </returns>
         protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
-            return new Fixture();
+            return new Fixture { OmitAutoProperties = true };
         }
 
         private class ParameterAttributeCutomization : ICustomization

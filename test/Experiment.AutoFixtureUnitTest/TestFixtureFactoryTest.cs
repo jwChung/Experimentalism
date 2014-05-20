@@ -85,7 +85,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Fact]
-        public void CreateAppliesCustomizeAttributeToCustomizedFixture()
+        public void CreateCorrectlyAppliesCustomizeAttribute()
         {
             var fixture = new Fixture();
             var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => fixture };
@@ -93,6 +93,28 @@ namespace Jwc.Experiment.AutoFixture
             sut.Create(GetType().GetMethod("FrozenTest"));
 
             Assert.Same(fixture.Create<string>(), fixture.Create<string>());
+        }
+
+        [Fact]
+        public void CreateReturnsFixtureOmittingAutoProperties()
+        {
+            var sut = new TestFixtureFactory();
+
+            var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var testFixture = Assert.IsAssignableFrom<TestFixture>(actual);
+            Assert.True(testFixture.Fixture.OmitAutoProperties);
+        }
+
+        [Fact]
+        public void CreateCanReturnFixtureAllowingAutoProperties()
+        {
+            var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => new Fixture() };
+
+            var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var testFixture = Assert.IsAssignableFrom<TestFixture>(actual);
+            Assert.False(testFixture.Fixture.OmitAutoProperties);
         }
         
         public void FrozenTest([Frozen] string arg)
