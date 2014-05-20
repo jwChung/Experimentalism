@@ -23,4 +23,9 @@ using System.Runtime.InteropServices;
  *   of a specimen.
  *   
  * - [NEW] Imports NoAutoPropertiesAttribute from AutoFixture.Xunit.
+ * 
+ * - [NEW] Makes the TestCase class accepting the Delegate parameter to avoid
+ *   the ambiguousness between Action and Func supplied to constructor parameter
+ *   of generic TestCase, and removes all the generic TestCase classes.
+ *   (BREAKING-CHANGE)
  */

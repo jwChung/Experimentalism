@@ -78,12 +78,13 @@ namespace Jwc.Experiment.Xunit
         [FirstClassExamWithCustomFixture]
         public IEnumerable<ITestCase> FirstClassExamSupportsTestCasesWithAutoData()
         {
-            yield return new TestCase<string, int>(
-                (x, y) =>
-                {
-                    Assert.Equal("custom string", x);
-                    Assert.Equal(5678, y);
-                });
+            yield return new TestCase(
+                new Action<string, int>(
+                    (x, y) =>
+                    {
+                        Assert.Equal("custom string", x);
+                        Assert.Equal(5678, y);
+                    }));
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute

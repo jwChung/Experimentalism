@@ -152,14 +152,15 @@ public IEnumerable<ITestCase> AddTest()
 
 ```c#
 [FirstClassExam]
-public IEnumerable<ITestCase> FirstClassTestWithAutoDataTest()
+public IEnumerable<ITestCase> FirstClassExamWithAutoDataTest()
 {
-    yield return new TestCase<string, object>(
-        (x, y) =>
-        {
-            Assert.NotNull(x);
-            Assert.NotNull(y);
-        });
+    yield return new TestCase(
+        new Action<string, object>(
+            (x, y) =>
+            {
+                Assert.NotNull(x);
+                Assert.NotNull(y);
+            }));
 }
 ```
 

@@ -87,9 +87,9 @@ namespace Jwc.Experiment.AutoFixture
         [FirstClassExam]
         public IEnumerable<ITestCase> FirstClassExamWithCustomFixtureSupportsTestCasesWithAutoData()
         {
-            yield return new TestCase<string>(x => Assert.NotNull(x));
-            yield return new TestCase<int>(x => Assert.True(x > 0, "x > 0"));
-            yield return new TestCase<object>(x => Assert.NotNull(x));
+            yield return new TestCase(new Action<int>(x => Assert.True(x > 0, "x > 0")));
+            yield return new TestCase(new Action<string>(x => Assert.NotNull(x)));
+            yield return new TestCase(new Action<object>(x => Assert.NotNull(x)));
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute
