@@ -14,8 +14,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.20.0")]
 
 /*
- * Version 0.20.1
+ * Version 0.21.0
  * 
  * - [FIX] Makes a test fixture creating a specimen without auto-properties as
  *   default. (BREAKING-CHANGE)
+ *   
+ * - [NEW] Implements AutoPropertiesAttribute to explicitly set auto-properties
+ *   of a specimen.
  */
