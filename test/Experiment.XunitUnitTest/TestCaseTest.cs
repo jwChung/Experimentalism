@@ -65,7 +65,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSut()
+        public void ConvertNullMethodToTestCommandThrows()
         {
             var sut = new TestCase(() => { });
             Assert.Throws<ArgumentNullException>(
@@ -86,28 +86,31 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(action, command.Delegate);
             Assert.Empty(command.Arguments);
         }
+    }
 
+    public class TestCaseOfTTest
+    {
         [Fact]
-        public void SutOfTIsTestCase()
+        public void SutIsTestCase()
         {
             var sut = new TestCase<object>(x => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
 
         [Fact]
-        public void InitializeWithNullActionOfTThrows()
+        public void InitializeWithNullActionThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase<object>((Action<object>)null));
         }
 
         [Fact]
-        public void InitializeWithNullFuncOfTThrows()
+        public void InitializeWithNullFuncThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase<string>((Func<string, object>)null));
         }
 
         [Fact]
-        public void InitializeWithCompositeActionOfTThrows()
+        public void InitializeWithCompositeActionThrows()
         {
             Action<object> action = x => { };
             action += x => { };
@@ -115,7 +118,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void InitializeWithCompositeFuncOfTThrows()
+        public void InitializeWithCompositeFuncThrows()
         {
             Func<object, object> func = x => null;
             func += x => null;
@@ -123,7 +126,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithActionOfT()
+        public void DelegateIsCorrectWhenInitializedWithAction()
         {
             Action<object> action = x => { };
             var sut = new TestCase<object>(action);
@@ -134,7 +137,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithFuncOfT()
+        public void DelegateIsCorrectWhenInitializedWithFunc()
         {
             Func<int, object> func = x => null;
             var sut = new TestCase<int>(func);
@@ -145,7 +148,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT()
+        public void ConvertNullMethodToTestCommandThrows()
         {
             var sut = new TestCase<object>(x => { });
             Assert.Throws<ArgumentNullException>(
@@ -153,7 +156,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertToTestCommandWithNullFixtureFactoryThrowsIfDeclaredOnSutOfT()
+        public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
             var sut = new TestCase<object>(x => { });
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -162,7 +165,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertToTestCommandReturnsCorrectTestCommandIfDeclaredOnSutOfT()
+        public void ConvertToTestCommandReturnsCorrectTestCommand()
         {
             Action<int> action = x => { };
             var sut = new TestCase<int>(action);
@@ -170,7 +173,11 @@ namespace Jwc.Experiment.Xunit
             var fixture = new FakeTestFixture();
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
-                OnCreate = mi => { Assert.Equal(action.Method, mi); return fixture; }
+                OnCreate = mi =>
+                {
+                    Assert.Equal(action.Method, mi);
+                    return fixture;
+                }
             };
 
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
@@ -182,13 +189,17 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertToTestCommandCreatesFixtureOnlyOnceIfDeclaredOnSutOfT()
+        public void ConvertToTestCommandCreatesFixtureOnlyOnce()
         {
             var sut = new TestCase<int>(x => { });
             int createdCount = 0;
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
-                OnCreate = mi => { createdCount++; return new FakeTestFixture(); }
+                OnCreate = mi =>
+                {
+                    createdCount++;
+                    return new FakeTestFixture();
+                }
             };
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
@@ -196,28 +207,31 @@ namespace Jwc.Experiment.Xunit
 
             Assert.Equal(1, createdCount);
         }
+    }
 
+    public class TestCaseOfT1AndT2Test
+    {
         [Fact]
-        public void SutOfT1T2IsTestCase()
+        public void SutIsTestCase()
         {
             var sut = new TestCase<object, int>((x, y) => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
 
         [Fact]
-        public void InitializeWithNullActionOfT1T2Throws()
+        public void InitializeWithNullActionThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase<object, int>((Action<object, int>)null));
         }
 
         [Fact]
-        public void InitializeWithNullFuncOfT1T2Throws()
+        public void InitializeWithNullFuncThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase<string, int>((Func<string, int, object>)null));
         }
 
         [Fact]
-        public void InitializeWithCompositeActionOfT1T2Throws()
+        public void InitializeWithCompositeActionThrows()
         {
             Action<object, int> action = (x, y) => { };
             action += (x, y) => { };
@@ -225,7 +239,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void InitializeWithCompositeFuncOfT1T2Throws()
+        public void InitializeWithCompositeFuncThrows()
         {
             Func<object, int, object> func = (x, y) => null;
             func += (x, y) => null;
@@ -233,7 +247,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithActionOfT1T2()
+        public void DelegateIsCorrectWhenInitializedWithAction()
         {
             Action<object, int> action = (x, y) => { };
             var sut = new TestCase<object, int>(action);
@@ -244,7 +258,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithFuncOfT1T2()
+        public void DelegateIsCorrectWhenInitializedWithFunc()
         {
             Func<int, string, object> func = (x, y) => null;
             var sut = new TestCase<int, string>(func);
@@ -255,7 +269,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertNullMethodToTestCommandThrowsIfDeclaredOnSutOfT1T2()
+        public void ConvertNullMethodToTestCommandThrows()
         {
             var sut = new TestCase<object, int>((x, y) => { });
             Assert.Throws<ArgumentNullException>(
@@ -263,7 +277,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertToTestCommandWithNullFixtureFactoryThrowsIfDeclaredOnSutOfT1T2()
+        public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
             var sut = new TestCase<object, int>((x, y) => { });
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -272,7 +286,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertToTestCommandReturnsCorrectTestCommandIfDeclaredOnSutOfT1T2()
+        public void ConvertToTestCommandReturnsCorrectTestCommand()
         {
             Action<int, string> action = (x, y) => { };
             var sut = new TestCase<int, string>(action);
@@ -280,7 +294,11 @@ namespace Jwc.Experiment.Xunit
             var fixture = new FakeTestFixture();
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
-                OnCreate = mi => { Assert.Equal(action.Method, mi); return fixture; }
+                OnCreate = mi =>
+                {
+                    Assert.Equal(action.Method, mi);
+                    return fixture;
+                }
             };
 
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
@@ -294,13 +312,17 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertToTestCommandCreatesFixtureOnlyOnceIfDeclaredOnSutOfT1T2()
+        public void ConvertToTestCommandCreatesFixtureOnlyOnce()
         {
             var sut = new TestCase<int, string>((x, y) => { });
             int createdCount = 0;
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
-                OnCreate = mi => { createdCount++; return new FakeTestFixture(); }
+                OnCreate = mi =>
+                {
+                    createdCount++;
+                    return new FakeTestFixture();
+                }
             };
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
