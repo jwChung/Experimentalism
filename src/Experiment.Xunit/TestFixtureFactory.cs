@@ -1,20 +1,45 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
 namespace Jwc.Experiment.Xunit
 {
-    internal static class TestFixtureFactory
+    /// <summary>
+    /// Supplies harbor of <see cref="ITestFixtureFactory" />.
+    /// </summary>
+    public static class TestFixtureFactory
     {
         private static ITestFixtureFactory _testFixtureFactory;
-        private static readonly object _lockObj = new object();
+        private static readonly object _syncLock = new object();
 
-        public static ITestFixture Create(MethodInfo testMethod)
+        /// <summary>
+        /// Gets a value inicating the current
+        /// <see cref="ITestFixtureFactory" />.
+        /// </summary>
+        public static ITestFixtureFactory Current
+        {
+            get
+            {
+                return _testFixtureFactory ?? new NotSupportedFixtureFactory2();
+            }
+        }
+
+        /// <summary>
+        /// Sets a factory of test fixture.
+        /// </summary>
+        /// <param name="testFixtureFactory">
+        /// The factory of test fixture.
+        /// </param>
+        public static void SetCurrent(ITestFixtureFactory testFixtureFactory)
+        {
+            _testFixtureFactory = testFixtureFactory;
+        }
+
+        internal static ITestFixture Create(MethodInfo testMethod)
         {
             if (_testFixtureFactory == null)
             {
-                lock (_lockObj)
+                lock (_syncLock)
                 {
                     if (_testFixtureFactory == null)
                         _testFixtureFactory = CreateTestFixtureFactory(testMethod.ReflectedType.Assembly);
@@ -31,26 +56,9 @@ namespace Jwc.Experiment.Xunit
                 .Cast<TestFixtureFactoryTypeAttribute>().SingleOrDefault();
 
             if (attribute == null)
-                return new NotSupportedFixtureFactory();
+                return new NotSupportedFixtureFactory2();
 
             return (ITestFixtureFactory)Activator.CreateInstance(attribute.Type);
-        }
-
-        private class NotSupportedFixtureFactory : ITestFixtureFactory
-        {
-            ITestFixture ITestFixtureFactory.Create(MethodInfo testMethod)
-            {
-                if (testMethod == null)
-                    throw new ArgumentNullException("testMethod");
-
-                throw new NotSupportedException(
-                    String.Format(
-                        CultureInfo.CurrentCulture,
-                        "To create auto data, explicitly declare TestFixtureFactoryTypeAttribute on the test " +
-                        "assembly '{0}' or override the CreateTestFixture method of the test attribute " +
-                        "to create an instance of ITestFixture.",
-                        testMethod.ReflectedType.Assembly));
-            }
         }
     }
 }

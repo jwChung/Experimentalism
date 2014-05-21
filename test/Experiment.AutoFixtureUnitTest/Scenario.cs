@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.AutoFixture;
 using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
+using TestFixtureFactory = Jwc.Experiment.AutoFixture.TestFixtureFactory;
 
 [assembly: TestFixtureFactoryType(typeof(TestFixtureFactory))]
 
