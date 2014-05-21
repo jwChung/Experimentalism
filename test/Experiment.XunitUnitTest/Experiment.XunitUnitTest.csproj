@@ -48,6 +48,7 @@
     <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
+    <Compile Include="AssemblyInitializeAttributeTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
     <Compile Include="DelegatingStaticTestFixtureFactory.cs" />
     <Compile Include="DelegatingTestCase.cs" />

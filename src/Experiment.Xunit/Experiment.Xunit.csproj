@@ -48,6 +48,7 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyInitializeAttribute.cs" />
     <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="FirstClassCommand.cs" />
