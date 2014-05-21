@@ -7,8 +7,10 @@ namespace Jwc.Experiment.Xunit
     {
         public static void Execute(this MethodInfo testMethod)
         {
-            var setup = new AppDomainSetup { ApplicationBase = Environment.CurrentDirectory };
-            var appDomain = AppDomain.CreateDomain(testMethod.Name, null, setup);
+            var appDomain = AppDomain.CreateDomain(
+                testMethod.Name,
+                AppDomain.CurrentDomain.Evidence,
+                AppDomain.CurrentDomain.SetupInformation);
 
             try
             {
@@ -21,15 +23,6 @@ namespace Jwc.Experiment.Xunit
             finally
             {
                 AppDomain.Unload(appDomain);
-            }
-        }
-
-        private class TestRunner : MarshalByRefObject
-        {
-            public void Run(MethodInfo testMethod)
-            {
-                var target = Activator.CreateInstance(testMethod.ReflectedType);
-                testMethod.Invoke(target, new object[0]);
             }
         }
     }

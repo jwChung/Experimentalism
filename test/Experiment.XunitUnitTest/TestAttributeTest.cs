@@ -286,7 +286,11 @@ namespace Jwc.Experiment.Xunit
         [InlineData("CreateParameterizedTestWithoutTestFixtureFactoryAttributeReturnsExceptionCommand")]
         [InlineData("CreateParameterizedTestWithTestFixtureFactoryAttributeReturnsCorrectCommand")]
         [InlineData("CreateParameterizedTestSeveralTimesCreatesTestFixtureFactoryOnlyOnce")]
-        [InlineData("CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultiThreads")]
+        [InlineData("CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultipleThreads")]
+        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
+        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes")]
+        [InlineData("CreateTestCommandsUsesMultipleAssemblyInitializes")]
+        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads")]
         public void RunTestWithStaticFixture(string testMethod)
         {
             GetType().GetMethod(testMethod).Execute();
@@ -339,7 +343,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
         }
 
-        public void CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultiThreads()
+        public void CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultipleThreads()
         {
             // Fixture setup
             var sut = new TestAttribute();
@@ -358,6 +362,83 @@ namespace Jwc.Experiment.Xunit
 
             // Verify outcome
             Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
+        }
+
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyInitalizer.SetupCount);
+        }
+
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyInitalizer.SetupCount);
+        }
+
+        public void CreateTestCommandsUsesMultipleAssemblyInitializes()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyInitalizer.SetupCount);
+            Assert.Equal(1, SpyOtherInitalizer.SetupCount);
+        }
+
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
+        {
+            // Fixture setup
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var threads = new Thread[20];
+            for (int i = 0; i < threads.Length; i++)
+                threads[i] = new Thread(() => sut.CreateTestCommands(method).ToArray());
+
+            // Exercise system
+            foreach (var thread in threads)
+                thread.Start();
+
+            foreach (var thread in threads)
+                thread.Join();
+
+            Assert.Equal(1, SpyInitalizer.SetupCount);
+        }
+
+        [Fact(Skip = "Run on debug mode. I have no idea about why the DomainUnload event is only raised on debug mode.")]
+        public void CreateTestCommandsRegistersTearDownToDomainUnloadUnloadEvent()
+        {
+            IMethodInfo method = Reflector.Wrap(GetType()
+                .GetMethod("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel"));
+
+            var appDomain = AppDomain.CreateDomain(
+                method.Name,
+                AppDomain.CurrentDomain.Evidence,
+                AppDomain.CurrentDomain.SetupInformation);
+
+            try
+            {
+                var runner = (TestRunner)appDomain.CreateInstanceAndUnwrap(
+                    Assembly.GetExecutingAssembly().FullName,
+                    typeof(TestRunner).FullName);
+                runner.Run(method.MethodInfo);
+            }
+            finally
+            {
+                appDomain.DomainUnload += (s, e) => Assert.Equal(1, SpyInitalizer.TearDownCount);
+                AppDomain.Unload(appDomain);
+            }
         }
 
         [InlineData]

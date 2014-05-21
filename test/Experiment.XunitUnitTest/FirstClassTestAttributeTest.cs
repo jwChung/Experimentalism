@@ -186,7 +186,8 @@ namespace Jwc.Experiment.Xunit
 
         [Theory]
         [InlineData("CreateTestCommandsWithTestFixtureFactoryAttributePassesCorrectTestFixtureToTestCase")]
-        [InlineData("CreateTestCommandsSeveralTimesCreatesTestFixtureOnlyOnce")]
+        [InlineData("CreateTestCommandsCreatesTestFixtureOnlyOnceWhenCalledMultipleTimes")]
+        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
         public void RunTestWithStaticFixture(string testMethod)
         {
             GetType().GetMethod(testMethod).Execute();
@@ -208,7 +209,7 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<FactCommand>(actual);
         }
 
-        public void CreateTestCommandsSeveralTimesCreatesTestFixtureOnlyOnce()
+        public void CreateTestCommandsCreatesTestFixtureOnlyOnceWhenCalledMultipleTimes()
         {
             var sut = new FirstClassTestAttribute();
             const string methodName = "PassTestFixtureTest";
@@ -218,6 +219,16 @@ namespace Jwc.Experiment.Xunit
             sut.CreateTestCommands(method).Single();
 
             Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
+        }
+
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
+        {
+            var sut = new FirstClassTestAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("PassTestFixtureTest"));
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyInitalizer.SetupCount);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()
@@ -297,6 +308,11 @@ namespace Jwc.Experiment.Xunit
             {
                 OnConvertToTestCommand = (m, f) => { throw new NotSupportedException(); }
             };
+        }
+
+        public IEnumerable<ITestCase> EmptyTestCases()
+        {
+            yield break;
         }
 
         private class TssFirstClassTestAttribute : FirstClassTestAttribute

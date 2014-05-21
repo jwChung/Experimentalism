@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Jwc.Experiment.Xunit
 {
@@ -9,6 +11,9 @@ namespace Jwc.Experiment.Xunit
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class AssemblyInitializeAttribute : Attribute
     {
+        private static readonly object _syncLock = new object();
+        private static bool _initialized;
+
         private readonly Type _initializer;
 
         /// <summary>
@@ -37,6 +42,35 @@ namespace Jwc.Experiment.Xunit
             {
                 return _initializer;
             }
+        }
+
+        internal static void Initialize(Assembly testAssembly)
+        {
+            if (_initialized)
+                return;
+
+            lock (_syncLock)
+            {
+                if (_initialized)
+                    return;
+
+                InitializeImpl(testAssembly);
+                _initialized = true;    
+            }
+        }
+
+        private static void InitializeImpl(Assembly testAssembly)
+        {
+            var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyInitializeAttribute), false);
+            foreach (AssemblyInitializeAttribute attribure in attribures)
+                InitializeImpl(attribure.Initializer);
+        }
+
+        private static void InitializeImpl(Type type)
+        {
+            var teardown = Activator.CreateInstance(type) as IDisposable;
+            if (teardown != null)
+                AppDomain.CurrentDomain.DomainUnload += (s, e) => teardown.Dispose();
         }
     }
 }

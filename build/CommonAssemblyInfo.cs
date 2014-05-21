@@ -14,8 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.21.1")]
 
 /*
- * Version 0.21.1
+ * Version 0.22.0
  * 
- * - [FIX] Renames ExamAttribute to TestAttribute and FirstClassExamAttribute to
- *   FirstClassTestAttribute. (BREAKING-CHANGE)
+ * - [NEW] Implements setting up or tearing down test fixture on assembly level.
  */
