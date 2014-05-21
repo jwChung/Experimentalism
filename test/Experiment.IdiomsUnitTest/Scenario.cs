@@ -13,7 +13,7 @@ namespace Jwc.Experiment.Idioms
 {
     public class Scenario
     {
-        [Exam]
+        [Test]
         public void NullGuardClasuseAssertionCorrectlyVerifiesMember(
             NullGuardClauseAssertion assertion)
         {
@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
                 .ForEach(assertion.Verify);
         }
 
-        [FirstClassExam]
+        [FirstClassTest]
         public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -43,7 +43,7 @@ namespace Jwc.Experiment.Idioms
                 .Select(m => new TestCase(new Action<NullGuardClauseAssertion>(a => a.Verify(m))));
         }
 
-        [Exam]
+        [Test]
         public void MemberInitializationAssertionCorrectlyVerifiesMember(
             MemberInitializationAssertion assertion)
         {
@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms
                 .ForEach(assertion.Verify);
         }
 
-        [FirstClassExam]
+        [FirstClassTest]
         public IEnumerable<ITestCase> SutWithMemberInitializationAssertionCorrectlyCreatesTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
@@ -61,14 +61,14 @@ namespace Jwc.Experiment.Idioms
                 .Select(m => new TestCase(new Action<MemberInitializationAssertion>(a => a.Verify(m))));
         }
 
-        [Exam]
+        [Test]
         public void NullGuardClasuseAssertionCorrectlyVerifiesType(
             NullGuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }
 
-        [Exam]
+        [Test]
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
@@ -83,7 +83,7 @@ namespace Jwc.Experiment.Idioms
             .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        [Exam]
+        [Test]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(

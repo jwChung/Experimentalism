@@ -8,19 +8,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class FirstClassExamAttributeTest
+    public class FirstClassTestAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateTestCommandsReturnsCorrectCommands()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             const string methodName = "TestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsFromStaticReturnsCorrectCommands()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             const string methodName = "StaticTestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -54,7 +54,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsWithNullMethodInfoThrows()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             Assert.Throws<ArgumentNullException>(() => sut.CreateTestCommands(null).ToArray());
         }
 
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Xunit
         {
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
-            var sut = new TssFirstClassExamAttribute
+            var sut = new TssFirstClassTestAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -80,7 +80,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestCaseThrows()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ExceptionFromCreatingTestCaseTest"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -93,7 +93,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenCreatingTestFixtureThrows()
         {
-            var sut = new TssFirstClassExamAttribute
+            var sut = new TssFirstClassTestAttribute
             {
                 OnCreateTestFixture = mi => { throw new NotSupportedException(); }
             };
@@ -110,7 +110,7 @@ namespace Jwc.Experiment.Xunit
         [InlineData("InvalidReturnTypeTest")]
         public void CreateTestCommandsReturnsExceptionCommandWhenMethodReturnTypeIsInvalid(string methodName)
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -122,7 +122,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsDoesNotThrowWhenMethodReturnTypeIsValid()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ValidReturnTypeTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -133,7 +133,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenMethodIsParameterized()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ParameterizedTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -145,7 +145,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsOfAbstractBaseClassReturnsCorrectTestCommand()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             var method = Reflector.Wrap(typeof(SubTestClass).GetMethod("FirstClassTest"));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -156,7 +156,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsReturnsCorrectExceptionCommandsWhenManyTestCasesThrows()
         {
-            var sut = new TssFirstClassExamAttribute();
+            var sut = new TssFirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("ManyExceptionTest"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -173,7 +173,7 @@ namespace Jwc.Experiment.Xunit
         [Fact(Skip = "Explicitly run this test without TestFixtureFactoryTypeAttribute in which the line should be commented out.")]
         public void CreateTestCommandsWithoutTestFixtureFactoryAttributeRetrunsExceptionCommand()
         {
-            var sut = new FirstClassExamAttribute();
+            var sut = new FirstClassTestAttribute();
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -194,7 +194,7 @@ namespace Jwc.Experiment.Xunit
 
         public void CreateTestCommandsWithTestFixtureFactoryAttributePassesCorrectTestFixtureToTestCase()
         {
-            var sut = new FirstClassExamAttribute();
+            var sut = new FirstClassTestAttribute();
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
             DelegatingStaticTestFixtureFactory.OnCreate = mi =>
@@ -210,7 +210,7 @@ namespace Jwc.Experiment.Xunit
 
         public void CreateTestCommandsSeveralTimesCreatesTestFixtureOnlyOnce()
         {
-            var sut = new FirstClassExamAttribute();
+            var sut = new FirstClassTestAttribute();
             const string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
@@ -299,7 +299,7 @@ namespace Jwc.Experiment.Xunit
             };
         }
 
-        private class TssFirstClassExamAttribute : FirstClassExamAttribute
+        private class TssFirstClassTestAttribute : FirstClassTestAttribute
         {
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {

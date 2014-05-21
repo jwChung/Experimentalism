@@ -13,46 +13,46 @@ namespace Jwc.Experiment.AutoFixture
 {
     public class Scenario
     {
-        [Exam]
-        public void ExamSupportsNonParameterizedTest()
+        [Test]
+        public void TestAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [Exam]
+        [Test]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void ExamSupportsParameterizedTest(string arg1, int arg2)
+        public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);
         }
 
-        [Exam]
-        public void ExamSupportsParameterizedTestWithAutoData(
+        [Test]
+        public void TestAttributeSupportsParameterizedTestWithAutoData(
             string arg1, Type arg2)
         {
             Assert.NotNull(arg1);
             Assert.NotNull(arg2);
         }
 
-        [Exam]
+        [Test]
         [InlineData("expected")]
-        public void ExamSupportsParameterizedTestWithMixedData(
+        public void TestAttributeSupportsParameterizedTestWithMixedData(
             string arg1, object arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.NotNull(arg2);
         }
 
-        [Exam]
+        [Test]
         public void FrozenAttributeFreezesInstanceOfCertainType(
             [Frozen] string arg1, string arg2)
         {
             Assert.Same(arg1, arg2);
         }
 
-        [Exam]
+        [Test]
         public void ModestAttributeUsesModestCtorToConstructInstanceOfCertainType(
             [Modest] Person person)
         {
@@ -60,7 +60,7 @@ namespace Jwc.Experiment.AutoFixture
             Assert.Equal(0, person.Age);
         }
 
-        [Exam]
+        [Test]
         public void GreedyAttributeUsesGreedyCtorToConstructInstanceOfCertainType(
             [Frozen] string name,
             [Frozen] int age,
@@ -70,8 +70,8 @@ namespace Jwc.Experiment.AutoFixture
             Assert.Equal(age, person.Age);
         }
 
-        [FirstClassExam]
-        public IEnumerable<ITestCase> FirstClassExamSupportsManyTestCases()
+        [FirstClassTest]
+        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsManyTestCases()
         {
             var testCases = new[]
             {
@@ -84,8 +84,8 @@ namespace Jwc.Experiment.AutoFixture
                 c => new TestCase(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
-        [FirstClassExam]
-        public IEnumerable<ITestCase> FirstClassExamWithCustomFixtureSupportsTestCasesWithAutoData()
+        [FirstClassTest]
+        public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
             yield return new TestCase(new Action<int>(x => Assert.True(x > 0, "x > 0")));
             yield return new TestCase(new Action<string>(x => Assert.NotNull(x)));

@@ -9,19 +9,19 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class ExamAttributeTest
+    public class TestAttributeTest
     {
         [Fact]
         public void SutIsFactAttribute()
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             Assert.IsAssignableFrom<FactAttribute>(sut);
         }
 
         [Fact]
         public void CreateNonParameterizedTestReturnsCorrectFactCommand()
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.CreateTestCommands(method);
@@ -36,7 +36,7 @@ namespace Jwc.Experiment.Xunit
         [InlineData("dummy", 1, null)]
         public void CreateParameterizedTestReturnsTheoryCommands(string arg1, int arg2, object arg3)
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
 
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
@@ -52,7 +52,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestWithAutoDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new TssExamAttribute { OnCreateTestFixture = mi => fixture };
+            var sut = new TssTestAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -71,7 +71,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestWithMixedDataReturnsCorrectCommands()
         {
             var fixture = new FakeTestFixture();
-            var sut = new TssExamAttribute { OnCreateTestFixture = mi => fixture };
+            var sut = new TssTestAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -85,7 +85,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateParameterizedTestWithInvalidCountDataThrows()
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidCountData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -97,7 +97,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateParameterizedTestWithInvalidTypeDataThrows()
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithInvalidTypeData"));
 
             var actual = sut.CreateTestCommands(method);
@@ -110,7 +110,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestWithAutoDataNotUsingDataAttributeReturnsCorrectCommand()
         {
             var fixture = new FakeTestFixture();
-            var sut = new TssExamAttribute { OnCreateTestFixture = mi => fixture };
+            var sut = new TssTestAttribute { OnCreateTestFixture = mi => fixture };
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
 
             var actual = sut.CreateTestCommands(method);
@@ -124,7 +124,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateParameterizedTestPassesCorrectParameterTypes()
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedForParameterTypes"));
             Assert.DoesNotThrow(() => sut.CreateTestCommands(method).Single());
         }
@@ -134,7 +134,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestWithNoAutoDataDoesNotInitializeFixture(
             string arg1, int arg2, object arg3)
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             var actual = sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).Single();
             Assert.IsNotType<ExceptionCommand>(actual);
@@ -145,7 +145,7 @@ namespace Jwc.Experiment.Xunit
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -165,7 +165,7 @@ namespace Jwc.Experiment.Xunit
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -185,7 +185,7 @@ namespace Jwc.Experiment.Xunit
         {
             var fixture = new FakeTestFixture();
             int callCount = 0;
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -203,7 +203,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateNonParameterizedTestDoesNotInitializeFixture()
         {
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi => { throw new NotSupportedException(); }
             };
@@ -215,7 +215,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestForSingleReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi => { throw exception; }
             };
@@ -232,7 +232,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestForManyReturnsExceptionCommandWhenThrowingException()
         {
             var exception = new NotSupportedException();
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi => { throw exception; }
             };
@@ -254,7 +254,7 @@ namespace Jwc.Experiment.Xunit
         {
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
             bool verified = false;
-            var sut = new TssExamAttribute
+            var sut = new TssTestAttribute
             {
                 OnCreateTestFixture = mi =>
                 {
@@ -272,7 +272,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateParameterizedTestWithExceptionDataReturnsCorrectCommands()
         {
-            var sut = new TssExamAttribute();
+            var sut = new TssTestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithExceptionData"));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -294,7 +294,7 @@ namespace Jwc.Experiment.Xunit
 
         public void CreateParameterizedTestWithoutTestFixtureFactoryAttributeReturnsExceptionCommand()
         {
-            var sut = new ExamAttribute();
+            var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap(typeof(object).GetMethod("Equals", new[] { typeof(object) }));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -306,7 +306,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateParameterizedTestWithTestFixtureFactoryAttributeReturnsCorrectCommand()
         {
             // Fixture setup
-            var sut = new ExamAttribute();
+            var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
             var fixture = new FakeTestFixture();
             DelegatingStaticTestFixtureFactory.OnCreate = mi =>
@@ -331,7 +331,7 @@ namespace Jwc.Experiment.Xunit
 
         public void CreateParameterizedTestSeveralTimesCreatesTestFixtureFactoryOnlyOnce()
         {
-            var sut = new ExamAttribute();
+            var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             sut.CreateTestCommands(method).ToArray();
@@ -342,7 +342,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultiThreads()
         {
             // Fixture setup
-            var sut = new ExamAttribute();
+            var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
 
             var threads = new Thread[20];
@@ -395,7 +395,7 @@ namespace Jwc.Experiment.Xunit
         {
         }
 
-        private class TssExamAttribute : ExamAttribute
+        private class TssTestAttribute : TestAttribute
         {
             public Func<MethodInfo, ITestFixture> OnCreateTestFixture
             {

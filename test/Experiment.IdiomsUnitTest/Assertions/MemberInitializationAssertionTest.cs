@@ -208,7 +208,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             var types = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
 
-            var assembly = typeof(ExamAttribute).Assembly;
+            var assembly = typeof(TestAttribute).Assembly;
 
             var expected = assembly.GetExportedTypes();
 

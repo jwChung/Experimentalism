@@ -16,7 +16,7 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
-    public class ExamAttribute : FactAttribute
+    public class TestAttribute : FactAttribute
     {
         /// <summary>
         /// Enumerates the test commands represented by this test method.

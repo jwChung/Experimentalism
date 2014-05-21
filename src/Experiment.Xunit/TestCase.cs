@@ -9,7 +9,7 @@ namespace Jwc.Experiment.Xunit
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an
     /// xUnit.net ITestCommand when returned from a test method adorned with
-    /// the <see cref="FirstClassExamAttribute" />.
+    /// the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     public class TestCase : ITestCase
     {
@@ -71,7 +71,7 @@ namespace Jwc.Experiment.Xunit
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassExamAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
         /// A test fixture factory to provide auto data.

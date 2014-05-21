@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(ExamAttribute).Assembly;
+            var sut = typeof(TestAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 // GAC
@@ -35,7 +35,7 @@ namespace Jwc.Experiment.Xunit
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(ExamAttribute).Assembly;
+            var sut = typeof(TestAttribute).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var types = Assembly.Load(assemblyName).GetExportedTypes();
 

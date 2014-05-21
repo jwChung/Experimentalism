@@ -9,47 +9,47 @@ namespace Jwc.Experiment.Xunit
 {
     public class Scenario
     {
-        [ExamWithCustomFixture]
-        public void ExamSupportsNonParameterizedTest()
+        [ScenarioTest]
+        public void TestAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [ExamWithCustomFixture]
+        [ScenarioTest]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void ExamSupportsParameterizedTest(string arg1, int arg2)
+        public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);
         }
 
-        [ExamWithCustomFixture]
-        public void ExamSupportsParameterizedTestWithAutoData(
+        [ScenarioTest]
+        public void TestAttributeSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
             Assert.Equal("custom string", arg1);
             Assert.Equal(5678, arg2);
         }
 
-        [ExamWithCustomFixture]
+        [ScenarioTest]
         [InlineData("expected")]
-        public void ExamSupportsParameterizedTestWithMixedData(
+        public void TestAttributeSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(5678, arg2);
         }
 
-        [FirstClassExamWithCustomFixture]
-        public IEnumerable<ITestCase> FirstClassExamSupportsTestCasesForYieldReturn()
+        [FirstClassScenarioTest]
+        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForYieldReturn()
         {
             yield return new TestCase(() => Assert.Equal(3, 2 + 1));
             yield return new TestCase(() => Assert.Equal(10, 3 + 7));
         }
 
-        [FirstClassExamWithCustomFixture]
-        public ITestCase[] FirstClassExamSupportsTestCasesForArray()
+        [FirstClassScenarioTest]
+        public ITestCase[] FirstClassTestAttributeSupportsTestCasesForArray()
         {
             var testCases = new[]
             {
@@ -62,8 +62,8 @@ namespace Jwc.Experiment.Xunit
                 .Cast<ITestCase>().ToArray();
         }
 
-        [FirstClassExamWithCustomFixture]
-        public IEnumerable<ITestCase> FirstClassExamSupportsTestCasesForEnumerable()
+        [FirstClassScenarioTest]
+        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
             {
@@ -72,11 +72,11 @@ namespace Jwc.Experiment.Xunit
             };
 
             return testCases.Select(
-                c => new TestCase(() => new Scenario().ExamSupportsParameterizedTest(c.X, c.Y)));
+                c => new TestCase(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
-        [FirstClassExamWithCustomFixture]
-        public IEnumerable<ITestCase> FirstClassExamSupportsTestCasesWithAutoData()
+        [FirstClassScenarioTest]
+        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesWithAutoData()
         {
             yield return new TestCase(
                 new Action<string, int>(
@@ -96,7 +96,7 @@ namespace Jwc.Experiment.Xunit
             }
         }
 
-        private class ExamWithCustomFixtureAttribute : ExamAttribute
+        private class ScenarioTestAttribute : TestAttribute
         {
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
@@ -104,7 +104,7 @@ namespace Jwc.Experiment.Xunit
             }
         }
 
-        private class FirstClassExamWithCustomFixtureAttribute : FirstClassExamAttribute
+        private class FirstClassScenarioTestAttribute : FirstClassTestAttribute
         {
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
