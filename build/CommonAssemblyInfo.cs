@@ -16,8 +16,13 @@ using System.Runtime.InteropServices;
 /*
  * Version 0.22.0
  * 
- * - [NEW] Implements setting up or tearing down test fixture on assembly level.
+ * - [NEW] Implements setting up or tearing down test fixture on assembly level
+ *   using AssemblyInitializeAttribute.
+ *   
+ * - [NEW] Introduces DefaultFixtureFactory to support static factory of test
+ *   fixture.
  * 
  * - [FIX] Removes TestFixtureFactoryTypeAttribute to use
- *   AssemblyInitializeAttribute instead. (BREAKING-CHANGE)
+ *   AssemblyInitializeAttribute and DefaultFixtureFactory instead.
+ *   (BREAKING-CHANGE)
  */
