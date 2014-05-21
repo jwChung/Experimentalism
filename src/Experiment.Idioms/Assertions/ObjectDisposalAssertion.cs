@@ -83,6 +83,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// <param name="method">
         /// The method.
         /// </param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException")]
         public override void Verify(MethodInfo method)
         {
             if (method == null)
