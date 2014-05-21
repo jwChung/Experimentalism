@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Reflection;
-
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
@@ -10,7 +6,6 @@ namespace Jwc.Experiment.Xunit
     public static class TestFixtureFactory
     {
         private static ITestFixtureFactory _testFixtureFactory;
-        private static readonly object _syncLock = new object();
 
         /// <summary>
         /// Gets a value inicating the current
@@ -33,32 +28,6 @@ namespace Jwc.Experiment.Xunit
         public static void SetCurrent(ITestFixtureFactory testFixtureFactory)
         {
             _testFixtureFactory = testFixtureFactory;
-        }
-
-        internal static ITestFixture Create(MethodInfo testMethod)
-        {
-            if (_testFixtureFactory == null)
-            {
-                lock (_syncLock)
-                {
-                    if (_testFixtureFactory == null)
-                        _testFixtureFactory = CreateTestFixtureFactory(testMethod.ReflectedType.Assembly);
-                }
-            }
-
-            return _testFixtureFactory.Create(testMethod);
-        }
-
-        private static ITestFixtureFactory CreateTestFixtureFactory(Assembly testAssembly)
-        {
-            var attribute = testAssembly
-                .GetCustomAttributes(typeof(TestFixtureFactoryTypeAttribute), false)
-                .Cast<TestFixtureFactoryTypeAttribute>().SingleOrDefault();
-
-            if (attribute == null)
-                return new NotSupportedFixtureFactory();
-
-            return (ITestFixtureFactory)Activator.CreateInstance(attribute.Type);
         }
     }
 }

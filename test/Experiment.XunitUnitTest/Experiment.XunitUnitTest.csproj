@@ -50,7 +50,6 @@
     </Compile>
     <Compile Include="AssemblyInitializeAttributeTest.cs" />
     <Compile Include="AssemblyLevelTest.cs" />
-    <Compile Include="DelegatingStaticTestFixtureFactory.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="TestFixtureFactoryTest.cs" />
-    <Compile Include="TestFixtureFactoryTypeAttributeTest.cs" />
     <Compile Include="TestMethodExtensions.cs" />
     <Compile Include="TestRunner.cs" />
   </ItemGroup>
