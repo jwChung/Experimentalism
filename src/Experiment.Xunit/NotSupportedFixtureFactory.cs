@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Reflection;
 
 namespace Jwc.Experiment.Xunit
@@ -19,16 +18,10 @@ namespace Jwc.Experiment.Xunit
         /// </param>
         public ITestFixture Create(MethodInfo testMethod)
         {
-            if (testMethod == null)
-                throw new ArgumentNullException("testMethod");
-
             throw new NotSupportedException(
-                String.Format(
-                    CultureInfo.CurrentCulture,
-                    "To create auto data, explicitly declare TestFixtureFactoryTypeAttribute on the test " +
-                    "assembly '{0}' or override the CreateTestFixture method of the test attribute " +
-                    "to create an instance of ITestFixture.",
-                    testMethod.ReflectedType.Assembly));
+                "To create auto data, set valid 'ITestFixtureFactory' with the 'TestFixtureFactory.SetCurrent' " +
+                "method through 'AssemblyFixtureConfigAttribute', or override the 'CreateTestFixture' method " +
+                "of the test attribute to create an instance of 'ITestFixture'.");
         }
     }
 }

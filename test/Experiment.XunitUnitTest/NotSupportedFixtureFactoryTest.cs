@@ -14,13 +14,6 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void CreateWithNullTestMethodThrows()
-        {
-            var sut = new NotSupportedFixtureFactory();
-            Assert.Throws<ArgumentNullException>(() => sut.Create(null));
-        }
-
-        [Fact]
         public void CreateThrows()
         {
             var sut = new NotSupportedFixtureFactory();
