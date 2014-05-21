@@ -7,7 +7,7 @@ using Jwc.Experiment.Idioms.Assertions;
 using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
 
-[assembly: AssemblyInitialize(typeof(Scenario.FixtureFactoryInitializer))]
+[assembly: AssemblyInitialize(typeof(Scenario.DefaultFixtureFactoryInitializer))]
 
 namespace Jwc.Experiment.Idioms
 {
@@ -178,11 +178,11 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        internal class FixtureFactoryInitializer
+        internal class DefaultFixtureFactoryInitializer
         {
-            public FixtureFactoryInitializer()
+            public DefaultFixtureFactoryInitializer()
             {
-                TestFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
+                DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
             }
         }
     }

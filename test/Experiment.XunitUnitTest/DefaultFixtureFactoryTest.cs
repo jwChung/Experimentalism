@@ -1,10 +1,9 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Xunit.Extensions;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class TestFixtureFactoryTest
+    public class DefaultFixtureFactoryTest
     {
         [Theory]
         [InlineData("CurrentIsCorrect")]
@@ -16,14 +15,14 @@ namespace Jwc.Experiment.Xunit
 
         public void CurrentIsCorrect()
         {
-            Assert.IsAssignableFrom<NotSupportedFixtureFactory>(TestFixtureFactory.Current);
+            Assert.IsAssignableFrom<NotSupportedFixtureFactory>(DefaultFixtureFactory.Current);
         }
 
         public void SetCurrentCorrectlySetsFactoryToCurrent()
         {
             var expected = new DelegatingTestFixtureFactory();
-            TestFixtureFactory.SetCurrent(expected);
-            Assert.Equal(expected, TestFixtureFactory.Current);
+            DefaultFixtureFactory.SetCurrent(expected);
+            Assert.Equal(expected, DefaultFixtureFactory.Current);
         }
     }
 }

@@ -58,7 +58,7 @@
     <Compile Include="ITestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCase.cs" />
-    <Compile Include="TestFixtureFactory.cs" />
+    <Compile Include="DefaultFixtureFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">

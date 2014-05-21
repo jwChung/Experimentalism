@@ -7,7 +7,7 @@ using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-[assembly: AssemblyInitialize(typeof(Scenario.FixtureFactoryInitializer))]
+[assembly: AssemblyInitialize(typeof(Scenario.DefaultFixtureFactoryInitializer))]
 
 namespace Jwc.Experiment.AutoFixture
 {
@@ -100,11 +100,11 @@ namespace Jwc.Experiment.AutoFixture
             }
         }
 
-        internal class FixtureFactoryInitializer
+        internal class DefaultFixtureFactoryInitializer
         {
-            public FixtureFactoryInitializer()
+            public DefaultFixtureFactoryInitializer()
             {
-                Xunit.TestFixtureFactory.SetCurrent(new TestFixtureFactory());
+                DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
             }
         }
     }

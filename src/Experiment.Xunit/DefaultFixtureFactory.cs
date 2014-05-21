@@ -3,7 +3,7 @@ namespace Jwc.Experiment.Xunit
     /// <summary>
     /// Supplies harbor of <see cref="ITestFixtureFactory" />.
     /// </summary>
-    public static class TestFixtureFactory
+    public static class DefaultFixtureFactory
     {
         private static ITestFixtureFactory _testFixtureFactory;
 

@@ -397,7 +397,7 @@ namespace Jwc.Experiment.Xunit
                     return new FakeTestFixture();
                 }
             };
-            TestFixtureFactory.SetCurrent(factory);
+            DefaultFixtureFactory.SetCurrent(factory);
 
             // Exercise system 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -407,7 +407,7 @@ namespace Jwc.Experiment.Xunit
             Assert.True(actual.All(c => c is TheoryCommand));
 
             // Fixture teardown
-            TestFixtureFactory.SetCurrent(null);
+            DefaultFixtureFactory.SetCurrent(null);
         }
 
         [InlineData]

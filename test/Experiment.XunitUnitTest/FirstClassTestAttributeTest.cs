@@ -215,7 +215,7 @@ namespace Jwc.Experiment.Xunit
                     return expected;
                 }
             };
-            TestFixtureFactory.SetCurrent(factory);
+            DefaultFixtureFactory.SetCurrent(factory);
 
             // Exercise system and Verify outcome
             yield return new DelegatingTestCase
@@ -228,7 +228,7 @@ namespace Jwc.Experiment.Xunit
             };
 
             // Fixture teardown
-            TestFixtureFactory.SetCurrent(null);
+            DefaultFixtureFactory.SetCurrent(null);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()
