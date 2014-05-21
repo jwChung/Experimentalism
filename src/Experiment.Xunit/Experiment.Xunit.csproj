@@ -49,7 +49,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInitializeAttribute.cs" />
-    <Compile Include="NotSupportedFixtureFactory2.cs" />
+    <Compile Include="NotSupportedFixtureFactory.cs" />
     <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="FirstClassCommand.cs" />

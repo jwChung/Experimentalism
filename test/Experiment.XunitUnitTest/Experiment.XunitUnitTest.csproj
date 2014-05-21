@@ -53,7 +53,7 @@
     <Compile Include="DelegatingStaticTestFixtureFactory.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
-    <Compile Include="NotSupportedFixtureFactory2Test.cs" />
+    <Compile Include="NotSupportedFixtureFactoryTest.cs" />
     <Compile Include="SpyInitalizer.cs" />
     <Compile Include="SpyOtherInitalizer.cs" />
     <Compile Include="TestAttributeTest.cs" />

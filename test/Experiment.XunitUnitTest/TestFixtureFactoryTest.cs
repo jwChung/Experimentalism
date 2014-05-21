@@ -16,7 +16,7 @@ namespace Jwc.Experiment.Xunit
 
         public void CurrentIsCorrect()
         {
-            Assert.IsAssignableFrom<NotSupportedFixtureFactory2>(TestFixtureFactory.Current);
+            Assert.IsAssignableFrom<NotSupportedFixtureFactory>(TestFixtureFactory.Current);
         }
 
         public void SetCurrentCorrectlySetsFactoryToCurrent()

@@ -20,7 +20,7 @@ namespace Jwc.Experiment.Xunit
         {
             get
             {
-                return _testFixtureFactory ?? new NotSupportedFixtureFactory2();
+                return _testFixtureFactory ?? new NotSupportedFixtureFactory();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Jwc.Experiment.Xunit
                 .Cast<TestFixtureFactoryTypeAttribute>().SingleOrDefault();
 
             if (attribute == null)
-                return new NotSupportedFixtureFactory2();
+                return new NotSupportedFixtureFactory();
 
             return (ITestFixtureFactory)Activator.CreateInstance(attribute.Type);
         }

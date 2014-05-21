@@ -9,7 +9,7 @@ namespace Jwc.Experiment.Xunit
     /// <see cref="NotSupportedException" /> when the <code>Create</code>
     /// method is called.
     /// </summary>
-    public class NotSupportedFixtureFactory2 : ITestFixtureFactory
+    public class NotSupportedFixtureFactory : ITestFixtureFactory
     {
         /// <summary>
         /// Throws <see cref="NotSupportedException" />.
