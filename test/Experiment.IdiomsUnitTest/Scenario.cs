@@ -8,6 +8,7 @@ using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
 
 [assembly: TestFixtureFactoryType(typeof(Scenario.FakeTestFixtureFactory))]
+[assembly: AssemblyInitialize(typeof(Scenario.FixtureFactoryInitializer))]
 
 namespace Jwc.Experiment.Idioms
 {
@@ -175,6 +176,14 @@ namespace Jwc.Experiment.Idioms
             public ITestFixture Create(MethodInfo testMethod)
             {
                 return new FakeTestFixture();
+            }
+        }
+
+        internal class FixtureFactoryInitializer
+        {
+            public FixtureFactoryInitializer()
+            {
+                TestFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
             }
         }
     }

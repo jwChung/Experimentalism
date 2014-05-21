@@ -185,40 +185,10 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Theory]
-        [InlineData("CreateTestCommandsWithTestFixtureFactoryAttributePassesCorrectTestFixtureToTestCase")]
-        [InlineData("CreateTestCommandsCreatesTestFixtureOnlyOnceWhenCalledMultipleTimes")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
         public void RunTestWithStaticFixture(string testMethod)
         {
             GetType().GetMethod(testMethod).Execute();
-        }
-
-        public void CreateTestCommandsWithTestFixtureFactoryAttributePassesCorrectTestFixtureToTestCase()
-        {
-            var sut = new FirstClassTestAttribute();
-            const string methodName = "PassTestFixtureTest";
-            var method = Reflector.Wrap(GetType().GetMethod(methodName));
-            DelegatingStaticTestFixtureFactory.OnCreate = mi =>
-            {
-                Assert.Equal(method.MethodInfo, mi);
-                return new FakeTestFixture();
-            };
-
-            var actual = sut.CreateTestCommands(method).Single();
-
-            Assert.IsType<FactCommand>(actual);
-        }
-
-        public void CreateTestCommandsCreatesTestFixtureOnlyOnceWhenCalledMultipleTimes()
-        {
-            var sut = new FirstClassTestAttribute();
-            const string methodName = "PassTestFixtureTest";
-            var method = Reflector.Wrap(GetType().GetMethod(methodName));
-
-            sut.CreateTestCommands(method).Single();
-            sut.CreateTestCommands(method).Single();
-
-            Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
@@ -229,6 +199,36 @@ namespace Jwc.Experiment.Xunit
             sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(1, SpyInitalizer.SetupCount);
+        }
+
+        [FirstClassTest]
+        public IEnumerable<ITestCase> CreateTestCommandsUsesCorrectTestFixtureFactory()
+        {
+            // Fixture setup
+            var expected = new FakeTestFixture();
+            var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
+            var factory = new DelegatingTestFixtureFactory
+            {
+                OnCreate = m =>
+                {
+                    Assert.Equal(testMethod, m);
+                    return expected;
+                }
+            };
+            TestFixtureFactory.SetCurrent(factory);
+
+            // Exercise system and Verify outcome
+            yield return new DelegatingTestCase
+            {
+                OnConvertToTestCommand = (m, f) =>
+                {
+                    Assert.Equal(expected, f.Create(testMethod));
+                    return new FactCommand(m);
+                }
+            };
+
+            // Fixture teardown
+            TestFixtureFactory.SetCurrent(null);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()

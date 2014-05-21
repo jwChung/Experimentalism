@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment.AutoFixture;
 using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 using TestFixtureFactory = Jwc.Experiment.AutoFixture.TestFixtureFactory;
 
 [assembly: TestFixtureFactoryType(typeof(TestFixtureFactory))]
+[assembly: AssemblyInitialize(typeof(Scenario.FixtureFactoryInitializer))]
 
 namespace Jwc.Experiment.AutoFixture
 {
@@ -97,6 +99,14 @@ namespace Jwc.Experiment.AutoFixture
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
             {
                 yield return new object[] { "expected", 1234 };
+            }
+        }
+
+        internal class FixtureFactoryInitializer
+        {
+            public FixtureFactoryInitializer()
+            {
+                Xunit.TestFixtureFactory.SetCurrent(new TestFixtureFactory());
             }
         }
     }

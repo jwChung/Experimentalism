@@ -54,7 +54,7 @@ namespace Jwc.Experiment.Xunit
         /// </returns>
         protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
-            return TestFixtureFactory.Create(testMethod);
+            return TestFixtureFactory.Current.Create(testMethod);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
