@@ -170,8 +170,8 @@ namespace Jwc.Experiment.Xunit
             });
         }
 
-        [Fact(Skip = "Explicitly run this test without TestFixtureFactoryTypeAttribute in which the line should be commented out.")]
-        public void CreateTestCommandsWithoutTestFixtureFactoryAttributeRetrunsExceptionCommand()
+        [Fact]
+        public void CreateTestCommandsWithoutValidTestFixtureFactoryRetrunsExceptionCommand()
         {
             var sut = new FirstClassTestAttribute();
             const string methodName = "PassTestFixtureTest";

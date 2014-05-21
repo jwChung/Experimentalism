@@ -283,7 +283,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Theory]
-        [InlineData("CreateParameterizedTestWithoutDefaultTestFixtureFactoryReturnsExceptionCommand")]
+        [InlineData("CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes")]
         [InlineData("CreateTestCommandsUsesMultipleAssemblyInitializes")]
@@ -293,7 +293,7 @@ namespace Jwc.Experiment.Xunit
             GetType().GetMethod(testMethod).Execute();
         }
 
-        public void CreateParameterizedTestWithoutDefaultTestFixtureFactoryReturnsExceptionCommand()
+        public void CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap(typeof(object).GetMethod("Equals", new[] { typeof(object) }));
