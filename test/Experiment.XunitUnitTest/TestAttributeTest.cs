@@ -283,10 +283,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Theory]
-        [InlineData("CreateParameterizedTestWithoutTestFixtureFactoryAttributeReturnsExceptionCommand")]
-        [InlineData("CreateParameterizedTestWithTestFixtureFactoryAttributeReturnsCorrectCommand")]
-        [InlineData("CreateParameterizedTestSeveralTimesCreatesTestFixtureFactoryOnlyOnce")]
-        [InlineData("CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultipleThreads")]
+        [InlineData("CreateParameterizedTestWithoutDefaultTestFixtureFactoryReturnsExceptionCommand")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes")]
         [InlineData("CreateTestCommandsUsesMultipleAssemblyInitializes")]
@@ -296,7 +293,7 @@ namespace Jwc.Experiment.Xunit
             GetType().GetMethod(testMethod).Execute();
         }
 
-        public void CreateParameterizedTestWithoutTestFixtureFactoryAttributeReturnsExceptionCommand()
+        public void CreateParameterizedTestWithoutDefaultTestFixtureFactoryReturnsExceptionCommand()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap(typeof(object).GetMethod("Equals", new[] { typeof(object) }));
@@ -305,63 +302,6 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsAssignableFrom<ExceptionCommand>(actual);
             Assert.IsType<NotSupportedException>(command.Exception);
-        }
-
-        public void CreateParameterizedTestWithTestFixtureFactoryAttributeReturnsCorrectCommand()
-        {
-            // Fixture setup
-            var sut = new TestAttribute();
-            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
-            var fixture = new FakeTestFixture();
-            DelegatingStaticTestFixtureFactory.OnCreate = mi =>
-            {
-                Assert.Equal(method.MethodInfo, mi);
-                return fixture;
-            };
-
-            // Exercise system
-            var actual = sut.CreateTestCommands(method).ToArray();
-
-            // Verify outcome
-            Assert.Equal(2, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var theoryCommand = Assert.IsType<TheoryCommand>(c);
-                Assert.Equal(
-                    new[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) },
-                    theoryCommand.Parameters);
-            });
-        }
-
-        public void CreateParameterizedTestSeveralTimesCreatesTestFixtureFactoryOnlyOnce()
-        {
-            var sut = new TestAttribute();
-            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
-
-            sut.CreateTestCommands(method).ToArray();
-
-            Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
-        }
-
-        public void CreateTestCommandsCreatesTestFixtureFactoryAsSingletonWhenAccessedByMultipleThreads()
-        {
-            // Fixture setup
-            var sut = new TestAttribute();
-            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
-
-            var threads = new Thread[20];
-            for (int i = 0; i < threads.Length; i++)
-                threads[i] = new Thread(() => sut.CreateTestCommands(method).ToArray());
-
-            // Exercise system
-            foreach (var thread in threads)
-                thread.Start();
-
-            foreach (var thread in threads)
-                thread.Join();
-
-            // Verify outcome
-            Assert.Equal(1, DelegatingStaticTestFixtureFactory.ConstructCount);
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
@@ -439,6 +379,35 @@ namespace Jwc.Experiment.Xunit
                 appDomain.DomainUnload += (s, e) => Assert.Equal(1, SpyInitalizer.TearDownCount);
                 AppDomain.Unload(appDomain);
             }
+        }
+
+        [Fact]
+        public void CreateTestCommandsUsesCorrectTestFixtureFactory()
+        {
+            // Fixture setup
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
+            int callCount = 0;
+            var factory = new DelegatingTestFixtureFactory
+            {
+                OnCreate = m =>
+                {
+                    callCount++;
+                    Assert.Equal(method.MethodInfo, m);
+                    return new FakeTestFixture();
+                }
+            };
+            TestFixtureFactory.SetCurrent(factory);
+
+            // Exercise system 
+            var actual = sut.CreateTestCommands(method).ToArray();
+
+            // Verify outcome
+            Assert.Equal(2, callCount);
+            Assert.True(actual.All(c => c is TheoryCommand));
+
+            // Fixture teardown
+            TestFixtureFactory.SetCurrent(null);
         }
 
         [InlineData]

@@ -6,9 +6,7 @@ using Jwc.Experiment.AutoFixture;
 using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
-using TestFixtureFactory = Jwc.Experiment.AutoFixture.TestFixtureFactory;
 
-[assembly: TestFixtureFactoryType(typeof(TestFixtureFactory))]
 [assembly: AssemblyInitialize(typeof(Scenario.FixtureFactoryInitializer))]
 
 namespace Jwc.Experiment.AutoFixture

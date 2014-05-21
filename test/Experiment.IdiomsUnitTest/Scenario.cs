@@ -7,7 +7,6 @@ using Jwc.Experiment.Idioms.Assertions;
 using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
 
-[assembly: TestFixtureFactoryType(typeof(Scenario.FakeTestFixtureFactory))]
 [assembly: AssemblyInitialize(typeof(Scenario.FixtureFactoryInitializer))]
 
 namespace Jwc.Experiment.Idioms
