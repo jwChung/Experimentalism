@@ -353,12 +353,14 @@ namespace Jwc.Experiment.Xunit
             foreach (var thread in threads)
                 thread.Join();
 
+            // Verify outcome
             Assert.Equal(1, SpyInitalizer.SetupCount);
         }
 
         [Fact(Skip = "Run on debug mode. I have no idea about why the DomainUnload event is only raised on debug mode.")]
         public void CreateTestCommandsRegistersTearDownToDomainUnloadUnloadEvent()
         {
+            // Fixture setup
             IMethodInfo method = Reflector.Wrap(GetType()
                 .GetMethod("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel"));
 
@@ -369,6 +371,7 @@ namespace Jwc.Experiment.Xunit
 
             try
             {
+                // Exercise system
                 var runner = (TestRunner)appDomain.CreateInstanceAndUnwrap(
                     Assembly.GetExecutingAssembly().FullName,
                     typeof(TestRunner).FullName);
@@ -376,6 +379,7 @@ namespace Jwc.Experiment.Xunit
             }
             finally
             {
+                // Verify outcome
                 appDomain.DomainUnload += (s, e) => Assert.Equal(1, SpyInitalizer.TearDownCount);
                 AppDomain.Unload(appDomain);
             }

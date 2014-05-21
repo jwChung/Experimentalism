@@ -201,31 +201,28 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyInitalizer.SetupCount);
         }
 
-        [FirstClassTest]
-        public IEnumerable<ITestCase> CreateTestCommandsUsesCorrectTestFixtureFactory()
+        [Fact]
+        public void CreateTestCommandsUsesCorrectTestFixtureFactory()
         {
             // Fixture setup
-            var expected = new FakeTestFixture();
-            var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
+            var sut = new FirstClassTestAttribute();
+
+            var method = Reflector.Wrap(GetType().GetMethod("PassTestFixtureTest"));
             var factory = new DelegatingTestFixtureFactory
             {
                 OnCreate = m =>
                 {
-                    Assert.Equal(testMethod, m);
-                    return expected;
+                    Assert.Equal(method.MethodInfo, m);
+                    return new FakeTestFixture();
                 }
             };
             DefaultFixtureFactory.SetCurrent(factory);
 
-            // Exercise system and Verify outcome
-            yield return new DelegatingTestCase
-            {
-                OnConvertToTestCommand = (m, f) =>
-                {
-                    Assert.Equal(expected, f.Create(testMethod));
-                    return new FactCommand(m);
-                }
-            };
+            // Exercise system
+            var actual = sut.CreateTestCommands(method).Single();
+
+            // Verify outcome
+            Assert.IsType<FactCommand>(actual);
 
             // Fixture teardown
             DefaultFixtureFactory.SetCurrent(null);
