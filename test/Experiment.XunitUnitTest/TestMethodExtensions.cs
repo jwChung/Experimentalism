@@ -5,7 +5,7 @@ namespace Jwc.Experiment.Xunit
 {
     public static class TestMethodExtensions
     {
-        public static void Execute(this MethodInfo testMethod)
+        public static void RunOnOtherDomain(this MethodInfo testMethod)
         {
             var appDomain = AppDomain.CreateDomain(
                 testMethod.Name,
@@ -14,11 +14,11 @@ namespace Jwc.Experiment.Xunit
 
             try
             {
-                var runner = (TestRunner)appDomain.CreateInstanceAndUnwrap(
+                var invoker = (TestInvoker)appDomain.CreateInstanceAndUnwrap(
                     Assembly.GetExecutingAssembly().FullName,
-                    typeof(TestRunner).FullName);
+                    typeof(TestInvoker).FullName);
 
-                runner.Run(testMethod);
+                invoker.Invoke(testMethod);
             }
             finally
             {

@@ -188,7 +188,7 @@ namespace Jwc.Experiment.Xunit
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
         public void RunTestWithStaticFixture(string testMethod)
         {
-            GetType().GetMethod(testMethod).Execute();
+            GetType().GetMethod(testMethod).RunOnOtherDomain();
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
@@ -198,7 +198,7 @@ namespace Jwc.Experiment.Xunit
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyInitalizer.SetupCount);
+            Assert.Equal(1, SpyFixtureConfig.SetupCount);
         }
 
         [Fact]

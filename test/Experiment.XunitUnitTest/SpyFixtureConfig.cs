@@ -2,9 +2,9 @@
 
 namespace Jwc.Experiment.Xunit
 {
-    public class SpyInitalizer : MarshalByRefObject, IDisposable
+    public class SpyFixtureConfig : IDisposable
     {
-        public SpyInitalizer()
+        public SpyFixtureConfig()
         {
             SetupCount++;
         }

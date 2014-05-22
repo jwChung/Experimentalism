@@ -11,10 +11,10 @@ namespace Jwc.Experiment.Xunit
     public sealed class AssemblyFixtureConfigAttribute : Attribute
     {
         private static readonly object _syncLock = new object();
-        private static bool _initialized;
+        private static bool _configured;
 
         private readonly Type _configClass;
-
+        
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="AssemblyFixtureConfigAttribute" /> class.
@@ -43,33 +43,33 @@ namespace Jwc.Experiment.Xunit
             }
         }
 
-        internal static void Initialize(Assembly testAssembly)
+        internal static void Configure(Assembly testAssembly)
         {
-            if (_initialized)
+            if (_configured)
                 return;
 
             lock (_syncLock)
             {
-                if (_initialized)
+                if (_configured)
                     return;
 
-                InitializeImpl(testAssembly);
-                _initialized = true;    
+                ConfigureSync(testAssembly);
+                _configured = true;    
             }
         }
 
-        private static void InitializeImpl(Assembly testAssembly)
+        private static void ConfigureSync(Assembly testAssembly)
         {
             var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyFixtureConfigAttribute), false);
             foreach (AssemblyFixtureConfigAttribute attribure in attribures)
-                InitializeImpl(attribure.ConfigClass);
+                ConfigureSync(attribure.ConfigClass);
         }
 
-        private static void InitializeImpl(Type type)
+        private static void ConfigureSync(Type configType)
         {
-            var teardown = Activator.CreateInstance(type) as IDisposable;
-            if (teardown != null)
-                AppDomain.CurrentDomain.DomainUnload += (s, e) => teardown.Dispose();
+            var config = Activator.CreateInstance(configType) as IDisposable;
+            if (config != null)
+                AppDomain.CurrentDomain.DomainUnload += (s, e) => config.Dispose();
         }
     }
 }

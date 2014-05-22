@@ -53,8 +53,8 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />
-    <Compile Include="SpyInitalizer.cs" />
-    <Compile Include="SpyOtherInitalizer.cs" />
+    <Compile Include="SpyFixtureConfig.cs" />
+    <Compile Include="SpyOtherFixtureConfig.cs" />
     <Compile Include="TestAttributeTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="DefaultFixtureFactoryTest.cs" />
     <Compile Include="TestMethodExtensions.cs" />
-    <Compile Include="TestRunner.cs" />
+    <Compile Include="TestInvoker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

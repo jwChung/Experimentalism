@@ -286,11 +286,11 @@ namespace Jwc.Experiment.Xunit
         [InlineData("CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes")]
-        [InlineData("CreateTestCommandsUsesMultipleAssemblyInitializes")]
+        [InlineData("CreateTestCommandsUsesMultipleAssemblyFixtureConfigs")]
         [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads")]
         public void RunTestWithStaticFixture(string testMethod)
         {
-            GetType().GetMethod(testMethod).Execute();
+            GetType().GetMethod(testMethod).RunOnOtherDomain();
         }
 
         public void CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand()
@@ -311,7 +311,7 @@ namespace Jwc.Experiment.Xunit
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyInitalizer.SetupCount);
+            Assert.Equal(1, SpyFixtureConfig.SetupCount);
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes()
@@ -322,18 +322,18 @@ namespace Jwc.Experiment.Xunit
             sut.CreateTestCommands(method).ToArray();
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyInitalizer.SetupCount);
+            Assert.Equal(1, SpyFixtureConfig.SetupCount);
         }
 
-        public void CreateTestCommandsUsesMultipleAssemblyInitializes()
+        public void CreateTestCommandsUsesMultipleAssemblyFixtureConfigs()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyInitalizer.SetupCount);
-            Assert.Equal(1, SpyOtherInitalizer.SetupCount);
+            Assert.Equal(1, SpyFixtureConfig.SetupCount);
+            Assert.Equal(1, SpyOtherFixtureConfig.SetupCount);
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
@@ -354,11 +354,11 @@ namespace Jwc.Experiment.Xunit
                 thread.Join();
 
             // Verify outcome
-            Assert.Equal(1, SpyInitalizer.SetupCount);
+            Assert.Equal(1, SpyFixtureConfig.SetupCount);
         }
 
         [Fact(Skip = "Run on debug mode. I have no idea about why the DomainUnload event is only raised on debug mode.")]
-        public void CreateTestCommandsRegistersTearDownToDomainUnloadUnloadEvent()
+        public void CreateTestCommandsRegistersTearDownToDomainUnloadEvent()
         {
             // Fixture setup
             IMethodInfo method = Reflector.Wrap(GetType()
@@ -372,15 +372,15 @@ namespace Jwc.Experiment.Xunit
             try
             {
                 // Exercise system
-                var runner = (TestRunner)appDomain.CreateInstanceAndUnwrap(
+                var invoker = (TestInvoker)appDomain.CreateInstanceAndUnwrap(
                     Assembly.GetExecutingAssembly().FullName,
-                    typeof(TestRunner).FullName);
-                runner.Run(method.MethodInfo);
+                    typeof(TestInvoker).FullName);
+                invoker.Invoke(method.MethodInfo);
             }
             finally
             {
                 // Verify outcome
-                appDomain.DomainUnload += (s, e) => Assert.Equal(1, SpyInitalizer.TearDownCount);
+                appDomain.DomainUnload += (s, e) => Assert.Equal(1, SpyFixtureConfig.TearDownCount);
                 AppDomain.Unload(appDomain);
             }
         }
