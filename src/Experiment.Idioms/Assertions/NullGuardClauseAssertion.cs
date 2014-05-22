@@ -81,7 +81,20 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (method != null && method.IsAbstract)
                 return;
 
+            var property = member as PropertyInfo;
+            if (property != null && IsAbstract(property))
+                return;
+
             _assertion.Verify(member);
+        }
+
+        private static bool IsAbstract(PropertyInfo property)
+        {
+            var getMethod = property.GetGetMethod(true);
+            if (getMethod != null)
+                return getMethod.IsAbstract;
+
+            return property.GetSetMethod(true).IsAbstract;
         }
 
         private class SpecimenBuilder : ISpecimenBuilder

@@ -111,7 +111,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyInterfaceMethodDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var method = typeof(IComparable).GetMethods().Single();
+            var method = new Methods<IInterfaceType>().Select(x => x.Method(null));
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
 
@@ -119,7 +119,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyAbstractMethodDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var method = typeof(AbstractType).GetMethod("AbstractMethod");
+            var method = new Methods<AbstractType>().Select(x => x.AbstractMethod(null));
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
 
@@ -127,10 +127,26 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyVirtualMethodFromAbstractTypeThrows()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var method = typeof(AbstractType).GetMethod("VirtualMethod");
+            var method = new Methods<AbstractType>().Select(x => x.VirtualMethod(null));
             Assert.Throws<GuardClauseException>(() => sut.Verify(method));
         }
 
+        [Fact]
+        public void VerifyInterfaceGetPropetyDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var property = new Properties<IInterfaceType>().Select(x => x.GetProperty);
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyInterfaceSetPropetyDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var property = typeof(IInterfaceType).GetProperty("SetProperty");
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+        
         private class ClassWithGuardedMembers
         {
             public void Method(string arg1, object arg2)
@@ -150,6 +166,15 @@ namespace Jwc.Experiment.Idioms.Assertions
                 if (arg1 == null)
                     throw new ArgumentNullException("arg1");
             }
+        }
+
+        private interface IInterfaceType
+        {
+            void Method(object arg);
+
+            object GetProperty { get; }
+
+            object SetProperty { set; }
         }
 
         private abstract class AbstractType
