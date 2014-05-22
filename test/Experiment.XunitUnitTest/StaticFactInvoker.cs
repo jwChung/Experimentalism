@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Reflection;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class TestInvoker : MarshalByRefObject
+    public class StaticFactInvoker : MarshalByRefObject
     {
         public void Invoke(MethodInfo testMethod)
         {

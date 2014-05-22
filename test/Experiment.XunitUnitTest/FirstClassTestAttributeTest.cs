@@ -184,13 +184,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Contains("TestFixtureFactory.SetCurrent", exception.Message);
         }
 
-        [Theory]
-        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
-        public void RunTestWithStaticFixture(string testMethod)
-        {
-            GetType().GetMethod(testMethod).RunOnOtherDomain();
-        }
-
+        [StaticFact]
         public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
         {
             var sut = new FirstClassTestAttribute();
@@ -201,7 +195,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
-        [Fact]
+        [StaticFact]
         public void CreateTestCommandsUsesCorrectTestFixtureFactory()
         {
             // Fixture setup
@@ -223,9 +217,6 @@ namespace Jwc.Experiment.Xunit
 
             // Verify outcome
             Assert.IsType<FactCommand>(actual);
-
-            // Fixture teardown
-            DefaultFixtureFactory.SetCurrent(null);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()

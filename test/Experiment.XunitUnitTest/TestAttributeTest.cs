@@ -287,17 +287,7 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<NotSupportedException>(command.Exception);
         }
 
-        [Theory]
-        [InlineData("CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand")]
-        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel")]
-        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes")]
-        [InlineData("CreateTestCommandsUsesMultipleAssemblyFixtureConfigs")]
-        [InlineData("CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads")]
-        public void RunTestWithStaticFixture(string testMethod)
-        {
-            GetType().GetMethod(testMethod).RunOnOtherDomain();
-        }
-
+        [Fact]
         public void CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand()
         {
             var sut = new TestAttribute();
@@ -309,6 +299,7 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<NotSupportedException>(command.Exception);
         }
 
+        [StaticFact]
         public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
         {
             var sut = new TestAttribute();
@@ -319,6 +310,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
+        [StaticFact]
         public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes()
         {
             var sut = new TestAttribute();
@@ -330,6 +322,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
+        [StaticFact]
         public void CreateTestCommandsUsesMultipleAssemblyFixtureConfigs()
         {
             var sut = new TestAttribute();
@@ -341,6 +334,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyOtherFixtureCustomization.SetupCount);
         }
 
+        [StaticFact]
         public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
         {
             // Fixture setup
@@ -374,9 +368,9 @@ namespace Jwc.Experiment.Xunit
                 AppDomain.CurrentDomain.Evidence,
                 AppDomain.CurrentDomain.SetupInformation);
 
-            var invoker = (TestInvoker)appDomain.CreateInstanceAndUnwrap(
+            var invoker = (StaticFactInvoker)appDomain.CreateInstanceAndUnwrap(
                 Assembly.GetExecutingAssembly().FullName,
-                typeof(TestInvoker).FullName);
+                typeof(StaticFactInvoker).FullName);
 
             // Exercise system
             invoker.Invoke(method.MethodInfo);
@@ -401,7 +395,7 @@ namespace Jwc.Experiment.Xunit
             }
         }
 
-        [Fact]
+        [StaticFact]
         public void CreateTestCommandsUsesCorrectTestFixtureFactory()
         {
             // Fixture setup
@@ -425,9 +419,6 @@ namespace Jwc.Experiment.Xunit
             // Verify outcome
             Assert.Equal(2, callCount);
             Assert.True(actual.All(c => c is TheoryCommand));
-
-            // Fixture teardown
-            DefaultFixtureFactory.SetCurrent(null);
         }
 
         [InlineData]

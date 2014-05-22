@@ -10,13 +10,12 @@ namespace Jwc.Experiment.Xunit
             Assert.IsAssignableFrom<NotSupportedFixtureFactory>(DefaultFixtureFactory.Current);
         }
 
-        [Fact]
+        [StaticFact]
         public void SetCurrentCorrectlySetsFactoryToCurrent()
         {
             var expected = new DelegatingTestFixtureFactory();
             DefaultFixtureFactory.SetCurrent(expected);
             Assert.Equal(expected, DefaultFixtureFactory.Current);
-            DefaultFixtureFactory.SetCurrent(null);
         }
     }
 }
