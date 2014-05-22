@@ -92,6 +92,13 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
+        public void VerifyNullMethodThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((MethodInfo)null));
+        }
+
+        [Fact]
         public void VerifyGuardedMethodDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
@@ -124,11 +131,18 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void VerifyVirtualMethodFromAbstractTypeThrows()
+        public void VerifyVirtualUnguardedMethodFromAbstractTypeThrows()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
             var method = new Methods<AbstractType>().Select(x => x.VirtualMethod(null));
             Assert.Throws<GuardClauseException>(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyNullPropertyThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((PropertyInfo)null));
         }
 
         [Fact]
@@ -146,9 +160,67 @@ namespace Jwc.Experiment.Idioms.Assertions
             var property = typeof(IInterfaceType).GetProperty("SetProperty");
             Assert.DoesNotThrow(() => sut.Verify(property));
         }
+
+        [Fact]
+        public void VerifyVirtualUnguardedPropertyFromAbstractTypeThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var property = typeof(AbstractType).GetProperty("SetProperty");
+            Assert.Throws<GuardClauseException>(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyGuardedPropertyDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var property = new Properties<ClassWithGuardedMembers>().Select(x => x.Property);
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyNullConstructorThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((ConstructorInfo)null));
+        }
+
+        [Fact]
+        public void VerifyUnguardedConstructorThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var constructor = Constructors.Select(() => new ClassWithUnguardedMembers(null));
+            Assert.Throws<GuardClauseException>(() => sut.Verify(constructor));
+        }
+
+        [Fact]
+        public void VerifyGuardedConstructorDosNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var constructor = Constructors.Select(() => new ClassWithGuardedMembers(null));
+            Assert.DoesNotThrow(() => sut.Verify(constructor));
+        }
         
         private class ClassWithGuardedMembers
         {
+            public ClassWithGuardedMembers(object arg)
+            {
+                if (arg == null)
+                    throw new ArgumentNullException("arg");
+            }
+
+            public object Property
+            {
+                get
+                {
+                    return null;
+                }
+                set
+                {
+                    if (value == null)
+                        throw new ArgumentNullException("value");
+                }
+            }
+
             public void Method(string arg1, object arg2)
             {
                 if (arg1 == null)
@@ -161,6 +233,10 @@ namespace Jwc.Experiment.Idioms.Assertions
 
         private class ClassWithUnguardedMembers
         {
+            public ClassWithUnguardedMembers(object arg)
+            {
+            }
+
             public void Method(string arg1, object arg2)
             {
                 if (arg1 == null)
@@ -180,6 +256,13 @@ namespace Jwc.Experiment.Idioms.Assertions
         private abstract class AbstractType
         {
             public abstract void AbstractMethod(object arg);
+
+            public virtual object SetProperty
+            {
+                set
+                {
+                }
+            }
 
             public virtual void VirtualMethod(object arg)
             {

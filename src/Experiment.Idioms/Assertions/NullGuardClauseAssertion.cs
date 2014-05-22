@@ -9,8 +9,8 @@ namespace Jwc.Experiment.Idioms.Assertions
     /// Encapsulates a unit test that verifies that a method or constructor has
     /// appropriate Null Guard Clauses in place.
     /// </summary>
-    public class NullGuardClauseAssertion :
-        IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion, IIdiomaticMemberAssertion
+    public class NullGuardClauseAssertion
+        : IdiomaticMemberAssertion, IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion
     {
         private readonly ITestFixture _testFixture;
         private readonly IIdiomaticAssertion _assertion;
@@ -70,22 +70,53 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a member has appropriate Null Guard Clause in place.
+        /// Verifies that a constructor has appropriate Null Guard Clause in
+        /// place.
+        /// specified constructor.
         /// </summary>
-        /// <param name="member">
-        /// The member.
+        /// <param name="constructor">
+        /// The constructor.
         /// </param>
-        public void Verify(MemberInfo member)
+        public override void Verify(ConstructorInfo constructor)
         {
-            var method = member as MethodInfo;
-            if (method != null && method.IsAbstract)
+            if (constructor == null)
+                throw new ArgumentNullException("constructor");
+
+            _assertion.Verify(constructor);
+        }
+
+        /// <summary>
+        /// Verifies that a property has appropriate Null Guard Clause in place.
+        /// </summary>
+        /// <param name="property">
+        /// The property.
+        /// </param>
+        public override void Verify(PropertyInfo property)
+        {
+            if (property == null)
+                throw new ArgumentNullException("property");
+
+            if (IsAbstract(property))
                 return;
 
-            var property = member as PropertyInfo;
-            if (property != null && IsAbstract(property))
+            _assertion.Verify(property);
+        }
+
+        /// <summary>
+        /// Verifies that a method has appropriate Null Guard Clause in place.
+        /// </summary>
+        /// <param name="method">
+        /// The method.
+        /// </param>
+        public override void Verify(MethodInfo method)
+        {
+            if (method == null)
+                throw new ArgumentNullException("method");
+
+            if (method.IsAbstract)
                 return;
 
-            _assertion.Verify(member);
+            _assertion.Verify(method);
         }
 
         private static bool IsAbstract(PropertyInfo property)
