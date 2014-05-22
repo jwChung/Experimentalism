@@ -198,7 +198,7 @@ namespace Jwc.Experiment.Xunit
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyFixtureConfig.SetupCount);
+            Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
         [Fact]

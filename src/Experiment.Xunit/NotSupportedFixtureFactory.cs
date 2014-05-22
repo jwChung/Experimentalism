@@ -21,12 +21,12 @@ namespace Jwc.Experiment.Xunit
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "TestFixtureFactory")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ITestFixtureFactory")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ITestFixture")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AssemblyFixtureConfigAttribute")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AssemblyFixtureCustomizationAttribute")]
         public ITestFixture Create(MethodInfo testMethod)
         {
             throw new NotSupportedException(
                 "To create auto data, set valid 'ITestFixtureFactory' with the 'TestFixtureFactory.SetCurrent' " +
-                "method through 'AssemblyFixtureConfigAttribute', or override the 'CreateTestFixture' method " +
+                "method through 'AssemblyFixtureCustomizationAttribute', or override the 'CreateTestFixture' method " +
                 "of the test attribute to create an instance of 'ITestFixture'.");
         }
     }

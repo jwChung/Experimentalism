@@ -48,13 +48,13 @@
     <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
-    <Compile Include="AssemblyFixtureConfigAttributeTest.cs" />
+    <Compile Include="AssemblyFixtureCustomizationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />
-    <Compile Include="SpyFixtureConfig.cs" />
-    <Compile Include="SpyOtherFixtureConfig.cs" />
+    <Compile Include="SpyFixtureCustomization.cs" />
+    <Compile Include="SpyOtherFixtureCustomization.cs" />
     <Compile Include="TestAttributeTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="FakeTestFixture.cs" />

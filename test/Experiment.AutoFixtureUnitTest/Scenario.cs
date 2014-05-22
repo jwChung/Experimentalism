@@ -7,7 +7,7 @@ using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-[assembly: AssemblyFixtureConfig(typeof(Scenario.FixtureFactoryConfig))]
+[assembly: AssemblyFixtureCustomization(typeof(Scenario.TestFixtureCustomization))]
 
 namespace Jwc.Experiment.AutoFixture
 {
@@ -92,19 +92,19 @@ namespace Jwc.Experiment.AutoFixture
             yield return new TestCase(new Action<object>(x => Assert.NotNull(x)));
         }
 
+        public class TestFixtureCustomization
+        {
+            public TestFixtureCustomization()
+            {
+                DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
+            }
+        }
+
         private class ParameterizedTestDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
             {
                 yield return new object[] { "expected", 1234 };
-            }
-        }
-
-        internal class FixtureFactoryConfig
-        {
-            public FixtureFactoryConfig()
-            {
-                DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
             }
         }
     }

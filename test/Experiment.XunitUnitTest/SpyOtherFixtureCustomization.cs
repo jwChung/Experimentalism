@@ -1,8 +1,8 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
-    public class SpyOtherFixtureConfig
+    public class SpyOtherFixtureCustomization
     {
-        public SpyOtherFixtureConfig()
+        public SpyOtherFixtureCustomization()
         {
             SetupCount++;
         }

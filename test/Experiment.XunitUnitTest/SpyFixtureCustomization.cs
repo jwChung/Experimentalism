@@ -2,9 +2,9 @@
 
 namespace Jwc.Experiment.Xunit
 {
-    public class SpyFixtureConfig : IDisposable
+    public class SpyFixtureCustomization : IDisposable
     {
-        public SpyFixtureConfig()
+        public SpyFixtureCustomization()
         {
             SetupCount++;
         }

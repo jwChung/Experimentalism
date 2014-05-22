@@ -9,8 +9,8 @@ using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
 
-[assembly: AssemblyFixtureConfig(typeof(SpyFixtureConfig))]
-[assembly: AssemblyFixtureConfig(typeof(SpyOtherFixtureConfig))]
+[assembly: AssemblyFixtureCustomization(typeof(SpyFixtureCustomization))]
+[assembly: AssemblyFixtureCustomization(typeof(SpyOtherFixtureCustomization))]
 
 namespace Jwc.Experiment.Xunit
 {
@@ -316,7 +316,7 @@ namespace Jwc.Experiment.Xunit
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyFixtureConfig.SetupCount);
+            Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes()
@@ -327,7 +327,7 @@ namespace Jwc.Experiment.Xunit
             sut.CreateTestCommands(method).ToArray();
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyFixtureConfig.SetupCount);
+            Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
         public void CreateTestCommandsUsesMultipleAssemblyFixtureConfigs()
@@ -337,8 +337,8 @@ namespace Jwc.Experiment.Xunit
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyFixtureConfig.SetupCount);
-            Assert.Equal(1, SpyOtherFixtureConfig.SetupCount);
+            Assert.Equal(1, SpyFixtureCustomization.SetupCount);
+            Assert.Equal(1, SpyOtherFixtureCustomization.SetupCount);
         }
 
         public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
@@ -359,7 +359,7 @@ namespace Jwc.Experiment.Xunit
                 thread.Join();
 
             // Verify outcome
-            Assert.Equal(1, SpyFixtureConfig.SetupCount);
+            Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
         [Fact]
@@ -384,7 +384,7 @@ namespace Jwc.Experiment.Xunit
             // Verify outcome
             appDomain.DomainUnload += (s, e) =>
             {
-                if (SpyFixtureConfig.TearDownCount != 1)
+                if (SpyFixtureCustomization.TearDownCount != 1)
                     File.Create("Fail.tmp");
             };
             AppDomain.Unload(appDomain);

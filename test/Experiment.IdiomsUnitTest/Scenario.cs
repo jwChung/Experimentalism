@@ -7,7 +7,7 @@ using Jwc.Experiment.Idioms.Assertions;
 using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
 
-[assembly: AssemblyFixtureConfig(typeof(Scenario.FixtureFactoryConfig))]
+[assembly: AssemblyFixtureCustomization(typeof(Scenario.TestFixtureCustomization))]
 
 namespace Jwc.Experiment.Idioms
 {
@@ -98,6 +98,22 @@ namespace Jwc.Experiment.Idioms
             .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
+        public class TestFixtureCustomization
+        {
+            public TestFixtureCustomization()
+            {
+                DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
+            }
+        }
+
+        private class FakeTestFixtureFactory : ITestFixtureFactory
+        {
+            public ITestFixture Create(MethodInfo testMethod)
+            {
+                return new FakeTestFixture();
+            }
+        }
+
         private class ClassForNullGuardClause
         {
             public ClassForNullGuardClause(object arg)
@@ -167,22 +183,6 @@ namespace Jwc.Experiment.Idioms
                 {
                     return _z;
                 }
-            }
-        }
-
-        internal class FakeTestFixtureFactory : ITestFixtureFactory
-        {
-            public ITestFixture Create(MethodInfo testMethod)
-            {
-                return new FakeTestFixture();
-            }
-        }
-
-        internal class FixtureFactoryConfig
-        {
-            public FixtureFactoryConfig()
-            {
-                DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
             }
         }
     }
