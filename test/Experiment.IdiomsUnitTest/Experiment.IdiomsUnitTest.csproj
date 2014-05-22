@@ -87,7 +87,7 @@
     <Compile Include="OrEqualityComparer.cs" />
     <Compile Include="ParameterToFieldComparerTest.cs" />
     <Compile Include="ParameterToPropertyComparerTest.cs" />
-    <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingEqualityComparer.cs" />
     <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />

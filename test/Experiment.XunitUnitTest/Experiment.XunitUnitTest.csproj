@@ -49,7 +49,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AssemblyFixtureConfigAttributeTest.cs" />
-    <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />

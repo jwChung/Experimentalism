@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment.Xunit
 {
-    public class AssemblyLevelTest
+    public class AssemblyTest
     {
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(IIdiomaticMemberAssertion).Assembly;
+            var sut = typeof(TestAttribute).Assembly;
             var specifiedAssemblies = new []
             {
                 // GAC
@@ -19,13 +18,11 @@ namespace Jwc.Experiment.Idioms
                 "System.Core",
 
                 // Direct references
+                "xunit",
                 "Jwc.Experiment",
-                "Ploeh.Albedo",
-                
+
                 // Indirect references
-                "Ploeh.AutoFixture",
-                "Ploeh.AutoFixture.Idioms",
-                "Mono.Reflection"
+                "xunit.extensions"
             };
 
             var actual = sut.GetActualReferencedAssemblies();
@@ -34,13 +31,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Theory]
-        [InlineData("Ploeh.AutoFixture")]
-        [InlineData("Ploeh.AutoFixture.Idioms")]
-        [InlineData("Mono.Reflection")]
+        [InlineData("xunit.extensions")]
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
         {
             // Fixture setup
-            var sut = typeof(IIdiomaticMemberAssertion).Assembly;
+            var sut = typeof(TestAttribute).Assembly;
             var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
             var types = Assembly.Load(assemblyName).GetExportedTypes();
 

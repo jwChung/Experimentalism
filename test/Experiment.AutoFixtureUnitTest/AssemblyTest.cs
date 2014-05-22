@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Jwc.Experiment.AutoFixture
 {
-    public class AssemblyLevelTest
+    public class AssemblyTest
     {
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()

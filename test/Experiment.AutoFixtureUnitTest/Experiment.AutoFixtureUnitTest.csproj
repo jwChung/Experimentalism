@@ -53,7 +53,7 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AbstractType.cs" />
-    <Compile Include="AssemblyLevelTest.cs" />
+    <Compile Include="AssemblyTest.cs" />
     <Compile Include="AutoPropertiesAttributeTest.cs" />
     <Compile Include="ConcreteType.cs" />
     <Compile Include="CustomizeAttributeTest.cs" />
