@@ -30,7 +30,7 @@ namespace Jwc.Experiment.Xunit
             if (method == null)
                 throw new ArgumentNullException("method");
 
-            AssemblyInitializeAttribute.Initialize(method.MethodInfo.ReflectedType.Assembly);
+            AssemblyFixtureConfigAttribute.Initialize(method.MethodInfo.ReflectedType.Assembly);
 
             var enumerator = GetTestCommands(method).GetEnumerator();
             

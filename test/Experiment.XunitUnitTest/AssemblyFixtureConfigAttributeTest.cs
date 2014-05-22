@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class AssemblyInitializeAttributeTest
+    public class AssemblyFixtureConfigAttributeTest
     {
         [Fact]
         public void SutIsAttribute()
         {
-            var sut = new AssemblyInitializeAttribute(typeof(object));
+            var sut = new AssemblyFixtureConfigAttribute(typeof(object));
             Assert.IsAssignableFrom<Attribute>(sut);
         }
 
@@ -16,16 +16,16 @@ namespace Jwc.Experiment.Xunit
         public void InitializeWithNullInitializerThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new AssemblyInitializeAttribute(null));
+                () => new AssemblyFixtureConfigAttribute(null));
         }
 
         [Fact]
-        public void InitializerIsCorrect()
+        public void ConfigClassIsCorrect()
         {
             var expected = GetType();
-            var sut = new AssemblyInitializeAttribute(expected);
+            var sut = new AssemblyFixtureConfigAttribute(expected);
 
-            var actual = sut.Initializer;
+            var actual = sut.ConfigClass;
 
             Assert.Equal(expected, actual);
         }

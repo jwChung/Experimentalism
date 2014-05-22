@@ -8,38 +8,38 @@ namespace Jwc.Experiment.Xunit
     /// to tear down a test fixture only once on assembly level.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AssemblyInitializeAttribute : Attribute
+    public sealed class AssemblyFixtureConfigAttribute : Attribute
     {
         private static readonly object _syncLock = new object();
         private static bool _initialized;
 
-        private readonly Type _initializer;
+        private readonly Type _configClass;
 
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="AssemblyInitializeAttribute" /> class.
+        /// <see cref="AssemblyFixtureConfigAttribute" /> class.
         /// </summary>
-        /// <param name="initializer">
+        /// <param name="configClass">
         /// A type to be used to set up or to tear down a test fixture only once
         /// on assembly level.
         /// </param>
-        public AssemblyInitializeAttribute(Type initializer)
+        public AssemblyFixtureConfigAttribute(Type configClass)
         {
-            if (initializer == null)
-                throw new ArgumentNullException("initializer");
+            if (configClass == null)
+                throw new ArgumentNullException("configClass");
 
-            _initializer = initializer;
+            _configClass = configClass;
         }
 
         /// <summary>
         /// Gets a type to be used to set up or to tear down a test fixture only
         /// once on assembly level.
         /// </summary>
-        public Type Initializer
+        public Type ConfigClass
         {
             get
             {
-                return _initializer;
+                return _configClass;
             }
         }
 
@@ -60,9 +60,9 @@ namespace Jwc.Experiment.Xunit
 
         private static void InitializeImpl(Assembly testAssembly)
         {
-            var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyInitializeAttribute), false);
-            foreach (AssemblyInitializeAttribute attribure in attribures)
-                InitializeImpl(attribure.Initializer);
+            var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyFixtureConfigAttribute), false);
+            foreach (AssemblyFixtureConfigAttribute attribure in attribures)
+                InitializeImpl(attribure.ConfigClass);
         }
 
         private static void InitializeImpl(Type type)
