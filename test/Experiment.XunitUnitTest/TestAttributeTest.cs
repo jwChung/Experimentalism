@@ -4,9 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
+
+[assembly: AssemblyFixtureConfig(typeof(SpyFixtureConfig))]
+[assembly: AssemblyFixtureConfig(typeof(SpyOtherFixtureConfig))]
 
 namespace Jwc.Experiment.Xunit
 {
