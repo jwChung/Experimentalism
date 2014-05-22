@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Jwc.Experiment.Xunit;
 using Moq;
@@ -19,6 +20,20 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
+        public void SutIsIdiomaticTypeAssertion()
+        {
+            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
+        }
+
+        [Fact]
+        public void SutIsIdiomaticAssemblyAssertion()
+        {
+            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+        }
+
+        [Fact]
         public void InitializeWithNullTestFixtureThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new NullGuardClauseAssertion(null));
@@ -33,50 +48,6 @@ namespace Jwc.Experiment.Idioms.Assertions
             var actual = sut.TestFixture;
 
             Assert.Equal(testFixture, actual);
-        }
-
-        [Fact]
-        public void VerifyGuardedMethodDoesNotThrow()
-        {
-            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var guardedMethod = new Methods<ClassWithGuardedMembers>().Select(x => x.Method(null, null));
-            Assert.DoesNotThrow(() => sut.Verify(guardedMethod));
-        }
-
-        [Fact]
-        public void VerifyUnguardedMethodThrows()
-        {
-            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var unguardedMethod = new Methods<ClassWithUnguardedMembers>().Select(x => x.Method(null, null));
-            Assert.Throws<GuardClauseException>(() => sut.Verify(unguardedMethod));
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
-        }
-
-        [Fact]
-        public void VerifyGuardedTypeDoesNotThrow()
-        {
-            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            Assert.DoesNotThrow(() => sut.Verify(typeof(ClassWithGuardedMembers)));
-        }
-
-        [Fact]
-        public void VerifyUnguardedTypeThrows()
-        {
-            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            Assert.Throws<GuardClauseException>(() => sut.Verify(typeof(ClassWithUnguardedMembers)));
-        }
-
-        [Fact]
-        public void SutIsIdiomaticAssemblyAssertion()
-        {
-            var sut = new NullGuardClauseAssertion(new DelegatingTestFixture());
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
         }
 
         [Fact]
@@ -106,6 +77,60 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
         }
 
+        [Fact]
+        public void VerifyGuardedTypeDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(typeof(ClassWithGuardedMembers)));
+        }
+
+        [Fact]
+        public void VerifyUnguardedTypeThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            Assert.Throws<GuardClauseException>(() => sut.Verify(typeof(ClassWithUnguardedMembers)));
+        }
+
+        [Fact]
+        public void VerifyGuardedMethodDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var guardedMethod = new Methods<ClassWithGuardedMembers>().Select(x => x.Method(null, null));
+            Assert.DoesNotThrow(() => sut.Verify(guardedMethod));
+        }
+
+        [Fact]
+        public void VerifyUnguardedMethodThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var unguardedMethod = new Methods<ClassWithUnguardedMembers>().Select(x => x.Method(null, null));
+            Assert.Throws<GuardClauseException>(() => sut.Verify(unguardedMethod));
+        }
+
+        [Fact]
+        public void VerifyInterfaceMethodDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var method = typeof(IComparable).GetMethods().Single();
+            Assert.DoesNotThrow(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyAbstractMethodDoesNotThrow()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var method = typeof(AbstractType).GetMethod("AbstractMethod");
+            Assert.DoesNotThrow(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyVirtualMethodFromAbstractTypeThrows()
+        {
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var method = typeof(AbstractType).GetMethod("VirtualMethod");
+            Assert.Throws<GuardClauseException>(() => sut.Verify(method));
+        }
+
         private class ClassWithGuardedMembers
         {
             public void Method(string arg1, object arg2)
@@ -124,6 +149,15 @@ namespace Jwc.Experiment.Idioms.Assertions
             {
                 if (arg1 == null)
                     throw new ArgumentNullException("arg1");
+            }
+        }
+
+        private abstract class AbstractType
+        {
+            public abstract void AbstractMethod(object arg);
+
+            public virtual void VirtualMethod(object arg)
+            {
             }
         }
     }

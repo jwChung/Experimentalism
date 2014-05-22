@@ -77,6 +77,10 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// </param>
         public void Verify(MemberInfo member)
         {
+            var method = member as MethodInfo;
+            if (method != null && method.IsAbstract)
+                return;
+
             _assertion.Verify(member);
         }
 
