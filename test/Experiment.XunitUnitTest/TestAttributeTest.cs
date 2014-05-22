@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -357,7 +358,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureConfig.SetupCount);
         }
 
-        [Fact(Skip = "Run on debug mode. I have no idea about why the DomainUnload event is only raised on debug mode.")]
+        [Fact]
         public void CreateTestCommandsRegistersTearDownToDomainUnloadEvent()
         {
             // Fixture setup
@@ -369,19 +370,30 @@ namespace Jwc.Experiment.Xunit
                 AppDomain.CurrentDomain.Evidence,
                 AppDomain.CurrentDomain.SetupInformation);
 
+            var invoker = (TestInvoker)appDomain.CreateInstanceAndUnwrap(
+                Assembly.GetExecutingAssembly().FullName,
+                typeof(TestInvoker).FullName);
+
+            // Exercise system
+            invoker.Invoke(method.MethodInfo);
+
+            // Verify outcome
+            appDomain.DomainUnload += (s, e) =>
+            {
+                if (SpyFixtureConfig.TearDownCount != 1)
+                    File.Create("Fail.tmp");
+            };
+            AppDomain.Unload(appDomain);
+
+            var exists = File.Exists("Fail.tmp");
             try
             {
-                // Exercise system
-                var invoker = (TestInvoker)appDomain.CreateInstanceAndUnwrap(
-                    Assembly.GetExecutingAssembly().FullName,
-                    typeof(TestInvoker).FullName);
-                invoker.Invoke(method.MethodInfo);
+                Assert.False(exists, "Teardown");
             }
             finally
             {
-                // Verify outcome
-                appDomain.DomainUnload += (s, e) => Assert.Equal(1, SpyFixtureConfig.TearDownCount);
-                AppDomain.Unload(appDomain);
+                if (exists)
+                    File.Delete("Fail.tmp");
             }
         }
 
