@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Jwc.Experiment.Xunit;
 using Moq;
@@ -174,6 +173,30 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
             var property = new Properties<ClassWithGuardedMembers>().Select(x => x.Property);
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyGetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var property = new Properties<ClassWithMembers>().Select(x => x.ReadOnlyProperty);
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyUngarudedPrivateSetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new NullGuardClauseAssertion(new FakeTestFixture());
+            var property = typeof(ClassWithMembers).GetProperty("PrivateSetProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
             Assert.DoesNotThrow(() => sut.Verify(property));
         }
 
