@@ -14,17 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.22.1")]
 
 /*
- * Version 0.22.1
+ * Version 0.22.2
  * 
- * - [FIX] Renames AssemblyFixtureConfigAttribute to
- *   AssemblyFixtureCustomizationAttribute. (BREAKING-CHANGE)
- *   
- * - [FIX] Fixes that idiomatic assertions throws an exception when verifying
- *   irrelevant static or abstract members.
- *   
- * - [FIX] Fixes that idiomatic assertions throws an exception when verifying
- *   irrelevant get or set properties.
- *   
- * - [FIX] Introdues the IdiomaticAssertion class to use it as base class of an
- *   idiomatic assertion.
+ * - [FIX] Fixed that custom display name and timeout cannot be declared on
+ *   FirstClassTestAttribute.
  */
