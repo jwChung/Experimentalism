@@ -19,6 +19,9 @@ using System.Runtime.InteropServices;
  * - [FIX] Renames AssemblyFixtureConfigAttribute to
  *   AssemblyFixtureCustomizationAttribute. (BREAKING-CHANGE)
  *   
- * - [FIX] Makes idiomatic assertions ignore verifying irrelevant static or
- *   abstract members.
+ * - [FIX] Fixes that idiomatic assertions throws an exception when verifying
+ *   irrelevant static or abstract members.
+ *   
+ * - [FIX] Fixes that idiomatic assertions throws an exception when verifying
+ *   irrelevant get or set properties.
  */
