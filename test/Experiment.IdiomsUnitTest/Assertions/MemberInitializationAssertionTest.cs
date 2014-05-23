@@ -363,11 +363,11 @@ namespace Jwc.Experiment.Idioms.Assertions
 
             public class ClassForUnsatisfiedFields
             {
-#pragma warning disable 649
+#pragma warning disable 169, 649
                 public readonly object ObjectValue;
                 public readonly string StringValue;
                 public readonly int IntValue;
-#pragma warning restore 649
+#pragma warning restore 169, 649
 
                 public ClassForUnsatisfiedFields(object objectValue, string stringValue)
                 {
