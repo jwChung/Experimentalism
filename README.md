@@ -142,9 +142,12 @@ public IEnumerable<ITestCase> AddTest()
         new { X = 3, Y = 7, Z = 10 },
         new { X = 100, Y = 23, Z = 123 }
     };
-
-    return testCases.Select(
-        c => new TestCase(() => Assert.Equal(c.Z, c.X + c.Y)));
+    return testCases.Select(c => new TestCase(() =>
+    {
+        var sut = new Calc();
+        var actual = sut.Add(c.X, c.Y);
+        Assert.Equal(c.Z, actual);
+    }));
 }
 ```
 
@@ -152,15 +155,19 @@ public IEnumerable<ITestCase> AddTest()
 
 ```c#
 [FirstClassTest]
-public IEnumerable<ITestCase> FirstClassTestWithAutoData()
+public IEnumerable<ITestCase> AddTest()
 {
-    yield return new TestCase(
-        new Action<string, object>(
-            (x, y) =>
-            {
-                Assert.NotNull(x);
-                Assert.NotNull(y);
-            }));
+    var testCases = new[]
+    {
+        new { X = 1, Y = 2, Z = 3 },
+        new { X = 3, Y = 7, Z = 10 },
+        new { X = 100, Y = 23, Z = 123 }
+    };
+    return testCases.Select(c => new TestCase(new Action<Calc>(sut =>
+    {
+        var actual = sut.Add(c.X, c.Y);
+        Assert.Equal(c.Z, actual);
+    })));
 }
 ```
 
