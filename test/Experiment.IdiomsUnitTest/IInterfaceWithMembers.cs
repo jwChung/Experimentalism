@@ -1,4 +1,4 @@
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     public interface IInterfaceWithMembers
     {

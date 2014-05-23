@@ -67,8 +67,8 @@
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
-    <Compile Include="Assertions\AbstractClassWithMembers.cs" />
-    <Compile Include="Assertions\IInterfaceWithMembers.cs" />
+    <Compile Include="AbstractClassWithMembers.cs" />
+    <Compile Include="IInterfaceWithMembers.cs" />
     <Compile Include="Assertions\ObjectDisposalAssertionTest.cs" />
     <Compile Include="DisplayNameCollectorTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
