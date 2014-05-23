@@ -86,17 +86,65 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void DisplayNameIsCorrect()
         {
-            var arguments = new[] { 1, new object(), "string", null };
-            var sut = new FirstClassCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action<int, object, string, Type>((a, b, c, d) => { }),
-                arguments);
-            var expected = "Jwc.Experiment.Xunit.FirstClassCommandTest.DisplayNameIsCorrect" +
-                           "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
+            // Fixture setup
+            var method = (MethodInfo)MethodBase.GetCurrentMethod();
 
+            var sut = new FirstClassCommand(
+                Reflector.Wrap(method),
+                new Action<int, object, string, Type>((a, b, c, d) => { }),
+                new[] { 1, new object(), "string", null });
+
+            string methodName = method.ReflectedType.FullName + "." + method.Name;
+            var expected = methodName + "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
+
+            // Exercise system
             var actual = sut.DisplayName;
 
+            // Verify outcome
             Assert.Equal(expected, actual);
+        }
+
+        [Fact(DisplayName = "CustomDisplayName")]
+        public void DisplayNameIsCorrectWhenInitializedWithDisplayName()
+        {
+            // Fixture setup
+            var method = (MethodInfo)MethodBase.GetCurrentMethod();
+
+            var sut = new FirstClassCommand(
+                Reflector.Wrap(method),
+                new Action<int, object, string, Type>((a, b, c, d) => { }),
+                new[] { 1, new object(), "string", null });
+
+            string methodName = "CustomDisplayName";
+            var expected = methodName + "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
+
+            // Exercise system
+            var actual = sut.DisplayName;
+
+            // Verify outcome
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TimeoutIsCorrect()
+        {
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }),
+                new object[0]);
+            var actual = sut.Timeout;
+            Assert.Equal(0, actual);
+        }
+
+        [Fact]
+        public void ShouldCreateInstanceIsCorrect()
+        {
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }),
+                new object[0]);
+            var actual = sut.ShouldCreateInstance;
+            Assert.False(actual, "ShouldCreateInstance");
         }
 
         [Fact]
@@ -137,28 +185,6 @@ namespace Jwc.Experiment.Xunit
             var result = Assert.IsType<PassedResult>(actual);
             Assert.Equal(method.Name, result.MethodName);
             Assert.Equal(sut.DisplayName, result.DisplayName);
-        }
-
-        [Fact]
-        public void TimeoutIsCorrect()
-        {
-            var sut = new FirstClassCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }),
-                new object[0]);
-            var actual = sut.Timeout;
-            Assert.Equal(0, actual);
-        }
-
-        [Fact]
-        public void ShouldCreateInstanceIsCorrect()
-        {
-            var sut = new FirstClassCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new Action(() => { }),
-                new object[0]);
-            var actual = sut.ShouldCreateInstance;
-            Assert.False(actual, "ShouldCreateInstance");
         }
     }
 }

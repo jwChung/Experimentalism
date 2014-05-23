@@ -28,7 +28,7 @@ namespace Jwc.Experiment.Xunit
         ///     The test arguments to be supplied to the test delegate.
         /// </param>
         public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
-            : base(EnsureIsNotNull(method), null, 0)
+            : base(EnsureIsNotNull(method), MethodUtility.GetDisplayName(method), 0)
         {
             if (@delegate == null)
             {
@@ -44,7 +44,7 @@ namespace Jwc.Experiment.Xunit
             _delegate = @delegate;
             _arguments = arguments;
 
-            SetWellFormattedDisplayName();
+            SetDisplayName();
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Jwc.Experiment.Xunit
             return method;
         }
 
-        private void SetWellFormattedDisplayName()
+        private void SetDisplayName()
         {
             DisplayName += "(" + string.Join(", ", GetArgumentValues()) + ")";
         }
