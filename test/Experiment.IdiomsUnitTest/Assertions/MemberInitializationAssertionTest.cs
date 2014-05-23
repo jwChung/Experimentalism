@@ -22,29 +22,17 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void ParameterToMemberComparerIsCorrect()
+        public void SutIsIdiomaticTypeAssertion()
         {
-            var constructorComparer = new DelegatingReflectionElementComparer();
-            var sut = new MemberInitializationAssertion(
-                   constructorComparer,
-                   EqualityComparer<IReflectionElement>.Default);
-
-            var actual = sut.ParameterToMemberComparer;
-
-            Assert.Equal(constructorComparer, actual);
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
         }
 
         [Fact]
-        public void MemberToParameterComparerIsCorrect()
+        public void SutIsIdiomaticAssemblyAssertion()
         {
-            var memberComparer = EqualityComparer<IReflectionElement>.Default;
-            var sut = new MemberInitializationAssertion(
-                   EqualityComparer<IReflectionElement>.Default,
-                   memberComparer);
-
-            var actual = sut.MemberToParameterComparer;
-
-            Assert.Equal(memberComparer, actual);
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
         }
 
         [Fact]
@@ -52,8 +40,8 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             Assert.Throws<ArgumentNullException>(
                 () => new MemberInitializationAssertion(
-                    null,
-                    EqualityComparer<IReflectionElement>.Default));
+                          null,
+                          EqualityComparer<IReflectionElement>.Default));
         }
 
         [Fact]
@@ -61,8 +49,21 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             Assert.Throws<ArgumentNullException>(
                 () => new MemberInitializationAssertion(
-                    EqualityComparer<IReflectionElement>.Default,
-                    null));
+                          EqualityComparer<IReflectionElement>.Default,
+                          null));
+        }
+
+        [Fact]
+        public void ParameterToMemberComparerIsCorrect()
+        {
+            var constructorComparer = new DelegatingReflectionElementComparer();
+            var sut = new MemberInitializationAssertion(
+                constructorComparer,
+                EqualityComparer<IReflectionElement>.Default);
+
+            var actual = sut.ParameterToMemberComparer;
+
+            Assert.Equal(constructorComparer, actual);
         }
 
         [Fact]
@@ -80,6 +81,19 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.Equal(testFixture, comparers1.TestFixture);
             var comparers2 = Assert.IsAssignableFrom<ParameterToFieldComparer>(comparers[1]);
             Assert.Equal(testFixture, comparers2.TestFixture);
+        }
+
+        [Fact]
+        public void MemberToParameterComparerIsCorrect()
+        {
+            var memberComparer = EqualityComparer<IReflectionElement>.Default;
+            var sut = new MemberInitializationAssertion(
+                EqualityComparer<IReflectionElement>.Default,
+                memberComparer);
+
+            var actual = sut.MemberToParameterComparer;
+
+            Assert.Equal(memberComparer, actual);
         }
 
         [Fact]
@@ -110,66 +124,31 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.Equal(testFixture, actual);
         }
 
-        [Theory]
-        [SatisfiedConstructorData]
-        public void VerifySatisfiedConstructorDoesNotThrow(ConstructorInfo constructor)
+        [Fact]
+        public void VerifyAssemblyCorrectlyVerifies()
         {
-            var sut = new MemberInitializationAssertion(new FakeTestFixture());
-            Assert.DoesNotThrow(() => sut.Verify(constructor));
-        }
+            // Fixture setup
+            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture()).Object;
 
-        [Theory]
-        [UnsatisfiedConstructorData]
-        public void VerifyUnsatisfiedConstructorThrows(ConstructorInfo constructor)
-        {
-            var sut = new MemberInitializationAssertion(new FakeTestFixture());
-            Assert.Throws<MemberInitializationException>(() => sut.Verify(constructor));
-        }
+            var types = new List<MemberInfo>();
+            sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
 
-        [Theory]
-        [SatisfiedFieldData]
-        public void VerifySatisfiedFieldDoesNotThrow(FieldInfo field)
-        {
-            var sut = new MemberInitializationAssertion(new FakeTestFixture());
-            Assert.DoesNotThrow(() => sut.Verify(field));
-        }
+            var assembly = typeof(TestAttribute).Assembly;
 
-        [Theory]
-        [UnsatisfiedFieldData]
-        public void VerifyUnsatisfiedFieldThrows(FieldInfo field)
-        {
-            var sut = new MemberInitializationAssertion(new FakeTestFixture());
-            Assert.Throws<MemberInitializationException>(() => sut.Verify(field));
-        }
+            var expected = assembly.GetExportedTypes();
 
-        [Theory]
-        [SatisfiedPropertyData]
-        public void VerifySatisfiedPropertyDoesNotThrow(PropertyInfo property)
-        {
-            var sut = new MemberInitializationAssertion(new FakeTestFixture());
-            Assert.DoesNotThrow(() => sut.Verify(property));
-        }
+            // Exercise system
+            sut.Verify(assembly);
 
-        [Theory]
-        [UnsatisfiedPropertyData]
-        public void VerifyUnsatisfiedPropertyThrows(PropertyInfo property)
-        {
-            var sut = new MemberInitializationAssertion(new FakeTestFixture());
-            Assert.Throws<MemberInitializationException>(() => sut.Verify(property));
+            // Verify outcome
+            Assert.Equal(expected, types);
         }
 
         [Fact]
-        public void VerifyNullConstructorThrows()
+        public void VerifyNullAssemblyThrows()
         {
             var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
-            Assert.Throws<ArgumentNullException>(() => sut.Verify((ConstructorInfo)null));
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
         }
 
         [Theory]
@@ -192,38 +171,89 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.Throws<MemberInitializationException>(() => sut.Verify(type));
         }
 
-        [Fact]
-        public void SutIsIdiomaticAssemblyAssertion()
+        [Theory]
+        [SatisfiedFieldData]
+        public void VerifySatisfiedFieldDoesNotThrow(FieldInfo field)
         {
-            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(field));
+        }
+
+        [Theory]
+        [UnsatisfiedFieldData]
+        public void VerifyUnsatisfiedFieldThrows(FieldInfo field)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.Throws<MemberInitializationException>(() => sut.Verify(field));
         }
 
         [Fact]
-        public void VerifyAssemblyCorrectlyVerifies()
+        public void VerifyNullFieldThrows()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var exception = Assert.Throws<ArgumentNullException>(() => sut.Verify((FieldInfo)null));
+            Assert.Equal("field", exception.ParamName);
+        }
+
+        [Fact]
+        public void VerifyStaticFieldDoesNotThrow()
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            var field = Fields.Select(() => ClassWithMembers.StaticField);
+            Assert.DoesNotThrow(() => sut.Verify(field));
+        }
+
+        [Theory]
+        [SatisfiedConstructorData]
+        public void VerifySatisfiedConstructorDoesNotThrow(ConstructorInfo constructor)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(constructor));
+        }
+
+        [Theory]
+        [UnsatisfiedConstructorData]
+        public void VerifyUnsatisfiedConstructorThrows(ConstructorInfo constructor)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.Throws<MemberInitializationException>(() => sut.Verify(constructor));
+        }
+
+        [Fact]
+        public void VerifyNullConstructorThrows()
+        {
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((ConstructorInfo)null));
+        }
+
+        [Fact]
+        public void VerifyStaticConstructorDoesNotThrow()
         {
             // Fixture setup
-            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture()).Object;
-
-            var types = new List<MemberInfo>();
-            sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
-
-            var assembly = typeof(TestAttribute).Assembly;
-
-            var expected = assembly.GetExportedTypes();
-
-            // Exercise system
-            sut.Verify(assembly);
-
-            // Verify outcome
-            Assert.Equal(expected, types);
-        }
-        
-        [Fact]
-        public void VerifyNullAssemblyThrows()
-        {
             var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
-            Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
+            var constructor = typeof(ClassWithMembers)
+                .GetConstructors(BindingFlags.NonPublic | BindingFlags.Static)
+                .Single();
+            Assert.NotNull(constructor);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(constructor));
+        }
+
+        [Theory]
+        [SatisfiedPropertyData]
+        public void VerifySatisfiedPropertyDoesNotThrow(PropertyInfo property)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Theory]
+        [UnsatisfiedPropertyData]
+        public void VerifyUnsatisfiedPropertyThrows(PropertyInfo property)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.Throws<MemberInitializationException>(() => sut.Verify(property));
         }
 
         [Fact]
@@ -235,11 +265,51 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void VerifyNullFieldThrows()
+        public void VerifyStaticSetPropertyDoesNotThrow()
         {
+            // Fixture setup
             var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
-            var exception = Assert.Throws<ArgumentNullException>(() => sut.Verify((FieldInfo)null));
-            Assert.Equal("field", exception.ParamName);
+            var property = typeof(ClassWithMembers).GetProperty("StaticWriteOnlyProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyStaticGetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var property = typeof(ClassWithMembers).GetProperty("StaticReadOnlyProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyInterfaceSetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var property = typeof(IInterfaceWithMembers).GetProperty("SetProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyInterfaceGetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var property = typeof(IInterfaceWithMembers).GetProperty("GetProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
         }
 
         private class SatisfiedConstructorDataAttribute : DataAttribute

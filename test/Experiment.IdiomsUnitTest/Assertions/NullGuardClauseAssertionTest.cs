@@ -118,7 +118,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyInterfaceMethodDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var method = new Methods<IInterfaceType>().Select(x => x.Method(null));
+            var method = new Methods<IInterfaceWithMembers>().Select(x => x.Method(null));
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
 
@@ -126,7 +126,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyAbstractMethodDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var method = new Methods<AbstractType>().Select(x => x.AbstractMethod(null));
+            var method = new Methods<AbstractClassWithMembers>().Select(x => x.AbstractMethod(null));
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
 
@@ -134,7 +134,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyVirtualUnguardedMethodFromAbstractTypeThrows()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var method = new Methods<AbstractType>().Select(x => x.VirtualMethod(null));
+            var method = new Methods<AbstractClassWithMembers>().Select(x => x.VirtualMethod(null));
             Assert.Throws<GuardClauseException>(() => sut.Verify(method));
         }
 
@@ -149,7 +149,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyInterfaceGetPropetyDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var property = new Properties<IInterfaceType>().Select(x => x.GetProperty);
+            var property = new Properties<IInterfaceWithMembers>().Select(x => x.GetProperty);
             Assert.DoesNotThrow(() => sut.Verify(property));
         }
 
@@ -157,7 +157,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyInterfaceSetPropetyDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var property = typeof(IInterfaceType).GetProperty("SetProperty");
+            var property = typeof(IInterfaceWithMembers).GetProperty("SetProperty");
             Assert.DoesNotThrow(() => sut.Verify(property));
         }
 
@@ -165,7 +165,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyVirtualUnguardedPropertyFromAbstractTypeThrows()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
-            var property = typeof(AbstractType).GetProperty("SetProperty");
+            var property = typeof(AbstractClassWithMembers).GetProperty("SetProperty");
             Assert.Throws<GuardClauseException>(() => sut.Verify(property));
         }
 
@@ -241,31 +241,6 @@ namespace Jwc.Experiment.Idioms.Assertions
             {
                 if (arg1 == null)
                     throw new ArgumentNullException("arg1");
-            }
-        }
-
-        private interface IInterfaceType
-        {
-            void Method(object arg);
-
-            object GetProperty { get; }
-
-            object SetProperty { set; }
-        }
-
-        private abstract class AbstractType
-        {
-            public abstract void AbstractMethod(object arg);
-
-            public virtual object SetProperty
-            {
-                set
-                {
-                }
-            }
-
-            public virtual void VirtualMethod(object arg)
-            {
             }
         }
     }

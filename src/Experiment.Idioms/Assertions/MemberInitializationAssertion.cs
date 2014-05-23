@@ -131,6 +131,9 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (field == null)
                 throw new ArgumentNullException("field");
 
+            if (field.IsStatic)
+                return;
+
             var fieldInfoElement = field.ToElement();
             var parameterInfoElements = GetParameterInfoElements(field.ReflectedType);
 
@@ -196,6 +199,9 @@ Parameter  : {2}";
             if (property == null)
                 throw new ArgumentNullException("property");
 
+            if (property.IsStatic() || property.IsAbstract())
+                return;
+
             var propertyInfoElement = property.ToElement();
             var parameterInfoElements = GetParameterInfoElements(property.ReflectedType);
 
@@ -215,7 +221,7 @@ Property      : {2}";
                     property.ReflectedType,
                     propertyInfoElement));
         }
-
+        
         private static IEnumerable<ParameterInfoElement> GetParameterInfoElements(Type reflectedType)
         {
             return reflectedType.GetConstructors().SelectMany(GetParameterInfoElements);

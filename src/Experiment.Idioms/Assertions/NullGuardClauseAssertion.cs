@@ -96,7 +96,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (property == null)
                 throw new ArgumentNullException("property");
 
-            if (IsAbstract(property))
+            if (property.IsAbstract())
                 return;
 
             _assertion.Verify(property);
@@ -117,15 +117,6 @@ namespace Jwc.Experiment.Idioms.Assertions
                 return;
 
             _assertion.Verify(method);
-        }
-
-        private static bool IsAbstract(PropertyInfo property)
-        {
-            var getMethod = property.GetGetMethod(true);
-            if (getMethod != null)
-                return getMethod.IsAbstract;
-
-            return property.GetSetMethod(true).IsAbstract;
         }
 
         private class SpecimenBuilder : ISpecimenBuilder
