@@ -312,6 +312,30 @@ namespace Jwc.Experiment.Idioms.Assertions
             Assert.DoesNotThrow(() => sut.Verify(property));
         }
 
+        [Fact]
+        public void VerifySetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var property = typeof(ClassWithMembers).GetProperty("WriteOnlyProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyPrivateGetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new MemberInitializationAssertion(new DelegatingTestFixture());
+            var property = typeof(ClassWithMembers).GetProperty("PrivateGetProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
         private class SatisfiedConstructorDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)

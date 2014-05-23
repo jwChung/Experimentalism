@@ -199,7 +199,7 @@ Parameter  : {2}";
             if (property == null)
                 throw new ArgumentNullException("property");
 
-            if (property.IsStatic() || property.IsAbstract())
+            if (property.GetGetMethod() == null || property.IsStatic() || property.IsAbstract())
                 return;
 
             var propertyInfoElement = property.ToElement();
