@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
+    <Compile Include="Assertions\IdiomaticAssertionTest.cs" />
     <Compile Include="IInterfaceWithMembers.cs" />
     <Compile Include="Assertions\ObjectDisposalAssertionTest.cs" />
     <Compile Include="DisplayNameCollectorTest.cs" />
