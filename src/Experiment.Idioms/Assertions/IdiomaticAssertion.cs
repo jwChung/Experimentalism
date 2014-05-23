@@ -19,7 +19,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// <param name="assembly">
         /// The assembly.
         /// </param>
-        public void Verify(Assembly assembly)
+        public virtual void Verify(Assembly assembly)
         {
             if (assembly == null)
                 throw new ArgumentNullException("assembly");

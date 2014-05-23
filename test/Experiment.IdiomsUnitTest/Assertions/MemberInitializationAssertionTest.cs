@@ -128,7 +128,8 @@ namespace Jwc.Experiment.Idioms.Assertions
         public void VerifyAssemblyCorrectlyVerifies()
         {
             // Fixture setup
-            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture()).Object;
+            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture())
+            { CallBase = true }.Object;
 
             var types = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);

@@ -9,8 +9,7 @@ namespace Jwc.Experiment.Idioms.Assertions
     /// Encapsulates a unit test that verifies that a method or constructor has
     /// appropriate Null Guard Clauses in place.
     /// </summary>
-    public class NullGuardClauseAssertion
-        : IdiomaticMemberAssertion, IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion
+    public class NullGuardClauseAssertion : IdiomaticAssertion
     {
         private readonly ITestFixture _testFixture;
         private readonly IIdiomaticAssertion _assertion;
@@ -40,35 +39,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                 return _testFixture;
             }
         }
-
-        /// <summary>
-        /// Verifies that all types of an assembly has appropriate Null Guard
-        /// Clause in place.
-        /// </summary>
-        /// <param name="assembly">
-        /// The assembly.
-        /// </param>
-        public void Verify(Assembly assembly)
-        {
-            if (assembly == null)
-                throw new ArgumentNullException("assembly");
-
-            foreach (var type in assembly.GetExportedTypes())
-                Verify(type);
-        }
-
-        /// <summary>
-        /// Verifies that a type has appropriate Null Guard Clause in place.
-        /// </summary>
-        /// <param name="type">
-        /// The type.
-        /// </param>
-        public virtual void Verify(Type type)
-        {
-            foreach (var member in type.GetIdiomaticMembers())
-                Verify(member);
-        }
-
+        
         /// <summary>
         /// Verifies that a constructor has appropriate Null Guard Clause in
         /// place.
