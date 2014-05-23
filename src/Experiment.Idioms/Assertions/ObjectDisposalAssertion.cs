@@ -49,9 +49,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         /// </param>
         public void Verify(Type type)
         {
-            var members = new IdiomaticMembers(type, MemberKinds.Instance);
-
-            foreach (var member in members)
+            foreach (var member in type.GetIdiomaticMembers())
                 Verify(member);
         }
 
@@ -67,11 +65,11 @@ namespace Jwc.Experiment.Idioms.Assertions
             if (property == null)
                 throw new ArgumentNullException("property");
 
-            var getMethod = property.GetGetMethod();
+            var getMethod = property.GetGetMethod(true);
             if (getMethod != null)
                 Verify(getMethod);
 
-            var setMethod = property.GetSetMethod();
+            var setMethod = property.GetSetMethod(true);
             if (setMethod != null)
                 Verify(setMethod);
         }
@@ -88,6 +86,9 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             if (method == null)
                 throw new ArgumentNullException("method");
+
+            if (method.IsStatic || method.IsAbstract)
+                return;
 
             var owner = GetOwner(method);
             owner.Dispose();

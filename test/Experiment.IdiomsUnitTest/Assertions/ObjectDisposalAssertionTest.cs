@@ -42,42 +42,17 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void VerifyMethodDoesNotThrowWhenMethodThrowsObjectDisposedException()
+        public void VerifyTypeVerifiesCorrectMembers()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
-            var method = new Methods<ClassForDisposable>().Select(x => x.ThrowObjectDisposedException());
-            Assert.DoesNotThrow(() => sut.Verify(method));
-        }
+            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
+            var members = new List<MemberInfo>();
+            sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
+            var type = typeof(ClassWithMembers);
+            var expected = new IdiomaticMembers(type);
 
-        [Fact]
-        public void VerifyMethodThrowsWhenTargetIsNotDisposable()
-        {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
-            var method = new Methods<ClassForNonDisposable>().Select(x => x.Method());
-            Assert.Throws<ArgumentException>(() => sut.Verify(method));
-        }
+            sut.Verify(type);
 
-        [Fact]
-        public void VerifyMethodThrowsWhenMethodDoesNotThrowObjectDisposedException()
-        {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
-            var method = new Methods<ClassForDisposable>().Select(x => x.DoNotThrowException());
-            Assert.Throws<ObjectDisposalException>(() => sut.Verify(method));
-        }
-
-        [Fact]
-        public void VerifyMethodThrowsWhenMethodThrowsOtherException()
-        {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
-            var method = new Methods<ClassForDisposable>().Select(x => x.ThrowNotSupportedException());
-            Assert.Throws<TargetInvocationException>(() => sut.Verify(method));
-        }
-
-        [Fact]
-        public void VerifyNullMethodThrows()
-        {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
-            Assert.Throws<ArgumentNullException>(() => sut.Verify((MethodInfo)null));
+            Assert.Equal(expected.OrderBy(m => m.Name), members.OrderBy(m => m.Name));
         }
 
         [Fact]
@@ -86,7 +61,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
             var property = new Properties<ClassWithMembers>().Select(x => x.PublicProperty);
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MethodInfo>()));
-            
+
             sut.Verify(property);
 
             sut.ToMock().Verify(x => x.Verify(property.GetGetMethod()));
@@ -127,19 +102,104 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         [Fact]
-        public void VerifyTypeVerifiesCorrectMembers()
+        public void VerifyStaticSetPropertyDoesNotThrow()
         {
-            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
-            var members = new List<MemberInfo>();
-            sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
-            var type = typeof(ClassWithMembers);
-            var expected = new IdiomaticMembers(type, MemberKinds.Instance);
+            // Fixture setup
+            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var property = typeof(ClassWithMembers).GetProperty("StaticWriteOnlyProperty");
+            Assert.NotNull(property);
 
-            sut.Verify(type);
-
-            Assert.Equal(expected.OrderBy(m => m.Name), members.OrderBy(m => m.Name));
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
         }
-        
+
+        [Fact]
+        public void VerifyStaticGetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var property = typeof(ClassWithMembers).GetProperty("StaticReadOnlyProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyInterfaceSetPropertyDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var property = typeof(IInterfaceWithMembers).GetProperty("SetProperty");
+            Assert.NotNull(property);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyMethodDoesNotThrowWhenMethodThrowsObjectDisposedException()
+        {
+            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var method = new Methods<ClassForDisposable>().Select(x => x.ThrowObjectDisposedException());
+            Assert.DoesNotThrow(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyMethodThrowsWhenTargetIsNotDisposable()
+        {
+            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var method = new Methods<ClassForNonDisposable>().Select(x => x.Method());
+            Assert.Throws<ArgumentException>(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyMethodThrowsWhenMethodDoesNotThrowObjectDisposedException()
+        {
+            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var method = new Methods<ClassForDisposable>().Select(x => x.DoNotThrowException());
+            Assert.Throws<ObjectDisposalException>(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyMethodThrowsWhenMethodThrowsOtherException()
+        {
+            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var method = new Methods<ClassForDisposable>().Select(x => x.ThrowNotSupportedException());
+            Assert.Throws<TargetInvocationException>(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyNullMethodThrows()
+        {
+            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            Assert.Throws<ArgumentNullException>(() => sut.Verify((MethodInfo)null));
+        }
+
+        [Fact]
+        public void VerifyStaticMethodDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var method = typeof(ClassWithMembers).GetMethod("PublicStaticMethod");
+            Assert.NotNull(method);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyInterfaceMethodDoesNotThrow()
+        {
+            // Fixture setup
+            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var method = typeof(IInterfaceWithMembers).GetMethod("Method");
+            Assert.NotNull(method);
+
+            // Exercise system and Verify outcome
+            Assert.DoesNotThrow(() => sut.Verify(method));
+        }
+
         private class ClassForDisposable : IDisposable
         {
             private bool _disposed;
