@@ -82,7 +82,8 @@ namespace Jwc.Experiment.Idioms
             var fieldInfoElement = new Fields<ClassWithMembers>().Select(x => x.PublicField).ToElement();
             var getPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .First(p => p.GetSetMethod() == null).ToElement();
+                .First(p => p.GetSetMethod(true) == null && p.GetGetMethod(true) != null)
+                .ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(getPropertyInfoElement);
 
@@ -97,7 +98,7 @@ namespace Jwc.Experiment.Idioms
             var fieldInfoElement = new Fields<ClassWithMembers>().Select(x => x.PublicField).ToElement();
             var setPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .First(p => p.GetGetMethod(true) == null)
+                .First(p => p.GetGetMethod(true) == null && p.GetSetMethod(true) != null)
                 .ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(setPropertyInfoElement);
@@ -113,7 +114,8 @@ namespace Jwc.Experiment.Idioms
             var fieldInfoElement = new Fields<ClassWithMembers>().Select(x => x.PublicField).ToElement();
             var getSetPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .First(p => p.GetGetMethod() != null && p.GetSetMethod() != null).ToElement();
+                .First(p => p.GetGetMethod(true) != null && p.GetSetMethod(true) != null)
+                .ToElement();
 
             var actual = sut.Visit(fieldInfoElement).Visit(getSetPropertyInfoElement);
 
@@ -221,7 +223,8 @@ namespace Jwc.Experiment.Idioms
             var sut = new MemberKindCollector(new[] { MemberKinds.InstanceField });
             var getPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                .First(p => p.GetSetMethod() == null).ToElement();
+                .First(p => p.GetSetMethod(true) == null && p.GetGetMethod(true) != null)
+                .ToElement();
 
             var actual = sut.Visit(getPropertyInfoElement);
 
@@ -235,7 +238,8 @@ namespace Jwc.Experiment.Idioms
             var sut = new MemberKindCollector(new[] { MemberKinds.InstanceField });
             var setPropertyInfoElement = typeof(ClassWithMembers)
                 .GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                .First(p => p.GetGetMethod() == null).ToElement();
+                .First(p => p.GetGetMethod(true) == null && p.GetSetMethod(true) != null)
+                .ToElement();
 
             var actual = sut.Visit(setPropertyInfoElement);
 
