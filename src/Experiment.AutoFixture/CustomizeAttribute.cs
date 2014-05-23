@@ -15,8 +15,12 @@ namespace Jwc.Experiment.AutoFixture
         /// <summary>
         /// Gets a customization for a parameter.
         /// </summary>
-        /// <param name="parameter">The parameter for which the customization is requested.</param>
-        /// <returns></returns>
+        /// <param name="parameter">
+        /// The parameter for which the customization is requested.
+        /// </param>
+        /// <returns>
+        /// The customization.
+        /// </returns>
         public abstract ICustomization GetCustomization(ParameterInfo parameter);
     }
 }
