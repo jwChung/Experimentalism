@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -10,22 +11,23 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    /// 이 attribute는 method위에 선언되어 해당 method가 test라는 것을
-    /// 지칭하게 되며, non-parameterized test 뿐 아니라 parameterized test에도
-    /// 사용될 수 있다.
+    ///     이 attribute는 method위에 선언되어 해당 method가 test라는 것을 지칭하게 되며, non-parameterized test 뿐
+    ///     아니라 parameterized test에도 사용될 수 있다.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
+    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
     public class TestAttribute : FactAttribute
     {
         /// <summary>
-        /// Enumerates the test commands represented by this test method.
-        /// Derived classes should override this method to return instances of
-        /// <see cref="ITestCommand" />, one per execution of a test method.
+        ///     Enumerates the test commands represented by this test method. Derived classes should
+        ///     override this method to return instances of
+        ///     <see cref="ITestCommand" />, one per execution of a test method.
         /// </summary>
-        /// <param name="method">The test method</param>
+        /// <param name="method">
+        ///     The test method
+        /// </param>
         /// <returns>
-        /// The test commands which will execute the test runs for the given method
+        ///     The test commands which will execute the test runs for the given method
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
@@ -46,20 +48,20 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="ITestFixture"/>.
+        ///     Creates an instance of <see cref="ITestFixture" />.
         /// </summary>
         /// <param name="testMethod">
-        /// The test method
+        ///     The test method
         /// </param>
         /// <returns>
-        /// The created fixture.
+        ///     The created fixture.
         /// </returns>
         protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
             return DefaultFixtureFactory.Current.Create(testMethod);
         }
-        
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private static bool TryMoveNext(
             IEnumerator<ITestCommand> enumerator,
             out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
@@ -77,7 +79,7 @@ namespace Jwc.Experiment.Xunit
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
         {
             try
@@ -106,7 +108,7 @@ namespace Jwc.Experiment.Xunit
             return new TheoryCommand(method, arguments.ToArray());
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "auto data를 만들 때 발생되는 unhandled exception을 처리하기 위해서 이 경고 무시함.")]
         private ITestCommand CreateEachTestCommand(IMethodInfo method, object[] specifiedArguments)
         {
             try

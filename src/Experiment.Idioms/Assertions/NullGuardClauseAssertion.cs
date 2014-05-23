@@ -6,8 +6,8 @@ using Ploeh.AutoFixture.Kernel;
 namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
-    /// Encapsulates a unit test that verifies that a method or constructor has
-    /// appropriate Null Guard Clauses in place.
+    ///     Encapsulates a unit test that verifies that a method or constructor has appropriate
+    ///     Null Guard Clauses in place.
     /// </summary>
     public class NullGuardClauseAssertion : IdiomaticAssertion
     {
@@ -15,10 +15,10 @@ namespace Jwc.Experiment.Idioms.Assertions
         private readonly IIdiomaticAssertion _assertion;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NullGuardClauseAssertion"/> class.
+        ///     Initializes a new instance of the <see cref="NullGuardClauseAssertion" /> class.
         /// </summary>
         /// <param name="testFixture">
-        /// A test fixture to create auto-data.
+        ///     A test fixture to create auto-data.
         /// </param>
         public NullGuardClauseAssertion(ITestFixture testFixture)
         {
@@ -30,7 +30,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Gets a value indicating the test fixture.
+        ///     Gets a value indicating the test fixture.
         /// </summary>
         public ITestFixture TestFixture
         {
@@ -39,14 +39,13 @@ namespace Jwc.Experiment.Idioms.Assertions
                 return _testFixture;
             }
         }
-        
+
         /// <summary>
-        /// Verifies that a constructor has appropriate Null Guard Clause in
-        /// place.
-        /// specified constructor.
+        ///     Verifies that a constructor has appropriate Null Guard Clause in place. specified
+        ///     constructor.
         /// </summary>
         /// <param name="constructor">
-        /// The constructor.
+        ///     The constructor.
         /// </param>
         public override void Verify(ConstructorInfo constructor)
         {
@@ -57,10 +56,10 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a property has appropriate Null Guard Clause in place.
+        ///     Verifies that a property has appropriate Null Guard Clause in place.
         /// </summary>
         /// <param name="property">
-        /// The property.
+        ///     The property.
         /// </param>
         public override void Verify(PropertyInfo property)
         {
@@ -74,10 +73,10 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a method has appropriate Null Guard Clause in place.
+        ///     Verifies that a method has appropriate Null Guard Clause in place.
         /// </summary>
         /// <param name="method">
-        /// The method.
+        ///     The method.
         /// </param>
         public override void Verify(MethodInfo method)
         {

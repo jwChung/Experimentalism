@@ -80,7 +80,7 @@ namespace Jwc.Experiment.Idioms
                 Assembly.Load("Ploeh.AutoFixture"),
                 Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
-            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace Jwc.Experiment.Idioms
                 Assembly.Load("Ploeh.AutoFixture"),
                 Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
-            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         public class TestFixtureCustomization
@@ -130,16 +130,12 @@ namespace Jwc.Experiment.Idioms
             {
                 set
                 {
-                    if(value == null)
+                    if (value == null)
                         throw new ArgumentNullException("value");
                 }
             }
 
-            public object UnguradedProperty
-            {
-                get;
-                set;
-            }
+            public object UnguradedProperty { get; set; }
 
             public void Method(object arg)
             {

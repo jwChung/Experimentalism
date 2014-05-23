@@ -6,7 +6,7 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    /// Represents a test command for first class tests.
+    ///     Represents a test command for first class tests.
     /// </summary>
     public class FirstClassCommand : TestCommand
     {
@@ -15,17 +15,17 @@ namespace Jwc.Experiment.Xunit
         private readonly object[] _arguments;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FirstClassCommand"/> class.
+        ///     Initializes a new instance of the <see cref="FirstClassCommand" /> class.
         /// </summary>
         /// <param name="method">
-        /// The test method which this instance is associated. This will
-        /// likely be the method adorned with an <see cref="FirstClassTestAttribute"/>
+        ///     The test method which this instance is associated. This will likely be the method
+        ///     adorned with an <see cref="FirstClassTestAttribute" />
         /// </param>
         /// <param name="delegate">
-        /// The test case to be invoked when the test is executed.
+        ///     The test case to be invoked when the test is executed.
         /// </param>
         /// <param name="arguments">
-        /// The test arguments to be supplied to the test delegate.
+        ///     The test arguments to be supplied to the test delegate.
         /// </param>
         public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
             : base(EnsureIsNotNull(method), null, 0)
@@ -48,7 +48,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Gets the test method.
+        ///     Gets the test method.
         /// </summary>
         public IMethodInfo Method
         {
@@ -59,7 +59,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Gets the test delegate.
+        ///     Gets the test delegate.
         /// </summary>
         public Delegate Delegate
         {
@@ -70,7 +70,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Gets the arguments.
+        ///     Gets the arguments.
         /// </summary>
         public IEnumerable<object> Arguments
         {
@@ -81,10 +81,10 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Gets a value indicating whether a test-case instance is created.
+        ///     Gets a value indicating whether a test-case instance is created.
         /// </summary>
         /// <value>
-        /// <c>true</c> if a test-case instance is created; otherwise, <c>false</c>.
+        ///     <c>true</c> if a test-case instance is created; otherwise, <c>false</c>.
         /// </value>
         public override bool ShouldCreateInstance
         {
@@ -95,10 +95,14 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Execute the test delegate with the arguments.
+        ///     Execute the test delegate with the arguments.
         /// </summary>
-        /// <param name="testClass">The test class object.</param>
-        /// <returns>The result of the execution.</returns>
+        /// <param name="testClass">
+        ///     The test class object.
+        /// </param>
+        /// <returns>
+        ///     The result of the execution.
+        /// </returns>
         public override MethodResult Execute(object testClass)
         {
             Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, Arguments.ToArray());

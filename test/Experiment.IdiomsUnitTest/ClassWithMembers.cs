@@ -42,11 +42,7 @@ namespace Jwc.Experiment.Idioms
         {
         }
 
-        public static object StaticProperty
-        {
-            get;
-            set;
-        }
+        public static object StaticProperty { get; set; }
 
         public static object StaticReadOnlyProperty
         {
@@ -63,11 +59,7 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        public object PublicProperty
-        {
-            get;
-            set;
-        }
+        public object PublicProperty { get; set; }
 
         public object ReadOnlyProperty
         {
@@ -84,11 +76,7 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        public object PrivateSetProperty
-        {
-            get;
-            private set;
-        }
+        public object PrivateSetProperty { get; private set; }
 
         public object PrivateGetProperty
         {
@@ -101,29 +89,13 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        protected internal object ProtectedInternalProperty
-        {
-            get;
-            set;
-        }
+        protected internal object ProtectedInternalProperty { get; set; }
 
-        protected object ProtectedProperty
-        {
-            get;
-            set;
-        }
+        protected object ProtectedProperty { get; set; }
 
-        internal object InternalProperty
-        {
-            get;
-            set;
-        }
+        internal object InternalProperty { get; set; }
 
-        private object PrivateProperty
-        {
-            get;
-            set;
-        }
+        private object PrivateProperty { get; set; }
 
         public void PublicMethod()
         {

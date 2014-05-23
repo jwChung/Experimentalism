@@ -223,7 +223,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             var constructor = Constructors.Select(() => new ClassWithGuardedMembers(null));
             Assert.DoesNotThrow(() => sut.Verify(constructor));
         }
-        
+
         private class ClassWithGuardedMembers
         {
             public ClassWithGuardedMembers(object arg)

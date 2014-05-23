@@ -8,17 +8,17 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represents <see cref="IReflectionVisitor{T}"/> to collect reference
-    /// assemblies for a given reflection meta-data.
+    ///     Represents <see cref="IReflectionVisitor{T}" /> to collect reference assemblies for
+    ///     a given reflection meta-data.
     /// </summary>
     public class ReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
         private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
         private readonly HashSet<Type> _types = new HashSet<Type>();
         private readonly MemberReferenceCollector _memberReferenceCollector = new MemberReferenceCollector();
-        
+
         /// <summary>
-        /// Gets the observation or value produced by this instance.
+        ///     Gets the observation or value produced by this instance.
         /// </summary>
         public override IEnumerable<Assembly> Value
         {
@@ -30,15 +30,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows an <see cref="TypeElement" /> to be visited. This method is
-        /// called when the element accepts this visitor instance.
+        ///     Allows an <see cref="TypeElement" /> to be visited. This method is called when the
+        ///     element accepts this visitor instance.
         /// </summary>
-        /// <param name="typeElement">The <see cref="TypeElement" /> being visited.
+        /// <param name="typeElement">
+        ///     The <see cref="TypeElement" /> being visited.
         /// </param>
         /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(TypeElement typeElement)
         {
@@ -52,15 +52,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows <see cref="FieldInfoElement" /> instances to be 'visited'.
-        /// This method is called when the elements 'accepts' this visitor instance.
+        ///     Allows <see cref="FieldInfoElement" /> instances to be 'visited'. This method is
+        ///     called when the elements 'accepts' this visitor instance.
         /// </summary>
         /// <param name="fieldInfoElements">
-        /// The <see cref="FieldInfoElement" /> instances being visited.
+        ///     The <see cref="FieldInfoElement" /> instances being visited.
         /// </param>
         /// <returns>
-        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
-        /// used to continue the visiting process with potentially updated observations.
+        ///     A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be used
+        ///     to continue the visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             params FieldInfoElement[] fieldInfoElements)
@@ -69,7 +69,7 @@ namespace Jwc.Experiment.Idioms
             {
                 throw new ArgumentNullException("fieldInfoElements");
             }
-            
+
             var elements = fieldInfoElements
                 .Where(e => e.FieldInfo.ReflectedType == e.FieldInfo.DeclaringType)
                 .ToArray();
@@ -78,17 +78,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows an <see cref="ConstructorInfoElement"/> to be visited. 
-        /// This method is called when the element accepts this visitor
-        /// instance.
+        ///     Allows an <see cref="ConstructorInfoElement" /> to be visited. This method is called
+        ///     when the element accepts this visitor instance.
         /// </summary>
         /// <param name="constructorInfoElement">
-        /// The <see cref="ConstructorInfoElement"/> being visited.
+        ///     The <see cref="ConstructorInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             ConstructorInfoElement constructorInfoElement)
@@ -103,15 +101,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows <see cref="PropertyInfoElement"/> instances to be 'visited'.
-        /// This method is called when the elements 'accepts' this visitor instance.
+        ///     Allows <see cref="PropertyInfoElement" /> instances to be 'visited'. This method is
+        ///     called when the elements 'accepts' this visitor instance.
         /// </summary>
         /// <param name="propertyInfoElements">
-        /// The <see cref="PropertyInfoElement"/> instances being visited.
+        ///     The <see cref="PropertyInfoElement" /> instances being visited.
         /// </param>
         /// <returns>
-        /// A (potentially) new <see cref="IReflectionVisitor{T}"/> instance which can be
-        /// used to continue the visiting process with potentially updated observations.
+        ///     A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be used
+        ///     to continue the visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             params PropertyInfoElement[] propertyInfoElements)
@@ -129,15 +127,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows <see cref="MethodInfoElement"/> instances to be 'visited'.
-        /// This method is called when the elements 'accepts' this visitor instance.
+        ///     Allows <see cref="MethodInfoElement" /> instances to be 'visited'. This method is
+        ///     called when the elements 'accepts' this visitor instance.
         /// </summary>
         /// <param name="methodInfoElements">
-        /// The <see cref="MethodInfoElement"/> instances being visited.
+        ///     The <see cref="MethodInfoElement" /> instances being visited.
         /// </param>
         /// <returns>
-        /// A (potentially) new <see cref="IReflectionVisitor{T}"/> instance which can be
-        /// used to continue the visiting process with potentially updated observations.
+        ///     A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be used
+        ///     to continue the visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             params MethodInfoElement[] methodInfoElements)
@@ -155,15 +153,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows <see cref="EventInfoElement" /> instances to be 'visited'.
-        /// This method is called when the elements 'accepts' this visitor instance.
+        ///     Allows <see cref="EventInfoElement" /> instances to be 'visited'. This method is
+        ///     called when the elements 'accepts' this visitor instance.
         /// </summary>
         /// <param name="eventInfoElements">
-        /// The <see cref="EventInfoElement" /> instances being visited.
+        ///     The <see cref="EventInfoElement" /> instances being visited.
         /// </param>
         /// <returns>
-        /// A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be
-        /// used to continue the visiting process with potentially updated observations.
+        ///     A (potentially) new <see cref="IReflectionVisitor{T}" /> instance which can be used
+        ///     to continue the visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             params EventInfoElement[] eventInfoElements)
@@ -181,17 +179,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows an <see cref="FieldInfoElement" /> to be visited.
-        /// This method is called when the element accepts this visitor
-        /// instance.
+        ///     Allows an <see cref="FieldInfoElement" /> to be visited. This method is called when
+        ///     the element accepts this visitor instance.
         /// </summary>
         /// <param name="fieldInfoElement">
-        /// The <see cref="FieldInfoElement" /> being visited.
+        ///     The <see cref="FieldInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             FieldInfoElement fieldInfoElement)
@@ -206,17 +202,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows an <see cref="MethodInfoElement" /> to be visited.
-        /// This method is called when the element accepts this visitor
-        /// instance.
+        ///     Allows an <see cref="MethodInfoElement" /> to be visited. This method is called when
+        ///     the element accepts this visitor instance.
         /// </summary>
         /// <param name="methodInfoElement">
-        /// The <see cref="MethodInfoElement" /> being visited.
+        ///     The <see cref="MethodInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             MethodInfoElement methodInfoElement)
@@ -228,23 +222,21 @@ namespace Jwc.Experiment.Idioms
 
             MethodInfo methodInfo = methodInfoElement.MethodInfo;
             AddReferencedAssemblies(methodInfo.ReturnType);
-            
+
             VisitMethodBody(methodInfo);
             return base.Visit(methodInfoElement);
         }
 
         /// <summary>
-        /// Allows an <see cref="ParameterInfoElement" /> to be visited.
-        /// This method is called when the element accepts this visitor
-        /// instance.
+        ///     Allows an <see cref="ParameterInfoElement" /> to be visited. This method is called
+        ///     when the element accepts this visitor instance.
         /// </summary>
         /// <param name="parameterInfoElement">
-        /// The <see cref="ParameterInfoElement" /> being visited.
+        ///     The <see cref="ParameterInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             ParameterInfoElement parameterInfoElement)
@@ -259,17 +251,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Allows an <see cref="LocalVariableInfoElement" /> to be visited.
-        /// This method is called when the element accepts this visitor
-        /// instance.
+        ///     Allows an <see cref="LocalVariableInfoElement" /> to be visited. This method is
+        ///     called when the element accepts this visitor instance.
         /// </summary>
         /// <param name="localVariableInfoElement">
-        /// The <see cref="LocalVariableInfoElement" /> being visited.
+        ///     The <see cref="LocalVariableInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used
-        /// to continue the visiting process with potentially updated
-        /// observations.
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             LocalVariableInfoElement localVariableInfoElement)
@@ -284,9 +274,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Visits the method body of a method-base.
+        ///     Visits the method body of a method-base.
         /// </summary>
-        /// <param name="methodBase">The method-base.</param>
+        /// <param name="methodBase">
+        ///     The method-base.
+        /// </param>
         protected virtual void VisitMethodBody(MethodBase methodBase)
         {
             if (methodBase == null)
@@ -310,7 +302,7 @@ namespace Jwc.Experiment.Idioms
                     AddReferencedAssemblies(parameter.ParameterType);
             }
         }
-        
+
         private void AddReferencedAssemblies(Type type)
         {
             if (_types.Contains(type))

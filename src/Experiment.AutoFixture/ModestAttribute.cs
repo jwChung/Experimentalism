@@ -8,21 +8,23 @@ using Ploeh.AutoFixture.Kernel;
 namespace Jwc.Experiment.AutoFixture
 {
     /// <summary>
-    /// An attribute that can be applied to parameters to indicate that the
-    /// parameter value should be created using the most modest constructor that
-    /// can be satisfied by an <see cref="IFixture"/>.
+    ///     An attribute that can be applied to parameters to indicate that the parameter value
+    ///     should be created using the most modest constructor that can be satisfied by an
+    ///     <see cref="IFixture" />.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class ModestAttribute : CustomizeAttribute
     {
         /// <summary>
-        /// Gets a customization that associates a <see cref="ModestConstructorQuery"/> with the
-        /// <see cref="Type"/> of the parameter.
+        ///     Gets a customization that associates a <see cref="ModestConstructorQuery" /> with
+        ///     the <see cref="Type" /> of the parameter.
         /// </summary>
-        /// <param name="parameter">The parameter for which the customization is requested.</param>
+        /// <param name="parameter">
+        ///     The parameter for which the customization is requested.
+        /// </param>
         /// <returns>
-        /// A customization that associates a <see cref="ModestConstructorQuery"/> with the
-        /// <see cref="Type"/> of the parameter.
+        ///     A customization that associates a <see cref="ModestConstructorQuery" /> with the
+        ///     <see cref="Type" /> of the parameter.
         /// </returns>
         public override ICustomization GetCustomization(ParameterInfo parameter)
         {

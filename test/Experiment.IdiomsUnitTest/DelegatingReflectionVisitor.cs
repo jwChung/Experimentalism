@@ -18,11 +18,7 @@ namespace Jwc.Experiment.Idioms
             }
         }
 
-        public Func<TypeElement, IReflectionVisitor<T>> OnVisitTypeElement
-        {
-            get;
-            set;
-        }
+        public Func<TypeElement, IReflectionVisitor<T>> OnVisitTypeElement { get; set; }
 
         public override IReflectionVisitor<T> Visit(TypeElement typeElement)
         {

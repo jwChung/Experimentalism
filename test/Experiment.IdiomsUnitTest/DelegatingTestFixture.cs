@@ -4,11 +4,7 @@ namespace Jwc.Experiment.Idioms
 {
     public class DelegatingTestFixture : ITestFixture
     {
-        public Func<object, object> OnCreate
-        {
-            get;
-            set;
-        }
+        public Func<object, object> OnCreate { get; set; }
 
         public object Create(object request)
         {

@@ -70,7 +70,7 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(memberKinds, actual);
         }
-        
+
         [Fact]
         public void SutEnumeratesAllKindsOfMembersWhenMemberKindsIsDefault()
         {
@@ -154,8 +154,8 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ToArray();
 
             var result = actual.All(
-                m => GetMemberKinds(m) == MemberKinds.InstanceConstructor
-                    || GetMemberKinds(m) == MemberKinds.InstanceMethod);
+                m => GetMemberKinds(m) == MemberKinds.InstanceConstructor ||
+                     GetMemberKinds(m) == MemberKinds.InstanceMethod);
             Assert.True(result, "Constructor or Method.");
         }
 
@@ -169,7 +169,7 @@ namespace Jwc.Experiment.Idioms
             Assert.True(actual.Any(m => GetMemberKinds(m) == MemberKinds.InstanceGetProperty), "GetProperty.");
             Assert.True(actual.Any(m => GetMemberKinds(m) == MemberKinds.InstanceProperty), "Property.");
         }
-        
+
         [Fact]
         public void SutEnumeratesOnlyPublicMembers()
         {
@@ -198,7 +198,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.ToArray();
             Assert.True(actual.Cast<EventInfo>().All(ei => ei.GetAddMethod(true).IsStatic));
         }
-        
+
         private static Accessibilities GetAccessibilities(MemberInfo member)
         {
             return member.ToReflectionElement().Accept(new AccessibilityCollector()).Value.Single();

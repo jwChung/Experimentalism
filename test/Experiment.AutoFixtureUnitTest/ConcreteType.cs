@@ -34,16 +34,8 @@ namespace Jwc.Experiment.AutoFixture
             Property4 = obj4;
         }
 
-        public override object Property4
-        {
-            get;
-            set;
-        }
+        public override object Property4 { get; set; }
 
-        public object Property5
-        {
-            get;
-            set;
-        }
+        public object Property5 { get; set; }
     }
 }

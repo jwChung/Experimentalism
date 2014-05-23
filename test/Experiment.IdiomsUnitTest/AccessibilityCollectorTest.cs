@@ -51,7 +51,7 @@ namespace Jwc.Experiment.Idioms
             var actual = sut.Visit(typeElement1).Visit(typeElement2);
 
             Assert.Equal(
-                new[]{ Accessibilities.Public, Accessibilities.Internal },
+                new[] { Accessibilities.Public, Accessibilities.Internal },
                 actual.Value.ToArray());
         }
 
@@ -296,8 +296,8 @@ namespace Jwc.Experiment.Idioms
                 {
                     var getMethod = x.GetGetMethod(true);
                     var setMethod = x.GetSetMethod(true);
-                    return getMethod != null && getMethod.IsAssembly
-                        && setMethod != null && setMethod.IsPrivate;
+                    return getMethod != null && getMethod.IsAssembly &&
+                           setMethod != null && setMethod.IsPrivate;
                 })
                 .First().ToElement();
 
@@ -306,8 +306,8 @@ namespace Jwc.Experiment.Idioms
                 {
                     var getMethod = x.GetGetMethod(true);
                     var setMethod = x.GetSetMethod(true);
-                    return getMethod != null && getMethod.IsPublic
-                        && setMethod != null && setMethod.IsPrivate;
+                    return getMethod != null && getMethod.IsPublic &&
+                           setMethod != null && setMethod.IsPrivate;
                 })
                 .First().ToElement();
 
@@ -464,64 +464,64 @@ namespace Jwc.Experiment.Idioms
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPublic
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPublic),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPublic &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPublic),
                     Accessibilities.Public
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsFamilyOrAssembly
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsFamilyOrAssembly),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsFamilyOrAssembly &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsFamilyOrAssembly),
                     Accessibilities.ProtectedInternal
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsFamily
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsFamily),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsFamily &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsFamily),
                     Accessibilities.Protected
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsAssembly),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsAssembly),
                     Accessibilities.Internal
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPrivate
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPrivate &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
                     Accessibilities.Private
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) == null
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPublic),
+                        x => x.GetGetMethod(true) == null && x.GetSetMethod(true) != null &&
+                             x.GetSetMethod(true).IsPublic),
                     Accessibilities.Public
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
                         x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly
-                            && x.GetSetMethod(true) == null),
+                             && x.GetSetMethod(true) == null),
                     Accessibilities.Internal
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPublic
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsPublic &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
                     Accessibilities.Public | Accessibilities.Private
                 };
                 yield return new object[]
                 {
                     new Func<PropertyInfo, bool>(
-                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly
-                            && x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
+                        x => x.GetGetMethod(true) != null && x.GetGetMethod(true).IsAssembly &&
+                             x.GetSetMethod(true) != null && x.GetSetMethod(true).IsPrivate),
                     Accessibilities.Internal | Accessibilities.Private
                 };
             }

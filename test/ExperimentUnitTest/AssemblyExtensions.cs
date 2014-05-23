@@ -24,7 +24,7 @@ namespace Jwc.Experiment
             foreach (var type in assembly.GetExportedTypes())
             {
                 VerifyDoesNotExpose(type, types);
-                const BindingFlags bindingFlags = 
+                const BindingFlags bindingFlags =
                     BindingFlags.Public | BindingFlags.NonPublic |
                     BindingFlags.Static | BindingFlags.Instance;
                 foreach (var member in type.GetMembers(bindingFlags))

@@ -4,8 +4,8 @@ using System.Reflection;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    /// Attribute to supply a type of which instance will be used to set up or
-    /// to tear down a test fixture only once on assembly level.
+    ///     Attribute to supply a type of which instance will be used to set up or to tear down
+    ///     a test fixture only once on assembly level.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class AssemblyFixtureCustomizationAttribute : Attribute
@@ -14,14 +14,14 @@ namespace Jwc.Experiment.Xunit
         private static bool _configured;
 
         private readonly Type _customizationType;
-        
+
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="AssemblyFixtureCustomizationAttribute" /> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="AssemblyFixtureCustomizationAttribute" /> class.
         /// </summary>
         /// <param name="customizationType">
-        /// A type to be used to set up or to tear down a test fixture only once
-        /// on assembly level.
+        ///     A type to be used to set up or to tear down a test fixture only once on assembly
+        ///     level.
         /// </param>
         public AssemblyFixtureCustomizationAttribute(Type customizationType)
         {
@@ -32,8 +32,8 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Gets a type to be used to set up or to tear down a test fixture only
-        /// once on assembly level.
+        ///     Gets a type to be used to set up or to tear down a test fixture only once on
+        ///     assembly level.
         /// </summary>
         public Type CustomizationType
         {
@@ -54,7 +54,7 @@ namespace Jwc.Experiment.Xunit
                     return;
 
                 CustomizeSync(testAssembly);
-                _configured = true;    
+                _configured = true;
             }
         }
 

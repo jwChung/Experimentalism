@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
         public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(IIdiomaticMemberAssertion).Assembly;
-            var specifiedAssemblies = new []
+            var specifiedAssemblies = new[]
             {
                 // GAC
                 "mscorlib",

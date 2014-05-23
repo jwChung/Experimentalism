@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -7,18 +8,18 @@ using System.Reflection;
 namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
-    /// Encapsulates a unit test that verifies that members throw
-    /// <see cref="ObjectDisposedException"/> after its owner(object) is disposed.
+    ///     Encapsulates a unit test that verifies that members throw
+    ///     <see cref="ObjectDisposedException" /> after its owner(object) is disposed.
     /// </summary>
     public class ObjectDisposalAssertion : IdiomaticMemberAssertion, IIdiomaticTypeAssertion
     {
         private readonly ITestFixture _testFixture;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectDisposalAssertion"/> class.
+        ///     Initializes a new instance of the <see cref="ObjectDisposalAssertion" /> class.
         /// </summary>
         /// <param name="testFixture">
-        /// The test fixture to create an owner object.
+        ///     The test fixture to create an owner object.
         /// </param>
         public ObjectDisposalAssertion(ITestFixture testFixture)
         {
@@ -29,7 +30,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Gets a value indicating the test fixture.
+        ///     Gets a value indicating the test fixture.
         /// </summary>
         public ITestFixture TestFixture
         {
@@ -40,12 +41,11 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that instance preperties and methods of a given type throw
-        /// <see cref="ObjectDisposedException" /> after the instance of th type
-        /// is disposed.
+        ///     Verifies that instance preperties and methods of a given type throw
+        ///     <see cref="ObjectDisposedException" /> after the instance of th type is disposed.
         /// </summary>
         /// <param name="type">
-        /// The type.
+        ///     The type.
         /// </param>
         public void Verify(Type type)
         {
@@ -54,11 +54,11 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a property throws <see cref="ObjectDisposedException"/>
-        /// after its owner(object) is disposed.
+        ///     Verifies that a property throws <see cref="ObjectDisposedException" />
+        ///     after its owner(object) is disposed.
         /// </summary>
         /// <param name="property">
-        /// The property.
+        ///     The property.
         /// </param>
         public override void Verify(PropertyInfo property)
         {
@@ -75,13 +75,13 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a method throws <see cref="ObjectDisposedException"/>
-        /// after its owner(object) is disposed.
+        ///     Verifies that a method throws <see cref="ObjectDisposedException" />
+        ///     after its owner(object) is disposed.
         /// </summary>
         /// <param name="method">
-        /// The method.
+        ///     The method.
         /// </param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException")]
         public override void Verify(MethodInfo method)
         {
             if (method == null)

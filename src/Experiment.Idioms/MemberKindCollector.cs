@@ -7,15 +7,15 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represents a class to collect <see cref="MemberKinds"/>.
+    ///     Represents a class to collect <see cref="MemberKinds" />.
     /// </summary>
     public class MemberKindCollector : ReflectionVisitor<IEnumerable<MemberKinds>>
     {
         private readonly IEnumerable<MemberKinds> _memberKinds;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberKindCollector"/>
-        /// class.
+        ///     Initializes a new instance of the <see cref="MemberKindCollector" />
+        ///     class.
         /// </summary>
         public MemberKindCollector()
             : this(new MemberKinds[0])
@@ -23,11 +23,11 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberKindCollector"/>
-        /// class.
+        ///     Initializes a new instance of the <see cref="MemberKindCollector" />
+        ///     class.
         /// </summary>
         /// <param name="memberKinds">
-        /// The initial member kinds.
+        ///     The initial member kinds.
         /// </param>
         public MemberKindCollector(IEnumerable<MemberKinds> memberKinds)
         {
@@ -35,7 +35,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets a value indicating the collected <see cref="MemberKinds"/>(s).
+        ///     Gets a value indicating the collected <see cref="MemberKinds" />(s).
         /// </summary>
         public override IEnumerable<MemberKinds> Value
         {
@@ -46,15 +46,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects a <see cref="MemberKinds"/> value corresponding to
-        /// the <paramref name="fieldInfoElement"/>.
+        ///     Collects a <see cref="MemberKinds" /> value corresponding to the
+        ///     <paramref name="fieldInfoElement" />.
         /// </summary>
         /// <param name="fieldInfoElement">
-        /// A field element to collect <see cref="MemberKinds"/>.
+        ///     A field element to collect <see cref="MemberKinds" />.
         /// </param>
         /// <returns>
-        /// A new instance of <see cref="MemberKindCollector"/> having collected
-        /// <see cref="MemberKinds"/>.
+        ///     A new instance of <see cref="MemberKindCollector" /> having collected
+        ///     <see cref="MemberKinds" />.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<MemberKinds>> Visit(
             FieldInfoElement fieldInfoElement)
@@ -70,15 +70,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects a <see cref="MemberKinds"/> value corresponding to
-        /// the <paramref name="constructorInfoElement"/>.
+        ///     Collects a <see cref="MemberKinds" /> value corresponding to the
+        ///     <paramref name="constructorInfoElement" />.
         /// </summary>
         /// <param name="constructorInfoElement">
-        /// A constructor element to collect <see cref="MemberKinds"/>.
+        ///     A constructor element to collect <see cref="MemberKinds" />.
         /// </param>
         /// <returns>
-        /// A new instance of <see cref="MemberKindCollector"/> having collected
-        /// <see cref="MemberKinds"/>.
+        ///     A new instance of <see cref="MemberKindCollector" /> having collected
+        ///     <see cref="MemberKinds" />.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<MemberKinds>> Visit(
             ConstructorInfoElement constructorInfoElement)
@@ -94,15 +94,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects a <see cref="MemberKinds"/> value corresponding to
-        /// the <paramref name="propertyInfoElement"/>.
+        ///     Collects a <see cref="MemberKinds" /> value corresponding to the
+        ///     <paramref name="propertyInfoElement" />.
         /// </summary>
         /// <param name="propertyInfoElement">
-        /// A property element to collect <see cref="MemberKinds"/>.
+        ///     A property element to collect <see cref="MemberKinds" />.
         /// </param>
         /// <returns>
-        /// A new instance of <see cref="MemberKindCollector"/> having collected
-        /// <see cref="MemberKinds"/>.
+        ///     A new instance of <see cref="MemberKindCollector" /> having collected
+        ///     <see cref="MemberKinds" />.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<MemberKinds>> Visit(
             PropertyInfoElement propertyInfoElement)
@@ -115,15 +115,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects a <see cref="MemberKinds"/> value corresponding to
-        /// the <paramref name="methodInfoElement"/>.
+        ///     Collects a <see cref="MemberKinds" /> value corresponding to the
+        ///     <paramref name="methodInfoElement" />.
         /// </summary>
         /// <param name="methodInfoElement">
-        /// A method element to collect <see cref="MemberKinds"/>.
+        ///     A method element to collect <see cref="MemberKinds" />.
         /// </param>
         /// <returns>
-        /// A new instance of <see cref="MemberKindCollector"/> having collected
-        /// <see cref="MemberKinds"/>.
+        ///     A new instance of <see cref="MemberKindCollector" /> having collected
+        ///     <see cref="MemberKinds" />.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<MemberKinds>> Visit(
             MethodInfoElement methodInfoElement)
@@ -139,15 +139,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects a <see cref="MemberKinds"/> value corresponding to
-        /// the <paramref name="eventInfoElement"/>.
+        ///     Collects a <see cref="MemberKinds" /> value corresponding to the
+        ///     <paramref name="eventInfoElement" />.
         /// </summary>
         /// <param name="eventInfoElement">
-        /// An event element to collect <see cref="MemberKinds"/>.
+        ///     An event element to collect <see cref="MemberKinds" />.
         /// </param>
         /// <returns>
-        /// A new instance of <see cref="MemberKindCollector"/> having collected
-        /// <see cref="MemberKinds"/>.
+        ///     A new instance of <see cref="MemberKindCollector" /> having collected
+        ///     <see cref="MemberKinds" />.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<MemberKinds>> Visit(
             EventInfoElement eventInfoElement)

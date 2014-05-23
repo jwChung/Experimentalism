@@ -46,13 +46,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         [Theory]
-        [ReferenceCollectingDataAttribute]
+        [ReferenceCollectingData]
         public void VisitTypeElementCollectsCorrectAssemblies(
             Type type, Assembly[] expected)
         {
             var refereces = new[] { typeof(ISet<>).Assembly };
             var sut = new Mock<MemberReferenceCollector>(new object[] { refereces })
-                { CallBase = true }.Object;
+            { CallBase = true }.Object;
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Throws<InvalidOperationException>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<ConstructorInfoElement>())).Throws<InvalidOperationException>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Throws<InvalidOperationException>();

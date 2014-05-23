@@ -46,11 +46,13 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.CreateTestCommands(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray();
 
             Assert.Equal(3, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var theoryCommand = Assert.IsType<TheoryCommand>(c);
-                Assert.Equal(new[] { arg1, arg2, arg3 }, theoryCommand.Parameters);
-            });
+            Array.ForEach(
+                actual,
+                c =>
+                {
+                    var theoryCommand = Assert.IsType<TheoryCommand>(c);
+                    Assert.Equal(new[] { arg1, arg2, arg3 }, theoryCommand.Parameters);
+                });
         }
 
         [Fact]
@@ -63,13 +65,15 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(2, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var theoryCommand = Assert.IsType<TheoryCommand>(c);
-                Assert.Equal(
-                    new[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) },
-                    theoryCommand.Parameters);
-            });
+            Array.ForEach(
+                actual,
+                c =>
+                {
+                    var theoryCommand = Assert.IsType<TheoryCommand>(c);
+                    Assert.Equal(
+                        new[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) },
+                        theoryCommand.Parameters);
+                });
         }
 
         [Fact]
@@ -210,7 +214,7 @@ namespace Jwc.Experiment.Xunit
         {
             var sut = new TssTestAttribute
             {
-                OnCreateTestFixture = mi => { throw new NotSupportedException(); }
+                OnCreateTestFixture = mi => { throw new NotSupportedException(); }  
             };
             Assert.DoesNotThrow(() => sut.CreateTestCommands(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod())).ToArray());
@@ -246,12 +250,14 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(2, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var command = Assert.IsAssignableFrom<ExceptionCommand>(c);
-                Assert.Equal(method.MethodInfo.Name, command.MethodName);
-                Assert.Equal(exception, command.Exception);
-            });
+            Array.ForEach(
+                actual,
+                c =>
+                {
+                    var command = Assert.IsAssignableFrom<ExceptionCommand>(c);
+                    Assert.Equal(method.MethodInfo.Name, command.MethodName);
+                    Assert.Equal(exception, command.Exception);
+                });
         }
 
         [Fact]
@@ -360,8 +366,8 @@ namespace Jwc.Experiment.Xunit
         public void CreateTestCommandsRegistersTearDownToDomainUnloadEvent()
         {
             // Fixture setup
-            IMethodInfo method = Reflector.Wrap(GetType()
-                .GetMethod("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel"));
+            IMethodInfo method = Reflector.Wrap(
+                GetType().GetMethod("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel"));
 
             var appDomain = AppDomain.CreateDomain(
                 method.Name,
@@ -458,11 +464,7 @@ namespace Jwc.Experiment.Xunit
 
         private class TssTestAttribute : TestAttribute
         {
-            public Func<MethodInfo, ITestFixture> OnCreateTestFixture
-            {
-                get;
-                set;
-            }
+            public Func<MethodInfo, ITestFixture> OnCreateTestFixture { get; set; }
 
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {

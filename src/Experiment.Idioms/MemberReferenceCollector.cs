@@ -7,25 +7,25 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Represents <see cref="IReflectionVisitor{T}"/> to collect reference
-    /// assemblies for a given reflection meta-data on member level.
+    ///     Represents <see cref="IReflectionVisitor{T}" /> to collect reference assemblies for
+    ///     a given reflection meta-data on member level.
     /// </summary>
     public class MemberReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
         private readonly IEnumerable<Assembly> _references;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberReferenceCollector"/> class.
+        ///     Initializes a new instance of the <see cref="MemberReferenceCollector" /> class.
         /// </summary>
         public MemberReferenceCollector() : this(new Assembly[0])
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberReferenceCollector"/> class.
+        ///     Initializes a new instance of the <see cref="MemberReferenceCollector" /> class.
         /// </summary>
         /// <param name="references">
-        /// The references.
+        ///     The references.
         /// </param>
         public MemberReferenceCollector(IEnumerable<Assembly> references)
         {
@@ -36,8 +36,8 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets a value indicating references collected for a given
-        /// reflection meta-data on member level.
+        ///     Gets a value indicating references collected for a given reflection meta-data on
+        ///     member level.
         /// </summary>
         public override IEnumerable<Assembly> Value
         {
@@ -48,10 +48,14 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects references of a specified type element.
+        ///     Collects references of a specified type element.
         /// </summary>
-        /// <param name="typeElement">The type element.</param>
-        /// <returns>The result visitor which collected assemblies.</returns>
+        /// <param name="typeElement">
+        ///     The type element.
+        /// </param>
+        /// <returns>
+        ///     The result visitor which collected assemblies.
+        /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(TypeElement typeElement)
         {
             if (typeElement == null)
@@ -62,13 +66,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects references of a specified field element.
+        ///     Collects references of a specified field element.
         /// </summary>
         /// <param name="fieldInfoElement">
-        /// The field element.
+        ///     The field element.
         /// </param>
         /// <returns>
-        /// The result visitor which collected assemblies.
+        ///     The result visitor which collected assemblies.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(FieldInfoElement fieldInfoElement)
         {
@@ -80,13 +84,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects references of a specified method element.
+        ///     Collects references of a specified method element.
         /// </summary>
         /// <param name="methodInfoElement">
-        /// The metod element.
+        ///     The metod element.
         /// </param>
         /// <returns>
-        /// The result visitor which collected assemblies.
+        ///     The result visitor which collected assemblies.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(MethodInfoElement methodInfoElement)
         {
@@ -101,12 +105,14 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Ignores refernces of local variable elements.
+        ///     Ignores refernces of local variable elements.
         /// </summary>
         /// <param name="localVariableInfoElements">
-        /// The local variable elements.
+        ///     The local variable elements.
         /// </param>
-        /// <returns>This instance</returns>
+        /// <returns>
+        ///     This instance
+        /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             params LocalVariableInfoElement[] localVariableInfoElements)
         {
@@ -114,13 +120,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Collects references of a specified parameter element.
+        ///     Collects references of a specified parameter element.
         /// </summary>
         /// <param name="parameterInfoElement">
-        /// The parameter element.
+        ///     The parameter element.
         /// </param>
         /// <returns>
-        /// The result visitor which collected assemblies.
+        ///     The result visitor which collected assemblies.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             ParameterInfoElement parameterInfoElement)

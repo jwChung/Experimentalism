@@ -26,8 +26,8 @@ namespace Jwc.Experiment.AutoFixture
             // Fixture setup
             var sut = new FrozenAttribute();
             // Exercise system and verify outcome
-            Assert.Throws<ArgumentNullException>(() =>
-                sut.GetCustomization(null));
+            Assert.Throws<ArgumentNullException>(
+                () => sut.GetCustomization(null));
             // Teardown
         }
 

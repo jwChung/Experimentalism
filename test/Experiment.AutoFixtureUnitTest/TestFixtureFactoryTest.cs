@@ -116,7 +116,7 @@ namespace Jwc.Experiment.AutoFixture
             var testFixture = Assert.IsAssignableFrom<TestFixture>(actual);
             Assert.False(testFixture.Fixture.OmitAutoProperties);
         }
-        
+
         public void FrozenTest([Frozen] string arg)
         {
         }
@@ -125,17 +125,13 @@ namespace Jwc.Experiment.AutoFixture
         {
         }
 
-        public void ManyAttributeTest([Greedy][Frozen] Person person)
+        public void ManyAttributeTest([Greedy] [Frozen] Person person)
         {
         }
-        
+
         private class DelegatingTestFixtureFactory : TestFixtureFactory
         {
-            public Func<MethodInfo, IFixture> OnCreateFixture
-            {
-                get;
-                set;
-            }
+            public Func<MethodInfo, IFixture> OnCreateFixture { get; set; }
 
             protected override IFixture CreateFixture(MethodInfo testMethod)
             {

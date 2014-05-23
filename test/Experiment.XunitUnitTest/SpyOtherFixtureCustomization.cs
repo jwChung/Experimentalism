@@ -7,10 +7,6 @@
             SetupCount++;
         }
 
-        public static int SetupCount
-        {
-            get;
-            set;
-        }
+        public static int SetupCount { get; set; }
     }
 }

@@ -146,7 +146,7 @@ namespace Jwc.Experiment.Idioms
 #pragma warning disable 649
             private readonly int _value;
 #pragma warning restore 649
-            public object Value;
+            public readonly object Value;
 
             public TypeForFieldEqualValue(int value)
             {

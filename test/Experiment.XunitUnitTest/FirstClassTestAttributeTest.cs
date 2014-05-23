@@ -27,11 +27,13 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(3, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var command = Assert.IsType<FactCommand>(c);
-                Assert.Equal(methodName, command.MethodName);
-            });
+            Array.ForEach(
+                actual,
+                c =>
+                {
+                    var command = Assert.IsType<FactCommand>(c);
+                    Assert.Equal(methodName, command.MethodName);
+                });
         }
 
         [Fact]
@@ -44,11 +46,13 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(3, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var command = Assert.IsType<FactCommand>(c);
-                Assert.Equal(methodName, command.MethodName);
-            });
+            Array.ForEach(
+                actual,
+                c =>
+                {
+                    var command = Assert.IsType<FactCommand>(c);
+                    Assert.Equal(methodName, command.MethodName);
+                });
         }
 
         [Fact]
@@ -162,12 +166,14 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(3, actual.Length);
-            Array.ForEach(actual, c =>
-            {
-                var command = Assert.IsAssignableFrom<ExceptionCommand>(c);
-                Assert.Equal(method.MethodInfo.Name, command.MethodName);
-                Assert.IsType<NotSupportedException>(command.Exception);
-            });
+            Array.ForEach(
+                actual,
+                c =>
+                {
+                    var command = Assert.IsAssignableFrom<ExceptionCommand>(c);
+                    Assert.Equal(method.MethodInfo.Name, command.MethodName);
+                    Assert.IsType<NotSupportedException>(command.Exception);
+                });
         }
 
         [Fact]
@@ -305,11 +311,7 @@ namespace Jwc.Experiment.Xunit
 
         private class TssFirstClassTestAttribute : FirstClassTestAttribute
         {
-            public Func<MethodInfo, ITestFixture> OnCreateTestFixture
-            {
-                get;
-                set;
-            }
+            public Func<MethodInfo, ITestFixture> OnCreateTestFixture { get; set; }
 
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {

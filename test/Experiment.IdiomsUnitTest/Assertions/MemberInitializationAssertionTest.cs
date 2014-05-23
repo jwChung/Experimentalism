@@ -40,8 +40,8 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             Assert.Throws<ArgumentNullException>(
                 () => new MemberInitializationAssertion(
-                          null,
-                          EqualityComparer<IReflectionElement>.Default));
+                    null,
+                    EqualityComparer<IReflectionElement>.Default));
         }
 
         [Fact]
@@ -49,8 +49,8 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             Assert.Throws<ArgumentNullException>(
                 () => new MemberInitializationAssertion(
-                          EqualityComparer<IReflectionElement>.Default,
-                          null));
+                    EqualityComparer<IReflectionElement>.Default,
+                    null));
         }
 
         [Fact]
@@ -376,17 +376,9 @@ namespace Jwc.Experiment.Idioms.Assertions
                     ByteValue = byteValue;
                 }
 
-                public object ObjectValue
-                {
-                    get;
-                    set;
-                }
+                public object ObjectValue { get; set; }
 
-                public byte ByteValue
-                {
-                    get;
-                    set;
-                }
+                public byte ByteValue { get; set; }
             }
         }
 
@@ -415,11 +407,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                     ObjectValue = objectValue;
                 }
 
-                public object ObjectValue
-                {
-                    get;
-                    set;
-                }
+                public object ObjectValue { get; set; }
             }
         }
 
@@ -496,17 +484,9 @@ namespace Jwc.Experiment.Idioms.Assertions
                     _intValue = intValue;
                 }
 
-                public object ObjectValue
-                {
-                    get;
-                    set;
-                }
+                public object ObjectValue { get; set; }
 
-                public string StringValue
-                {
-                    get;
-                    private set;
-                }
+                public string StringValue { get; private set; }
 
                 public int IntValue
                 {
@@ -535,17 +515,9 @@ namespace Jwc.Experiment.Idioms.Assertions
                 {
                 }
 
-                public object ObjectValue
-                {
-                    get;
-                    set;
-                }
+                public object ObjectValue { get; set; }
 
-                public string StringValue
-                {
-                    get;
-                    private set;
-                }
+                public string StringValue { get; private set; }
 
                 public int IntValue
                 {

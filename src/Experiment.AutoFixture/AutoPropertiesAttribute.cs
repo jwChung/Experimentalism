@@ -1,27 +1,28 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Ploeh.AutoFixture;
 
 namespace Jwc.Experiment.AutoFixture
 {
     /// <summary>
-    /// An attribute that can be applied to parameters to indicate that the
-    /// parameter value should have properties auto populated when the
-    /// <see cref="IFixture"/> creates an instance of that type.
+    ///     An attribute that can be applied to parameters to indicate that the parameter value
+    ///     should have properties auto populated when the <see cref="IFixture" /> creates an
+    ///     instance of that type.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class AutoPropertiesAttribute : CustomizeAttribute
     {
         /// <summary>
-        /// Gets a customization that enables auto population of properties for
-        /// the type of the parameter.
+        ///     Gets a customization that enables auto population of properties for the type of the
+        ///     parameter.
         /// </summary>
         /// <param name="parameter">
-        /// The parameter for which the customization is requested.
+        ///     The parameter for which the customization is requested.
         /// </param>
         /// <returns>
-        /// A customization that enables auto population of the
-        /// <see cref="Type" /> of the parameter.
+        ///     A customization that enables auto population of the
+        ///     <see cref="Type" /> of the parameter.
         /// </returns>
         public override ICustomization GetCustomization(ParameterInfo parameter)
         {
@@ -46,7 +47,7 @@ namespace Jwc.Experiment.AutoFixture
                     .Invoke(null, new object[] { fixture });
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "This method is called through reflection.")]
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "This method is called through reflection.")]
             public static void CustomizeImpl<T>(IFixture fixture)
             {
                 fixture.Customize<T>(c => c.WithAutoProperties());

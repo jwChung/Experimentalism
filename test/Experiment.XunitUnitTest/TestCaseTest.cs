@@ -153,10 +153,7 @@ namespace Jwc.Experiment.Xunit
             var sut = new TestCase(() => "anonymous");
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
-                OnCreate = mi =>
-                {
-                    throw new InvalidOperationException();
-                }
+                OnCreate = mi => { throw new InvalidOperationException(); }
             };
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 

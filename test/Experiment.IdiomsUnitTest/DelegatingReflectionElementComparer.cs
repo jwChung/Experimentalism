@@ -6,11 +6,7 @@ namespace Jwc.Experiment.Idioms
 {
     public class DelegatingReflectionElementComparer : IEqualityComparer<IReflectionElement>
     {
-        public Func<IReflectionElement, IReflectionElement, bool> OnEquals
-        {
-            get;
-            set;
-        }
+        public Func<IReflectionElement, IReflectionElement, bool> OnEquals { get; set; }
 
         public bool Equals(IReflectionElement x, IReflectionElement y)
         {

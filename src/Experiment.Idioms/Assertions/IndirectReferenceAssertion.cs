@@ -9,8 +9,8 @@ using Ploeh.Albedo.Refraction;
 namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
-    /// Encapsulates a unit test that verifies that certain assemblies are not
-    /// exposed through API.
+    ///     Encapsulates a unit test that verifies that certain assemblies are not exposed
+    ///     through API.
     /// </summary>
     public class IndirectReferenceAssertion
         : IdiomaticMemberAssertion, IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion
@@ -20,10 +20,10 @@ namespace Jwc.Experiment.Idioms.Assertions
         private readonly Assembly[] _indirectReferences;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IndirectReferenceAssertion"/> class.
+        ///     Initializes a new instance of the <see cref="IndirectReferenceAssertion" /> class.
         /// </summary>
         /// <param name="indirectReferences">
-        /// The indirect references which should not be exposed though API.
+        ///     The indirect references which should not be exposed though API.
         /// </param>
         public IndirectReferenceAssertion(params Assembly[] indirectReferences)
         {
@@ -31,7 +31,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Gets a value indicating the indirect references.
+        ///     Gets a value indicating the indirect references.
         /// </summary>
         public IEnumerable<Assembly> IndirectReferences
         {
@@ -42,10 +42,11 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that an assembly does not expose the indirect references
-        /// through API.
+        ///     Verifies that an assembly does not expose the indirect references through API.
         /// </summary>
-        /// <param name="assembly">The assembly.</param>
+        /// <param name="assembly">
+        ///     The assembly.
+        /// </param>
         public void Verify(Assembly assembly)
         {
             if (assembly == null)
@@ -57,10 +58,11 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a type does not expose the indirect references
-        /// through API.
+        ///     Verifies that a type does not expose the indirect references through API.
         /// </summary>
-        /// <param name="type">The type.</param>
+        /// <param name="type">
+        ///     The type.
+        /// </param>
         public virtual void Verify(Type type)
         {
             EnsureNotExpose(type.ToElement());
@@ -70,50 +72,55 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that a field does not expose the indirect references
-        /// through API.
+        ///     Verifies that a field does not expose the indirect references through API.
         /// </summary>
-        /// <param name="field">The field.</param>
+        /// <param name="field">
+        ///     The field.
+        /// </param>
         public override void Verify(FieldInfo field)
         {
             EnsureNotExpose(field.ToElement());
         }
 
         /// <summary>
-        /// Verifies that a constructor does not expose the indirect references
-        /// through API.
+        ///     Verifies that a constructor does not expose the indirect references through API.
         /// </summary>
-        /// <param name="constructor">The constructor.</param>
+        /// <param name="constructor">
+        ///     The constructor.
+        /// </param>
         public override void Verify(ConstructorInfo constructor)
         {
             EnsureNotExpose(constructor.ToElement());
         }
 
         /// <summary>
-        /// Verifies that a property does not expose the indirect references
-        /// through API.
+        ///     Verifies that a property does not expose the indirect references through API.
         /// </summary>
-        /// <param name="property">The field.</param>
+        /// <param name="property">
+        ///     The field.
+        /// </param>
         public override void Verify(PropertyInfo property)
         {
             EnsureNotExpose(property.ToElement());
         }
 
         /// <summary>
-        /// Verifies that a method does not expose the indirect references
-        /// through API.
+        ///     Verifies that a method does not expose the indirect references through API.
         /// </summary>
-        /// <param name="method">The method.</param>
+        /// <param name="method">
+        ///     The method.
+        /// </param>
         public override void Verify(MethodInfo method)
         {
             EnsureNotExpose(method.ToElement());
         }
 
         /// <summary>
-        /// Verifies that an event does not expose the indirect references
-        /// through API.
+        ///     Verifies that an event does not expose the indirect references through API.
         /// </summary>
-        /// <param name="event">The event.</param>
+        /// <param name="event">
+        ///     The event.
+        /// </param>
         public override void Verify(EventInfo @event)
         {
             EnsureNotExpose(@event.ToElement());

@@ -27,7 +27,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void ValueIsCorrectWhenInitializedWithMemberKinds()
         {
-            var memberKinds = new[] { MemberKinds.InstanceProperty, MemberKinds.StaticField};
+            var memberKinds = new[] { MemberKinds.InstanceProperty, MemberKinds.StaticField };
             var sut = new MemberKindCollector(memberKinds);
 
             var actual = sut.Value;
@@ -260,7 +260,7 @@ namespace Jwc.Experiment.Idioms
             Assert.NotSame(sut, actual);
             Assert.Equal(new[] { MemberKinds.InstanceField, MemberKinds.StaticMethod }, actual.Value);
         }
-        
+
         [Fact]
         public void VisitStaticEventInfoElementCollectsCorrectMemberKind()
         {

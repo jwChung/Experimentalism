@@ -109,7 +109,7 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(visitor, actual);
             Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
-        
+
         [Fact]
         public void VisitNullMethodInfoElementThrows()
         {
@@ -206,7 +206,7 @@ namespace Jwc.Experiment.Idioms
             var propertyInfoElements = typeof(SubClassWithMembers).GetProperties(_bindingFlags)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
-            
+
             var actual = sut.Visit(propertyInfoElements);
 
             Assert.Empty(actual.Value);
@@ -396,7 +396,7 @@ namespace Jwc.Experiment.Idioms
             Assert.Equal(visitor, actual);
             Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
-        
+
         [Fact]
         public void VisitNullConstructorInfoElementThrows()
         {
@@ -417,7 +417,7 @@ namespace Jwc.Experiment.Idioms
 
             Assert.Equal(visitor, actual);
         }
-        
+
         [Fact]
         public void VisitPropertyInfoElementsCallsBaseMethod()
         {

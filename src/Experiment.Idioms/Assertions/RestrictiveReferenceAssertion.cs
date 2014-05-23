@@ -8,20 +8,19 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
-    /// Encapsulates a unit test that verifies that all references of an assembly
-    /// are specified.
+    ///     Encapsulates a unit test that verifies that all references of an assembly are
+    ///     specified.
     /// </summary>
     public class RestrictiveReferenceAssertion : IIdiomaticAssemblyAssertion
     {
         private readonly Assembly[] _restrictiveReferences;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RestrictiveReferenceAssertion"/>
-        /// class.
+        ///     Initializes a new instance of the <see cref="RestrictiveReferenceAssertion" />
+        ///     class.
         /// </summary>
         /// <param name="restrictiveReferences">
-        /// The restrictive references to specify all references of a certain
-        /// assembly.
+        ///     The restrictive references to specify all references of a certain assembly.
         /// </param>
         public RestrictiveReferenceAssertion(params Assembly[] restrictiveReferences)
         {
@@ -29,7 +28,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Gets a value indicating the restrictive references.
+        ///     Gets a value indicating the restrictive references.
         /// </summary>
         public IEnumerable<Assembly> RestrictiveReferences
         {
@@ -40,10 +39,12 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that all references of an assembly are specified through
-        /// the restrictive references.
+        ///     Verifies that all references of an assembly are specified through the restrictive
+        ///     references.
         /// </summary>
-        /// <param name="assembly">The assembly.</param>
+        /// <param name="assembly">
+        ///     The assembly.
+        /// </param>
         public void Verify(Assembly assembly)
         {
             var references = assembly.ToElement().Accept(new ReferenceCollector()).Value.Except(new[] { assembly });

@@ -3,53 +3,53 @@
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Specifies flags than represents accessibilities.
+    ///     Specifies flags than represents accessibilities.
     /// </summary>
     [Flags]
     public enum Accessibilities
     {
         /// <summary>
-        /// The none accessibility.
+        ///     The none accessibility.
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// The public accessibility.
+        ///     The public accessibility.
         /// </summary>
         Public = 1,
 
         /// <summary>
-        /// The protected accessibility.
+        ///     The protected accessibility.
         /// </summary>
         Protected = 2,
 
         /// <summary>
-        /// The internal accessibility.
+        ///     The internal accessibility.
         /// </summary>
         Internal = 4,
 
         /// <summary>
-        /// The private accessibility.
+        ///     The private accessibility.
         /// </summary>
         Private = 8,
 
         /// <summary>
-        /// The protected or internal accessibility.
+        ///     The protected or internal accessibility.
         /// </summary>
         ProtectedInternal = Protected | Internal,
 
         /// <summary>
-        /// The public or protected accessibility.
+        ///     The public or protected accessibility.
         /// </summary>
         Exposed = Public | Protected,
 
         /// <summary>
-        /// The all accessibilities.
+        ///     The all accessibilities.
         /// </summary>
         All = Public | Protected | Internal | Private,
 
         /// <summary>
-        /// The default accessibilities.
+        ///     The default accessibilities.
         /// </summary>
         Default = Public
     }

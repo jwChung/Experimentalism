@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Xunit
         public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(TestAttribute).Assembly;
-            var specifiedAssemblies = new []
+            var specifiedAssemblies = new[]
             {
                 // GAC
                 "mscorlib",

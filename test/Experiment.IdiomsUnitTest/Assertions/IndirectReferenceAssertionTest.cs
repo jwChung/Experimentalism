@@ -32,7 +32,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             var sut = new IndirectReferenceAssertion();
             Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
         }
-        
+
         [Fact]
         public void IndirectReferencesIsCorrect()
         {
@@ -247,7 +247,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             // Fixture setup
             var sut = new Mock<IndirectReferenceAssertion>(new object[] { new Assembly[0] })
-                { CallBase = true }.Object;
+            { CallBase = true }.Object;
 
             var members = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
@@ -267,7 +267,7 @@ namespace Jwc.Experiment.Idioms.Assertions
         {
             // Fixture setup
             var sut = new Mock<IndirectReferenceAssertion>(new object[] { new Assembly[0] })
-                { CallBase = true }.Object;
+            { CallBase = true }.Object;
 
             var types = new List<Type>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
@@ -356,11 +356,7 @@ namespace Jwc.Experiment.Idioms.Assertions
             {
             }
 
-            public Fixture Property
-            {
-                get;
-                set;
-            }
+            public Fixture Property { get; set; }
 
             public void Method(IIdiomaticTypeAssertion arg1, object arg2)
             {

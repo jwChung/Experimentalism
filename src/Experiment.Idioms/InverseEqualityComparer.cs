@@ -4,21 +4,21 @@ using System.Collections.Generic;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    /// Decorates <see cref="IEqualityComparer{T}" /> to inverse the order of
-    /// compared arguments
+    ///     Decorates <see cref="IEqualityComparer{T}" /> to inverse the order of compared
+    ///     arguments
     /// </summary>
     /// <typeparam name="T">
-    /// The type of the compared arguments.
+    ///     The type of the compared arguments.
     /// </typeparam>
     public class InverseEqualityComparer<T> : IEqualityComparer<T>
     {
         private readonly IEqualityComparer<T> _equalityComparer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InverseEqualityComparer{T}"/> class.
+        ///     Initializes a new instance of the <see cref="InverseEqualityComparer{T}" /> class.
         /// </summary>
         /// <param name="equalityComparer">
-        /// The equality comparer to be evaluated reversely.
+        ///     The equality comparer to be evaluated reversely.
         /// </param>
         public InverseEqualityComparer(IEqualityComparer<T> equalityComparer)
         {
@@ -31,7 +31,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Gets a indicating the equality comparer.
+        ///     Gets a indicating the equality comparer.
         /// </summary>
         public IEqualityComparer<T> EqualityComparer
         {
@@ -42,16 +42,16 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Determines whether the specified objects are equal.
+        ///     Determines whether the specified objects are equal.
         /// </summary>
         /// <returns>
-        /// true if the specified objects are equal; otherwise, false.
+        ///     true if the specified objects are equal; otherwise, false.
         /// </returns>
         /// <param name="x">
-        /// The first object of type <paramref name="x" /> to compare.
+        ///     The first object of type <paramref name="x" /> to compare.
         /// </param>
         /// <param name="y">
-        /// The second object of type <paramref name="y" /> to compare.
+        ///     The second object of type <paramref name="y" /> to compare.
         /// </param>
         public bool Equals(T x, T y)
         {
@@ -59,13 +59,13 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        /// Returns a hash code for the specified object.
+        ///     Returns a hash code for the specified object.
         /// </summary>
         /// <returns>
-        /// A hash code for the specified object.
+        ///     A hash code for the specified object.
         /// </returns>
         /// <param name="obj">
-        /// The <see cref="object" /> for which a hash code is to be returned.
+        ///     The <see cref="object" /> for which a hash code is to be returned.
         /// </param>
         public int GetHashCode(T obj)
         {

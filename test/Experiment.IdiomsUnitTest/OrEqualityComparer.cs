@@ -117,10 +117,7 @@ namespace Jwc.Experiment.Idioms
                 },
                 new DelegatingEqualityComparer<object>
                 {
-                    OnEquals = (x, y) =>
-                    {
-                        throw new InvalidOperationException();
-                    }
+                    OnEquals = (x, y) => { throw new InvalidOperationException(); }
                 }
             };
 

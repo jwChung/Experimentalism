@@ -5,11 +5,7 @@ namespace Jwc.Experiment.Xunit
 {
     public class DelegatingTestCase : ITestCase
     {
-        public Func<IMethodInfo, ITestFixtureFactory, ITestCommand> OnConvertToTestCommand
-        {
-            get;
-            set;
-        }
+        public Func<IMethodInfo, ITestFixtureFactory, ITestCommand> OnConvertToTestCommand { get; set; }
 
         public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory)
         {

@@ -5,17 +5,9 @@ namespace Jwc.Experiment.Idioms
 {
     public class DelegatingEqualityComparer<T> : IEqualityComparer<T>
     {
-        public Func<T, T, bool> OnEquals
-        {
-            get;
-            set;
-        }
+        public Func<T, T, bool> OnEquals { get; set; }
 
-        public Func<T, int> OnGetHashCode
-        {
-            get;
-            set;
-        }
+        public Func<T, int> OnGetHashCode { get; set; }
 
         public bool Equals(T x, T y)
         {

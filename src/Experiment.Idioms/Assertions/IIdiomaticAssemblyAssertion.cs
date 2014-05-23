@@ -3,16 +3,17 @@
 namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
-    /// Represents an encapsulation of an idiomatic unit test assertion based on
-    /// <see cref="Assembly"/>.
+    ///     Represents an encapsulation of an idiomatic unit test assertion based on
+    ///     <see cref="Assembly" />.
     /// </summary>
     public interface IIdiomaticAssemblyAssertion
     {
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified assembly.
+        ///     Verifies that the idiomatic assertion can be verified for the specified assembly.
         /// </summary>
-        /// <param name="assembly">The assembly.</param>
+        /// <param name="assembly">
+        ///     The assembly.
+        /// </param>
         void Verify(Assembly assembly);
     }
 }

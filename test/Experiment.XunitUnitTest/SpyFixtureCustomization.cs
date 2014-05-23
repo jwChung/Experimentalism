@@ -9,17 +9,9 @@ namespace Jwc.Experiment.Xunit
             SetupCount++;
         }
 
-        public static int SetupCount
-        {
-            get;
-            set;
-        }
+        public static int SetupCount { get; set; }
 
-        public static int TearDownCount
-        {
-            get;
-            set;
-        }
+        public static int TearDownCount { get; set; }
 
         public void Dispose()
         {

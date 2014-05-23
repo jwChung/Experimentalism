@@ -72,7 +72,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ArgumentsIsCorrect()
         {
-            var arguments = new[]{1, new object(), "string"};
+            var arguments = new[] { 1, new object(), "string" };
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 new Action(() => { }),
@@ -92,7 +92,7 @@ namespace Jwc.Experiment.Xunit
                 new Action<int, object, string, Type>((a, b, c, d) => { }),
                 arguments);
             var expected = "Jwc.Experiment.Xunit.FirstClassCommandTest.DisplayNameIsCorrect" +
-                            "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
+                           "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
 
             var actual = sut.DisplayName;
 

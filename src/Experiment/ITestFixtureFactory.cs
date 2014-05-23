@@ -3,18 +3,18 @@
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represents a factory to create an instance of <see cref="ITestFixture"/>.
+    ///     Represents a factory to create an instance of <see cref="ITestFixture" />.
     /// </summary>
     public interface ITestFixtureFactory
     {
         /// <summary>
-        /// Creates a test fixture.
+        ///     Creates a test fixture.
         /// </summary>
         /// <param name="testMethod">
-        /// The test method in which the test fixture will be used.
+        ///     The test method in which the test fixture will be used.
         /// </param>
         /// <returns>
-        /// The test fixture.
+        ///     The test fixture.
         /// </returns>
         ITestFixture Create(MethodInfo testMethod);
     }

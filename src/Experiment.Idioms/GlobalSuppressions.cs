@@ -8,5 +8,7 @@
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames", Justification="CI빌드에서 강력한 이름으로 assembly를 서명하기 때문에 이 경고를 무시.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", Justification="SemanticVersioning의 명명법을 따르기 위하여 이 경고를 무시.")]
+using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames", Justification = "CI빌드에서 강력한 이름으로 assembly를 서명하기 때문에 이 경고를 무시.")]
+[assembly: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly", Justification = "SemanticVersioning의 명명법을 따르기 위하여 이 경고를 무시.")]

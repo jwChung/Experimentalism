@@ -9,7 +9,7 @@ namespace Jwc.Experiment.AutoFixture
         public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(TestFixture).Assembly;
-            var specifiedAssemblies = new []
+            var specifiedAssemblies = new[]
             {
                 // GAC
                 "mscorlib",

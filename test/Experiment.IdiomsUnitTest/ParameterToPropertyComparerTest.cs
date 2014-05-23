@@ -187,7 +187,7 @@ namespace Jwc.Experiment.Idioms
         private class TypeForPropertyEqualValue
         {
             private readonly int _value;
-            private int[] _values;
+            private readonly int[] _values;
 
             public TypeForPropertyEqualValue(int value)
             {

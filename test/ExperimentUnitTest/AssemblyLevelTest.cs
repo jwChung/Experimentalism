@@ -9,7 +9,7 @@ namespace Jwc.Experiment
         public void SutReferencesOnlySpecifiedAssemblies()
         {
             var sut = typeof(ITestFixture).Assembly;
-            var specifiedAssemblies = new []
+            var specifiedAssemblies = new[]
             {
                 // GAC
                 "mscorlib"

@@ -1,17 +1,19 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace Jwc.Experiment.Idioms.Assertions
 {
     /// <summary>
-    /// Base implementation of <see cref="IIdiomaticMemberAssertion"/>.
+    ///     Base implementation of <see cref="IIdiomaticMemberAssertion" />.
     /// </summary>
     public abstract class IdiomaticMemberAssertion : IIdiomaticMemberAssertion
     {
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified member.
+        ///     Verifies that the idiomatic assertion can be verified for the specified member.
         /// </summary>
-        /// <param name="member">The member.</param>
+        /// <param name="member">
+        ///     The member.
+        /// </param>
         public virtual void Verify(MemberInfo member)
         {
             var field = member as FieldInfo;
@@ -36,48 +38,53 @@ namespace Jwc.Experiment.Idioms.Assertions
         }
 
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified field.
+        ///     Verifies that the idiomatic assertion can be verified for the specified field.
         /// </summary>
-        /// <param name="field">The field.</param>
+        /// <param name="field">
+        ///     The field.
+        /// </param>
         public virtual void Verify(FieldInfo field)
         {
         }
 
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified constructor.
+        ///     Verifies that the idiomatic assertion can be verified for the specified constructor.
         /// </summary>
-        /// <param name="constructor">The constructor.</param>
+        /// <param name="constructor">
+        ///     The constructor.
+        /// </param>
         public virtual void Verify(ConstructorInfo constructor)
         {
         }
 
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified property.
+        ///     Verifies that the idiomatic assertion can be verified for the specified property.
         /// </summary>
-        /// <param name="property">The property.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Property", Justification = "This word 'property' is desiable to show reflection information of a certain property.")]
+        /// <param name="property">
+        ///     The property.
+        /// </param>
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Property", Justification = "This word 'property' is desiable to show reflection information of a certain property.")]
         public virtual void Verify(PropertyInfo property)
         {
         }
 
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified method.
+        ///     Verifies that the idiomatic assertion can be verified for the specified method.
         /// </summary>
-        /// <param name="method">The method.</param>
+        /// <param name="method">
+        ///     The method.
+        /// </param>
         public virtual void Verify(MethodInfo method)
         {
         }
 
         /// <summary>
-        /// Verifies that the idiomatic assertion can be verified for the
-        /// specified event.
+        ///     Verifies that the idiomatic assertion can be verified for the specified event.
         /// </summary>
-        /// <param name="event">The event.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "event", Justification = "This word 'event' is desiable to show reflection information of a certain event.")]
+        /// <param name="event">
+        ///     The event.
+        /// </param>
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "event", Justification = "This word 'event' is desiable to show reflection information of a certain event.")]
         public virtual void Verify(EventInfo @event)
         {
         }

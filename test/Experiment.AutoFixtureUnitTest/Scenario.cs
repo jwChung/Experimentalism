@@ -30,7 +30,8 @@ namespace Jwc.Experiment.AutoFixture
 
         [Test]
         public void TestAttributeSupportsParameterizedTestWithAutoData(
-            string arg1, Type arg2)
+            string arg1,
+            Type arg2)
         {
             Assert.NotNull(arg1);
             Assert.NotNull(arg2);
@@ -39,7 +40,8 @@ namespace Jwc.Experiment.AutoFixture
         [Test]
         [InlineData("expected")]
         public void TestAttributeSupportsParameterizedTestWithMixedData(
-            string arg1, object arg2)
+            string arg1,
+            object arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.NotNull(arg2);
@@ -47,7 +49,8 @@ namespace Jwc.Experiment.AutoFixture
 
         [Test]
         public void FrozenAttributeFreezesInstanceOfCertainType(
-            [Frozen] string arg1, string arg2)
+            [Frozen] string arg1,
+            string arg2)
         {
             Assert.Same(arg1, arg2);
         }

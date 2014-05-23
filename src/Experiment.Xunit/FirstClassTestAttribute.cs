@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -9,21 +10,23 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    /// A test attribute used to adorn methods that creates first-class
-    /// executable test cases.
+    ///     A test attribute used to adorn methods that creates first-class executable test
+    ///     cases.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
+    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
     public class FirstClassTestAttribute : FactAttribute
     {
         /// <summary>
-        /// Enumerates the test commands represented by this test method.
-        /// Derived classes should override this method to return instances of
-        /// <see cref="ITestCommand" />, one per execution of a test method.
+        ///     Enumerates the test commands represented by this test method. Derived classes should
+        ///     override this method to return instances of
+        ///     <see cref="ITestCommand" />, one per execution of a test method.
         /// </summary>
-        /// <param name="method">The test method</param>
+        /// <param name="method">
+        ///     The test method
+        /// </param>
         /// <returns>
-        /// The test commands which will execute the test runs for the given method
+        ///     The test commands which will execute the test runs for the given method
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
@@ -33,7 +36,7 @@ namespace Jwc.Experiment.Xunit
             AssemblyFixtureCustomizationAttribute.Customize(method.MethodInfo.ReflectedType.Assembly);
 
             var enumerator = GetTestCommands(method).GetEnumerator();
-            
+
             Func<IMethodInfo, ITestCommand> exceptionCommandFunc;
 
             while (TryMoveNext(enumerator, out exceptionCommandFunc))
@@ -44,20 +47,20 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="ITestFixture" />.
+        ///     Creates an instance of <see cref="ITestFixture" />.
         /// </summary>
         /// <param name="testMethod">
-        /// The test method
+        ///     The test method
         /// </param>
         /// <returns>
-        /// The created fixture.
+        ///     The created fixture.
         /// </returns>
         protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
             return DefaultFixtureFactory.Current.Create(testMethod);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
         {
             try
@@ -70,7 +73,7 @@ namespace Jwc.Experiment.Xunit
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
         private static bool TryMoveNext(
             IEnumerator<ITestCommand> enumerator,
             out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
@@ -115,7 +118,7 @@ namespace Jwc.Experiment.Xunit
             return (IEnumerable<ITestCase>)testCases;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
         private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
         {
             try
