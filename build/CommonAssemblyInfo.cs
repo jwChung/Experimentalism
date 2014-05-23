@@ -24,4 +24,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] Fixes that idiomatic assertions throws an exception when verifying
  *   irrelevant get or set properties.
+ *   
+ * - [FIX] Introdues the IdiomaticAssertion class to use it as base class of an
+ *   idiomatic assertion.
  */
