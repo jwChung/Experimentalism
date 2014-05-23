@@ -18,4 +18,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] Renames AssemblyFixtureConfigAttribute to
  *   AssemblyFixtureCustomizationAttribute. (BREAKING-CHANGE)
+ *   
+ * - [FIX] Makes idiomatic assertions ignore verifying irrelevant static or
+ *   abstract members.
  */
