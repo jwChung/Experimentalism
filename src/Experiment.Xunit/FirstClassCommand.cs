@@ -27,8 +27,10 @@ namespace Jwc.Experiment.Xunit
         /// <param name="arguments">
         ///     The test arguments to be supplied to the test delegate.
         /// </param>
-        public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
-            : base(EnsureIsNotNull(method), MethodUtility.GetDisplayName(method), 0)
+        public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments) : base(
+            EnsureIsNotNull(method),
+            MethodUtility.GetDisplayName(method),
+            MethodUtility.GetTimeoutParameter(method))
         {
             if (@delegate == null)
             {

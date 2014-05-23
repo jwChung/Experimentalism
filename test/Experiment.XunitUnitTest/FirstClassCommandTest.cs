@@ -136,6 +136,17 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(0, actual);
         }
 
+        [Fact(Timeout = 123)]
+        public void TimeoutIsCorrectWhenInitializedWithTimeout()
+        {
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new Action(() => { }),
+                new object[0]);
+            var actual = sut.Timeout;
+            Assert.Equal(123, actual);
+        }
+
         [Fact]
         public void ShouldCreateInstanceIsCorrect()
         {
