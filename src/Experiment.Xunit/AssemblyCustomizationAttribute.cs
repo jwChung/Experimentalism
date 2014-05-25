@@ -8,7 +8,7 @@ namespace Jwc.Experiment.Xunit
     ///     a test fixture only once on assembly level.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public sealed class AssemblyFixtureCustomizationAttribute : Attribute
+    public sealed class AssemblyCustomizationAttribute : Attribute
     {
         private static readonly object _syncLock = new object();
         private static bool _configured;
@@ -17,13 +17,13 @@ namespace Jwc.Experiment.Xunit
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="AssemblyFixtureCustomizationAttribute" /> class.
+        ///     <see cref="AssemblyCustomizationAttribute" /> class.
         /// </summary>
         /// <param name="customizationType">
         ///     A type to be used to set up or to tear down a test fixture only once on assembly
         ///     level.
         /// </param>
-        public AssemblyFixtureCustomizationAttribute(Type customizationType)
+        public AssemblyCustomizationAttribute(Type customizationType)
         {
             if (customizationType == null)
                 throw new ArgumentNullException("customizationType");
@@ -60,8 +60,8 @@ namespace Jwc.Experiment.Xunit
 
         private static void CustomizeSync(Assembly testAssembly)
         {
-            var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyFixtureCustomizationAttribute), false);
-            foreach (AssemblyFixtureCustomizationAttribute attribure in attribures)
+            var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyCustomizationAttribute), false);
+            foreach (AssemblyCustomizationAttribute attribure in attribures)
                 CustomizeSync(attribure.CustomizationType);
         }
 

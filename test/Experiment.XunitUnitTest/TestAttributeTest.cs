@@ -9,8 +9,8 @@ using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
 
-[assembly: AssemblyFixtureCustomization(typeof(SpyFixtureCustomization))]
-[assembly: AssemblyFixtureCustomization(typeof(SpyOtherFixtureCustomization))]
+[assembly: AssemblyCustomization(typeof(SpyFixtureCustomization))]
+[assembly: AssemblyCustomization(typeof(SpyOtherFixtureCustomization))]
 
 namespace Jwc.Experiment.Xunit
 {

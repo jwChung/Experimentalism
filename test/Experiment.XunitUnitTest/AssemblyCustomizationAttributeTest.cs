@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class AssemblyFixtureCustomizationAttributeTest
+    public class AssemblyCustomizationAttributeTest
     {
         [Fact]
         public void SutIsAttribute()
         {
-            var sut = new AssemblyFixtureCustomizationAttribute(typeof(object));
+            var sut = new AssemblyCustomizationAttribute(typeof(object));
             Assert.IsAssignableFrom<Attribute>(sut);
         }
 
@@ -16,14 +16,14 @@ namespace Jwc.Experiment.Xunit
         public void InitializeWithNullInitializerThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new AssemblyFixtureCustomizationAttribute(null));
+                () => new AssemblyCustomizationAttribute(null));
         }
 
         [Fact]
         public void CustomizationTypeIsCorrect()
         {
             var expected = GetType();
-            var sut = new AssemblyFixtureCustomizationAttribute(expected);
+            var sut = new AssemblyCustomizationAttribute(expected);
 
             var actual = sut.CustomizationType;
 

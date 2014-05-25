@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.22.2")]
 
 /*
- * Version 0.22.2
+ * Version 0.22.3
  * 
- * - [FIX] Fixed that custom display name and timeout cannot be declared on
- *   FirstClassTestAttribute.
+ * - [FIX] Renamed AssemblyFixtureCustomizationAttribute to
+ *   AssemblyCustomizationAttribute. (BREAKING-CHANGE)
  */

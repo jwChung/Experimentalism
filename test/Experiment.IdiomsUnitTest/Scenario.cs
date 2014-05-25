@@ -7,7 +7,7 @@ using Jwc.Experiment.Idioms.Assertions;
 using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
 
-[assembly: AssemblyFixtureCustomization(typeof(Scenario.TestFixtureCustomization))]
+[assembly: AssemblyCustomization(typeof(Scenario.TestFixtureCustomization))]
 
 namespace Jwc.Experiment.Idioms
 {

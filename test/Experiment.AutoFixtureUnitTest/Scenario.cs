@@ -7,7 +7,7 @@ using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-[assembly: AssemblyFixtureCustomization(typeof(Scenario.TestFixtureCustomization))]
+[assembly: AssemblyCustomization(typeof(Scenario.TestFixtureCustomization))]
 
 namespace Jwc.Experiment.AutoFixture
 {

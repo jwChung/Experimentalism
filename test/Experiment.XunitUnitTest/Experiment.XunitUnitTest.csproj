@@ -49,7 +49,7 @@
     <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
       <Link>AssemblyExtensions.cs</Link>
     </Compile>
-    <Compile Include="AssemblyFixtureCustomizationAttributeTest.cs" />
+    <Compile Include="AssemblyCustomizationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
