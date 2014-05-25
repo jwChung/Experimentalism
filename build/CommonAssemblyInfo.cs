@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.22.2")]
-[assembly: AssemblyInformationalVersion("0.22.2")]
+[assembly: AssemblyVersion("0.22.3")]
+[assembly: AssemblyInformationalVersion("0.22.3")]
 
 /*
  * Version 0.22.3
