@@ -30,4 +30,9 @@ using System.Runtime.InteropServices;
  *           string testParameterName,
  *           Delegate @delegate,
  *           object[] arguments)
+ *           
+ * - [FIX] Added a new constructor of the TestCase class to show customizable
+ *   test-parameters.
+ *   
+ *       public TestCase(string testParameterName, Delegate @delegate)
  */

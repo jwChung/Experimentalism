@@ -33,6 +33,18 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
+        public void InitializeWithNullDelegateAndTestParameterNameThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase(string.Empty, null));
+        }
+
+        [Fact]
+        public void InitializeWithNullTestParameterNameThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new TestCase(null, new Action(() => { })));
+        }
+
+        [Fact]
         public void InitializeWithCompositeActionThrows()
         {
             Action action = () => { };
@@ -54,6 +66,52 @@ namespace Jwc.Experiment.Xunit
             Func<object> func = () => null;
             func += () => null;
             Assert.Throws<ArgumentException>(() => new TestCase((Delegate)func));
+        }
+
+        [Fact]
+        public void InitializeWithCompositeDelegateAndTestParamterNameThrows()
+        {
+            Func<object> func = () => null;
+            func += () => null;
+            Assert.Throws<ArgumentException>(() => new TestCase(string.Empty, func));
+        }
+
+        [Fact]
+        public void TestParameterNameIsCorrectWhenInitializedWithAction()
+        {
+            var sut = new TestCase(() => { });
+            var actual = sut.TestParameterName;
+            Assert.Null(actual);
+        }
+
+        [Fact]
+        public void TestParameterNameIsCorrectWhenInitializedWithFunc()
+        {
+            var sut = new TestCase(() => null);
+            var actual = sut.TestParameterName;
+            Assert.Null(actual);
+        }
+
+        [Fact]
+        public void TestParameterNameIsCorrectWhenInitializedWithDelegate()
+        {
+            Delegate @delegate = new Func<object>(() => null);
+            var sut = new TestCase(@delegate);
+
+            var actual = sut.TestParameterName;
+
+            Assert.Null(actual);
+        }
+
+        [Fact]
+        public void TestParameterNameIsCorrectWhenInitializedWithTestParameterNameAndDelegate()
+        {
+            var testParameterName = "anonymous";
+            var sut = new TestCase(testParameterName, new Func<object>(() => null));
+
+            var actual = sut.TestParameterName;
+
+            Assert.Equal(testParameterName, actual);
         }
 
         [Fact]
@@ -83,6 +141,17 @@ namespace Jwc.Experiment.Xunit
         {
             Delegate @delegate = new Func<object>(() => null);
             var sut = new TestCase(@delegate);
+
+            var actual = sut.Delegate;
+
+            Assert.Equal(@delegate, actual);
+        }
+
+        [Fact]
+        public void DelegateIsCorrectWhenInitializedWithTestParameterNameAndDelegate()
+        {
+            Delegate @delegate = new Func<object>(() => null);
+            var sut = new TestCase("anonymous", @delegate);
 
             var actual = sut.Delegate;
 
@@ -202,6 +271,33 @@ namespace Jwc.Experiment.Xunit
             sut.ConvertToTestCommand(dummyMethod, fixtureFactory);
 
             Assert.Equal(1, createdCount);
+        }
+
+        [Fact]
+        public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectTestParameterName()
+        {
+            var testParameterName = "anonymous";
+            var sut = new TestCase(testParameterName, new Func<object>(() => null));
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
+
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(testParameterName, command.TestParameterName);
+        }
+
+        [Fact]
+        public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectTestParameterName()
+        {
+            var testParameterName = "anonymous";
+            var sut = new TestCase(testParameterName, new Action<int>(x => { }));
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var testFixtureFactory = new DelegatingTestFixtureFactory { OnCreate = m => new FakeTestFixture() };
+
+            var actual = sut.ConvertToTestCommand(method, testFixtureFactory);
+
+            var command = Assert.IsType<FirstClassCommand>(actual);
+            Assert.Equal(testParameterName, command.TestParameterName);
         }
     }
 }

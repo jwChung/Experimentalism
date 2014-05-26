@@ -66,7 +66,8 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        /// Gets a value indicating the string to show parameters of a test method in test result.
+        ///     Gets a value indicating the string to show parameters of a test method in test
+        ///     result.
         /// </summary>
         public string TestParameterName
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
@@ -13,6 +12,7 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class TestCase : ITestCase
     {
+        private readonly string _testParameterName;
         private readonly Delegate _delegate;
 
         /// <summary>
@@ -47,13 +47,49 @@ namespace Jwc.Experiment.Xunit
                 throw new ArgumentNullException("delegate");
 
             if (@delegate.GetInvocationList().Length != 1)
-            {
                 throw new ArgumentException(
                     "Composite delegates are not supported, set only one operation.",
                     "delegate");
-            }
 
             _delegate = @delegate;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TestCase" /> class.
+        /// </summary>
+        /// <param name="testParameterName">
+        ///     A string to show parameters of a test method in test result.
+        /// </param>
+        /// <param name="delegate">
+        ///     The test delegate.
+        /// </param>
+        public TestCase(string testParameterName, Delegate @delegate)
+        {
+            if (testParameterName == null)
+                throw new ArgumentNullException("testParameterName");
+
+            if (@delegate == null)
+                throw new ArgumentNullException("delegate");
+
+            if (@delegate.GetInvocationList().Length != 1)
+                throw new ArgumentException(
+                    "Composite delegates are not supported, set only one operation.",
+                    "delegate");
+
+            _testParameterName = testParameterName;
+            _delegate = @delegate;
+        }
+
+        /// <summary>
+        ///     Gets a value indicating the string to show parameters of a test method in test
+        ///     result.
+        /// </summary>
+        public string TestParameterName
+        {
+            get
+            {
+                return _testParameterName;
+            }
         }
 
         /// <summary>
@@ -87,32 +123,21 @@ namespace Jwc.Experiment.Xunit
             if (testFixtureFactory == null)
                 throw new ArgumentNullException("testFixtureFactory");
 
-            var parameters = Delegate.Method.GetParameters();
-
-            if (!parameters.Any())
-                return CreateNonParamterizedCommand(method);
-
-            return CreateParameterizedCommand(method, testFixtureFactory, parameters);
+            var fixture = new Lazy<ITestFixture>(() => testFixtureFactory.Create(Delegate.Method));
+            return CreateTestCommand(method, fixture);
         }
 
-        private FirstClassCommand CreateNonParamterizedCommand(IMethodInfo method)
+        private ITestCommand CreateTestCommand(IMethodInfo method, Lazy<ITestFixture> fixture)
         {
-            return new FirstClassCommand(method, string.Empty, Delegate, new object[0]);
-        }
-
-        private ITestCommand CreateParameterizedCommand(
-            IMethodInfo method,
-            ITestFixtureFactory testFixtureFactory,
-            IEnumerable<ParameterInfo> parameters)
-        {
-            var fixture = testFixtureFactory.Create(Delegate.Method);
-            var arguments = parameters.Select(p => fixture.Create(p.ParameterType)).ToArray();
+            var arguments = Delegate.Method.GetParameters()
+                .Select(p => fixture.Value.Create(p.ParameterType)).ToArray();
+            
             return new FirstClassCommand(method, GetTestParameterName(arguments), Delegate, arguments);
         }
 
         private string GetTestParameterName(IList<object> arguments)
         {
-            return string.Join(", ", GetArgumentValues(arguments));
+            return TestParameterName ?? string.Join(", ", GetArgumentValues(arguments));
         }
 
         private IEnumerable<string> GetArgumentValues(IList<object> arguments)
