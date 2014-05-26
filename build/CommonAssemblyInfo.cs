@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.22.3")]
-[assembly: AssemblyInformationalVersion("0.22.3")]
+[assembly: AssemblyVersion("0.22.4")]
+[assembly: AssemblyInformationalVersion("0.22.4")]
 
 /*
  * Version 0.22.4
@@ -20,19 +20,13 @@ using System.Runtime.InteropServices;
  *   argument. (BREAKING-CHANGE)
  *   
  *   Before:
- *       public FirstClassCommand(
- *           IMethodInfo method,
- *           Delegate @delegate,
- *           object[] arguments)
+ *   public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
+ *   
  *   After:        
- *       public FirstClassCommand(
- *           IMethodInfo method,
- *           string testParameterName,
- *           Delegate @delegate,
- *           object[] arguments)
+ *   public FirstClassCommand(IMethodInfo method, string testParameterName, Delegate @delegate, object[] arguments)
  *           
  * - [FIX] Added a new constructor of the TestCase class to show customizable
  *   test-parameters.
  *   
- *       public TestCase(string testParameterName, Delegate @delegate)
+ *   public TestCase(string testParameterName, Delegate @delegate)
  */
