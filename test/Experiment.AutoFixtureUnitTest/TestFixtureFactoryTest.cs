@@ -15,7 +15,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Fact]
-        public void CreateReturnCorrectTestFixture()
+        public void CreateReturnsCorrectTestFixture()
         {
             var sut = new TestFixtureFactory();
             var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
