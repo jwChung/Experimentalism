@@ -43,12 +43,13 @@ namespace Jwc.Experiment.AutoFixture
 
             public void Customize(IFixture fixture)
             {
-                GetType().GetMethod("CustomizeImpl").MakeGenericMethod(_targetType)
+                GetType().GetMethod("Customize", BindingFlags.NonPublic | BindingFlags.Static)
+                    .MakeGenericMethod(_targetType)
                     .Invoke(null, new object[] { fixture });
             }
 
             [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "This method is called through reflection.")]
-            public static void CustomizeImpl<T>(IFixture fixture)
+            private static void Customize<T>(IFixture fixture)
             {
                 fixture.Customize<T>(c => c.WithAutoProperties());
             }
