@@ -97,7 +97,7 @@ namespace Jwc.Experiment.Xunit
 
         private FirstClassCommand CreateNonParamterizedCommand(IMethodInfo method)
         {
-            return new FirstClassCommand(method, Delegate, new object[0]);
+            return new FirstClassCommand(method, string.Empty, Delegate, new object[0]);
         }
 
         private ITestCommand CreateParameterizedCommand(
@@ -107,7 +107,23 @@ namespace Jwc.Experiment.Xunit
         {
             var fixture = testFixtureFactory.Create(Delegate.Method);
             var arguments = parameters.Select(p => fixture.Create(p.ParameterType)).ToArray();
-            return new FirstClassCommand(method, Delegate, arguments);
+            return new FirstClassCommand(method, GetTestParameterName(arguments), Delegate, arguments);
+        }
+
+        private string GetTestParameterName(IList<object> arguments)
+        {
+            return string.Join(", ", GetArgumentValues(arguments));
+        }
+
+        private IEnumerable<string> GetArgumentValues(IList<object> arguments)
+        {
+            return Delegate.Method.GetParameters()
+                .Select(pi => GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
+        }
+
+        private static string GetArgumentValue(string typeName, object argument)
+        {
+            return typeName + ": " + (argument ?? "(null)");
         }
     }
 }

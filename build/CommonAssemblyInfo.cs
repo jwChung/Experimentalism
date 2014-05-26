@@ -14,8 +14,20 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.22.3")]
 
 /*
- * Version 0.22.3
+ * Version 0.22.4
  * 
- * - [FIX] Renamed AssemblyFixtureCustomizationAttribute to
- *   AssemblyCustomizationAttribute. (BREAKING-CHANGE)
+ * - [FIX] Made the construtor of FirstClassCommand accept a testParameterName
+ *   argument. (BREAKING-CHANGE)
+ *   
+ *   Before:
+ *       public FirstClassCommand(
+ *           IMethodInfo method,
+ *           Delegate @delegate,
+ *           object[] arguments)
+ *   After:        
+ *       public FirstClassCommand(
+ *           IMethodInfo method,
+ *           string testParameterName,
+ *           Delegate @delegate,
+ *           object[] arguments)
  */

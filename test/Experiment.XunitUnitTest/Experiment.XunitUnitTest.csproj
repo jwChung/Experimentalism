@@ -52,6 +52,7 @@
     <Compile Include="AssemblyCustomizationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
+    <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="StaticFactAttribute.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />

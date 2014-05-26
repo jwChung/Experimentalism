@@ -12,6 +12,7 @@ namespace Jwc.Experiment.Xunit
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 new Action(() => { }),
                 new object[0]);
             Assert.IsAssignableFrom<TestCommand>(sut);
@@ -21,7 +22,18 @@ namespace Jwc.Experiment.Xunit
         public void InitializeWithNullMethodThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new FirstClassCommand(null, new Action(() => { }), new object[0]));
+                () => new FirstClassCommand(null, string.Empty, new Action(() => { }), new object[0]));
+        }
+
+        [Fact]
+        public void InitializeWithNullParameterDisplayNameThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new FirstClassCommand(
+                    Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    null,
+                    new Action(() => { }),
+                    new object[0]));
         }
 
         [Fact]
@@ -30,6 +42,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    string.Empty,
                     null,
                     new object[0]));
         }
@@ -40,6 +53,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    string.Empty,
                     new Action(() => { }),
                     null));
         }
@@ -48,11 +62,26 @@ namespace Jwc.Experiment.Xunit
         public void MethodIsCorrect()
         {
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var sut = new FirstClassCommand(method, new Action(() => { }), new object[0]);
+            var sut = new FirstClassCommand(method, string.Empty, new Action(() => { }), new object[0]);
 
             var actual = sut.Method;
 
             Assert.Equal(method, actual);
+        }
+
+        [Fact]
+        public void TestParameterNameIsCorrect()
+        {
+            string expected = "TestParameterName";
+            var sut = new FirstClassCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                expected,
+                new Action(() => { }),
+                new object[0]);
+
+            var actual = sut.TestParameterName;
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -61,6 +90,7 @@ namespace Jwc.Experiment.Xunit
             var @delegate = new Action(() => { });
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 @delegate,
                 new object[0]);
 
@@ -75,6 +105,7 @@ namespace Jwc.Experiment.Xunit
             var arguments = new[] { 1, new object(), "string" };
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 new Action(() => { }),
                 arguments);
 
@@ -86,42 +117,33 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void DisplayNameIsCorrect()
         {
-            // Fixture setup
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-
+            string parameterDisplayName = "Anonymous Parameters";
             var sut = new FirstClassCommand(
                 Reflector.Wrap(method),
+                parameterDisplayName,
                 new Action<int, object, string, Type>((a, b, c, d) => { }),
                 new[] { 1, new object(), "string", null });
+            var expected = method.ReflectedType.FullName + "." + method.Name + "(" + parameterDisplayName + ")";
 
-            string methodName = method.ReflectedType.FullName + "." + method.Name;
-            var expected = methodName + "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
-
-            // Exercise system
             var actual = sut.DisplayName;
 
-            // Verify outcome
             Assert.Equal(expected, actual);
         }
 
         [Fact(DisplayName = "CustomDisplayName")]
         public void DisplayNameIsCorrectWhenInitializedWithDisplayName()
         {
-            // Fixture setup
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-
             var sut = new FirstClassCommand(
                 Reflector.Wrap(method),
+                string.Empty,
                 new Action<int, object, string, Type>((a, b, c, d) => { }),
                 new[] { 1, new object(), "string", null });
+            var expected = "CustomDisplayName()";
 
-            string methodName = "CustomDisplayName";
-            var expected = methodName + "(Int32: '1', Object: 'System.Object', String: 'string', Type: 'NULL')";
-
-            // Exercise system
             var actual = sut.DisplayName;
 
-            // Verify outcome
             Assert.Equal(expected, actual);
         }
 
@@ -130,6 +152,7 @@ namespace Jwc.Experiment.Xunit
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 new Action(() => { }),
                 new object[0]);
             var actual = sut.Timeout;
@@ -141,6 +164,7 @@ namespace Jwc.Experiment.Xunit
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 new Action(() => { }),
                 new object[0]);
             var actual = sut.Timeout;
@@ -152,6 +176,7 @@ namespace Jwc.Experiment.Xunit
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 new Action(() => { }),
                 new object[0]);
             var actual = sut.ShouldCreateInstance;
@@ -172,6 +197,7 @@ namespace Jwc.Experiment.Xunit
             };
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
                 @delegate,
                 arguments);
 
@@ -188,6 +214,7 @@ namespace Jwc.Experiment.Xunit
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new FirstClassCommand(
                 method,
+                string.Empty,
                 new Action(() => { }),
                 new object[0]);
 

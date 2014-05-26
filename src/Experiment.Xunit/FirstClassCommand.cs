@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
@@ -11,6 +10,7 @@ namespace Jwc.Experiment.Xunit
     public class FirstClassCommand : TestCommand
     {
         private readonly IMethodInfo _method;
+        private readonly string _testParameterName;
         private readonly Delegate _delegate;
         private readonly object[] _arguments;
 
@@ -19,7 +19,11 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         /// <param name="method">
         ///     The test method which this instance is associated. This will likely be the method
-        ///     adorned with an <see cref="FirstClassTestAttribute" />
+        ///     adorned with an
+        ///     <see cref="FirstClassTestAttribute" />
+        /// </param>
+        /// <param name="testParameterName">
+        ///     A string to show parameters of a test method in test result.
         /// </param>
         /// <param name="delegate">
         ///     The test case to be invoked when the test is executed.
@@ -27,22 +31,23 @@ namespace Jwc.Experiment.Xunit
         /// <param name="arguments">
         ///     The test arguments to be supplied to the test delegate.
         /// </param>
-        public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments) : base(
-            EnsureIsNotNull(method),
-            MethodUtility.GetDisplayName(method),
-            MethodUtility.GetTimeoutParameter(method))
+        public FirstClassCommand(
+            IMethodInfo method, string testParameterName, Delegate @delegate, object[] arguments) : base(
+                EnsureIsNotNull(method),
+                MethodUtility.GetDisplayName(method),
+                MethodUtility.GetTimeoutParameter(method))
         {
+            if (testParameterName == null)
+                throw new ArgumentNullException("testParameterName");
+
             if (@delegate == null)
-            {
                 throw new ArgumentNullException("delegate");
-            }
 
             if (arguments == null)
-            {
                 throw new ArgumentNullException("arguments");
-            }
 
             _method = method;
+            _testParameterName = testParameterName;
             _delegate = @delegate;
             _arguments = arguments;
 
@@ -57,6 +62,17 @@ namespace Jwc.Experiment.Xunit
             get
             {
                 return _method;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the string to show parameters of a test method in test result.
+        /// </summary>
+        public string TestParameterName
+        {
+            get
+            {
+                return _testParameterName;
             }
         }
 
@@ -107,34 +123,21 @@ namespace Jwc.Experiment.Xunit
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, Arguments.ToArray());
+            Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, _arguments);
             return new PassedResult(Method, DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
         {
             if (method == null)
-            {
                 throw new ArgumentNullException("method");
-            }
 
             return method;
         }
 
         private void SetDisplayName()
         {
-            DisplayName += "(" + string.Join(", ", GetArgumentValues()) + ")";
-        }
-
-        private IEnumerable<string> GetArgumentValues()
-        {
-            return Delegate.Method.GetParameters().Select(pi =>
-                GetArgumentValue(pi.ParameterType.Name, _arguments[pi.Position]));
-        }
-
-        private static string GetArgumentValue(string typeName, object argument)
-        {
-            return typeName + ": " + (argument != null ? "'" + argument + "'" : "'NULL'");
+            DisplayName += "(" + TestParameterName + ")";
         }
     }
 }

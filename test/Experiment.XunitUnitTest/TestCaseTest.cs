@@ -116,6 +116,7 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<FirstClassCommand>(actual);
             Assert.Equal(method, command.Method);
+            Assert.Equal(string.Empty, command.TestParameterName);
             Assert.Equal(sut.Delegate, command.Delegate);
             Assert.Empty(command.Arguments);
         }
@@ -123,10 +124,26 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertParameterizedDelegateToTestCommandReturnsCorrectTestCommand()
         {
-            Action<int, string> @delegate = (x, y) => { };
+            // Fixture setup
+            Action<int, string, object> @delegate = (x, y, z) => { };
             var sut = new TestCase(@delegate);
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var fixture = new FakeTestFixture();
+
+            var fixture = new DelegatingTestFixture
+            {
+                OnCreate = r =>
+                {
+                    var type = r as Type;
+                    if (type == typeof(string))
+                        return "anonymous";
+                    if (type == typeof(int))
+                        return 123;
+                    if (type == typeof(object))
+                        return null;
+
+                    throw new NotSupportedException();
+                }
+            };
+
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
                 OnCreate = mi =>
@@ -136,14 +153,20 @@ namespace Jwc.Experiment.Xunit
                 }
             };
 
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            string testParameterName = "Int32: 123, String: anonymous, Object: (null)";
+            var arguments = new object[] { 123, "anonymous", null };
+
+            // Exercise system
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
+            // Verify outcome
             var command = Assert.IsType<FirstClassCommand>(actual);
+
             Assert.Equal(method, command.Method);
+            Assert.Equal(testParameterName, command.TestParameterName);
             Assert.Equal(@delegate, command.Delegate);
-            Assert.Equal(
-                new[] { fixture.Create(typeof(int)), fixture.Create(typeof(string)) },
-                command.Arguments);
+            Assert.Equal(arguments, command.Arguments);
         }
 
         [Fact]
