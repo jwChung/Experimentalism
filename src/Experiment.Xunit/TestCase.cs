@@ -63,21 +63,12 @@ namespace Jwc.Experiment.Xunit
         /// <param name="delegate">
         ///     The test delegate.
         /// </param>
-        public TestCase(string testParameterName, Delegate @delegate)
+        public TestCase(string testParameterName, Delegate @delegate) : this(@delegate)
         {
             if (testParameterName == null)
                 throw new ArgumentNullException("testParameterName");
 
-            if (@delegate == null)
-                throw new ArgumentNullException("delegate");
-
-            if (@delegate.GetInvocationList().Length != 1)
-                throw new ArgumentException(
-                    "Composite delegates are not supported, set only one operation.",
-                    "delegate");
-
             _testParameterName = testParameterName;
-            _delegate = @delegate;
         }
 
         /// <summary>
