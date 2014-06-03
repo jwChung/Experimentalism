@@ -1,6 +1,4 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Verify">
-  <Import Project="Build.tasks"/>
-  
   <ItemGroup>
     <CopyNuGetFiles Include="@(NuGetFiles)"/>
   </ItemGroup>
