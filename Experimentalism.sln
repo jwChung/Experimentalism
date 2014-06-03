@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC
 		build\Build.proj = build\Build.proj
 		build\Build.props = build\Build.props
 		build\Build.targets = build\Build.targets
+		build\Build.tasks = build\Build.tasks
 		build\CodeAnalysisDictionary.xml = build\CodeAnalysisDictionary.xml
 		build\CommonAssemblyInfo.cs = build\CommonAssemblyInfo.cs
 		Run.cmd = Run.cmd
