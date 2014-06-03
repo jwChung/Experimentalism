@@ -53,7 +53,7 @@ namespace Jwc.Experiment.Idioms.Assertions
                 if (RestrictiveReferences.Contains(reference))
                     continue;
 
-                var messageFormat = @"The reference of the assembly is not specified through the restrictive references.
+                var messageFormat = @"The reference of the assembly is not specified by the restricted references.
 Reference: {0}
 Assembly : {1}
 Restrictive references:
