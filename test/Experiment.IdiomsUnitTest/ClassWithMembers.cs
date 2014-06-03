@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Idioms
         protected object ProtectedField;
         internal object InternalField = null;
 #pragma warning disable 169
-        private object PrivateField;
+        private object _privateField;
 #pragma warning restore 169
 
         static ClassWithMembers()

@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
 {
     public class ReferenceCollectorTest
     {
-        private const BindingFlags _bindingFlags =
+        private const BindingFlags Bindings =
             BindingFlags.Static | BindingFlags.Instance |
             BindingFlags.Public | BindingFlags.NonPublic;
 
@@ -172,7 +172,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNonDeclaredFieldInfoElementsFiltersIt()
         {
-            var fieldInfoElements = typeof(SubClassWithMembers).GetFields(_bindingFlags)
+            var fieldInfoElements = typeof(SubClassWithMembers).GetFields(Bindings)
                 .Select(f => f.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -184,7 +184,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitDeclaredFieldInfoElementsDoesNotFilterIt()
         {
-            var fieldInfoElements = typeof(ClassWithMembers).GetFields(_bindingFlags)
+            var fieldInfoElements = typeof(ClassWithMembers).GetFields(Bindings)
                 .Select(f => f.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -203,7 +203,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNonDeclaredPropertyInfoElementsFiltersIt()
         {
-            var propertyInfoElements = typeof(SubClassWithMembers).GetProperties(_bindingFlags)
+            var propertyInfoElements = typeof(SubClassWithMembers).GetProperties(Bindings)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -215,7 +215,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitDeclaredPropertyInfoElementsDoesNotFilterIt()
         {
-            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(_bindingFlags)
+            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(Bindings)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -234,7 +234,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNonDeclaredMethodInfoElementsFiltersIt()
         {
-            var methodInfoElements = typeof(SubClassWithMembers).GetMethods(_bindingFlags)
+            var methodInfoElements = typeof(SubClassWithMembers).GetMethods(Bindings)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -246,7 +246,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitDeclaredMethodInfoElementsDoesNotFilterIt()
         {
-            var methodInfoElements = typeof(ClassWithMembers).GetMethods(_bindingFlags)
+            var methodInfoElements = typeof(ClassWithMembers).GetMethods(Bindings)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -265,7 +265,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitNonDeclaredEventInfoElementsFiltersIt()
         {
-            var eventInfoElements = typeof(SubClassWithMembers).GetEvents(_bindingFlags)
+            var eventInfoElements = typeof(SubClassWithMembers).GetEvents(Bindings)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -277,7 +277,7 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void VisitDeclaredEventInfoElementsDoesNotFilterIt()
         {
-            var eventInfoElements = typeof(ClassWithMembers).GetEvents(_bindingFlags)
+            var eventInfoElements = typeof(ClassWithMembers).GetEvents(Bindings)
                 .Select(x => x.ToElement()).ToArray();
             var sut = new ReferenceCollector();
 
@@ -410,7 +410,7 @@ namespace Jwc.Experiment.Idioms
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
-            var fieldInfoElements = typeof(ClassWithMembers).GetFields(_bindingFlags)
+            var fieldInfoElements = typeof(ClassWithMembers).GetFields(Bindings)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(fieldInfoElements);
@@ -424,7 +424,7 @@ namespace Jwc.Experiment.Idioms
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
-            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(_bindingFlags)
+            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(Bindings)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(propertyInfoElements);
@@ -438,7 +438,7 @@ namespace Jwc.Experiment.Idioms
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<MethodInfoElement>())).Returns(visitor);
-            var methodInfoElements = typeof(ClassWithMembers).GetMethods(_bindingFlags)
+            var methodInfoElements = typeof(ClassWithMembers).GetMethods(Bindings)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(methodInfoElements);
@@ -452,7 +452,7 @@ namespace Jwc.Experiment.Idioms
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
             sut.ToMock().Setup(x => x.Visit(It.IsAny<EventInfoElement>())).Returns(visitor);
-            var eventInfoElements = typeof(ClassWithMembers).GetEvents(_bindingFlags)
+            var eventInfoElements = typeof(ClassWithMembers).GetEvents(Bindings)
                 .Select(x => x.ToElement()).ToArray();
 
             var actual = sut.Visit(eventInfoElements);

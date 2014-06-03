@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Xunit
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class AssemblyCustomizationAttribute : Attribute
     {
-        private static readonly object _syncLock = new object();
+        private static readonly object SyncLock = new object();
         private static bool _configured;
 
         private readonly Type _customizationType;
@@ -48,7 +48,7 @@ namespace Jwc.Experiment.Xunit
             if (_configured)
                 return;
 
-            lock (_syncLock)
+            lock (SyncLock)
             {
                 if (_configured)
                     return;

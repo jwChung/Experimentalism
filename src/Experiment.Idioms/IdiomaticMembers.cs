@@ -15,11 +15,11 @@ namespace Jwc.Experiment.Idioms
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class IdiomaticMembers : IEnumerable<MemberInfo>
     {
-        private const BindingFlags _bindingFlags =
+        private const BindingFlags Bindings =
             BindingFlags.Public | BindingFlags.DeclaredOnly |
             BindingFlags.Static | BindingFlags.Instance;
 
-        private static readonly MemberKindCollector _memberKindCollector = new MemberKindCollector();
+        private static readonly MemberKindCollector MemberKindCollector = new MemberKindCollector();
 
         private readonly Type _type;
         private readonly MemberKinds _memberKinds;
@@ -86,7 +86,7 @@ namespace Jwc.Experiment.Idioms
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
-            return Type.GetMembers(_bindingFlags)
+            return Type.GetMembers(Bindings)
                 .Except(GetAccessors())
                 .Except(GetEventMethods())
                 .Where(m => !(m is Type))
@@ -101,12 +101,12 @@ namespace Jwc.Experiment.Idioms
 
         private IEnumerable<MethodInfo> GetAccessors()
         {
-            return Type.GetProperties(_bindingFlags).SelectMany(p => p.GetAccessors(true));
+            return Type.GetProperties(Bindings).SelectMany(p => p.GetAccessors(true));
         }
 
         private IEnumerable<MethodInfo> GetEventMethods()
         {
-            return Type.GetEvents(_bindingFlags).SelectMany(
+            return Type.GetEvents(Bindings).SelectMany(
                 e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
         }
 
@@ -117,7 +117,7 @@ namespace Jwc.Experiment.Idioms
 
         private static MemberKinds GetMemberKinds(MemberInfo member)
         {
-            return member.ToReflectionElement().Accept(_memberKindCollector).Value.Single();
+            return member.ToReflectionElement().Accept(MemberKindCollector).Value.Single();
         }
     }
 }
