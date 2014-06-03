@@ -28,9 +28,7 @@
       UnitTest;
       " />
 
-  <Target Name="Deployment"
-          Condition=" '$(CurrentBranchName)' == 'master' and !$(CommitMessage.StartsWith('Merge pull request #')) "
-          DependsOnTargets="
+  <Target Name="Deployment" Condition=" '$(CurrentBranchName)' == 'master' and !$(CommitMessage.StartsWith('Merge pull request #')) " DependsOnTargets="
       NuGetVersioning;
       NuGetReleaseNotes;
       NuGetPack;
