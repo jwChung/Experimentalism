@@ -11,8 +11,8 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    ///     이 attribute는 method위에 선언되어 해당 method가 test라는 것을 지칭하게 되며, non-parameterized test 뿐
-    ///     아니라 parameterized test에도 사용될 수 있다.
+    ///     이 attribute는 method위에 선언되어 해당 method가 test라는 것을 지칭하게 되며,
+    ///     non-parameterized test 뿐 아니라 parameterized test에도 사용될 수 있다.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
@@ -20,14 +20,14 @@ namespace Jwc.Experiment.Xunit
     {
         /// <summary>
         ///     Enumerates the test commands represented by this test method. Derived classes should
-        ///     override this method to return instances of
-        ///     <see cref="ITestCommand" />, one per execution of a test method.
+        ///     override this method to return instances of <see cref="ITestCommand" />, one per
+        ///     execution of a test method.
         /// </summary>
         /// <param name="method">
         ///     The test method
         /// </param>
         /// <returns>
-        ///     The test commands which will execute the test runs for the given method
+        ///     The test commands which will execute the test runs for the given method.
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {

@@ -19,14 +19,14 @@ namespace Jwc.Experiment.Xunit
     {
         /// <summary>
         ///     Enumerates the test commands represented by this test method. Derived classes should
-        ///     override this method to return instances of
-        ///     <see cref="ITestCommand" />, one per execution of a test method.
+        ///     override this method to return instances of <see cref="ITestCommand" />, one per
+        ///     execution of a test method.
         /// </summary>
         /// <param name="method">
-        ///     The test method
+        ///     The test method.
         /// </param>
         /// <returns>
-        ///     The test commands which will execute the test runs for the given method
+        ///     The test commands which will execute the test runs for the given method.
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
@@ -50,7 +50,7 @@ namespace Jwc.Experiment.Xunit
         ///     Creates an instance of <see cref="ITestFixture" />.
         /// </summary>
         /// <param name="testMethod">
-        ///     The test method
+        ///     The test method.
         /// </param>
         /// <returns>
         ///     The created fixture.
