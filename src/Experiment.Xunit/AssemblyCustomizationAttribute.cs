@@ -53,19 +53,19 @@ namespace Jwc.Experiment.Xunit
                 if (_configured)
                     return;
 
-                CustomizeSync(testAssembly);
+                CustomizeImpl(testAssembly);
                 _configured = true;
             }
         }
 
-        private static void CustomizeSync(Assembly testAssembly)
+        private static void CustomizeImpl(Assembly testAssembly)
         {
             var attribures = testAssembly.GetCustomAttributes(typeof(AssemblyCustomizationAttribute), false);
             foreach (AssemblyCustomizationAttribute attribure in attribures)
-                CustomizeSync(attribure.CustomizationType);
+                CustomizeImpl(attribure.CustomizationType);
         }
 
-        private static void CustomizeSync(Type customizationType)
+        private static void CustomizeImpl(Type customizationType)
         {
             var customization = Activator.CreateInstance(customizationType) as IDisposable;
             if (customization != null)
