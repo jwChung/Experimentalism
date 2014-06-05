@@ -17,5 +17,13 @@ namespace Jwc.Experiment.AutoFixture
                 Assembly.Load("Ploeh.AutoFixture"))
             .Verify(typeof(TestFixture).Assembly);
         }
+
+        [Fact]
+        public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
+        {
+            new IndirectReferenceAssertion(
+                Assembly.Load("Ploeh.AutoFixture"))
+            .Verify(typeof(IIdiomaticMemberAssertion).Assembly);
+        }
     }
 }
