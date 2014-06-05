@@ -202,6 +202,11 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
+* AutoFixture.AutoMoq 3.18.7
+  Website:      https://github.com/AutoFixture/AutoFixture
+  Copyright:    Copyright (c) 2013 Mark Seemann
+  License:      The MIT License
+
 * Albedo 1.0.1  
   Website:      https://github.com/ploeh/Albedo  
   Copyright:    Copyright (c) 2013 Mark Seemann  
@@ -211,6 +216,11 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Website:      https://github.com/jbevain/mono.reflection  
   Copyright:    Copyright (C) 2009 - 2010 Novell, Inc. (http://www.novell.com)  
   License:      The MIT License
+
+* Moq 3.1.416.3
+  Website:      http://www.moqthis.com
+  Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD
+  License:      BSD
 
 ### Inspiration
 Experimentalism의 auto data 기능은 [xUnit Test Patterns(*by Gerard Meszaros*)](http://xunitpatterns.com/index.html)의 [Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method)와 [Parameterized Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method)에서 영감을 얻었으며, [AutoFixture](https://github.com/AutoFixture/AutoFixture)의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/)로부터 많은 영향을 받았습니다.

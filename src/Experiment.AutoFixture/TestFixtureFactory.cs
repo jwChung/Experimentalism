@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.AutoMoq;
 
 namespace Jwc.Experiment.AutoFixture
 {
@@ -40,7 +41,7 @@ namespace Jwc.Experiment.AutoFixture
         /// </returns>
         protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
-            return new Fixture { OmitAutoProperties = true };
+            return new Fixture { OmitAutoProperties = true }.Customize(new AutoMoqCustomization());
         }
 
         private class ParameterAttributeCutomization : ICustomization

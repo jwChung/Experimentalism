@@ -117,6 +117,22 @@ namespace Jwc.Experiment.AutoFixture
             Assert.False(testFixture.Fixture.OmitAutoProperties);
         }
 
+        [Fact]
+        public void CreateReturnsFixtureBeingAbleToCreateInstanceOfAbstractType()
+        {
+            var sut = new TestFixtureFactory();
+            var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.NotNull(actual.Create(typeof(IDisposable)));
+        }
+
+        [Fact]
+        public void CreateCanReturnFixtureNotBeingAbleToCreateInstanceOfAbstractType()
+        {
+            var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => new Fixture() };
+            var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
+            Assert.Throws<ObjectCreationException>(() => actual.Create(typeof(IDisposable)));
+        }
+
         public void FrozenTest([Frozen] string arg)
         {
         }

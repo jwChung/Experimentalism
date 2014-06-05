@@ -14,7 +14,8 @@ namespace Jwc.Experiment.AutoFixture
                 Assembly.Load("mscorlib"),
                 typeof(Enumerable).Assembly /*System.Core*/,
                 Assembly.Load("Jwc.Experiment"),
-                Assembly.Load("Ploeh.AutoFixture"))
+                Assembly.Load("Ploeh.AutoFixture"),
+                Assembly.Load("Ploeh.AutoFixture.AutoMoq"))
             .Verify(typeof(TestFixture).Assembly);
         }
 
@@ -22,8 +23,8 @@ namespace Jwc.Experiment.AutoFixture
         public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
         {
             new IndirectReferenceAssertion(
-                Assembly.Load("Ploeh.AutoFixture"))
-            .Verify(typeof(IIdiomaticMemberAssertion).Assembly);
+                Assembly.Load("Ploeh.AutoFixture.AutoMoq"))
+            .Verify(typeof(TestFixture).Assembly);
         }
     }
 }

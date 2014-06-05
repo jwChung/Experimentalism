@@ -14,19 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.22.4")]
 
 /*
- * Version 0.22.4
+ * Version 0.23.0
  * 
- * - [FIX] Made the construtor of FirstClassCommand accept a testParameterName
- *   argument. (BREAKING-CHANGE)
- *   
- *   Before:
- *   public FirstClassCommand(IMethodInfo method, Delegate @delegate, object[] arguments)
- *   
- *   After:        
- *   public FirstClassCommand(IMethodInfo method, string testParameterName, Delegate @delegate, object[] arguments)
- *           
- * - [FIX] Added a new constructor of the TestCase class to show customizable
- *   test-parameters.
- *   
- *   public TestCase(string testParameterName, Delegate @delegate)
+ * - [NEW] made Experiment.AutoFixture support creating instances of abstract
+ *   types.
  */
