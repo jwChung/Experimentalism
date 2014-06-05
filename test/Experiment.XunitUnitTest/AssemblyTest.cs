@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Jwc.Experiment.Xunit
 {
@@ -10,37 +10,21 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(TestAttribute).Assembly;
-            var specifiedAssemblies = new[]
-            {
-                // GAC
-                "mscorlib",
-                "System.Core",
-
-                // Direct references
-                "xunit",
-                "Jwc.Experiment",
-
-                // Indirect references
-                "xunit.extensions"
-            };
-
-            var actual = sut.GetActualReferencedAssemblies();
-
-            Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
+            new RestrictiveReferenceAssertion(
+                Assembly.Load("mscorlib"),
+                typeof(Enumerable).Assembly /*System.Core*/,
+                Assembly.Load("Jwc.Experiment"),
+                Assembly.Load("xunit"),
+                Assembly.Load("xunit.extensions"))
+            .Verify(typeof(TestAttribute).Assembly);
         }
 
-        [Theory]
-        [InlineData("xunit.extensions")]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
+        [Fact]
+        public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
         {
-            // Fixture setup
-            var sut = typeof(TestAttribute).Assembly;
-            var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
-            var types = Assembly.Load(assemblyName).GetExportedTypes();
-
-            // Exercise system and Verify outcome
-            sut.VerifyDoesNotExpose(types);
+            new IndirectReferenceAssertion(
+                Assembly.Load("xunit.extensions"))
+            .Verify(typeof(TestAttribute).Assembly);
         }
     }
 }

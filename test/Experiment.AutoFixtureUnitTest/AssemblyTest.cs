@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reflection;
+using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
 
 namespace Jwc.Experiment.AutoFixture
@@ -8,23 +10,12 @@ namespace Jwc.Experiment.AutoFixture
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(TestFixture).Assembly;
-            var specifiedAssemblies = new[]
-            {
-                // GAC
-                "mscorlib",
-                "System.Core",
-
-                // Direct references
-                "Jwc.Experiment",
-                "Ploeh.AutoFixture"
-
-                // Indirect references
-            };
-
-            var actual = sut.GetActualReferencedAssemblies();
-
-            Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
+            new RestrictiveReferenceAssertion(
+                Assembly.Load("mscorlib"),
+                typeof(Enumerable).Assembly /*System.Core*/,
+                Assembly.Load("Jwc.Experiment"),
+                Assembly.Load("Ploeh.AutoFixture"))
+            .Verify(typeof(TestFixture).Assembly);
         }
     }
 }

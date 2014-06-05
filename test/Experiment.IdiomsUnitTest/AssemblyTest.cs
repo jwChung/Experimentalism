@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Jwc.Experiment.Idioms
 {
@@ -11,41 +11,26 @@ namespace Jwc.Experiment.Idioms
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(IIdiomaticMemberAssertion).Assembly;
-            var specifiedAssemblies = new[]
-            {
-                // GAC
-                "mscorlib",
-                "System.Core",
-
-                // Direct references
-                "Jwc.Experiment",
-                "Ploeh.Albedo",
-                
-                // Indirect references
-                "Ploeh.AutoFixture",
-                "Ploeh.AutoFixture.Idioms",
-                "Mono.Reflection"
-            };
-
-            var actual = sut.GetActualReferencedAssemblies();
-
-            Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
+            new RestrictiveReferenceAssertion(
+                Assembly.Load("mscorlib"),
+                typeof(ISet<>).Assembly /*System*/,
+                typeof(Enumerable).Assembly /*System.Core*/,
+                Assembly.Load("Jwc.Experiment"),
+                Assembly.Load("Ploeh.Albedo"),
+                Assembly.Load("Ploeh.AutoFixture"),
+                Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                Assembly.Load("Mono.Reflection"))
+            .Verify(typeof(IIdiomaticMemberAssertion).Assembly);
         }
 
-        [Theory]
-        [InlineData("Ploeh.AutoFixture")]
-        [InlineData("Ploeh.AutoFixture.Idioms")]
-        [InlineData("Mono.Reflection")]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedReference(string name)
+        [Fact]
+        public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
         {
-            // Fixture setup
-            var sut = typeof(IIdiomaticMemberAssertion).Assembly;
-            var assemblyName = sut.GetActualReferencedAssemblies().Single(n => n == name);
-            var types = Assembly.Load(assemblyName).GetExportedTypes();
-
-            // Exercise system and Verify outcome
-            sut.VerifyDoesNotExpose(types);
+            new IndirectReferenceAssertion(
+                Assembly.Load("Ploeh.AutoFixture"),
+                Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                Assembly.Load("Mono.Reflection"))
+            .Verify(typeof(IIdiomaticMemberAssertion).Assembly);
         }
     }
 }

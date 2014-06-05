@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Reflection;
+using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
 
 namespace Jwc.Experiment
@@ -8,19 +9,8 @@ namespace Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            var sut = typeof(ITestFixture).Assembly;
-            var specifiedAssemblies = new[]
-            {
-                // GAC
-                "mscorlib"
-
-                // Direct references
-                // Indirect references
-            };
-
-            var actual = sut.GetActualReferencedAssemblies();
-
-            Assert.Equal(specifiedAssemblies.OrderBy(x => x), actual.OrderBy(x => x));
+            new RestrictiveReferenceAssertion(Assembly.Load("mscorlib"))
+                .Verify(typeof(ITestFixture).Assembly);
         }
     }
 }

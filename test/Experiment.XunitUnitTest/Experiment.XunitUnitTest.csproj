@@ -33,8 +33,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
     </Reference>
@@ -45,9 +43,6 @@
   <ItemGroup>
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\ExperimentUnitTest\AssemblyExtensions.cs">
-      <Link>AssemblyExtensions.cs</Link>
     </Compile>
     <Compile Include="AssemblyCustomizationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
@@ -73,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.Idioms\Experiment.Idioms.csproj">
+      <Project>{7352fc70-2780-415c-9a43-f889f7b8028d}</Project>
+      <Name>Experiment.Idioms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Experiment.Xunit\Experiment.Xunit.csproj">
       <Project>{d178dcd9-76a9-4eeb-b850-4e48c70ba07d}</Project>
       <Name>Experiment.Xunit</Name>
