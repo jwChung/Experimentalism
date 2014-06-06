@@ -427,6 +427,34 @@ namespace Jwc.Experiment.Xunit
             Assert.True(actual.All(c => c is TheoryCommand));
         }
 
+        [Fact]
+        public void CreateParameterizedTestCommandWithAutoDataNotUsingDataAttributePassesCorrectTestMethodToTheCommand()
+        {
+            var sut = new TssTestAttribute
+            {
+                OnCreateTestFixture = mi => new FakeTestFixture()
+            };
+            var method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoDataNotUsingDataAttribute"));
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var theoryCommand = Assert.IsType<TheoryCommand>(actual);
+            Assert.Equal(method.MethodInfo.Name, theoryCommand.MethodName);
+        }
+
+        [Fact]
+        public void CreateParameterizedTestCommandWithAutoDataUsingDataAttributePassesCorrectTestMethodToTheCommand()
+        {
+            var sut = new TssTestAttribute
+            {
+                OnCreateTestFixture = mi => new FakeTestFixture()
+            };
+            var method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithAutoData"));
+            var actual = sut.CreateTestCommands(method).First();
+
+            var theoryCommand = Assert.IsType<TheoryCommand>(actual);
+            Assert.Equal(method.MethodInfo.Name, theoryCommand.MethodName);
+        }
+
         [InlineData]
         [InlineData]
         public void ParameterizedWithAutoData(string arg1, int arg2)
