@@ -14,8 +14,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.0")]
 
 /*
- * Version 0.23.0
+ * Version 0.23.1
  * 
- * - [NEW] made Experiment.AutoFixture support creating instances of abstract
- *   types.
+ * - [FIX] introduced Jwc.Expereiment.AssemblyFixtureConfigurationAttribute
+ *   instead of Jwc.Expereiment.Xunit.AssemblyCustomizationAttribute.
+ *   (BREAKING-CHANGE)
+ *   
+ * - [FIX] moved DefaultFixtureFactory from Jwc.Expereiment.Xunit to
+ *   Jwc.Expereiment. (BREAKING-CHANGE)
  */
