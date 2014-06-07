@@ -1,9 +1,12 @@
-﻿namespace Jwc.Experiment.AutoFixture
+﻿using System;
+
+namespace Jwc.Experiment.AutoFixture
 {
     /// <summary>
     ///     Attribute to configure test fixture factory.
     /// </summary>
-    public class TestFixtureFactoryConfigurationAttribute : DefaultFixtureFactoryConfigurationAttribute
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
+    public sealed class TestFixtureFactoryConfigurationAttribute : DefaultFixtureFactoryConfigurationAttribute
     {
         /// <summary>
         ///     Initializes a new instance of the
