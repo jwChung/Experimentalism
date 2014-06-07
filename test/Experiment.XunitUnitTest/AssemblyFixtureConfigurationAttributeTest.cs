@@ -11,7 +11,7 @@ namespace Jwc.Experiment.Xunit
             var sut = new TssAssemblyFixtureConfigurationAttribute();
             Assert.IsAssignableFrom<Attribute>(sut);
         }
-
+        
         private class TssAssemblyFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
         {
         }
