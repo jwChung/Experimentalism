@@ -57,7 +57,6 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="SpyAssemblyFixtureConfigurationAttribute.cs" />
-    <Compile Include="SpyOtherAssemblyFixtureConfigurationAttribute.cs" />
     <Compile Include="TestAttributeTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
