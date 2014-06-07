@@ -8,7 +8,8 @@ namespace Jwc.Experiment
     /// <summary>
     ///     Attribute to set up or tear down all fixtures in a test assembly.
     /// </summary>
-    public class AssemblyFixtureConfigurationAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+    public abstract class AssemblyFixtureConfigurationAttribute : Attribute
     {
         private static readonly object SyncLock = new object();
         private static bool _configured;
@@ -43,7 +44,7 @@ namespace Jwc.Experiment
         /// <param name="testAssembly">
         ///     The test assembly.
         /// </param>
-        protected virtual void SetUp(Assembly testAssembly)
+        protected virtual void Setup(Assembly testAssembly)
         {
         }
 
@@ -53,7 +54,7 @@ namespace Jwc.Experiment
         /// <param name="testAssembly">
         ///     The test assembly.
         /// </param>
-        protected virtual void TearDown(Assembly testAssembly)
+        protected virtual void Teardown(Assembly testAssembly)
         {
         }
 
@@ -71,8 +72,8 @@ namespace Jwc.Experiment
 
         private void ConfigureAttribute(Assembly testAssembly)
         {
-            SetUp(testAssembly);
-            DomainUnload += (s, e) => TearDown(testAssembly);
+            Setup(testAssembly);
+            DomainUnload += (s, e) => Teardown(testAssembly);
         }
 
         /// <summary>

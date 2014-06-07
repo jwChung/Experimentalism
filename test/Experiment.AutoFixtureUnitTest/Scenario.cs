@@ -97,7 +97,7 @@ namespace Jwc.Experiment.AutoFixture
 
         public class TestFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
         {
-            protected override void SetUp(Assembly testAssembly)
+            protected override void Setup(Assembly testAssembly)
             {
                 DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
             }

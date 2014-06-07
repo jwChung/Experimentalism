@@ -12,13 +12,13 @@ namespace Jwc.Experiment.Xunit
 
         public static Assembly TearDownAssembly { get; set; }
 
-        protected override void SetUp(Assembly testAssembly)
+        protected override void Setup(Assembly testAssembly)
         {
             SetUpAssembly = testAssembly;
             SetUpCount++;
         }
 
-        protected override void TearDown(Assembly testAssembly)
+        protected override void Teardown(Assembly testAssembly)
         {
             TearDownAssembly = testAssembly;
             TearDownCount++;

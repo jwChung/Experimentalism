@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Jwc.Experiment
@@ -16,6 +17,7 @@ namespace Jwc.Experiment
         /// <param name="testMethod">
         ///     The test method in which the test fixture will be used.
         /// </param>
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "The literals violating this rule are desire type names.")]
         public ITestFixture Create(MethodInfo testMethod)
         {
             throw new NotSupportedException(

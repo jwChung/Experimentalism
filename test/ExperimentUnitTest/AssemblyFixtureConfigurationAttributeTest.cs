@@ -104,12 +104,12 @@ namespace Jwc.Experiment
                 }
             }
 
-            protected override void SetUp(Assembly testAssembly)
+            protected override void Setup(Assembly testAssembly)
             {
                 SetUpAssemblies.Add(testAssembly);
             }
 
-            protected override void TearDown(Assembly testAssembly)
+            protected override void Teardown(Assembly testAssembly)
             {
                 TearDownAssemblies.Add(testAssembly);
             }
