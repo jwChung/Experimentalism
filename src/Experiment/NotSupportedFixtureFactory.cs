@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace Jwc.Experiment.Xunit
+namespace Jwc.Experiment
 {
     /// <summary>
     ///     Represents test fixture factory which throws
@@ -25,6 +25,7 @@ namespace Jwc.Experiment.Xunit
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AssemblyCustomizationAttribute")]
         public ITestFixture Create(MethodInfo testMethod)
         {
+            // TODO: clarify this exception message.
             throw new NotSupportedException(
                 "To create auto data, set valid 'ITestFixtureFactory' with the 'TestFixtureFactory.SetCurrent' " +
                 "method through 'AssemblyCustomizationAttribute', or override the 'CreateTestFixture' method " +

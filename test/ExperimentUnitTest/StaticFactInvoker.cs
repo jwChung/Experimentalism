@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Jwc.Experiment.Xunit
+namespace Jwc.Experiment
 {
     public class StaticFactInvoker : MarshalByRefObject
     {

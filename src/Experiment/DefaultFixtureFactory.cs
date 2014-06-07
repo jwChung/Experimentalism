@@ -1,4 +1,4 @@
-namespace Jwc.Experiment.Xunit
+namespace Jwc.Experiment
 {
     /// <summary>
     ///     Supplies harbor of <see cref="ITestFixtureFactory" />.

@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit;
 
-namespace Jwc.Experiment.Xunit
+namespace Jwc.Experiment
 {
     public class NotSupportedFixtureFactoryTest
     {

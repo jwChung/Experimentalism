@@ -44,15 +44,21 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\ExperimentUnitTest\DelegatingTestFixtureFactory.cs">
+      <Link>DelegatingTestFixtureFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\ExperimentUnitTest\StaticFactAttribute.cs">
+      <Link>StaticFactAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\ExperimentUnitTest\StaticFactInvoker.cs">
+      <Link>StaticFactInvoker.cs</Link>
+    </Compile>
     <Compile Include="AssemblyFixtureConfigurationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
-    <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="SpyAssemblyFixtureConfigurationAttribute.cs" />
     <Compile Include="SpyOtherAssemblyFixtureConfigurationAttribute.cs" />
-    <Compile Include="StaticFactAttribute.cs" />
-    <Compile Include="NotSupportedFixtureFactoryTest.cs" />
     <Compile Include="TestAttributeTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
@@ -61,8 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestCaseTest.cs" />
-    <Compile Include="DefaultFixtureFactoryTest.cs" />
-    <Compile Include="StaticFactInvoker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

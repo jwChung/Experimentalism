@@ -4,7 +4,7 @@ using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
-namespace Jwc.Experiment.Xunit
+namespace Jwc.Experiment
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class StaticFactAttribute : FactAttribute
