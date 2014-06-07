@@ -39,6 +39,7 @@
     </Compile>
     <Compile Include="AssemblyFixtureConfigurationAttribute.cs" />
     <Compile Include="DefaultFixtureFactory.cs" />
+    <Compile Include="DefaultFixtureFactoryConfigurationAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
