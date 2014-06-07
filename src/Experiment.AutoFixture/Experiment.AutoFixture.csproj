@@ -60,6 +60,7 @@
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestFixtureFactoryConfigurationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">

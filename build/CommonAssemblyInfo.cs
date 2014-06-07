@@ -14,15 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.1")]
 
 /*
- * Version 0.23.1
+ * Version 0.23.2
  * 
- * - [FIX] introduced Jwc.Expereiment.AssemblyFixtureConfigurationAttribute
- *   instead of Jwc.Expereiment.Xunit.AssemblyCustomizationAttribute.
- *   (BREAKING-CHANGE)
- *   
- * - [FIX] moved DefaultFixtureFactory from Jwc.Expereiment.Xunit to
- *   Jwc.Expereiment. (BREAKING-CHANGE)
- *   
- * - [FIX] introduced DefaultFixtureFactoryConfigurationAttribute to supply the
- *   default factory of test fixture.
+ * - [FIX] introduced TestFixtureFactoryConfigurationAttribute.
  */
