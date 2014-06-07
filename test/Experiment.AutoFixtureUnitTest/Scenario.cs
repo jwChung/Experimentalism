@@ -95,9 +95,9 @@ namespace Jwc.Experiment.AutoFixture
             yield return new TestCase(new Action<object>(x => Assert.NotNull(x)));
         }
 
-        public class TestFixtureConfigurationAttribute : Xunit.AssemblyFixtureConfigurationAttribute
+        public class TestFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
         {
-            public override void SetUp(Assembly testAssembly)
+            protected override void SetUp(Assembly testAssembly)
             {
                 DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
             }

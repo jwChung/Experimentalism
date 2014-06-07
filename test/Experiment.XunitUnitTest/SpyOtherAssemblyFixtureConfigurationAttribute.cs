@@ -8,12 +8,12 @@ namespace Jwc.Experiment.Xunit
 
         public static int TearDownCount { get; set; }
 
-        public override void SetUp(Assembly testAssembly)
+        protected override void SetUp(Assembly testAssembly)
         {
             SetupCount++;
         }
 
-        public override void TearDown(Assembly testAssembly)
+        protected override void TearDown(Assembly testAssembly)
         {
             TearDownCount++;
         }

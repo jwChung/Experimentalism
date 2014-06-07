@@ -53,7 +53,6 @@
     <Compile Include="..\ExperimentUnitTest\StaticFactInvoker.cs">
       <Link>StaticFactInvoker.cs</Link>
     </Compile>
-    <Compile Include="AssemblyFixtureConfigurationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />

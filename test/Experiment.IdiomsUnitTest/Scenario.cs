@@ -98,9 +98,9 @@ namespace Jwc.Experiment.Idioms
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        public class TestFixtureConfigurationAttribute : Xunit.AssemblyFixtureConfigurationAttribute
+        public class TestFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
         {
-            public override void SetUp(Assembly testAssembly)
+            protected override void SetUp(Assembly testAssembly)
             {
                 DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
             }
