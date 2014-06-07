@@ -48,6 +48,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyCustomizationAttribute.cs" />
+    <Compile Include="AssemblyFixtureConfigurationAttribute.cs" />
     <Compile Include="NotSupportedFixtureFactory.cs" />
     <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
