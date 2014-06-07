@@ -22,4 +22,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] moved DefaultFixtureFactory from Jwc.Expereiment.Xunit to
  *   Jwc.Expereiment. (BREAKING-CHANGE)
+ *   
+ * - [FIX] introduced DefaultFixtureFactoryConfigurationAttribute to supply the
+ *   default factory of test fixture.
  */
