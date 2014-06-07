@@ -42,6 +42,7 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AssemblyFixtureConfigurationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DefaultFixtureFactoryTest.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />

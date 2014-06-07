@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using Jwc.Experiment.Idioms.Assertions;
 using Xunit;
 
@@ -9,8 +10,10 @@ namespace Jwc.Experiment
         [Fact]
         public void SutReferencesOnlySpecifiedAssemblies()
         {
-            new RestrictiveReferenceAssertion(Assembly.Load("mscorlib"))
-                .Verify(typeof(ITestFixture).Assembly);
+            new RestrictiveReferenceAssertion(
+                Assembly.Load("mscorlib"),
+                typeof(Enumerable).Assembly /*System.Core*/)
+            .Verify(typeof(ITestFixture).Assembly);
         }
     }
 }
