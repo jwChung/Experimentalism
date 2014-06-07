@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 
@@ -7,6 +8,8 @@ namespace Jwc.Experiment
     /// <summary>
     /// Attribute to configure default fixture factory.
     /// </summary>
+    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute can be inherited to supply custom ITestFixtureFactory.")]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
     public class DefaultFixtureFactoryConfigurationAttribute : AssemblyFixtureConfigurationAttribute
     {
         private readonly Type _factoryType;
