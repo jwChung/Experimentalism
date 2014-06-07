@@ -12,6 +12,9 @@ using Xunit.Sdk;
 [assembly: AssemblyCustomization(typeof(SpyFixtureCustomization))]
 [assembly: AssemblyCustomization(typeof(SpyOtherFixtureCustomization))]
 
+[assembly: SpyAssemblyFixtureConfiguration]
+[assembly: SpyOtherAssemblyFixtureConfiguration]
+
 namespace Jwc.Experiment.Xunit
 {
     public class TestAttributeTest
@@ -305,8 +308,8 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<NotSupportedException>(command.Exception);
         }
 
-        [StaticFact]
-        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
+        [StaticFact(Skip = "Conflict")]
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel2()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -316,8 +319,8 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
-        [StaticFact]
-        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes()
+        [StaticFact(Skip = "Conflict")]
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes2()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -328,8 +331,8 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
-        [StaticFact]
-        public void CreateTestCommandsUsesMultipleAssemblyFixtureConfigs()
+        [StaticFact(Skip = "Conflict")]
+        public void CreateTestCommandsUsesMultipleAssemblyFixtureConfigs2()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -340,8 +343,8 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyOtherFixtureCustomization.SetupCount);
         }
 
-        [StaticFact]
-        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
+        [StaticFact(Skip = "Conflict")]
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads2()
         {
             // Fixture setup
             var sut = new TestAttribute();
@@ -362,8 +365,8 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyFixtureCustomization.SetupCount);
         }
 
-        [Fact]
-        public void CreateTestCommandsRegistersTearDownToDomainUnloadEvent()
+        [Fact(Skip = "Conflict")]
+        public void CreateTestCommandsRegistersTearDownToDomainUnloadEvent2()
         {
             // Fixture setup
             IMethodInfo method = Reflector.Wrap(
@@ -453,6 +456,157 @@ namespace Jwc.Experiment.Xunit
 
             var theoryCommand = Assert.IsType<TheoryCommand>(actual);
             Assert.Equal(method.MethodInfo.Name, theoryCommand.MethodName);
+        }
+
+        [StaticFact]
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssembly()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
+        }
+
+        [StaticFact]
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenCalledManyTimes()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
+        }
+
+        [StaticFact]
+        public void CreateTestCommandsUsesMultipleAssemblyFixtureConfigurations()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
+            Assert.Equal(1, SpyOtherAssemblyFixtureConfigurationAttribute.SetupCount);
+        }
+
+        [StaticFact]
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
+        {
+            // Fixture setup
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var threads = new Thread[30];
+            for (int i = 0; i < threads.Length; i++)
+                threads[i] = new Thread(() => sut.CreateTestCommands(method).ToArray());
+
+            // Exercise system
+            foreach (var thread in threads)
+                thread.Start();
+
+            foreach (var thread in threads)
+                thread.Join();
+
+            // Verify outcome
+            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
+        }
+
+        [Fact]
+        public void CreateTestCommandsRegistersTearDownToDomainUnloadEvent()
+        {
+            // Fixture setup
+            IMethodInfo method = Reflector.Wrap(
+                GetType().GetMethod("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssembly"));
+
+            var appDomain = AppDomain.CreateDomain(
+                method.Name,
+                AppDomain.CurrentDomain.Evidence,
+                AppDomain.CurrentDomain.SetupInformation);
+
+            var invoker = (StaticFactInvoker)appDomain.CreateInstanceAndUnwrap(
+                Assembly.GetExecutingAssembly().FullName,
+                typeof(StaticFactInvoker).FullName);
+
+            // Exercise system
+            invoker.Invoke(method.MethodInfo);
+
+            // Verify outcome
+            appDomain.DomainUnload += (s, e) =>
+            {
+                if (SpyAssemblyFixtureConfigurationAttribute.TearDownCount != 1)
+                    File.Create("Fail.tmp");
+
+                if (SpyOtherAssemblyFixtureConfigurationAttribute.TearDownCount != 1)
+                    File.Create("Fail.tmp");
+            };
+            AppDomain.Unload(appDomain);
+
+            var exists = File.Exists("Fail.tmp");
+            try
+            {
+                Assert.False(exists, "Teardown");
+            }
+            finally
+            {
+                if (exists)
+                    File.Delete("Fail.tmp");
+            }
+        }
+
+        [StaticFact]
+        public void CreateTestCommandsPassesCorrectAssemblyToSetUpOfConfigurationAttribute()
+        {
+            var sut = new TestAttribute();
+            IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            sut.CreateTestCommands(method).ToArray();
+
+            Assert.Equal(GetType().Assembly, SpyAssemblyFixtureConfigurationAttribute.SetUpAssembly);
+        }
+
+        [Fact]
+        public void CreateTestCommandsPassesCorrectAssemblyToTearDownOfConfigurationAttribute()
+        {
+            // Fixture setup
+            IMethodInfo method = Reflector.Wrap(
+                GetType().GetMethod("CreateTestCommandsSetsUpFixtureOnlyOnceOnAssembly"));
+
+            var appDomain = AppDomain.CreateDomain(
+                method.Name,
+                AppDomain.CurrentDomain.Evidence,
+                AppDomain.CurrentDomain.SetupInformation);
+
+            var invoker = (StaticFactInvoker)appDomain.CreateInstanceAndUnwrap(
+                Assembly.GetExecutingAssembly().FullName,
+                typeof(StaticFactInvoker).FullName);
+
+            // Exercise system
+            invoker.Invoke(method.MethodInfo);
+
+            // Verify outcome
+            appDomain.DomainUnload += (s, e) =>
+            {
+                var assemblyName = SpyAssemblyFixtureConfigurationAttribute.TearDownAssembly.GetName().Name;
+
+                if ("Jwc.Experiment.XunitUnitTest" != assemblyName)
+                    File.Create("Fail.tmp");
+            };
+            AppDomain.Unload(appDomain);
+
+            var exists = File.Exists("Fail.tmp");
+            try
+            {
+                Assert.False(exists);
+            }
+            finally
+            {
+                if (exists)
+                    File.Delete("Fail.tmp");
+            }
         }
 
         [InlineData]

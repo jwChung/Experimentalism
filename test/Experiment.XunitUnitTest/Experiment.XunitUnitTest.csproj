@@ -50,6 +50,8 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
+    <Compile Include="SpyAssemblyFixtureConfigurationAttribute.cs" />
+    <Compile Include="SpyOtherAssemblyFixtureConfigurationAttribute.cs" />
     <Compile Include="StaticFactAttribute.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />
     <Compile Include="SpyFixtureCustomization.cs" />

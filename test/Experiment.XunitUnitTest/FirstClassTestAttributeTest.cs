@@ -191,14 +191,14 @@ namespace Jwc.Experiment.Xunit
         }
 
         [StaticFact]
-        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssemblyLevel()
+        public void CreateTestCommandsSetsUpFixtureOnlyOnceOnAssembly()
         {
             var sut = new FirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("PassTestFixtureTest"));
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyFixtureCustomization.SetupCount);
+            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
         }
 
         [StaticFact]
