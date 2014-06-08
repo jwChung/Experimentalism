@@ -47,11 +47,11 @@
     <Compile Include="..\ExperimentUnitTest\DelegatingTestFixtureFactory.cs">
       <Link>DelegatingTestFixtureFactory.cs</Link>
     </Compile>
-    <Compile Include="..\ExperimentUnitTest\StaticFactAttribute.cs">
-      <Link>StaticFactAttribute.cs</Link>
+    <Compile Include="..\ExperimentUnitTest\NewAppDomainFactAttribute.cs">
+      <Link>NewAppDomainFactAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\ExperimentUnitTest\StaticFactInvoker.cs">
-      <Link>StaticFactInvoker.cs</Link>
+    <Compile Include="..\ExperimentUnitTest\NewAppDomainFactInvoker.cs">
+      <Link>NewAppDomainFactInvoker.cs</Link>
     </Compile>
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />

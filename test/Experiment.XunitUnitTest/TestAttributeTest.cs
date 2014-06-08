@@ -304,7 +304,7 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<NotSupportedException>(command.Exception);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void CreateTestCommandsUsesCorrectTestFixtureFactory()
         {
             // Fixture setup
@@ -358,7 +358,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(method.MethodInfo.Name, theoryCommand.MethodName);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void CreateTestCommandsCorrectlyConfiguresAllFixturesInTestAssembly()
         {
             var sut = new TestAttribute();

@@ -190,7 +190,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Contains("TestFixtureFactory.SetCurrent", exception.Message);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void CreateTestCommandsCorrectlyConfiguresAllFixturesInTestAssembly()
         {
             var sut = new FirstClassTestAttribute();
@@ -201,7 +201,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void CreateTestCommandsUsesCorrectTestFixtureFactory()
         {
             // Fixture setup

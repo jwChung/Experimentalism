@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Jwc.Experiment
 {
-    public class StaticFactInvoker : MarshalByRefObject
+    public class NewAppDomainFactInvoker : MarshalByRefObject
     {
         public void Invoke(MethodInfo testMethod)
         {

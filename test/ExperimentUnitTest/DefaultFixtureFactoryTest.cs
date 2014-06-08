@@ -10,7 +10,7 @@ namespace Jwc.Experiment
             Assert.IsAssignableFrom<NotSupportedFixtureFactory>(DefaultFixtureFactory.Current);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void SetCurrentCorrectlySetsFactoryToCurrent()
         {
             var expected = new DelegatingTestFixtureFactory();

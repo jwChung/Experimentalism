@@ -83,7 +83,7 @@ namespace Jwc.Experiment
             Assert.Equal(factory, actual);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void SetupSetsSuppliedFactoryAsCurrentOfDefaultFixtureFactory()
         {
             var factory = new DelegatingTestFixtureFactory();
@@ -94,7 +94,7 @@ namespace Jwc.Experiment
             Assert.Equal(factory, DefaultFixtureFactory.Current);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void SetupSetsInstanceOfSuppliedFactoryTypeAsCurrentOfDefaultFixtureFactory()
         {
             var factoryType = typeof(DelegatingTestFixtureFactory);

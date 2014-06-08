@@ -16,7 +16,7 @@ namespace Jwc.Experiment
             Assert.IsAssignableFrom<Attribute>(sut);
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenCalledManyTimes()
         {
             var attribute1 = new TssAssemblyFixtureConfigurationAttribute();
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
             Assert.Equal(assembly, attribute2.SetUpAssemblies.Single());
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void ConfigureRegistersCorrectTearDownHandlerToDomainUnloadEvent()
         {
             var attribute = new TssAssemblyFixtureConfigurationAttribute();
@@ -53,7 +53,7 @@ namespace Jwc.Experiment
             Assert.Equal(assembly, attribute.TearDownAssemblies.Single());
         }
 
-        [StaticFact]
+        [NewAppDomainFact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
         {
             // Fixture setup

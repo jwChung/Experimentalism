@@ -7,7 +7,7 @@ using Xunit.Sdk;
 namespace Jwc.Experiment
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public class StaticFactAttribute : FactAttribute
+    public class NewAppDomainFactAttribute : FactAttribute
     {
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
@@ -41,9 +41,9 @@ namespace Jwc.Experiment
 
                 try
                 {
-                    var invoker = (StaticFactInvoker)appDomain.CreateInstanceAndUnwrap(
+                    var invoker = (NewAppDomainFactInvoker)appDomain.CreateInstanceAndUnwrap(
                         Assembly.GetExecutingAssembly().FullName,
-                        typeof(StaticFactInvoker).FullName);
+                        typeof(NewAppDomainFactInvoker).FullName);
 
                     invoker.Invoke(_method.MethodInfo);
                 }
