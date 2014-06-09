@@ -312,34 +312,28 @@ namespace Jwc.Experiment
             return this;
         }
 
-        /// <summary>
-        ///     Visits the method body of a method-base.
-        /// </summary>
-        /// <param name="methodBase">
-        ///     The method-base.
-        /// </param>
-        protected virtual void VisitMethodBody(MethodBase methodBase)
+        private void VisitMethodBody(MethodBase method)
         {
-            if (methodBase == null)
-                throw new ArgumentNullException("methodBase");
-
-            if (methodBase.GetMethodBody() == null)
+            if (method.GetMethodBody() == null)
                 return;
-
-            var methodBases = methodBase.GetInstructions()
+            
+            var methodBases = method.GetInstructions()
                 .Select(i => i.Operand).OfType<MethodBase>();
 
-            foreach (var methodBaseInMethodBody in methodBases)
-            {
-                AddReferencesToType(methodBaseInMethodBody.ReflectedType);
-                var method = methodBaseInMethodBody as MethodInfo;
+            foreach (var methodBase in methodBases)
+                VisitMethodInMethodBody(methodBase);
+        }
 
-                if (method != null)
-                    AddReferencesToType(method.ReturnType);
+        private void VisitMethodInMethodBody(MethodBase methodBase)
+        {
+            AddReferencesToType(methodBase.ReflectedType);
+            var method = methodBase as MethodInfo;
 
-                foreach (var parameter in methodBaseInMethodBody.GetParameters())
-                    AddReferencesToType(parameter.ParameterType);
-            }
+            if (method != null)
+                AddReferencesToType(method.ReturnType);
+
+            foreach (var parameter in methodBase.GetParameters())
+                AddReferencesToType(parameter.ParameterType);
         }
 
         private void AddReferencesToAttributes(ICustomAttributeProvider attributeProvider)
