@@ -54,7 +54,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the type of the test fixture factory.
+        ///     Gets a value indicating the type of the test fixture factory.
         /// </summary>
         public Type FactoryType
         {
@@ -65,7 +65,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the test fixture factory.
+        ///     Gets a value indicating the test fixture factory.
         /// </summary>
         public ITestFixtureFactory Factory
         {
