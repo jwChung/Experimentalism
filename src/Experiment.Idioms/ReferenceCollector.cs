@@ -30,6 +30,25 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
+        ///     Visits an assembly element to collect reference assemblies to attributes.
+        /// </summary>
+        /// <param name="assemblyElement">
+        ///     The assembly element.
+        /// </param>
+        /// <returns>
+        ///     The result visitor collecting reference assemblies.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            AssemblyElement assemblyElement)
+        {
+            if (assemblyElement == null)
+                throw new ArgumentNullException("assemblyElement");
+
+            AddReferencesToAttributes(assemblyElement.Assembly);
+            return base.Visit(assemblyElement);
+        }
+
+        /// <summary>
         ///     Allows an <see cref="TypeElement" /> to be visited. This method is called when the
         ///     element accepts this visitor instance.
         /// </summary>
@@ -40,14 +59,14 @@ namespace Jwc.Experiment
         ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
         ///     visiting process with potentially updated observations.
         /// </returns>
-        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(TypeElement typeElement)
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            TypeElement typeElement)
         {
             if (typeElement == null)
-            {
                 throw new ArgumentNullException("typeElement");
-            }
 
-            AddReferencedAssemblies(typeElement.Type);
+            AddReferencesToType(typeElement.Type);
+            AddReferencesToAttributes(typeElement.Type);
             return base.Visit(typeElement);
         }
 
@@ -66,38 +85,12 @@ namespace Jwc.Experiment
             params FieldInfoElement[] fieldInfoElements)
         {
             if (fieldInfoElements == null)
-            {
                 throw new ArgumentNullException("fieldInfoElements");
-            }
 
             var elements = fieldInfoElements
                 .Where(e => e.FieldInfo.ReflectedType == e.FieldInfo.DeclaringType)
                 .ToArray();
-
             return base.Visit(elements);
-        }
-
-        /// <summary>
-        ///     Allows an <see cref="ConstructorInfoElement" /> to be visited. This method is called
-        ///     when the element accepts this visitor instance.
-        /// </summary>
-        /// <param name="constructorInfoElement">
-        ///     The <see cref="ConstructorInfoElement" /> being visited.
-        /// </param>
-        /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
-        /// </returns>
-        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
-            ConstructorInfoElement constructorInfoElement)
-        {
-            if (constructorInfoElement == null)
-            {
-                throw new ArgumentNullException("constructorInfoElement");
-            }
-
-            VisitMethodBody(constructorInfoElement.ConstructorInfo);
-            return base.Visit(constructorInfoElement);
         }
 
         /// <summary>
@@ -115,14 +108,11 @@ namespace Jwc.Experiment
             params PropertyInfoElement[] propertyInfoElements)
         {
             if (propertyInfoElements == null)
-            {
                 throw new ArgumentNullException("propertyInfoElements");
-            }
 
             var elements = propertyInfoElements
                 .Where(e => e.PropertyInfo.ReflectedType == e.PropertyInfo.DeclaringType)
                 .ToArray();
-
             return base.Visit(elements);
         }
 
@@ -141,14 +131,11 @@ namespace Jwc.Experiment
             params MethodInfoElement[] methodInfoElements)
         {
             if (methodInfoElements == null)
-            {
                 throw new ArgumentNullException("methodInfoElements");
-            }
 
             var elements = methodInfoElements
                 .Where(e => e.MethodInfo.ReflectedType == e.MethodInfo.DeclaringType)
                 .ToArray();
-
             return base.Visit(elements);
         }
 
@@ -167,14 +154,11 @@ namespace Jwc.Experiment
             params EventInfoElement[] eventInfoElements)
         {
             if (eventInfoElements == null)
-            {
                 throw new ArgumentNullException("eventInfoElements");
-            }
 
             var elements = eventInfoElements
                 .Where(e => e.EventInfo.ReflectedType == e.EventInfo.DeclaringType)
                 .ToArray();
-
             return base.Visit(elements);
         }
 
@@ -193,12 +177,53 @@ namespace Jwc.Experiment
             FieldInfoElement fieldInfoElement)
         {
             if (fieldInfoElement == null)
-            {
                 throw new ArgumentNullException("fieldInfoElement");
-            }
 
-            AddReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType);
+            AddReferencesToType(fieldInfoElement.FieldInfo.FieldType);
+            AddReferencesToAttributes(fieldInfoElement.FieldInfo);
             return this;
+        }
+
+        /// <summary>
+        ///     Allows an <see cref="ConstructorInfoElement" /> to be visited. This method is called
+        ///     when the element accepts this visitor instance.
+        /// </summary>
+        /// <param name="constructorInfoElement">
+        ///     The <see cref="ConstructorInfoElement" /> being visited.
+        /// </param>
+        /// <returns>
+        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        ///     visiting process with potentially updated observations.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            ConstructorInfoElement constructorInfoElement)
+        {
+            if (constructorInfoElement == null)
+                throw new ArgumentNullException("constructorInfoElement");
+
+            VisitMethodBody(constructorInfoElement.ConstructorInfo);
+            AddReferencesToAttributes(constructorInfoElement.ConstructorInfo);
+
+            return base.Visit(constructorInfoElement);
+        }
+
+        /// <summary>
+        ///     Visits a property element to collect reference assemblies to attributes.
+        /// </summary>
+        /// <param name="propertyInfoElement">
+        ///     The property element.
+        /// </param>
+        /// <returns>
+        ///     The result visitor collecting reference assemblies.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            PropertyInfoElement propertyInfoElement)
+        {
+            if (propertyInfoElement == null)
+                throw new ArgumentNullException("propertyInfoElement");
+
+            AddReferencesToAttributes(propertyInfoElement.PropertyInfo);
+            return base.Visit(propertyInfoElement);
         }
 
         /// <summary>
@@ -216,15 +241,32 @@ namespace Jwc.Experiment
             MethodInfoElement methodInfoElement)
         {
             if (methodInfoElement == null)
-            {
                 throw new ArgumentNullException("methodInfoElement");
-            }
 
             MethodInfo methodInfo = methodInfoElement.MethodInfo;
-            AddReferencedAssemblies(methodInfo.ReturnType);
-
+            AddReferencesToType(methodInfo.ReturnType);
+            AddReferencesToAttributes(methodInfo);
             VisitMethodBody(methodInfo);
             return base.Visit(methodInfoElement);
+        }
+
+        /// <summary>
+        ///     Visits an event element to collect reference assemblies to attributes.
+        /// </summary>
+        /// <param name="eventInfoElement">
+        ///     The event element.
+        /// </param>
+        /// <returns>
+        ///     The result visitor collecting reference assemblies.
+        /// </returns>
+        public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
+            EventInfoElement eventInfoElement)
+        {
+            if (eventInfoElement == null)
+                throw new ArgumentNullException("eventInfoElement");
+
+            AddReferencesToAttributes(eventInfoElement.EventInfo);
+            return base.Visit(eventInfoElement);
         }
 
         /// <summary>
@@ -242,11 +284,10 @@ namespace Jwc.Experiment
             ParameterInfoElement parameterInfoElement)
         {
             if (parameterInfoElement == null)
-            {
                 throw new ArgumentNullException("parameterInfoElement");
-            }
 
-            AddReferencedAssemblies(parameterInfoElement.ParameterInfo.ParameterType);
+            AddReferencesToType(parameterInfoElement.ParameterInfo.ParameterType);
+            AddReferencesToAttributes(parameterInfoElement.ParameterInfo);
             return this;
         }
 
@@ -265,11 +306,9 @@ namespace Jwc.Experiment
             LocalVariableInfoElement localVariableInfoElement)
         {
             if (localVariableInfoElement == null)
-            {
                 throw new ArgumentNullException("localVariableInfoElement");
-            }
 
-            AddReferencedAssemblies(localVariableInfoElement.LocalVariableInfo.LocalType);
+            AddReferencesToType(localVariableInfoElement.LocalVariableInfo.LocalType);
             return this;
         }
 
@@ -292,26 +331,32 @@ namespace Jwc.Experiment
 
             foreach (var methodBaseInMethodBody in methodBases)
             {
-                AddReferencedAssemblies(methodBaseInMethodBody.ReflectedType);
+                AddReferencesToType(methodBaseInMethodBody.ReflectedType);
                 var method = methodBaseInMethodBody as MethodInfo;
 
                 if (method != null)
-                    AddReferencedAssemblies(method.ReturnType);
+                    AddReferencesToType(method.ReturnType);
 
                 foreach (var parameter in methodBaseInMethodBody.GetParameters())
-                    AddReferencedAssemblies(parameter.ParameterType);
+                    AddReferencesToType(parameter.ParameterType);
             }
         }
 
-        private void AddReferencedAssemblies(Type type)
+        private void AddReferencesToAttributes(ICustomAttributeProvider attributeProvider)
+        {
+            foreach (var attribute in attributeProvider.GetCustomAttributes(false))
+                AddReferencesToType(attribute.GetType());
+        }
+
+        private void AddReferencesToType(Type type)
         {
             if (_types.Contains(type))
                 return;
 
             var assemblies = type.ToElement().Accept(_memberReferenceCollector).Value;
-
             foreach (var assembly in assemblies)
                 _assemblies.Add(assembly);
+
             _types.Add(type);
         }
     }

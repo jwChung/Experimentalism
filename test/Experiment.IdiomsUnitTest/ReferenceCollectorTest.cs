@@ -32,6 +32,46 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void VisitAssemblyElementCollectsCorrectReferencesToAttribute()
+        {
+            var assembly = new DelegatingAssembly
+            {
+                OnGetCustomAttributes = i => { Assert.False(i); return new object[] { new FactAttribute() }; }
+            };
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(assembly.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitAssemblyElementCallsBaseMethod()
+        {
+            var assembly = new DelegatingAssembly
+            {
+                OnGetTypes = () => new[] { typeof(object), typeof(int) }
+            };
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
+            var visitor1 = new Mock<ReferenceCollector>().Object;
+            var visitor2 = new Mock<ReferenceCollector>().Object;
+            sut.ToMock().Setup(x => x.Visit(typeof(object).ToElement())).Returns(visitor1);
+            visitor1.ToMock().Setup(x => x.Visit(typeof(int).ToElement())).Returns(visitor2);
+
+            var actual = sut.Visit(assembly.ToElement());
+
+            Assert.Equal(visitor2, actual);
+        }
+
+        [Fact]
+        public void VisitNullAssemblyElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((AssemblyElement)null));
+        }
+
+        [Fact]
         public void VisitTypeElementCollectsCorrectAssemblies()
         {
             var type = typeof(List<ClassImplementingHierarchical>);
@@ -61,6 +101,20 @@ namespace Jwc.Experiment
         {
             var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((TypeElement)null));
+        }
+
+        [Fact]
+        public void VisitTypeElementCollectsCorrectReferencesToAttribute()
+        {
+            var type = Mock.Of<Type>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.Assembly == typeof(object).Assembly);
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(type.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -134,6 +188,20 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void VisitFieldInfoElementCollectsCorrectReferencesToAttribute()
+        {
+            var fieldInfo = Mock.Of<FieldInfo>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.FieldType == typeof(object));
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(fieldInfo.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
         public void VisitConstructorInfoElementCollectsCorrectAssembliesForMethodBody()
         {
             var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
@@ -159,6 +227,19 @@ namespace Jwc.Experiment
         {
             var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitConstructorInfoElementCollectsCorrectReferencesToAttribute()
+        {
+            var constructorInfo = Mock.Of<ConstructorInfo>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() });
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(constructorInfo.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]
@@ -204,6 +285,27 @@ namespace Jwc.Experiment
             var actual = sut.Visit(propertyInfoElements);
 
             Assert.Equal(visitor, actual);
+        }
+
+        [Fact]
+        public void VisitPropertyInfoElementCollectsCorrectReferencesToAttribute()
+        {
+            var propertyInfo = Mock.Of<PropertyInfo>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.PropertyType == typeof(object));
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(propertyInfo.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitNullPropertyInfoElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((PropertyInfoElement)null));
         }
 
         [Fact]
@@ -364,6 +466,20 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void VisitMethodInfoElementCollectsCorrectReferencesToAttribute()
+        {
+            var methodInfo = Mock.Of<MethodInfo>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.ReturnType == typeof(object));
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(methodInfo.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
         public void VisitNonDeclaredEventInfoElementsFiltersIt()
         {
             var eventInfoElements = typeof(SubClassWithMembers).GetEvents(Bindings)
@@ -409,6 +525,28 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void VisitEventInfoElementCollectsCorrectReferencesToAttribute()
+        {
+            var eventInfo = Mock.Of<EventInfo>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetAddMethod(true) == Mock.Of<MethodInfo>(m => m.ReturnType == typeof(void)) &&
+                x.GetRemoveMethod(true) == Mock.Of<MethodInfo>(m => m.ReturnType == typeof(void)));
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(eventInfo.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitNullEventInfoElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement)null));
+        }
+
+        [Fact]
         public void VisitParameterInfoElementCollectsCorrectAssemblies()
         {
             var sut = new ReferenceCollector();
@@ -432,6 +570,20 @@ namespace Jwc.Experiment
         {
             var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((ParameterInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitParameterInfoElementCollectsCorrectReferencesToAttribute()
+        {
+            var parameterInfo = Mock.Of<ParameterInfo>(x =>
+                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.ParameterType == typeof(object));
+            var sut = new ReferenceCollector();
+            var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
+
+            sut.Visit(parameterInfo.ToElement());
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
         }
 
         [Fact]

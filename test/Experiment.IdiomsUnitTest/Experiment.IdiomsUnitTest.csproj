@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
+    <Compile Include="DelegatingAssembly.cs" />
     <Compile Include="Idioms\IdiomaticAssertionTest.cs" />
     <Compile Include="IInterfaceWithMembers.cs" />
     <Compile Include="Idioms\ObjectDisposalAssertionTest.cs" />
