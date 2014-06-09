@@ -128,5 +128,21 @@ namespace Jwc.Experiment.Xunit
             // Exercise system and Verify outcome
             Assert.Throws(exception.GetType(), () => sut.Execute(testClass));
         }
+
+        [Fact]
+        public void ExecuteDoesNotThrowIfInnerExceptionIsNullWhenUnwrappingTargetInvocaionException()
+        {
+            // Fixture setup
+            var testClass = new object();
+
+            var testCommand = Mock.Of<ITestCommand>();
+            var exception = new TargetInvocationException(null);
+            Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Throws(exception);
+
+            var sut = new ExceptionUnwrappingCommand(testCommand);
+
+            // Exercise system and Verify outcome
+            Assert.Throws(exception.GetType(), () => sut.Execute(testClass));
+        }
     }
 }

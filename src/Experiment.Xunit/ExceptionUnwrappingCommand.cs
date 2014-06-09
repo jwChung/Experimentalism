@@ -94,7 +94,10 @@ namespace Jwc.Experiment.Xunit
             }
             catch (TargetInvocationException exception)
             {
-                throw exception.InnerException;
+                if (exception.InnerException != null)
+                    throw exception.InnerException;
+
+                throw;
             }
         }
 
