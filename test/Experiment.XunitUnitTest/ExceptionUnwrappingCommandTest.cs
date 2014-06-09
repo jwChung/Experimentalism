@@ -36,9 +36,8 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void DisplayNameIsCorrect()
         {
-            var testCommand = new Mock<ITestCommand>().Object;
             var expected = "anonymous";
-            Mock.Get(testCommand).SetupGet(x => x.DisplayName).Returns(expected);
+            var testCommand = Mock.Of<ITestCommand>(x => x.DisplayName == expected);
             var sut = new ExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.DisplayName;
@@ -49,9 +48,8 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ShouldCreateInstanceIsCorrect()
         {
-            var testCommand = new Mock<ITestCommand>().Object;
             var expected = true;
-            Mock.Get(testCommand).SetupGet(x => x.ShouldCreateInstance).Returns(expected);
+            var testCommand = Mock.Of<ITestCommand>(x => x.ShouldCreateInstance == expected);
             var sut = new ExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.ShouldCreateInstance;
@@ -62,9 +60,8 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void TimeoutIsCorrect()
         {
-            var testCommand = new Mock<ITestCommand>().Object;
             var expected = 123;
-            Mock.Get(testCommand).SetupGet(x => x.Timeout).Returns(expected);
+            var testCommand = Mock.Of<ITestCommand>(x => x.Timeout == expected);
             var sut = new ExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.Timeout;
@@ -75,15 +72,15 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ToStartXmlReturnsCorrectResult()
         {
-            var testCommand = new Mock<ITestCommand>().Object;
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<top/>");
-            Mock.Get(testCommand).Setup(x => x.ToStartXml()).Returns(xmlDocument.FirstChild);
+            var expected = xmlDocument.FirstChild;
+            var testCommand = Mock.Of<ITestCommand>(x => x.ToStartXml() == expected);
             var sut = new ExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.ToStartXml();
 
-            Assert.Equal(xmlDocument.FirstChild, actual);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -91,8 +88,7 @@ namespace Jwc.Experiment.Xunit
         {
             var testClass = new object();
             var methodResult = new PassedResult(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), null);
-            var testCommand = new Mock<ITestCommand>().Object;
-            Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Returns(methodResult);
+            var testCommand = Mock.Of<ITestCommand>(x => x.Execute(testClass) == methodResult);
             var sut = new ExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.Execute(testClass);
@@ -106,7 +102,7 @@ namespace Jwc.Experiment.Xunit
             // Fixture setup
             var testClass = new object();
 
-            var testCommand = new Mock<ITestCommand>().Object;
+            var testCommand = Mock.Of<ITestCommand>();
             var inner = new InvalidOperationException();
             var exception = new TargetInvocationException(inner);
             Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Throws(exception);
@@ -123,7 +119,7 @@ namespace Jwc.Experiment.Xunit
             // Fixture setup
             var testClass = new object();
 
-            var testCommand = new Mock<ITestCommand>().Object;
+            var testCommand = Mock.Of<ITestCommand>();
             var exception = new Exception("message", new InvalidOperationException());
             Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Throws(exception);
 
