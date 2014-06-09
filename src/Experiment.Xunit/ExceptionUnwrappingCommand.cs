@@ -11,16 +11,56 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class ExceptionUnwrappingCommand : ITestCommand
     {
+        private readonly ITestCommand _testCommand;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ExceptionUnwrappingCommand" />
+        ///     class.
+        /// </summary>
+        /// <param name="testCommand">
+        ///     The test command to be unwrapped.
+        /// </param>
+        public ExceptionUnwrappingCommand(ITestCommand testCommand)
+        {
+            if (testCommand == null)
+                throw new ArgumentNullException("testCommand");
+
+            _testCommand = testCommand;
+        }
+
+        /// <summary>
+        ///     Gets a value inicating the test command to be unwrapped.
+        /// </summary>
+        public ITestCommand TestCommand
+        {
+            get
+            {
+                return _testCommand;
+            }
+        }
+
         /// <summary>
         ///     Gets the display name of the test method.
         /// </summary>
-        public string DisplayName { get; private set; }
+        public string DisplayName
+        {
+            get
+            {
+                return TestCommand.DisplayName;
+            }
+        }
 
         /// <summary>
         ///     Determines if the test runner infrastructure should create a new instance of the
         ///     test class before running the test.
         /// </summary>
-        public bool ShouldCreateInstance { get; private set; }
+        public bool ShouldCreateInstance
+        {
+            get
+            {
+                return TestCommand.ShouldCreateInstance;
+            }
+        }
 
         /// <summary>
         ///     Determines if the test should be limited to running a specific amount of time before
@@ -29,7 +69,13 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         ///     The timeout value, in milliseconds; if zero, the test will not have a timeout.
         /// </returns>
-        public int Timeout { get; private set; }
+        public int Timeout
+        {
+            get
+            {
+                return TestCommand.Timeout;
+            }
+        }
 
         /// <summary>
         ///     Executes the test method.
@@ -42,7 +88,14 @@ namespace Jwc.Experiment.Xunit
         /// </returns>
         public MethodResult Execute(object testClass)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return TestCommand.Execute(testClass);
+            }
+            catch (TargetInvocationException exception)
+            {
+                throw exception.InnerException;
+            }
         }
 
         /// <summary>
@@ -51,7 +104,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns />
         public XmlNode ToStartXml()
         {
-            throw new NotImplementedException();
+            return TestCommand.ToStartXml();
         }
     }
 }
