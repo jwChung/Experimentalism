@@ -122,8 +122,13 @@ namespace Jwc.Experiment.Xunit
         {
             var arguments = Delegate.Method.GetParameters()
                 .Select(p => fixture.Value.Create(p.ParameterType)).ToArray();
-            
-            return new FirstClassCommand(method, GetTestParameterName(arguments), Delegate, arguments);
+
+            return new ExceptionUnwrappingCommand(
+                new FirstClassCommand(
+                    method,
+                    GetTestParameterName(arguments),
+                    Delegate,
+                    arguments));
         }
 
         private string GetTestParameterName(IList<object> arguments)

@@ -183,7 +183,8 @@ namespace Jwc.Experiment.Xunit
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+               Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(method, command.Method);
             Assert.Equal(string.Empty, command.TestParameterName);
             Assert.Equal(sut.Delegate, command.Delegate);
@@ -230,7 +231,8 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
             // Verify outcome
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+               Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
 
             Assert.Equal(method, command.Method);
             Assert.Equal(testParameterName, command.TestParameterName);
@@ -282,7 +284,8 @@ namespace Jwc.Experiment.Xunit
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(testParameterName, command.TestParameterName);
         }
 
@@ -296,7 +299,8 @@ namespace Jwc.Experiment.Xunit
 
             var actual = sut.ConvertToTestCommand(method, testFixtureFactory);
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(testParameterName, command.TestParameterName);
         }
     }
