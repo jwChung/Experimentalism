@@ -47,26 +47,55 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public void Verify(Assembly assembly)
         {
-            var references = assembly.ToElement().Accept(new ReferenceCollector()).Value.Except(new[] { assembly });
-            foreach (var reference in references)
-            {
-                if (RestrictiveReferences.Contains(reference))
-                    continue;
+            var references = assembly.ToElement()
+                .Accept(new ReferenceCollector()).Value.Except(new[] { assembly })
+                .ToArray();
 
-                var messageFormat = @"The reference of the assembly is not specified by the restricted references.
+            foreach (var reference in references)
+                Verify(assembly, reference);
+
+            foreach (var restrictiveReference in RestrictiveReferences)
+                Verify(assembly, references, restrictiveReference);
+        }
+
+        private void Verify(Assembly assembly, Assembly reference)
+        {
+            if (RestrictiveReferences.Contains(reference))
+                return;
+
+            var messageFormat = @"The reference of the assembly is not specified in the restricted references.
 Reference: {0}
 Assembly : {1}
 Restrictive references:
 {2}";
 
-                throw new RestrictiveReferenceException(
-                    string.Format(
-                        CultureInfo.CurrentCulture,
-                        messageFormat,
-                        reference,
-                        assembly,
-                        GetRestrictiveReferenceString()));
-            }
+            throw new RestrictiveReferenceException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    messageFormat,
+                    reference,
+                    assembly,
+                    GetRestrictiveReferenceString()));
+        }
+
+        private void Verify(Assembly assembly, IEnumerable<Assembly> references, Assembly restrictiveReference)
+        {
+            if (references.Contains(restrictiveReference))
+                return;
+
+            var messageFormat = @"The unused reference of the assembly should not be specified in the restricted references.
+Unused Reference: {0}
+Assembly : {1}
+Restrictive references:
+{2}";
+
+            throw new RestrictiveReferenceException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    messageFormat,
+                    restrictiveReference,
+                    assembly,
+                    GetRestrictiveReferenceString()));
         }
 
         private string GetRestrictiveReferenceString()

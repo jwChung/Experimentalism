@@ -21,4 +21,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] fixed that ReferenceCollector does not collect references to custom
  *   attributes.
+ *   
+ * - [FIX] fixed that RestrictiveReferenceAssertion does not throw when unused
+ *   reference is specified.
  */

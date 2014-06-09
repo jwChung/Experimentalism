@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using Jwc.Experiment.Xunit;
 using Xunit;
@@ -57,6 +58,20 @@ namespace Jwc.Experiment.Idioms
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
             Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(TestAttribute).Assembly));
+        }
+
+        [Fact]
+        public void VerifyAssemblyThrowsWhenAnyUnusedReferenceIsSpecified()
+        {
+            var restrictiveReferences = new[]
+            {
+                typeof(object).Assembly,
+                typeof(XmlNode).Assembly,
+                typeof(ISet<>).Assembly,
+                typeof(TheoryAttribute).Assembly // Unused reference
+            };
+            var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
+            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(FactAttribute).Assembly));
         }
     }
 }
