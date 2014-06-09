@@ -89,87 +89,6 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void VisitMethodInfoElementCollectsCorrectAssemblies()
-        {
-            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
-            var expected = new[]
-            {
-                typeof(ClassImplementingMultiple).Assembly,
-                typeof(IDisposable).Assembly,
-                typeof(ISpecimenContext).Assembly
-            };
-            var methodInfoElement = new Methods<ClassForCollectingReference>()
-                .Select(x => x.ReturnMethod()).ToElement();
-
-            var actual = sut.Visit(methodInfoElement);
-
-            Assert.Equal(visitor, actual);
-            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
-        }
-
-        [Fact]
-        public void VisitNullMethodInfoElementThrows()
-        {
-            var sut = new ReferenceCollector();
-            Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
-        }
-
-        [Fact]
-        public void VisitParameterInfoElementCollectsCorrectAssemblies()
-        {
-            var sut = new ReferenceCollector();
-            var expected = new[]
-            {
-                typeof(ClassImplementingMultiple).Assembly,
-                typeof(IDisposable).Assembly,
-                typeof(ISpecimenContext).Assembly
-            };
-            var parameterInfoElement = new Methods<ClassForCollectingReference>()
-                .Select(x => x.ParameterizedMethod(null)).GetParameters()
-                .First().ToElement();
-
-            var actual = sut.Visit(parameterInfoElement);
-
-            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
-        }
-
-        [Fact]
-        public void VisitNullParameterInfoElementThrows()
-        {
-            var sut = new ReferenceCollector();
-            Assert.Throws<ArgumentNullException>(() => sut.Visit((ParameterInfoElement)null));
-        }
-
-        [Fact]
-        public void VisitLocalVariableInfoElementCollectsCorrectAssemblies()
-        {
-            var sut = new ReferenceCollector();
-            var expected = new[]
-            {
-                typeof(ClassImplementingMultiple).Assembly,
-                typeof(IDisposable).Assembly,
-                typeof(ISpecimenContext).Assembly
-            };
-            var localVariableInfoElement = new Methods<ClassForCollectingReference>()
-                .Select(x => x.ReturnMethod()).GetMethodBody()
-                .LocalVariables.First().ToElement();
-
-            var actual = sut.Visit(localVariableInfoElement);
-
-            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
-        }
-
-        [Fact]
-        public void VisitNullLocalVariableInfoElementThrows()
-        {
-            var sut = new ReferenceCollector();
-            Assert.Throws<ArgumentNullException>(() => sut.Visit((LocalVariableInfoElement)null));
-        }
-
-        [Fact]
         public void VisitNonDeclaredFieldInfoElementsFiltersIt()
         {
             var fieldInfoElements = typeof(SubClassWithMembers).GetFields(Bindings)
@@ -198,6 +117,48 @@ namespace Jwc.Experiment
         {
             var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((FieldInfoElement[])null));
+        }
+
+        [Fact]
+        public void VisitFieldInfoElementsCallsBaseMethod()
+        {
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
+            var fieldInfoElements = typeof(ClassWithMembers).GetFields(Bindings)
+                .Select(x => x.ToElement()).ToArray();
+
+            var actual = sut.Visit(fieldInfoElements);
+
+            Assert.Equal(visitor, actual);
+        }
+
+        [Fact]
+        public void VisitConstructorInfoElementCollectsCorrectAssembliesForMethodBody()
+        {
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
+            var expected = new[]
+            {
+                typeof(IDisposable).Assembly,
+                GetType().Assembly,
+                typeof(Fixture).Assembly
+            };
+            var constructorInfoElement = Constructors.Select(() => new ClassForCollectingReference(0)).ToElement();
+
+            var actual = sut.Visit(constructorInfoElement);
+
+            Assert.Equal(visitor, actual);
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitNullConstructorInfoElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
         }
 
         [Fact]
@@ -232,6 +193,49 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void VisitPropertyInfoElementsCallsBaseMethod()
+        {
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
+            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(Bindings)
+                .Select(x => x.ToElement()).ToArray();
+
+            var actual = sut.Visit(propertyInfoElements);
+
+            Assert.Equal(visitor, actual);
+        }
+
+        [Fact]
+        public void VisitMethodInfoElementCollectsCorrectAssemblies()
+        {
+            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
+            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
+            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
+            var expected = new[]
+            {
+                typeof(ClassImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var methodInfoElement = new Methods<ClassForCollectingReference>()
+                .Select(x => x.ReturnMethod()).ToElement();
+
+            var actual = sut.Visit(methodInfoElement);
+
+            Assert.Equal(visitor, actual);
+            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitNullMethodInfoElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement)null));
+        }
+
+        [Fact]
         public void VisitNonDeclaredMethodInfoElementsFiltersIt()
         {
             var methodInfoElements = typeof(SubClassWithMembers).GetMethods(Bindings)
@@ -260,37 +264,6 @@ namespace Jwc.Experiment
         {
             var sut = new ReferenceCollector();
             Assert.Throws<ArgumentNullException>(() => sut.Visit((MethodInfoElement[])null));
-        }
-
-        [Fact]
-        public void VisitNonDeclaredEventInfoElementsFiltersIt()
-        {
-            var eventInfoElements = typeof(SubClassWithMembers).GetEvents(Bindings)
-                .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollector();
-
-            var actual = sut.Visit(eventInfoElements);
-
-            Assert.Empty(actual.Value);
-        }
-
-        [Fact]
-        public void VisitDeclaredEventInfoElementsDoesNotFilterIt()
-        {
-            var eventInfoElements = typeof(ClassWithMembers).GetEvents(Bindings)
-                .Select(x => x.ToElement()).ToArray();
-            var sut = new ReferenceCollector();
-
-            var actual = sut.Visit(eventInfoElements);
-
-            Assert.NotEmpty(actual.Value);
-        }
-
-        [Fact]
-        public void VisitNullEventInfoElementsThrows()
-        {
-            var sut = new ReferenceCollector();
-            Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement[])null));
         }
 
         [Fact]
@@ -377,62 +350,6 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void VisitConstructorInfoElementCollectsCorrectAssembliesForMethodBody()
-        {
-            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<ParameterInfoElement>())).Returns(visitor);
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<LocalVariableInfoElement>())).Returns(visitor);
-            var expected = new[]
-            {
-                typeof(IDisposable).Assembly,
-                GetType().Assembly,
-                typeof(Fixture).Assembly
-            };
-            var constructorInfoElement = Constructors.Select(() => new ClassForCollectingReference(0)).ToElement();
-
-            var actual = sut.Visit(constructorInfoElement);
-
-            Assert.Equal(visitor, actual);
-            Assert.Equal(expected.OrderBy(x => x.ToString()), sut.Value.OrderBy(x => x.ToString()));
-        }
-
-        [Fact]
-        public void VisitNullConstructorInfoElementThrows()
-        {
-            var sut = new ReferenceCollector();
-            Assert.Throws<ArgumentNullException>(() => sut.Visit((ConstructorInfoElement)null));
-        }
-
-        [Fact]
-        public void VisitFieldInfoElementsCallsBaseMethod()
-        {
-            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
-            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<FieldInfoElement>())).Returns(visitor);
-            var fieldInfoElements = typeof(ClassWithMembers).GetFields(Bindings)
-                .Select(x => x.ToElement()).ToArray();
-
-            var actual = sut.Visit(fieldInfoElements);
-
-            Assert.Equal(visitor, actual);
-        }
-
-        [Fact]
-        public void VisitPropertyInfoElementsCallsBaseMethod()
-        {
-            var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
-            var visitor = new DelegatingReflectionVisitor<IEnumerable<Assembly>>();
-            sut.ToMock().Setup(x => x.Visit(It.IsAny<PropertyInfoElement>())).Returns(visitor);
-            var propertyInfoElements = typeof(ClassWithMembers).GetProperties(Bindings)
-                .Select(x => x.ToElement()).ToArray();
-
-            var actual = sut.Visit(propertyInfoElements);
-
-            Assert.Equal(visitor, actual);
-        }
-
-        [Fact]
         public void VisitMethodInfoElementsCallsBaseMethod()
         {
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
@@ -447,6 +364,37 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void VisitNonDeclaredEventInfoElementsFiltersIt()
+        {
+            var eventInfoElements = typeof(SubClassWithMembers).GetEvents(Bindings)
+                .Select(x => x.ToElement()).ToArray();
+            var sut = new ReferenceCollector();
+
+            var actual = sut.Visit(eventInfoElements);
+
+            Assert.Empty(actual.Value);
+        }
+
+        [Fact]
+        public void VisitDeclaredEventInfoElementsDoesNotFilterIt()
+        {
+            var eventInfoElements = typeof(ClassWithMembers).GetEvents(Bindings)
+                .Select(x => x.ToElement()).ToArray();
+            var sut = new ReferenceCollector();
+
+            var actual = sut.Visit(eventInfoElements);
+
+            Assert.NotEmpty(actual.Value);
+        }
+
+        [Fact]
+        public void VisitNullEventInfoElementsThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((EventInfoElement[])null));
+        }
+
+        [Fact]
         public void VisitEventInfoElementsCallsBaseMethod()
         {
             var sut = new Mock<ReferenceCollector> { CallBase = true }.Object;
@@ -458,6 +406,58 @@ namespace Jwc.Experiment
             var actual = sut.Visit(eventInfoElements);
 
             Assert.Equal(visitor, actual);
+        }
+
+        [Fact]
+        public void VisitParameterInfoElementCollectsCorrectAssemblies()
+        {
+            var sut = new ReferenceCollector();
+            var expected = new[]
+            {
+                typeof(ClassImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var parameterInfoElement = new Methods<ClassForCollectingReference>()
+                .Select(x => x.ParameterizedMethod(null)).GetParameters()
+                .First().ToElement();
+
+            var actual = sut.Visit(parameterInfoElement);
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitNullParameterInfoElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((ParameterInfoElement)null));
+        }
+
+        [Fact]
+        public void VisitLocalVariableInfoElementCollectsCorrectAssemblies()
+        {
+            var sut = new ReferenceCollector();
+            var expected = new[]
+            {
+                typeof(ClassImplementingMultiple).Assembly,
+                typeof(IDisposable).Assembly,
+                typeof(ISpecimenContext).Assembly
+            };
+            var localVariableInfoElement = new Methods<ClassForCollectingReference>()
+                .Select(x => x.ReturnMethod()).GetMethodBody()
+                .LocalVariables.First().ToElement();
+
+            var actual = sut.Visit(localVariableInfoElement);
+
+            Assert.Equal(expected.OrderBy(x => x.ToString()), actual.Value.OrderBy(x => x.ToString()));
+        }
+
+        [Fact]
+        public void VisitNullLocalVariableInfoElementThrows()
+        {
+            var sut = new ReferenceCollector();
+            Assert.Throws<ArgumentNullException>(() => sut.Visit((LocalVariableInfoElement)null));
         }
     }
 }
