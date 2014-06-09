@@ -531,7 +531,7 @@ namespace Jwc.Experiment.Idioms
                 {
                     get
                     {
-                        return 10;
+                        return -1;
                     }
                 }
             }
