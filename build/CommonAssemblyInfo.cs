@@ -14,14 +14,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.3")]
 
 /*
- * Version 0.23.3
+ * Version 0.23.4
  * 
- * - [FIX] moved out of the namespace 'Experiment.Idioms.Assertions'.
- *   (BREAKING-CHANGE)
+ * - [FIX] modified the unnecessary protected method 'VisitMethodBody' to
+ *   private. (BREAKING-CHANGE)
  *   
- * - [FIX] fixed an exception thrown when verifying member initialization for
- *   the field 'value__' of enum types.
- *   
- * - [FIX] unwarpped TargetInvocationException thrown by the delegate of
- *   TestCase.
+ * - [FIX] fixed that ReferenceCollector does not collect references to custom
+ *   attributes.
  */
