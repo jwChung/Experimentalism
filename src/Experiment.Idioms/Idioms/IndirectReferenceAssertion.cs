@@ -27,6 +27,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public IndirectReferenceAssertion(params Assembly[] indirectReferences)
         {
+            if (indirectReferences == null)
+                throw new ArgumentNullException("indirectReferences");
+
             _indirectReferences = indirectReferences;
         }
 
@@ -52,8 +55,7 @@ namespace Jwc.Experiment.Idioms
             if (assembly == null)
                 throw new ArgumentNullException("assembly");
 
-            var types = assembly.GetTypes().Where(IsExposed);
-            foreach (var type in types)
+            foreach (var type in assembly.GetTypes())
                 Verify(type);
         }
 
@@ -65,9 +67,12 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public virtual void Verify(Type type)
         {
+            if (!IsExposed(type))
+                return;
+
             EnsureNotExpose(type.ToElement());
 
-            foreach (var member in GetExposedMembers(type))
+            foreach (var member in type.GetIdiomaticMembers())
                 Verify(member);
         }
 
@@ -79,6 +84,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(FieldInfo field)
         {
+            if (!IsExposed(field))
+                return;
+
             EnsureNotExpose(field.ToElement());
         }
 
@@ -90,6 +98,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(ConstructorInfo constructor)
         {
+            if (!IsExposed(constructor))
+                return;
+
             EnsureNotExpose(constructor.ToElement());
         }
 
@@ -101,6 +112,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(PropertyInfo property)
         {
+            if (!IsExposed(property))
+                return;
+
             EnsureNotExpose(property.ToElement());
         }
 
@@ -112,6 +126,9 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(MethodInfo method)
         {
+            if (!IsExposed(method))
+                return;
+
             EnsureNotExpose(method.ToElement());
         }
 
@@ -123,18 +140,21 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(EventInfo @event)
         {
+            if (!IsExposed(@event))
+                return;
+
             EnsureNotExpose(@event.ToElement());
         }
 
         private void EnsureNotExpose(IReflectionElement reflectionElement)
         {
-            var references = GetReferences(reflectionElement);
-            var reference = references.FirstOrDefault(r => IndirectReferences.Contains(r));
+            var reference = GetReferences(reflectionElement)
+                .FirstOrDefault(r => IndirectReferences.Contains(r));
 
             if (reference == null)
                 return;
 
-            var messageFormat = @"The indirect reference should not be exposed through the API.
+            var messageFormat = @"The indirect reference should not be exposed through API.
 Indirect reference: {0}
 API(exposing)     : {1}";
 
@@ -144,25 +164,6 @@ API(exposing)     : {1}";
                     messageFormat,
                     reference,
                     reflectionElement.Accept(new DisplayNameCollector()).Value.Single()));
-        }
-
-        private IEnumerable<MemberInfo> GetExposedMembers(Type type)
-        {
-            const BindingFlags bindingFlags =
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly |
-                BindingFlags.Static | BindingFlags.Instance;
-
-            var accessors = type.GetProperties(bindingFlags)
-                .SelectMany(p => p.GetAccessors(true));
-
-            var eventMethods = type.GetEvents(bindingFlags)
-                .SelectMany(e => new[] { e.GetAddMethod(true), e.GetRemoveMethod(true) });
-
-            return type.GetMembers(bindingFlags)
-                .Except(accessors)
-                .Except(eventMethods)
-                .Where(m => !(m is Type))
-                .Where(IsExposed);
         }
 
         private bool IsExposed(MemberInfo member)

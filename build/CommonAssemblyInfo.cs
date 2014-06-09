@@ -24,4 +24,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] fixed that RestrictiveReferenceAssertion does not throw when unused
  *   reference is specified.
+ *   
+ * - [FIX] fixed that IndirectReferenceAssertion does not ignore verifying
+ *   unexposed(private/internal) members.
  */
