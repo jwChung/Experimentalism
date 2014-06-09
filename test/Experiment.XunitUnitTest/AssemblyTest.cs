@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using Jwc.Experiment.Idioms;
 using Xunit;
 
@@ -12,7 +11,8 @@ namespace Jwc.Experiment.Xunit
         {
             new RestrictiveReferenceAssertion(
                 Assembly.Load("mscorlib"),
-                typeof(Enumerable).Assembly /*System.Core*/,
+                Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Assembly.Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("Jwc.Experiment"),
                 Assembly.Load("xunit"),
                 Assembly.Load("xunit.extensions"))

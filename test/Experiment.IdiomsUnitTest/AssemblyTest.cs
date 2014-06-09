@@ -13,8 +13,8 @@ namespace Jwc.Experiment
         {
             new RestrictiveReferenceAssertion(
                 Assembly.Load("mscorlib"),
-                typeof(ISet<>).Assembly /*System*/,
-                typeof(Enumerable).Assembly /*System.Core*/,
+                Assembly.Load("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("Jwc.Experiment"),
                 Assembly.Load("Ploeh.Albedo"),
                 Assembly.Load("Ploeh.AutoFixture"),
