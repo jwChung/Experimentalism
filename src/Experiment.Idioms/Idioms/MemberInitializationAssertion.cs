@@ -105,7 +105,7 @@ namespace Jwc.Experiment.Idioms
             if (field == null)
                 throw new ArgumentNullException("field");
 
-            if (field.IsStatic)
+            if (field.IsStatic || field.ReflectedType.IsEnum)
                 return;
 
             var fieldInfoElement = field.ToElement();

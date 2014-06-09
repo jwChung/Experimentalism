@@ -18,4 +18,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] moved out of the namespace 'Experiment.Idioms.Assertions'.
  *   (BREAKING-CHANGE)
+ *   
+ * - [FIX] fixed an exception thrown when verifying member initialization for
+ *   the field 'value__' of enum types.
  */

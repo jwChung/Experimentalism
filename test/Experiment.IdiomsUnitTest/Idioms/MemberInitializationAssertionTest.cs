@@ -204,6 +204,14 @@ namespace Jwc.Experiment.Idioms
             Assert.DoesNotThrow(() => sut.Verify(field));
         }
 
+        [Fact]
+        public void VerifyEnumFieldDoesNotThrow()
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            var field = typeof(Accessibilities).GetField("value__");
+            Assert.DoesNotThrow(() => sut.Verify(field));
+        }
+
         [Theory]
         [SatisfiedConstructorData]
         public void VerifySatisfiedConstructorDoesNotThrow(ConstructorInfo constructor)
