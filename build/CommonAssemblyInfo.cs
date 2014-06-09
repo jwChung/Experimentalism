@@ -21,4 +21,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] fixed an exception thrown when verifying member initialization for
  *   the field 'value__' of enum types.
+ *   
+ * - [FIX] unwarpped TargetInvocationException thrown by the delegate of
+ *   TestCase.
  */
