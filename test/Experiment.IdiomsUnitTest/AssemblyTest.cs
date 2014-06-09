@@ -22,7 +22,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
+        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
         {
             new IndirectReferenceAssertion(
                 Assembly.Load("Ploeh.AutoFixture"),

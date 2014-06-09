@@ -19,7 +19,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Fact]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
+        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
         {
             new IndirectReferenceAssertion(
                 Assembly.Load("Ploeh.AutoFixture.AutoMoq"))

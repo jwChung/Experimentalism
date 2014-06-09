@@ -20,7 +20,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedReference()
+        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
         {
             new IndirectReferenceAssertion(
                 Assembly.Load("xunit.extensions"))
