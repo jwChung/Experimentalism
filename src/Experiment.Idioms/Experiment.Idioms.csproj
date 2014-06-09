@@ -7,7 +7,7 @@
     <ProjectGuid>{7352FC70-2780-415C-9A43-F889F7B8028D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
     <AssemblyName>Jwc.Experiment.Idioms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -58,24 +58,24 @@
     </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
-    <Compile Include="Assertions\IdiomaticAssertion.cs" />
-    <Compile Include="Assertions\ObjectDisposalAssertion.cs" />
+    <Compile Include="Idioms\IdiomaticAssertion.cs" />
+    <Compile Include="Idioms\ObjectDisposalAssertion.cs" />
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="DisplayNameCollector.cs" />
     <Compile Include="MemberReferenceCollector.cs" />
     <Compile Include="IdiomaticExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
-    <Compile Include="Assertions\IdiomaticMemberAssertion.cs" />
-    <Compile Include="Assertions\IIdiomaticAssemblyAssertion.cs" />
-    <Compile Include="Assertions\IIdiomaticTypeAssertion.cs" />
+    <Compile Include="Idioms\IdiomaticMemberAssertion.cs" />
+    <Compile Include="Idioms\IIdiomaticAssemblyAssertion.cs" />
+    <Compile Include="Idioms\IIdiomaticTypeAssertion.cs" />
     <Compile Include="IndirectReferenceException.cs" />
-    <Compile Include="Assertions\IndirectReferenceAssertion.cs" />
-    <Compile Include="Assertions\MemberInitializationAssertion.cs" />
-    <Compile Include="Assertions\NullGuardClauseAssertion.cs" />
+    <Compile Include="Idioms\IndirectReferenceAssertion.cs" />
+    <Compile Include="Idioms\MemberInitializationAssertion.cs" />
+    <Compile Include="Idioms\NullGuardClauseAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
-    <Compile Include="Assertions\IIdiomaticMemberAssertion.cs" />
+    <Compile Include="Idioms\IIdiomaticMemberAssertion.cs" />
     <Compile Include="MemberKindCollector.cs" />
     <Compile Include="ReferenceCollector.cs" />
     <Compile Include="MemberKinds.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="InverseEqualityComparer.cs" />
     <Compile Include="PropertyToParameterComparer.cs" />
     <Compile Include="RestrictiveReferenceException.cs" />
-    <Compile Include="Assertions\RestrictiveReferenceAssertion.cs" />
+    <Compile Include="Idioms\RestrictiveReferenceAssertion.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

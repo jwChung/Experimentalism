@@ -8,7 +8,7 @@ using Ploeh.Albedo;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     public class MemberInitializationAssertionTest
     {

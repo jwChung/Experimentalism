@@ -8,7 +8,7 @@ using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class ReferenceCollectorTest
     {

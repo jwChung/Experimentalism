@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo.Refraction;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     ///     Represents members of a certain <see cref="Type" /> which will be verified by

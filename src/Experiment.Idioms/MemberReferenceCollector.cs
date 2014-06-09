@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     ///     Represents <see cref="IReflectionVisitor{T}" /> to collect reference assemblies for

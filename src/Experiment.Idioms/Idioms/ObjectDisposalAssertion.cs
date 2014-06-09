@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     ///     Encapsulates a unit test that verifies that members throw

@@ -14,7 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.2")]
 
 /*
- * Version 0.23.2
+ * Version 0.23.3
  * 
- * - [FIX] introduced TestFixtureFactoryConfigurationAttribute.
+ * - [FIX] moved out of the namespace 'Experiment.Idioms.Assertions'.
+ *   (BREAKING-CHANGE)
  */

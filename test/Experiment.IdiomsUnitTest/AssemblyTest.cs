@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.Idioms.Assertions;
+using Jwc.Experiment.Idioms;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class AssemblyTest
     {

@@ -1,7 +1,7 @@
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class FakeTestFixture : ITestFixture
     {

@@ -7,7 +7,7 @@
     <ProjectGuid>{CD942D14-856A-436B-905C-BA417767E977}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment.Idioms</RootNamespace>
+    <RootNamespace>Jwc.Experiment</RootNamespace>
     <AssemblyName>Jwc.Experiment.IdiomsUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -65,19 +65,19 @@
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
-    <Compile Include="Assertions\IdiomaticAssertionTest.cs" />
+    <Compile Include="Idioms\IdiomaticAssertionTest.cs" />
     <Compile Include="IInterfaceWithMembers.cs" />
-    <Compile Include="Assertions\ObjectDisposalAssertionTest.cs" />
+    <Compile Include="Idioms\ObjectDisposalAssertionTest.cs" />
     <Compile Include="DisplayNameCollectorTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
     <Compile Include="IdiomaticExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
-    <Compile Include="Assertions\IdiomaticMemberAssertionTest.cs" />
+    <Compile Include="Idioms\IdiomaticMemberAssertionTest.cs" />
     <Compile Include="IndirectReferenceExceptionTest.cs" />
-    <Compile Include="Assertions\IndirectReferenceAssertionTest.cs" />
-    <Compile Include="Assertions\MemberInitializationAssertionTest.cs" />
-    <Compile Include="Assertions\NullGuardClauseAssertionTest.cs" />
+    <Compile Include="Idioms\IndirectReferenceAssertionTest.cs" />
+    <Compile Include="Idioms\MemberInitializationAssertionTest.cs" />
+    <Compile Include="Idioms\NullGuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MemberKindCollectorTest.cs" />
     <Compile Include="MockExtensions.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />
     <Compile Include="RestrictiveReferenceExceptionTest.cs" />
-    <Compile Include="Assertions\RestrictiveReferenceAssertionTest.cs" />
+    <Compile Include="Idioms\RestrictiveReferenceAssertionTest.cs" />
     <Compile Include="SubClassWithMembers.cs" />
     <Compile Include="ClassForCollectingReference.cs" />
     <Compile Include="ClassImplementingHierarchical.cs" />

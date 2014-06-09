@@ -6,7 +6,7 @@ using Moq;
 using Ploeh.Albedo;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     public class ObjectDisposalAssertionTest
     {

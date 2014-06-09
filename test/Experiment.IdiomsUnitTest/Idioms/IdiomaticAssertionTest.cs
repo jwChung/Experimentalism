@@ -6,7 +6,7 @@ using Jwc.Experiment.Xunit;
 using Moq;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     public class IdiomaticAssertionTest
     {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     ///     Represents an encapsulation of an idiomatic unit test assertion based on

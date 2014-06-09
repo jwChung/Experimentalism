@@ -7,7 +7,7 @@ using Ploeh.Albedo;
 using Ploeh.AutoFixture.Idioms;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     public class NullGuardClauseAssertionTest
     {

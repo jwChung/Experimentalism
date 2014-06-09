@@ -4,7 +4,7 @@ using System.Linq;
 using Ploeh.Albedo;
 using Xunit;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class DisplayNameCollectorTest
     {

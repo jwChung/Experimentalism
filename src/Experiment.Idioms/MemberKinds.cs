@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     ///     Represents kinds of idiomatic members.

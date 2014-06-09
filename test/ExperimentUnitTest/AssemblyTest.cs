@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.Idioms.Assertions;
+using Jwc.Experiment.Idioms;
 using Xunit;
 
 namespace Jwc.Experiment

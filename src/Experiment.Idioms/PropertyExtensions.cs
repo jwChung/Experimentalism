@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     internal static class PropertyExtensions
     {

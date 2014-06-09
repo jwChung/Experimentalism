@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     ///     Represents base class implementing <see cref="IIdiomaticAssemblyAssertion" />,

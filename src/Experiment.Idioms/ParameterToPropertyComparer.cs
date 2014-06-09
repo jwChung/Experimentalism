@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     /// <summary>
     ///     Represent comaprer to determine that a parameter value equals to a property value.

@@ -1,7 +1,7 @@
 using System;
 using Ploeh.Albedo;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class ClassImplementingHierarchical : IDisposable, IHierarchical
     {

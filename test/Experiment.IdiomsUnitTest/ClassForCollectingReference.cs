@@ -1,7 +1,7 @@
 using System.Linq;
 using Ploeh.AutoFixture;
 
-namespace Jwc.Experiment.Idioms
+namespace Jwc.Experiment
 {
     public class ClassForCollectingReference
     {

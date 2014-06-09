@@ -3,7 +3,7 @@ using System.Reflection;
 using Ploeh.AutoFixture.Idioms;
 using Ploeh.AutoFixture.Kernel;
 
-namespace Jwc.Experiment.Idioms.Assertions
+namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     ///     Encapsulates a unit test that verifies that a method or constructor has appropriate
