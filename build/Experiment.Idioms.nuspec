@@ -20,15 +20,10 @@
     <file src="..\src\Experiment\bin\Release\Jwc.Experiment.dll" target="lib\net40" />
     <file src="..\src\Experiment\bin\Release\Jwc.Experiment.pdb" target="lib\net40" />
     <file src="..\src\Experiment\bin\Release\Jwc.Experiment.xml" target="lib\net40" />
-    <file src="..\src\Experiment.Idioms\bin\Release\Jwc.Experiment.Idioms.dll" target="lib\net40" />
-    <file src="..\src\Experiment.Idioms\bin\Release\Jwc.Experiment.Idioms.pdb" target="lib\net40" />
+    <file src="..\src\Experiment.Idioms\bin\Release\ILMergeOutput\Jwc.Experiment.Idioms.dll" target="lib\net40" />
+    <file src="..\src\Experiment.Idioms\bin\Release\ILMergeOutput\Jwc.Experiment.Idioms.pdb" target="lib\net40" />
     <file src="..\src\Experiment.Idioms\bin\Release\Jwc.Experiment.Idioms.xml" target="lib\net40" />
     <file src="..\src\**\*.cs" target="src" />
-    <file src="..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.dll" target="lib\net40" />
-    <file src="..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.xml" target="lib\net40" />
-    <file src="..\packages\AutoFixture.Idioms.3.18.7\lib\net40\Ploeh.AutoFixture.Idioms.dll" target="lib\net40" />
-    <file src="..\packages\AutoFixture.Idioms.3.18.7\lib\net40\Ploeh.AutoFixture.Idioms.xml" target="lib\net40" />
-    <file src="..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll" target="lib\net40" />
     <file src="..\packages\Albedo.1.0.1\lib\net35\Ploeh.Albedo.dll" target="lib\net40" />
     <file src="..\packages\Albedo.1.0.1\lib\net35\Ploeh.Albedo.xml" target="lib\net40" />
     <file src="Install.ps1" target="tools" />
