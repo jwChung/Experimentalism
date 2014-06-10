@@ -10,8 +10,7 @@ namespace Jwc.Experiment.Xunit
     {
         private readonly IMethodInfo _method;
         private readonly string _displayParameterName;
-        private readonly Delegate _delegate;
-        private readonly object[] _arguments;
+        private readonly Action _action;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="FirstClassCommand" /> class.
@@ -23,33 +22,24 @@ namespace Jwc.Experiment.Xunit
         /// <param name="displayParameterName">
         ///     A string to show parameters of a test method in test result.
         /// </param>
-        /// <param name="delegate">
-        ///     The test case to be invoked when the test is executed.
+        /// <param name="action">
+        ///     The test action to be invoked when the test is executed.
         /// </param>
-        /// <param name="arguments">
-        ///     The test arguments to be supplied to the test delegate.
-        /// </param>
-        public FirstClassCommand(
-            IMethodInfo method, string displayParameterName, Delegate @delegate, object[] arguments) : base(
-                EnsureIsNotNull(method),
-                MethodUtility.GetDisplayName(method),
-                MethodUtility.GetTimeoutParameter(method))
+        public FirstClassCommand(IMethodInfo method, string displayParameterName, Action action) : base(
+            EnsureIsNotNull(method),
+            MethodUtility.GetDisplayName(method),
+            MethodUtility.GetTimeoutParameter(method))
         {
             if (displayParameterName == null)
                 throw new ArgumentNullException("displayParameterName");
 
-            if (@delegate == null)
-                throw new ArgumentNullException("delegate");
-
-            if (arguments == null)
-                throw new ArgumentNullException("arguments");
+            if (action == null)
+                throw new ArgumentNullException("action");
 
             _method = method;
             _displayParameterName = displayParameterName;
-            _delegate = @delegate;
-            _arguments = arguments;
-
-            SetDisplayName();
+            _action = action;
+            DisplayName += "(" + displayParameterName + ")";
         }
 
         /// <summary>
@@ -57,10 +47,7 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public IMethodInfo Method
         {
-            get
-            {
-                return _method;
-            }
+            get { return _method; }
         }
 
         /// <summary>
@@ -69,21 +56,15 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public string DisplayParameterName
         {
-            get
-            {
-                return _displayParameterName;
-            }
+            get { return _displayParameterName; }
         }
 
         /// <summary>
-        ///     Gets the test delegate.
+        ///     Gets the test action.
         /// </summary>
-        public Delegate Delegate
+        public Action Action
         {
-            get
-            {
-                return _delegate;
-            }
+            get { return _action; }
         }
 
         /// <summary>
@@ -94,14 +75,11 @@ namespace Jwc.Experiment.Xunit
         /// </value>
         public override bool ShouldCreateInstance
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
-        ///     Execute the test delegate with the arguments.
+        ///     Execute the test action.
         /// </summary>
         /// <param name="testClass">
         ///     The test class object.
@@ -111,7 +89,7 @@ namespace Jwc.Experiment.Xunit
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, _arguments);
+            Action();
             return new PassedResult(Method, DisplayName);
         }
 
@@ -121,11 +99,6 @@ namespace Jwc.Experiment.Xunit
                 throw new ArgumentNullException("method");
 
             return method;
-        }
-
-        private void SetDisplayName()
-        {
-            DisplayName += "(" + DisplayParameterName + ")";
         }
     }
 }

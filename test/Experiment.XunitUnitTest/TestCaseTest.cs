@@ -106,12 +106,12 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void DisplayParameterNameIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
-            var testParameterName = "anonymous";
-            var sut = new TestCase(testParameterName, new Func<object>(() => null));
+            const string displayParameterName = "anonymous";
+            var sut = new TestCase(displayParameterName, new Func<object>(() => null));
 
             var actual = sut.DisplayParameterName;
 
-            Assert.Equal(testParameterName, actual);
+            Assert.Equal(displayParameterName, actual);
         }
 
         [Fact]
@@ -312,7 +312,7 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<FirstClassCommand>(
                 Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
-            ((Action)command.Delegate).Invoke();
+            command.Action.Invoke();
             Assert.True(verifyMock);
         }
     }
