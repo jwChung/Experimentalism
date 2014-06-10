@@ -77,7 +77,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void TestParameterNameIsCorrectWhenInitializedWithAction()
+        public void DisplayParameterNameIsCorrectWhenInitializedWithAction()
         {
             var sut = new TestCase(() => { });
             var actual = sut.DisplayParameterName;
@@ -85,7 +85,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void TestParameterNameIsCorrectWhenInitializedWithFunc()
+        public void DisplayParameterNameIsCorrectWhenInitializedWithFunc()
         {
             var sut = new TestCase(() => null);
             var actual = sut.DisplayParameterName;
@@ -93,7 +93,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void TestParameterNameIsCorrectWhenInitializedWithDelegate()
+        public void DisplayParameterNameIsCorrectWhenInitializedWithDelegate()
         {
             Delegate @delegate = new Func<object>(() => null);
             var sut = new TestCase(@delegate);
@@ -314,6 +314,21 @@ namespace Jwc.Experiment.Xunit
                 Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
             command.Action.Invoke();
             Assert.True(verifyMock);
+        }
+
+        [Fact]
+        public void ConvertActionDelegateToTestCommandReturnsTestCommandWithCorrectDelegate()
+        {
+            Delegate @delegate = new Action(() => { });
+            var sut = new TestCase(@delegate);
+
+            var actual = sut.ConvertToTestCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                new DelegatingTestFixtureFactory());
+
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+            Assert.Equal(@delegate, command.Action);
         }
     }
 }
