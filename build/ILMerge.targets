@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Verify">
   <Target Name="ILMerge" AfterTargets="Build" Inputs="@(IntermediateAssembly)" Outputs="@(MainAssembly -> '%(RelativeDir)ILMergeOutput\%(Filename)%(Extension)')"  Condition=" '$(SignAssembly)' == 'True' ">
     <ItemGroup>
-      <ILMergeExecutableItem Include="..\..\packages\**\ILMerge.exe"></ILMergeExecutableItem>
+      <ILMergeExecutableItem Include="..\..\packages\**\ILMerge.exe" />
     </ItemGroup>
     <PropertyGroup>
       <ILMergeExecutable>@(ILMergeExecutableItem)</ILMergeExecutable>
