@@ -18,4 +18,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] renamed 'TestParameterName' to 'DisplayParameterName'.
  *   (BAEAKING-CHANGE)
+ *   
+ * - [FIX] slightly improved performance of TestCase and refactored
+ *   FirstClassCommand to simplify. (BAEAKING-CHANGE)
  */
