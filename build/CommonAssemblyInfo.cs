@@ -14,17 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.4")]
 
 /*
- * Version 0.23.4
+ * Version 0.23.5
  * 
- * - [FIX] modified the unnecessary protected method 'VisitMethodBody' to
- *   private. (BREAKING-CHANGE)
- *   
- * - [FIX] fixed that ReferenceCollector does not collect references to custom
- *   attributes.
- *   
- * - [FIX] fixed that RestrictiveReferenceAssertion does not throw when unused
- *   reference is specified.
- *   
- * - [FIX] fixed that IndirectReferenceAssertion does not ignore verifying
- *   unexposed(private/internal) members.
+ * - [FIX] addressed ilmerge in Experiment.AutoFixture and Experiment.Xunit.
  */
