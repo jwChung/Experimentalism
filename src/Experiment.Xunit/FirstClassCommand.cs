@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Xunit
     public class FirstClassCommand : TestCommand
     {
         private readonly IMethodInfo _method;
-        private readonly string _testParameterName;
+        private readonly string _displayParameterName;
         private readonly Delegate _delegate;
         private readonly object[] _arguments;
 
@@ -21,7 +21,7 @@ namespace Jwc.Experiment.Xunit
         ///     The test method which this instance is associated. This will likely be the method
         ///     adorned with an <see cref="FirstClassTestAttribute" />.
         /// </param>
-        /// <param name="testParameterName">
+        /// <param name="displayParameterName">
         ///     A string to show parameters of a test method in test result.
         /// </param>
         /// <param name="delegate">
@@ -31,13 +31,13 @@ namespace Jwc.Experiment.Xunit
         ///     The test arguments to be supplied to the test delegate.
         /// </param>
         public FirstClassCommand(
-            IMethodInfo method, string testParameterName, Delegate @delegate, object[] arguments) : base(
+            IMethodInfo method, string displayParameterName, Delegate @delegate, object[] arguments) : base(
                 EnsureIsNotNull(method),
                 MethodUtility.GetDisplayName(method),
                 MethodUtility.GetTimeoutParameter(method))
         {
-            if (testParameterName == null)
-                throw new ArgumentNullException("testParameterName");
+            if (displayParameterName == null)
+                throw new ArgumentNullException("displayParameterName");
 
             if (@delegate == null)
                 throw new ArgumentNullException("delegate");
@@ -46,7 +46,7 @@ namespace Jwc.Experiment.Xunit
                 throw new ArgumentNullException("arguments");
 
             _method = method;
-            _testParameterName = testParameterName;
+            _displayParameterName = displayParameterName;
             _delegate = @delegate;
             _arguments = arguments;
 
@@ -68,11 +68,11 @@ namespace Jwc.Experiment.Xunit
         ///     Gets a value indicating the string to show parameters of a test method in test
         ///     result.
         /// </summary>
-        public string TestParameterName
+        public string DisplayParameterName
         {
             get
             {
-                return _testParameterName;
+                return _displayParameterName;
             }
         }
 
@@ -137,7 +137,7 @@ namespace Jwc.Experiment.Xunit
 
         private void SetDisplayName()
         {
-            DisplayName += "(" + TestParameterName + ")";
+            DisplayName += "(" + DisplayParameterName + ")";
         }
     }
 }

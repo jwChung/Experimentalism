@@ -72,14 +72,14 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void TestParameterNameIsCorrect()
         {
-            string expected = "TestParameterName";
+            string expected = "DisplayParameterName";
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 expected,
                 new Action(() => { }),
                 new object[0]);
 
-            var actual = sut.TestParameterName;
+            var actual = sut.DisplayParameterName;
 
             Assert.Equal(expected, actual);
         }

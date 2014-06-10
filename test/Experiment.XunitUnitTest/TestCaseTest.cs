@@ -33,13 +33,13 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void InitializeWithNullDelegateAndTestParameterNameThrows()
+        public void InitializeWithNullDelegateAndDisplayParameterNameThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase(string.Empty, null));
         }
 
         [Fact]
-        public void InitializeWithNullTestParameterNameThrows()
+        public void InitializeWithNullDisplayParameterNameThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase(null, new Action(() => { })));
         }
@@ -80,7 +80,7 @@ namespace Jwc.Experiment.Xunit
         public void TestParameterNameIsCorrectWhenInitializedWithAction()
         {
             var sut = new TestCase(() => { });
-            var actual = sut.TestParameterName;
+            var actual = sut.DisplayParameterName;
             Assert.Null(actual);
         }
 
@@ -88,7 +88,7 @@ namespace Jwc.Experiment.Xunit
         public void TestParameterNameIsCorrectWhenInitializedWithFunc()
         {
             var sut = new TestCase(() => null);
-            var actual = sut.TestParameterName;
+            var actual = sut.DisplayParameterName;
             Assert.Null(actual);
         }
 
@@ -98,18 +98,18 @@ namespace Jwc.Experiment.Xunit
             Delegate @delegate = new Func<object>(() => null);
             var sut = new TestCase(@delegate);
 
-            var actual = sut.TestParameterName;
+            var actual = sut.DisplayParameterName;
 
             Assert.Null(actual);
         }
 
         [Fact]
-        public void TestParameterNameIsCorrectWhenInitializedWithTestParameterNameAndDelegate()
+        public void DisplayParameterNameIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
             var testParameterName = "anonymous";
             var sut = new TestCase(testParameterName, new Func<object>(() => null));
 
-            var actual = sut.TestParameterName;
+            var actual = sut.DisplayParameterName;
 
             Assert.Equal(testParameterName, actual);
         }
@@ -148,7 +148,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithTestParameterNameAndDelegate()
+        public void DelegateIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
             Delegate @delegate = new Func<object>(() => null);
             var sut = new TestCase("anonymous", @delegate);
@@ -186,7 +186,7 @@ namespace Jwc.Experiment.Xunit
             var command = Assert.IsType<FirstClassCommand>(
                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(method, command.Method);
-            Assert.Equal(string.Empty, command.TestParameterName);
+            Assert.Equal(string.Empty, command.DisplayParameterName);
             Assert.Equal(sut.Delegate, command.Delegate);
             Assert.Empty(command.Arguments);
         }
@@ -235,7 +235,7 @@ namespace Jwc.Experiment.Xunit
                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
 
             Assert.Equal(method, command.Method);
-            Assert.Equal(testParameterName, command.TestParameterName);
+            Assert.Equal(testParameterName, command.DisplayParameterName);
             Assert.Equal(@delegate, command.Delegate);
             Assert.Equal(arguments, command.Arguments);
         }
@@ -276,7 +276,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectTestParameterName()
+        public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
             var testParameterName = "anonymous";
             var sut = new TestCase(testParameterName, new Func<object>(() => null));
@@ -286,11 +286,11 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<FirstClassCommand>(
                 Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(testParameterName, command.TestParameterName);
+            Assert.Equal(testParameterName, command.DisplayParameterName);
         }
 
         [Fact]
-        public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectTestParameterName()
+        public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
             var testParameterName = "anonymous";
             var sut = new TestCase(testParameterName, new Action<int>(x => { }));
@@ -301,7 +301,7 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<FirstClassCommand>(
                 Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(testParameterName, command.TestParameterName);
+            Assert.Equal(testParameterName, command.DisplayParameterName);
         }
     }
 }

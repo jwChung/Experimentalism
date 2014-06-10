@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class TestCase : ITestCase
     {
-        private readonly string _testParameterName;
+        private readonly string _displayParameterName;
         private readonly Delegate _delegate;
 
         /// <summary>
@@ -57,29 +57,29 @@ namespace Jwc.Experiment.Xunit
         /// <summary>
         ///     Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
-        /// <param name="testParameterName">
+        /// <param name="displayParameterName">
         ///     A string to show parameters of a test method in test result.
         /// </param>
         /// <param name="delegate">
         ///     The test delegate.
         /// </param>
-        public TestCase(string testParameterName, Delegate @delegate) : this(@delegate)
+        public TestCase(string displayParameterName, Delegate @delegate) : this(@delegate)
         {
-            if (testParameterName == null)
-                throw new ArgumentNullException("testParameterName");
+            if (displayParameterName == null)
+                throw new ArgumentNullException("displayParameterName");
 
-            _testParameterName = testParameterName;
+            _displayParameterName = displayParameterName;
         }
 
         /// <summary>
         ///     Gets a value indicating the string to show parameters of a test method in test
         ///     result.
         /// </summary>
-        public string TestParameterName
+        public string DisplayParameterName
         {
             get
             {
-                return _testParameterName;
+                return _displayParameterName;
             }
         }
 
@@ -126,14 +126,14 @@ namespace Jwc.Experiment.Xunit
             return new ExceptionUnwrappingCommand(
                 new FirstClassCommand(
                     method,
-                    GetTestParameterName(arguments),
+                    GetDisplayParameterName(arguments),
                     Delegate,
                     arguments));
         }
 
-        private string GetTestParameterName(IList<object> arguments)
+        private string GetDisplayParameterName(IList<object> arguments)
         {
-            return TestParameterName ?? string.Join(", ", GetArgumentValues(arguments));
+            return DisplayParameterName ?? string.Join(", ", GetArgumentValues(arguments));
         }
 
         private IEnumerable<string> GetArgumentValues(IList<object> arguments)

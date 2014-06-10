@@ -14,7 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.5")]
 
 /*
- * Version 0.23.5
+ * Version 0.23.6
  * 
- * - [FIX] addressed ilmerge in Experiment.AutoFixture and Experiment.Xunit.
+ * - [FIX] renamed 'TestParameterName' to 'DisplayParameterName'.
+ *   (BAEAKING-CHANGE)
  */
