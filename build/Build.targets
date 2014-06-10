@@ -100,8 +100,7 @@
     <Exec Command="$(NuGetPath) push %(NugetSymbolPackages.Identity)" ContinueOnError="true" />
     <Delete Files="@(NugetSymbolPackages)" />
     <Exec Command="$(NuGetPath) push %(NugetPackages.Identity)" />
-    <Exec Command="$(NuGetPath) delete %(NuGetFiles.Filename) $(SemanticVersion) -NonInteractive"
-          Condition="$(SemanticVersion.Contains('-'))" />
+    <Exec Command="$(NuGetPath) delete %(NuGetFiles.Filename) $(SemanticVersion) -NonInteractive" Condition="$(SemanticVersion.Contains('-'))" ContinueOnError="true" />
     <OnError ExecuteTargets="DeleteNupkgFiles" />
   </Target>
 
