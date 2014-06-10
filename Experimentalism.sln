@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC
 		build\Build.tasks = build\Build.tasks
 		build\CodeAnalysisDictionary.xml = build\CodeAnalysisDictionary.xml
 		build\CommonAssemblyInfo.cs = build\CommonAssemblyInfo.cs
+		build\ILMerge.targets = build\ILMerge.targets
 		Run.cmd = Run.cmd
 		Run.sh = Run.sh
 	EndProjectSection
