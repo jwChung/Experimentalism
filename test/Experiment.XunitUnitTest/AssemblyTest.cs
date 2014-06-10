@@ -18,13 +18,5 @@ namespace Jwc.Experiment.Xunit
                 Assembly.Load("xunit.extensions"))
             .Verify(typeof(TestAttribute).Assembly);
         }
-
-        [Fact]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
-        {
-            new IndirectReferenceAssertion(
-                Assembly.Load("xunit.extensions"))
-            .Verify(typeof(TestAttribute).Assembly);
-        }
     }
 }
