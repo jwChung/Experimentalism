@@ -187,8 +187,6 @@ namespace Jwc.Experiment.Xunit
                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(method, command.Method);
             Assert.Equal(string.Empty, command.DisplayParameterName);
-            Assert.Equal(sut.Delegate, command.Delegate);
-            Assert.Empty(command.Arguments);
         }
 
         [Fact]
@@ -224,9 +222,8 @@ namespace Jwc.Experiment.Xunit
             };
 
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            string testParameterName = "Int32: 123, String: anonymous, Object: (null)";
-            var arguments = new object[] { 123, "anonymous", null };
-
+            const string displayParameterName = "Int32: 123, String: anonymous, Object: (null)";
+            
             // Exercise system
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
@@ -235,9 +232,7 @@ namespace Jwc.Experiment.Xunit
                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
 
             Assert.Equal(method, command.Method);
-            Assert.Equal(testParameterName, command.DisplayParameterName);
-            Assert.Equal(@delegate, command.Delegate);
-            Assert.Equal(arguments, command.Arguments);
+            Assert.Equal(displayParameterName, command.DisplayParameterName);
         }
 
         [Fact]
@@ -278,22 +273,22 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
-            var testParameterName = "anonymous";
-            var sut = new TestCase(testParameterName, new Func<object>(() => null));
+            const string displayParameterName = "anonymous";
+            var sut = new TestCase(displayParameterName, new Func<object>(() => null));
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
             var command = Assert.IsType<FirstClassCommand>(
                 Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(testParameterName, command.DisplayParameterName);
+            Assert.Equal(displayParameterName, command.DisplayParameterName);
         }
 
         [Fact]
         public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
-            var testParameterName = "anonymous";
-            var sut = new TestCase(testParameterName, new Action<int>(x => { }));
+            const string displayParameterName = "anonymous";
+            var sut = new TestCase(displayParameterName, new Action<int>(x => { }));
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixtureFactory = new DelegatingTestFixtureFactory { OnCreate = m => new FakeTestFixture() };
 
@@ -301,7 +296,24 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<FirstClassCommand>(
                 Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(testParameterName, command.DisplayParameterName);
+            Assert.Equal(displayParameterName, command.DisplayParameterName);
+        }
+
+        [Fact]
+        public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandWithCorrectDelegate()
+        {
+            bool verifyMock = false;
+            var fixture = new DelegatingTestFixture { OnCreate = r => 123 };
+            var sut = new TestCase(new Action<int>(x => { Assert.Equal(123, x); verifyMock = true; }));
+            var factory = new DelegatingTestFixtureFactory { OnCreate = m => fixture };
+
+            var actual = sut.ConvertToTestCommand(
+                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), factory);
+
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+            ((Action)command.Delegate).Invoke();
+            Assert.True(verifyMock);
         }
     }
 }

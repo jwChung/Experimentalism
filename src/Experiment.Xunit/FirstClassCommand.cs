@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
@@ -84,17 +83,6 @@ namespace Jwc.Experiment.Xunit
             get
             {
                 return _delegate;
-            }
-        }
-
-        /// <summary>
-        ///     Gets the arguments.
-        /// </summary>
-        public IEnumerable<object> Arguments
-        {
-            get
-            {
-                return _arguments;
             }
         }
 

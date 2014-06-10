@@ -100,21 +100,6 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void ArgumentsIsCorrect()
-        {
-            var arguments = new[] { 1, new object(), "string" };
-            var sut = new FirstClassCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                string.Empty,
-                new Action(() => { }),
-                arguments);
-
-            var actual = sut.Arguments;
-
-            Assert.Equal(arguments, actual);
-        }
-
-        [Fact]
         public void DisplayNameIsCorrect()
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();

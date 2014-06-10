@@ -127,8 +127,8 @@ namespace Jwc.Experiment.Xunit
                 new FirstClassCommand(
                     method,
                     GetDisplayParameterName(arguments),
-                    Delegate,
-                    arguments));
+                    new Action(() => Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, arguments)),
+                    new object[0]));
         }
 
         private string GetDisplayParameterName(IList<object> arguments)
