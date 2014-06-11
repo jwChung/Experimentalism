@@ -2,7 +2,7 @@
 
 namespace Jwc.Experiment.Xunit
 {
-    public class SpyAssemblyCustomizationAttribute : AssemblyCustomizationAttribute
+    public class SpyAssemblyFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
     {
         public static int SetUpCount { get; set; }
 

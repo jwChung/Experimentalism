@@ -192,14 +192,14 @@ namespace Jwc.Experiment.Xunit
         }
 
         [NewAppDomainFact]
-        public void CreateTestCommandsCorrectlyCustomizesAllFixturesInTestAssembly()
+        public void CreateTestCommandsCorrectlyConfiguresAllFixturesInTestAssembly()
         {
             var sut = new FirstClassTestAttribute();
             var method = Reflector.Wrap(GetType().GetMethod("PassTestFixtureTest"));
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyAssemblyCustomizationAttribute.SetUpCount);
+            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
         }
 
         [NewAppDomainFact]

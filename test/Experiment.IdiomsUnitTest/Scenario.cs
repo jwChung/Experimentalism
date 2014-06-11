@@ -7,7 +7,7 @@ using Jwc.Experiment.Idioms;
 using Jwc.Experiment.Xunit;
 using Ploeh.Albedo;
 
-[assembly: Scenario.FixtureCustomization]
+[assembly: Scenario.TestFixtureConfiguration]
 
 namespace Jwc.Experiment
 {
@@ -98,7 +98,7 @@ namespace Jwc.Experiment
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        public class FixtureCustomizationAttribute : AssemblyCustomizationAttribute
+        public class TestFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
         {
             protected override void Setup(Assembly testAssembly)
             {

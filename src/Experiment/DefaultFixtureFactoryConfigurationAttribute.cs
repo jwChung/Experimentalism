@@ -6,23 +6,23 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Attribute to customize default fixture with a <see cref="ITestFixtureFactory"/> type.
+    /// Attribute to configure default fixture factory.
     /// </summary>
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute can be inherited to supply custom ITestFixtureFactory.")]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public class DefaultFixtureCustomizationAttribute : AssemblyCustomizationAttribute
+    public class DefaultFixtureFactoryConfigurationAttribute : AssemblyFixtureConfigurationAttribute
     {
         private readonly Type _factoryType;
         private readonly ITestFixtureFactory _factory;
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="DefaultFixtureCustomizationAttribute" /> class.
+        ///     <see cref="DefaultFixtureFactoryConfigurationAttribute" /> class.
         /// </summary>
         /// <param name="factoryType">
         ///     Type of the test fixture factory.
         /// </param>
-        public DefaultFixtureCustomizationAttribute(Type factoryType)
+        public DefaultFixtureFactoryConfigurationAttribute(Type factoryType)
         {
             if (factoryType == null)
                 throw new ArgumentNullException("factoryType");
@@ -40,12 +40,12 @@ namespace Jwc.Experiment
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="DefaultFixtureCustomizationAttribute" /> class.
+        ///     <see cref="DefaultFixtureFactoryConfigurationAttribute" /> class.
         /// </summary>
         /// <param name="factory">
         ///     The test fixture factory.
         /// </param>
-        protected DefaultFixtureCustomizationAttribute(ITestFixtureFactory factory)
+        protected DefaultFixtureFactoryConfigurationAttribute(ITestFixtureFactory factory)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
