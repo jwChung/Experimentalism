@@ -128,7 +128,7 @@
   <Target Name="GitTagging" Condition="!$(SemanticVersion.Contains('-'))">
     <Exec Command='git config user.name "$(CommitAuthor)"' />
     <Exec Command='git config user.email "$(CommitAuthorEmail)"' />
-    <Exec Command='git tag -a -F ReleaseNotes.txt $(SemanticVersion)' />
+    <Exec Command='git tag -a -F ReleaseNotes.txt "v$(SemanticVersion)"' />
     <Exec Command='git push --quiet --tags --repo "$(Repository)"' />
     <OnError ExecuteTargets="DeleteReleaseNotes" />
   </Target>
