@@ -10,19 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.23.6")]
-[assembly: AssemblyInformationalVersion("0.23.6")]
+[assembly: AssemblyVersion("0.23.7")]
+[assembly: AssemblyInformationalVersion("0.23.7")]
 
 /*
- * Version 0.23.6
+ * Version 0.23.7
  * 
- * - [FIX] renamed 'TestParameterName' to 'DisplayParameterName'.
- *   (BAEAKING-CHANGE)
- *   
- * - [FIX] slightly improved performance of TestCase and refactored
- *   FirstClassCommand to simplify. (BAEAKING-CHANGE)
- *   
- * - [FIX] renamed the word 'configuration' to 'customization' in
- *   AssemblyFixtureConfigration, and some classes related with this.
- *   (BREAKING-CHANGE)
+ * - [FIX] reverted the word 'customization' to 'configuration' in assembly
+ *   attirbutes. (BREAKING-CHANGE)
  */
