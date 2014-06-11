@@ -21,4 +21,8 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] slightly improved performance of TestCase and refactored
  *   FirstClassCommand to simplify. (BAEAKING-CHANGE)
+ *   
+ * - [FIX] renamed the word 'configuration' to 'customization' in
+ *   AssemblyFixtureConfigration, and some classes related with this.
+ *   (BREAKING-CHANGE)
  */
