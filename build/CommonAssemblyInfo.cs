@@ -14,12 +14,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.7")]
 
 /*
- * Version 0.23.7
+ * Version 0.23.8
  * 
- * - [FIX] reverted the word 'customization' to 'configuration' in assembly
- *   attirbutes. (BREAKING-CHANGE)
- *   
- * - [FIX] renamed some assembly attributes. (BREAKING-CHANGE)
- *   DefaultFixtureyConfigurationAttribute -> TestFixtureyConfigurationAttribute
- *   TestFixtureyConfigurationAttribute -> AutFixtureyConfigurationAttribute
+ * - [FIX] fixed the type name 'TestFixtureFactory' to
+ *   'DefaultFixtureFactory' in the message of the exception thrown by
+ *   NotSupportedFixtureFactory.Create.
  */

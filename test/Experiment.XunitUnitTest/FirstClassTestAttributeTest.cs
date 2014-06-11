@@ -188,7 +188,7 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<ExceptionCommand>(actual);
             var exception = Assert.IsType<NotSupportedException>(command.Exception);
-            Assert.Contains("TestFixtureFactory.SetCurrent", exception.Message);
+            Assert.Contains("DefaultFixtureFactory.SetCurrent", exception.Message);
         }
 
         [NewAppDomainFact]

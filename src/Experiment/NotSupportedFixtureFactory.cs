@@ -21,9 +21,9 @@ namespace Jwc.Experiment
         public ITestFixture Create(MethodInfo testMethod)
         {
             throw new NotSupportedException(
-                "To create auto data, call 'TestFixtureFactory.SetCurrent' to set 'ITestFixtureFactory', or override " +
-                "'CreateTestFixture' of 'TestAttribute' or 'FirstClassTestAttribute' to create an instance of " +
-                "'ITestFixture'.");
+                "To create auto data, call 'DefaultFixtureFactory.SetCurrent' to set 'ITestFixtureFactory', " +
+                "or override 'CreateTestFixture' of 'TestAttribute' or 'FirstClassTestAttribute' to create " +
+                "an instance of 'ITestFixture'.");
         }
     }
 }
