@@ -14,7 +14,7 @@ namespace Jwc.Experiment
     public class Scenario
     {
         [Test]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesMember(
+        public void NullGuardClasuseAssertionCorrectlyVerifiesMembers(
             NullGuardClauseAssertion assertion)
         {
             typeof(ClassForNullGuardClause)
@@ -29,8 +29,18 @@ namespace Jwc.Experiment
                 .ForEach(assertion.Verify);
         }
 
+        [Test]
+        public void MemberInitializationAssertionCorrectlyVerifiesMembers(
+            MemberInitializationAssertion assertion)
+        {
+            typeof(ClassWithMembersInitializedByConstructor)
+                .GetIdiomaticMembers()
+                .ToList()
+                .ForEach(assertion.Verify);
+        }
+
         [FirstClassTest]
-        public IEnumerable<ITestCase> SutWithNullGuardClasuseAssertionCorrectlyCreatesTestCases()
+        public IEnumerable<ITestCase> NullGuardClasuseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -43,18 +53,8 @@ namespace Jwc.Experiment
                 .Select(m => new TestCase(new Action<NullGuardClauseAssertion>(a => a.Verify(m))));
         }
 
-        [Test]
-        public void MemberInitializationAssertionCorrectlyVerifiesMember(
-            MemberInitializationAssertion assertion)
-        {
-            typeof(ClassWithMembersInitializedByConstructor)
-                .GetIdiomaticMembers()
-                .ToList()
-                .ForEach(assertion.Verify);
-        }
-
         [FirstClassTest]
-        public IEnumerable<ITestCase> SutWithMemberInitializationAssertionCorrectlyCreatesTestCases()
+        public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers()
@@ -80,22 +80,17 @@ namespace Jwc.Experiment
                 Assembly.Load("Ploeh.AutoFixture"),
                 Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
-                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         [Test]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
-                ////Assembly.Load("mscorlib"),
-                ////typeof(Uri).Assembly,
-                ////typeof(Enumerable).Assembly,
-                ////Assembly.Load("Jwc.Experiment"),
-                ////Assembly.Load("Ploeh.Albedo"),
                 Assembly.Load("Ploeh.AutoFixture"),
                 Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
-                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute

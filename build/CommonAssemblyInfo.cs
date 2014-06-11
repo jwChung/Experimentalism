@@ -18,4 +18,8 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] reverted the word 'customization' to 'configuration' in assembly
  *   attirbutes. (BREAKING-CHANGE)
+ *   
+ * - [FIX] renamed some assembly attributes. (BREAKING-CHANGE)
+ *   DefaultFixtureyConfigurationAttribute -> TestFixtureyConfigurationAttribute
+ *   TestFixtureyConfigurationAttribute -> AutFixtureyConfigurationAttribute
  */
