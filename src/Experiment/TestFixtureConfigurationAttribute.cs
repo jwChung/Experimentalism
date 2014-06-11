@@ -6,23 +6,23 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Attribute to configure default fixture factory.
+    ///     Attribute to configure default fixture factory.
     /// </summary>
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute can be inherited to supply custom ITestFixtureFactory.")]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public class DefaultFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
+    public class TestFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
     {
         private readonly Type _factoryType;
         private readonly ITestFixtureFactory _factory;
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="DefaultFixtureConfigurationAttribute" /> class.
+        ///     <see cref="TestFixtureConfigurationAttribute" /> class.
         /// </summary>
         /// <param name="factoryType">
         ///     Type of the test fixture factory.
         /// </param>
-        public DefaultFixtureConfigurationAttribute(Type factoryType)
+        public TestFixtureConfigurationAttribute(Type factoryType)
         {
             if (factoryType == null)
                 throw new ArgumentNullException("factoryType");
@@ -40,12 +40,12 @@ namespace Jwc.Experiment
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="DefaultFixtureConfigurationAttribute" /> class.
+        ///     <see cref="TestFixtureConfigurationAttribute" /> class.
         /// </summary>
         /// <param name="factory">
         ///     The test fixture factory.
         /// </param>
-        protected DefaultFixtureConfigurationAttribute(ITestFixtureFactory factory)
+        protected TestFixtureConfigurationAttribute(ITestFixtureFactory factory)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");

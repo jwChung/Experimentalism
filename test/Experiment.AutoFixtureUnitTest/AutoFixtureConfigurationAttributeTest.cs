@@ -2,19 +2,19 @@
 
 namespace Jwc.Experiment.AutoFixture
 {
-    public class TestFixtureyConfigurationAttributeTest
+    public class AutoFixtureConfigurationAttributeTest
     {
         [Fact]
         public void SutIsDefaultFixtureConfigurationAttribute()
         {
-            var sut = new TestFixtureyConfigurationAttribute();
-            Assert.IsAssignableFrom<DefaultFixtureConfigurationAttribute>(sut);
+            var sut = new AutoFixtureConfigurationAttribute();
+            Assert.IsAssignableFrom<TestFixtureConfigurationAttribute>(sut);
         }
 
         [Fact]
         public void FactoryIsCorrect()
         {
-            var sut = new TestFixtureyConfigurationAttribute();
+            var sut = new AutoFixtureConfigurationAttribute();
 
             var actual = sut.Factory;
 

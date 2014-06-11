@@ -7,7 +7,7 @@ using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 
-[assembly: Scenario.TestFixtureConfiguration]
+[assembly: Scenario.ScenarioFixtureConfiguration]
 
 namespace Jwc.Experiment.AutoFixture
 {
@@ -95,7 +95,7 @@ namespace Jwc.Experiment.AutoFixture
             yield return new TestCase(new Action<object>(x => Assert.NotNull(x)));
         }
 
-        public class TestFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
+        public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
         {
             protected override void Setup(Assembly testAssembly)
             {
