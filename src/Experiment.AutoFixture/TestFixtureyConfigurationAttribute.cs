@@ -6,13 +6,13 @@ namespace Jwc.Experiment.AutoFixture
     ///     Attribute to configure test fixture factory.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public sealed class TestFixtureFactoryConfigurationAttribute : DefaultFixtureFactoryConfigurationAttribute
+    public sealed class TestFixtureyConfigurationAttribute : DefaultFixtureConfigurationAttribute
     {
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="TestFixtureFactoryConfigurationAttribute" /> class.
+        ///     <see cref="TestFixtureyConfigurationAttribute" /> class.
         /// </summary>
-        public TestFixtureFactoryConfigurationAttribute() : base(new TestFixtureFactory())
+        public TestFixtureyConfigurationAttribute() : base(new TestFixtureFactory())
         {
         }
     }

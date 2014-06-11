@@ -9,7 +9,7 @@ namespace Jwc.Experiment
     ///     Attribute to set up or tear down all fixtures in a test assembly.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public abstract class AssemblyFixtureConfigurationAttribute : Attribute
+    public abstract class TestAssemblyConfigurationAttribute : Attribute
     {
         private static readonly object SyncLock = new object();
         private static bool _configured;
@@ -64,10 +64,10 @@ namespace Jwc.Experiment
                 attribute.ConfigureAttribute(testAssembly);
         }
 
-        private static IEnumerable<AssemblyFixtureConfigurationAttribute> GetAttributes(Assembly testAssembly)
+        private static IEnumerable<TestAssemblyConfigurationAttribute> GetAttributes(Assembly testAssembly)
         {
-            return testAssembly.GetCustomAttributes(typeof(AssemblyFixtureConfigurationAttribute), false)
-                .Cast<AssemblyFixtureConfigurationAttribute>();
+            return testAssembly.GetCustomAttributes(typeof(TestAssemblyConfigurationAttribute), false)
+                .Cast<TestAssemblyConfigurationAttribute>();
         }
 
         private void ConfigureAttribute(Assembly testAssembly)

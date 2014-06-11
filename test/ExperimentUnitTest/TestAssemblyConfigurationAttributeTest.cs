@@ -7,32 +7,32 @@ using Xunit;
 
 namespace Jwc.Experiment
 {
-    public class AssemblyFixtureConfigurationAttributeTest
+    public class TestAssemblyConfigurationAttributeTest
     {
         [Fact]
         public void SutIsAttribute()
         {
-            var sut = new TssAssemblyFixtureConfigurationAttribute();
+            var sut = new TssTestAssemblyConfigurationAttribute();
             Assert.IsAssignableFrom<Attribute>(sut);
         }
 
         [NewAppDomainFact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenCalledManyTimes()
         {
-            var attribute1 = new TssAssemblyFixtureConfigurationAttribute();
-            var attribute2 = new TssAssemblyFixtureConfigurationAttribute();
+            var attribute1 = new TssTestAssemblyConfigurationAttribute();
+            var attribute2 = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly
             {
                 OnGetCustomAttributes = (t, i) =>
                 {
-                    Assert.Equal(typeof(AssemblyFixtureConfigurationAttribute), t);
+                    Assert.Equal(typeof(TestAssemblyConfigurationAttribute), t);
                     Assert.False(i);
                     return new object[] { attribute1, attribute2 };
                 }
             };
 
-            AssemblyFixtureConfigurationAttribute.Configure(assembly);
-            AssemblyFixtureConfigurationAttribute.Configure(assembly);
+            TestAssemblyConfigurationAttribute.Configure(assembly);
+            TestAssemblyConfigurationAttribute.Configure(assembly);
 
             Assert.Equal(assembly, attribute1.SetUpAssemblies.Single());
             Assert.Equal(assembly, attribute2.SetUpAssemblies.Single());
@@ -41,13 +41,13 @@ namespace Jwc.Experiment
         [NewAppDomainFact]
         public void ConfigureRegistersCorrectTearDownHandlerToDomainUnloadEvent()
         {
-            var attribute = new TssAssemblyFixtureConfigurationAttribute();
+            var attribute = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly
             {
                 OnGetCustomAttributes = (t, i) => new object[] { attribute }
             };
 
-            AssemblyFixtureConfigurationAttribute.Configure(assembly);
+            TestAssemblyConfigurationAttribute.Configure(assembly);
 
             attribute.RaiseDomainUnload();
             Assert.Equal(assembly, attribute.TearDownAssemblies.Single());
@@ -57,7 +57,7 @@ namespace Jwc.Experiment
         public void ConfigureSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
         {
             // Fixture setup
-            var attribute = new TssAssemblyFixtureConfigurationAttribute();
+            var attribute = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly
             {
                 OnGetCustomAttributes = (t, i) => new object[] { attribute }
@@ -65,7 +65,7 @@ namespace Jwc.Experiment
 
             var threads = new Thread[30];
             for (int i = 0; i < threads.Length; i++)
-                threads[i] = new Thread(() => AssemblyFixtureConfigurationAttribute.Configure(assembly));
+                threads[i] = new Thread(() => TestAssemblyConfigurationAttribute.Configure(assembly));
 
             // Exercise system
             foreach (var thread in threads)
@@ -80,10 +80,10 @@ namespace Jwc.Experiment
         [Fact]
         public void ConfigureWithNullAssemblyThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => AssemblyFixtureConfigurationAttribute.Configure(null));
+            Assert.Throws<ArgumentNullException>(() => TestAssemblyConfigurationAttribute.Configure(null));
         }
 
-        private class TssAssemblyFixtureConfigurationAttribute : AssemblyFixtureConfigurationAttribute
+        private class TssTestAssemblyConfigurationAttribute : TestAssemblyConfigurationAttribute
         {
             private readonly List<Assembly> _setUpAssemblies = new List<Assembly>();
             private readonly List<Assembly> _tearDownAssemblies = new List<Assembly>();

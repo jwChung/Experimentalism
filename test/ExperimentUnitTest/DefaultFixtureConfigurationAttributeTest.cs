@@ -5,20 +5,20 @@ using Xunit.Extensions;
 
 namespace Jwc.Experiment
 {
-    public class DefaultFixtureFactoryConfigurationAttributeTest
+    public class DefaultFixtureConfigurationAttributeTest
     {
         [Fact]
         public void SutIsAssemblyFixtureConfigurationAttribute()
         {
-            var sut = new DefaultFixtureFactoryConfigurationAttribute(typeof(DelegatingTestFixtureFactory));
-            Assert.IsAssignableFrom<AssemblyFixtureConfigurationAttribute>(sut);
+            var sut = new DefaultFixtureConfigurationAttribute(typeof(DelegatingTestFixtureFactory));
+            Assert.IsAssignableFrom<TestAssemblyConfigurationAttribute>(sut);
         }
 
         [Fact]
         public void InitializeWithNullFactoryTypeThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new DefaultFixtureFactoryConfigurationAttribute(null));
+                () => new DefaultFixtureConfigurationAttribute(null));
         }
 
         [Theory]
@@ -29,21 +29,21 @@ namespace Jwc.Experiment
         public void InitializeWithInvalidFactoryTypeThrows(Type factoryType)
         {
             Assert.Throws<ArgumentException>(
-                () => new DefaultFixtureFactoryConfigurationAttribute(factoryType));
+                () => new DefaultFixtureConfigurationAttribute(factoryType));
         }
 
         [Fact]
         public void InitializeWithNullFactoryThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new TssDefaultFixtureFactoryConfigurationAttribute((ITestFixtureFactory)null));
+                () => new TssDefaultFixtureConfigurationAttribute((ITestFixtureFactory)null));
         }
 
         [Fact]
         public void FactoryTypeIsCorrectWhenInitializedWithFactoryType()
         {
             var expected = typeof(DelegatingTestFixtureFactory);
-            var sut = new DefaultFixtureFactoryConfigurationAttribute(expected);
+            var sut = new DefaultFixtureConfigurationAttribute(expected);
 
             var actual = sut.FactoryType;
 
@@ -54,7 +54,7 @@ namespace Jwc.Experiment
         public void FactoryTypeIsCorrectWhenInitializedWithFactory()
         {
             var factory = new DelegatingTestFixtureFactory();
-            var sut = new TssDefaultFixtureFactoryConfigurationAttribute(factory);
+            var sut = new TssDefaultFixtureConfigurationAttribute(factory);
 
             var actual = sut.FactoryType;
 
@@ -65,7 +65,7 @@ namespace Jwc.Experiment
         public void FactoryIsCorrectWhenInitializedWithFactoryType()
         {
             var expected = typeof(DelegatingTestFixtureFactory);
-            var sut = new DefaultFixtureFactoryConfigurationAttribute(expected);
+            var sut = new DefaultFixtureConfigurationAttribute(expected);
 
             var actual = sut.Factory;
 
@@ -76,7 +76,7 @@ namespace Jwc.Experiment
         public void FactoryIsCorrectWhenInitializedWithFactory()
         {
             var factory = new DelegatingTestFixtureFactory();
-            var sut = new TssDefaultFixtureFactoryConfigurationAttribute(factory);
+            var sut = new TssDefaultFixtureConfigurationAttribute(factory);
 
             var actual = sut.Factory;
 
@@ -87,7 +87,7 @@ namespace Jwc.Experiment
         public void SetupSetsSuppliedFactoryAsCurrentOfDefaultFixtureFactory()
         {
             var factory = new DelegatingTestFixtureFactory();
-            var sut = new TssDefaultFixtureFactoryConfigurationAttribute(factory);
+            var sut = new TssDefaultFixtureConfigurationAttribute(factory);
 
             sut.CallSetup(null);
 
@@ -98,20 +98,20 @@ namespace Jwc.Experiment
         public void SetupSetsInstanceOfSuppliedFactoryTypeAsCurrentOfDefaultFixtureFactory()
         {
             var factoryType = typeof(DelegatingTestFixtureFactory);
-            var sut = new TssDefaultFixtureFactoryConfigurationAttribute(factoryType);
+            var sut = new TssDefaultFixtureConfigurationAttribute(factoryType);
 
             sut.CallSetup(null);
 
             Assert.IsType<DelegatingTestFixtureFactory>(DefaultFixtureFactory.Current);
         }
 
-        private class TssDefaultFixtureFactoryConfigurationAttribute : DefaultFixtureFactoryConfigurationAttribute
+        private class TssDefaultFixtureConfigurationAttribute : DefaultFixtureConfigurationAttribute
         {
-            public TssDefaultFixtureFactoryConfigurationAttribute(Type factoryType) : base(factoryType)
+            public TssDefaultFixtureConfigurationAttribute(Type factoryType) : base(factoryType)
             {
             }
 
-            public TssDefaultFixtureFactoryConfigurationAttribute(ITestFixtureFactory factory) : base(factory)
+            public TssDefaultFixtureConfigurationAttribute(ITestFixtureFactory factory) : base(factory)
             {
             }
 

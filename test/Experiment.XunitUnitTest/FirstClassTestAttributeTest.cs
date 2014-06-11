@@ -199,7 +199,7 @@ namespace Jwc.Experiment.Xunit
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
+            Assert.Equal(1, SpyTestAssemblyConfigurationAttribute.SetUpCount);
         }
 
         [NewAppDomainFact]
