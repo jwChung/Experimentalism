@@ -11,7 +11,7 @@ namespace Jwc.Experiment
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public abstract class TestAssemblyConfigurationAttribute : Attribute
     {
-        private static readonly object SyncLock = new object();
+        private static readonly object SyncRoot = new object();
         private static bool _configured;
 
         /// <summary>
@@ -28,14 +28,17 @@ namespace Jwc.Experiment
             if (_configured)
                 return;
 
-            lock (SyncLock)
-            {
-                if (_configured)
-                    return;
+            lock (SyncRoot)
+                ConfigureImpl(testAssembly);
+        }
 
-                ConfigureAttributes(testAssembly);
-                _configured = true;
-            }
+        private static void ConfigureImpl(Assembly testAssembly)
+        {
+            if (_configured)
+                return;
+
+            ConfigureAttributes(testAssembly);
+            _configured = true;
         }
 
         /// <summary>
