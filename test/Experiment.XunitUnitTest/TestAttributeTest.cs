@@ -7,7 +7,7 @@ using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
 
-[assembly: SpyAssemblyFixtureConfiguration]
+[assembly: SpyAssemblyCustomization]
 
 namespace Jwc.Experiment.Xunit
 {
@@ -357,14 +357,14 @@ namespace Jwc.Experiment.Xunit
         }
 
         [NewAppDomainFact]
-        public void CreateTestCommandsCorrectlyConfiguresAllFixturesInTestAssembly()
+        public void CreateTestCommandsCorrectlyCustomizesAllFixturesInTestAssembly()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyAssemblyFixtureConfigurationAttribute.SetUpCount);
+            Assert.Equal(1, SpyAssemblyCustomizationAttribute.SetUpCount);
         }
         
         [InlineData]

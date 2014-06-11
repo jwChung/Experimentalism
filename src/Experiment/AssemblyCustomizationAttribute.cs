@@ -9,10 +9,10 @@ namespace Jwc.Experiment
     ///     Attribute to set up or tear down all fixtures in a test assembly.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-    public abstract class AssemblyFixtureConfigurationAttribute : Attribute
+    public abstract class AssemblyCustomizationAttribute : Attribute
     {
         private static readonly object SyncLock = new object();
-        private static bool _configured;
+        private static bool _customized;
 
         /// <summary>
         ///     Sets up or tears down all fixtures in a test assembly.
@@ -20,21 +20,21 @@ namespace Jwc.Experiment
         /// <param name="testAssembly">
         ///     The test assembly.
         /// </param>
-        public static void Configure(Assembly testAssembly)
+        public static void Customize(Assembly testAssembly)
         {
             if (testAssembly == null)
                 throw new ArgumentNullException("testAssembly");
 
-            if (_configured)
+            if (_customized)
                 return;
 
             lock (SyncLock)
             {
-                if (_configured)
+                if (_customized)
                     return;
 
-                ConfigureAttributes(testAssembly);
-                _configured = true;
+                CustomizeAttributes(testAssembly);
+                _customized = true;
             }
         }
 
@@ -58,19 +58,19 @@ namespace Jwc.Experiment
         {
         }
 
-        private static void ConfigureAttributes(Assembly testAssembly)
+        private static void CustomizeAttributes(Assembly testAssembly)
         {
             foreach (var attribute in GetAttributes(testAssembly))
-                attribute.ConfigureAttribute(testAssembly);
+                attribute.CustomizeAttribute(testAssembly);
         }
 
-        private static IEnumerable<AssemblyFixtureConfigurationAttribute> GetAttributes(Assembly testAssembly)
+        private static IEnumerable<AssemblyCustomizationAttribute> GetAttributes(Assembly testAssembly)
         {
-            return testAssembly.GetCustomAttributes(typeof(AssemblyFixtureConfigurationAttribute), false)
-                .Cast<AssemblyFixtureConfigurationAttribute>();
+            return testAssembly.GetCustomAttributes(typeof(AssemblyCustomizationAttribute), false)
+                .Cast<AssemblyCustomizationAttribute>();
         }
 
-        private void ConfigureAttribute(Assembly testAssembly)
+        private void CustomizeAttribute(Assembly testAssembly)
         {
             Setup(testAssembly);
             DomainUnload += (s, e) => Teardown(testAssembly);
