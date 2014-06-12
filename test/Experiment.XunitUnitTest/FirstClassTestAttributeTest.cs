@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Jwc.Experiment.Xunit;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
+
+////[assembly: TestAssemblyExceptionConfiguration]
 
 namespace Jwc.Experiment.Xunit
 {
@@ -224,6 +227,18 @@ namespace Jwc.Experiment.Xunit
 
             // Verify outcome
             Assert.IsType<FactCommand>(actual);
+        }
+
+        [Fact(Skip = "Explicitly run this test with uncommenting the usage of TestAssemblyExceptionConfiguration on the top.")]
+        public void CreateTestCommandsReturnsExceptionCommandWhenTestAssemblyConfigurationThrows()
+        {
+            var sut = new FirstClassTestAttribute();
+            var method = Reflector.Wrap(GetType().GetMethod("TestCasesTest"));
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<InvalidOperationException>(command.Exception);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()

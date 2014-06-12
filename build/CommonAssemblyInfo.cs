@@ -19,4 +19,7 @@ using System.Runtime.InteropServices;
  * - [FIX] fixed the type name 'TestFixtureFactory' to
  *   'DefaultFixtureFactory' in the message of the exception thrown by
  *   NotSupportedFixtureFactory.Create.
+ *   
+ * - [FIX] fixed that test attributes do not handle exception thrown by the
+ *   Setup method of TestAssemblyConfigurationAttribute.
  */

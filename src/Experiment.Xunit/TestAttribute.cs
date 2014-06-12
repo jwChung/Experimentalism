@@ -34,17 +34,17 @@ namespace Jwc.Experiment.Xunit
             if (method == null)
                 throw new ArgumentNullException("method");
 
-            TestAssemblyConfigurationAttribute.Configure(method.MethodInfo.ReflectedType.Assembly);
+            try
+            {
+                TestAssemblyConfigurationAttribute.Configure(
+                    method.MethodInfo.ReflectedType.Assembly);
+            }
+            catch (Exception exception)
+            {
+                return new[] { new ExceptionCommand(method, exception) };
+            }
 
-            var enumerator = GetTestCommands(method).GetEnumerator();
-
-            Func<IMethodInfo, ITestCommand> exceptionCommandFunc;
-
-            while (TryMoveNext(enumerator, out exceptionCommandFunc))
-                yield return enumerator.Current;
-
-            if (exceptionCommandFunc != null)
-                yield return exceptionCommandFunc.Invoke(method);
+            return new TestCommandEnumerable(method, GetTestCommands(method));
         }
 
         /// <summary>
@@ -59,24 +59,6 @@ namespace Jwc.Experiment.Xunit
         protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
             return DefaultFixtureFactory.Current.Create(testMethod);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
-        private static bool TryMoveNext(
-            IEnumerator<ITestCommand> enumerator,
-            out Func<IMethodInfo, ITestCommand> exceptionCommandFunc)
-        {
-            try
-            {
-                var moveNext = enumerator.MoveNext();
-                exceptionCommandFunc = null;
-                return moveNext;
-            }
-            catch (Exception exception)
-            {
-                exceptionCommandFunc = m => new ExceptionCommand(m, exception);
-                return false;
-            }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]

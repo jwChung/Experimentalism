@@ -8,6 +8,7 @@ using Xunit.Extensions;
 using Xunit.Sdk;
 
 [assembly: SpyTestAssemblyConfiguration]
+////[assembly: TestAssemblyExceptionConfiguration]
 
 namespace Jwc.Experiment.Xunit
 {
@@ -365,6 +366,18 @@ namespace Jwc.Experiment.Xunit
             sut.CreateTestCommands(method).ToArray();
 
             Assert.Equal(1, SpyTestAssemblyConfigurationAttribute.SetUpCount);
+        }
+
+        [Fact(Skip = "Explicitly run this test with uncommenting the usage of TestAssemblyExceptionConfiguration on the top.")]
+        public void CreateTestCommandsReturnsExceptionCommandWhenTestAssemblyConfigurationThrows()
+        {
+            var sut = new TestAttribute();
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var actual = sut.CreateTestCommands(method).Single();
+
+            var command = Assert.IsType<ExceptionCommand>(actual);
+            Assert.IsType<InvalidOperationException>(command.Exception);
         }
         
         [InlineData]
