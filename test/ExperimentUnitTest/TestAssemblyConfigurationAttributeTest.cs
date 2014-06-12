@@ -23,7 +23,7 @@ namespace Jwc.Experiment
             var attribute2 = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly
             {
-                OnGetCustomAttributes = (t, i) =>
+                OnGetCustomAttributesWithType = (t, i) =>
                 {
                     Assert.Equal(typeof(TestAssemblyConfigurationAttribute), t);
                     Assert.False(i);
@@ -44,7 +44,7 @@ namespace Jwc.Experiment
             var attribute = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly
             {
-                OnGetCustomAttributes = (t, i) => new object[] { attribute }
+                OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
             };
 
             TestAssemblyConfigurationAttribute.Configure(assembly);
@@ -60,7 +60,7 @@ namespace Jwc.Experiment
             var attribute = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly
             {
-                OnGetCustomAttributes = (t, i) => new object[] { attribute }
+                OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
             };
 
             var threads = new Thread[30];
@@ -121,16 +121,6 @@ namespace Jwc.Experiment
             }
 
             protected override event EventHandler DomainUnload;
-        }
-
-        private class DelegatingAssembly : Assembly
-        {
-            public Func<Type, bool, object[]> OnGetCustomAttributes { get; set; }
-
-            public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-            {
-                return OnGetCustomAttributes(attributeType, inherit);
-            }
         }
     }
 }

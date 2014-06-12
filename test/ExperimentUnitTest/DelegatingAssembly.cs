@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 
 namespace Jwc.Experiment
@@ -13,6 +13,8 @@ namespace Jwc.Experiment
 
         public Func<bool, object[]> OnGetCustomAttributes { get; set; }
 
+        public Func<Type, bool, object[]> OnGetCustomAttributesWithType { get; set; }
+
         public Func<Type[]> OnGetTypes { get; set; }
 
         public override string FullName
@@ -23,6 +25,11 @@ namespace Jwc.Experiment
         public override object[] GetCustomAttributes(bool inherit)
         {
             return OnGetCustomAttributes(inherit);
+        }
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return OnGetCustomAttributesWithType(attributeType, inherit);
         }
 
         public override Type[] GetTypes()
