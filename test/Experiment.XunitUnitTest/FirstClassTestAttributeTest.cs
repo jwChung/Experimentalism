@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Jwc.Experiment.Xunit;
+using Moq;
 using Xunit;
 using Xunit.Extensions;
 using Xunit.Sdk;
-
-////[assembly: TestAssemblyExceptionConfiguration]
 
 namespace Jwc.Experiment.Xunit
 {
@@ -229,11 +227,19 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<FactCommand>(actual);
         }
 
-        [Fact(Skip = "Explicitly run this test with uncommenting the usage of TestAssemblyExceptionConfiguration on the top.")]
+        [NewAppDomainFact]
         public void CreateTestCommandsReturnsExceptionCommandWhenTestAssemblyConfigurationThrows()
         {
             var sut = new FirstClassTestAttribute();
-            var method = Reflector.Wrap(GetType().GetMethod("TestCasesTest"));
+            var assembly = new DelegatingAssembly
+            {
+                OnGetCustomAttributesWithType =
+                    (t, i) => new object[] { new TestAssemblyExceptionConfigurationAttribute() }
+            };
+            var method = Mock.Of<IMethodInfo>(
+                x => x.MethodInfo == Mock.Of<MethodInfo>(
+                    m => m.ReflectedType == Mock.Of<Type>(
+                        t => t.Assembly == assembly)));
 
             var actual = sut.CreateTestCommands(method).Single();
 

@@ -49,6 +49,9 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\ExperimentUnitTest\DelegatingAssembly.cs">
+      <Link>DelegatingAssembly.cs</Link>
+    </Compile>
     <Compile Include="..\ExperimentUnitTest\DelegatingTestFixtureFactory.cs">
       <Link>DelegatingTestFixtureFactory.cs</Link>
     </Compile>
