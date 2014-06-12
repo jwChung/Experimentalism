@@ -2,7 +2,11 @@
   <ItemGroup>
     <CopyNuGetFiles Include="@(NuGetFiles)"/>
   </ItemGroup>
-
+  <PropertyGroup>
+    <NuGetPath>@(NuGetPath)</NuGetPath>
+    <XunitRunnerPath>@(XunitRunnerPath)</XunitRunnerPath>
+  </PropertyGroup>
+  
   <Target Name="MakePrivateKeyFile">
     <PropertyGroup>
       <SignAssembly>true</SignAssembly>
