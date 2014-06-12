@@ -28,6 +28,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         ///     The test commands which will execute the test runs for the given method.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by test assembly configuration.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             if (method == null)

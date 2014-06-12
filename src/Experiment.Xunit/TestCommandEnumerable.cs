@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit.Sdk;
 
@@ -54,6 +55,7 @@ namespace Jwc.Experiment.Xunit
                 _enumerator.Dispose();
             }
 
+            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when enumerating test commands.")]
             public bool MoveNext()
             {
                 try
