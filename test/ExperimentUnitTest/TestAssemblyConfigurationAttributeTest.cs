@@ -16,71 +16,84 @@ namespace Jwc.Experiment
             Assert.IsAssignableFrom<Attribute>(sut);
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenCalledManyTimes()
         {
-            var attribute1 = new TssTestAssemblyConfigurationAttribute();
-            var attribute2 = new TssTestAssemblyConfigurationAttribute();
-            var assembly = new DelegatingAssembly
+            try
             {
-                OnGetCustomAttributesWithType = (t, i) =>
-                {
-                    Assert.Equal(typeof(TestAssemblyConfigurationAttribute), t);
-                    Assert.False(i);
-                    return new object[] { attribute1, attribute2 };
-                }
-            };
-
-            TestAssemblyConfigurationAttribute.Configure(assembly);
-            TestAssemblyConfigurationAttribute.Configure(assembly);
-
-            Assert.Equal(assembly, attribute1.SetUpAssemblies.Single());
-            Assert.Equal(assembly, attribute2.SetUpAssemblies.Single());
+                
+            }
+            finally
+            {
+                ResetConfigured();
+            }
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void ConfigureRegistersCorrectTearDownHandlerToDomainUnloadEvent()
         {
-            var attribute = new TssTestAssemblyConfigurationAttribute();
-            var assembly = new DelegatingAssembly
+            try
             {
-                OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
-            };
+                var attribute = new TssTestAssemblyConfigurationAttribute();
+                var assembly = new DelegatingAssembly
+                {
+                    OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
+                };
 
-            TestAssemblyConfigurationAttribute.Configure(assembly);
+                TestAssemblyConfigurationAttribute.Configure(assembly);
 
-            attribute.RaiseDomainUnload();
-            Assert.Equal(assembly, attribute.TearDownAssemblies.Single());
+                attribute.RaiseDomainUnload();
+                Assert.Equal(assembly, attribute.TearDownAssemblies.Single());
+            }
+            finally
+            {
+                ResetConfigured();
+            }
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
         {
-            // Fixture setup
-            var attribute = new TssTestAssemblyConfigurationAttribute();
-            var assembly = new DelegatingAssembly
+            try
             {
-                OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
-            };
+                // Fixture setup
+                var attribute = new TssTestAssemblyConfigurationAttribute();
+                var assembly = new DelegatingAssembly
+                {
+                    OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
+                };
 
-            var threads = new Thread[30];
-            for (int i = 0; i < threads.Length; i++)
-                threads[i] = new Thread(() => TestAssemblyConfigurationAttribute.Configure(assembly));
+                var threads = new Thread[30];
+                for (int i = 0; i < threads.Length; i++)
+                    threads[i] = new Thread(() => TestAssemblyConfigurationAttribute.Configure(assembly));
 
-            // Exercise system
-            foreach (var thread in threads)
-                thread.Start();
-            foreach (var thread in threads)
-                thread.Join();
+                // Exercise system
+                foreach (var thread in threads)
+                    thread.Start();
+                foreach (var thread in threads)
+                    thread.Join();
 
-            // Verify outcome
-            Assert.Equal(assembly, attribute.SetUpAssemblies.Single());
+                // Verify outcome
+                Assert.Equal(assembly, attribute.SetUpAssemblies.Single());
+            }
+            finally
+            {
+                // Fixture teardown
+                ResetConfigured();
+            }
         }
 
         [Fact]
         public void ConfigureWithNullAssemblyThrows()
         {
             Assert.Throws<ArgumentNullException>(() => TestAssemblyConfigurationAttribute.Configure(null));
+        }
+
+        public void ResetConfigured()
+        {
+            typeof(TestAssemblyConfigurationAttribute)
+                .GetField("_configured", BindingFlags.NonPublic | BindingFlags.Static)
+                .SetValue(null, false);
         }
 
         private class TssTestAssemblyConfigurationAttribute : TestAssemblyConfigurationAttribute

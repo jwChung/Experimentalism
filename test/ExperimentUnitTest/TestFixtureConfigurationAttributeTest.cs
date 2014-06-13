@@ -83,26 +83,40 @@ namespace Jwc.Experiment
             Assert.Equal(factory, actual);
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void SetupSetsSuppliedFactoryAsCurrentOfDefaultFixtureFactory()
         {
-            var factory = new DelegatingTestFixtureFactory();
-            var sut = new TssTestFixtureConfigurationAttribute(factory);
+            try
+            {
+                var factory = new DelegatingTestFixtureFactory();
+                var sut = new TssTestFixtureConfigurationAttribute(factory);
 
-            sut.CallSetup(null);
+                sut.CallSetup(null);
 
-            Assert.Equal(factory, DefaultFixtureFactory.Current);
+                Assert.Equal(factory, DefaultFixtureFactory.Current);
+            }
+            finally
+            {
+                DefaultFixtureFactory.SetCurrent(null);
+            }
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void SetupSetsInstanceOfSuppliedFactoryTypeAsCurrentOfDefaultFixtureFactory()
         {
-            var factoryType = typeof(DelegatingTestFixtureFactory);
-            var sut = new TssTestFixtureConfigurationAttribute(factoryType);
+            try
+            {
+                var factoryType = typeof(DelegatingTestFixtureFactory);
+                var sut = new TssTestFixtureConfigurationAttribute(factoryType);
 
-            sut.CallSetup(null);
+                sut.CallSetup(null);
 
-            Assert.IsType<DelegatingTestFixtureFactory>(DefaultFixtureFactory.Current);
+                Assert.IsType<DelegatingTestFixtureFactory>(DefaultFixtureFactory.Current);
+            }
+            finally
+            {
+                DefaultFixtureFactory.SetCurrent(null);
+            }
         }
 
         private class TssTestFixtureConfigurationAttribute : TestFixtureConfigurationAttribute
