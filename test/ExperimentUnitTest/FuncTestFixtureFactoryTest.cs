@@ -14,6 +14,12 @@ namespace Jwc.Experiment
         }
 
         [Fact]
+        public void InitializeWithNullFuncThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new FuncTestFixtureFactory(null));
+        }
+
+        [Fact]
         public void FuncIsCorrect()
         {
             Func<MethodInfo, ITestFixtureFactory> func = m => null;

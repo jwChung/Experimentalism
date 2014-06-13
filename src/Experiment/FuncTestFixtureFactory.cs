@@ -18,6 +18,9 @@ namespace Jwc.Experiment
         /// </param>
         public FuncTestFixtureFactory(Func<MethodInfo, ITestFixtureFactory> func)
         {
+            if (func == null)
+                throw new ArgumentNullException("func");
+
             _func = func;
         }
 
