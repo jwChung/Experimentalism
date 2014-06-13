@@ -190,24 +190,24 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright 2013 Outercurve Foundation  
   License:      Apache 2.0
 
-* AutoFixture 3.18.7
+* AutoFixture 3.18.7  
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* AutoFixture.Xunit 3.18.7
+* AutoFixture.Xunit 3.18.7  
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* AutoFixture.Idioms 3.18.7
+* AutoFixture.Idioms 3.18.7  
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* AutoFixture.AutoMoq 3.18.7
-  Website:      https://github.com/AutoFixture/AutoFixture
-  Copyright:    Copyright (c) 2013 Mark Seemann
+* AutoFixture.AutoMoq 3.18.7  
+  Website:      https://github.com/AutoFixture/AutoFixture  
+  Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
 * Albedo 1.0.1  
@@ -220,9 +220,9 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright (C) 2009 - 2010 Novell, Inc. (http://www.novell.com)  
   License:      The MIT License
 
-* Moq 3.1.416.3
-  Website:      http://www.moqthis.com
-  Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD
+* Moq 3.1.416.3  
+  Website:      http://www.moqthis.com  
+  Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD  
   License:      BSD
 
 ### Icon image
