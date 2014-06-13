@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Moq;
 using Xunit;
 
 namespace Jwc.Experiment
@@ -22,12 +23,36 @@ namespace Jwc.Experiment
         [Fact]
         public void FuncIsCorrect()
         {
-            Func<MethodInfo, ITestFixtureFactory> func = m => null;
+            Func<MethodInfo, ITestFixture> func = m => null;
             var sut = new FuncTestFixtureFactory(func);
 
             var actual = sut.Func;
 
             Assert.Equal(func, actual);
+        }
+
+        [Fact]
+        public void CreateReturnsCorrectResult()
+        {
+            var method = Mock.Of<MethodInfo>();
+            var fixture = Mock.Of<ITestFixture>();
+            Func<MethodInfo, ITestFixture> func = m =>
+            {
+                Assert.Equal(method, m);
+                return fixture;
+            };
+            var sut = new FuncTestFixtureFactory(func);
+
+            var actual = sut.Create(method);
+
+            Assert.Equal(fixture, actual);
+        }
+
+        [Fact]
+        public void CreateWithNullTestMethodThrows()
+        {
+            var sut = new FuncTestFixtureFactory(x => null);
+            Assert.Throws<ArgumentNullException>(() => sut.Create(null));
         }
     }
 }

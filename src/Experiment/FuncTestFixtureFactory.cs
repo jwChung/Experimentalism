@@ -8,7 +8,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class FuncTestFixtureFactory : ITestFixtureFactory
     {
-        private readonly Func<MethodInfo, ITestFixtureFactory> _func;
+        private readonly Func<MethodInfo, ITestFixture> _func;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="FuncTestFixtureFactory" /> class.
@@ -16,7 +16,7 @@ namespace Jwc.Experiment
         /// <param name="func">
         ///     The function to create the test fixture.
         /// </param>
-        public FuncTestFixtureFactory(Func<MethodInfo, ITestFixtureFactory> func)
+        public FuncTestFixtureFactory(Func<MethodInfo, ITestFixture> func)
         {
             if (func == null)
                 throw new ArgumentNullException("func");
@@ -27,7 +27,7 @@ namespace Jwc.Experiment
         /// <summary>
         /// Gets a value indicating the function supplied by constructor.
         /// </summary>
-        public Func<MethodInfo, ITestFixtureFactory> Func
+        public Func<MethodInfo, ITestFixture> Func
         {
             get { return _func; }
         }
@@ -43,7 +43,10 @@ namespace Jwc.Experiment
         /// </returns>
         public ITestFixture Create(MethodInfo testMethod)
         {
-            throw new NotImplementedException();
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
+            return Func(testMethod);
         }
     }
 }
