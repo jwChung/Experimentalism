@@ -9,7 +9,7 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class FirstClassTestAttributeTest
+    public class FirstClassTestAttributeTest : IDisposable
     {
         [Fact]
         public void SutIsFactAttribute()
@@ -192,7 +192,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Contains("DefaultFixtureFactory.SetCurrent", exception.Message);
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void CreateTestCommandsCorrectlyConfiguresAllFixturesInTestAssembly()
         {
             var sut = new FirstClassTestAttribute();
@@ -203,7 +203,7 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(1, SpyTestAssemblyConfigurationAttribute.SetUpCount);
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void CreateTestCommandsUsesCorrectTestFixtureFactory()
         {
             // Fixture setup
@@ -227,7 +227,7 @@ namespace Jwc.Experiment.Xunit
             Assert.IsType<FactCommand>(actual);
         }
 
-        [NewAppDomainFact]
+        [Fact]
         public void CreateTestCommandsReturnsExceptionCommandWhenTestAssemblyConfigurationThrows()
         {
             var sut = new FirstClassTestAttribute();
@@ -245,6 +245,15 @@ namespace Jwc.Experiment.Xunit
 
             var command = Assert.IsType<ExceptionCommand>(actual);
             Assert.IsType<InvalidOperationException>(command.Exception);
+        }
+
+        public void Dispose()
+        {
+            SpyTestAssemblyConfigurationAttribute.SetUpCount = 0;
+            DefaultFixtureFactory.SetCurrent(null);
+            typeof(TestAssemblyConfigurationAttribute)
+                .GetField("_configured", BindingFlags.NonPublic | BindingFlags.Static)
+                .SetValue(null, false);
         }
 
         public IEnumerable<ITestCase> TestCasesTest()

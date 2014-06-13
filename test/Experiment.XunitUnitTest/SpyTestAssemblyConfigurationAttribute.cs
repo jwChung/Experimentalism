@@ -1,4 +1,7 @@
 ﻿using System.Reflection;
+using Jwc.Experiment.Xunit;
+
+[assembly: SpyTestAssemblyConfiguration]
 
 namespace Jwc.Experiment.Xunit
 {
