@@ -9,7 +9,6 @@ using Xunit.Extensions;
 using Xunit.Sdk;
 
 [assembly: SpyTestAssemblyConfiguration]
-////[assembly: TestAssemblyExceptionConfiguration]
 
 namespace Jwc.Experiment.Xunit
 {
