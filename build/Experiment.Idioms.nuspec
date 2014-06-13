@@ -10,6 +10,7 @@
     <tags>unit-testing tdd</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
     <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/jwChung/Experimentalism/master/icon.png</iconUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <references>
       <reference file="Jwc.Experiment.dll" />

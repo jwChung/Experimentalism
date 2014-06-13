@@ -9,6 +9,7 @@
     <copyright>(c) 2014 Jin-Wook Chung</copyright>
     <tags>unit-testing tdd autofixture</tags>
     <projectUrl>https://github.com/jwChung/Experimentalism</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/jwChung/Experimentalism/master/icon.png</iconUrl>
     <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <references>
