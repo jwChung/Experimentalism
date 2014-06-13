@@ -46,6 +46,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DelegatingAssembly.cs" />
+    <Compile Include="FuncTestFixtureFactoryTest.cs" />
     <Compile Include="TestAssemblyConfigurationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="TestFixtureConfigurationAttributeTest.cs" />
