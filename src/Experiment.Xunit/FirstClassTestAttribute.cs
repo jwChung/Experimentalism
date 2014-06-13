@@ -106,7 +106,7 @@ namespace Jwc.Experiment.Xunit
         {
             try
             {
-                return testCase.ConvertToTestCommand(method, new FuncFixtureFactory(CreateTestFixture));
+                return testCase.ConvertToTestCommand(method, new FuncTestFixtureFactory(CreateTestFixture));
             }
             catch (Exception exception)
             {
@@ -129,21 +129,6 @@ namespace Jwc.Experiment.Xunit
             return methodInfo.IsStatic
                 ? null
                 : Activator.CreateInstance(methodInfo.ReflectedType);
-        }
-
-        private class FuncFixtureFactory : ITestFixtureFactory
-        {
-            private readonly Func<MethodInfo, ITestFixture> _func;
-
-            public FuncFixtureFactory(Func<MethodInfo, ITestFixture> func)
-            {
-                _func = func;
-            }
-
-            public ITestFixture Create(MethodInfo testMethod)
-            {
-                return _func(testMethod);
-            }
         }
     }
 }
