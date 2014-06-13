@@ -172,6 +172,11 @@ public IEnumerable<ITestCase> AddTest()
 Credits
 -------
 
+### Inspiration
+Experimentalism의 auto data 기능은 [xUnit Test Patterns(*by Gerard Meszaros*)](http://xunitpatterns.com/index.html)의 [Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method)와 [Parameterized Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method)에서 영감을 얻었으며, [AutoFixture](https://github.com/AutoFixture/AutoFixture)의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/)로부터 많은 영향을 받았습니다.
+
+First class test 방식은 [Bug squash의 First-class tests in MbUnit](http://bugsquash.blogspot.dk/2012/05/first-class-tests-in-mbunit.html)라는 글과 [Exude](https://github.com/GreanTech/Exude)에서 영감을 얻었습니다.
+
 ###Third-party libraries
 Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습니다. 아래의 각 라이브러리에서 언급되는 라이센스 전문은 LICENSE.txt 파일 또는 각 소스파일의 헤더형태로 제공되므로 이를 참고할 수 있습니다.
 
@@ -220,10 +225,10 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD
   License:      BSD
 
-### Inspiration
-Experimentalism의 auto data 기능은 [xUnit Test Patterns(*by Gerard Meszaros*)](http://xunitpatterns.com/index.html)의 [Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Anonymous%20Creation%20Method)와 [Parameterized Anonymous Creation Method](http://xunitpatterns.com/Creation%20Method.html#Parameterized%20Anonymous%20Creation%20Method)에서 영감을 얻었으며, [AutoFixture](https://github.com/AutoFixture/AutoFixture)의 [AutoFixture.Xunit](https://www.nuget.org/packages/AutoFixture.Xunit/)로부터 많은 영향을 받았습니다.
-
-First class test 방식은 [Bug squash의 First-class tests in MbUnit](http://bugsquash.blogspot.dk/2012/05/first-class-tests-in-mbunit.html)라는 글과 [Exude](https://github.com/GreanTech/Exude)에서 영감을 얻었습니다.
+### Icon image
+Website:      http://www.oxygen-icons.org  
+Copyright:    Copyright (c) Oxygen Team  
+License:      [Creative Commons (Attribution-NonCommercial-NoDerivs 2.5 Generic)](http://creativecommons.org/licenses/by-nc-nd/2.5/)
 
 Questions
 ---------
