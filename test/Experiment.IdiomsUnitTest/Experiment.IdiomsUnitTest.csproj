@@ -94,7 +94,6 @@
     <Compile Include="ParameterToPropertyComparerTest.cs" />
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingEqualityComparer.cs" />
-    <Compile Include="InverseEqualityComparerTest.cs" />
     <Compile Include="PropertyToParameterComparerTest.cs" />
     <Compile Include="RestrictiveReferenceExceptionTest.cs" />
     <Compile Include="Idioms\RestrictiveReferenceAssertionTest.cs" />
