@@ -63,6 +63,7 @@
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="Idioms\IdiomaticAssertion.cs" />
     <Compile Include="Idioms\ObjectDisposalAssertion.cs" />
+    <Compile Include="MemberInfoExtensions.cs" />
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="DisplayNameCollector.cs" />
     <Compile Include="MemberReferenceCollector.cs" />

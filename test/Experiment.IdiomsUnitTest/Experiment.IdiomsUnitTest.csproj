@@ -73,6 +73,7 @@
     <Compile Include="IInterfaceWithMembers.cs" />
     <Compile Include="Idioms\ObjectDisposalAssertionTest.cs" />
     <Compile Include="DisplayNameCollectorTest.cs" />
+    <Compile Include="MemberInfoExtensionsTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
     <Compile Include="TypeExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
