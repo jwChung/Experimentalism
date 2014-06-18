@@ -96,12 +96,16 @@
   </Target>
 
   <Target Name="DeterminesCanPush">
-    <Exec Command='git describe'>
+    <Exec Command='git fetch origin -q --tags --depth 1' />
+    <Exec Command='git for-each-ref --count=1 --sort="-*authordate"'  ConsoleToMSBuild="true">
       <Output TaskParameter="ConsoleOutput" PropertyName="ConsoleOutput" />
     </Exec>
     <PropertyGroup>
-      <CanPush>!$(ConsoleOutput.Contains($(SemanticVersion)))</CanPush>
+      <CanPush>False</CanPush>
     </PropertyGroup>
+    <CreateProperty Value="True" Condition="' $(ConsoleOutput.Contains($(SemanticVersion)))' == 'false' ">
+      <Output TaskParameter="Value" PropertyName="CanPush" />
+    </CreateProperty>
   </Target>
 
   <Target Name="NuGetPush">

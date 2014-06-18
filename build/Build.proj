@@ -3,28 +3,29 @@
   <Import Project="Build.tasks"/>
   <Import Project="Build.targets"/>
 
-  <Target Name="Verify">
-    <CallTarget Targets="BuildProjects;UnitTest" />
-  </Target>
-
-  <Target Name="LocalDeployment">
-    <CallTarget Targets="NuGetVersioning;NuGetReleaseNotes;NuGetPack;RestoreNuGetVersion;RestoreReleaseNotes" />
-    <CallTarget Targets="NuGetPushToLocal;DeleteNupkgFiles" />
-  </Target>
-
-  <Target Name="Build">
-    <CallTarget Targets="MakePrivateKeyFile;BuildProjects;DeleteKeyFiles" />
-  </Target>
-
-  <Target Name="Tests">
-    <CallTarget Targets="UnitTest" />
-  </Target>
+  <Target Name="Verify"
+          DependsOnTargets="BuildProjects;UnitTest;" />
   
-  <Target Name="Deployment">
-    <CallTarget Targets="NuGetVersioning;NuGetReleaseNotes" />
-    <CallTarget Targets="DeterminesCanPush" />
-    <CallTarget Targets="NuGetPack;NuGetPush;DeleteNupkgFiles" Condition=" '$(CanPush)' == 'true' " />
-    <CallTarget Targets="RestoreNuGetVersion;RestoreReleaseNotes" />
-    <CallTarget Targets="CreateReleaseNotes;GitTagging;DeleteReleaseNotes" Condition=" '$(CanPush)' == 'true' " />
-  </Target>
+  <Target Name="LocalDeployment"
+          DependsOnTargets="
+          NuGetVersioning;NuGetReleaseNotes;NuGetPack;RestoreNuGetVersion;RestoreReleaseNotes;
+          NuGetPushToLocal;DeleteNupkgFiles;" />
+
+  <Target Name="Build"
+          DependsOnTargets="MakePrivateKeyFile;BuildProjects;DeleteKeyFiles;" />
+
+  <Target Name="Tests" DependsOnTargets="UnitTest" />
+  
+  <Target Name="Deployment"
+          DependsOnTargets="NuGetPareparingStep;NuGetPackingStep;NuGetRestoringStep;GitTaggingStep;" />
+
+  <Target Name="NuGetPareparingStep" DependsOnTargets="NuGetVersioning;NuGetReleaseNotes;DeterminesCanPush" />
+  
+  <Target Name="NuGetPackingStep" Condition=" '$(CanPush)' "
+          DependsOnTargets="NuGetPack;NuGetPush;DeleteNupkgFiles" />
+  
+  <Target Name="NuGetRestoringStep" DependsOnTargets="RestoreNuGetVersion;RestoreReleaseNotes" />
+  
+  <Target Name="GitTaggingStep" Condition=" '$(CanPush)' "
+          DependsOnTargets="CreateReleaseNotes;GitTagging;DeleteReleaseNotes" />
 </Project>
