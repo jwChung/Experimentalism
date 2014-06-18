@@ -3,41 +3,28 @@
   <Import Project="Build.tasks"/>
   <Import Project="Build.targets"/>
 
-  <Target Name="Verify" DependsOnTargets="
-      BuildProjects;
-      UnitTest;
-      " />
+  <Target Name="Verify">
+    <CallTarget Targets="BuildProjects;UnitTest" />
+  </Target>
 
-  <Target Name="LocalDeployment" DependsOnTargets="
-      NuGetVersioning;
-      NuGetReleaseNotes;
-      NuGetPack;
-      RestoreNuGetVersion;
-      RestoreReleaseNotes;
-      NuGetPushToLocal;
-      DeleteNupkgFiles;
-      " />
+  <Target Name="LocalDeployment">
+    <CallTarget Targets="NuGetVersioning;NuGetReleaseNotes;NuGetPack;RestoreNuGetVersion;RestoreReleaseNotes" />
+    <CallTarget Targets="NuGetPushToLocal;DeleteNupkgFiles" />
+  </Target>
 
-  <Target Name="Build" DependsOnTargets="
-      MakePrivateKeyFile;
-      BuildProjects;
-      DeleteKeyFiles;
-      " />
+  <Target Name="Build">
+    <CallTarget Targets="MakePrivateKeyFile;BuildProjects;DeleteKeyFiles" />
+  </Target>
 
-  <Target Name="Tests" DependsOnTargets="
-      UnitTest;
-      " />
-
-  <Target Name="Deployment" Condition=" '$(CurrentBranchName)' == 'master' and !$(CommitMessage.StartsWith('Merge pull request #')) " DependsOnTargets="
-      NuGetVersioning;
-      NuGetReleaseNotes;
-      NuGetPack;
-      RestoreNuGetVersion;
-      RestoreReleaseNotes;
-      NuGetPush;
-      DeleteNupkgFiles;
-      CreateReleaseNotes;
-      GitTagging;
-      DeleteReleaseNotes;
-      " />
+  <Target Name="Tests">
+    <CallTarget Targets="UnitTest" />
+  </Target>
+  
+  <Target Name="Deployment">
+    <CallTarget Targets="NuGetVersioning;NuGetReleaseNotes;NuGetPack;RestoreNuGetVersion;RestoreReleaseNotes" />
+    <CallTarget Targets="DeterminesCanPush" />
+    <CallTarget Targets="NuGetPush" Condition=" '$(CanPush)' == 'true' " />
+    <CallTarget Targets="DeleteNupkgFiles" />
+    <CallTarget Targets="CreateReleaseNotes;GitTagging;DeleteReleaseNotes" Condition=" '$(CanPush)' == 'true' " />
+  </Target>
 </Project>

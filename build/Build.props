@@ -11,8 +11,6 @@
     <TestAssemblies>..\test\**\bin\release\*UnitTest.dll</TestAssemblies>
     <LocalNugetFeed>D:\LocalNugetFeed</LocalNugetFeed>
     <Repository>https://$(MY_GITHUBACCOUNT)@github.com/jwChung/Experimentalism.git</Repository>
-    <CurrentBranchName>$(APPVEYOR_REPO_BRANCH)</CurrentBranchName>
-    <CommitMessage>$(APPVEYOR_REPO_COMMIT_MESSAGE)</CommitMessage>
     <CommitAuthor>$(APPVEYOR_REPO_COMMIT_AUTHOR)</CommitAuthor>
     <CommitAuthorEmail>$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)</CommitAuthorEmail>
     <SetApiKey>$(MY_SETAPIKEY)</SetApiKey>

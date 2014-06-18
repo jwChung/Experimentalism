@@ -95,6 +95,15 @@
     <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/releaseNotes" Value="releaseNotes" />
   </Target>
 
+  <Target Name="DeterminesCanPush">
+    <Exec Command='git describe'>
+      <Output TaskParameter="ConsoleOutput" PropertyName="ConsoleOutput" />
+    </Exec>
+    <PropertyGroup>
+      <CanPush>!$(ConsoleOutput.Contains($(SemanticVersion)))</CanPush>
+    </PropertyGroup>
+  </Target>
+
   <Target Name="NuGetPush">
     <ItemGroup>
       <NugetSymbolPackages Include="*.symbols.nupkg" />
