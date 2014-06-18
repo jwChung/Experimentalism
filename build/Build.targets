@@ -101,11 +101,8 @@
       <Output TaskParameter="ConsoleOutput" PropertyName="ConsoleOutput" />
     </Exec>
     <PropertyGroup>
-      <CanPush>False</CanPush>
+      <CanPush>!$(ConsoleOutput.Contains($(SemanticVersion)))</CanPush>
     </PropertyGroup>
-    <CreateProperty Value="True" Condition="' $(ConsoleOutput.Contains($(SemanticVersion)))' == 'false' ">
-      <Output TaskParameter="Value" PropertyName="CanPush" />
-    </CreateProperty>
   </Target>
 
   <Target Name="NuGetPush">
