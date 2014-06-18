@@ -17,4 +17,7 @@ using System.Runtime.InteropServices;
  * Version 0.23.9
  * 
  * - [FIX] introduced the new FuncTestFixtureFactory class.
+ * 
+ * - [FIX] used composition instead of inheritance from
+ *   InverseEqualityComparer<T> and removed the unused class. (BREAKING-CHANGE)
  */
