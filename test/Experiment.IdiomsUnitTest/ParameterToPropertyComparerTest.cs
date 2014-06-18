@@ -27,7 +27,7 @@ namespace Jwc.Experiment
         }
 
         [Fact]
-        public void GetHashCodeReturnsAlwaysSameValue()
+        public void GetHashCodeReturnsZero()
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
             var actual = sut.GetHashCode(null);
@@ -176,10 +176,10 @@ namespace Jwc.Experiment
             var sut = new ParameterToPropertyComparer(testFixture);
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(new int[0]))
                 .GetParameters().First().ToElement();
-            var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
+            var propertyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Values).ToElement();
 
-            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+            var actual = sut.Equals(parameterInfoElement, propertyInfoElement);
 
             Assert.True(actual, "Equals.");
         }
