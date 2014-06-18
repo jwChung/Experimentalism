@@ -21,10 +21,10 @@
   </Target>
   
   <Target Name="Deployment">
-    <CallTarget Targets="NuGetVersioning;NuGetReleaseNotes;NuGetPack;RestoreNuGetVersion;RestoreReleaseNotes" />
+    <CallTarget Targets="NuGetVersioning;NuGetReleaseNotes" />
     <CallTarget Targets="DeterminesCanPush" />
-    <CallTarget Targets="NuGetPush" Condition=" '$(CanPush)' == 'true' " />
-    <CallTarget Targets="DeleteNupkgFiles" />
+    <CallTarget Targets="NuGetPack;NuGetPush;DeleteNupkgFiles" Condition=" '$(CanPush)' == 'true' " />
+    <CallTarget Targets="RestoreNuGetVersion;RestoreReleaseNotes" />
     <CallTarget Targets="CreateReleaseNotes;GitTagging;DeleteReleaseNotes" Condition=" '$(CanPush)' == 'true' " />
   </Target>
 </Project>
