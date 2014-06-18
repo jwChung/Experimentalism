@@ -66,7 +66,7 @@
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="DisplayNameCollector.cs" />
     <Compile Include="MemberReferenceCollector.cs" />
-    <Compile Include="IdiomaticExtensions.cs" />
+    <Compile Include="TypeExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
     <Compile Include="Idioms\IdiomaticMemberAssertion.cs" />

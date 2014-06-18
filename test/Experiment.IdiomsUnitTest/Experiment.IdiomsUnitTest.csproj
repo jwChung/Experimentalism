@@ -74,7 +74,7 @@
     <Compile Include="Idioms\ObjectDisposalAssertionTest.cs" />
     <Compile Include="DisplayNameCollectorTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
-    <Compile Include="IdiomaticExtensionsTest.cs" />
+    <Compile Include="TypeExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
     <Compile Include="Idioms\IdiomaticMemberAssertionTest.cs" />

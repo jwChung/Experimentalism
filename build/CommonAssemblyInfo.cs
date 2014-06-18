@@ -14,10 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.23.9")]
 
 /*
- * Version 0.23.9
+ * Version 0.23.10
  * 
- * - [FIX] introduced the new FuncTestFixtureFactory class.
- * 
- * - [FIX] used composition instead of inheritance from
- *   InverseEqualityComparer<T> and removed the unused class. (BREAKING-CHANGE)
+ * - [FIX] renamed IdiomaticExtensions to TypeExtensions. (BREAKING-CHANGE)
  */

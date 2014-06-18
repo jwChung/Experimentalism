@@ -2,7 +2,7 @@
 
 namespace Jwc.Experiment
 {
-    public class IdiomaticExtensionsTest
+    public class TypeExtensionsTest
     {
         [Fact]
         public void GetIdiomaticMembersReturnsCorrectMembers()

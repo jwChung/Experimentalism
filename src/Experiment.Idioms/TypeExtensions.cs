@@ -5,9 +5,9 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Defines idiomatic extension methods.
+    ///     Defines <see cref="Type" /> extension methods.
     /// </summary>
-    public static class IdiomaticExtensions
+    public static class TypeExtensions
     {
         /// <summary>
         ///     Gets idiomatic members of a type.
