@@ -25,7 +25,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Gets a value indicating the function supplied by constructor.
+        ///     Gets a value indicating the function supplied by constructor.
         /// </summary>
         public Func<MethodInfo, ITestFixture> Func
         {
