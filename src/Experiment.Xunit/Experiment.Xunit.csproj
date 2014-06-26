@@ -56,7 +56,7 @@
     <Compile Include="ITestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCase.cs" />
-    <Compile Include="ExceptionUnwrappingCommand.cs" />
+    <Compile Include="TargetInvocationExceptionUnwrappingCommand.cs" />
     <Compile Include="TestCommandEnumerable.cs" />
   </ItemGroup>
   <ItemGroup>

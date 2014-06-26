@@ -184,7 +184,7 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
             var command = Assert.IsType<FirstClassCommand>(
-               Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+               Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(method, command.Method);
             Assert.Equal(string.Empty, command.DisplayParameterName);
         }
@@ -229,7 +229,7 @@ namespace Jwc.Experiment.Xunit
 
             // Verify outcome
             var command = Assert.IsType<FirstClassCommand>(
-               Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+               Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
 
             Assert.Equal(method, command.Method);
             Assert.Equal(displayParameterName, command.DisplayParameterName);
@@ -280,7 +280,7 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
             var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(displayParameterName, command.DisplayParameterName);
         }
 
@@ -295,7 +295,7 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.ConvertToTestCommand(method, testFixtureFactory);
 
             var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(displayParameterName, command.DisplayParameterName);
         }
 
@@ -311,7 +311,7 @@ namespace Jwc.Experiment.Xunit
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), factory);
 
             var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             command.Action.Invoke();
             Assert.True(verifyMock);
         }
@@ -327,7 +327,7 @@ namespace Jwc.Experiment.Xunit
                 new DelegatingTestFixtureFactory());
 
             var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<ExceptionUnwrappingCommand>(actual).TestCommand);
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(@delegate, command.Action);
         }
     }

@@ -14,9 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.24.0")]
 
 /*
- * Version 0.24.0
+ * Version 0.24.1
  * 
- * - [FIX] renamed IdiomaticExtensions to TypeExtensions. (BREAKING-CHANGE)
- * 
- * - [NEW] introduced the extension method - GetDisplayName.
+ * - [FIX] renamed ExceptionUnwrappingCommand to
+ *   TargetInvocationExceptionUnwrappingCommand. (BREAKING-CHANGE)
  */

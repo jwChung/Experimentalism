@@ -9,18 +9,18 @@ namespace Jwc.Experiment.Xunit
     ///     Represents <see cref="ITestCommand" /> unwrapping
     ///     <see cref="TargetInvocationException" />.
     /// </summary>
-    public class ExceptionUnwrappingCommand : ITestCommand
+    public class TargetInvocationExceptionUnwrappingCommand : ITestCommand
     {
         private readonly ITestCommand _testCommand;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ExceptionUnwrappingCommand" />
+        ///     Initializes a new instance of the <see cref="TargetInvocationExceptionUnwrappingCommand" />
         ///     class.
         /// </summary>
         /// <param name="testCommand">
         ///     The test command to be unwrapped.
         /// </param>
-        public ExceptionUnwrappingCommand(ITestCommand testCommand)
+        public TargetInvocationExceptionUnwrappingCommand(ITestCommand testCommand)
         {
             if (testCommand == null)
                 throw new ArgumentNullException("testCommand");

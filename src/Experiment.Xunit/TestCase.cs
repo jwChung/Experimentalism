@@ -123,7 +123,7 @@ namespace Jwc.Experiment.Xunit
             var arguments = Delegate.Method.GetParameters()
                 .Select(p => fixture.Value.Create(p.ParameterType)).ToArray();
 
-            return new ExceptionUnwrappingCommand(
+            return new TargetInvocationExceptionUnwrappingCommand(
                 new FirstClassCommand(
                     method,
                     GetDisplayParameterName(arguments),

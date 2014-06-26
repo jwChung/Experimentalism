@@ -58,7 +58,7 @@
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
-    <Compile Include="ExceptionUnwrappingCommandTest.cs" />
+    <Compile Include="TargetInvocationExceptionUnwrappingCommandTest.cs" />
     <Compile Include="SpyTestAssemblyConfigurationAttribute.cs" />
     <Compile Include="TestAssemblyExceptionConfigurationAttribute.cs" />
     <Compile Include="TestAttributeTest.cs" />

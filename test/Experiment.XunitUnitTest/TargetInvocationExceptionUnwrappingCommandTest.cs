@@ -7,26 +7,26 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
 {
-    public class ExceptionUnwrappingCommandTest
+    public class TargetInvocationExceptionUnwrappingCommandTest
     {
         [Fact]
         public void SutIsTestCommand()
         {
-            var sut = new ExceptionUnwrappingCommand(new Mock<ITestCommand>().Object);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(new Mock<ITestCommand>().Object);
             Assert.IsAssignableFrom<ITestCommand>(sut);
         }
 
         [Fact]
         public void InitializeWithNullTestCommandThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ExceptionUnwrappingCommand(null));
+            Assert.Throws<ArgumentNullException>(() => new TargetInvocationExceptionUnwrappingCommand(null));
         }
 
         [Fact]
         public void TestCommandIsCorrect()
         {
             var testCommand = new Mock<ITestCommand>().Object;
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.TestCommand;
 
@@ -38,7 +38,7 @@ namespace Jwc.Experiment.Xunit
         {
             var expected = "anonymous";
             var testCommand = Mock.Of<ITestCommand>(x => x.DisplayName == expected);
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.DisplayName;
 
@@ -50,7 +50,7 @@ namespace Jwc.Experiment.Xunit
         {
             var expected = true;
             var testCommand = Mock.Of<ITestCommand>(x => x.ShouldCreateInstance == expected);
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.ShouldCreateInstance;
 
@@ -62,7 +62,7 @@ namespace Jwc.Experiment.Xunit
         {
             var expected = 123;
             var testCommand = Mock.Of<ITestCommand>(x => x.Timeout == expected);
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.Timeout;
 
@@ -76,7 +76,7 @@ namespace Jwc.Experiment.Xunit
             xmlDocument.LoadXml("<top/>");
             var expected = xmlDocument.FirstChild;
             var testCommand = Mock.Of<ITestCommand>(x => x.ToStartXml() == expected);
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.ToStartXml();
 
@@ -89,7 +89,7 @@ namespace Jwc.Experiment.Xunit
             var testClass = new object();
             var methodResult = new PassedResult(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), null);
             var testCommand = Mock.Of<ITestCommand>(x => x.Execute(testClass) == methodResult);
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             var actual = sut.Execute(testClass);
 
@@ -107,7 +107,7 @@ namespace Jwc.Experiment.Xunit
             var exception = new TargetInvocationException(inner);
             Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Throws(exception);
 
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             // Exercise system and Verify outcome
             Assert.Throws(inner.GetType(), () => sut.Execute(testClass));
@@ -123,7 +123,7 @@ namespace Jwc.Experiment.Xunit
             var exception = new Exception("message", new InvalidOperationException());
             Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Throws(exception);
 
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             // Exercise system and Verify outcome
             Assert.Throws(exception.GetType(), () => sut.Execute(testClass));
@@ -139,7 +139,7 @@ namespace Jwc.Experiment.Xunit
             var exception = new TargetInvocationException(null);
             Mock.Get(testCommand).Setup(x => x.Execute(testClass)).Throws(exception);
 
-            var sut = new ExceptionUnwrappingCommand(testCommand);
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
             // Exercise system and Verify outcome
             Assert.Throws(exception.GetType(), () => sut.Execute(testClass));
