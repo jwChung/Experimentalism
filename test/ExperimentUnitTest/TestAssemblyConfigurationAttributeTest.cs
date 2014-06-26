@@ -21,10 +21,30 @@ namespace Jwc.Experiment
         {
             try
             {
-                
+                // Fixture setup
+                var attribute1 = new TssTestAssemblyConfigurationAttribute();
+                var attribute2 = new TssTestAssemblyConfigurationAttribute();
+                var assembly = new DelegatingAssembly
+                {
+                    OnGetCustomAttributesWithType = (t, i) =>
+                    {
+                        Assert.Equal(typeof(TestAssemblyConfigurationAttribute), t);
+                        Assert.False(i);
+                        return new object[] { attribute1, attribute2 };
+                    }
+                };
+
+                // Exercise system
+                TestAssemblyConfigurationAttribute.Configure(assembly);
+                TestAssemblyConfigurationAttribute.Configure(assembly);
+
+                // Verify outcome
+                Assert.Equal(assembly, attribute1.SetUpAssemblies.Single());
+                Assert.Equal(assembly, attribute2.SetUpAssemblies.Single());
             }
             finally
             {
+                // Fixture teardown
                 ResetConfigured();
             }
         }
