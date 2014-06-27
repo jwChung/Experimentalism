@@ -41,11 +41,11 @@ namespace Jwc.Experiment
             if (testAssembly == null)
                 throw new ArgumentNullException("testAssembly");
 
-            if (configured)
+            if (TestAssemblyConfigurationAttribute.configured)
                 return;
 
-            lock (SyncRoot)
-                ConfigureImpl(testAssembly);
+            lock (TestAssemblyConfigurationAttribute.SyncRoot)
+                TestAssemblyConfigurationAttribute.ConfigureImpl(testAssembly);
         }
 
         /// <summary>
@@ -70,16 +70,16 @@ namespace Jwc.Experiment
 
         private static void ConfigureImpl(Assembly testAssembly)
         {
-            if (configured)
+            if (TestAssemblyConfigurationAttribute.configured)
                 return;
 
-            ConfigureAttributes(testAssembly);
-            configured = true;
+            TestAssemblyConfigurationAttribute.ConfigureAttributes(testAssembly);
+            TestAssemblyConfigurationAttribute.configured = true;
         }
 
         private static void ConfigureAttributes(Assembly testAssembly)
         {
-            foreach (var attribute in GetAttributes(testAssembly))
+            foreach (var attribute in TestAssemblyConfigurationAttribute.GetAttributes(testAssembly))
                 attribute.ConfigureAttribute(testAssembly);
         }
 

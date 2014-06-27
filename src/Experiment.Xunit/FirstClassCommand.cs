@@ -26,7 +26,7 @@ namespace Jwc.Experiment.Xunit
         /// The test action to be invoked when the test is executed.
         /// </param>
         public FirstClassCommand(IMethodInfo method, string displayParameterName, Action action) : base(
-            EnsureIsNotNull(method),
+            FirstClassCommand.EnsureIsNotNull(method),
             MethodUtility.GetDisplayName(method),
             MethodUtility.GetTimeoutParameter(method))
         {

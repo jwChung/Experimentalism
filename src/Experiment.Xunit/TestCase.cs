@@ -112,7 +112,7 @@ namespace Jwc.Experiment.Xunit
             if (testFixtureFactory == null)
                 throw new ArgumentNullException("testFixtureFactory");
 
-            var fixture = new Lazy<ITestFixture>(() => testFixtureFactory.Create(Delegate.Method));
+            var fixture = new Lazy<ITestFixture>(() => testFixtureFactory.Create(this.Delegate.Method));
             return this.CreateTestCommand(method, fixture);
         }
 
@@ -123,7 +123,7 @@ namespace Jwc.Experiment.Xunit
 
         private ITestCommand CreateTestCommand(IMethodInfo method, Lazy<ITestFixture> fixture)
         {
-            var arguments = Delegate.Method.GetParameters()
+            var arguments = this.Delegate.Method.GetParameters()
                 .Select(p => fixture.Value.Create(p.ParameterType)).ToArray();
 
             return new TargetInvocationExceptionUnwrappingCommand(
@@ -140,20 +140,20 @@ namespace Jwc.Experiment.Xunit
 
         private Action GetAction(object[] arguments)
         {
-            var action = Delegate as Action;
+            var action = this.Delegate as Action;
             if (action != null)
                 return action;
 
-            var func = Delegate as Func<object>;
+            var func = this.Delegate as Func<object>;
             if (func != null)
                 return () => func();
 
-            return () => Delegate.GetType().GetMethod("Invoke").Invoke(Delegate, arguments);
+            return () => this.Delegate.GetType().GetMethod("Invoke").Invoke(this.Delegate, arguments);
         }
 
         private IEnumerable<string> GetArgumentValues(IList<object> arguments)
         {
-            return Delegate.Method.GetParameters()
+            return this.Delegate.Method.GetParameters()
                 .Select(pi => GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
         }
     }
