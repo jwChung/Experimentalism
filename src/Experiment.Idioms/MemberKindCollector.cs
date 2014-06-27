@@ -11,7 +11,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class MemberKindCollector : ReflectionVisitor<IEnumerable<MemberKinds>>
     {
-        private readonly IEnumerable<MemberKinds> memberKinds;
+        private readonly IEnumerable<MemberKinds> value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberKindCollector" /> class.
@@ -29,7 +29,7 @@ namespace Jwc.Experiment
         /// </param>
         public MemberKindCollector(IEnumerable<MemberKinds> memberKinds)
         {
-            this.memberKinds = memberKinds;
+            this.value = memberKinds;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return this.memberKinds;
+                return this.value;
             }
         }
 

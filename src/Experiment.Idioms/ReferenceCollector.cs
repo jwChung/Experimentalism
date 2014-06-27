@@ -13,7 +13,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class ReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
-        private readonly HashSet<Assembly> assemblies = new HashSet<Assembly>();
+        private readonly HashSet<Assembly> value = new HashSet<Assembly>();
         private readonly HashSet<Type> types = new HashSet<Type>();
         private readonly MemberReferenceCollector memberReferenceCollector = new MemberReferenceCollector();
 
@@ -24,7 +24,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                foreach (var assembly in this.assemblies)
+                foreach (var assembly in this.value)
                     yield return assembly;
             }
         }
@@ -349,7 +349,7 @@ namespace Jwc.Experiment
 
             var assemblies = type.ToElement().Accept(this.memberReferenceCollector).Value;
             foreach (var assembly in assemblies)
-                this.assemblies.Add(assembly);
+                this.value.Add(assembly);
 
             this.types.Add(type);
         }

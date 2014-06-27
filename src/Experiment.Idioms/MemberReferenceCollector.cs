@@ -12,7 +12,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class MemberReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
-        private readonly IEnumerable<Assembly> references;
+        private readonly IEnumerable<Assembly> value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberReferenceCollector" /> class.
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
             if (references == null)
                 throw new ArgumentNullException("references");
 
-            this.references = references;
+            this.value = references;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return this.references.Distinct();
+                return this.value.Distinct();
             }
         }
 
