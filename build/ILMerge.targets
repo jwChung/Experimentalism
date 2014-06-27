@@ -11,6 +11,6 @@
     </CreateItem>
     <Message Text="MERGING: %(ILMergeAssemblies.Filename)" Importance="High" />
     <MakeDir Directories="$(OutputPath)ILMergeOutput" />
-    <Exec Command="$(ILMergeExecutable) /Closed /Internalize  /Lib:$(OutputPath)  /keyfile:$(AssemblyOriginatorKeyFile) /out:&quot;$(OutputPath)ILMergeOutput\%(MainAssembly.Filename)%(MainAssembly.Extension)&quot; &quot;@(IntermediateAssembly)&quot; @(ILMergeAssemblies->'&quot;%(FullPath)&quot;', ' ')" />
+    <Exec Command="$(ILMergeExecutable) /Closed /Internalize /Lib:$(OutputPath) /keyfile:$(AssemblyOriginatorKeyFile) /out:&quot;$(OutputPath)ILMergeOutput\%(MainAssembly.Filename)%(MainAssembly.Extension)&quot; &quot;@(IntermediateAssembly)&quot; @(ILMergeAssemblies->'&quot;%(FullPath)&quot;', ' ')" />
   </Target>
 </Project>
