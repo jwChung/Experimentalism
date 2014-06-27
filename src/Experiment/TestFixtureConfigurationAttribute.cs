@@ -12,8 +12,8 @@ namespace Jwc.Experiment
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
     public class TestFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
     {
-        private readonly Type _factoryType;
-        private readonly ITestFixtureFactory _factory;
+        private readonly Type factoryType;
+        private readonly ITestFixtureFactory factory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixtureConfigurationAttribute" />
@@ -35,7 +35,7 @@ namespace Jwc.Experiment
                         factoryType),
                     "factoryType");
 
-            _factoryType = factoryType;
+            this.factoryType = factoryType;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Jwc.Experiment
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
-            _factory = factory;
+            this.factory = factory;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _factoryType ?? _factory.GetType();
+                return this.factoryType ?? this.factory.GetType();
             }
         }
 
@@ -71,7 +71,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _factory ?? (ITestFixtureFactory)Activator.CreateInstance(FactoryType);
+                return this.factory ?? (ITestFixtureFactory)Activator.CreateInstance(this.FactoryType);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Jwc.Experiment
         /// </param>
         protected override void Setup(Assembly testAssembly)
         {
-            DefaultFixtureFactory.SetCurrent(Factory);
+            DefaultFixtureFactory.SetCurrent(this.Factory);
         }
     }
 }

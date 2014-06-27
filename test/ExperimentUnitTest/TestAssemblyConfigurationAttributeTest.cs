@@ -112,7 +112,7 @@ namespace Jwc.Experiment
         public void ResetConfigured()
         {
             typeof(TestAssemblyConfigurationAttribute)
-                .GetField("_configured", BindingFlags.NonPublic | BindingFlags.Static)
+                .GetField("configured", BindingFlags.NonPublic | BindingFlags.Static)
                 .SetValue(null, false);
         }
 

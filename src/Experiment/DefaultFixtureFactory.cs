@@ -5,16 +5,16 @@ namespace Jwc.Experiment
     /// </summary>
     public static class DefaultFixtureFactory
     {
-        private static ITestFixtureFactory _testFixtureFactory;
+        private static ITestFixtureFactory testFixtureFactory;
 
         /// <summary>
-        /// Gets a value inicating the current <see cref="ITestFixtureFactory" />.
+        /// Gets a value indicating the current <see cref="ITestFixtureFactory" />.
         /// </summary>
         public static ITestFixtureFactory Current
         {
             get
             {
-                return _testFixtureFactory ?? new NotSupportedFixtureFactory();
+                return testFixtureFactory ?? new NotSupportedFixtureFactory();
             }
         }
 
@@ -26,7 +26,7 @@ namespace Jwc.Experiment
         /// </param>
         public static void SetCurrent(ITestFixtureFactory testFixtureFactory)
         {
-            _testFixtureFactory = testFixtureFactory;
+            DefaultFixtureFactory.testFixtureFactory = testFixtureFactory;
         }
     }
 }

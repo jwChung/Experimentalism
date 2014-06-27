@@ -8,7 +8,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class FuncTestFixtureFactory : ITestFixtureFactory
     {
-        private readonly Func<MethodInfo, ITestFixture> _func;
+        private readonly Func<MethodInfo, ITestFixture> func;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FuncTestFixtureFactory" /> class.
@@ -21,7 +21,7 @@ namespace Jwc.Experiment
             if (func == null)
                 throw new ArgumentNullException("func");
 
-            _func = func;
+            this.func = func;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Jwc.Experiment
         /// </summary>
         public Func<MethodInfo, ITestFixture> Func
         {
-            get { return _func; }
+            get { return this.func; }
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Jwc.Experiment
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
-            return Func(testMethod);
+            return this.Func(testMethod);
         }
     }
 }

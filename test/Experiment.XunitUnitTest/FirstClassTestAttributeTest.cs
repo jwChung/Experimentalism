@@ -252,7 +252,7 @@ namespace Jwc.Experiment.Xunit
             SpyTestAssemblyConfigurationAttribute.SetUpCount = 0;
             DefaultFixtureFactory.SetCurrent(null);
             typeof(TestAssemblyConfigurationAttribute)
-                .GetField("_configured", BindingFlags.NonPublic | BindingFlags.Static)
+                .GetField("configured", BindingFlags.NonPublic | BindingFlags.Static)
                 .SetValue(null, false);
         }
 

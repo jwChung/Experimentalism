@@ -12,7 +12,23 @@ namespace Jwc.Experiment
     public abstract class TestAssemblyConfigurationAttribute : Attribute
     {
         private static readonly object SyncRoot = new object();
-        private static bool _configured;
+        private static bool configured;
+
+        /// <summary>
+        /// Occurs when [domain unload].
+        /// </summary>
+        protected virtual event EventHandler DomainUnload
+        {
+            add
+            {
+                AppDomain.CurrentDomain.DomainUnload += value;
+            }
+
+            remove
+            {
+                AppDomain.CurrentDomain.DomainUnload -= value;
+            }
+        }
 
         /// <summary>
         /// Sets up or tears down all fixtures in a test assembly.
@@ -25,20 +41,11 @@ namespace Jwc.Experiment
             if (testAssembly == null)
                 throw new ArgumentNullException("testAssembly");
 
-            if (_configured)
+            if (configured)
                 return;
 
             lock (SyncRoot)
                 ConfigureImpl(testAssembly);
-        }
-
-        private static void ConfigureImpl(Assembly testAssembly)
-        {
-            if (_configured)
-                return;
-
-            ConfigureAttributes(testAssembly);
-            _configured = true;
         }
 
         /// <summary>
@@ -61,6 +68,15 @@ namespace Jwc.Experiment
         {
         }
 
+        private static void ConfigureImpl(Assembly testAssembly)
+        {
+            if (configured)
+                return;
+
+            ConfigureAttributes(testAssembly);
+            configured = true;
+        }
+
         private static void ConfigureAttributes(Assembly testAssembly)
         {
             foreach (var attribute in GetAttributes(testAssembly))
@@ -75,23 +91,8 @@ namespace Jwc.Experiment
 
         private void ConfigureAttribute(Assembly testAssembly)
         {
-            Setup(testAssembly);
-            DomainUnload += (s, e) => Teardown(testAssembly);
-        }
-
-        /// <summary>
-        /// Occurs when [domain unload].
-        /// </summary>
-        protected virtual event EventHandler DomainUnload
-        {
-            add
-            {
-                AppDomain.CurrentDomain.DomainUnload += value;
-            }
-            remove
-            {
-                AppDomain.CurrentDomain.DomainUnload -= value;
-            }
+            this.Setup(testAssembly);
+            this.DomainUnload += (s, e) => this.Teardown(testAssembly);
         }
     }
 }
