@@ -28,9 +28,8 @@ namespace Jwc.Experiment.AutoFixture
                 throw new ArgumentNullException("fixture");
             }
 
+            this.RegisterItself(fixture);
             this.fixture = fixture;
-            fixture.Inject<ITestFixture>(this);
-            fixture.Inject(this);
             this.specimenContext = new SpecimenContext(fixture);
         }
 
@@ -57,6 +56,12 @@ namespace Jwc.Experiment.AutoFixture
         public object Create(object request)
         {
             return this.specimenContext.Resolve(request);
+        }
+
+        private void RegisterItself(IFixture fixture)
+        {
+            fixture.Inject<ITestFixture>(this);
+            fixture.Inject(this);
         }
     }
 }
