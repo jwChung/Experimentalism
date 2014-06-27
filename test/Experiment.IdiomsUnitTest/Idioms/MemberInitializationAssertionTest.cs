@@ -128,8 +128,7 @@ namespace Jwc.Experiment.Idioms
         public void VerifyAssemblyCorrectlyVerifies()
         {
             // Fixture setup
-            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture())
-            { CallBase = true }.Object;
+            var sut = new Mock<MemberInitializationAssertion>(new DelegatingTestFixture()) { CallBase = true }.Object;
 
             var types = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
@@ -363,25 +362,25 @@ namespace Jwc.Experiment.Idioms
 
                 public ClassForSatisfiedConstructors(string stringValue)
                 {
-                    StringValue = stringValue;
+                    this.StringValue = stringValue;
                 }
 
                 public ClassForSatisfiedConstructors(string stringValue, int intValue)
                 {
-                    StringValue = stringValue;
-                    IntValue = intValue;
+                    this.StringValue = stringValue;
+                    this.IntValue = intValue;
                 }
 
                 public ClassForSatisfiedConstructors(object objectValue, int intValue)
                 {
-                    ObjectValue = objectValue;
-                    IntValue = intValue;
+                    this.ObjectValue = objectValue;
+                    this.IntValue = intValue;
                 }
 
                 public ClassForSatisfiedConstructors(object objectValue, byte byteValue)
                 {
-                    ObjectValue = objectValue;
-                    ByteValue = byteValue;
+                    this.ObjectValue = objectValue;
+                    this.ByteValue = byteValue;
                 }
 
                 public object ObjectValue { get; set; }
@@ -407,12 +406,12 @@ namespace Jwc.Experiment.Idioms
 
                 public ClassForUnsatisfiedConstructors(string stringValue, int intValue)
                 {
-                    StringValue = stringValue;
+                    this.StringValue = stringValue;
                 }
 
                 public ClassForUnsatisfiedConstructors(int intValue, object objectValue)
                 {
-                    ObjectValue = objectValue;
+                    this.ObjectValue = objectValue;
                 }
 
                 public object ObjectValue { get; set; }
@@ -434,13 +433,13 @@ namespace Jwc.Experiment.Idioms
 
                 public ClassForSatisfiedFields(object objectValue, string stringValue)
                 {
-                    ObjectValue = objectValue;
+                    this.ObjectValue = objectValue;
                 }
 
                 public ClassForSatisfiedFields(string stringValue, int intValue)
                 {
-                    StringValue = stringValue;
-                    IntValue = intValue;
+                    this.StringValue = stringValue;
+                    this.IntValue = intValue;
                 }
             }
         }
@@ -479,17 +478,17 @@ namespace Jwc.Experiment.Idioms
 
             public class ClassForSatisfiedProperties
             {
-                private readonly int _intValue;
+                private readonly int intValue;
 
                 public ClassForSatisfiedProperties(object objectValue, string stringValue)
                 {
-                    ObjectValue = objectValue;
+                    this.ObjectValue = objectValue;
                 }
 
                 public ClassForSatisfiedProperties(string stringValue, int intValue)
                 {
-                    StringValue = stringValue;
-                    _intValue = intValue;
+                    this.StringValue = stringValue;
+                    this.intValue = intValue;
                 }
 
                 public object ObjectValue { get; set; }
@@ -500,7 +499,7 @@ namespace Jwc.Experiment.Idioms
                 {
                     get
                     {
-                        return _intValue;
+                        return this.intValue;
                     }
                 }
             }

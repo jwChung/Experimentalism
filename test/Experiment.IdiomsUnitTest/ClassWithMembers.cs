@@ -1,19 +1,22 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Jwc.Experiment
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
     public class ClassWithMembers
     {
         public static object StaticField;
         public object PublicField;
         public object OtherPublicField;
-        protected internal object ProtectedInternalField;
-        protected object ProtectedField;
         internal object InternalField = null;
+        protected internal object ProtectedInternalField;
+        protected object protectedField;
 #pragma warning disable 169
-        private object _privateField;
+        private object privateField;
 #pragma warning restore 169
 
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode", Justification = "The static constructor is to test.")]
         static ClassWithMembers()
         {
         }
@@ -26,6 +29,10 @@ namespace Jwc.Experiment
         {
         }
 
+        internal ClassWithMembers(int arg)
+        {
+        }
+
         protected internal ClassWithMembers(string arg)
         {
         }
@@ -34,13 +41,23 @@ namespace Jwc.Experiment
         {
         }
 
-        internal ClassWithMembers(int arg)
-        {
-        }
-
         private ClassWithMembers(double arg)
         {
         }
+
+#pragma warning disable 67
+        public static event EventHandler StaticEvent;
+
+        public event EventHandler PublicEvent;
+
+        internal event EventHandler InternalEvent;
+
+        protected internal event EventHandler ProtectedInternalEvent;
+
+        protected event EventHandler ProtectedEvent;
+
+        private event EventHandler PrivateEvent;
+#pragma warning restore 67
 
         public static object StaticProperty { get; set; }
 
@@ -84,48 +101,25 @@ namespace Jwc.Experiment
             {
                 return null;
             }
+
             set
             {
             }
         }
 
+        internal object InternalProperty { get; set; }
+
         protected internal object ProtectedInternalProperty { get; set; }
 
         protected object ProtectedProperty { get; set; }
 
-        internal object InternalProperty { get; set; }
-
         private object PrivateProperty { get; set; }
-
-        public void PublicMethod()
-        {
-        }
-
-        protected internal void ProtectedInternalMethod()
-        {
-        }
-
-        protected void ProtectedMethod()
-        {
-        }
-
-        internal void InternalMethod()
-        {
-        }
-
-        private void PrivateMethod()
-        {
-        }
 
         public static void PublicStaticMethod()
         {
         }
 
-        protected internal static void ProtectedInternalStaticMethod()
-        {
-        }
-
-        protected static void ProtectedStaticMethod()
+        public void PublicMethod()
         {
         }
 
@@ -133,17 +127,32 @@ namespace Jwc.Experiment
         {
         }
 
+        internal void InternalMethod()
+        {
+        }
+
+        protected internal static void ProtectedInternalStaticMethod()
+        {
+        }
+
+        protected internal void ProtectedInternalMethod()
+        {
+        }
+
+        protected static void ProtectedStaticMethod()
+        {
+        }
+        
+        protected void ProtectedMethod()
+        {
+        }
+
         private static void PrivateStaticMethod()
         {
         }
 
-#pragma warning disable 67
-        public static event EventHandler StaticEvent;
-        public event EventHandler PublicEvent;
-        protected internal event EventHandler ProtectedInternalEvent;
-        protected event EventHandler ProtectedEvent;
-        internal event EventHandler InternalEvent;
-        private event EventHandler PrivateEvent;
-#pragma warning restore 67
+        private void PrivateMethod()
+        {
+        }
     }
 }

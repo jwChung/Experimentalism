@@ -10,7 +10,7 @@ namespace Jwc.Experiment
 
         public bool Equals(IReflectionElement x, IReflectionElement y)
         {
-            return OnEquals(x, y);
+            return this.OnEquals(x, y);
         }
 
         public int GetHashCode(IReflectionElement obj)

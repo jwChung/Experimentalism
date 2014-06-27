@@ -14,7 +14,7 @@ namespace Jwc.Experiment.AutoFixture
 
         public override ICustomization GetCustomization(ParameterInfo parameter)
         {
-            return OnGetCustomization(parameter);
+            return this.OnGetCustomization(parameter);
         }
     }
 }

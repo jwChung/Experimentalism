@@ -123,6 +123,7 @@ namespace Jwc.Experiment.Xunit
                     {
                         return "custom string";
                     }
+
                     if (type == typeof(int))
                     {
                         return 5678;

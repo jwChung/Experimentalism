@@ -1,22 +1,24 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Ploeh.AutoFixture;
 
 namespace Jwc.Experiment
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
     public class ClassForCollectingReference
     {
+#pragma warning disable 649
+        public ClassImplementingMultiple Field;
+#pragma warning restore 649
+
         public ClassForCollectingReference(int arg)
         {
-            PrivateMethod1(null);
+            this.PrivateMethod1(null);
         }
 
         public ClassForCollectingReference(object arg)
         {
         }
-
-#pragma warning disable 649
-        public ClassImplementingMultiple Field;
-#pragma warning restore 649
 
         public ClassImplementingMultiple ReturnMethod()
         {
@@ -40,17 +42,17 @@ namespace Jwc.Experiment
 
         public void ConstructInMethodBody()
         {
-            PrivateMethod1(new Fixture());
+            this.PrivateMethod1(new Fixture());
         }
 
         public void RetrunValueInMethodBody()
         {
-            PrivateMethod2();
+            this.PrivateMethod2();
         }
 
         public void PassParameterInMethodBody()
         {
-            PrivateMethod1(null);
+            this.PrivateMethod1(null);
         }
 
         private void PrivateMethod1(Fixture fixture)

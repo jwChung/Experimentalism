@@ -131,7 +131,7 @@ namespace Jwc.Experiment
 
             public void CallSetup(Assembly testAssembly)
             {
-                base.Setup(testAssembly);
+                this.Setup(testAssembly);
             }
         }
 

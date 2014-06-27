@@ -4,8 +4,8 @@ namespace Jwc.Experiment.Xunit
 {
     public class FakeTestFixture : ITestFixture
     {
-        private readonly string _stringValue = Guid.NewGuid().ToString();
-        private readonly int _intValue = new Random().Next();
+        private readonly string stringValue = Guid.NewGuid().ToString();
+        private readonly int intValue = new Random().Next();
 
         public object Create(object request)
         {
@@ -14,11 +14,12 @@ namespace Jwc.Experiment.Xunit
             {
                 if (type == typeof(string))
                 {
-                    return _stringValue;
+                    return this.stringValue;
                 }
+
                 if (type == typeof(int))
                 {
-                    return _intValue;
+                    return this.intValue;
                 }
             }
 

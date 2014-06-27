@@ -11,12 +11,12 @@ namespace Jwc.Experiment
 
         public bool Equals(T x, T y)
         {
-            return OnEquals(x, y);
+            return this.OnEquals(x, y);
         }
 
         public int GetHashCode(T obj)
         {
-            return OnGetHashCode(obj);
+            return this.OnGetHashCode(obj);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Jwc.Experiment
             Func<FieldInfo, bool> predicate, Accessibilities expected)
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var fieldInfoElement = typeof(object).Assembly
@@ -85,7 +85,7 @@ namespace Jwc.Experiment
         public void VisitFieldInfoElementManyTimeProducesCorrectValues()
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var fieldInfos = typeof(object).Assembly
@@ -113,7 +113,7 @@ namespace Jwc.Experiment
             Func<MethodBase, bool> predicate, Accessibilities expected)
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfoElement = typeof(object).Assembly
@@ -130,7 +130,7 @@ namespace Jwc.Experiment
         public void VisitConstructorInfoElementManyTimeProducesCorrectValues()
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfos = typeof(object).Assembly
@@ -158,7 +158,7 @@ namespace Jwc.Experiment
             Func<MethodBase, bool> predicate, Accessibilities expected)
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var methodInfoElement = typeof(object).Assembly
@@ -175,7 +175,7 @@ namespace Jwc.Experiment
         public void VisitMethodInfoElementManyTimeProducesCorrectValues()
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var constructorInfos = typeof(object).Assembly
@@ -203,7 +203,7 @@ namespace Jwc.Experiment
             Func<EventInfo, bool> predicate, Accessibilities expected)
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var eventInfoElement = typeof(object).Assembly
@@ -221,7 +221,7 @@ namespace Jwc.Experiment
         public void VisitEventInfoElementManyTimeProducesCorrectValues()
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var eventInfos = typeof(object).Assembly
@@ -265,7 +265,7 @@ namespace Jwc.Experiment
             Func<PropertyInfo, bool> predicate, Accessibilities expected)
         {
             var sut = new AccessibilityCollector();
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
             var propertyInfoElement = typeof(object).Assembly
@@ -284,7 +284,7 @@ namespace Jwc.Experiment
             // Fixture setup
             var sut = new AccessibilityCollector();
 
-            const BindingFlags bindingFlags =
+            BindingFlags bindingFlags =
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static;
 

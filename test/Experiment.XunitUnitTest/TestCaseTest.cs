@@ -106,7 +106,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void DisplayParameterNameIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
-            const string displayParameterName = "anonymous";
+            string displayParameterName = "anonymous";
             var sut = new TestCase(displayParameterName, new Func<object>(() => null));
 
             var actual = sut.DisplayParameterName;
@@ -222,7 +222,7 @@ namespace Jwc.Experiment.Xunit
             };
 
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            const string displayParameterName = "Int32: 123, String: anonymous, Object: (null)";
+            string displayParameterName = "Int32: 123, String: anonymous, Object: (null)";
             
             // Exercise system
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
@@ -273,7 +273,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
-            const string displayParameterName = "anonymous";
+            string displayParameterName = "anonymous";
             var sut = new TestCase(displayParameterName, new Func<object>(() => null));
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
@@ -287,7 +287,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
-            const string displayParameterName = "anonymous";
+            string displayParameterName = "anonymous";
             var sut = new TestCase(displayParameterName, new Action<int>(x => { }));
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixtureFactory = new DelegatingTestFixtureFactory { OnCreate = m => new FakeTestFixture() };

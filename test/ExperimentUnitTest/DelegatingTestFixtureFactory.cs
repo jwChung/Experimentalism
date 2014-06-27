@@ -9,7 +9,7 @@ namespace Jwc.Experiment
 
         public ITestFixture Create(MethodInfo testMethod)
         {
-            return OnCreate(testMethod);
+            return this.OnCreate(testMethod);
         }
     }
 }

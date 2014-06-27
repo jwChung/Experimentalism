@@ -11,6 +11,13 @@ namespace Jwc.Experiment.Xunit
 {
     public class FirstClassTestAttributeTest : IDisposable
     {
+        public static IEnumerable<ITestCase> StaticTestCasesTest()
+        {
+            yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+            yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
+        }
+
         [Fact]
         public void SutIsFactAttribute()
         {
@@ -22,7 +29,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateTestCommandsReturnsCorrectCommands()
         {
             var sut = new TssFirstClassTestAttribute();
-            const string methodName = "TestCasesTest";
+            string methodName = "TestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -41,7 +48,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateTestCommandsFromStaticReturnsCorrectCommands()
         {
             var sut = new TssFirstClassTestAttribute();
-            const string methodName = "StaticTestCasesTest";
+            string methodName = "StaticTestCasesTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).ToArray();
@@ -66,7 +73,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void CreateTestCommandsPassesCorrectTestFixtureToTestCase()
         {
-            const string methodName = "PassTestFixtureTest";
+            string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
             var sut = new TssFirstClassTestAttribute
             {
@@ -182,7 +189,7 @@ namespace Jwc.Experiment.Xunit
         public void CreateTestCommandsWithoutValidTestFixtureFactoryRetrunsExceptionCommand()
         {
             var sut = new FirstClassTestAttribute();
-            const string methodName = "PassTestFixtureTest";
+            string methodName = "PassTestFixtureTest";
             var method = Reflector.Wrap(GetType().GetMethod(methodName));
 
             var actual = sut.CreateTestCommands(method).Single();
@@ -274,14 +281,7 @@ namespace Jwc.Experiment.Xunit
                 }
             };
         }
-
-        public static IEnumerable<ITestCase> StaticTestCasesTest()
-        {
-            yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
-            yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
-            yield return new DelegatingTestCase { OnConvertToTestCommand = (m, f) => new FactCommand(m) };
-        }
-
+        
         public IEnumerable<ITestCase> PassTestFixtureTest()
         {
             yield return new DelegatingTestCase
@@ -346,7 +346,7 @@ namespace Jwc.Experiment.Xunit
 
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
-                return OnCreateTestFixture(testMethod);
+                return this.OnCreateTestFixture(testMethod);
             }
         }
 

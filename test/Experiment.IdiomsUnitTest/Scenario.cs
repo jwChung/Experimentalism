@@ -145,22 +145,22 @@ namespace Jwc.Experiment
 
         private class ClassWithMembersInitializedByConstructor
         {
-            private readonly int _x;
-            private readonly IList<object> _y;
-            private readonly string _z;
+            private readonly int x;
+            private readonly IList<object> y;
+            private readonly string z;
 
             public ClassWithMembersInitializedByConstructor(int x, object[] y, string z)
             {
-                _x = x;
-                _y = y.ToList();
-                _z = z;
+                this.x = x;
+                this.y = y.ToList();
+                this.z = z;
             }
 
             public int X
             {
                 get
                 {
-                    return _x;
+                    return this.x;
                 }
             }
 
@@ -168,7 +168,7 @@ namespace Jwc.Experiment
             {
                 get
                 {
-                    return _y;
+                    return this.y;
                 }
             }
 
@@ -176,7 +176,7 @@ namespace Jwc.Experiment
             {
                 get
                 {
-                    return _z;
+                    return this.z;
                 }
             }
         }

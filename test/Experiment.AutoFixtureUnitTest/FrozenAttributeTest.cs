@@ -17,8 +17,10 @@ namespace Jwc.Experiment.AutoFixture
             // Fixture setup
             // Exercise system
             var sut = new FrozenAttribute();
+
             // Verify outcome
             Assert.IsAssignableFrom<CustomizeAttribute>(sut);
+
             // Teardown
         }
 
@@ -27,9 +29,11 @@ namespace Jwc.Experiment.AutoFixture
         {
             // Fixture setup
             var sut = new FrozenAttribute();
+
             // Exercise system and verify outcome
             Assert.Throws<ArgumentNullException>(
                 () => sut.GetCustomization(null));
+
             // Teardown
         }
 
@@ -42,11 +46,14 @@ namespace Jwc.Experiment.AutoFixture
                 .GetMethod("DoSomething", new[] { typeof(object) })
                 .GetParameters()
                 .Single();
+
             // Exercise system
             var result = sut.GetCustomization(parameter);
+
             // Verify outcome
             var freezer = Assert.IsAssignableFrom<FreezingCustomization>(result);
             Assert.Equal(parameter.ParameterType, freezer.TargetType);
+
             // Teardown
         }
 
@@ -59,11 +66,14 @@ namespace Jwc.Experiment.AutoFixture
                 .GetMethod("DoSomething", new[] { typeof(object) })
                 .GetParameters()
                 .Single();
+
             // Exercise system
             var result = sut.GetCustomization(parameter);
+
             // Verify outcome
             var freezer = Assert.IsAssignableFrom<FreezingCustomization>(result);
             Assert.Equal(parameter.ParameterType, freezer.RegisteredType);
+
             // Teardown
         }
 
@@ -77,11 +87,14 @@ namespace Jwc.Experiment.AutoFixture
                 .GetMethod("DoSomething", new[] { typeof(ConcreteType) })
                 .GetParameters()
                 .Single();
+
             // Exercise system
             var result = sut.GetCustomization(parameter);
+
             // Verify outcome
             var freezer = Assert.IsAssignableFrom<FreezingCustomization>(result);
             Assert.Equal(registeredType, freezer.RegisteredType);
+
             // Teardown
         }
 
@@ -95,8 +108,10 @@ namespace Jwc.Experiment.AutoFixture
                 .GetMethod("DoSomething", new[] { typeof(ConcreteType) })
                 .GetParameters()
                 .Single();
+
             // Exercise system and verify outcome
             Assert.Throws<ArgumentException>(() => sut.GetCustomization(parameter));
+
             // Teardown
         }
     }

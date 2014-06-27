@@ -106,8 +106,9 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitTypeElementCollectsCorrectReferencesToAttribute()
         {
+            var attributes = new object[] { new FactAttribute() };
             var type = Mock.Of<Type>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetCustomAttributes(false) == attributes &&
                 x.Assembly == typeof(object).Assembly);
             var sut = new ReferenceCollector();
             var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
@@ -190,8 +191,9 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitFieldInfoElementCollectsCorrectReferencesToAttribute()
         {
+            var attributes = new object[] { new FactAttribute() };
             var fieldInfo = Mock.Of<FieldInfo>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetCustomAttributes(false) == attributes &&
                 x.FieldType == typeof(object));
             var sut = new ReferenceCollector();
             var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
@@ -232,8 +234,8 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitConstructorInfoElementCollectsCorrectReferencesToAttribute()
         {
-            var constructorInfo = Mock.Of<ConstructorInfo>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() });
+            var attributes = new object[] { new FactAttribute() };
+            var constructorInfo = Mock.Of<ConstructorInfo>(x => x.GetCustomAttributes(false) == attributes);
             var sut = new ReferenceCollector();
             var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
 
@@ -290,8 +292,9 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitPropertyInfoElementCollectsCorrectReferencesToAttribute()
         {
+            var attributes = new object[] { new FactAttribute() };
             var propertyInfo = Mock.Of<PropertyInfo>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetCustomAttributes(false) == attributes &&
                 x.PropertyType == typeof(object));
             var sut = new ReferenceCollector();
             var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
@@ -468,8 +471,9 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitMethodInfoElementCollectsCorrectReferencesToAttribute()
         {
+            var attributes = new object[] { new FactAttribute() };
             var methodInfo = Mock.Of<MethodInfo>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetCustomAttributes(false) == attributes &&
                 x.ReturnType == typeof(object));
             var sut = new ReferenceCollector();
             var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };
@@ -527,8 +531,9 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitEventInfoElementCollectsCorrectReferencesToAttribute()
         {
+            var attributes = new object[] { new FactAttribute() };
             var eventInfo = Mock.Of<EventInfo>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetCustomAttributes(false) == attributes &&
                 x.GetAddMethod(true) == Mock.Of<MethodInfo>(m => m.ReturnType == typeof(void)) &&
                 x.GetRemoveMethod(true) == Mock.Of<MethodInfo>(m => m.ReturnType == typeof(void)));
             var sut = new ReferenceCollector();
@@ -575,8 +580,9 @@ namespace Jwc.Experiment
         [Fact]
         public void VisitParameterInfoElementCollectsCorrectReferencesToAttribute()
         {
+            var attributes = new object[] { new FactAttribute() };
             var parameterInfo = Mock.Of<ParameterInfo>(x =>
-                x.GetCustomAttributes(false) == new object[] { new FactAttribute() } &&
+                x.GetCustomAttributes(false) == attributes &&
                 x.ParameterType == typeof(object));
             var sut = new ReferenceCollector();
             var expected = new[] { typeof(FactAttribute).Assembly, typeof(IDisposable).Assembly };

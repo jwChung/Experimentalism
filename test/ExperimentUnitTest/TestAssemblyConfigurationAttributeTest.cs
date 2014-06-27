@@ -45,7 +45,7 @@ namespace Jwc.Experiment
             finally
             {
                 // Fixture teardown
-                ResetConfigured();
+                this.ResetConfigured();
             }
         }
 
@@ -67,7 +67,7 @@ namespace Jwc.Experiment
             }
             finally
             {
-                ResetConfigured();
+                this.ResetConfigured();
             }
         }
 
@@ -99,7 +99,7 @@ namespace Jwc.Experiment
             finally
             {
                 // Fixture teardown
-                ResetConfigured();
+                this.ResetConfigured();
             }
         }
 
@@ -118,14 +118,16 @@ namespace Jwc.Experiment
 
         private class TssTestAssemblyConfigurationAttribute : TestAssemblyConfigurationAttribute
         {
-            private readonly List<Assembly> _setUpAssemblies = new List<Assembly>();
-            private readonly List<Assembly> _tearDownAssemblies = new List<Assembly>();
+            private readonly List<Assembly> setUpAssemblies = new List<Assembly>();
+            private readonly List<Assembly> tearDownAssemblies = new List<Assembly>();
+            
+            protected override event EventHandler DomainUnload;
 
             public List<Assembly> SetUpAssemblies
             {
                 get
                 {
-                    return _setUpAssemblies;
+                    return this.setUpAssemblies;
                 }
             }
 
@@ -133,27 +135,25 @@ namespace Jwc.Experiment
             {
                 get
                 {
-                    return _tearDownAssemblies;
+                    return this.tearDownAssemblies;
                 }
-            }
-
-            protected override void Setup(Assembly testAssembly)
-            {
-                SetUpAssemblies.Add(testAssembly);
-            }
-
-            protected override void Teardown(Assembly testAssembly)
-            {
-                TearDownAssemblies.Add(testAssembly);
             }
 
             public void RaiseDomainUnload()
             {
-                if (DomainUnload != null)
-                    DomainUnload(this, new EventArgs());
+                if (this.DomainUnload != null)
+                    this.DomainUnload(this, new EventArgs());
             }
 
-            protected override event EventHandler DomainUnload;
+            protected override void Setup(Assembly testAssembly)
+            {
+                this.SetUpAssemblies.Add(testAssembly);
+            }
+
+            protected override void Teardown(Assembly testAssembly)
+            {
+                this.TearDownAssemblies.Add(testAssembly);
+            }
         }
     }
 }

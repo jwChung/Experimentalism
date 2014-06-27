@@ -2,8 +2,6 @@ namespace Jwc.Experiment
 {
     public abstract class AbstractClassWithMembers
     {
-        public abstract void AbstractMethod(object arg);
-
         public virtual object SetProperty
         {
             set
@@ -11,6 +9,8 @@ namespace Jwc.Experiment
             }
         }
 
+        public abstract void AbstractMethod(object arg);
+        
         public virtual void VirtualMethod(object arg)
         {
         }

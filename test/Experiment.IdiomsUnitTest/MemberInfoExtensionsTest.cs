@@ -17,9 +17,9 @@ namespace Jwc.Experiment
         public void GetDisplayMethodNameReturnsCorrectString()
         {
             var member = MethodBase.GetCurrentMethod();
-            const string expected = "[[Jwc.Experiment.MemberInfoExtensionsTest]" +
-                                    "[Void GetDisplayMethodNameReturnsCorrectString()]] " +
-                                    "(method)";
+            string expected = "[[Jwc.Experiment.MemberInfoExtensionsTest]" +
+                              "[Void GetDisplayMethodNameReturnsCorrectString()]] " +
+                              "(method)";
 
             var actual = member.GetDisplayName();
 
@@ -30,9 +30,9 @@ namespace Jwc.Experiment
         public void GetDisplayPropertyNameReturnsCorrectString()
         {
             var member = new Properties<ClassWithMembers>().Select(x => x.PublicProperty);
-            const string expected = "[[Jwc.Experiment.ClassWithMembers]" +
-                                    "[System.Object PublicProperty]] " +
-                                    "(property)";
+            string expected = "[[Jwc.Experiment.ClassWithMembers]" +
+                              "[System.Object PublicProperty]] " +
+                              "(property)";
 
             var actual = member.GetDisplayName();
 

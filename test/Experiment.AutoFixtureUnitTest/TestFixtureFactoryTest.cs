@@ -151,7 +151,7 @@ namespace Jwc.Experiment.AutoFixture
 
             protected override IFixture CreateFixture(MethodInfo testMethod)
             {
-                return OnCreateFixture(testMethod);
+                return this.OnCreateFixture(testMethod);
             }
         }
     }

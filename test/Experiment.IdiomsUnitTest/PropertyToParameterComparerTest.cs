@@ -63,16 +63,16 @@ namespace Jwc.Experiment
 
         private class ClassForPropertyEqualToParameter
         {
-            private readonly string _value;
+            private readonly string value;
 
             public ClassForPropertyEqualToParameter(string value)
             {
-                _value = value;
+                this.value = value;
             }
 
             public string Value
             {
-                get { return _value; }
+                get { return this.value; }
             }
 
             public string Other

@@ -2,8 +2,8 @@ namespace Jwc.Experiment.AutoFixture
 {
     public class Person
     {
-        private readonly string _name;
-        private readonly int _age;
+        private readonly string name;
+        private readonly int age;
 
         public Person()
         {
@@ -11,15 +11,15 @@ namespace Jwc.Experiment.AutoFixture
 
         public Person(string name, int age)
         {
-            _name = name;
-            _age = age;
+            this.name = name;
+            this.age = age;
         }
 
         public string Name
         {
             get
             {
-                return _name;
+                return this.name;
             }
         }
 
@@ -27,7 +27,7 @@ namespace Jwc.Experiment.AutoFixture
         {
             get
             {
-                return _age;
+                return this.age;
             }
         }
     }

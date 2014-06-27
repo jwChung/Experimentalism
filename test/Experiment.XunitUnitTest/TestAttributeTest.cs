@@ -436,7 +436,7 @@ namespace Jwc.Experiment.Xunit
 
             protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
             {
-                return OnCreateTestFixture(testMethod);
+                return this.OnCreateTestFixture(testMethod);
             }
         }
 

@@ -53,8 +53,7 @@ namespace Jwc.Experiment.Idioms
         public void VerifyAssemblyCorrectlyVerifies()
         {
             // Fixture setup
-            var sut = new Mock<NullGuardClauseAssertion>(new DelegatingTestFixture())
-            { CallBase = true }.Object;
+            var sut = new Mock<NullGuardClauseAssertion>(new DelegatingTestFixture()) { CallBase = true }.Object;
 
             var types = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
@@ -238,6 +237,7 @@ namespace Jwc.Experiment.Idioms
                 {
                     return null;
                 }
+
                 set
                 {
                     if (value == null)

@@ -15,8 +15,10 @@ namespace Jwc.Experiment.AutoFixture
             // Fixture setup
             // Exercise system
             var sut = new DelegatingCustomizeAttribute();
+
             // Verify outcome
             Assert.IsAssignableFrom<CustomizeAttribute>(sut);
+
             // Teardown
         }
 
@@ -26,8 +28,10 @@ namespace Jwc.Experiment.AutoFixture
             // Fixture setup
             // Exercise system
             var sut = new DelegatingCustomizeAttribute();
+
             // Verify outcome
             Assert.IsAssignableFrom<Attribute>(sut);
+
             // Teardown
         }
     }

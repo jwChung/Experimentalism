@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Ploeh.Albedo;
 using Xunit;
@@ -61,6 +62,7 @@ namespace Jwc.Experiment
             Assert.Equal(0, actual);
         }
 
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
         private class ClassForFieldEqualToParameter
         {
             public string Value;
@@ -68,7 +70,7 @@ namespace Jwc.Experiment
 
             public ClassForFieldEqualToParameter(string value)
             {
-                Value = value;
+                this.Value = value;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Moq;
@@ -58,8 +59,8 @@ namespace Jwc.Experiment.Idioms
         public void VerifyAssemblyCorrectlyVerifies()
         {
             // Fixture setup
-            var sut = new Mock<IndirectReferenceAssertion>(new object[] { new Assembly[0] })
-            { CallBase = true }.Object;
+            var arguments = new object[] { new Assembly[0] };
+            var sut = new Mock<IndirectReferenceAssertion>(arguments) { CallBase = true }.Object;
             
             var types = new List<Type>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
@@ -85,8 +86,8 @@ namespace Jwc.Experiment.Idioms
         public void VerifyTypeCorrectlyVerifies()
         {
             // Fixture setup
-            var sut = new Mock<IndirectReferenceAssertion>(new object[] { new Assembly[0] })
-            { CallBase = true }.Object;
+            var arguments = new object[] { new Assembly[0] };
+            var sut = new Mock<IndirectReferenceAssertion>(arguments) { CallBase = true }.Object;
 
             var members = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
@@ -225,9 +226,11 @@ namespace Jwc.Experiment.Idioms
         [InlineData(MethodAttributes.Assembly)]
         public void VerifyUnexposedConstructorIgnoresVerifying(MethodAttributes attributes)
         {
-            var constructor = Mock.Of<ConstructorInfo>(x =>
+            var parameterInfos = new[] { Mock.Of<ParameterInfo>(p => p.ParameterType == typeof(object)) };
+            var constructor = Mock.Of<ConstructorInfo>(
+                x =>
                 x.Attributes == attributes &&
-                x.GetParameters() == new[] { Mock.Of<ParameterInfo>(p => p.ParameterType == typeof(object)) });
+                x.GetParameters() == parameterInfos);
             var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
             Assert.DoesNotThrow(() => sut.Verify(constructor));
         }
@@ -338,6 +341,7 @@ namespace Jwc.Experiment.Idioms
             Assert.DoesNotThrow(() => sut.Verify(@event));
         }
 
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
         public class ClassForIndirectReference : IdiomaticMemberAssertion
         {
 #pragma warning disable 649
@@ -354,15 +358,15 @@ namespace Jwc.Experiment.Idioms
             {
             }
 
+#pragma warning disable 67
+            public event Func<IIdiomaticTypeAssertion> Event;
+#pragma warning restore 67
+
             public Fixture Property { get; set; }
 
             public void Method(IIdiomaticTypeAssertion arg1, object arg2)
             {
             }
-
-#pragma warning disable 67
-            public event Func<IIdiomaticTypeAssertion> Event;
-#pragma warning restore 67
         }
     }
 }

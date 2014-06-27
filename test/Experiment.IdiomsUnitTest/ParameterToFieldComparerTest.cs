@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Ploeh.Albedo;
 using Xunit;
@@ -143,19 +144,19 @@ namespace Jwc.Experiment
         private class TypeForFieldEqualValue
         {
             public readonly IEnumerable<int> Values;
-#pragma warning disable 649
-            private readonly int _value;
-#pragma warning restore 649
             public readonly object Value;
+#pragma warning disable 649
+            private readonly int value;
+#pragma warning restore 649
 
             public TypeForFieldEqualValue(int value)
             {
-                Value = value;
+                this.Value = value;
             }
 
             public TypeForFieldEqualValue(int[] values)
             {
-                Values = values.ToArray();
+                this.Values = values.ToArray();
             }
 
             public object WritableOnlyProperty
@@ -169,8 +170,9 @@ namespace Jwc.Experiment
             {
                 private get
                 {
-                    return _value;
+                    return this.value;
                 }
+
                 set
                 {
                 }

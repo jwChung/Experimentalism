@@ -18,8 +18,10 @@ namespace Jwc.Experiment.AutoFixture
             // Fixture setup
             // Exercise system
             var sut = new ModestAttribute();
+
             // Verify outcome
             Assert.IsAssignableFrom<CustomizeAttribute>(sut);
+
             // Teardown
         }
 
@@ -28,9 +30,11 @@ namespace Jwc.Experiment.AutoFixture
         {
             // Fixture setup
             var sut = new ModestAttribute();
+
             // Exercise system and verify outcome
             Assert.Throws<ArgumentNullException>(
                 () => sut.GetCustomization(null));
+
             // Teardown
         }
 
@@ -41,12 +45,15 @@ namespace Jwc.Experiment.AutoFixture
             var sut = new ModestAttribute();
             var parameter = typeof(TypeWithOverloadedMembers).GetMethod("DoSomething", new[] { typeof(object) })
                 .GetParameters().Single();
+
             // Exercise system
             var result = sut.GetCustomization(parameter);
+
             // Verify outcome
             var invoker = Assert.IsAssignableFrom<ConstructorCustomization>(result);
             Assert.Equal(parameter.ParameterType, invoker.TargetType);
             Assert.IsAssignableFrom<ModestConstructorQuery>(invoker.Query);
+
             // Teardown
         }
     }

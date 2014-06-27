@@ -5,18 +5,18 @@ namespace Jwc.Experiment
 {
     public class FakeTestFixture : ITestFixture
     {
-        private readonly ISpecimenContext _context;
+        private readonly ISpecimenContext context;
 
         public FakeTestFixture()
         {
             var fixture = new Fixture();
             fixture.Inject<ITestFixture>(this);
-            _context = new SpecimenContext(fixture);
+            this.context = new SpecimenContext(fixture);
         }
 
         public object Create(object request)
         {
-            return _context.Resolve(request);
+            return this.context.Resolve(request);
         }
     }
 }

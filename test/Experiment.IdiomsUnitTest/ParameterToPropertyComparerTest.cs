@@ -186,24 +186,24 @@ namespace Jwc.Experiment
 
         private class TypeForPropertyEqualValue
         {
-            private readonly int _value;
-            private readonly int[] _values;
+            private readonly int value;
+            private readonly int[] values;
 
             public TypeForPropertyEqualValue(int value)
             {
-                _value = value;
+                this.value = value;
             }
 
             public TypeForPropertyEqualValue(int[] values)
             {
-                _values = values.ToArray();
+                this.values = values.ToArray();
             }
 
             public IEnumerable<int> Values
             {
                 get
                 {
-                    return _values;
+                    return this.values;
                 }
             }
 
@@ -211,7 +211,7 @@ namespace Jwc.Experiment
             {
                 get
                 {
-                    return _value;
+                    return this.value;
                 }
             }
 
@@ -226,8 +226,9 @@ namespace Jwc.Experiment
             {
                 private get
                 {
-                    return _value;
+                    return this.value;
                 }
+
                 set
                 {
                 }

@@ -9,7 +9,7 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory)
         {
-            return OnConvertToTestCommand(method, testFixtureFactory);
+            return this.OnConvertToTestCommand(method, testFixtureFactory);
         }
     }
 }

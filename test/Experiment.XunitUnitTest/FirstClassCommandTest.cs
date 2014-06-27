@@ -27,11 +27,12 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void InitializeWithNullParameterDisplayNameThrows()
         {
+            Action action = () => { };
             Assert.Throws<ArgumentNullException>(
                 () => new FirstClassCommand(
                     Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                     null,
-                    () => { }));
+                    action));
         }
 
         [Fact]
@@ -58,7 +59,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void DisplayParameterNameIsCorrect()
         {
-            const string expected = "DisplayParameterName";
+            string expected = "DisplayParameterName";
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 expected,
@@ -87,7 +88,7 @@ namespace Jwc.Experiment.Xunit
         public void DisplayNameIsCorrect()
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            const string displayParameterName = "Anonymous Parameters";
+            string displayParameterName = "Anonymous Parameters";
             var sut = new FirstClassCommand(
                 Reflector.Wrap(method),
                 displayParameterName,
@@ -107,7 +108,7 @@ namespace Jwc.Experiment.Xunit
                 Reflector.Wrap(method),
                 string.Empty,
                 () => { });
-            const string expected = "CustomDisplayName()";
+            string expected = "CustomDisplayName()";
 
             var actual = sut.DisplayName;
 

@@ -7,7 +7,7 @@ namespace Jwc.Experiment
     {
         public DelegatingReflectionVisitor()
         {
-            OnVisitTypeElement = e => this;
+            this.OnVisitTypeElement = e => this;
         }
 
         public override T Value
@@ -22,7 +22,7 @@ namespace Jwc.Experiment
 
         public override IReflectionVisitor<T> Visit(TypeElement typeElement)
         {
-            return OnVisitTypeElement(typeElement);
+            return this.OnVisitTypeElement(typeElement);
         }
     }
 }

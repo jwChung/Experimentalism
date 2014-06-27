@@ -7,8 +7,8 @@ namespace Jwc.Experiment
     {
         public DelegatingAssembly()
         {
-            OnGetCustomAttributes = i => new object[0];
-            OnGetTypes = () => new Type[0];
+            this.OnGetCustomAttributes = i => new object[0];
+            this.OnGetTypes = () => new Type[0];
         }
 
         public Func<bool, object[]> OnGetCustomAttributes { get; set; }
@@ -24,17 +24,17 @@ namespace Jwc.Experiment
 
         public override object[] GetCustomAttributes(bool inherit)
         {
-            return OnGetCustomAttributes(inherit);
+            return this.OnGetCustomAttributes(inherit);
         }
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
-            return OnGetCustomAttributesWithType(attributeType, inherit);
+            return this.OnGetCustomAttributesWithType(attributeType, inherit);
         }
 
         public override Type[] GetTypes()
         {
-            return OnGetTypes();
+            return this.OnGetTypes();
         }
     }
 }

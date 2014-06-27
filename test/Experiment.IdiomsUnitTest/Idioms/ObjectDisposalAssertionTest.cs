@@ -202,11 +202,11 @@ namespace Jwc.Experiment.Idioms
 
         private class ClassForDisposable : IDisposable
         {
-            private bool _disposed;
+            private bool disposed;
 
             public void ThrowObjectDisposedException()
             {
-                if (_disposed)
+                if (this.disposed)
                     throw new ObjectDisposedException(ToString());
             }
 
@@ -221,7 +221,7 @@ namespace Jwc.Experiment.Idioms
 
             public void Dispose()
             {
-                _disposed = true;
+                this.disposed = true;
             }
         }
 
