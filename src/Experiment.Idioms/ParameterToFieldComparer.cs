@@ -8,11 +8,11 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represent comaprer to determine that a parameter value equals to a field value.
+    /// Represent comparer to determine that a parameter value equals to a field value.
     /// </summary>
     public class ParameterToFieldComparer : IEqualityComparer<IReflectionElement>
     {
-        private readonly ITestFixture _testFixture;
+        private readonly ITestFixture testFixture;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterToFieldComparer" /> class.
@@ -27,17 +27,17 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("testFixture");
             }
 
-            _testFixture = testFixture;
+            this.testFixture = testFixture;
         }
 
         /// <summary>
-        /// Gets a vlaue indicating the test fixture.
+        /// Gets a value indicating the test fixture.
         /// </summary>
         public ITestFixture TestFixture
         {
             get
             {
-                return _testFixture;
+                return this.testFixture;
             }
         }
 
@@ -73,7 +73,7 @@ namespace Jwc.Experiment
                 return false;
 
             var arguments = constructorInfo.GetParameters()
-                .Select(pi => TestFixture.Create(pi.ParameterType))
+                .Select(pi => this.TestFixture.Create(pi.ParameterType))
                 .ToArray();
             var target = constructorInfo.Invoke(arguments);
             var argumentValue = arguments[parameterInfo.Position];

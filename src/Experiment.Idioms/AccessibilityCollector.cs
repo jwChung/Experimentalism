@@ -11,7 +11,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class AccessibilityCollector : ReflectionVisitor<IEnumerable<Accessibilities>>
     {
-        private readonly IEnumerable<Accessibilities> _values;
+        private readonly IEnumerable<Accessibilities> values;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccessibilityCollector" /> class.
@@ -28,7 +28,7 @@ namespace Jwc.Experiment
         /// </param>
         protected AccessibilityCollector(IEnumerable<Accessibilities> values)
         {
-            _values = values;
+            this.values = values;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _values;
+                return this.values;
             }
         }
 
@@ -72,7 +72,7 @@ namespace Jwc.Experiment
             else if (type.IsNestedAssembly) accessibilities = Accessibilities.Internal;
             else if (type.IsNestedPrivate) accessibilities = Accessibilities.Private;
 
-            return new AccessibilityCollector(Value.Concat(new[] { accessibilities }));
+            return new AccessibilityCollector(this.Value.Concat(new[] { accessibilities }));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Jwc.Experiment
             else if (fieldInfo.IsAssembly) accessibilities = Accessibilities.Internal;
             else if (fieldInfo.IsPrivate) accessibilities = Accessibilities.Private;
 
-            return new AccessibilityCollector(Value.Concat(new[] { accessibilities }));
+            return new AccessibilityCollector(this.Value.Concat(new[] { accessibilities }));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Jwc.Experiment
             }
 
             return new AccessibilityCollector(
-                Value.Concat(new[] { GetAccessibilities(constructorInfoElement.ConstructorInfo) }));
+                this.Value.Concat(new[] { GetAccessibilities(constructorInfoElement.ConstructorInfo) }));
         }
 
         /// <summary>
@@ -158,17 +158,17 @@ namespace Jwc.Experiment
 
             if (getMethod != null)
             {
-                visitor = Visit(getMethod.ToElement());
+                visitor = this.Visit(getMethod.ToElement());
                 accessibilities |= visitor.Value.Last();
             }
 
             if (setMethod != null)
             {
-                visitor = Visit(setMethod.ToElement());
+                visitor = this.Visit(setMethod.ToElement());
                 accessibilities |= visitor.Value.Last();
             }
 
-            return new AccessibilityCollector(Value.Concat(new[] { accessibilities }));
+            return new AccessibilityCollector(this.Value.Concat(new[] { accessibilities }));
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Jwc.Experiment
             }
 
             return new AccessibilityCollector(
-                Value.Concat(new[] { GetAccessibilities(methodInfoElement.MethodInfo) }));
+                this.Value.Concat(new[] { GetAccessibilities(methodInfoElement.MethodInfo) }));
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("eventInfoElement");
             }
 
-            return Visit(eventInfoElement.EventInfo.GetAddMethod(true).ToElement());
+            return this.Visit(eventInfoElement.EventInfo.GetAddMethod(true).ToElement());
         }
 
         private static Accessibilities GetAccessibilities(MethodBase constructorInfo)

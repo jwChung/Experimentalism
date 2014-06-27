@@ -5,7 +5,7 @@ namespace Jwc.Experiment
 {
     /// <summary>
     /// Represents a verification error when testing whether members (property or field) are
-    /// correctly intialized by a constructor.
+    /// correctly initialized by a constructor.
     /// </summary>
     [Serializable]
     public class MemberInitializationException : Exception

@@ -21,8 +21,8 @@ namespace Jwc.Experiment
 
         private static readonly MemberKindCollector MemberKindCollector = new MemberKindCollector();
 
-        private readonly Type _type;
-        private readonly MemberKinds _memberKinds;
+        private readonly Type type;
+        private readonly MemberKinds memberKinds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
@@ -50,8 +50,8 @@ namespace Jwc.Experiment
             if (type == null)
                 throw new ArgumentNullException("type");
 
-            _type = type;
-            _memberKinds = memberKinds;
+            this.type = type;
+            this.memberKinds = memberKinds;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _type;
+                return this.type;
             }
         }
 
@@ -73,7 +73,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _memberKinds;
+                return this.memberKinds;
             }
         }
 
@@ -87,16 +87,21 @@ namespace Jwc.Experiment
         public IEnumerator<MemberInfo> GetEnumerator()
         {
             return Type.GetMembers(Bindings)
-                .Except(GetAccessors())
-                .Except(GetEventMethods())
+                .Except(this.GetAccessors())
+                .Except(this.GetEventMethods())
                 .Where(m => !(m is Type))
-                .Where(IsSpecifiedByMemberKind)
+                .Where(this.IsSpecifiedByMemberKind)
                 .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
+        }
+
+        private static MemberKinds GetMemberKinds(MemberInfo member)
+        {
+            return member.ToReflectionElement().Accept(MemberKindCollector).Value.Single();
         }
 
         private IEnumerable<MethodInfo> GetAccessors()
@@ -113,11 +118,6 @@ namespace Jwc.Experiment
         private bool IsSpecifiedByMemberKind(MemberInfo member)
         {
             return (GetMemberKinds(member) & MemberKinds) != MemberKinds.None;
-        }
-
-        private static MemberKinds GetMemberKinds(MemberInfo member)
-        {
-            return member.ToReflectionElement().Accept(MemberKindCollector).Value.Single();
         }
     }
 }

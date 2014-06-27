@@ -12,7 +12,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class MemberReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
-        private readonly IEnumerable<Assembly> _references;
+        private readonly IEnumerable<Assembly> references;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberReferenceCollector" /> class.
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
             if (references == null)
                 throw new ArgumentNullException("references");
 
-            _references = references;
+            this.references = references;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _references.Distinct();
+                return this.references.Distinct();
             }
         }
 
@@ -61,7 +61,7 @@ namespace Jwc.Experiment
             if (typeElement == null)
                 throw new ArgumentNullException("typeElement");
 
-            var references = Value.Concat(GetReferencedAssemblies(typeElement.Type));
+            var references = this.Value.Concat(GetReferencedAssemblies(typeElement.Type));
             return new MemberReferenceCollector(references);
         }
 
@@ -79,7 +79,7 @@ namespace Jwc.Experiment
             if (fieldInfoElement == null)
                 throw new ArgumentNullException("fieldInfoElement");
 
-            var references = Value.Concat(GetReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType));
+            var references = this.Value.Concat(GetReferencedAssemblies(fieldInfoElement.FieldInfo.FieldType));
             return new MemberReferenceCollector(references);
         }
 
@@ -87,7 +87,7 @@ namespace Jwc.Experiment
         /// Collects references of a specified method element.
         /// </summary>
         /// <param name="methodInfoElement">
-        /// The metod element.
+        /// The method element.
         /// </param>
         /// <returns>
         /// The result visitor which collected assemblies.
@@ -97,7 +97,7 @@ namespace Jwc.Experiment
             if (methodInfoElement == null)
                 throw new ArgumentNullException("methodInfoElement");
 
-            var references = Value
+            var references = this.Value
                 .Concat(base.Visit(methodInfoElement).Value)
                 .Concat(GetReferencedAssemblies(methodInfoElement.MethodInfo.ReturnType));
 
@@ -105,13 +105,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        /// Ignores refernces of local variable elements.
+        /// Ignores references of local variable elements.
         /// </summary>
         /// <param name="localVariableInfoElements">
         /// The local variable elements.
         /// </param>
         /// <returns>
-        /// This instance
+        /// This instance.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Assembly>> Visit(
             params LocalVariableInfoElement[] localVariableInfoElements)
@@ -134,7 +134,8 @@ namespace Jwc.Experiment
             if (parameterInfoElement == null)
                 throw new ArgumentNullException("parameterInfoElement");
 
-            var references = Value.Concat(GetReferencedAssemblies(parameterInfoElement.ParameterInfo.ParameterType));
+            var references = this.Value.Concat(
+                GetReferencedAssemblies(parameterInfoElement.ParameterInfo.ParameterType));
             return new MemberReferenceCollector(references);
         }
 

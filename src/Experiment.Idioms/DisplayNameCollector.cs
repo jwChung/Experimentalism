@@ -7,11 +7,11 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represetns a display name of a reflection member.
+    /// Represents a display name of a reflection member.
     /// </summary>
     public class DisplayNameCollector : ReflectionVisitor<IEnumerable<string>>
     {
-        private readonly IEnumerable<string> _displayNames;
+        private readonly IEnumerable<string> displayNames;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DisplayNameCollector" /> class.
@@ -28,22 +28,22 @@ namespace Jwc.Experiment
         /// </param>
         protected DisplayNameCollector(IEnumerable<string> displayNames)
         {
-            _displayNames = displayNames;
+            this.displayNames = displayNames;
         }
 
         /// <summary>
-        /// Gets a value indicating the collected dispaly names.
+        /// Gets a value indicating the collected display names.
         /// </summary>
         public override IEnumerable<string> Value
         {
             get
             {
-                return _displayNames;
+                return this.displayNames;
             }
         }
 
         /// <summary>
-        /// Visits an assembly element to collect a dispaly name of it.
+        /// Visits an assembly element to collect a display name of it.
         /// </summary>
         /// <param name="assemblyElement">
         /// The assembly element whose display name is collected.
@@ -57,11 +57,11 @@ namespace Jwc.Experiment
             if (assemblyElement == null)
                 throw new ArgumentNullException("assemblyElement");
 
-            return new DisplayNameCollector(Value.Concat(new[] { assemblyElement.ToString() }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { assemblyElement.ToString() }));
         }
 
         /// <summary>
-        /// Visits a type element to collect a dispaly name of it.
+        /// Visits a type element to collect a display name of it.
         /// </summary>
         /// <param name="typeElement">
         /// The type element whose display name is collected.
@@ -75,11 +75,11 @@ namespace Jwc.Experiment
             if (typeElement == null)
                 throw new ArgumentNullException("typeElement");
 
-            return new DisplayNameCollector(Value.Concat(new[] { typeElement.ToString() }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { typeElement.ToString() }));
         }
 
         /// <summary>
-        /// Visits a field element to collect a dispaly name of it.
+        /// Visits a field element to collect a display name of it.
         /// </summary>
         /// <param name="fieldInfoElement">
         /// The field element whose display name is collected.
@@ -101,11 +101,11 @@ namespace Jwc.Experiment
                 fieldInfo.ReflectedType,
                 fieldInfo);
 
-            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
-        /// Visits a constructor element to collect a dispaly name of it.
+        /// Visits a constructor element to collect a display name of it.
         /// </summary>
         /// <param name="constructorInfoElement">
         /// The constructor element whose display name is collected.
@@ -127,11 +127,11 @@ namespace Jwc.Experiment
                 constructorInfo.ReflectedType,
                 constructorInfo);
 
-            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
-        /// Visits a property element to collect a dispaly name of it.
+        /// Visits a property element to collect a display name of it.
         /// </summary>
         /// <param name="propertyInfoElement">
         /// The property element whose display name is collected.
@@ -153,11 +153,11 @@ namespace Jwc.Experiment
                 propertyInfo.ReflectedType,
                 propertyInfo);
 
-            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
-        /// Visits a method element to collect a dispaly name of it.
+        /// Visits a method element to collect a display name of it.
         /// </summary>
         /// <param name="methodInfoElement">
         /// The method element whose display name is collected.
@@ -179,11 +179,11 @@ namespace Jwc.Experiment
                 methodInfo.ReflectedType,
                 methodInfo);
 
-            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { displayName }));
         }
 
         /// <summary>
-        /// Visits an event element to collect a dispaly name of it.
+        /// Visits an event element to collect a display name of it.
         /// </summary>
         /// <param name="eventInfoElement">
         /// The event element whose display name is collected.
@@ -205,7 +205,7 @@ namespace Jwc.Experiment
                 eventInfo.ReflectedType,
                 eventInfo);
 
-            return new DisplayNameCollector(Value.Concat(new[] { displayName }));
+            return new DisplayNameCollector(this.Value.Concat(new[] { displayName }));
         }
     }
 }

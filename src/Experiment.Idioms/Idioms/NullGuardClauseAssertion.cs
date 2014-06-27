@@ -11,8 +11,8 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class NullGuardClauseAssertion : IdiomaticAssertion
     {
-        private readonly ITestFixture _testFixture;
-        private readonly IIdiomaticAssertion _assertion;
+        private readonly ITestFixture testFixture;
+        private readonly IIdiomaticAssertion assertion;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NullGuardClauseAssertion" /> class.
@@ -25,8 +25,8 @@ namespace Jwc.Experiment.Idioms
             if (testFixture == null)
                 throw new ArgumentNullException("testFixture");
 
-            _testFixture = testFixture;
-            _assertion = new GuardClauseAssertion(new SpecimenBuilder(testFixture));
+            this.testFixture = testFixture;
+            this.assertion = new GuardClauseAssertion(new SpecimenBuilder(testFixture));
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _testFixture;
+                return this.testFixture;
             }
         }
 
@@ -51,7 +51,7 @@ namespace Jwc.Experiment.Idioms
             if (constructor == null)
                 throw new ArgumentNullException("constructor");
 
-            _assertion.Verify(constructor);
+            this.assertion.Verify(constructor);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Jwc.Experiment.Idioms
             if (property.IsAbstract())
                 return;
 
-            _assertion.Verify(property);
+            this.assertion.Verify(property);
         }
 
         /// <summary>
@@ -85,21 +85,21 @@ namespace Jwc.Experiment.Idioms
             if (method.IsAbstract)
                 return;
 
-            _assertion.Verify(method);
+            this.assertion.Verify(method);
         }
 
         private class SpecimenBuilder : ISpecimenBuilder
         {
-            private readonly ITestFixture _testFixture;
+            private readonly ITestFixture testFixture;
 
             public SpecimenBuilder(ITestFixture testFixture)
             {
-                _testFixture = testFixture;
+                this.testFixture = testFixture;
             }
 
             public object Create(object request, ISpecimenContext context)
             {
-                return _testFixture.Create(request);
+                return this.testFixture.Create(request);
             }
         }
     }

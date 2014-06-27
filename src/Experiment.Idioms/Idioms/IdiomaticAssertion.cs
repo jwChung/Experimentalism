@@ -22,7 +22,7 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("assembly");
 
             foreach (var type in assembly.GetExportedTypes())
-                Verify(type);
+                this.Verify(type);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Jwc.Experiment.Idioms
         public virtual void Verify(Type type)
         {
             foreach (var member in type.GetIdiomaticMembers())
-                Verify(member);
+                this.Verify(member);
         }
     }
 }

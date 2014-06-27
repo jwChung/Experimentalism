@@ -18,23 +18,23 @@ namespace Jwc.Experiment.Idioms
         {
             var field = member as FieldInfo;
             if (field != null)
-                Verify(field);
+                this.Verify(field);
 
             var constructor = member as ConstructorInfo;
             if (constructor != null)
-                Verify(constructor);
+                this.Verify(constructor);
 
             var property = member as PropertyInfo;
             if (property != null)
-                Verify(property);
+                this.Verify(property);
 
             var method = member as MethodInfo;
             if (method != null)
-                Verify(method);
+                this.Verify(method);
 
             var @event = member as EventInfo;
             if (@event != null)
-                Verify(@event);
+                this.Verify(@event);
         }
 
         /// <summary>

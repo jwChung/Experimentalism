@@ -4,12 +4,12 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    /// Represent comaprer to determine that a field value equals to a parameter value.
+    /// Represent comparer to determine that a field value equals to a parameter value.
     /// </summary>
     public class FieldToParameterComparer : IEqualityComparer<IReflectionElement>
     {
-        private readonly ITestFixture _testFixture;
-        private readonly IEqualityComparer<IReflectionElement> _comparer;
+        private readonly ITestFixture testFixture;
+        private readonly IEqualityComparer<IReflectionElement> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FieldToParameterComparer" /> class.
@@ -19,8 +19,8 @@ namespace Jwc.Experiment
         /// </param>
         public FieldToParameterComparer(ITestFixture testFixture)
         {
-            _testFixture = testFixture;
-            _comparer = new ParameterToFieldComparer(testFixture);
+            this.testFixture = testFixture;
+            this.comparer = new ParameterToFieldComparer(testFixture);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _testFixture;
+                return this.testFixture;
             }
         }
 
@@ -48,7 +48,7 @@ namespace Jwc.Experiment
         /// </returns>
         public bool Equals(IReflectionElement x, IReflectionElement y)
         {
-            return _comparer.Equals(y, x);
+            return this.comparer.Equals(y, x);
         }
 
         /// <summary>

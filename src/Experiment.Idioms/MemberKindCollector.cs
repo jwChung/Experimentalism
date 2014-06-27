@@ -11,7 +11,7 @@ namespace Jwc.Experiment
     /// </summary>
     public class MemberKindCollector : ReflectionVisitor<IEnumerable<MemberKinds>>
     {
-        private readonly IEnumerable<MemberKinds> _memberKinds;
+        private readonly IEnumerable<MemberKinds> memberKinds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberKindCollector" /> class.
@@ -29,7 +29,7 @@ namespace Jwc.Experiment
         /// </param>
         public MemberKindCollector(IEnumerable<MemberKinds> memberKinds)
         {
-            _memberKinds = memberKinds;
+            this.memberKinds = memberKinds;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _memberKinds;
+                return this.memberKinds;
             }
         }
 
@@ -64,7 +64,7 @@ namespace Jwc.Experiment
                 ? MemberKinds.StaticField
                 : MemberKinds.InstanceField;
 
-            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
+            return new MemberKindCollector(this.Value.Concat(new[] { memberKinds }));
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Jwc.Experiment
                 ? MemberKinds.StaticConstructor
                 : MemberKinds.InstanceConstructor;
 
-            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
+            return new MemberKindCollector(this.Value.Concat(new[] { memberKinds }));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("propertyInfoElement");
 
             return new MemberKindCollector(
-                Value.Concat(new[] { GetPropertyKinds(propertyInfoElement.PropertyInfo) }));
+                this.Value.Concat(new[] { GetPropertyKinds(propertyInfoElement.PropertyInfo) }));
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Jwc.Experiment
                 ? MemberKinds.StaticMethod
                 : MemberKinds.InstanceMethod;
 
-            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
+            return new MemberKindCollector(this.Value.Concat(new[] { memberKinds }));
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Jwc.Experiment
                 ? MemberKinds.StaticEvent
                 : MemberKinds.InstanceEvent;
 
-            return new MemberKindCollector(Value.Concat(new[] { memberKinds }));
+            return new MemberKindCollector(this.Value.Concat(new[] { memberKinds }));
         }
 
         private static MemberKinds GetPropertyKinds(PropertyInfo property)

@@ -13,7 +13,7 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class ObjectDisposalAssertion : IdiomaticMemberAssertion, IIdiomaticTypeAssertion
     {
-        private readonly ITestFixture _testFixture;
+        private readonly ITestFixture testFixture;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectDisposalAssertion" /> class.
@@ -26,7 +26,7 @@ namespace Jwc.Experiment.Idioms
             if (testFixture == null)
                 throw new ArgumentNullException("testFixture");
 
-            _testFixture = testFixture;
+            this.testFixture = testFixture;
         }
 
         /// <summary>
@@ -36,13 +36,13 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _testFixture;
+                return this.testFixture;
             }
         }
 
         /// <summary>
-        /// Verifies that instance preperties and methods of a given type throw
-        /// <see cref="ObjectDisposedException" /> after the instance of th type is disposed.
+        /// Verifies that instance properties and methods of a given type throw
+        /// <see cref="ObjectDisposedException" /> after the instance of the type is disposed.
         /// </summary>
         /// <param name="type">
         /// The type.
@@ -50,7 +50,7 @@ namespace Jwc.Experiment.Idioms
         public void Verify(Type type)
         {
             foreach (var member in type.GetIdiomaticMembers())
-                Verify(member);
+                this.Verify(member);
         }
 
         /// <summary>
@@ -67,11 +67,11 @@ namespace Jwc.Experiment.Idioms
 
             var getMethod = property.GetGetMethod(true);
             if (getMethod != null)
-                Verify(getMethod);
+                this.Verify(getMethod);
 
             var setMethod = property.GetSetMethod(true);
             if (setMethod != null)
-                Verify(setMethod);
+                this.Verify(setMethod);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Jwc.Experiment.Idioms
         /// <param name="method">
         /// The method.
         /// </param>
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException", Justification = "The word is a type name.")]
         public override void Verify(MethodInfo method)
         {
             if (method == null)
@@ -90,12 +90,12 @@ namespace Jwc.Experiment.Idioms
             if (method.IsStatic || method.IsAbstract)
                 return;
 
-            var owner = GetOwner(method);
+            var owner = this.GetOwner(method);
             owner.Dispose();
 
             try
             {
-                method.Invoke(owner, GetArguments(method.GetParameters()));
+                method.Invoke(owner, this.GetArguments(method.GetParameters()));
             }
             catch (TargetInvocationException exception)
             {
@@ -119,7 +119,7 @@ Method: {1}";
 
         private IDisposable GetOwner(MethodInfo method)
         {
-            var disposable = TestFixture.Create(method.ReflectedType) as IDisposable;
+            var disposable = this.TestFixture.Create(method.ReflectedType) as IDisposable;
             if (disposable != null)
                 return disposable;
 
@@ -137,7 +137,7 @@ Method: {1}";
 
         private object[] GetArguments(IEnumerable<ParameterInfo> parameters)
         {
-            return parameters.Select(pi => TestFixture.Create(pi.ParameterType)).ToArray();
+            return parameters.Select(pi => this.TestFixture.Create(pi.ParameterType)).ToArray();
         }
     }
 }

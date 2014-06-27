@@ -9,13 +9,13 @@ namespace Jwc.Experiment.Idioms
 {
     /// <summary>
     /// Encapsulates a unit test that verifies that members (property or field) are correctly
-    /// intialized by a constructor.
+    /// initialized by a constructor.
     /// </summary>
     public class MemberInitializationAssertion : IdiomaticAssertion
     {
-        private readonly ITestFixture _testFixture;
-        private readonly IEqualityComparer<IReflectionElement> _parameterToMemberComparer;
-        private readonly IEqualityComparer<IReflectionElement> _memberToParameterComparer;
+        private readonly ITestFixture testFixture;
+        private readonly IEqualityComparer<IReflectionElement> parameterToMemberComparer;
+        private readonly IEqualityComparer<IReflectionElement> memberToParameterComparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
@@ -31,7 +31,7 @@ namespace Jwc.Experiment.Idioms
                 new PropertyToParameterComparer(testFixture),
                 new FieldToParameterComparer(testFixture)))
         {
-            _testFixture = testFixture;
+            this.testFixture = testFixture;
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Jwc.Experiment.Idioms
             if (memberToParameterComparer == null)
                 throw new ArgumentNullException("memberToParameterComparer");
 
-            _parameterToMemberComparer = parameterToMemberComparer;
-            _memberToParameterComparer = memberToParameterComparer;
+            this.parameterToMemberComparer = parameterToMemberComparer;
+            this.memberToParameterComparer = memberToParameterComparer;
         }
 
         /// <summary>
@@ -66,29 +66,29 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _testFixture;
+                return this.testFixture;
             }
         }
 
         /// <summary>
-        /// Gets a value to compare a parameter with a member(field or propety).
+        /// Gets a value to compare a parameter with a member(field or property).
         /// </summary>
         public IEqualityComparer<IReflectionElement> ParameterToMemberComparer
         {
             get
             {
-                return _parameterToMemberComparer;
+                return this.parameterToMemberComparer;
             }
         }
 
         /// <summary>
-        /// Gets a value to compare a member(field or propety) with a parameter.
+        /// Gets a value to compare a member(field or property) with a parameter.
         /// </summary>
         public IEqualityComparer<IReflectionElement> MemberToParameterComparer
         {
             get
             {
-                return _memberToParameterComparer;
+                return this.memberToParameterComparer;
             }
         }
 
@@ -109,7 +109,7 @@ namespace Jwc.Experiment.Idioms
             var fieldInfoElement = field.ToElement();
             var parameterInfoElements = GetParameterInfoElements(field.ReflectedType);
 
-            if (parameterInfoElements.Any(p => MemberToParameterComparer.Equals(fieldInfoElement, p)))
+            if (parameterInfoElements.Any(p => this.MemberToParameterComparer.Equals(fieldInfoElement, p)))
                 return;
 
             var messageFormat = @"No constructors with an argument that matches the field were found.
@@ -143,7 +143,7 @@ Field         : {2}";
 
             foreach (var parameterInfoElement in parameterInfoElements)
             {
-                if (memberElements.Any(m => ParameterToMemberComparer.Equals(parameterInfoElement, m)))
+                if (memberElements.Any(m => this.ParameterToMemberComparer.Equals(parameterInfoElement, m)))
                     continue;
 
                 var messageFormat = @"The constructor parameter was not exposed through any fields or properties.
@@ -178,7 +178,7 @@ Parameter  : {2}";
             var propertyInfoElement = property.ToElement();
             var parameterInfoElements = GetParameterInfoElements(property.ReflectedType);
 
-            if (parameterInfoElements.Any(p => MemberToParameterComparer.Equals(propertyInfoElement, p)))
+            if (parameterInfoElements.Any(p => this.MemberToParameterComparer.Equals(propertyInfoElement, p)))
                 return;
 
             var messageFormat = @"No constructors with an argument that matches the property were found.

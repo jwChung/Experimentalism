@@ -14,9 +14,9 @@ namespace Jwc.Experiment.Idioms
     public class IndirectReferenceAssertion
         : IdiomaticMemberAssertion, IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion
     {
-        private readonly MemberReferenceCollector _memberReferenceCollector = new MemberReferenceCollector();
-        private readonly AccessibilityCollector _accessibilityCollector = new AccessibilityCollector();
-        private readonly Assembly[] _indirectReferences;
+        private readonly MemberReferenceCollector memberReferenceCollector = new MemberReferenceCollector();
+        private readonly AccessibilityCollector accessibilityCollector = new AccessibilityCollector();
+        private readonly Assembly[] indirectReferences;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IndirectReferenceAssertion" /> class.
@@ -29,7 +29,7 @@ namespace Jwc.Experiment.Idioms
             if (indirectReferences == null)
                 throw new ArgumentNullException("indirectReferences");
 
-            _indirectReferences = indirectReferences;
+            this.indirectReferences = indirectReferences;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _indirectReferences;
+                return this.indirectReferences;
             }
         }
 
@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Idioms
                 throw new ArgumentNullException("assembly");
 
             foreach (var type in assembly.GetTypes())
-                Verify(type);
+                this.Verify(type);
         }
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public virtual void Verify(Type type)
         {
-            if (!IsExposed(type))
+            if (!this.IsExposed(type))
                 return;
 
-            EnsureNotExpose(type.ToElement());
+            this.EnsureNotExpose(type.ToElement());
 
             foreach (var member in type.GetIdiomaticMembers())
-                Verify(member);
+                this.Verify(member);
         }
 
         /// <summary>
@@ -83,10 +83,10 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(FieldInfo field)
         {
-            if (!IsExposed(field))
+            if (!this.IsExposed(field))
                 return;
 
-            EnsureNotExpose(field.ToElement());
+            this.EnsureNotExpose(field.ToElement());
         }
 
         /// <summary>
@@ -97,10 +97,10 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(ConstructorInfo constructor)
         {
-            if (!IsExposed(constructor))
+            if (!this.IsExposed(constructor))
                 return;
 
-            EnsureNotExpose(constructor.ToElement());
+            this.EnsureNotExpose(constructor.ToElement());
         }
 
         /// <summary>
@@ -111,10 +111,10 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(PropertyInfo property)
         {
-            if (!IsExposed(property))
+            if (!this.IsExposed(property))
                 return;
 
-            EnsureNotExpose(property.ToElement());
+            this.EnsureNotExpose(property.ToElement());
         }
 
         /// <summary>
@@ -125,10 +125,10 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(MethodInfo method)
         {
-            if (!IsExposed(method))
+            if (!this.IsExposed(method))
                 return;
 
-            EnsureNotExpose(method.ToElement());
+            this.EnsureNotExpose(method.ToElement());
         }
 
         /// <summary>
@@ -139,16 +139,16 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public override void Verify(EventInfo @event)
         {
-            if (!IsExposed(@event))
+            if (!this.IsExposed(@event))
                 return;
 
-            EnsureNotExpose(@event.ToElement());
+            this.EnsureNotExpose(@event.ToElement());
         }
 
         private void EnsureNotExpose(IReflectionElement reflectionElement)
         {
-            var reference = GetReferences(reflectionElement)
-                .FirstOrDefault(r => IndirectReferences.Contains(r));
+            var reference = this.GetReferences(reflectionElement)
+                .FirstOrDefault(r => this.IndirectReferences.Contains(r));
 
             if (reference == null)
                 return;
@@ -167,17 +167,17 @@ API(exposing)     : {1}";
 
         private bool IsExposed(MemberInfo member)
         {
-            return (GetAccessibilities(member) & Accessibilities.Exposed) != Accessibilities.None;
+            return (this.GetAccessibilities(member) & Accessibilities.Exposed) != Accessibilities.None;
         }
 
         private IEnumerable<Assembly> GetReferences(IReflectionElement reflectionElement)
         {
-            return reflectionElement.Accept(_memberReferenceCollector).Value;
+            return reflectionElement.Accept(this.memberReferenceCollector).Value;
         }
 
         private Accessibilities GetAccessibilities(MemberInfo member)
         {
-            return member.ToReflectionElement().Accept(_accessibilityCollector).Value.Single();
+            return member.ToReflectionElement().Accept(this.accessibilityCollector).Value.Single();
         }
     }
 }

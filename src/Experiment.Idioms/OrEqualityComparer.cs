@@ -13,7 +13,7 @@ namespace Jwc.Experiment
     /// </typeparam>
     public class OrEqualityComparer<T> : IEqualityComparer<T>
     {
-        private readonly IEqualityComparer<T>[] _equalityComparers;
+        private readonly IEqualityComparer<T>[] equalityComparers;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrEqualityComparer{T}" /> class.
@@ -28,7 +28,7 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("equalityComparers");
             }
 
-            _equalityComparers = equalityComparers;
+            this.equalityComparers = equalityComparers;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return _equalityComparers;
+                return this.equalityComparers;
             }
         }
 
@@ -57,7 +57,7 @@ namespace Jwc.Experiment
         /// </param>
         public bool Equals(T x, T y)
         {
-            return EqualityComparers.Any(e => e.Equals(x, y));
+            return this.EqualityComparers.Any(e => e.Equals(x, y));
         }
 
         /// <summary>

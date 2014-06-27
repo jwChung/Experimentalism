@@ -13,9 +13,9 @@ namespace Jwc.Experiment
     /// </summary>
     public class ReferenceCollector : ReflectionVisitor<IEnumerable<Assembly>>
     {
-        private readonly HashSet<Assembly> _assemblies = new HashSet<Assembly>();
-        private readonly HashSet<Type> _types = new HashSet<Type>();
-        private readonly MemberReferenceCollector _memberReferenceCollector = new MemberReferenceCollector();
+        private readonly HashSet<Assembly> assemblies = new HashSet<Assembly>();
+        private readonly HashSet<Type> types = new HashSet<Type>();
+        private readonly MemberReferenceCollector memberReferenceCollector = new MemberReferenceCollector();
 
         /// <summary>
         /// Gets the observation or value produced by this instance.
@@ -24,7 +24,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                foreach (var assembly in _assemblies)
+                foreach (var assembly in this.assemblies)
                     yield return assembly;
             }
         }
@@ -44,7 +44,7 @@ namespace Jwc.Experiment
             if (assemblyElement == null)
                 throw new ArgumentNullException("assemblyElement");
 
-            AddReferencesToAttributes(assemblyElement.Assembly);
+            this.AddReferencesToAttributes(assemblyElement.Assembly);
             return base.Visit(assemblyElement);
         }
 
@@ -65,8 +65,8 @@ namespace Jwc.Experiment
             if (typeElement == null)
                 throw new ArgumentNullException("typeElement");
 
-            AddReferencesToType(typeElement.Type);
-            AddReferencesToAttributes(typeElement.Type);
+            this.AddReferencesToType(typeElement.Type);
+            this.AddReferencesToAttributes(typeElement.Type);
             return base.Visit(typeElement);
         }
 
@@ -179,8 +179,8 @@ namespace Jwc.Experiment
             if (fieldInfoElement == null)
                 throw new ArgumentNullException("fieldInfoElement");
 
-            AddReferencesToType(fieldInfoElement.FieldInfo.FieldType);
-            AddReferencesToAttributes(fieldInfoElement.FieldInfo);
+            this.AddReferencesToType(fieldInfoElement.FieldInfo.FieldType);
+            this.AddReferencesToAttributes(fieldInfoElement.FieldInfo);
             return this;
         }
 
@@ -201,8 +201,8 @@ namespace Jwc.Experiment
             if (constructorInfoElement == null)
                 throw new ArgumentNullException("constructorInfoElement");
 
-            VisitMethodBody(constructorInfoElement.ConstructorInfo);
-            AddReferencesToAttributes(constructorInfoElement.ConstructorInfo);
+            this.VisitMethodBody(constructorInfoElement.ConstructorInfo);
+            this.AddReferencesToAttributes(constructorInfoElement.ConstructorInfo);
 
             return base.Visit(constructorInfoElement);
         }
@@ -222,7 +222,7 @@ namespace Jwc.Experiment
             if (propertyInfoElement == null)
                 throw new ArgumentNullException("propertyInfoElement");
 
-            AddReferencesToAttributes(propertyInfoElement.PropertyInfo);
+            this.AddReferencesToAttributes(propertyInfoElement.PropertyInfo);
             return base.Visit(propertyInfoElement);
         }
 
@@ -244,9 +244,9 @@ namespace Jwc.Experiment
                 throw new ArgumentNullException("methodInfoElement");
 
             MethodInfo methodInfo = methodInfoElement.MethodInfo;
-            AddReferencesToType(methodInfo.ReturnType);
-            AddReferencesToAttributes(methodInfo);
-            VisitMethodBody(methodInfo);
+            this.AddReferencesToType(methodInfo.ReturnType);
+            this.AddReferencesToAttributes(methodInfo);
+            this.VisitMethodBody(methodInfo);
             return base.Visit(methodInfoElement);
         }
 
@@ -265,7 +265,7 @@ namespace Jwc.Experiment
             if (eventInfoElement == null)
                 throw new ArgumentNullException("eventInfoElement");
 
-            AddReferencesToAttributes(eventInfoElement.EventInfo);
+            this.AddReferencesToAttributes(eventInfoElement.EventInfo);
             return base.Visit(eventInfoElement);
         }
 
@@ -286,8 +286,8 @@ namespace Jwc.Experiment
             if (parameterInfoElement == null)
                 throw new ArgumentNullException("parameterInfoElement");
 
-            AddReferencesToType(parameterInfoElement.ParameterInfo.ParameterType);
-            AddReferencesToAttributes(parameterInfoElement.ParameterInfo);
+            this.AddReferencesToType(parameterInfoElement.ParameterInfo.ParameterType);
+            this.AddReferencesToAttributes(parameterInfoElement.ParameterInfo);
             return this;
         }
 
@@ -308,7 +308,7 @@ namespace Jwc.Experiment
             if (localVariableInfoElement == null)
                 throw new ArgumentNullException("localVariableInfoElement");
 
-            AddReferencesToType(localVariableInfoElement.LocalVariableInfo.LocalType);
+            this.AddReferencesToType(localVariableInfoElement.LocalVariableInfo.LocalType);
             return this;
         }
 
@@ -321,37 +321,37 @@ namespace Jwc.Experiment
                 .Select(i => i.Operand).OfType<MethodBase>();
 
             foreach (var methodBase in methodBases)
-                VisitMethodInMethodBody(methodBase);
+                this.VisitMethodInMethodBody(methodBase);
         }
 
         private void VisitMethodInMethodBody(MethodBase methodBase)
         {
-            AddReferencesToType(methodBase.ReflectedType);
+            this.AddReferencesToType(methodBase.ReflectedType);
             var method = methodBase as MethodInfo;
 
             if (method != null)
-                AddReferencesToType(method.ReturnType);
+                this.AddReferencesToType(method.ReturnType);
 
             foreach (var parameter in methodBase.GetParameters())
-                AddReferencesToType(parameter.ParameterType);
+                this.AddReferencesToType(parameter.ParameterType);
         }
 
         private void AddReferencesToAttributes(ICustomAttributeProvider attributeProvider)
         {
             foreach (var attribute in attributeProvider.GetCustomAttributes(false))
-                AddReferencesToType(attribute.GetType());
+                this.AddReferencesToType(attribute.GetType());
         }
 
         private void AddReferencesToType(Type type)
         {
-            if (_types.Contains(type))
+            if (this.types.Contains(type))
                 return;
 
-            var assemblies = type.ToElement().Accept(_memberReferenceCollector).Value;
+            var assemblies = type.ToElement().Accept(this.memberReferenceCollector).Value;
             foreach (var assembly in assemblies)
-                _assemblies.Add(assembly);
+                this.assemblies.Add(assembly);
 
-            _types.Add(type);
+            this.types.Add(type);
         }
     }
 }

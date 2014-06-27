@@ -12,7 +12,7 @@ namespace Jwc.Experiment.Idioms
     /// </summary>
     public class RestrictiveReferenceAssertion : IIdiomaticAssemblyAssertion
     {
-        private readonly Assembly[] _restrictiveReferences;
+        private readonly Assembly[] restrictiveReferences;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RestrictiveReferenceAssertion" /> class.
@@ -22,7 +22,7 @@ namespace Jwc.Experiment.Idioms
         /// </param>
         public RestrictiveReferenceAssertion(params Assembly[] restrictiveReferences)
         {
-            _restrictiveReferences = restrictiveReferences;
+            this.restrictiveReferences = restrictiveReferences;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Jwc.Experiment.Idioms
         {
             get
             {
-                return _restrictiveReferences;
+                return this.restrictiveReferences;
             }
         }
 
@@ -50,15 +50,15 @@ namespace Jwc.Experiment.Idioms
                 .ToArray();
 
             foreach (var reference in references)
-                Verify(assembly, reference);
+                this.Verify(assembly, reference);
 
-            foreach (var restrictiveReference in RestrictiveReferences)
-                Verify(assembly, references, restrictiveReference);
+            foreach (var restrictiveReference in this.RestrictiveReferences)
+                this.Verify(assembly, references, restrictiveReference);
         }
 
         private void Verify(Assembly assembly, Assembly reference)
         {
-            if (RestrictiveReferences.Contains(reference))
+            if (this.RestrictiveReferences.Contains(reference))
                 return;
 
             var messageFormat = @"The reference of the assembly is not specified in the restricted references.
@@ -73,7 +73,7 @@ Restrictive references:
                     messageFormat,
                     reference,
                     assembly,
-                    GetRestrictiveReferenceString()));
+                    this.GetRestrictiveReferenceString()));
         }
 
         private void Verify(Assembly assembly, IEnumerable<Assembly> references, Assembly restrictiveReference)
@@ -93,14 +93,14 @@ Restrictive references:
                     messageFormat,
                     restrictiveReference,
                     assembly,
-                    GetRestrictiveReferenceString()));
+                    this.GetRestrictiveReferenceString()));
         }
 
         private string GetRestrictiveReferenceString()
         {
             return string.Join(
                 "," + Environment.NewLine,
-                RestrictiveReferences.Select(r => new string(' ', 11) + r));
+                this.RestrictiveReferences.Select(r => new string(' ', 11) + r));
         }
     }
 }
