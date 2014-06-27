@@ -16,6 +16,7 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "The warnigns are from Korean.")]
     public class TestAttribute : FactAttribute
     {
         /// <summary>
@@ -45,7 +46,7 @@ namespace Jwc.Experiment.Xunit
                 return new[] { new ExceptionCommand(method, exception) };
             }
 
-            return new TestCommandEnumerable(method, GetTestCommands(method));
+            return new TestCommandEnumerable(method, this.GetTestCommands(method));
         }
 
         /// <summary>
@@ -69,9 +70,9 @@ namespace Jwc.Experiment.Xunit
             {
                 var specifiedArgumentSet = new SpecifiedArgumentSet(method.MethodInfo);
                 if (!specifiedArgumentSet.Any())
-                    return new[] { CreateSingleTestCommand(method) };
+                    return new[] { this.CreateSingleTestCommand(method) };
 
-                return specifiedArgumentSet.Select(sa => CreateEachTestCommand(method, sa));
+                return specifiedArgumentSet.Select(sa => this.CreateEachTestCommand(method, sa));
             }
             catch (Exception exception)
             {
@@ -82,7 +83,7 @@ namespace Jwc.Experiment.Xunit
         private ITestCommand CreateSingleTestCommand(IMethodInfo method)
         {
             var arguments = new TestArgumentCollection(
-                new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
+                new Lazy<ITestFixture>(() => this.CreateTestFixture(method.MethodInfo)),
                 method.MethodInfo.GetParameters());
 
             if (!arguments.HasParemeters)
@@ -97,7 +98,7 @@ namespace Jwc.Experiment.Xunit
             try
             {
                 var arguments = new TestArgumentCollection(
-                    new Lazy<ITestFixture>(() => CreateTestFixture(method.MethodInfo)),
+                    new Lazy<ITestFixture>(() => this.CreateTestFixture(method.MethodInfo)),
                     method.MethodInfo.GetParameters(),
                     specifiedArguments);
 
@@ -111,76 +112,76 @@ namespace Jwc.Experiment.Xunit
 
         private class SpecifiedArgumentSet : IEnumerable<object[]>
         {
-            private readonly MethodInfo _method;
+            private readonly MethodInfo method;
 
             public SpecifiedArgumentSet(MethodInfo method)
             {
-                _method = method;
+                this.method = method;
             }
 
             public IEnumerator<object[]> GetEnumerator()
             {
-                return GetDataAttributes()
-                    .SelectMany(da => da.GetData(_method, GetParameterTypes()))
+                return this.GetDataAttributes()
+                    .SelectMany(da => da.GetData(this.method, this.GetParameterTypes()))
                     .GetEnumerator();
-            }
-
-            private IEnumerable<DataAttribute> GetDataAttributes()
-            {
-                return ((IEnumerable<DataAttribute>)_method
-                    .GetCustomAttributes(typeof(DataAttribute), false));
-            }
-
-            private Type[] GetParameterTypes()
-            {
-                return _method.GetParameters().Select(pi => pi.ParameterType).ToArray();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return GetEnumerator();
+                return this.GetEnumerator();
+            }
+
+            private IEnumerable<DataAttribute> GetDataAttributes()
+            {
+                return (IEnumerable<DataAttribute>)this.method
+                    .GetCustomAttributes(typeof(DataAttribute), false);
+            }
+
+            private Type[] GetParameterTypes()
+            {
+                return this.method.GetParameters().Select(pi => pi.ParameterType).ToArray();
             }
         }
 
         private class TestArgumentCollection : IEnumerable<object>
         {
-            private readonly Lazy<ITestFixture> _fixture;
-            private readonly ParameterInfo[] _parameters;
-            private readonly object[] _specifiedArguments;
+            private readonly Lazy<ITestFixture> fixture;
+            private readonly ParameterInfo[] parameters;
+            private readonly object[] specifiedArguments;
 
             public TestArgumentCollection(
                 Lazy<ITestFixture> fixture,
                 ParameterInfo[] parameters,
                 params object[] specifiedArguments)
             {
-                _fixture = fixture;
-                _parameters = parameters;
-                _specifiedArguments = specifiedArguments;
+                this.fixture = fixture;
+                this.parameters = parameters;
+                this.specifiedArguments = specifiedArguments;
             }
 
             public bool HasParemeters
             {
                 get
                 {
-                    return _parameters.Length != 0;
+                    return this.parameters.Length != 0;
                 }
             }
 
             public IEnumerator<object> GetEnumerator()
             {
-                return _specifiedArguments.Concat(GetAutoArguments()).GetEnumerator();
-            }
-
-            private IEnumerable<object> GetAutoArguments()
-            {
-                return _parameters
-                    .Skip(_specifiedArguments.Length)
-                    .Select(pi => _fixture.Value.Create(pi.ParameterType));
+                return this.specifiedArguments.Concat(this.GetAutoArguments()).GetEnumerator();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return GetEnumerator();
+                return this.GetEnumerator();
+            }
+
+            private IEnumerable<object> GetAutoArguments()
+            {
+                return this.parameters
+                    .Skip(this.specifiedArguments.Length)
+                    .Select(pi => this.fixture.Value.Create(pi.ParameterType));
             }
         }
     }

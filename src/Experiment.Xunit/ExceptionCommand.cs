@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
@@ -6,9 +7,10 @@ namespace Jwc.Experiment.Xunit
     /// <summary>
     /// Exception 테스트커멘드를 나타냄.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "The warnings are from Korean.")]
     public class ExceptionCommand : TestCommand
     {
-        private readonly Exception _exception;
+        private readonly Exception exception;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExceptionCommand" /> class.
@@ -23,11 +25,9 @@ namespace Jwc.Experiment.Xunit
             : base(EnsureIsNotNull(method), null, 0)
         {
             if (exception == null)
-            {
                 throw new ArgumentNullException("exception");
-            }
 
-            _exception = exception;
+            this.exception = exception;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Xunit
         {
             get
             {
-                return _exception;
+                return this.exception;
             }
         }
 

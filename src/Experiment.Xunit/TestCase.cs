@@ -11,8 +11,8 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class TestCase : ITestCase
     {
-        private readonly string _displayParameterName;
-        private readonly Delegate _delegate;
+        private readonly string displayParameterName;
+        private readonly Delegate @delegate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase" /> class.
@@ -28,7 +28,7 @@ namespace Jwc.Experiment.Xunit
         /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
         /// <param name="func">
-        /// The test func.
+        /// The test function.
         /// </param>
         public TestCase(Func<object> func) : this((Delegate)func)
         {
@@ -50,7 +50,7 @@ namespace Jwc.Experiment.Xunit
                     "Composite delegates are not supported, set only one operation.",
                     "delegate");
 
-            _delegate = @delegate;
+            this.@delegate = @delegate;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Jwc.Experiment.Xunit
             if (displayParameterName == null)
                 throw new ArgumentNullException("displayParameterName");
 
-            _displayParameterName = displayParameterName;
+            this.displayParameterName = displayParameterName;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Jwc.Experiment.Xunit
         {
             get
             {
-                return _displayParameterName;
+                return this.displayParameterName;
             }
         }
 
@@ -88,7 +88,7 @@ namespace Jwc.Experiment.Xunit
         {
             get
             {
-                return _delegate;
+                return @delegate;
             }
         }
 
@@ -113,7 +113,12 @@ namespace Jwc.Experiment.Xunit
                 throw new ArgumentNullException("testFixtureFactory");
 
             var fixture = new Lazy<ITestFixture>(() => testFixtureFactory.Create(Delegate.Method));
-            return CreateTestCommand(method, fixture);
+            return this.CreateTestCommand(method, fixture);
+        }
+
+        private static string GetArgumentValue(string typeName, object argument)
+        {
+            return typeName + ": " + (argument ?? "(null)");
         }
 
         private ITestCommand CreateTestCommand(IMethodInfo method, Lazy<ITestFixture> fixture)
@@ -124,13 +129,13 @@ namespace Jwc.Experiment.Xunit
             return new TargetInvocationExceptionUnwrappingCommand(
                 new FirstClassCommand(
                     method,
-                    GetDisplayParameterName(arguments),
-                    GetAction(arguments)));
+                    this.GetDisplayParameterName(arguments),
+                    this.GetAction(arguments)));
         }
 
         private string GetDisplayParameterName(IList<object> arguments)
         {
-            return DisplayParameterName ?? string.Join(", ", GetArgumentValues(arguments));
+            return this.DisplayParameterName ?? string.Join(", ", this.GetArgumentValues(arguments));
         }
 
         private Action GetAction(object[] arguments)
@@ -150,11 +155,6 @@ namespace Jwc.Experiment.Xunit
         {
             return Delegate.Method.GetParameters()
                 .Select(pi => GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
-        }
-
-        private static string GetArgumentValue(string typeName, object argument)
-        {
-            return typeName + ": " + (argument ?? "(null)");
         }
     }
 }

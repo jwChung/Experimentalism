@@ -44,7 +44,7 @@ namespace Jwc.Experiment.Xunit
                 return new[] { new ExceptionCommand(method, exception) };
             }
 
-            return new TestCommandEnumerable(method, GetTestCommands(method));
+            return new TestCommandEnumerable(method, this.GetTestCommands(method));
         }
 
         /// <summary>
@@ -59,19 +59,6 @@ namespace Jwc.Experiment.Xunit
         protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
         {
             return DefaultFixtureFactory.Current.Create(testMethod);
-        }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
-        private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
-        {
-            try
-            {
-                return CreateTestCases(method).Select(tc => ConvertToTestCommand(method, tc));
-            }
-            catch (Exception exception)
-            {
-                return new ITestCommand[] { new ExceptionCommand(method, exception) };
-            }
         }
 
         private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo method)
@@ -100,20 +87,7 @@ namespace Jwc.Experiment.Xunit
             var testCases = methodInfo.Invoke(CreateReflectedObject(methodInfo), null);
             return (IEnumerable<ITestCase>)testCases;
         }
-
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
-        private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
-        {
-            try
-            {
-                return testCase.ConvertToTestCommand(method, new FuncTestFixtureFactory(CreateTestFixture));
-            }
-            catch (Exception exception)
-            {
-                return new ExceptionCommand(method, exception);
-            }
-        }
-
+        
         private static bool IsMethodParameterless(MethodInfo methodInfo)
         {
             return !methodInfo.GetParameters().Any();
@@ -129,6 +103,32 @@ namespace Jwc.Experiment.Xunit
             return methodInfo.IsStatic
                 ? null
                 : Activator.CreateInstance(methodInfo.ReflectedType);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when creating test commands.")]
+        private IEnumerable<ITestCommand> GetTestCommands(IMethodInfo method)
+        {
+            try
+            {
+                return CreateTestCases(method).Select(tc => this.ConvertToTestCommand(method, tc));
+            }
+            catch (Exception exception)
+            {
+                return new ITestCommand[] { new ExceptionCommand(method, exception) };
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by ConvertToTestCommand.")]
+        private ITestCommand ConvertToTestCommand(IMethodInfo method, ITestCase testCase)
+        {
+            try
+            {
+                return testCase.ConvertToTestCommand(method, new FuncTestFixtureFactory(this.CreateTestFixture));
+            }
+            catch (Exception exception)
+            {
+                return new ExceptionCommand(method, exception);
+            }
         }
     }
 }

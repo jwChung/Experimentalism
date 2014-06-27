@@ -6,52 +6,52 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
 {
-    internal class TestCommandEnumerable: IEnumerable<ITestCommand>
+    internal class TestCommandEnumerable : IEnumerable<ITestCommand>
     {
-        private readonly IMethodInfo _testMethod;
-        private readonly IEnumerable<ITestCommand> _testCommands;
+        private readonly IMethodInfo testMethod;
+        private readonly IEnumerable<ITestCommand> testCommands;
 
         public TestCommandEnumerable(IMethodInfo testMethod, IEnumerable<ITestCommand> testCommands)
         {
-            _testMethod = testMethod;
-            _testCommands = testCommands;
+            this.testMethod = testMethod;
+            this.testCommands = testCommands;
         }
 
         public IEnumerator<ITestCommand> GetEnumerator()
         {
-            return new TestCommandEnumerator(_testMethod, _testCommands.GetEnumerator());
+            return new TestCommandEnumerator(this.testMethod, this.testCommands.GetEnumerator());
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         private class TestCommandEnumerator : IEnumerator<ITestCommand>
         {
-            private readonly IMethodInfo _testMethod;
-            private readonly IEnumerator<ITestCommand> _enumerator;
-            private ITestCommand _current;
+            private readonly IMethodInfo testMethod;
+            private readonly IEnumerator<ITestCommand> enumerator;
+            private ITestCommand current;
 
             public TestCommandEnumerator(IMethodInfo testMethod, IEnumerator<ITestCommand> enumerator)
             {
-                _testMethod = testMethod;
-                _enumerator = enumerator;
+                this.testMethod = testMethod;
+                this.enumerator = enumerator;
             }
 
             public ITestCommand Current
             {
-                get { return _current; }
+                get { return this.current; }
             }
 
             object IEnumerator.Current
             {
-                get { return Current; }
+                get { return this.Current; }
             }
 
             public void Dispose()
             {
-                _enumerator.Dispose();
+                this.enumerator.Dispose();
             }
 
             [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown when enumerating test commands.")]
@@ -59,14 +59,14 @@ namespace Jwc.Experiment.Xunit
             {
                 try
                 {
-                    if (!_enumerator.MoveNext())
+                    if (!this.enumerator.MoveNext())
                         return false;
 
-                    _current = _enumerator.Current;
+                    this.current = this.enumerator.Current;
                 }
                 catch (Exception exception)
                 {
-                    _current = new ExceptionCommand(_testMethod, exception);
+                    this.current = new ExceptionCommand(this.testMethod, exception);
                 }
 
                 return true;
@@ -74,7 +74,7 @@ namespace Jwc.Experiment.Xunit
 
             public void Reset()
             {
-                _enumerator.Reset();
+                this.enumerator.Reset();
             }
         }
     }

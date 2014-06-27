@@ -10,7 +10,7 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class TargetInvocationExceptionUnwrappingCommand : ITestCommand
     {
-        private readonly ITestCommand _testCommand;
+        private readonly ITestCommand testCommand;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -24,17 +24,17 @@ namespace Jwc.Experiment.Xunit
             if (testCommand == null)
                 throw new ArgumentNullException("testCommand");
 
-            _testCommand = testCommand;
+            this.testCommand = testCommand;
         }
 
         /// <summary>
-        /// Gets a value inicating the test command to be unwrapped.
+        /// Gets a value indicating the test command to be unwrapped.
         /// </summary>
         public ITestCommand TestCommand
         {
             get
             {
-                return _testCommand;
+                return this.testCommand;
             }
         }
 
@@ -45,25 +45,24 @@ namespace Jwc.Experiment.Xunit
         {
             get
             {
-                return TestCommand.DisplayName;
+                return this.TestCommand.DisplayName;
             }
         }
 
         /// <summary>
-        /// Determines if the test runner infrastructure should create a new instance of the test
-        /// class before running the test.
+        /// Gets a value indicating whether the test runner infrastructure should create a new
+        /// instance of the test class before running the test.
         /// </summary>
         public bool ShouldCreateInstance
         {
             get
             {
-                return TestCommand.ShouldCreateInstance;
+                return this.TestCommand.ShouldCreateInstance;
             }
         }
 
         /// <summary>
-        /// Determines if the test should be limited to running a specific amount of time before
-        /// automatically failing.
+        /// Gets a value indicating amount of time before automatically failing.
         /// </summary>
         /// <returns>
         /// The timeout value, in milliseconds; if zero, the test will not have a timeout.
@@ -72,7 +71,7 @@ namespace Jwc.Experiment.Xunit
         {
             get
             {
-                return TestCommand.Timeout;
+                return this.TestCommand.Timeout;
             }
         }
 
@@ -89,7 +88,7 @@ namespace Jwc.Experiment.Xunit
         {
             try
             {
-                return TestCommand.Execute(testClass);
+                return this.TestCommand.Execute(testClass);
             }
             catch (TargetInvocationException exception)
             {
@@ -103,10 +102,12 @@ namespace Jwc.Experiment.Xunit
         /// <summary>
         /// To the start XML.
         /// </summary>
-        /// <returns />
+        /// <returns>
+        /// The XML node.
+        /// </returns>
         public XmlNode ToStartXml()
         {
-            return TestCommand.ToStartXml();
+            return this.TestCommand.ToStartXml();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class FirstClassCommand : TestCommand
     {
-        private readonly IMethodInfo _method;
-        private readonly string _displayParameterName;
-        private readonly Action _action;
+        private readonly IMethodInfo method;
+        private readonly string displayParameterName;
+        private readonly Action action;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FirstClassCommand" /> class.
@@ -36,10 +36,10 @@ namespace Jwc.Experiment.Xunit
             if (action == null)
                 throw new ArgumentNullException("action");
 
-            _method = method;
-            _displayParameterName = displayParameterName;
-            _action = action;
-            DisplayName += "(" + displayParameterName + ")";
+            this.method = method;
+            this.displayParameterName = displayParameterName;
+            this.action = action;
+            this.DisplayName += "(" + displayParameterName + ")";
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public IMethodInfo Method
         {
-            get { return _method; }
+            get { return this.method; }
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public string DisplayParameterName
         {
-            get { return _displayParameterName; }
+            get { return this.displayParameterName; }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public Action Action
         {
-            get { return _action; }
+            get { return this.action; }
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Jwc.Experiment.Xunit
         public override MethodResult Execute(object testClass)
         {
             Action();
-            return new PassedResult(Method, DisplayName);
+            return new PassedResult(this.Method, DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
