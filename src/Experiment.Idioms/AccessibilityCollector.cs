@@ -7,24 +7,24 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Represents a class to collect <see cref="Accessibilities" />.
+    /// Represents a class to collect <see cref="Accessibilities" />.
     /// </summary>
     public class AccessibilityCollector : ReflectionVisitor<IEnumerable<Accessibilities>>
     {
         private readonly IEnumerable<Accessibilities> _values;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AccessibilityCollector" /> class.
+        /// Initializes a new instance of the <see cref="AccessibilityCollector" /> class.
         /// </summary>
         public AccessibilityCollector() : this(new Accessibilities[0])
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AccessibilityCollector" /> class.
+        /// Initializes a new instance of the <see cref="AccessibilityCollector" /> class.
         /// </summary>
         /// <param name="values">
-        ///     The value.
+        /// The value.
         /// </param>
         protected AccessibilityCollector(IEnumerable<Accessibilities> values)
         {
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets the observation or value produced by this instance.
+        /// Gets the observation or value produced by this instance.
         /// </summary>
         public override IEnumerable<Accessibilities> Value
         {
@@ -43,15 +43,15 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Allows an <see cref="TypeElement" /> to be visited. This method is called when the
-        ///     element accepts this visitor instance.
+        /// Allows an <see cref="TypeElement" /> to be visited. This method is called when the
+        /// element accepts this visitor instance.
         /// </summary>
         /// <param name="typeElement">
-        ///     The <see cref="TypeElement" /> being visited.
+        /// The <see cref="TypeElement" /> being visited.
         /// </param>
         /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        /// visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             TypeElement typeElement)
@@ -76,15 +76,15 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Allows an <see cref="FieldInfoElement" /> to be visited. This method is called when
-        ///     the element accepts this visitor instance.
+        /// Allows an <see cref="FieldInfoElement" /> to be visited. This method is called when the
+        /// element accepts this visitor instance.
         /// </summary>
         /// <param name="fieldInfoElement">
-        ///     The <see cref="FieldInfoElement" /> being visited.
+        /// The <see cref="FieldInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        /// visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             FieldInfoElement fieldInfoElement)
@@ -107,15 +107,15 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Allows an <see cref="ConstructorInfoElement" /> to be visited. This method is called
-        ///     when the element accepts this visitor instance.
+        /// Allows an <see cref="ConstructorInfoElement" /> to be visited. This method is called
+        /// when the element accepts this visitor instance.
         /// </summary>
         /// <param name="constructorInfoElement">
-        ///     The <see cref="ConstructorInfoElement" /> being visited.
+        /// The <see cref="ConstructorInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        /// visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             ConstructorInfoElement constructorInfoElement)
@@ -130,15 +130,15 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Allows an <see cref="PropertyInfoElement" /> to be visited. This method is called
-        ///     when the element accepts this visitor instance.
+        /// Allows an <see cref="PropertyInfoElement" /> to be visited. This method is called when
+        /// the element accepts this visitor instance.
         /// </summary>
         /// <param name="propertyInfoElement">
-        ///     The <see cref="PropertyInfoElement" /> being visited.
+        /// The <see cref="PropertyInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        /// visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             PropertyInfoElement propertyInfoElement)
@@ -172,15 +172,15 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Allows an <see cref="MethodInfoElement" /> to be visited. This method is called when
-        ///     the element accepts this visitor instance.
+        /// Allows an <see cref="MethodInfoElement" /> to be visited. This method is called when
+        /// the element accepts this visitor instance.
         /// </summary>
         /// <param name="methodInfoElement">
-        ///     The <see cref="MethodInfoElement" /> being visited.
+        /// The <see cref="MethodInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        /// visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             MethodInfoElement methodInfoElement)
@@ -195,15 +195,15 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Allows an <see cref="EventInfoElement" /> to be visited. This method is called when
-        ///     the element accepts this visitor instance.
+        /// Allows an <see cref="EventInfoElement" /> to be visited. This method is called when
+        /// the element accepts this visitor instance.
         /// </summary>
         /// <param name="eventInfoElement">
-        ///     The <see cref="EventInfoElement" /> being visited.
+        /// The <see cref="EventInfoElement" /> being visited.
         /// </param>
         /// <returns>
-        ///     A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
-        ///     visiting process with potentially updated observations.
+        /// A <see cref="IReflectionVisitor{T}" /> instance which can be used to continue the
+        /// visiting process with potentially updated observations.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<Accessibilities>> Visit(
             EventInfoElement eventInfoElement)

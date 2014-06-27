@@ -1,15 +1,14 @@
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Supplies harbor of <see cref="ITestFixtureFactory" />.
+    /// Supplies harbor of <see cref="ITestFixtureFactory" />.
     /// </summary>
     public static class DefaultFixtureFactory
     {
         private static ITestFixtureFactory _testFixtureFactory;
 
         /// <summary>
-        ///     Gets a value inicating the current
-        ///     <see cref="ITestFixtureFactory" />.
+        /// Gets a value inicating the current <see cref="ITestFixtureFactory" />.
         /// </summary>
         public static ITestFixtureFactory Current
         {
@@ -20,10 +19,10 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Sets a factory of test fixture.
+        /// Sets a factory of test fixture.
         /// </summary>
         /// <param name="testFixtureFactory">
-        ///     The factory of test fixture.
+        /// The factory of test fixture.
         /// </param>
         public static void SetCurrent(ITestFixtureFactory testFixtureFactory)
         {

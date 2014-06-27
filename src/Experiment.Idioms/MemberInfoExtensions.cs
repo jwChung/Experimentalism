@@ -6,18 +6,18 @@ using Ploeh.Albedo.Refraction;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Defines <see cref="MemberInfo" /> extension methods.
+    /// Defines <see cref="MemberInfo" /> extension methods.
     /// </summary>
     public static class MemberInfoExtensions
     {
         /// <summary>
-        ///     Gets the display name of a member.
+        /// Gets the display name of a member.
         /// </summary>
         /// <param name="member">
-        ///     The member.
+        /// The member.
         /// </param>
         /// <returns>
-        ///     the display name.
+        /// the display name.
         /// </returns>
         public static string GetDisplayName(this MemberInfo member)
         {

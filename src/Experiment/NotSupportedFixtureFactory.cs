@@ -5,17 +5,16 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Represents test fixture factory which throws
-    ///     <see cref="NotSupportedException" /> when the <code>Create</code>
-    ///     method is called.
+    /// Represents test fixture factory which throws <see cref="NotSupportedException" /> when the
+    /// <code>Create</code> method is called.
     /// </summary>
     public class NotSupportedFixtureFactory : ITestFixtureFactory
     {
         /// <summary>
-        ///     Throws <see cref="NotSupportedException" />.
+        /// Throws <see cref="NotSupportedException" />.
         /// </summary>
         /// <param name="testMethod">
-        ///     The test method in which the test fixture will be used.
+        /// The test method in which the test fixture will be used.
         /// </param>
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "The literals violating this rule are desire type names.")]
         public ITestFixture Create(MethodInfo testMethod)

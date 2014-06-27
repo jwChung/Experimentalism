@@ -8,18 +8,18 @@ using Ploeh.AutoFixture.AutoMoq;
 namespace Jwc.Experiment.AutoFixture
 {
     /// <summary>
-    ///     Represent the default factory for <see cref="ITestFixtureFactory" />.
+    /// Represent the default factory for <see cref="ITestFixtureFactory" />.
     /// </summary>
     public class TestFixtureFactory : ITestFixtureFactory
     {
         /// <summary>
-        ///     Creates a test fixture.
+        /// Creates a test fixture.
         /// </summary>
         /// <param name="testMethod">
-        ///     The test method in which the test fixture will be used.
+        /// The test method in which the test fixture will be used.
         /// </param>
         /// <returns>
-        ///     The test fixture.
+        /// The test fixture.
         /// </returns>
         public ITestFixture Create(MethodInfo testMethod)
         {
@@ -31,13 +31,13 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         /// <summary>
-        ///     Creates a fixture with a test method.
+        /// Creates a fixture with a test method.
         /// </summary>
         /// <param name="testMethod">
-        ///     The test method.
+        /// The test method.
         /// </param>
         /// <returns>
-        ///     The new fixture.
+        /// The new fixture.
         /// </returns>
         protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {

@@ -6,9 +6,8 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    ///     Represents a weakly-typed test case that can be turned into an xUnit.net
-    ///     ITestCommand when returned from a test method adorned with the
-    ///     <see cref="FirstClassTestAttribute" />.
+    /// Represents a weakly-typed test case that can be turned into an xUnit.net ITestCommand when
+    /// returned from a test method adorned with the <see cref="FirstClassTestAttribute" />.
     /// </summary>
     public class TestCase : ITestCase
     {
@@ -16,30 +15,30 @@ namespace Jwc.Experiment.Xunit
         private readonly Delegate _delegate;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TestCase" /> class.
+        /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
         /// <param name="action">
-        ///     The test action.
+        /// The test action.
         /// </param>
         public TestCase(Action action) : this((Delegate)action)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TestCase" /> class.
+        /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
         /// <param name="func">
-        ///     The test func.
+        /// The test func.
         /// </param>
         public TestCase(Func<object> func) : this((Delegate)func)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TestCase" /> class.
+        /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
         /// <param name="delegate">
-        ///     The test delegate.
+        /// The test delegate.
         /// </param>
         public TestCase(Delegate @delegate)
         {
@@ -55,13 +54,13 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TestCase" /> class.
+        /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
         /// <param name="displayParameterName">
-        ///     A string to show parameters of a test method in test result.
+        /// A string to show parameters of a test method in test result.
         /// </param>
         /// <param name="delegate">
-        ///     The test delegate.
+        /// The test delegate.
         /// </param>
         public TestCase(string displayParameterName, Delegate @delegate) : this(@delegate)
         {
@@ -72,8 +71,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Gets a value indicating the string to show parameters of a test method in test
-        ///     result.
+        /// Gets a value indicating the string to show parameters of a test method in test result.
         /// </summary>
         public string DisplayParameterName
         {
@@ -84,7 +82,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Gets the test delegate.
+        /// Gets the test delegate.
         /// </summary>
         public Delegate Delegate
         {
@@ -95,16 +93,16 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Converts the instance to an xUnit.net ITestCommand instance.
+        /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
         /// <param name="method">
-        ///     The method adorned by a <see cref="FirstClassTestAttribute" />.
+        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="testFixtureFactory">
-        ///     A test fixture factory to provide auto data.
+        /// A test fixture factory to provide auto data.
         /// </param>
         /// <returns>
-        ///     An xUnit.net ITestCommand that represents the executable test case.
+        /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
         public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory)
         {

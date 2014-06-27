@@ -10,23 +10,23 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    ///     A test attribute used to adorn methods that creates first-class executable test
-    ///     cases.
+    /// A test attribute used to adorn methods that creates first-class executable test
+    /// cases.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribue can be inherited by custom attribute.")]
     public class FirstClassTestAttribute : FactAttribute
     {
         /// <summary>
-        ///     Enumerates the test commands represented by this test method. Derived classes should
-        ///     override this method to return instances of <see cref="ITestCommand" />, one per
-        ///     execution of a test method.
+        /// Enumerates the test commands represented by this test method. Derived classes should
+        /// override this method to return instances of <see cref="ITestCommand" />, one per
+        /// execution of a test method.
         /// </summary>
         /// <param name="method">
-        ///     The test method.
+        /// The test method.
         /// </param>
         /// <returns>
-        ///     The test commands which will execute the test runs for the given method.
+        /// The test commands which will execute the test runs for the given method.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "This is suppressed to catch unhandled exception thrown by test assembly configuration.")]
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
@@ -48,13 +48,13 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Creates an instance of <see cref="ITestFixture" />.
+        /// Creates an instance of <see cref="ITestFixture" />.
         /// </summary>
         /// <param name="testMethod">
-        ///     The test method.
+        /// The test method.
         /// </param>
         /// <returns>
-        ///     The created fixture.
+        /// The created fixture.
         /// </returns>
         protected virtual ITestFixture CreateTestFixture(MethodInfo testMethod)
         {

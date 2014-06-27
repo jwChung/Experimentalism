@@ -7,24 +7,24 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Represetns a display name of a reflection member.
+    /// Represetns a display name of a reflection member.
     /// </summary>
     public class DisplayNameCollector : ReflectionVisitor<IEnumerable<string>>
     {
         private readonly IEnumerable<string> _displayNames;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DisplayNameCollector" /> class.
+        /// Initializes a new instance of the <see cref="DisplayNameCollector" /> class.
         /// </summary>
         public DisplayNameCollector() : this(new string[0])
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DisplayNameCollector" /> class.
+        /// Initializes a new instance of the <see cref="DisplayNameCollector" /> class.
         /// </summary>
         /// <param name="displayNames">
-        ///     The collected display names.
+        /// The collected display names.
         /// </param>
         protected DisplayNameCollector(IEnumerable<string> displayNames)
         {
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the collected dispaly names.
+        /// Gets a value indicating the collected dispaly names.
         /// </summary>
         public override IEnumerable<string> Value
         {
@@ -43,13 +43,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits an assembly element to collect a dispaly name of it.
+        /// Visits an assembly element to collect a dispaly name of it.
         /// </summary>
         /// <param name="assemblyElement">
-        ///     The assembly element whose display name is collected.
+        /// The assembly element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             AssemblyElement assemblyElement)
@@ -61,13 +61,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits a type element to collect a dispaly name of it.
+        /// Visits a type element to collect a dispaly name of it.
         /// </summary>
         /// <param name="typeElement">
-        ///     The type element whose display name is collected.
+        /// The type element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             TypeElement typeElement)
@@ -79,13 +79,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits a field element to collect a dispaly name of it.
+        /// Visits a field element to collect a dispaly name of it.
         /// </summary>
         /// <param name="fieldInfoElement">
-        ///     The field element whose display name is collected.
+        /// The field element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             FieldInfoElement fieldInfoElement)
@@ -105,13 +105,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits a constructor element to collect a dispaly name of it.
+        /// Visits a constructor element to collect a dispaly name of it.
         /// </summary>
         /// <param name="constructorInfoElement">
-        ///     The constructor element whose display name is collected.
+        /// The constructor element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             ConstructorInfoElement constructorInfoElement)
@@ -131,13 +131,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits a property element to collect a dispaly name of it.
+        /// Visits a property element to collect a dispaly name of it.
         /// </summary>
         /// <param name="propertyInfoElement">
-        ///     The property element whose display name is collected.
+        /// The property element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             PropertyInfoElement propertyInfoElement)
@@ -157,13 +157,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits a method element to collect a dispaly name of it.
+        /// Visits a method element to collect a dispaly name of it.
         /// </summary>
         /// <param name="methodInfoElement">
-        ///     The method element whose display name is collected.
+        /// The method element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             MethodInfoElement methodInfoElement)
@@ -183,13 +183,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Visits an event element to collect a dispaly name of it.
+        /// Visits an event element to collect a dispaly name of it.
         /// </summary>
         /// <param name="eventInfoElement">
-        ///     The event element whose display name is collected.
+        /// The event element whose display name is collected.
         /// </param>
         /// <returns>
-        ///     The visitor which collected a display name.
+        /// The visitor which collected a display name.
         /// </returns>
         public override IReflectionVisitor<IEnumerable<string>> Visit(
             EventInfoElement eventInfoElement)

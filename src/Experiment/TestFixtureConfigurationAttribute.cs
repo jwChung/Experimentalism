@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Attribute to configure default fixture factory.
+    /// Attribute to configure default fixture factory.
     /// </summary>
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute can be inherited to supply custom ITestFixtureFactory.")]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
@@ -16,11 +16,11 @@ namespace Jwc.Experiment
         private readonly ITestFixtureFactory _factory;
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="TestFixtureConfigurationAttribute" /> class.
+        /// Initializes a new instance of the <see cref="TestFixtureConfigurationAttribute" />
+        /// class.
         /// </summary>
         /// <param name="factoryType">
-        ///     Type of the test fixture factory.
+        /// Type of the test fixture factory.
         /// </param>
         public TestFixtureConfigurationAttribute(Type factoryType)
         {
@@ -39,11 +39,11 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="TestFixtureConfigurationAttribute" /> class.
+        /// Initializes a new instance of the <see cref="TestFixtureConfigurationAttribute" />
+        /// class.
         /// </summary>
         /// <param name="factory">
-        ///     The test fixture factory.
+        /// The test fixture factory.
         /// </param>
         protected TestFixtureConfigurationAttribute(ITestFixtureFactory factory)
         {
@@ -54,7 +54,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the type of the test fixture factory.
+        /// Gets a value indicating the type of the test fixture factory.
         /// </summary>
         public Type FactoryType
         {
@@ -65,7 +65,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the test fixture factory.
+        /// Gets a value indicating the test fixture factory.
         /// </summary>
         public ITestFixtureFactory Factory
         {
@@ -76,10 +76,10 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Sets up the default factory of test fixture in a test assembly.
+        /// Sets up the default factory of test fixture in a test assembly.
         /// </summary>
         /// <param name="testAssembly">
-        ///     The test assembly.
+        /// The test assembly.
         /// </param>
         protected override void Setup(Assembly testAssembly)
         {

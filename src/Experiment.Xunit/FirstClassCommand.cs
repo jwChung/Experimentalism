@@ -4,7 +4,7 @@ using Xunit.Sdk;
 namespace Jwc.Experiment.Xunit
 {
     /// <summary>
-    ///     Represents a test command for first class tests.
+    /// Represents a test command for first class tests.
     /// </summary>
     public class FirstClassCommand : TestCommand
     {
@@ -13,17 +13,17 @@ namespace Jwc.Experiment.Xunit
         private readonly Action _action;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="FirstClassCommand" /> class.
+        /// Initializes a new instance of the <see cref="FirstClassCommand" /> class.
         /// </summary>
         /// <param name="method">
-        ///     The test method which this instance is associated. This will likely be the method
-        ///     adorned with an <see cref="FirstClassTestAttribute" />.
+        /// The test method which this instance is associated. This will likely be the method
+        /// adorned with an <see cref="FirstClassTestAttribute" />.
         /// </param>
         /// <param name="displayParameterName">
-        ///     A string to show parameters of a test method in test result.
+        /// A string to show parameters of a test method in test result.
         /// </param>
         /// <param name="action">
-        ///     The test action to be invoked when the test is executed.
+        /// The test action to be invoked when the test is executed.
         /// </param>
         public FirstClassCommand(IMethodInfo method, string displayParameterName, Action action) : base(
             EnsureIsNotNull(method),
@@ -43,7 +43,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Gets the test method.
+        /// Gets the test method.
         /// </summary>
         public IMethodInfo Method
         {
@@ -51,8 +51,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Gets a value indicating the string to show parameters of a test method in test
-        ///     result.
+        /// Gets a value indicating the string to show parameters of a test method in test result.
         /// </summary>
         public string DisplayParameterName
         {
@@ -60,7 +59,7 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Gets the test action.
+        /// Gets the test action.
         /// </summary>
         public Action Action
         {
@@ -68,10 +67,10 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Gets a value indicating whether a test-case instance is created.
+        /// Gets a value indicating whether a test-case instance is created.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if a test-case instance is created; otherwise, <c>false</c>.
+        /// <c>true</c> if a test-case instance is created; otherwise, <c>false</c>.
         /// </value>
         public override bool ShouldCreateInstance
         {
@@ -79,13 +78,13 @@ namespace Jwc.Experiment.Xunit
         }
 
         /// <summary>
-        ///     Execute the test action.
+        /// Execute the test action.
         /// </summary>
         /// <param name="testClass">
-        ///     The test class object.
+        /// The test class object.
         /// </param>
         /// <returns>
-        ///     The result of the execution.
+        /// The result of the execution.
         /// </returns>
         public override MethodResult Execute(object testClass)
         {

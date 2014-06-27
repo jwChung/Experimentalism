@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Attribute to set up or tear down all fixtures in a test assembly.
+    /// Attribute to set up or tear down all fixtures in a test assembly.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public abstract class TestAssemblyConfigurationAttribute : Attribute
@@ -15,10 +15,10 @@ namespace Jwc.Experiment
         private static bool _configured;
 
         /// <summary>
-        ///     Sets up or tears down all fixtures in a test assembly.
+        /// Sets up or tears down all fixtures in a test assembly.
         /// </summary>
         /// <param name="testAssembly">
-        ///     The test assembly.
+        /// The test assembly.
         /// </param>
         public static void Configure(Assembly testAssembly)
         {
@@ -42,20 +42,20 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Sets up all fixtures in a test assembly.
+        /// Sets up all fixtures in a test assembly.
         /// </summary>
         /// <param name="testAssembly">
-        ///     The test assembly.
+        /// The test assembly.
         /// </param>
         protected virtual void Setup(Assembly testAssembly)
         {
         }
 
         /// <summary>
-        ///     Tears down all fixtures in a test assembly.
+        /// Tears down all fixtures in a test assembly.
         /// </summary>
         /// <param name="testAssembly">
-        ///     The test assembly.
+        /// The test assembly.
         /// </param>
         protected virtual void Teardown(Assembly testAssembly)
         {
@@ -80,7 +80,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Occurs when [domain unload].
+        /// Occurs when [domain unload].
         /// </summary>
         protected virtual event EventHandler DomainUnload
         {

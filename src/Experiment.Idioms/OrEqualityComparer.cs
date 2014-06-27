@@ -6,20 +6,20 @@ using System.Linq;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Represents logical or operator for <see cref="IEqualityComparer{T}" />
+    /// Represents logical or operator for <see cref="IEqualityComparer{T}" />
     /// </summary>
     /// <typeparam name="T">
-    ///     The compared type.
+    /// The compared type.
     /// </typeparam>
     public class OrEqualityComparer<T> : IEqualityComparer<T>
     {
         private readonly IEqualityComparer<T>[] _equalityComparers;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="OrEqualityComparer{T}" /> class.
+        /// Initializes a new instance of the <see cref="OrEqualityComparer{T}" /> class.
         /// </summary>
         /// <param name="equalityComparers">
-        ///     The equality comparers.
+        /// The equality comparers.
         /// </param>
         public OrEqualityComparer(params IEqualityComparer<T>[] equalityComparers)
         {
@@ -32,7 +32,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the equality comparers.
+        /// Gets a value indicating the equality comparers.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "The nested generic signature is desirable.")]
         public IEnumerable<IEqualityComparer<T>> EqualityComparers
@@ -44,16 +44,16 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Determines whether the specified objects are equal.
+        /// Determines whether the specified objects are equal.
         /// </summary>
         /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
+        /// true if the specified objects are equal; otherwise, false.
         /// </returns>
         /// <param name="x">
-        ///     The first object of type <paramref name="x" /> to compare.
+        /// The first object of type <paramref name="x" /> to compare.
         /// </param>
         /// <param name="y">
-        ///     The second object of type <paramref name="y" /> to compare.
+        /// The second object of type <paramref name="y" /> to compare.
         /// </param>
         public bool Equals(T x, T y)
         {
@@ -61,13 +61,13 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Returns a hash code for the specified object.
+        /// Returns a hash code for the specified object.
         /// </summary>
         /// <returns>
-        ///     A hash code for the specified object.
+        /// A hash code for the specified object.
         /// </returns>
         /// <param name="obj">
-        ///     The <see cref="object" /> for which a hash code is to be returned.
+        /// The <see cref="object" /> for which a hash code is to be returned.
         /// </param>
         public int GetHashCode(T obj)
         {

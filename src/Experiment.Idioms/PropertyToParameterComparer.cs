@@ -4,7 +4,7 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Represent comaprer to determine that a property value equals to a parameter value.
+    /// Represent comaprer to determine that a property value equals to a parameter value.
     /// </summary>
     public class PropertyToParameterComparer : IEqualityComparer<IReflectionElement>
     {
@@ -12,10 +12,10 @@ namespace Jwc.Experiment
         private readonly IEqualityComparer<IReflectionElement> _comparer;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PropertyToParameterComparer" /> class.
+        /// Initializes a new instance of the <see cref="PropertyToParameterComparer" /> class.
         /// </summary>
         /// <param name="testFixture">
-        ///     The test fixture.
+        /// The test fixture.
         /// </param>
         public PropertyToParameterComparer(ITestFixture testFixture)
         {
@@ -24,7 +24,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the test fixture.
+        /// Gets a value indicating the test fixture.
         /// </summary>
         public ITestFixture TestFixture
         {
@@ -35,16 +35,16 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Determines whether the specified objects are equal.
+        /// Determines whether the specified objects are equal.
         /// </summary>
         /// <param name="x">
-        ///     The first object of type <paramref name="x" /> to compare.
+        /// The first object of type <paramref name="x" /> to compare.
         /// </param>
         /// <param name="y">
-        ///     The second object of type <paramref name="y" /> to compare.
+        /// The second object of type <paramref name="y" /> to compare.
         /// </param>
         /// <returns>
-        ///     true if the specified objects are equal; otherwise, false.
+        /// true if the specified objects are equal; otherwise, false.
         /// </returns>
         public bool Equals(IReflectionElement x, IReflectionElement y)
         {
@@ -52,14 +52,14 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Always returns zero(constant) to use the <see cref="Equals" /> method to determine
-        ///     whether the specified objects are equal.
+        /// Always returns zero(constant) to use the <see cref="Equals" /> method to determine
+        /// whether the specified objects are equal.
         /// </summary>
         /// <param name="obj">
-        ///     The object to get the hash code.
+        /// The object to get the hash code.
         /// </param>
         /// <returns>
-        ///     The zero
+        /// The zero
         /// </returns>
         public int GetHashCode(IReflectionElement obj)
         {

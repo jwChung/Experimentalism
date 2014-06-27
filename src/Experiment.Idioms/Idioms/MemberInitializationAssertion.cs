@@ -8,8 +8,8 @@ using Ploeh.Albedo;
 namespace Jwc.Experiment.Idioms
 {
     /// <summary>
-    ///     Encapsulates a unit test that verifies that members (property or field) are
-    ///     correctly intialized by a constructor.
+    /// Encapsulates a unit test that verifies that members (property or field) are correctly
+    /// intialized by a constructor.
     /// </summary>
     public class MemberInitializationAssertion : IdiomaticAssertion
     {
@@ -18,11 +18,10 @@ namespace Jwc.Experiment.Idioms
         private readonly IEqualityComparer<IReflectionElement> _memberToParameterComparer;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MemberInitializationAssertion" />
-        ///     class.
+        /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
         /// </summary>
         /// <param name="testFixture">
-        ///     A test fixture to crete auto-data.
+        /// A test fixture to crete auto-data.
         /// </param>
         public MemberInitializationAssertion(ITestFixture testFixture) : this(
             new OrEqualityComparer<IReflectionElement>(
@@ -36,16 +35,15 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MemberInitializationAssertion" />
-        ///     class.
+        /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
         /// </summary>
         /// <param name="parameterToMemberComparer">
-        ///     A comparer to determine if a given parameter value of a constructor equals to a
-        ///     member(property or field) value.
+        /// A comparer to determine if a given parameter value of a constructor equals to a
+        /// member(property or field) value.
         /// </param>
         /// <param name="memberToParameterComparer">
-        ///     A comparer to determine if a given member(property or field) value equals to a
-        ///     parameter value of a constructor.
+        /// A comparer to determine if a given member(property or field) value equals to a parameter
+        /// value of a constructor.
         /// </param>
         public MemberInitializationAssertion(
             IEqualityComparer<IReflectionElement> parameterToMemberComparer,
@@ -62,7 +60,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        ///     Gets a value indicating the test fixture.
+        /// Gets a value indicating the test fixture.
         /// </summary>
         public ITestFixture TestFixture
         {
@@ -73,7 +71,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        ///     Gets a value to compare a parameter with a member(field or propety).
+        /// Gets a value to compare a parameter with a member(field or propety).
         /// </summary>
         public IEqualityComparer<IReflectionElement> ParameterToMemberComparer
         {
@@ -84,7 +82,7 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        ///     Gets a value to compare a member(field or propety) with a parameter.
+        /// Gets a value to compare a member(field or propety) with a parameter.
         /// </summary>
         public IEqualityComparer<IReflectionElement> MemberToParameterComparer
         {
@@ -95,10 +93,10 @@ namespace Jwc.Experiment.Idioms
         }
 
         /// <summary>
-        ///     Verifies that a field correctly exposes a certain parameter of a constructor.
+        /// Verifies that a field correctly exposes a certain parameter of a constructor.
         /// </summary>
         /// <param name="field">
-        ///     The field.
+        /// The field.
         /// </param>
         public override void Verify(FieldInfo field)
         {
@@ -129,11 +127,11 @@ Field         : {2}";
         }
 
         /// <summary>
-        ///     Verifies that all parameters of a constructor are correctly exposed through fields
-        ///     or properties.
+        /// Verifies that all parameters of a constructor are correctly exposed through fields or
+        /// properties.
         /// </summary>
         /// <param name="constructor">
-        ///     The constructor.
+        /// The constructor.
         /// </param>
         public override void Verify(ConstructorInfo constructor)
         {
@@ -164,10 +162,10 @@ Parameter  : {2}";
         }
 
         /// <summary>
-        ///     Verifies that a field correctly exposes a certain parameter of a constructor.
+        /// Verifies that a field correctly exposes a certain parameter of a constructor.
         /// </summary>
         /// <param name="property">
-        ///     The property.
+        /// The property.
         /// </param>
         public override void Verify(PropertyInfo property)
         {

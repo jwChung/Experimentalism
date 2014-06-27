@@ -9,8 +9,8 @@ using Ploeh.Albedo.Refraction;
 namespace Jwc.Experiment
 {
     /// <summary>
-    ///     Represents members of a certain <see cref="Type" /> which will be verified by
-    ///     idiomatic assertions.
+    /// Represents members of a certain <see cref="Type" /> which will be verified by idiomatic
+    /// assertions.
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "The main responsibility of this class isn't to be a 'collection' (which, by the way, it isn't - it's just an Iterator).")]
     public class IdiomaticMembers : IEnumerable<MemberInfo>
@@ -25,23 +25,23 @@ namespace Jwc.Experiment
         private readonly MemberKinds _memberKinds;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
+        /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
         /// </summary>
         /// <param name="type">
-        ///     A type to enumerate members.
+        /// A type to enumerate members.
         /// </param>
         public IdiomaticMembers(Type type) : this(type, MemberKinds.Default)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
+        /// Initializes a new instance of the <see cref="IdiomaticMembers" /> class.
         /// </summary>
         /// <param name="type">
-        ///     A type to enumerate members.
+        /// A type to enumerate members.
         /// </param>
         /// <param name="memberKinds">
-        ///     Member kinds to filter members.
+        /// Member kinds to filter members.
         /// </param>
         public IdiomaticMembers(
             Type type,
@@ -55,7 +55,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the type to enumerate members.
+        /// Gets a value indicating the type to enumerate members.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This name is desirable to indicate the target type.")]
         public Type Type
@@ -67,7 +67,7 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Gets a value indicating the member kinds to be enumerated.
+        /// Gets a value indicating the member kinds to be enumerated.
         /// </summary>
         public MemberKinds MemberKinds
         {
@@ -78,11 +78,11 @@ namespace Jwc.Experiment
         }
 
         /// <summary>
-        ///     Returns an enumerator that iterates through the collection.
+        /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        ///     A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to
-        ///     iterate through the collection.
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to
+        /// iterate through the collection.
         /// </returns>
         public IEnumerator<MemberInfo> GetEnumerator()
         {
