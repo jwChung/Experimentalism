@@ -88,8 +88,8 @@ namespace Jwc.Experiment.Xunit
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            Action();
-            return new PassedResult(this.Method, DisplayName);
+            this.Action();
+            return new PassedResult(this.Method, this.DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
