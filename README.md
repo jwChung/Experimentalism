@@ -23,21 +23,21 @@ Experiment.Xunit란 [Parameterized Test](http://xunitpatterns.com/Parameterized%
 ```c#
 public class Person
 {
-    private string _name;
+    private string name;
     
     public Person(string name)
 	{
-        _name = name;
+        this.name = name;
 	}
     
     public string Name
     {
-        get { return _name; }
+        get { return this.name; }
     }
     
     public string Say(string something)
     {
-        return _name + ": " + something;
+        return this.name + ": " + something;
     }
 }
 
