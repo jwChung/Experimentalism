@@ -34,17 +34,17 @@ namespace Jwc.Experiment.AutoFixture
 
         private class AutoPropertiesCustomization : ICustomization
         {
-            private readonly Type _targetType;
+            private readonly Type targetType;
 
             public AutoPropertiesCustomization(Type targetType)
             {
-                _targetType = targetType;
+                this.targetType = targetType;
             }
 
             public void Customize(IFixture fixture)
             {
                 GetType().GetMethod("Customize", BindingFlags.NonPublic | BindingFlags.Static)
-                    .MakeGenericMethod(_targetType)
+                    .MakeGenericMethod(this.targetType)
                     .Invoke(null, new object[] { fixture });
             }
 

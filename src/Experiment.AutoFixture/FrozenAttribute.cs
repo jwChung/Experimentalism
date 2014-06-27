@@ -39,7 +39,7 @@ namespace Jwc.Experiment.AutoFixture
             }
 
             var targetType = parameter.ParameterType;
-            return new FreezingCustomization(targetType, As ?? targetType);
+            return new FreezingCustomization(targetType, this.As ?? targetType);
         }
     }
 }

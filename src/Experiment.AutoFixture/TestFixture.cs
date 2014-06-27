@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
@@ -8,10 +9,11 @@ namespace Jwc.Experiment.AutoFixture
     /// <see cref="IFixture" />를 <see cref="ITestFixture" /> 인터페이스에 맞춘다. auto data기능을
     /// AutoFixture library로부터 채용하게 된다.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "The warnings are from Korean.")]
     public class TestFixture : ITestFixture
     {
-        private readonly IFixture _fixture;
-        private readonly ISpecimenContext _specimenContext;
+        private readonly IFixture fixture;
+        private readonly ISpecimenContext specimenContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixture" /> class.
@@ -26,10 +28,10 @@ namespace Jwc.Experiment.AutoFixture
                 throw new ArgumentNullException("fixture");
             }
 
-            _fixture = fixture;
-            _fixture.Inject<ITestFixture>(this);
-            _fixture.Inject(this);
-            _specimenContext = new SpecimenContext(fixture);
+            this.fixture = fixture;
+            fixture.Inject<ITestFixture>(this);
+            fixture.Inject(this);
+            this.specimenContext = new SpecimenContext(fixture);
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace Jwc.Experiment.AutoFixture
         {
             get
             {
-                return _fixture;
+                return this.fixture;
             }
         }
 
@@ -54,7 +56,7 @@ namespace Jwc.Experiment.AutoFixture
         /// </returns>
         public object Create(object request)
         {
-            return _specimenContext.Resolve(request);
+            return this.specimenContext.Resolve(request);
         }
     }
 }

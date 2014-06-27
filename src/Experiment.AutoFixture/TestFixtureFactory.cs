@@ -27,7 +27,7 @@ namespace Jwc.Experiment.AutoFixture
                 throw new ArgumentNullException("testMethod");
 
             var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
-            return new TestFixture(CreateFixture(testMethod).Customize(cutomization));
+            return new TestFixture(this.CreateFixture(testMethod).Customize(cutomization));
         }
 
         /// <summary>
@@ -46,16 +46,16 @@ namespace Jwc.Experiment.AutoFixture
 
         private class ParameterAttributeCutomization : ICustomization
         {
-            private readonly IEnumerable<ParameterInfo> _parameters;
+            private readonly IEnumerable<ParameterInfo> parameters;
 
             public ParameterAttributeCutomization(IEnumerable<ParameterInfo> parameters)
             {
-                _parameters = parameters;
+                this.parameters = parameters;
             }
 
             public void Customize(IFixture fixture)
             {
-                _parameters.SelectMany(GetCustomizations)
+                this.parameters.SelectMany(GetCustomizations)
                     .Aggregate(fixture, (f, c) => f.Customize(c));
             }
 
