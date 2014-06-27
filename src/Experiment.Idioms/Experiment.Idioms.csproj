@@ -11,7 +11,6 @@
     <AssemblyName>Jwc.Experiment.Idioms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
     <NuGetPackageImportStamp>81ac0b2c</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,6 +33,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Release\Jwc.Experiment.Idioms.XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\..\build\Experimentalism.ruleset</CodeAnalysisRuleSet>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Reflection">

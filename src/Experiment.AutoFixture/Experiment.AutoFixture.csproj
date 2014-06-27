@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>50e5b3c3</NuGetPackageImportStamp>
-    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +33,7 @@
     <CodeAnalysisRuleSet>..\..\build\Experimentalism.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Release\Jwc.Experiment.AutoFixture.xml</DocumentationFile>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ploeh.AutoFixture, Version=3.18.7.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
