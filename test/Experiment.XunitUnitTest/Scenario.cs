@@ -78,13 +78,11 @@ namespace Jwc.Experiment.Xunit
         [FirstClassScenarioTest]
         public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesWithAutoData()
         {
-            yield return new TestCase(
-                new Action<string, int>(
-                    (x, y) =>
-                    {
-                        Assert.Equal("custom string", x);
-                        Assert.Equal(5678, y);
-                    }));
+            yield return TestCase.New<string, int>((x, y) =>
+            {
+                Assert.Equal("custom string", x);
+                Assert.Equal(5678, y);
+            });
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute

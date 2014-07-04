@@ -90,9 +90,9 @@ namespace Jwc.Experiment.AutoFixture
         [FirstClassTest]
         public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
-            yield return new TestCase(new Action<int>(x => Assert.True(x > 0, "x > 0")));
-            yield return new TestCase(new Action<string>(x => Assert.NotNull(x)));
-            yield return new TestCase(new Action<object>(x => Assert.NotNull(x)));
+            yield return TestCase.New<int>(x => Assert.True(x > 0, "x > 0"));
+            yield return TestCase.New<string>(x => Assert.NotNull(x));
+            yield return TestCase.New<object>(x => Assert.NotNull(x));
         }
 
         public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute

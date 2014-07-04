@@ -17,7 +17,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void InitializeWithNullDelegateThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestCase((Delegate)null));
+            Assert.Throws<ArgumentNullException>(() => new TestCase(null));
         }
 
         [Fact]
