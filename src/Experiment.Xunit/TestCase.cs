@@ -44,12 +44,7 @@ namespace Jwc.Experiment.Xunit
         {
             if (@delegate == null)
                 throw new ArgumentNullException("delegate");
-
-            if (@delegate.GetInvocationList().Length != 1)
-                throw new ArgumentException(
-                    "Composite delegates are not supported, set only one operation.",
-                    "delegate");
-
+            
             this.@delegate = @delegate;
         }
 
@@ -76,10 +71,7 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public string DisplayParameterName
         {
-            get
-            {
-                return this.displayParameterName;
-            }
+            get { return this.displayParameterName; }
         }
 
         /// <summary>
@@ -87,10 +79,7 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public Delegate Delegate
         {
-            get
-            {
-                return @delegate;
-            }
+            get { return @delegate; }
         }
 
         /// <summary>

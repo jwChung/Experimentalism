@@ -18,4 +18,7 @@ using System.Runtime.InteropServices;
  * 
  * - [FIX] reordered the parameters of the constructor
  *   `TestCase(string, Delegate)`. (BREAKING-CHANGE)
+ *   
+ * - [FIX] removed the unnecessary guard clause as checking compiste delegate.
+ *   (BREAKING-CHANGE)
  */

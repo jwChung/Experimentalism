@@ -45,38 +45,6 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void InitializeWithCompositeActionThrows()
-        {
-            Action action = () => { };
-            action += () => { };
-            Assert.Throws<ArgumentException>(() => new TestCase(action));
-        }
-
-        [Fact]
-        public void InitializeWithCompositeFuncThrows()
-        {
-            Func<object> func = () => null;
-            func += () => null;
-            Assert.Throws<ArgumentException>(() => new TestCase(func));
-        }
-
-        [Fact]
-        public void InitializeWithCompositeDelegateThrows()
-        {
-            Func<object> func = () => null;
-            func += () => null;
-            Assert.Throws<ArgumentException>(() => new TestCase((Delegate)func));
-        }
-
-        [Fact]
-        public void InitializeWithCompositeDelegateAndTestParamterNameThrows()
-        {
-            Func<object> func = () => null;
-            func += () => null;
-            Assert.Throws<ArgumentException>(() => new TestCase(func, string.Empty));
-        }
-
-        [Fact]
         public void DisplayParameterNameIsCorrectWhenInitializedWithAction()
         {
             var sut = new TestCase(() => { });
@@ -223,7 +191,7 @@ namespace Jwc.Experiment.Xunit
 
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             string displayParameterName = "Int32: 123, String: anonymous, Object: (null)";
-            
+
             // Exercise system
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
