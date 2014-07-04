@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Xunit
 
             this.displayParameterName = displayParameterName;
         }
-
+        
         /// <summary>
         /// Gets a value indicating the string to show parameters of a test method in test result.
         /// </summary>
@@ -70,6 +70,20 @@ namespace Jwc.Experiment.Xunit
         public Delegate Delegate
         {
             get { return @delegate; }
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="TestCase"/>.
+        /// </summary>
+        /// <param name="action">
+        /// The action.
+        /// </param>
+        /// <returns>
+        /// The new instance.
+        /// </returns>
+        public static TestCase New(Action action)
+        {
+            return new TestCase((Delegate)action);
         }
 
         /// <summary>

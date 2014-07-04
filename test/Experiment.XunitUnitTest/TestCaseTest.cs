@@ -102,6 +102,23 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
+        public void NewWithActionReturnsCorrectInstance()
+        {
+            Action action = () => { };
+
+            TestCase actual = TestCase.New(action);
+
+            Assert.Equal(action, actual.Delegate);
+            Assert.Null(actual.DisplayParameterName);
+        }
+
+        [Fact]
+        public void NewWithNullActionThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => TestCase.New(null));
+        }
+
+        [Fact]
         public void ConvertNullMethodToTestCommandThrows()
         {
             var sut = new TestCase(() => { });
