@@ -128,7 +128,7 @@ public void AddTest(int a, int b, int expected)
 }
 ```
 
-하지만 Attribute Tabular Test는 Tabular Test에서는 없는 문제점이 있는데, 그것은 type-safe 방식이 아니라는 점이다. 그래서 Experiment에서는 Tabular Test와 Attribute Tabular Test의 장점만을 살릴 수 있는 First class test 방식을 지원합니다. First class test 방식에서는 Eager Test 문제를 해결함과 동시에 type-safe 방식을 지원하는 장점을 가집니다.
+하지만 Attribute Tabular Test는 Tabular Test에서는 없는 문제점이 있는데, 그것은 type-safe 방식이 아니라는 점입니다. 그래서 Experiment에서는 Tabular Test와 Attribute Tabular Test의 장점만을 살릴 수 있는 First class test 방식을 지원합니다. First class test 방식에서는 Eager Test 문제를 해결함과 동시에 type-safe 방식을 지원하는 장점을 가집니다.
 
 ```c#
 [FirstClassTest]
