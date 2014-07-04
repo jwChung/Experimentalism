@@ -27,16 +27,6 @@ namespace Jwc.Experiment.Xunit
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
-        /// <param name="func">
-        /// The test function.
-        /// </param>
-        public TestCase(Func<object> func) : this((Delegate)func)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestCase" /> class.
-        /// </summary>
         /// <param name="delegate">
         /// The test delegate.
         /// </param>

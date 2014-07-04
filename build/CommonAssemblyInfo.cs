@@ -21,4 +21,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] removed the unnecessary guard clause as checking compiste delegate.
  *   (BREAKING-CHANGE)
+ *   
+ * - [FIX] removed the constructor `TestCase(Func<objec>)` to prevent
+ *   the ambiguousness between Action and Func parameters. (BREAKING-CHANGE)
  */

@@ -21,12 +21,6 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void InitializeWithNullFuncThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => new TestCase((Func<object>)null));
-        }
-
-        [Fact]
         public void InitializeWithNullDelegateThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestCase((Delegate)null));
@@ -51,15 +45,7 @@ namespace Jwc.Experiment.Xunit
             var actual = sut.DisplayParameterName;
             Assert.Null(actual);
         }
-
-        [Fact]
-        public void DisplayParameterNameIsCorrectWhenInitializedWithFunc()
-        {
-            var sut = new TestCase(() => null);
-            var actual = sut.DisplayParameterName;
-            Assert.Null(actual);
-        }
-
+        
         [Fact]
         public void DisplayParameterNameIsCorrectWhenInitializedWithDelegate()
         {
@@ -92,18 +78,7 @@ namespace Jwc.Experiment.Xunit
 
             Assert.Equal(action, actual);
         }
-
-        [Fact]
-        public void DelegateIsCorrectWhenInitializedWithFunc()
-        {
-            Func<object> func = () => null;
-            var sut = new TestCase(func);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(func, actual);
-        }
-
+        
         [Fact]
         public void DelegateIsCorrectWhenInitializedWithDelegate()
         {
@@ -137,7 +112,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
-            var sut = new TestCase(() => null);
+            var sut = new TestCase(() => { });
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ArgumentNullException>(
                 () => sut.ConvertToTestCommand(dummyMethod, null));
@@ -207,7 +182,7 @@ namespace Jwc.Experiment.Xunit
         public void ConvertNonParameterizedDelegateToTestCommandDoesNotCreateFixture()
         {
             // Fixture setup
-            var sut = new TestCase(() => "anonymous");
+            var sut = new TestCase(() => { });
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
                 OnCreate = mi => { throw new InvalidOperationException(); }
