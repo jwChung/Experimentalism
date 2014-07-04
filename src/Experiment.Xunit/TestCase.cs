@@ -66,7 +66,7 @@ namespace Jwc.Experiment.Xunit
         /// Creates a new instance of <see cref="TestCase"/>.
         /// </summary>
         /// <param name="action">
-        /// The action.
+        /// An action.
         /// </param>
         /// <returns>
         /// The new instance.
@@ -76,6 +76,23 @@ namespace Jwc.Experiment.Xunit
             return new TestCase(action);
         }
 
+        /// <summary>
+        /// Creates a new instance of <see cref="TestCase" />.
+        /// </summary>
+        /// <param name="action">
+        /// An action.
+        /// </param>
+        /// <param name="displayParameterName">
+        /// A name of the parameter.
+        /// </param>
+        /// <returns>
+        /// The new instance.
+        /// </returns>
+        public static TestCase New(Action action, string displayParameterName)
+        {
+            return new TestCase(action, displayParameterName);
+        }
+        
         /// <summary>
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
