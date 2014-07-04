@@ -1,0 +1,90 @@
+﻿<#@ Template Debug="false" HostSpecific="false" Language="C#" #>
+<#@ Output Extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Import Namespace="System.Linq" #>
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Jwc.Experiment.Xunit
+{
+    /// <summary>
+    /// Represents a weakly-typed test case that can be turned into an xUnit.net ITestCommand when
+    /// returned from a test method adorned with the <see cref="FirstClassTestAttribute" />.
+    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine", Justification = "The is automatically generated.")]
+    public partial class TestCase : ITestCase
+    {
+<#
+for (var typeCount = 2; typeCount <= GenericTypeMax; typeCount++)
+{
+    var typeList = GetGenericList(typeCount, "TArg{0}");
+#>
+        /// <summary>
+        /// Creates a new instance of <see cref="TestCase" />.
+        /// </summary>
+<#
+for (var i = 1; i <= typeCount; i++)
+{
+    var typeName = string.Format("TArg{0}", i);
+#>
+        /// <typeparam name="<#=typeName#>">A type of the <#=ConvertToOrdinal(i)#> argument.</typeparam>
+<#
+}
+#>
+        /// <param name="action">
+        /// An action.
+        /// </param>
+        /// <returns>
+        /// The new instance.
+        /// </returns>
+        public static TestCase New<<#=typeList#>>(Action<<#=typeList#>> action)
+        {
+            return new TestCase(action);
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="TestCase" />.
+        /// </summary>
+<#
+for (var i = 1; i <= typeCount; i++)
+{
+    var typeName = string.Format("TArg{0}", i);
+#>
+        /// <typeparam name="<#=typeName#>">A type of the <#=ConvertToOrdinal(i)#> argument.</typeparam>
+<#
+}
+#>
+        /// <param name="action">
+        /// An action.
+        /// </param>
+        /// <param name="displayParameterName">
+        /// A name of the parameter.
+        /// </param>
+        /// <returns>
+        /// The new instance.
+        /// </returns>
+        public static TestCase New<<#=typeList#>>(Action<<#=typeList#>> action, string displayParameterName)
+        {
+            return new TestCase(action, displayParameterName);
+        }
+
+<#
+}
+#>
+    }
+}
+<#+
+private const int GenericTypeMax = 16;
+private static readonly string[] ordinalNumbers = new[] { "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth" };
+
+public static string ConvertToOrdinal(int number)
+{
+    return ordinalNumbers[number - 1];
+}
+
+private static string GetGenericList(int typeCount, string format, string separator = ", ")
+{
+    return string.Join(separator, Enumerable.Range(1, typeCount).Select(n => string.Format(format, n)).ToArray());
+}
+#>

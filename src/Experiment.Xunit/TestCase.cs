@@ -9,7 +9,7 @@ namespace Jwc.Experiment.Xunit
     /// Represents a weakly-typed test case that can be turned into an xUnit.net ITestCommand when
     /// returned from a test method adorned with the <see cref="FirstClassTestAttribute" />.
     /// </summary>
-    public class TestCase : ITestCase
+    public partial class TestCase : ITestCase
     {
         private readonly string displayParameterName;
         private readonly Delegate @delegate;

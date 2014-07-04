@@ -123,6 +123,29 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
+        public void NewWithActionOfTArg1AndTArg2ReturnsCorrectInstance()
+        {
+            Action<object, string> action = (x, y) => { };
+
+            TestCase actual = TestCase.New(action);
+
+            Assert.Equal(action, actual.Delegate);
+            Assert.Null(actual.DisplayParameterName);
+        }
+
+        [Fact]
+        public void NewWithActionOfTArg1AndTArg2AndDisplayParameterNameReturnsCorrectInstance()
+        {
+            Action<object, string> action = (x, y) => { };
+            var displayParameterName = "anonymous";
+
+            TestCase actual = TestCase.New(action, displayParameterName);
+
+            Assert.Equal(action, actual.Delegate);
+            Assert.Equal(displayParameterName, actual.DisplayParameterName);
+        }
+
+        [Fact]
         public void ConvertNullMethodToTestCommandThrows()
         {
             var sut = TestCase.New(() => { });
