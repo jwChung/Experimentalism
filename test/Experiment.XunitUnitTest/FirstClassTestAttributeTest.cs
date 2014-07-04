@@ -354,7 +354,7 @@ namespace Jwc.Experiment.Xunit
         {
             public IEnumerable<ITestCase> FirstClassTest()
             {
-                yield return new TestCase(() => { });
+                yield return TestCase.New(() => { });
             }
         }
 

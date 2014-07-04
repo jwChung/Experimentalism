@@ -44,8 +44,8 @@ namespace Jwc.Experiment.Xunit
         [FirstClassScenarioTest]
         public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForYieldReturn()
         {
-            yield return new TestCase(() => Assert.Equal(3, 2 + 1));
-            yield return new TestCase(() => Assert.Equal(10, 3 + 7));
+            yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
+            yield return TestCase.New(() => Assert.Equal(10, 3 + 7));
         }
 
         [FirstClassScenarioTest]
@@ -58,7 +58,7 @@ namespace Jwc.Experiment.Xunit
                 new { X = 100, Y = 23, Z = 123 }
             };
 
-            return testCases.Select(c => new TestCase(() => Assert.Equal(c.Z, c.X + c.Y)))
+            return testCases.Select(c => TestCase.New(() => Assert.Equal(c.Z, c.X + c.Y)))
                 .Cast<ITestCase>().ToArray();
         }
 
@@ -72,7 +72,7 @@ namespace Jwc.Experiment.Xunit
             };
 
             return testCases.Select(
-                c => new TestCase(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
+                c => TestCase.New(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
         [FirstClassScenarioTest]

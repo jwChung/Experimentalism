@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.24.1")]
 
 /*
- * Version 0.24.2
+ * Version 0.25.0
  * 
  * - [FIX] reordered the parameters of the constructor
  *   `TestCase(string, Delegate)`. (BREAKING-CHANGE)
@@ -24,4 +24,7 @@ using System.Runtime.InteropServices;
  *   
  * - [FIX] removed the constructor `TestCase(Func<objec>)` to prevent
  *   the ambiguousness between Action and Func parameters. (BREAKING-CHANGE)
+ *   
+ * - [NEW] removed the constructor `TestCase(Action)` but instead, introduced
+ *   the New method. (BREAKING-CHANGE)
  */

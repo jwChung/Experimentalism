@@ -17,16 +17,6 @@ namespace Jwc.Experiment.Xunit
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
-        /// <param name="action">
-        /// The test action.
-        /// </param>
-        public TestCase(Action action) : this((Delegate)action)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestCase" /> class.
-        /// </summary>
         /// <param name="delegate">
         /// The test delegate.
         /// </param>
@@ -83,7 +73,7 @@ namespace Jwc.Experiment.Xunit
         /// </returns>
         public static TestCase New(Action action)
         {
-            return new TestCase((Delegate)action);
+            return new TestCase(action);
         }
 
         /// <summary>

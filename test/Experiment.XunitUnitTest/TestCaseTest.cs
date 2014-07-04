@@ -10,16 +10,10 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void SutIsTestCase()
         {
-            var sut = new TestCase(() => { });
+            var sut = TestCase.New(() => { });
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
-
-        [Fact]
-        public void InitializeWithNullActionThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => new TestCase((Action)null));
-        }
-
+        
         [Fact]
         public void InitializeWithNullDelegateThrows()
         {
@@ -38,14 +32,6 @@ namespace Jwc.Experiment.Xunit
             Assert.Throws<ArgumentNullException>(() => new TestCase(new Action(() => { }), null));
         }
 
-        [Fact]
-        public void DisplayParameterNameIsCorrectWhenInitializedWithAction()
-        {
-            var sut = new TestCase(() => { });
-            var actual = sut.DisplayParameterName;
-            Assert.Null(actual);
-        }
-        
         [Fact]
         public void DisplayParameterNameIsCorrectWhenInitializedWithDelegate()
         {
@@ -68,17 +54,6 @@ namespace Jwc.Experiment.Xunit
             Assert.Equal(displayParameterName, actual);
         }
 
-        [Fact]
-        public void DelegateIsCorrectWhenInitializedWithAction()
-        {
-            Action action = () => { };
-            var sut = new TestCase(action);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(action, actual);
-        }
-        
         [Fact]
         public void DelegateIsCorrectWhenInitializedWithDelegate()
         {
@@ -113,15 +88,9 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
-        public void NewWithNullActionThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => TestCase.New(null));
-        }
-
-        [Fact]
         public void ConvertNullMethodToTestCommandThrows()
         {
-            var sut = new TestCase(() => { });
+            var sut = TestCase.New(() => { });
             Assert.Throws<ArgumentNullException>(
                 () => sut.ConvertToTestCommand(null, new DelegatingTestFixtureFactory()));
         }
@@ -129,7 +98,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertToTestCommandWithNullFixtureFactoryThrows()
         {
-            var sut = new TestCase(() => { });
+            var sut = TestCase.New(() => { });
             var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ArgumentNullException>(
                 () => sut.ConvertToTestCommand(dummyMethod, null));
@@ -138,7 +107,7 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ConvertNonParameterizedDelegateToTestCommandReturnsCorrectTestCommand()
         {
-            var sut = new TestCase(() => { });
+            var sut = TestCase.New(() => { });
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
@@ -199,7 +168,7 @@ namespace Jwc.Experiment.Xunit
         public void ConvertNonParameterizedDelegateToTestCommandDoesNotCreateFixture()
         {
             // Fixture setup
-            var sut = new TestCase(() => { });
+            var sut = TestCase.New(() => { });
             var fixtureFactory = new DelegatingTestFixtureFactory
             {
                 OnCreate = mi => { throw new InvalidOperationException(); }

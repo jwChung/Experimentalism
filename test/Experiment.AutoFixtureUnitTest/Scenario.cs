@@ -84,7 +84,7 @@ namespace Jwc.Experiment.AutoFixture
             };
 
             return testCases.Select(
-                c => new TestCase(() => Assert.Equal(c.Z, c.X + c.Y)));
+                c => TestCase.New(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
         [FirstClassTest]
