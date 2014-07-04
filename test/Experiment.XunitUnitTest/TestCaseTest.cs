@@ -35,13 +35,13 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void InitializeWithNullDelegateAndDisplayParameterNameThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestCase(string.Empty, null));
+            Assert.Throws<ArgumentNullException>(() => new TestCase(null, string.Empty));
         }
 
         [Fact]
         public void InitializeWithNullDisplayParameterNameThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestCase(null, new Action(() => { })));
+            Assert.Throws<ArgumentNullException>(() => new TestCase(new Action(() => { }), null));
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace Jwc.Experiment.Xunit
         {
             Func<object> func = () => null;
             func += () => null;
-            Assert.Throws<ArgumentException>(() => new TestCase(string.Empty, func));
+            Assert.Throws<ArgumentException>(() => new TestCase(func, string.Empty));
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace Jwc.Experiment.Xunit
         public void DisplayParameterNameIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
             string displayParameterName = "anonymous";
-            var sut = new TestCase(displayParameterName, new Func<object>(() => null));
+            var sut = new TestCase(new Func<object>(() => null), displayParameterName);
 
             var actual = sut.DisplayParameterName;
 
@@ -151,7 +151,7 @@ namespace Jwc.Experiment.Xunit
         public void DelegateIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
             Delegate @delegate = new Func<object>(() => null);
-            var sut = new TestCase("anonymous", @delegate);
+            var sut = new TestCase(@delegate, "anonymous");
 
             var actual = sut.Delegate;
 
@@ -274,7 +274,7 @@ namespace Jwc.Experiment.Xunit
         public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
             string displayParameterName = "anonymous";
-            var sut = new TestCase(displayParameterName, new Func<object>(() => null));
+            var sut = new TestCase(new Func<object>(() => null), displayParameterName);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
@@ -288,7 +288,7 @@ namespace Jwc.Experiment.Xunit
         public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
         {
             string displayParameterName = "anonymous";
-            var sut = new TestCase(displayParameterName, new Action<int>(x => { }));
+            var sut = new TestCase(new Action<int>(x => { }), displayParameterName);
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var testFixtureFactory = new DelegatingTestFixtureFactory { OnCreate = m => new FakeTestFixture() };
 

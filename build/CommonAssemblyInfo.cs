@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("0.24.1")]
 
 /*
- * Version 0.24.1
+ * Version 0.24.2
  * 
- * - [FIX] renamed ExceptionUnwrappingCommand to
- *   TargetInvocationExceptionUnwrappingCommand. (BREAKING-CHANGE)
+ * - [FIX] reordered the parameters of the constructor
+ *   `TestCase(string, Delegate)`. (BREAKING-CHANGE)
  */

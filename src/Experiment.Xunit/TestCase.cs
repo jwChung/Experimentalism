@@ -56,13 +56,14 @@ namespace Jwc.Experiment.Xunit
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
-        /// <param name="displayParameterName">
-        /// A string to show parameters of a test method in test result.
-        /// </param>
         /// <param name="delegate">
         /// The test delegate.
         /// </param>
-        public TestCase(string displayParameterName, Delegate @delegate) : this(@delegate)
+        /// <param name="displayParameterName">
+        /// A string to show parameters of a test method in test result.
+        /// </param>
+        public TestCase(Delegate @delegate, string displayParameterName)
+            : this(@delegate)
         {
             if (displayParameterName == null)
                 throw new ArgumentNullException("displayParameterName");

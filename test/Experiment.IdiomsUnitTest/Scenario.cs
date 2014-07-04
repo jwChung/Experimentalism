@@ -51,8 +51,8 @@ namespace Jwc.Experiment
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
                 .Select(m => new TestCase(
-                    m.GetDisplayName(),
-                    new Action<NullGuardClauseAssertion>(a => a.Verify(m))));
+                    new Action<NullGuardClauseAssertion>(a => a.Verify(m)),
+                    m.GetDisplayName()));
         }
 
         [FirstClassTest]
@@ -61,8 +61,8 @@ namespace Jwc.Experiment
             return typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers()
                 .Select(m => new TestCase(
-                    m.GetDisplayName(),
-                    new Action<MemberInitializationAssertion>(a => a.Verify(m))));
+                    new Action<MemberInitializationAssertion>(a => a.Verify(m)),
+                    m.GetDisplayName()));
         }
 
         [Test]
