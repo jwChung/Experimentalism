@@ -92,7 +92,40 @@ namespace Jwc.Experiment.Xunit
         {
             return new TestCase(action, displayParameterName);
         }
-        
+
+        /// <summary>
+        /// Creates a new instance of <see cref="TestCase" />.
+        /// </summary>
+        /// <typeparam name="TArg">A type of the first argument.</typeparam>
+        /// <param name="action">
+        /// An action.
+        /// </param>
+        /// <returns>
+        /// The new instance.
+        /// </returns>
+        public static TestCase New<TArg>(Action<TArg> action)
+        {
+            return new TestCase(action);
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="TestCase" />.
+        /// </summary>
+        /// <typeparam name="TArg">A type of the first argument.</typeparam>
+        /// <param name="action">
+        /// An action.
+        /// </param>
+        /// <param name="displayParameterName">
+        /// A name of the parameter.
+        /// </param>
+        /// <returns>
+        /// The new instance.
+        /// </returns>
+        public static TestCase New<TArg>(Action<TArg> action, string displayParameterName)
+        {
+            return new TestCase(action, displayParameterName);
+        }
+
         /// <summary>
         /// Converts the instance to an xUnit.net ITestCommand instance.
         /// </summary>
