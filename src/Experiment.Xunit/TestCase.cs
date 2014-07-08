@@ -59,9 +59,9 @@ namespace Jwc.Experiment.Xunit
         /// </summary>
         public Delegate Delegate
         {
-            get { return @delegate; }
+            get { return this.@delegate; }
         }
-
+        
         /// <summary>
         /// Creates a new instance of <see cref="TestCase"/>.
         /// </summary>
@@ -188,7 +188,7 @@ namespace Jwc.Experiment.Xunit
         private IEnumerable<string> GetArgumentValues(IList<object> arguments)
         {
             return this.Delegate.Method.GetParameters()
-                .Select(pi => GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
+                .Select(pi => TestCase.GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
         }
     }
 }

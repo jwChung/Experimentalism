@@ -14,7 +14,7 @@ namespace Jwc.Experiment
         {
             get
             {
-                return testFixtureFactory ?? new NotSupportedFixtureFactory();
+                return DefaultFixtureFactory.testFixtureFactory ?? new NotSupportedFixtureFactory();
             }
         }
 

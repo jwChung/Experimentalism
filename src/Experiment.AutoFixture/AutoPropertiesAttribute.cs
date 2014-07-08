@@ -43,7 +43,7 @@ namespace Jwc.Experiment.AutoFixture
 
             public void Customize(IFixture fixture)
             {
-                GetType().GetMethod("Customize", BindingFlags.NonPublic | BindingFlags.Static)
+                this.GetType().GetMethod("Customize", BindingFlags.NonPublic | BindingFlags.Static)
                     .MakeGenericMethod(this.targetType)
                     .Invoke(null, new object[] { fixture });
             }
