@@ -15,7 +15,7 @@ namespace Jwc.Experiment.AutoFixture
                     Assembly.Load("Jwc.Experiment"),
                     Assembly.Load("Ploeh.AutoFixture"),
                     Assembly.Load("Ploeh.AutoFixture.AutoMoq"))
-                .Verify(typeof(TestFixture).Assembly);
+                .Verify(Assembly.Load("Jwc.Experiment.AutoFixture"));
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace Jwc.Experiment.AutoFixture
         {
             new IndirectReferenceAssertion(
                     Assembly.Load("Ploeh.AutoFixture.AutoMoq"))
-                .Verify(typeof(TestFixture).Assembly);
+                .Verify(Assembly.Load("Jwc.Experiment.AutoFixture"));
         }
     }
 }

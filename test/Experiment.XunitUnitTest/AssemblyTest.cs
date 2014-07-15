@@ -16,7 +16,7 @@ namespace Jwc.Experiment.Xunit
                     Assembly.Load("Jwc.Experiment"),
                     Assembly.Load("xunit"),
                     Assembly.Load("xunit.extensions"))
-                .Verify(typeof(TestAttribute).Assembly);
+                .Verify(Assembly.Load("Jwc.Experiment.Xunit"));
         }
     }
 }

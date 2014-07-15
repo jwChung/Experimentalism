@@ -18,7 +18,7 @@ namespace Jwc.Experiment
                     Assembly.Load("Ploeh.AutoFixture"),
                     Assembly.Load("Ploeh.AutoFixture.Idioms"),
                     Assembly.Load("Mono.Reflection"))
-                .Verify(typeof(IIdiomaticMemberAssertion).Assembly);
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Jwc.Experiment
                     Assembly.Load("Ploeh.AutoFixture"),
                     Assembly.Load("Ploeh.AutoFixture.Idioms"),
                     Assembly.Load("Mono.Reflection"))
-                .Verify(typeof(IIdiomaticMemberAssertion).Assembly);
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
     }
 }
