@@ -15,7 +15,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Fact]
-        public void GetCustomizationReturnsCorrectCusomizaton()
+        public void GetCustomizationReturnsCorrectCustomizaton()
         {
             var sut = new AutoPropertiesAttribute();
             var parameter = GetType().GetMethod("Test").GetParameters().Single();
