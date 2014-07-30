@@ -27,7 +27,8 @@ namespace Jwc.Experiment.AutoFixture
                 throw new ArgumentNullException("testMethod");
 
             var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
-            return new TestFixture(this.CreateFixture(testMethod).Customize(cutomization));
+            var fixture = this.CreateFixture(testMethod).Customize(cutomization);
+            return new TestFixture(fixture);
         }
 
         /// <summary>
