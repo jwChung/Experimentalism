@@ -81,7 +81,6 @@ namespace Jwc.Experiment.Idioms
         /// <param name="method">
         /// The method.
         /// </param>
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException", Justification = "The word is a type name.")]
         public override void Verify(MethodInfo method)
         {
             if (method == null)
@@ -91,20 +90,31 @@ namespace Jwc.Experiment.Idioms
                 return;
 
             var owner = this.GetOwner(method);
+            if (owner == null)
+                ObjectDisposalAssertion.ThrowDoesNotImplementIDisposable(method);
+
             owner.Dispose();
 
-            try
-            {
-                method.Invoke(owner, this.GetArguments(method.GetParameters()));
-            }
-            catch (TargetInvocationException exception)
-            {
-                if (exception.InnerException is ObjectDisposedException)
-                    return;
+            this.VerifyThrowsObjectDisposedException(owner, method);
+        }
+        
+        private static void ThrowDoesNotImplementIDisposable(MethodInfo method)
+        {
+            var messageFormat = @"The owner(object) of the method does not implement IDisposable.
+Owner : {0}
+Method: {1}";
 
-                throw;
-            }
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    messageFormat,
+                    method.ReflectedType,
+                    method));
+        }
 
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ObjectDisposedException", Justification = "The word is a type name.")]
+        private static void ThrowDoesNotThrowObjectDisposedException(MethodInfo method)
+        {
             var messageFormat = @"After the owner of the method is disposed, the method does not throw ObjectDisposedException.
 Owner : {0}
 Method: {1}";
@@ -117,22 +127,26 @@ Method: {1}";
                     method));
         }
 
+        private void VerifyThrowsObjectDisposedException(IDisposable owner, MethodInfo method)
+        {
+            try
+            {
+                method.Invoke(owner, this.GetArguments(method.GetParameters()));
+            }
+            catch (TargetInvocationException exception)
+            {
+                if (exception.InnerException is ObjectDisposedException)
+                    return;
+
+                throw;
+            }
+
+            ObjectDisposalAssertion.ThrowDoesNotThrowObjectDisposedException(method);
+        }
+
         private IDisposable GetOwner(MethodInfo method)
         {
-            var disposable = this.TestFixture.Create(method.ReflectedType) as IDisposable;
-            if (disposable != null)
-                return disposable;
-
-            var messageFormat = @"The owner(object) of the method does not implement IDisposable.
-Owner : {0}
-Method: {1}";
-
-            throw new ArgumentException(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    messageFormat,
-                    method.ReflectedType,
-                    method));
+            return this.TestFixture.Create(method.ReflectedType) as IDisposable;
         }
 
         private object[] GetArguments(IEnumerable<ParameterInfo> parameters)
