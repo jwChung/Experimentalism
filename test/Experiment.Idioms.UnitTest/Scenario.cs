@@ -76,25 +76,25 @@ namespace Jwc.Experiment
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
-                Assembly.Load("mscorlib"),
-                typeof(Uri).Assembly, // System.dll
-                typeof(Enumerable).Assembly, // System.Core.dll
-                Assembly.Load("Jwc.Experiment"),
-                Assembly.Load("Ploeh.Albedo"),
-                Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.Idioms"),
-                Assembly.Load("Mono.Reflection"))
-            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+                    Assembly.Load("mscorlib"),
+                    Assembly.Load("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                    Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                    Assembly.Load("Jwc.Experiment"),
+                    Assembly.Load("Ploeh.Albedo"),
+                    Assembly.Load("Ploeh.AutoFixture"),
+                    Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                    Assembly.Load("Mono.Reflection"))
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         [Test]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
-                Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.Idioms"),
-                Assembly.Load("Mono.Reflection"))
-            .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
+                    Assembly.Load("Ploeh.AutoFixture"),
+                    Assembly.Load("Ploeh.AutoFixture.Idioms"),
+                    Assembly.Load("Mono.Reflection"))
+                .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
