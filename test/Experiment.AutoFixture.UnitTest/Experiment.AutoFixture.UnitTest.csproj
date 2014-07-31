@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD942D14-856A-436B-905C-BA417767E977}</ProjectGuid>
+    <ProjectGuid>{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jwc.Experiment</RootNamespace>
-    <AssemblyName>Jwc.Experiment.IdiomsUnitTest</AssemblyName>
+    <RootNamespace>Jwc.Experiment.AutoFixture</RootNamespace>
+    <AssemblyName>Jwc.Experiment.AutoFixture.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>5f9de585</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,30 +35,14 @@
     <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.2.1402.2112, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Ploeh.Albedo, Version=1.0.1.0, Culture=neutral, PublicKeyToken=179ef6dd03497bbd, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Albedo.1.0.1\lib\net35\Ploeh.Albedo.dll</HintPath>
-    </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.18.7.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.Idioms, Version=3.18.7.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\AutoFixture.Idioms.3.18.7\lib\net40\Ploeh.AutoFixture.Idioms.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit, Version=1.9.0.1566, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.extensions, Version=1.9.0.1566, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="xunit.extensions">
       <HintPath>..\..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -65,57 +50,35 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\ExperimentUnitTest\DelegatingAssembly.cs">
-      <Link>DelegatingAssembly.cs</Link>
-    </Compile>
-    <Compile Include="AccessibilityCollectorTest.cs" />
-    <Compile Include="AbstractClassWithMembers.cs" />
-    <Compile Include="Idioms\IdiomaticAssertionTest.cs" />
-    <Compile Include="IInterfaceWithMembers.cs" />
-    <Compile Include="Idioms\ObjectDisposalAssertionTest.cs" />
-    <Compile Include="DisplayNameCollectorTest.cs" />
-    <Compile Include="MemberInfoExtensionsTest.cs" />
-    <Compile Include="MemberReferenceCollectorTest.cs" />
-    <Compile Include="TypeExtensionsTest.cs" />
-    <Compile Include="ObjectDisposalExceptionTest.cs" />
-    <Compile Include="IdiomaticMembersTest.cs" />
-    <Compile Include="Idioms\IdiomaticMemberAssertionTest.cs" />
-    <Compile Include="IndirectReferenceExceptionTest.cs" />
-    <Compile Include="Idioms\IndirectReferenceAssertionTest.cs" />
-    <Compile Include="Idioms\MemberInitializationAssertionTest.cs" />
-    <Compile Include="Idioms\NullGuardClauseAssertionTest.cs" />
-    <Compile Include="IHierarchical.cs" />
-    <Compile Include="MemberKindCollectorTest.cs" />
-    <Compile Include="MockExtensions.cs" />
-    <Compile Include="ReferenceCollectorTest.cs" />
-    <Compile Include="MemberInitializationExceptionTest.cs" />
-    <Compile Include="FakeTestFixture.cs" />
-    <Compile Include="FieldToParameterComparerTest.cs" />
-    <Compile Include="OrEqualityComparerTest.cs" />
-    <Compile Include="ParameterToFieldComparerTest.cs" />
-    <Compile Include="ParameterToPropertyComparerTest.cs" />
+    <Compile Include="AbstractType.cs" />
     <Compile Include="AssemblyTest.cs" />
-    <Compile Include="DelegatingEqualityComparer.cs" />
-    <Compile Include="PropertyToParameterComparerTest.cs" />
-    <Compile Include="RestrictiveReferenceExceptionTest.cs" />
-    <Compile Include="Idioms\RestrictiveReferenceAssertionTest.cs" />
-    <Compile Include="SubClassWithMembers.cs" />
-    <Compile Include="ClassForCollectingReference.cs" />
-    <Compile Include="ClassImplementingHierarchical.cs" />
-    <Compile Include="ClassImplementingMultiple.cs" />
-    <Compile Include="ClassWithMembers.cs" />
-    <Compile Include="DelegatingReflectionElementComparer.cs" />
-    <Compile Include="DelegatingReflectionVisitor.cs" />
-    <Compile Include="DelegatingTestFixture.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AutoPropertiesAttributeTest.cs" />
+    <Compile Include="ConcreteType.cs" />
+    <Compile Include="CustomizeAttributeTest.cs" />
+    <Compile Include="DelegatingCustomizeAttribute.cs" />
+    <Compile Include="FrozenAttributeTest.cs" />
+    <Compile Include="GreedyAttributeTest.cs" />
+    <Compile Include="ModestAttributeTest.cs" />
+    <Compile Include="NoAutoPropertiesAttributeTest.cs" />
+    <Compile Include="AutoFixtureConfigurationAttributeTest.cs" />
+    <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
+    <Compile Include="TestFixtureFactoryTest.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeWithConcreteParameterMethod.cs" />
+    <Compile Include="TypeWithOverloadedMembers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Experiment.AutoFixture\Experiment.AutoFixture.csproj">
+      <Project>{7F77A967-02AA-47FC-A42A-0382697B483A}</Project>
+      <Name>Experiment.AutoFixture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Experiment.Idioms\Experiment.Idioms.csproj">
-      <Project>{7352FC70-2780-415C-9A43-F889F7B8028D}</Project>
+      <Project>{7352fc70-2780-415c-9a43-f889f7b8028d}</Project>
       <Name>Experiment.Idioms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Experiment.Xunit\Experiment.Xunit.csproj">
@@ -130,7 +93,6 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

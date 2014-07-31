@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "src\Experiment\Experiment.csproj", "{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentUnitTest", "test\ExperimentUnitTest\ExperimentUnitTest.csproj", "{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.UnitTest", "test\Experiment.UnitTest\Experiment.UnitTest.csproj", "{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{955D29E5-839E-4E13-B1C7-280876B6AE25}"
 	ProjectSection(SolutionItems) = preProject
@@ -40,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{955D29
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture", "src\Experiment.AutoFixture\Experiment.AutoFixture.csproj", "{7F77A967-02AA-47FC-A42A-0382697B483A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixtureUnitTest", "test\Experiment.AutoFixtureUnitTest\Experiment.AutoFixtureUnitTest.csproj", "{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture.UnitTest", "test\Experiment.AutoFixture.UnitTest\Experiment.AutoFixture.UnitTest.csproj", "{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{E102D7D2-FF22-43DC-A273-DF690515C276}"
 EndProject
@@ -48,11 +48,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0C3DF458-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Idioms", "src\Experiment.Idioms\Experiment.Idioms.csproj", "{7352FC70-2780-415C-9A43-F889F7B8028D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.IdiomsUnitTest", "test\Experiment.IdiomsUnitTest\Experiment.IdiomsUnitTest.csproj", "{CD942D14-856A-436B-905C-BA417767E977}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Idioms.UnitTest", "test\Experiment.Idioms.UnitTest\Experiment.Idioms.UnitTest.csproj", "{CD942D14-856A-436B-905C-BA417767E977}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Xunit", "src\Experiment.Xunit\Experiment.Xunit.csproj", "{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.XunitUnitTest", "test\Experiment.XunitUnitTest\Experiment.XunitUnitTest.csproj", "{C014692D-8241-4404-BDAB-634150CB0414}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Xunit.UnitTest", "test\Experiment.Xunit.UnitTest\Experiment.Xunit.UnitTest.csproj", "{C014692D-8241-4404-BDAB-634150CB0414}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

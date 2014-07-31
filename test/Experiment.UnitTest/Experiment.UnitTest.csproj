@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Jwc.Experiment</RootNamespace>
-    <AssemblyName>Jwc.ExperimentUnitTest</AssemblyName>
+    <AssemblyName>Jwc.Experiment.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>6493bcc7</NuGetPackageImportStamp>
