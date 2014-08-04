@@ -10,21 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("0.25.0")]
-[assembly: AssemblyInformationalVersion("0.25.0")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0")]
 
 /*
- * Version 0.25.0
+ * Version 1.0.0
  * 
- * - [FIX] reordered the parameters of the constructor
- *   `TestCase(string, Delegate)`. (BREAKING-CHANGE)
- *   
- * - [FIX] removed the unnecessary guard clause as checking compiste delegate.
- *   (BREAKING-CHANGE)
- *   
- * - [FIX] removed the constructor `TestCase(Func<objec>)` to prevent
- *   the ambiguousness between Action and Func parameters. (BREAKING-CHANGE)
- *   
- * - [NEW] removed the constructor `TestCase(Action)` but instead, introduced
- *   the New method. (BREAKING-CHANGE)
+ * - This is the first, official stable version.
  */
