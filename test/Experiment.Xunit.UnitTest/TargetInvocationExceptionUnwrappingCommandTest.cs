@@ -7,6 +7,7 @@ using Xunit.Sdk;
 
 namespace Jwc.Experiment.Xunit
 {
+    [Obsolete]
     public class TargetInvocationExceptionUnwrappingCommandTest
     {
         [Fact]

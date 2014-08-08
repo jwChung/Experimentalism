@@ -8,6 +8,7 @@ namespace Jwc.Experiment.Xunit
     /// <summary>
     /// Represents <see cref="ITestCommand" /> unwrapping <see cref="TargetInvocationException" />.
     /// </summary>
+    [Obsolete("Do not use this class which will be removed at the next major release.")]
     public class TargetInvocationExceptionUnwrappingCommand : ITestCommand
     {
         private readonly ITestCommand testCommand;
