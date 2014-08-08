@@ -160,11 +160,10 @@ namespace Jwc.Experiment.Xunit
             var arguments = this.Delegate.Method.GetParameters()
                 .Select(p => fixture.Value.Create(p.ParameterType)).ToArray();
 
-            return new TargetInvocationExceptionUnwrappingCommand(
-                new FirstClassCommand(
+            return new FirstClassCommand(
                     method,
                     this.GetDisplayParameterName(arguments),
-                    this.GetAction(arguments)));
+                    this.GetAction(arguments));
         }
 
         private string GetDisplayParameterName(IList<object> arguments)

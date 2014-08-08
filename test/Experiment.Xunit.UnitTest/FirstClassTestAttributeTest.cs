@@ -162,8 +162,7 @@ namespace Jwc.Experiment.Xunit
 
             var actual = sut.CreateTestCommands(method).Single();
 
-            Assert.IsType<FirstClassCommand>(
-                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
+            Assert.IsType<FirstClassCommand>(actual);
         }
 
         [Fact]
