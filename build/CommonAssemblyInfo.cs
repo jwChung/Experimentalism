@@ -10,11 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0")]
+[assembly: AssemblyVersion("1.0.1")]
+[assembly: AssemblyInformationalVersion("1.0.1")]
 
 /*
- * Version 1.0.0
+ * Version 1.0.1
  * 
- * - This is the first, official stable version.
+ * - [FIX] fixed the loss of stack traces for an exception thrown by
+ *   FirstClassCommmand.
  */
