@@ -69,7 +69,7 @@ namespace Jwc.Experiment.Idioms
             if (!this.IsExposed(type))
                 return;
 
-            this.EnsureNotExpose(type.ToElement());
+            this.EnsureDostNotExposeIndirectReferences(type.ToElement());
 
             foreach (var member in type.GetIdiomaticMembers())
                 this.Verify(member);
@@ -86,7 +86,7 @@ namespace Jwc.Experiment.Idioms
             if (!this.IsExposed(field))
                 return;
 
-            this.EnsureNotExpose(field.ToElement());
+            this.EnsureDostNotExposeIndirectReferences(field.ToElement());
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Jwc.Experiment.Idioms
             if (!this.IsExposed(constructor))
                 return;
 
-            this.EnsureNotExpose(constructor.ToElement());
+            this.EnsureDostNotExposeIndirectReferences(constructor.ToElement());
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Jwc.Experiment.Idioms
             if (!this.IsExposed(property))
                 return;
 
-            this.EnsureNotExpose(property.ToElement());
+            this.EnsureDostNotExposeIndirectReferences(property.ToElement());
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Jwc.Experiment.Idioms
             if (!this.IsExposed(method))
                 return;
 
-            this.EnsureNotExpose(method.ToElement());
+            this.EnsureDostNotExposeIndirectReferences(method.ToElement());
         }
 
         /// <summary>
@@ -142,10 +142,10 @@ namespace Jwc.Experiment.Idioms
             if (!this.IsExposed(@event))
                 return;
 
-            this.EnsureNotExpose(@event.ToElement());
+            this.EnsureDostNotExposeIndirectReferences(@event.ToElement());
         }
 
-        private void EnsureNotExpose(IReflectionElement reflectionElement)
+        private void EnsureDostNotExposeIndirectReferences(IReflectionElement reflectionElement)
         {
             var reference = this.GetReferences(reflectionElement)
                 .FirstOrDefault(r => this.IndirectReferences.Contains(r));
