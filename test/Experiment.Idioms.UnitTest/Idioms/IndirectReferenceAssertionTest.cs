@@ -110,7 +110,7 @@ namespace Jwc.Experiment.Idioms
                 Assembly.Load("Jwc.Experiment.Idioms")
             };
             var sut = new IndirectReferenceAssertion(indirectReferences);
-            var type = typeof(ClassForIndirectReference);
+            var type = typeof(TypeForIndirectReference);
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(type));
             Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
@@ -339,6 +339,10 @@ namespace Jwc.Experiment.Idioms
             var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
 
             Assert.DoesNotThrow(() => sut.Verify(@event));
+        }
+
+        public class TypeForIndirectReference : IdiomaticMemberAssertion
+        {
         }
 
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
