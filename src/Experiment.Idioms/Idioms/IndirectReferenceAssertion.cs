@@ -11,8 +11,7 @@ namespace Jwc.Experiment.Idioms
     /// <summary>
     /// Encapsulates a unit test that verifies that certain assemblies are not exposed through API.
     /// </summary>
-    public class IndirectReferenceAssertion
-        : IdiomaticMemberAssertion, IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion
+    public class IndirectReferenceAssertion : IdiomaticAssertion
     {
         private readonly MemberReferenceCollector memberReferenceCollector = new MemberReferenceCollector();
         private readonly AccessibilityCollector accessibilityCollector = new AccessibilityCollector();
@@ -49,7 +48,7 @@ namespace Jwc.Experiment.Idioms
         /// <param name="assembly">
         /// The assembly.
         /// </param>
-        public void Verify(Assembly assembly)
+        public override void Verify(Assembly assembly)
         {
             if (assembly == null)
                 throw new ArgumentNullException("assembly");
@@ -64,15 +63,14 @@ namespace Jwc.Experiment.Idioms
         /// <param name="type">
         /// The type.
         /// </param>
-        public virtual void Verify(Type type)
+        public override void Verify(Type type)
         {
             if (!this.IsExposed(type))
                 return;
 
             this.EnsureDostNotExposeIndirectReferences(type.ToElement());
 
-            foreach (var member in type.GetIdiomaticMembers())
-                this.Verify(member);
+            base.Verify(type);
         }
 
         /// <summary>
