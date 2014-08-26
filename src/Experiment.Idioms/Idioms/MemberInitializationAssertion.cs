@@ -213,12 +213,12 @@ Property      : {2}";
 
         private static IEnumerable<IReflectionElement> GetPropertyInfoElements(Type reflectedType)
         {
-            return reflectedType.GetFields().Select(x => x.ToElement());
+            return reflectedType.GetProperties().Select(x => x.ToElement());
         }
 
         private static IEnumerable<IReflectionElement> GetFieldInfoElements(Type reflectedType)
         {
-            return reflectedType.GetProperties().Select(x => x.ToElement());
+            return reflectedType.GetFields().Select(x => x.ToElement());
         }
     }
 }
