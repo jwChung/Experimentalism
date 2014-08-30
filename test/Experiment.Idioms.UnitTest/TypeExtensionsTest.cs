@@ -1,7 +1,7 @@
-﻿using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using global::Xunit;
+
     public class TypeExtensionsTest
     {
         [Fact]

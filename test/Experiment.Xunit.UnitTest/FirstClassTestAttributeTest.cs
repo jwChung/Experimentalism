@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Moq;
-using Xunit;
-using Xunit.Extensions;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Moq;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+    using global::Xunit.Sdk;
+
     public class FirstClassTestAttributeTest : IDisposable
     {
         public static IEnumerable<ITestCase> StaticTestCasesTest()

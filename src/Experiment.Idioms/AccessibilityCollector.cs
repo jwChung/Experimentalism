@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo;
+
     /// <summary>
     /// Represents a class to collect <see cref="Accessibilities" />.
     /// </summary>

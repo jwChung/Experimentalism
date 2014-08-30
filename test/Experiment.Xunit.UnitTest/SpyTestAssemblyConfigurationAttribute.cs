@@ -1,10 +1,10 @@
-﻿using System.Reflection;
-using Jwc.Experiment.Xunit;
-
-[assembly: SpyTestAssemblyConfiguration]
+﻿[assembly: Jwc.Experiment.Xunit.SpyTestAssemblyConfiguration]
 
 namespace Jwc.Experiment.Xunit
 {
+    using System.Reflection;
+    using Jwc.Experiment.Xunit;
+    
     public class SpyTestAssemblyConfigurationAttribute : TestAssemblyConfigurationAttribute
     {
         public static int SetUpCount { get; set; }

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+
     /// <summary>
     /// Specifies flags than represents accessibilities.
     /// </summary>

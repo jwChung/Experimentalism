@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Ploeh.Albedo;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System.Collections.Generic;
+    using Ploeh.Albedo;
+
     /// <summary>
     /// Represent comparer to determine that a property value equals to a parameter value.
     /// </summary>

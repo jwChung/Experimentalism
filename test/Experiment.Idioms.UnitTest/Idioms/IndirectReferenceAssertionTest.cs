@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using Moq;
-using Ploeh.Albedo;
-using Ploeh.AutoFixture;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Reflection;
+    using Moq;
+    using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+
     public class IndirectReferenceAssertionTest
     {
         [Fact]

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Ploeh.AutoFixture;
-using Xunit;
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Linq;
+    using Ploeh.AutoFixture;
+    using global::Xunit;
+
     public class AutoPropertiesAttributeTest
     {
         [Fact]

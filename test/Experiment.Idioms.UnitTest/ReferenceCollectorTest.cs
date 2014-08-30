@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Moq;
-using Ploeh.Albedo;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Moq;
+    using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
+    using global::Xunit;
+
     public class ReferenceCollectorTest
     {
         private const BindingFlags Bindings =

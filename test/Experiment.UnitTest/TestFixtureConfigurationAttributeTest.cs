@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Reflection;
+    using Xunit;
+    using Xunit.Extensions;
+
     public class TestFixtureConfigurationAttributeTest
     {
         [Fact]

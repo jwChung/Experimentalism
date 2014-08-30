@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using Ploeh.Albedo;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Reflection;
+    using Ploeh.Albedo;
+    using global::Xunit;
+
     public class MemberInfoExtensionsTest
     {
         [Fact]

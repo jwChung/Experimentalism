@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using Jwc.Experiment.Xunit;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml;
+    using Jwc.Experiment.Xunit;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+
     public class RestrictiveReferenceAssertionTest
     {
         [Fact]

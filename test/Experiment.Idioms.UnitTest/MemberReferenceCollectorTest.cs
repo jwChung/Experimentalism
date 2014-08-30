@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Moq;
-using Ploeh.Albedo;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Moq;
+    using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+
     public class MemberReferenceCollectorTest
     {
         [Fact]

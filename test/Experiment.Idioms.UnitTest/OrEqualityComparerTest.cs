@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using global::Xunit;
+
     public class OrEqualityComparerTest
     {
         [Fact]

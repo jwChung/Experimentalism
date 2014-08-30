@@ -1,8 +1,8 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 namespace Jwc.Experiment
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
     public class ClassWithMembers
     {

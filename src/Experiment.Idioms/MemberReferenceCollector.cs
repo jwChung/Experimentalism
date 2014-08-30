@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo;
+
     /// <summary>
     /// Represents <see cref="IReflectionVisitor{T}" /> to collect reference assemblies for a given
     /// reflection meta-data on member level.

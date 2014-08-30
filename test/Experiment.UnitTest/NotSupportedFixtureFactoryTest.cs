@@ -1,9 +1,9 @@
-﻿using System;
-using System.Reflection;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Reflection;
+    using Xunit;
+
     public class NotSupportedFixtureFactoryTest
     {
         [Fact]

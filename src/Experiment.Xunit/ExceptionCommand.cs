@@ -1,9 +1,9 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using global::Xunit.Sdk;
+
     /// <summary>
     /// Exception 테스트커멘드를 나타냄.
     /// </summary>

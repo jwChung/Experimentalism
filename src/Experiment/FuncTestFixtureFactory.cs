@@ -1,8 +1,8 @@
-﻿using System;
-using System.Reflection;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Reflection;
+
     /// <summary>
     /// Represents a test fixture created by a function delegate.
     /// </summary>

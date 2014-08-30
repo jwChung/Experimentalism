@@ -1,11 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Xunit.Sdk;
-
 namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using global::Xunit.Sdk;
+
     internal class TestCommandEnumerable : IEnumerable<ITestCommand>
     {
         private readonly IMethodInfo testMethod;

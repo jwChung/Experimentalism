@@ -1,9 +1,9 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Ploeh.AutoFixture;
-
 namespace Jwc.Experiment
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using Ploeh.AutoFixture;
+
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
     public class ClassForCollectingReference
     {

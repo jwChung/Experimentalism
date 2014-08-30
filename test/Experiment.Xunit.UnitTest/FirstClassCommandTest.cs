@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using Xunit;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Reflection;
+    using global::Xunit;
+    using global::Xunit.Sdk;
+
     public class FirstClassCommandTest
     {
         [Fact]

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo.Refraction;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo.Refraction;
+
     /// <summary>
     /// Defines <see cref="MemberInfo" /> extension methods.
     /// </summary>

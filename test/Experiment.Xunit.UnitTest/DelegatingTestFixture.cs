@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+
     public class DelegatingTestFixture : ITestFixture
     {
         public Func<object, object> OnCreate { get; set; }

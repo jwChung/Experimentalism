@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Ploeh.Albedo;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using Ploeh.Albedo;
+    using global::Xunit;
+
     public class FieldToParameterComparerTest
     {
         [Fact]

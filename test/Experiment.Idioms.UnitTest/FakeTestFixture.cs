@@ -1,8 +1,8 @@
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
-
 namespace Jwc.Experiment
 {
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
+
     public class FakeTestFixture : ITestFixture
     {
         private readonly ISpecimenContext context;

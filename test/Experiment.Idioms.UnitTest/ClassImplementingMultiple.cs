@@ -1,8 +1,8 @@
-using System;
-using Ploeh.AutoFixture.Kernel;
-
 namespace Jwc.Experiment
 {
+    using System;
+    using Ploeh.AutoFixture.Kernel;
+
     public class ClassImplementingMultiple : IDisposable, ISpecimenContext
     {
         public void Dispose()

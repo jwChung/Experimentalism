@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo;
+
     /// <summary>
     /// Encapsulates a unit test that verifies that members (property or field) are correctly
     /// initialized by a constructor.

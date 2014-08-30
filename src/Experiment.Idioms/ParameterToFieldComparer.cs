@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo;
+
     /// <summary>
     /// Represent comparer to determine that a parameter value equals to a field value.
     /// </summary>

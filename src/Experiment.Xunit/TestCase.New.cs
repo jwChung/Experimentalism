@@ -1,9 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an xUnit.net ITestCommand when
     /// returned from a test method adorned with the <see cref="FirstClassTestAttribute" />.

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo.Refraction;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo.Refraction;
+
     /// <summary>
     /// Represents members of a certain <see cref="Type" /> which will be verified by idiomatic
     /// assertions.

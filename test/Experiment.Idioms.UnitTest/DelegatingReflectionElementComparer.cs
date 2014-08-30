@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Ploeh.Albedo;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using Ploeh.Albedo;
+
     public class DelegatingReflectionElementComparer : IEqualityComparer<IReflectionElement>
     {
         public Func<IReflectionElement, IReflectionElement, bool> OnEquals { get; set; }

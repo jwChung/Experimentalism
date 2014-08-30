@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using Xunit;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using global::Xunit;
+    using global::Xunit.Sdk;
+
     /// <summary>
     /// A test attribute used to adorn methods that creates first-class executable test
     /// cases.

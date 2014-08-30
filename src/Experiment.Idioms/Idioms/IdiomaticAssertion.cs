@@ -1,8 +1,8 @@
-﻿using System;
-using System.Reflection;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Reflection;
+
     /// <summary>
     /// Represents base class implementing <see cref="IIdiomaticAssemblyAssertion" />,
     /// <see cref="IIdiomaticTypeAssertion" /> and <see cref="IIdiomaticMemberAssertion" />.

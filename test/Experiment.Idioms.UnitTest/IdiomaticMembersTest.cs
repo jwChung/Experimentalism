@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Jwc.Experiment.Idioms;
-using Ploeh.Albedo;
-using Ploeh.Albedo.Refraction;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Jwc.Experiment.Idioms;
+    using Ploeh.Albedo;
+    using Ploeh.Albedo.Refraction;
+    using global::Xunit;
+
     public class IdiomaticMembersTest
     {
         [Fact]

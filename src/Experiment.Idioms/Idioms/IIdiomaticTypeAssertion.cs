@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+
     /// <summary>
     /// Represents an encapsulation of an idiomatic unit test assertion based on
     /// <see cref="Type" />.

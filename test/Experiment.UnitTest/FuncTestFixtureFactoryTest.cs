@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using Moq;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Reflection;
+    using Moq;
+    using Xunit;
+
     public class FuncTestFixtureFactoryTest
     {
         [Fact]

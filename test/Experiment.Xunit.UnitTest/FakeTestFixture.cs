@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+
     public class FakeTestFixture : ITestFixture
     {
         private readonly string stringValue = Guid.NewGuid().ToString();

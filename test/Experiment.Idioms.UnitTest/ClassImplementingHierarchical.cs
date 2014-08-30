@@ -1,8 +1,8 @@
-using System;
-using Ploeh.Albedo;
-
 namespace Jwc.Experiment
 {
+    using System;
+    using Ploeh.Albedo;
+
     public class ClassImplementingHierarchical : IDisposable, IHierarchical
     {
         public void Dispose()

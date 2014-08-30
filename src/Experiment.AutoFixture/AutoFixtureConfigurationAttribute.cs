@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+
     /// <summary>
     /// Attribute to configure test fixture factory.
     /// </summary>

@@ -1,14 +1,13 @@
 ﻿// Original source code: https://github.com/AutoFixture/AutoFixture
 // Copyright           : Copyright (c) 2013 Mark Seemann  
 // License             : The MIT License
-
-using System;
-using System.Reflection;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
-
 namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Reflection;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
+
     /// <summary>
     /// An attribute that can be applied to parameters indicate that the parameter value should be
     /// created using the most greedy constructor that can be satisfied by an

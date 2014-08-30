@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System.Reflection;
+
     /// <summary>
     /// Represents an encapsulation of an idiomatic unit test assertion based on
     /// <see cref="MemberInfo" />.

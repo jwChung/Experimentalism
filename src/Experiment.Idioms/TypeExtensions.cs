@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
     /// <summary>
     /// Defines <see cref="Type" /> extension methods.
     /// </summary>

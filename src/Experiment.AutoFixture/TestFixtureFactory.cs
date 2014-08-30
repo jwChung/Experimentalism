@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
-
 namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.AutoMoq;
+
     /// <summary>
     /// Represent the default factory for <see cref="ITestFixtureFactory" />.
     /// </summary>

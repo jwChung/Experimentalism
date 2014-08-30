@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo;
-using Ploeh.Albedo.Refraction;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo;
+    using Ploeh.Albedo.Refraction;
+
     /// <summary>
     /// Encapsulates a unit test that verifies that certain assemblies are not exposed through API.
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using Xunit;
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
+    using global::Xunit;
+
     public class AutoFixtureConfigurationAttributeTest
     {
         [Fact]

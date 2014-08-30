@@ -1,14 +1,13 @@
 ﻿// Original source code: https://github.com/AutoFixture/AutoFixture
 // Copyright           : Copyright (c) 2013 Mark Seemann  
 // License             : The MIT License
-
-using System;
-using System.Linq;
-using Ploeh.AutoFixture;
-using Xunit;
-
 namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Linq;
+    using Ploeh.AutoFixture;
+    using global::Xunit;
+
     public class FrozenAttributeTest
     {
         [Fact]

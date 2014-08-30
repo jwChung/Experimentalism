@@ -1,8 +1,8 @@
-﻿using System;
-using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using global::Xunit;
+
     public class RestrictiveReferenceExceptionTest
     {
         [Fact]

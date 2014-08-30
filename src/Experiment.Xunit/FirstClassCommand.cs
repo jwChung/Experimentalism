@@ -1,8 +1,8 @@
-﻿using System;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using global::Xunit.Sdk;
+
     /// <summary>
     /// Represents a test command for first class tests.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+
     /// <summary>
     /// Base implementation of <see cref="IIdiomaticMemberAssertion" />.
     /// </summary>

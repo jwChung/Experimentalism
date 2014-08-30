@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using Xunit;
-using Xunit.Extensions;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Reflection;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+    using global::Xunit.Sdk;
+
     /// <summary>
     /// 이 attribute는 method위에 선언되어 해당 method가 test라는 것을 지칭하게 되며,
     /// non-parameterized test 뿐 아니라 parameterized test에도 사용될 수 있다.

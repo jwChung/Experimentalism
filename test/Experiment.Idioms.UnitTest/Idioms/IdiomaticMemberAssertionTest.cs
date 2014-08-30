@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Reflection;
-using Moq;
-using Ploeh.Albedo;
-using Xunit;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System.Linq;
+    using System.Reflection;
+    using Moq;
+    using Ploeh.Albedo;
+    using global::Xunit;
+
     public class IdiomaticMemberAssertionTest
     {
         [Fact]

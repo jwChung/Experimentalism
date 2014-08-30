@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-
 namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+
     public class DelegatingEqualityComparer<T> : IEqualityComparer<T>
     {
         public Func<T, T, bool> OnEquals { get; set; }

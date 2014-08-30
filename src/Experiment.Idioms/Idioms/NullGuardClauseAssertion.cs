@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using Ploeh.AutoFixture.Idioms;
-using Ploeh.AutoFixture.Kernel;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Reflection;
+    using Ploeh.AutoFixture.Idioms;
+    using Ploeh.AutoFixture.Kernel;
+
     /// <summary>
     /// Encapsulates a unit test that verifies that a method or constructor has appropriate Null
     /// Guard Clauses in place.

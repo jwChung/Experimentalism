@@ -1,7 +1,7 @@
-using System.Reflection;
-
 namespace Jwc.Experiment
 {
+    using System.Reflection;
+
     internal static class PropertyExtensions
     {
         public static bool IsStatic(this PropertyInfo property)

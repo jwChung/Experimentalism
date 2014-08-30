@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Reflection;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Reflection;
+
     /// <summary>
     /// Attribute to configure default fixture factory.
     /// </summary>

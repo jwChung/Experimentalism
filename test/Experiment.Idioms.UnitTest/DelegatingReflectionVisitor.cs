@@ -1,8 +1,8 @@
-using System;
-using Ploeh.Albedo;
-
 namespace Jwc.Experiment
 {
+    using System;
+    using Ploeh.Albedo;
+
     public class DelegatingReflectionVisitor<T> : ReflectionVisitor<T>
     {
         public DelegatingReflectionVisitor()

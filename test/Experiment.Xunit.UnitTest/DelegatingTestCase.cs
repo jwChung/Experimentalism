@@ -1,8 +1,8 @@
-﻿using System;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using global::Xunit.Sdk;
+
     public class DelegatingTestCase : ITestCase
     {
         public Func<IMethodInfo, ITestFixtureFactory, ITestCommand> OnConvertToTestCommand { get; set; }

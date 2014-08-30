@@ -1,12 +1,11 @@
 ﻿// Original source code: https://github.com/AutoFixture/AutoFixture
 // Copyright           : Copyright (c) 2013 Mark Seemann  
 // License             : The MIT License
-
-using System;
-using Xunit;
-
 namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using global::Xunit;
+
     public class CustomizeAttributeTest
     {
         [Fact]

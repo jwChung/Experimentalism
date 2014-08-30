@@ -1,10 +1,10 @@
-﻿using System;
-using Ploeh.AutoFixture;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using Ploeh.AutoFixture;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+
     public class TestFixtureTest
     {
         [Fact]

@@ -1,9 +1,9 @@
-﻿using System.Reflection;
-using Jwc.Experiment.Idioms;
-using Xunit;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System.Reflection;
+    using Jwc.Experiment.Idioms;
+    using global::Xunit;
+
     public class AssemblyTest
     {
         [Fact]

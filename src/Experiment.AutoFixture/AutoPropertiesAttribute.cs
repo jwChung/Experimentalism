@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using Ploeh.AutoFixture;
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+    using Ploeh.AutoFixture;
+
     /// <summary>
     /// An attribute that can be applied to parameters to indicate that the parameter value should
     /// have properties auto populated when the <see cref="IFixture" /> creates an instance of that

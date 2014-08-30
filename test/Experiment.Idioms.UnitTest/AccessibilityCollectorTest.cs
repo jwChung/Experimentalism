@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Ploeh.Albedo;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Ploeh.Albedo;
+    using global::Xunit;
+    using global::Xunit.Extensions;
+
     public class AccessibilityCollectorTest
     {
         [Fact]

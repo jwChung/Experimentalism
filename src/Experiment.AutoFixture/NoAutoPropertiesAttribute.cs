@@ -1,13 +1,12 @@
 ﻿// Original source code: https://github.com/AutoFixture/AutoFixture
 // Copyright           : Copyright (c) 2013 Mark Seemann  
 // License             : The MIT License
-
-using System;
-using System.Reflection;
-using Ploeh.AutoFixture;
-
 namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Reflection;
+    using Ploeh.AutoFixture;
+
     /// <summary>
     /// An attribute that can be applied to parameters to indicate that the parameter value should
     /// not have properties auto populated when the <see cref="IFixture" /> creates an instance of

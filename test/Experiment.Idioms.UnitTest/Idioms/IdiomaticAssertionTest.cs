@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Jwc.Experiment.Xunit;
-using Moq;
-using Xunit;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Jwc.Experiment.Xunit;
+    using Moq;
+    using global::Xunit;
+
     public class IdiomaticAssertionTest
     {
         [Fact]

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+
     /// <summary>
     /// Represents test fixture factory which throws <see cref="NotSupportedException" /> when the
     /// <code>Create</code> method is called.

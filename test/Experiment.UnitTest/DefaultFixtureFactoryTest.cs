@@ -1,7 +1,7 @@
-﻿using Xunit;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using Xunit;
+
     public class DefaultFixtureFactoryTest
     {
         [Fact]

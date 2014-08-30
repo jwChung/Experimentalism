@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-
-namespace Jwc.Experiment.Idioms
+﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+
     /// <summary>
     /// Encapsulates a unit test that verifies that members throw
     /// <see cref="ObjectDisposedException" /> after its owner(object) is disposed.

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Runtime.Serialization;
+
     /// <summary>
     /// Represents a verification error when testing whether all references of a certain assembly
     /// are specified.

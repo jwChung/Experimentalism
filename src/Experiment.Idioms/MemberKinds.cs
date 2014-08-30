@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+
     /// <summary>
     /// Represents kinds of idiomatic members.
     /// </summary>

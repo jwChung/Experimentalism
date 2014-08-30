@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System.Reflection;
+
     /// <summary>
     /// Represents a factory to create an instance of <see cref="ITestFixture" />.
     /// </summary>

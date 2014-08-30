@@ -1,12 +1,12 @@
-﻿using System;
-using System.Reflection;
-using System.Xml;
-using Moq;
-using Xunit;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Reflection;
+    using System.Xml;
+    using Moq;
+    using global::Xunit;
+    using global::Xunit.Sdk;
+
     [Obsolete]
     public class TargetInvocationExceptionUnwrappingCommandTest
     {

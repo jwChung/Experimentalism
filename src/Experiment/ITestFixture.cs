@@ -1,8 +1,8 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// test fixture를 표현.
     /// </summary>

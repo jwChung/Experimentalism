@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Jwc.Experiment;
-using Jwc.Experiment.Idioms;
-using Jwc.Experiment.Xunit;
-using Ploeh.Albedo;
-
-[assembly: Scenario.ScenarioFixtureConfiguration]
+﻿[assembly: Jwc.Experiment.Scenario.ScenarioFixtureConfiguration]
 
 namespace Jwc.Experiment
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Jwc.Experiment;
+    using Jwc.Experiment.Idioms;
+    using Jwc.Experiment.Xunit;
+    using Ploeh.Albedo;
+
     public class Scenario
     {
         [Test]

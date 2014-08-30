@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using System.Xml;
-using Xunit.Sdk;
-
-namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
+    using System.Reflection;
+    using System.Xml;
+    using global::Xunit.Sdk;
+
     /// <summary>
     /// Represents <see cref="ITestCommand" /> unwrapping <see cref="TargetInvocationException" />.
     /// </summary>

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Kernel;
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
+
     /// <summary>
     /// <see cref="IFixture" />를 <see cref="ITestFixture" /> 인터페이스에 맞춘다. auto data기능을
     /// AutoFixture library로부터 채용하게 된다.
