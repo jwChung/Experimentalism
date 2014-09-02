@@ -10,12 +10,18 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.0.1")]
-[assembly: AssemblyInformationalVersion("1.0.1")]
+[assembly: AssemblyVersion("1.1.0")]
+[assembly: AssemblyInformationalVersion("1.1.0")]
 
 /*
- * Version 1.0.1
+ * Version 1.1.0
  * 
- * - [FIX] fixed the loss of stack traces for an exception thrown by
- *   FirstClassCommmand.
+ * - [NEW] Renamed some attributes more meaningful ones. The old ones were made
+ *   obsolete.
+ *   
+ *     * Jwc.Experiment.TestFixtureConfigurationAttribute
+ *       -> Jwc.Experiment.DefaultFixtureConfigurationAttribute
+ *
+ *     * Jwc.Experiment.AutoFixture.AutoFixtureConfigurationAttribute
+ *       -> Jwc.Experiment.AutoFixture.TestFixtureConfigurationAttribute
  */
