@@ -2,19 +2,19 @@
 {
     using global::Xunit;
 
-    public class AutoFixtureConfigurationAttributeTest
+    public class TestFixtureConfigurationAttributeTest
     {
         [Fact]
-        public void SutIsTestFixtureConfigurationAttribute()
+        public void SutIsDefaultFixtureConfigurationAttribute()
         {
-            var sut = new AutoFixtureConfigurationAttribute();
-            Assert.IsAssignableFrom<Experiment.TestFixtureConfigurationAttribute>(sut);
+            var sut = new TestFixtureConfigurationAttribute();
+            Assert.IsAssignableFrom<DefaultFixtureConfigurationAttribute>(sut);
         }
 
         [Fact]
         public void FactoryIsCorrect()
         {
-            var sut = new AutoFixtureConfigurationAttribute();
+            var sut = new TestFixtureConfigurationAttribute();
 
             var actual = sut.Factory;
 

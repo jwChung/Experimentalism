@@ -6,13 +6,14 @@
     /// Attribute to configure test fixture factory.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public sealed class AutoFixtureConfigurationAttribute : Experiment.TestFixtureConfigurationAttribute
+    public sealed class TestFixtureConfigurationAttribute : DefaultFixtureConfigurationAttribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutoFixtureConfigurationAttribute" />
+        /// Initializes a new instance of the <see cref="TestFixtureConfigurationAttribute" />
         /// class.
         /// </summary>
-        public AutoFixtureConfigurationAttribute() : base(new TestFixtureFactory())
+        public TestFixtureConfigurationAttribute()
+            : base(new TestFixtureFactory())
         {
         }
     }
