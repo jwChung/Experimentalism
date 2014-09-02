@@ -9,7 +9,7 @@
     using Ploeh.Albedo.Refraction;
 
     /// <summary>
-    /// Encapsulates a unit test that verifies that certain assemblies are not exposed through API.
+    /// Encapsulates a unit test that verifies that certain assemblies are not exposed through public API.
     /// </summary>
     public class IndirectReferenceAssertion : IdiomaticAssertion
     {
@@ -43,7 +43,7 @@
         }
 
         /// <summary>
-        /// Verifies that an assembly does not expose the indirect references through API.
+        /// Verifies that an assembly does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="assembly">
         /// The assembly.
@@ -58,10 +58,10 @@
         }
 
         /// <summary>
-        /// Verifies that a type does not expose the indirect references through API.
+        /// Verifies that a type does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="type">
-        /// The type.
+        /// A type to be verified.
         /// </param>
         public override void Verify(Type type)
         {
@@ -74,7 +74,7 @@
         }
 
         /// <summary>
-        /// Verifies that a field does not expose the indirect references through API.
+        /// Verifies that a field does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="field">
         /// The field.
@@ -88,7 +88,7 @@
         }
 
         /// <summary>
-        /// Verifies that a constructor does not expose the indirect references through API.
+        /// Verifies that a constructor does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="constructor">
         /// The constructor.
@@ -102,7 +102,7 @@
         }
 
         /// <summary>
-        /// Verifies that a property does not expose the indirect references through API.
+        /// Verifies that a property does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="property">
         /// The field.
@@ -116,7 +116,7 @@
         }
 
         /// <summary>
-        /// Verifies that a method does not expose the indirect references through API.
+        /// Verifies that a method does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="method">
         /// The method.
@@ -130,7 +130,7 @@
         }
 
         /// <summary>
-        /// Verifies that an event does not expose the indirect references through API.
+        /// Verifies that an event does not expose the indirect references through public APIs.
         /// </summary>
         /// <param name="event">
         /// The event.
