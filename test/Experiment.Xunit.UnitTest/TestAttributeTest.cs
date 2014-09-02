@@ -289,10 +289,10 @@
         }
 
         [Fact]
-        public void CreateParameterizedTestWithoutValidTestFixtureFactoryReturnsExceptionCommand()
+        public void CreateParameterizedTestWithInvalidTestFixtureFactoryReturnsExceptionCommand()
         {
             var sut = new TestAttribute();
-            IMethodInfo method = Reflector.Wrap(typeof(object).GetMethod("Equals", new[] { typeof(object) }));
+            IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithMixedData"));
 
             var actual = sut.CreateTestCommands(method).Single();
 
