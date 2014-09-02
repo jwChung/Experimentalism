@@ -54,6 +54,7 @@
     <Compile Include="FuncTestFixtureFactoryTest.cs" />
     <Compile Include="TestAssemblyConfigurationAttributeTest.cs" />
     <Compile Include="AssemblyTest.cs" />
+    <Compile Include="DefaultFixtureConfigurationAttributeTest.cs" />
     <Compile Include="TestFixtureConfigurationAttributeTest.cs" />
     <Compile Include="DefaultFixtureFactoryTest.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
