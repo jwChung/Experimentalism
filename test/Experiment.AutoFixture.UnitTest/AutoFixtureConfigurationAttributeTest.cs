@@ -1,7 +1,9 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
+    using System;
     using global::Xunit;
 
+    [Obsolete]
     public class AutoFixtureConfigurationAttributeTest
     {
         [Fact]

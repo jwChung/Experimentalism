@@ -8,6 +8,7 @@
     /// <summary>
     /// Attribute to configure default fixture factory.
     /// </summary>
+    [Obsolete("This attribute is renamed DefaultConfigurationAttribute to be more meaningful. The attribute will be removed on the next major release.")]
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute can be inherited to supply custom ITestFixtureFactory.")]
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
     public class TestFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute

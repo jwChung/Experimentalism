@@ -5,6 +5,7 @@
     using Xunit;
     using Xunit.Extensions;
 
+    [Obsolete]
     public class TestFixtureConfigurationAttributeTest
     {
         [Fact]
