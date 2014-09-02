@@ -17,14 +17,14 @@
   <Target Name="Tests" DependsOnTargets="UnitTest" />
   
   <Target Name="Deployment"
-          DependsOnTargets="NuGetPareparingStep;NuGetPackingStep;NuGetRestoringStep;GitTaggingStep;" />
+          DependsOnTargets="PareparingStep;PushingStep;RestoringStep;GitTaggingStep;" />
 
-  <Target Name="NuGetPareparingStep" DependsOnTargets="NuGetVersioning;NuGetReleaseNotes;DeterminesCanPush" />
+  <Target Name="PareparingStep" DependsOnTargets="NuGetVersioning;NuGetReleaseNotes;DeterminesCanPush" />
   
-  <Target Name="NuGetPackingStep" Condition=" '$(CanPush)' "
+  <Target Name="PushingStep" Condition=" '$(CanPush)' "
           DependsOnTargets="NuGetPack;NuGetPush;DeleteNupkgFiles" />
   
-  <Target Name="NuGetRestoringStep" DependsOnTargets="RestoreNuGetVersion;RestoreReleaseNotes" />
+  <Target Name="RestoringStep" DependsOnTargets="RestoreNuGetVersion;RestoreReleaseNotes" />
   
   <Target Name="GitTaggingStep" Condition=" '$(CanPush)' "
           DependsOnTargets="CreateReleaseNotes;GitTagging;DeleteReleaseNotes" />
