@@ -112,12 +112,39 @@
                 builder.AppendLine(new string(line.Skip(indentation).ToArray()).TrimEnd());
 
             builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+            ReleaseNotes = builder.ToString();
+        }
+        catch (Exception ex)
+        {
+            Log.LogErrorFromException(ex);
+        }
+      ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask TaskName="EscapeXMLString"
+            TaskFactory="CodeTaskFactory"
+            AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup>
+      <XMLString ParameterType="System.String" Required="true" />
+      <EcapedXMLString ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text" />
+      <Using Namespace="System.Xml" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+        try
+        {
             var result = new StringBuilder();
             using (var writer = new XmlTextWriter(new StringWriter(result)))
             {
-                writer.WriteString(builder.ToString());
+                writer.WriteString(XMLString);
+                EcapedXMLString = result.ToString();
             }
-            ReleaseNotes = result.ToString();
         }
         catch (Exception ex)
         {

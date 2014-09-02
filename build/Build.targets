@@ -68,7 +68,10 @@
     <GetReleaseNotes CommonAssemblyInfo="%(CommonAssemblyInfo.Identity)">
       <Output TaskParameter="ReleaseNotes" PropertyName="ReleaseNotes" />
     </GetReleaseNotes>
-    <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/releaseNotes" Value="$(ReleaseNotes)" />
+    <EscapeXMLString XMLString="$(ReleaseNotes)">
+      <Output TaskParameter="EcapedXMLString" PropertyName="EscapedReleaseNotes" />
+    </EscapeXMLString>
+    <XmlPoke XmlInputPath="%(NuGetFiles.FullPath)" Query="//metadata/releaseNotes" Value="$(EscapedReleaseNotes)" />
     <OnError ExecuteTargets="RestoreNuGetVersion" />
   </Target>
 
