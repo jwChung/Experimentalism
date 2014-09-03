@@ -151,7 +151,7 @@
             if (reference == null)
                 return;
 
-            var messageFormat = @"The indirect reference should not be exposed through API.
+            var messageFormat = @"The indirect reference should not be exposed through public API.
 Indirect reference: {0}
 API(exposing)     : {1}";
 
