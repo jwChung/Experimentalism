@@ -18,5 +18,13 @@
                 Assembly.Load("xunit.extensions"))
                 .Verify(Assembly.Load("Jwc.Experiment.Xunit"));
         }
+
+        [Fact]
+        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
+        {
+            new IndirectReferenceAssertion(
+                Assembly.Load("xunit.extensions"))
+                .Verify(Assembly.Load("Jwc.Experiment.Xunit"));
+        }
     }
 }
