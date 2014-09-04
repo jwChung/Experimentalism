@@ -10,11 +10,9 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.2.0")]
-[assembly: AssemblyInformationalVersion("1.2.0")]
+[assembly: AssemblyVersion("1.3.0")]
+[assembly: AssemblyInformationalVersion("1.3.0")]
 
 /*
- * Version 1.2.0
- * 
- * - [Minor] Introduced the new Freeze method to ITestFixture.
+ * - [Minor] Introduced the new Create<T> method to ITestFixture.
  */
