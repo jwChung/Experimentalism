@@ -21,10 +21,21 @@
         object Create(object request);
 
         /// <summary>
+        /// Creates a specimen.
+        /// </summary>
+        /// <typeparam name="T">
+        /// A type of the specimen.
+        /// </typeparam>
+        /// <returns>
+        /// The speicmen being created.
+        /// </returns>
+        T Create<T>();
+
+        /// <summary>
         /// Freezes a specified specimen.
         /// </summary>
         /// <typeparam name="T">
-        /// The type of the specimen.
+        /// A type of the specimen.
         /// </typeparam>
         /// <param name="specimen">
         /// The specimen to be frozen.

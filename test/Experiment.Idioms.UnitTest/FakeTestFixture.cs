@@ -24,5 +24,10 @@ namespace Jwc.Experiment
         {
             throw new NotSupportedException();
         }
+
+        public T Create<T>()
+        {
+            throw new NotSupportedException();
+        }
     }
 }

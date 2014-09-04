@@ -59,6 +59,20 @@
         }
 
         /// <summary>
+        /// Creates a specimen.
+        /// </summary>
+        /// <typeparam name="T">
+        /// A type of the specimen.
+        /// </typeparam>
+        /// <returns>
+        /// The speicmen being created.
+        /// </returns>
+        public T Create<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Freezes a specified specimen.
         /// </summary>
         /// <typeparam name="T">
