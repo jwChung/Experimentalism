@@ -13,20 +13,7 @@
             var sut = new TestFixture(new Fixture());
             Assert.IsAssignableFrom<ITestFixture>(sut);
         }
-
-        [Fact]
-        public void CreateReturnsCorrectSpecimen()
-        {
-            var request = typeof(object);
-            var fixture = new Fixture();
-            var expected = fixture.Freeze<object>();
-            var sut = new TestFixture(fixture);
-
-            var actual = sut.Create(request);
-
-            Assert.Equal(expected, actual);
-        }
-
+        
         [Fact]
         public void InitializeWithNullFixtureThrows()
         {
@@ -44,6 +31,19 @@
             Assert.Same(expected, actual);
         }
 
+        [Fact]
+        public void CreateReturnsCorrectSpecimen()
+        {
+            var request = typeof(object);
+            var fixture = new Fixture();
+            var expected = fixture.Freeze<object>();
+            var sut = new TestFixture(fixture);
+
+            var actual = sut.Create(request);
+
+            Assert.Equal(expected, actual);
+        }
+
         [Theory]
         [InlineData(typeof(ITestFixture))]
         [InlineData(typeof(TestFixture))]
@@ -52,6 +52,14 @@
             var sut = new TestFixture(new Fixture());
             var actual = sut.Create(testFixtureType);
             Assert.Same(sut, actual);
+        }
+
+        [Fact]
+        public void CreateWithGenericReturnsCorrectSpecimen()
+        {
+            var sut = new TestFixture(new Fixture());
+            var actual = sut.Create<string>();
+            Assert.NotNull(actual);
         }
 
         [Fact]

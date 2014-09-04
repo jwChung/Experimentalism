@@ -69,7 +69,7 @@
         /// </returns>
         public T Create<T>()
         {
-            throw new NotImplementedException();
+            return this.fixture.Create<T>();
         }
 
         /// <summary>
