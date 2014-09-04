@@ -10,18 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.1.0")]
-[assembly: AssemblyInformationalVersion("1.1.0")]
+[assembly: AssemblyVersion("1.2.0")]
+[assembly: AssemblyInformationalVersion("1.2.0")]
 
 /*
- * Version 1.1.0
+ * Version 1.2.0
  * 
- * - [NEW] Renamed some attributes more meaningful ones. The old ones were made
- *   obsolete.
- *   
- *     * Jwc.Experiment.TestFixtureConfigurationAttribute
- *       -> Jwc.Experiment.DefaultFixtureConfigurationAttribute
- *
- *     * Jwc.Experiment.AutoFixture.AutoFixtureConfigurationAttribute
- *       -> Jwc.Experiment.AutoFixture.TestFixtureConfigurationAttribute
+ * - [Minor] Introduced the new Freeze method to ITestFixture.
  */
