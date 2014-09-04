@@ -69,7 +69,7 @@
         /// </param>
         public void Freeze<T>(T specimen)
         {
-            throw new NotImplementedException(); // TODO
+            this.fixture.Inject(specimen);
         }
 
         private void RegisterTestFixture()

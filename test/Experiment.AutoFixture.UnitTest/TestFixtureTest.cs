@@ -53,5 +53,16 @@
             var actual = sut.Create(testFixtureType);
             Assert.Same(sut, actual);
         }
+
+        [Fact]
+        public void FreezeCorrectlyFreezesSpecimen()
+        {
+            var expected = "foo";
+            var sut = new TestFixture(new Fixture());
+
+            sut.Freeze(expected);
+
+            Assert.Same(expected, sut.Create(typeof(string)));
+        }
     }
 }
