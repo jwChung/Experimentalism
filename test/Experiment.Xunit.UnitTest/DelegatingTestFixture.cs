@@ -10,5 +10,10 @@
         {
             return this.OnCreate(request);
         }
+
+        public void Freeze<T>(T specimen)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

@@ -19,5 +19,16 @@
         /// 만들어진 specimen 객체.
         /// </returns>
         object Create(object request);
+
+        /// <summary>
+        /// Freezes a specified specimen.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the specimen.
+        /// </typeparam>
+        /// <param name="specimen">
+        /// The specimen to be frozen.
+        /// </param>
+        void Freeze<T>(T specimen);
     }
 }

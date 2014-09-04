@@ -25,5 +25,10 @@
 
             throw new NotSupportedException();
         }
+
+        public void Freeze<T>(T specimen)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

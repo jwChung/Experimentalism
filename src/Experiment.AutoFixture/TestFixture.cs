@@ -58,6 +58,20 @@
             return this.specimenContext.Resolve(request);
         }
 
+        /// <summary>
+        /// Freezes a specified specimen.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the specimen.
+        /// </typeparam>
+        /// <param name="specimen">
+        /// The specimen to be frozen.
+        /// </param>
+        public void Freeze<T>(T specimen)
+        {
+            throw new NotImplementedException(); // TODO
+        }
+
         private void RegisterTestFixture()
         {
             this.Fixture.Inject<ITestFixture>(this);
