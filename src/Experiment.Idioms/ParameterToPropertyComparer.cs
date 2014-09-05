@@ -69,7 +69,7 @@
                 return false;
 
             var propertyInfo = propertyInfoElement.PropertyInfo;
-            if (propertyInfo.GetGetMethod(true) == null)
+            if (propertyInfo.GetGetMethod(true) == null || propertyInfo.GetIndexParameters().Length != 0)
                 return false;
 
             if (constructorInfo.ReflectedType != propertyInfo.ReflectedType)

@@ -16,6 +16,12 @@
         }
 
         [Fact]
+        public void InitializeWithNullTestFixtureThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ParameterToPropertyComparer(null));
+        }
+
+        [Fact]
         public void TestFixtureIsCorrect()
         {
             var testFixture = new DelegatingTestFixture();
@@ -113,12 +119,6 @@
         }
 
         [Fact]
-        public void InitializeWithNullTestFixtureThrows()
-        {
-            Assert.Throws<ArgumentNullException>(() => new ParameterToPropertyComparer(null));
-        }
-
-        [Fact]
         public void EqualsParameterToWritableOnlyPropertyRetrunsFalse()
         {
             var testFixture = new DelegatingTestFixture
@@ -184,6 +184,28 @@
             Assert.True(actual, "Equals.");
         }
 
+        [Fact]
+        public void EqualsParameterToIndexerAlwaysRetrunsFalse()
+        {
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(typeof(int), x);
+                    return 123;
+                }
+            };
+            var sut = new ParameterToPropertyComparer(testFixture);
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+                .GetParameters().Single().ToElement();
+            var propetyInfoElement = typeof(TypeForPropertyEqualValue)
+                .GetProperty("Item").ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+
+            Assert.False(actual, "Not Equals.");
+        }
+
         private class TypeForPropertyEqualValue
         {
             private readonly int value;
@@ -231,6 +253,14 @@
 
                 set
                 {
+                }
+            }
+
+            public object this[int key]
+            {
+                get
+                {
+                    return this.value;
                 }
             }
 
