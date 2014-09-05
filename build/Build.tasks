@@ -85,8 +85,8 @@
             var targetString = match.Result("$1");
 
             var lines = targetString.Split(
-                new[] { Environment.NewLine },
-                StringSplitOptions.None)
+                new[] { '\r', '\n' },
+                StringSplitOptions.RemoveEmptyEntries)
                 .SkipWhile(l => l.TrimStart(' ', '*') == string.Empty)
                 .Reverse().SkipWhile(l => l.TrimStart(' ', '*') == string.Empty).Reverse();
 
