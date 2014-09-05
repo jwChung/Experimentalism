@@ -10,9 +10,10 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.3.0")]
-[assembly: AssemblyInformationalVersion("1.3.0")]
+[assembly: AssemblyVersion("1.3.1")]
+[assembly: AssemblyInformationalVersion("1.3.1")]
 
 /*
- * - [Minor] Introduced the new Create<T> method to ITestFixture.
+ * - [Patch] Unwrapped TargetInvocationException wihtout loosing stack traces
+ *   when FirstClassCommand throws an exception.
  */
