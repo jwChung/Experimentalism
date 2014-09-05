@@ -7,9 +7,13 @@
     using global::Xunit;
     using global::Xunit.Sdk;
 
-    [Obsolete]
     public class TargetInvocationExceptionUnwrappingCommandTest
     {
+        public static void ThrowInvalidOperationException()
+        {
+            throw new InvalidOperationException();
+        }
+
         [Fact]
         public void SutIsTestCommand()
         {
@@ -144,6 +148,23 @@
 
             // Exercise system and Verify outcome
             Assert.Throws(exception.GetType(), () => sut.Execute(testClass));
+        }
+
+        [Test]
+        public void ExecuteDoesNotLooseStackTracesWhenUnwrappingTargetInvocaionException()
+        {
+            var testCommand = Mock.Of<ITestCommand>();
+            Mock.Get(testCommand).Setup(x => x.Execute(null)).Callback(
+                () =>
+                {
+                    this.GetType().GetMethod("ThrowInvalidOperationException").Invoke(null, new object[0]);
+                });
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
+
+            var e = Assert.Throws<InvalidOperationException>(() => sut.Execute(null));
+            Assert.Contains(
+                "TargetInvocationExceptionUnwrappingCommandTest.ThrowInvalidOperationException",
+                e.ToString());
         }
     }
 }

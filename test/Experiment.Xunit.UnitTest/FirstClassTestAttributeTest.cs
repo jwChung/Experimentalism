@@ -162,7 +162,8 @@
 
             var actual = sut.CreateTestCommands(method).Single();
 
-            Assert.IsType<FirstClassCommand>(actual);
+            Assert.IsType<FirstClassCommand>(
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
         }
 
         [Fact]

@@ -170,7 +170,8 @@
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+               Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(method, command.Method);
             Assert.Equal(string.Empty, command.DisplayParameterName);
         }
@@ -214,7 +215,8 @@
             var actual = sut.ConvertToTestCommand(method, fixtureFactory);
 
             // Verify outcome
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+               Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
 
             Assert.Equal(method, command.Method);
             Assert.Equal(displayParameterName, command.DisplayParameterName);
@@ -264,7 +266,8 @@
 
             var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(displayParameterName, command.DisplayParameterName);
         }
 
@@ -278,7 +281,8 @@
 
             var actual = sut.ConvertToTestCommand(method, testFixtureFactory);
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(displayParameterName, command.DisplayParameterName);
         }
 
@@ -293,7 +297,8 @@
             var actual = sut.ConvertToTestCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), factory);
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             command.Action.Invoke();
             Assert.True(verifyMock);
         }
@@ -308,7 +313,8 @@
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
                 new DelegatingTestFixtureFactory());
 
-            var command = Assert.IsType<FirstClassCommand>(actual);
+            var command = Assert.IsType<FirstClassCommand>(
+                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
             Assert.Equal(@delegate, command.Action);
         }
     }
