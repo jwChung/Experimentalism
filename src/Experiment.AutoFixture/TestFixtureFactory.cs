@@ -26,8 +26,10 @@ namespace Jwc.Experiment.AutoFixture
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
+#pragma warning disable 618
             var fixture = this.CreateFixture(testMethod).Customize(
                 new ParameterAttributeCutomization(testMethod.GetParameters()));
+#pragma warning restore 618
             return new TestFixture(fixture);
         }
 
@@ -40,6 +42,7 @@ namespace Jwc.Experiment.AutoFixture
         /// <returns>
         /// The new fixture.
         /// </returns>
+        [Obsolete("Use the GetCustomiztion method instead. This method will be removed on the next major release.")]
         protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
             return new Fixture().Customize(this.GetCustomization(testMethod));
@@ -88,6 +91,9 @@ namespace Jwc.Experiment.AutoFixture
         {
             public void Customize(IFixture fixture)
             {
+                if (fixture == null)
+                    throw new ArgumentNullException("fixture");
+
                 fixture.OmitAutoProperties = true;
             }
         }

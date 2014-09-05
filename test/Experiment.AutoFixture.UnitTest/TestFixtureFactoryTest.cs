@@ -175,7 +175,9 @@
         {
             public DelegatingTestFixtureFactory()
             {
+#pragma warning disable 618
                 this.OnCreateFixture = m => base.CreateFixture(m);
+#pragma warning restore 618
                 this.OnCreateCustomization = m => base.GetCustomization(m);
             }
 
@@ -183,6 +185,7 @@
 
             public Func<MethodInfo, ICustomization> OnCreateCustomization { get; set; }
 
+            [Obsolete]
             protected override IFixture CreateFixture(MethodInfo testMethod)
             {
                 return this.OnCreateFixture(testMethod);
