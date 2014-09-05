@@ -5,7 +5,7 @@
     using Ploeh.AutoFixture;
     using global::Xunit;
 
-    public class TestFixtureFactoryTest
+    public partial class TestFixtureFactoryTest
     {
         [Fact]
         public void SutIsTestFixtureFactory()
@@ -133,6 +133,29 @@
             Assert.Throws<ObjectCreationException>(() => actual.Create(typeof(IDisposable)));
         }
 
+        [Fact]
+        public void CreateReturnsCorrectFixtureUsingEmptyCustomization()
+        {
+            var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
+            var sut = new DelegatingTestFixtureFactory
+            {
+                OnCreateCustomization = m =>
+                {
+                    Assert.Equal(testMethod, m);
+                    return new EmptyCustomization();
+                }
+            };
+
+            var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
+
+            var fixture = Assert.IsAssignableFrom<TestFixture>(actual).Fixture;
+            Assert.False(fixture.OmitAutoProperties);
+            Assert.Throws<ObjectCreationException>(() => fixture.Create<IDisposable>());
+        }
+    }
+
+    public partial class TestFixtureFactoryTest
+    {
         public void FrozenTest([Frozen] string arg)
         {
         }
@@ -144,14 +167,37 @@
         public void ManyAttributeTest([Greedy] [Frozen] Person person)
         {
         }
+    }
 
+    public partial class TestFixtureFactoryTest
+    {
         private class DelegatingTestFixtureFactory : TestFixtureFactory
         {
+            public DelegatingTestFixtureFactory()
+            {
+                this.OnCreateFixture = m => base.CreateFixture(m);
+                this.OnCreateCustomization = m => base.GetCustomization(m);
+            }
+
             public Func<MethodInfo, IFixture> OnCreateFixture { get; set; }
+
+            public Func<MethodInfo, ICustomization> OnCreateCustomization { get; set; }
 
             protected override IFixture CreateFixture(MethodInfo testMethod)
             {
                 return this.OnCreateFixture(testMethod);
+            }
+
+            protected override ICustomization GetCustomization(MethodInfo testMethod)
+            {
+                return this.OnCreateCustomization(testMethod);
+            }
+        }
+
+        private class EmptyCustomization : ICustomization
+        {
+            public void Customize(IFixture fixture)
+            {
             }
         }
     }

@@ -26,8 +26,8 @@ namespace Jwc.Experiment.AutoFixture
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
-            var cutomization = new ParameterAttributeCutomization(testMethod.GetParameters());
-            var fixture = this.CreateFixture(testMethod).Customize(cutomization);
+            var fixture = this.CreateFixture(testMethod).Customize(
+                new ParameterAttributeCutomization(testMethod.GetParameters()));
             return new TestFixture(fixture);
         }
 
@@ -42,7 +42,23 @@ namespace Jwc.Experiment.AutoFixture
         /// </returns>
         protected virtual IFixture CreateFixture(MethodInfo testMethod)
         {
-            return new Fixture { OmitAutoProperties = true }.Customize(new AutoMoqCustomization());
+            return new Fixture().Customize(this.GetCustomization(testMethod));
+        }
+
+        /// <summary>
+        /// Creates a customization to customize test fixture.
+        /// </summary>
+        /// <param name="testMethod">
+        /// The test method.
+        /// </param>
+        /// <returns>
+        /// The new customization.
+        /// </returns>
+        protected virtual ICustomization GetCustomization(MethodInfo testMethod)
+        {
+            return new CompositeCustomization(
+                new AutoMoqCustomization(),
+                new OmitOmitAutoPropertiesCustomizatoin());
         }
 
         private class ParameterAttributeCutomization : ICustomization
@@ -65,6 +81,14 @@ namespace Jwc.Experiment.AutoFixture
                 return parameter.GetCustomAttributes(typeof(CustomizeAttribute), false)
                     .Cast<CustomizeAttribute>()
                     .Select(ca => ca.GetCustomization(parameter));
+            }
+        }
+
+        private class OmitOmitAutoPropertiesCustomizatoin : ICustomization
+        {
+            public void Customize(IFixture fixture)
+            {
+                fixture.OmitAutoProperties = true;
             }
         }
     }
