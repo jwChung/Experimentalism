@@ -10,10 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.3.1")]
-[assembly: AssemblyInformationalVersion("1.3.1")]
+[assembly: AssemblyVersion("1.3.2")]
+[assembly: AssemblyInformationalVersion("1.3.2")]
 
 /*
- * - [Patch] Unwrapped TargetInvocationException wihtout loosing stack traces
- *   when FirstClassCommand throws an exception.
+ * Version 1.3.2
+ * 
+ * - [Patch] Fixed passing the assertion of member initialization with an
+ *   indexer.
  */
