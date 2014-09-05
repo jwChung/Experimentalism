@@ -344,6 +344,14 @@
             Assert.DoesNotThrow(() => sut.Verify(property));
         }
 
+        [Theory]
+        [IndexerData]
+        public void VerifyIndexerAlwaysDoesNotThrow(PropertyInfo indexer)
+        {
+            var sut = new MemberInitializationAssertion(new FakeTestFixture());
+            Assert.DoesNotThrow(() => sut.Verify(indexer));
+        }
+
         private class SatisfiedConstructorDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
@@ -532,6 +540,22 @@
                     {
                         return -1;
                     }
+                }
+            }
+        }
+
+        private class IndexerDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
+            {
+                return typeof(ClassForIndices).GetProperties().Select(c => new object[] { c });
+            }
+
+            public class ClassForIndices
+            {
+                public object this[int index]
+                {
+                    get { return new object(); }
                 }
             }
         }

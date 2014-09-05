@@ -172,7 +172,10 @@ Parameter  : {2}";
             if (property == null)
                 throw new ArgumentNullException("property");
 
-            if (property.GetGetMethod() == null || property.IsStatic() || property.IsAbstract())
+            if (property.GetGetMethod() == null
+                || property.IsStatic()
+                || property.IsAbstract()
+                || property.GetIndexParameters().Length != 0)
                 return;
 
             var propertyInfoElement = property.ToElement();
