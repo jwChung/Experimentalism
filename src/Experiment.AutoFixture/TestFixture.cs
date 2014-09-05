@@ -67,6 +67,7 @@
         /// <returns>
         /// The speicmen being created.
         /// </returns>
+        [Obsolete("Do not use this method. Instead install AutoFixture package and use the members of IFixture to customize test fixture.")]
         public T Create<T>()
         {
             return this.fixture.Create<T>();
@@ -81,6 +82,7 @@
         /// <param name="specimen">
         /// The specimen to be frozen.
         /// </param>
+        [Obsolete("Do not use this method. Instead install AutoFixture package and use the members of IFixture to customize test fixture.")]
         public void Freeze<T>(T specimen)
         {
             this.fixture.Inject(specimen);

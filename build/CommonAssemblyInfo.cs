@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("1.3.2")]
 
 /*
- * Version 1.3.2
+ * Version 1.4.0
  * 
- * - [Patch] Fixed passing the assertion of member initialization with an
- *   indexer.
+ * - [Patch] Deprecated the Create<T>() and Freeze<T>(T) methods. Instead of it,
+ *   use members of IFixture to custmize test fixture.
  */

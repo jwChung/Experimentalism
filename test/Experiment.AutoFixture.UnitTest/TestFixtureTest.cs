@@ -55,6 +55,7 @@
         }
 
         [Fact]
+        [Obsolete]
         public void CreateWithGenericReturnsCorrectSpecimen()
         {
             var sut = new TestFixture(new Fixture());
@@ -63,6 +64,7 @@
         }
 
         [Fact]
+        [Obsolete]
         public void FreezeCorrectlyFreezesSpecimen()
         {
             var expected = "foo";
