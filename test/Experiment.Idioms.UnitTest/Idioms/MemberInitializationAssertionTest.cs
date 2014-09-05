@@ -356,7 +356,9 @@
         {
             public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
             {
-                return typeof(ClassForSatisfiedConstructors).GetConstructors().Select(c => new object[] { c });
+                return typeof(ClassForSatisfiedConstructors).GetConstructors()
+                    .Concat(typeof(ClassForSatisfiedConstructorsWithIndexer).GetConstructors())
+                    .Select(c => new object[] { c });
             }
 
             public class ClassForSatisfiedConstructors
@@ -394,6 +396,31 @@
                 public object ObjectValue { get; set; }
 
                 public byte ByteValue { get; set; }
+            }
+
+            public class ClassForSatisfiedConstructorsWithIndexer
+            {
+                public readonly int IntValue;
+
+                public ClassForSatisfiedConstructorsWithIndexer()
+                {
+                }
+
+                public ClassForSatisfiedConstructorsWithIndexer(object objectValue, int intValue)
+                {
+                    this.ObjectValue = objectValue;
+                    this.IntValue = intValue;
+                }
+
+                public object ObjectValue { get; set; }
+
+                public object this[int index]
+                {
+                    get
+                    {
+                        return new object();
+                    }
+                }
             }
         }
 
