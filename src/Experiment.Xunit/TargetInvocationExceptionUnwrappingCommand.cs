@@ -95,11 +95,7 @@
                 if (exception.InnerException == null)
                     throw;
 
-                var internalPreserveStackTrace = (Action)Delegate.CreateDelegate(
-                    typeof(Action), exception.InnerException, "InternalPreserveStackTrace");
-
-                internalPreserveStackTrace();
-                throw exception.InnerException;
+                throw TargetInvocationExceptionUnwrappingCommand.Unwrap(exception);
             }
         }
 
@@ -112,6 +108,21 @@
         public XmlNode ToStartXml()
         {
             return this.TestCommand.ToStartXml();
+        }
+
+        private static Exception Unwrap(TargetInvocationException exception)
+        {
+            ((Action)Delegate.CreateDelegate(
+                typeof(Action),
+                exception.InnerException,
+                "InternalPreserveStackTrace"))
+                .Invoke();
+
+            var e = exception.InnerException as TargetInvocationException;
+            if (e != null)
+                return TargetInvocationExceptionUnwrappingCommand.Unwrap(e);
+
+            return exception.InnerException;
         }
     }
 }

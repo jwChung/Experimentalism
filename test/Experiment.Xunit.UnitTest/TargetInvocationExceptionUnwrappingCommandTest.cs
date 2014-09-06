@@ -14,6 +14,13 @@
             throw new InvalidOperationException();
         }
 
+        public static void ThrowInvalidOperationException2()
+        {
+            typeof(TargetInvocationExceptionUnwrappingCommandTest)
+                .GetMethod("ThrowInvalidOperationException")
+                .Invoke(null, new object[0]);
+        }
+
         [Fact]
         public void SutIsTestCommand()
         {
@@ -151,13 +158,30 @@
         }
 
         [Test]
-        public void ExecuteDoesNotLooseStackTracesWhenUnwrappingTargetInvocaionException()
+        public void ExecuteUnwrapsTargetInvocationExceptionWithoutLoosingStackTraces()
         {
             var testCommand = Mock.Of<ITestCommand>();
             Mock.Get(testCommand).Setup(x => x.Execute(null)).Callback(
                 () =>
                 {
                     this.GetType().GetMethod("ThrowInvalidOperationException").Invoke(null, new object[0]);
+                });
+            var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
+
+            var e = Assert.Throws<InvalidOperationException>(() => sut.Execute(null));
+            Assert.Contains(
+                "TargetInvocationExceptionUnwrappingCommandTest.ThrowInvalidOperationException",
+                e.ToString());
+        }
+
+        [Test]
+        public void ExecuteRecursivelyUnwrapsTargetInvocationException()
+        {
+            var testCommand = Mock.Of<ITestCommand>();
+            Mock.Get(testCommand).Setup(x => x.Execute(null)).Callback(
+                () =>
+                {
+                    this.GetType().GetMethod("ThrowInvalidOperationException2").Invoke(null, new object[0]);
                 });
             var sut = new TargetInvocationExceptionUnwrappingCommand(testCommand);
 
