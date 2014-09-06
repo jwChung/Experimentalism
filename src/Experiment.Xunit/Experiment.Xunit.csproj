@@ -36,6 +36,7 @@
     <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit">
@@ -50,6 +51,7 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="FirstClassCommand.cs" />

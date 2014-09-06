@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
     using global::Xunit.Sdk;
 
     /// <summary>
@@ -52,15 +53,16 @@
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            return new FailedResult(testMethod, Exception, DisplayName);
+            return new FailedResult(
+                testMethod,
+                this.exception.UnwrapTargetInvocationException(),
+                DisplayName);
         }
 
         private static IMethodInfo EnsureIsNotNull(IMethodInfo method)
         {
             if (method == null)
-            {
                 throw new ArgumentNullException("method");
-            }
 
             return method;
         }

@@ -7,6 +7,18 @@
 
     public class ExceptionCommandTest
     {
+        public static void ThrowInvalidOperationException()
+        {
+            throw new InvalidOperationException();
+        }
+
+        public static void ThrowInvalidOperationException2()
+        {
+            typeof(ExceptionCommandTest)
+                .GetMethod("ThrowInvalidOperationException")
+                .Invoke(null, new object[0]);
+        }
+
         [Fact]
         public void SutIsTestCommand()
         {
@@ -85,6 +97,55 @@
             Assert.Equal(sut.MethodName, failedResult.MethodName);
             Assert.Equal(sut.Exception.GetType().FullName, failedResult.ExceptionType);
             Assert.Equal(sut.DisplayName, failedResult.DisplayName);
+        }
+
+        [Test]
+        public void ExecuteUnwrapsTargetInvocationExceptionWithoutLoosingStackTraces()
+        {
+            try
+            {
+                this.GetType().GetMethod("ThrowInvalidOperationException").Invoke(null, new object[0]);
+                Assert.True(false, "TargetInvocationException should be thrown.");
+            }
+            catch (TargetInvocationException exception)
+            {
+                var sut = new ExceptionCommand(
+                    Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    exception);
+
+                var actual = sut.Execute(null);
+
+                var failedResult = Assert.IsType<FailedResult>(actual);
+                Assert.Equal(typeof(InvalidOperationException).FullName, failedResult.ExceptionType);
+                Assert.Contains(
+                    "ExceptionCommandTest.ThrowInvalidOperationException",
+                    failedResult.StackTrace);
+            }
+        }
+
+        [Test]
+        public void ExecuteRecursivelyUnwrapsTargetInvocationException()
+        {
+            try
+            {
+                this.GetType().GetMethod("ThrowInvalidOperationException2").Invoke(null, new object[0]);
+                Assert.True(false, "TargetInvocationException should be thrown.");
+            }
+            catch (TargetInvocationException exception)
+            {
+                Assert.IsType<TargetInvocationException>(exception.InnerException);
+                var sut = new ExceptionCommand(
+                    Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                    exception);
+
+                var actual = sut.Execute(null);
+
+                var failedResult = Assert.IsType<FailedResult>(actual);
+                Assert.Equal(typeof(InvalidOperationException).FullName, failedResult.ExceptionType);
+                Assert.Contains(
+                    "ExceptionCommandTest.ThrowInvalidOperationException",
+                    failedResult.StackTrace);
+            }
         }
     }
 }
