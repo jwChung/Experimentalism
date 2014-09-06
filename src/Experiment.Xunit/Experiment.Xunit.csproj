@@ -64,7 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCase.New.tt</DependentUpon>
     </Compile>
-    <Compile Include="TestCommandEnumerable.cs" />
+    <Compile Include="TestCommandCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
