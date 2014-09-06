@@ -10,15 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.4.0")]
-[assembly: AssemblyInformationalVersion("1.4.0")]
+[assembly: AssemblyVersion("1.4.1")]
+[assembly: AssemblyInformationalVersion("1.4.1")]
 
 /*
- * Version 1.4.0
+ * Version 1.4.1
  * 
- * - [Minor] Deprecated the Create<T>() and Freeze<T>(T) methods. Instead of it,
- *   use members of IFixture to custmize test fixture.
- *   
- * - [Minor] Deprecated the CreateFixture method. Instead, introuduced the
- *   GetCustomization method to customize test fixture.
+ * - [Patch] Fixed that TargetInvocationException thrown while constructing test
+ *   data be shown as test result.
  */
