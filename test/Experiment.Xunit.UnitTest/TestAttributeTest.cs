@@ -276,7 +276,7 @@
         }
 
         [Fact]
-        public void CreateParameterizedTestWithExceptionDataReturnsCorrectCommands()
+        public void CreateParameterizedTestWithExceptionDataReturnsExceptionCommand()
         {
             var sut = new TssTestAttribute();
             IMethodInfo method = Reflector.Wrap(GetType().GetMethod("ParameterizedWithExceptionData"));
@@ -355,7 +355,7 @@
         }
 
         [Fact]
-        public void CreateTestCommandsCorrectlyConfiguresAllFixturesInTestAssembly()
+        public void CreateTestCommandsCorrectlyConfiguresAllConfigurationsInTestAssembly()
         {
             var sut = new TestAttribute();
             IMethodInfo method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
