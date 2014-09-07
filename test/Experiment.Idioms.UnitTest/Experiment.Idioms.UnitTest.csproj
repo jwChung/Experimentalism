@@ -69,6 +69,9 @@
     <Compile Include="..\Experiment.UnitTest\DelegatingAssembly.cs">
       <Link>DelegatingAssembly.cs</Link>
     </Compile>
+    <Compile Include="..\Experiment.UnitTest\Mocked.cs">
+      <Link>Mocked.cs</Link>
+    </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
     <Compile Include="Idioms\IdiomaticAssertionTest.cs" />
@@ -87,7 +90,6 @@
     <Compile Include="Idioms\NullGuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MemberKindCollectorTest.cs" />
-    <Compile Include="MockExtensions.cs" />
     <Compile Include="ReferenceCollectorTest.cs" />
     <Compile Include="MemberInitializationExceptionTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
