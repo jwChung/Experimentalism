@@ -66,33 +66,11 @@
         }
 
         [Fact]
-        public void CreateCorrectlyUsesCreateFixtureMethod()
-        {
-            var expected = new Fixture();
-            var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
-            var sut = new DelegatingTestFixtureFactory
-            {
-                OnCreateFixture = m =>
-                {
-                    Assert.Equal(testMethod, m);
-                    return expected;
-                }
-            };
-
-            var actual = sut.Create(testMethod);
-
-            Assert.Same(expected, ((TestFixture)actual).Fixture);
-        }
-
-        [Fact]
         public void CreateCorrectlyAppliesCustomizeAttribute()
         {
-            var fixture = new Fixture();
-            var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => fixture };
-
-            sut.Create(GetType().GetMethod("FrozenTest"));
-
-            Assert.Same(fixture.Create<string>(), fixture.Create<string>());
+            var sut = new TestFixtureFactory();
+            var actual = sut.Create(GetType().GetMethod("FrozenTest"));
+            Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
 
         [Fact]
@@ -109,7 +87,7 @@
         [Fact]
         public void CreateCanReturnFixtureAllowingAutoProperties()
         {
-            var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => new Fixture() };
+            var sut = new TssTestFixtureFactory { OnCreateCustomization = m => new AutoPropertiesCustomizatoin() };
 
             var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
 
@@ -128,7 +106,7 @@
         [Fact]
         public void CreateCanReturnFixtureNotBeingAbleToCreateInstanceOfAbstractType()
         {
-            var sut = new DelegatingTestFixtureFactory { OnCreateFixture = m => new Fixture() };
+            var sut = new TssTestFixtureFactory { OnCreateCustomization = m => new EmptyCustomization() };
             var actual = sut.Create((MethodInfo)MethodBase.GetCurrentMethod());
             Assert.Throws<ObjectCreationException>(() => actual.Create(typeof(IDisposable)));
         }
@@ -137,7 +115,7 @@
         public void CreateReturnsCorrectFixtureUsingEmptyCustomization()
         {
             var testMethod = (MethodInfo)MethodBase.GetCurrentMethod();
-            var sut = new DelegatingTestFixtureFactory
+            var sut = new TssTestFixtureFactory
             {
                 OnCreateCustomization = m =>
                 {
@@ -171,25 +149,14 @@
 
     public partial class TestFixtureFactoryTest
     {
-        private class DelegatingTestFixtureFactory : TestFixtureFactory
+        private class TssTestFixtureFactory : TestFixtureFactory
         {
-            public DelegatingTestFixtureFactory()
+            public TssTestFixtureFactory()
             {
-#pragma warning disable 618
-                this.OnCreateFixture = m => base.CreateFixture(m);
-#pragma warning restore 618
                 this.OnCreateCustomization = m => base.GetCustomization(m);
             }
 
-            public Func<MethodInfo, IFixture> OnCreateFixture { get; set; }
-
             public Func<MethodInfo, ICustomization> OnCreateCustomization { get; set; }
-
-            [Obsolete]
-            protected override IFixture CreateFixture(MethodInfo testMethod)
-            {
-                return this.OnCreateFixture(testMethod);
-            }
 
             protected override ICustomization GetCustomization(MethodInfo testMethod)
             {
@@ -201,6 +168,17 @@
         {
             public void Customize(IFixture fixture)
             {
+            }
+        }
+
+        private class AutoPropertiesCustomizatoin : ICustomization
+        {
+            public void Customize(IFixture fixture)
+            {
+                if (fixture == null)
+                    throw new ArgumentNullException("fixture");
+
+                fixture.OmitAutoProperties = false;
             }
         }
     }

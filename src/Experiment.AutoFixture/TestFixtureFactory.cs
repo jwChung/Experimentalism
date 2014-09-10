@@ -26,26 +26,11 @@ namespace Jwc.Experiment.AutoFixture
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
-#pragma warning disable 618
-            var fixture = this.CreateFixture(testMethod).Customize(
-                new ParameterAttributeCustomization(testMethod.GetParameters()));
-#pragma warning restore 618
-            return new TestFixture(fixture);
-        }
+            var fixture = new Fixture()
+                .Customize(new ParameterAttributeCustomization(testMethod.GetParameters()))
+                .Customize(this.GetCustomization(testMethod));
 
-        /// <summary>
-        /// Creates a fixture with a test method.
-        /// </summary>
-        /// <param name="testMethod">
-        /// The test method.
-        /// </param>
-        /// <returns>
-        /// The new fixture.
-        /// </returns>
-        [Obsolete("Use the GetCustomiztion method instead. This method will be removed on the next major release.")]
-        protected virtual IFixture CreateFixture(MethodInfo testMethod)
-        {
-            return new Fixture().Customize(this.GetCustomization(testMethod));
+            return new TestFixture(fixture);
         }
 
         /// <summary>
