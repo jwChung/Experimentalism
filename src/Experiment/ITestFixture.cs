@@ -19,29 +19,5 @@
         /// 만들어진 specimen 객체.
         /// </returns>
         object Create(object request);
-
-        /// <summary>
-        /// Creates a specimen.
-        /// </summary>
-        /// <typeparam name="T">
-        /// A type of the specimen.
-        /// </typeparam>
-        /// <returns>
-        /// The speicmen being created.
-        /// </returns>
-        [Obsolete("Do not use this method. Instead install AutoFixture package and use the members of IFixture to customize test fixture.")]
-        T Create<T>();
-
-        /// <summary>
-        /// Freezes a specified specimen.
-        /// </summary>
-        /// <typeparam name="T">
-        /// A type of the specimen.
-        /// </typeparam>
-        /// <param name="specimen">
-        /// The specimen to be frozen.
-        /// </param>
-        [Obsolete("Do not use this method. Instead install AutoFixture package and use the members of IFixture to customize test fixture.")]
-        void Freeze<T>(T specimen);
     }
 }

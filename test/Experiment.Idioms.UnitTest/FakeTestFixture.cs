@@ -1,6 +1,5 @@
 namespace Jwc.Experiment
 {
-    using System;
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Kernel;
 
@@ -18,16 +17,6 @@ namespace Jwc.Experiment
         public object Create(object request)
         {
             return this.context.Resolve(request);
-        }
-
-        public void Freeze<T>(T specimen)
-        {
-            throw new NotSupportedException();
-        }
-
-        public T Create<T>()
-        {
-            throw new NotSupportedException();
         }
     }
 }

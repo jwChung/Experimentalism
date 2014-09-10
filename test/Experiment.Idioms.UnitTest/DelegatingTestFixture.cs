@@ -10,15 +10,5 @@
         {
             return this.OnCreate(request);
         }
-
-        public void Freeze<T>(T specimen)
-        {
-            throw new NotSupportedException();
-        }
-
-        public T Create<T>()
-        {
-            throw new NotSupportedException();
-        }
     }
 }
