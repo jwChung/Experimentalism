@@ -14,13 +14,13 @@
         IMethodInfo TestMethod { get; }
 
         /// <summary>
-        /// Gets the arguments.
+        /// Gets test arguments.
         /// </summary>
         /// <param name="testObject">
-        /// The test object.
+        /// A test object.
         /// </param>
         /// <returns>
-        /// The arguments.
+        /// The test arguments.
         /// </returns>
         object[] GetArguments(object testObject);
     }

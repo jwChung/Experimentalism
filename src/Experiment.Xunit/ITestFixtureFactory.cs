@@ -11,7 +11,7 @@
         /// Creates a test fixture.
         /// </summary>
         /// <param name="testMethod">
-        /// The test information about a test method.
+        /// Information about a test method.
         /// </param>
         /// <returns>
         /// The test fixture.
