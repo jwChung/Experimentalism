@@ -19,15 +19,15 @@
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(ITestMethodContext context)
+        public IEnumerable<ITestCommand> Create(ITestMethodInfo context)
         {
             if (context == null)
                 throw new ArgumentNullException("context");
 
-            if (context.Actual.ReturnType != typeof(void) || context.Actual.GetParameters().Any())
+            if (context.ActualMethod.ReturnType != typeof(void) || context.ActualMethod.GetParameters().Any())
                 yield break;
 
-            yield return new FactCommand(Reflector.Wrap(context.Actual));
+            yield return new FactCommand(Reflector.Wrap(context.ActualMethod));
         }
     }
 }

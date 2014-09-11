@@ -10,12 +10,12 @@
         /// <summary>
         /// Creates a test fixture.
         /// </summary>
-        /// <param name="context">
+        /// <param name="testMethod">
         /// The test information about a test method.
         /// </param>
         /// <returns>
         /// The test fixture.
         /// </returns>
-        ITestFixture Create(ITestMethodContext context);
+        ITestFixture Create(ITestMethodInfo testMethod);
     }
 }

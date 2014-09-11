@@ -8,7 +8,7 @@
     /// </summary>
     public abstract class TestBaseAttribute : FactAttribute, ITestFixtureFactory
     {
-        ITestFixture ITestFixtureFactory.Create(ITestMethodContext context)
+        ITestFixture ITestFixtureFactory.Create(ITestMethodInfo context)
         {
             return this.Create(context);
         }
@@ -16,12 +16,12 @@
         /// <summary>
         /// Creates a test fixture.
         /// </summary>
-        /// <param name="context">
+        /// <param name="testMethod">
         /// The test information about a test method.
         /// </param>
         /// <returns>
         /// The test fixture.
         /// </returns>
-        protected abstract ITestFixture Create(ITestMethodContext context);
+        protected abstract ITestFixture Create(ITestMethodInfo testMethod);
     }
 }

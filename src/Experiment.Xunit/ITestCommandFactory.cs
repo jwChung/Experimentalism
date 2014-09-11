@@ -11,12 +11,12 @@
         /// <summary>
         /// Creates test commands.
         /// </summary>
-        /// <param name="context">
-        /// The information about a test method.
+        /// <param name="testMethod">
+        /// Information about a test method.
         /// </param>
         /// <returns>
         /// The new test commands.
         /// </returns>
-        IEnumerable<ITestCommand> Create(ITestMethodContext context);
+        IEnumerable<ITestCommand> Create(ITestMethodInfo testMethod);
     }
 }

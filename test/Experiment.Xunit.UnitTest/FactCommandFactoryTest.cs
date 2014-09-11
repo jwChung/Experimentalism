@@ -28,7 +28,7 @@
         {
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(x => x.NonVoidMethod());
-            var context = Mocked.Of<ITestMethodContext>(x => x.Actual == method);
+            var context = Mocked.Of<ITestMethodInfo>(x => x.ActualMethod == method);
 
             var actual = sut.Create(context);
 
@@ -40,7 +40,7 @@
         {
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(x => x.ParameterizedMethod(null, 0));
-            var context = Mocked.Of<ITestMethodContext>(x => x.Actual == method);
+            var context = Mocked.Of<ITestMethodInfo>(x => x.ActualMethod == method);
 
             var actual = sut.Create(context);
 
@@ -53,7 +53,7 @@
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(
                 x => x.CreateReturnsCorrectCommandIfTestMethodIsValid());
-            var context = Mocked.Of<ITestMethodContext>(x => x.Actual == method);
+            var context = Mocked.Of<ITestMethodInfo>(x => x.ActualMethod == method);
             var expected = method.ReflectedType.FullName + "." + method.Name;
 
             var actual = sut.Create(context).Single();

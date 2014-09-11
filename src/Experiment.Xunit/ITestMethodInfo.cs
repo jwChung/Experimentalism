@@ -5,22 +5,22 @@
     /// <summary>
     /// Defines information about a test method.
     /// </summary>
-    public interface ITestMethodContext
+    public interface ITestMethodInfo
     {
         /// <summary>
         /// Gets the test method adorned with a test attribute.
         /// </summary>
-        MethodInfo Adorned { get; }
+        MethodInfo TestMethod { get; }
 
         /// <summary>
         /// Gets the test method to be actually executed.
         /// </summary>
-        MethodInfo Actual { get; }
+        MethodInfo ActualMethod { get; }
 
         /// <summary>
         /// Gets the test object declaring a adorned test method.
         /// </summary>
-        object AdornedObject { get; }
+        object TestObject { get; }
 
         /// <summary>
         /// Gets the test object declaring a actual test method.
