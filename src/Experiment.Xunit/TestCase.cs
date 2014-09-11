@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using global::Xunit.Sdk;
+    using ITestFixtureFactory2 = Experiment.ITestFixtureFactory;
 
     /// <summary>
     /// Represents a weakly-typed test case that can be turned into an xUnit.net ITestCommand when
@@ -138,7 +139,7 @@
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory)
+        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory2 testFixtureFactory)
         {
             if (method == null)
                 throw new ArgumentNullException("method");

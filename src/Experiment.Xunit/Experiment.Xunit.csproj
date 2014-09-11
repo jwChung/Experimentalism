@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="ITestMethodContext.cs" />
+    <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="FirstClassCommand.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestBaseAttribute.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="TargetInvocationExceptionUnwrappingCommand.cs" />
     <Compile Include="TestCase.New.cs">
