@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="ITestArgumentContext.cs" />
+    <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
     <Compile Include="ITestMethodContext.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
