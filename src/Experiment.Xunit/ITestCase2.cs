@@ -9,18 +9,18 @@
     public interface ITestCase2
     {
         /// <summary>
-        /// Gets the explicit arguments.
+        /// Gets the arguments specified with explicit values.
         /// </summary>
-        IEnumerable<object> ExplicitArguments { get; }
+        IEnumerable<object> Arguments { get; }
 
         /// <summary>
         /// Gets the test method to be actually executed.
         /// </summary>
-        MethodInfo ActualMethod { get; }
+        MethodInfo TestMethod { get; }
 
         /// <summary>
         /// Gets the test object declaring a actual test method.
         /// </summary>
-        object ActualObject { get; }
+        object TestObject { get; }
     }
 }
