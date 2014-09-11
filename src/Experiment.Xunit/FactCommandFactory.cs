@@ -13,21 +13,24 @@
         /// <summary>
         /// Creates test commands.
         /// </summary>
-        /// <param name="context">
-        /// The information about a test method.
+        /// <param name="testMethod">
+        /// Information about a test method.
+        /// </param>
+        /// <param name="fixtureFactory">
+        /// A factory of test fixture.
         /// </param>
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(ITestMethodInfo context)
+        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
         {
-            if (context == null)
-                throw new ArgumentNullException("context");
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
 
-            if (context.ActualMethod.ReturnType != typeof(void) || context.ActualMethod.GetParameters().Any())
+            if (testMethod.MethodInfo.ReturnType != typeof(void) || testMethod.MethodInfo.GetParameters().Any())
                 yield break;
 
-            yield return new FactCommand(Reflector.Wrap(context.ActualMethod));
+            yield return new FactCommand(testMethod);
         }
     }
 }

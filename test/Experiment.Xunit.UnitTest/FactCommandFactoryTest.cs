@@ -17,10 +17,10 @@
         }
 
         [Fact]
-        public void CreateWithNullContextThrows()
+        public void CreateWithNullTestMethodThrows()
         {
             var sut = new FactCommandFactory();
-            Assert.Throws<ArgumentNullException>(() => sut.Create(null).ToArray());
+            Assert.Throws<ArgumentNullException>(() => sut.Create(null, null).ToArray());
         }
 
         [Fact]
@@ -28,9 +28,8 @@
         {
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(x => x.NonVoidMethod());
-            var context = Mocked.Of<ITestMethodInfo>(x => x.ActualMethod == method);
 
-            var actual = sut.Create(context);
+            var actual = sut.Create(Reflector.Wrap(method), null);
 
             Assert.Empty(actual);
         }
@@ -40,9 +39,8 @@
         {
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(x => x.ParameterizedMethod(null, 0));
-            var context = Mocked.Of<ITestMethodInfo>(x => x.ActualMethod == method);
 
-            var actual = sut.Create(context);
+            var actual = sut.Create(Reflector.Wrap(method), null);
 
             Assert.Empty(actual);
         }
@@ -53,10 +51,9 @@
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(
                 x => x.CreateReturnsCorrectCommandIfTestMethodIsValid());
-            var context = Mocked.Of<ITestMethodInfo>(x => x.ActualMethod == method);
             var expected = method.ReflectedType.FullName + "." + method.Name;
 
-            var actual = sut.Create(context).Single();
+             var actual = sut.Create(Reflector.Wrap(method), null).Single();
 
             var command = Assert.IsAssignableFrom<FactCommand>(actual);
             Assert.Equal(expected, command.DisplayName);
