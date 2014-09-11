@@ -15,7 +15,7 @@ namespace Jwc.Experiment
     {
         [Test]
         public void NullGuardClasuseAssertionCorrectlyVerifiesMembers(
-            NullGuardClauseAssertion assertion)
+            GuardClauseAssertion assertion)
         {
             typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -50,7 +50,7 @@ namespace Jwc.Experiment
                         Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
-                .Select(m => TestCase.New<NullGuardClauseAssertion>(
+                .Select(m => TestCase.New<GuardClauseAssertion>(
                     a => a.Verify(m),
                     m.GetDisplayName()));
         }
@@ -67,7 +67,7 @@ namespace Jwc.Experiment
 
         [Test]
         public void NullGuardClasuseAssertionCorrectlyVerifiesType(
-            NullGuardClauseAssertion assertion)
+            GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }

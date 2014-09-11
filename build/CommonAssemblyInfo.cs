@@ -14,8 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("1.6.0")]
 
 /*
- * Version 1.6.0
+ * Version 2.0.0
  * 
- * - [Minor] Implemented that TestBaseAttribute supports tests with
- *   DataAttribute(Xunit).
+ * - [Major] Renamed NullGuardClauseAssertion to GuardClauseAssertion.
  */

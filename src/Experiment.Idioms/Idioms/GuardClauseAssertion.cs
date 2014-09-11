@@ -4,29 +4,30 @@
     using System.Reflection;
     using Ploeh.AutoFixture.Idioms;
     using Ploeh.AutoFixture.Kernel;
+    using AutoFixtureGuardClauseAssertion = Ploeh.AutoFixture.Idioms.GuardClauseAssertion;
 
     /// <summary>
     /// Encapsulates a unit test that verifies that a method or constructor has appropriate Null
     /// Guard Clauses in place.
     /// </summary>
-    public class NullGuardClauseAssertion : IdiomaticAssertion
+    public class GuardClauseAssertion : IdiomaticAssertion
     {
         private readonly ITestFixture testFixture;
         private readonly IIdiomaticAssertion assertion;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NullGuardClauseAssertion" /> class.
+        /// Initializes a new instance of the <see cref="GuardClauseAssertion" /> class.
         /// </summary>
         /// <param name="testFixture">
         /// A test fixture to create auto-data.
         /// </param>
-        public NullGuardClauseAssertion(ITestFixture testFixture)
+        public GuardClauseAssertion(ITestFixture testFixture)
         {
             if (testFixture == null)
                 throw new ArgumentNullException("testFixture");
 
             this.testFixture = testFixture;
-            this.assertion = new GuardClauseAssertion(new SpecimenBuilder(testFixture));
+            this.assertion = new AutoFixtureGuardClauseAssertion(new SpecimenBuilder(testFixture));
         }
 
         /// <summary>
