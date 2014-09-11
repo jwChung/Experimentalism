@@ -52,7 +52,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ExceptionExtensions.cs" />
-    <Compile Include="ITestArgumentContext.cs" />
+    <Compile Include="ITestCommandInfo.cs" />
     <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
     <Compile Include="ITestMethodInfo.cs" />
