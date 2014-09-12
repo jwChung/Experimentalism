@@ -130,25 +130,50 @@
         }
 
         private static bool HasValues(
-            TestInfo m,
+            TestInfo testInfo,
             MethodInfo testMethod,
             MethodInfo actualMethod,
             object actualObject,
             IEnumerable<object> arguments,
             ITestFixtureFactory factory)
         {
-            return m.TestMethod == testMethod
-                && m.ActualMethod == actualMethod
-                && m.ActualObject == actualObject
-                && m.Arguments.SequenceEqual(arguments)
-                && m.TestFixtureFactory == factory;
+            return testInfo.TestMethod == testMethod
+                && testInfo.ActualMethod == actualMethod
+                && testInfo.ActualObject == actualObject
+                && testInfo.Arguments.SequenceEqual(arguments)
+                && testInfo.TestFixtureFactory == factory;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "To test members of test type.")]
+        private static class StaticTestClass
+        {
+            public static readonly MethodInfo Method = new Methods<object>().Select(x => x.ToString());
+            public static readonly object[] Arguments = new object[] { 123, "string" };
+            public static object TestObject = new object();
+
+            public static IEnumerable<ITestCase2> StaticTestMethod()
+            {
+                yield return Mocked.Of<ITestCase2>(t =>
+                    t.TestMethod == Method
+                    && t.Arguments == Arguments
+                    && t.TestObject == TestObject);
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "To test members of test type.")]
         private class TestClass
         {
             public static readonly MethodInfo Method = new Methods<object>().Select(x => x.ToString());
             public static readonly object[] Arguments = new object[] { 123, "string" };
             public static object TestObject = new object();
+
+            public static IEnumerable<ITestCase2> StaticTestMethod()
+            {
+                yield return Mocked.Of<ITestCase2>(t =>
+                    t.TestMethod == Method
+                    && t.Arguments == Arguments
+                    && t.TestObject == TestObject);
+            }
 
             public IEnumerable<ITestCase2> TestMethod()
             {
@@ -162,29 +187,6 @@
                     && t.Arguments == Arguments
                     && t.TestObject == TestObject);
 
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
-            }
-
-            public static IEnumerable<ITestCase2> StaticTestMethod()
-            {
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
-            }
-        }
-
-        private static class StaticTestClass
-        {
-            public static readonly MethodInfo Method = new Methods<object>().Select(x => x.ToString());
-            public static readonly object[] Arguments = new object[] { 123, "string" };
-            public static object TestObject = new object();
-
-            public static IEnumerable<ITestCase2> StaticTestMethod()
-            {
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
                     && t.Arguments == Arguments
