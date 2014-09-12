@@ -8,6 +8,8 @@
     /// </summary>
     public class ParameterizedCommand : TestCommand
     {
+        private readonly ITestCommandInfo testCommandInfo;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterizedCommand" /> class.
         /// </summary>
@@ -17,8 +19,17 @@
         public ParameterizedCommand(ITestCommandInfo testCommandInfo)
             : base(GuardNull(testCommandInfo).TestMethod, null, 0)
         {
+            this.testCommandInfo = testCommandInfo;
         }
 
+        /// <summary>
+        /// Gets the information of the test command.
+        /// </summary>
+        public ITestCommandInfo TestCommandInfo
+        {
+            get { return this.testCommandInfo; }
+        } 
+        
         /// <summary>
         /// Executes this test command with a test object.
         /// </summary>

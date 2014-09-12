@@ -31,5 +31,16 @@
 
             Assert.Equal(method.Name, actual);
         }
+
+        [Test]
+        public void TestCommandInfoIsCorrect()
+        {
+            var expected = Mocked.Of<ITestCommandInfo>();
+            var sut = new ParameterizedCommand(expected);
+
+            var actual = sut.TestCommandInfo;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
