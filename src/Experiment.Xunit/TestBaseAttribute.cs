@@ -1,7 +1,9 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
     using global::Xunit;
+    using global::Xunit.Sdk;
 
     /// <summary>
     /// Represents base attribute to indicate that a given method is a test method.
@@ -46,6 +48,22 @@
         ITestFixture ITestFixtureFactory.Create(ITestMethodInfo context)
         {
             return this.Create(context);
+        }
+
+        /// <summary>
+        /// Enumerates the test commands represented by this test method. Derived classes should
+        /// override this method to return instances of <see cref="T:Xunit.Sdk.ITestCommand" />,
+        /// one per execution of a test method.
+        /// </summary>
+        /// <param name="method">
+        /// The test method.
+        /// </param>
+        /// <returns>
+        /// The test commands which will execute the test runs for the given method.
+        /// </returns>
+        protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
+        {
+            return this.factory.Create(method, this);
         }
 
         /// <summary>

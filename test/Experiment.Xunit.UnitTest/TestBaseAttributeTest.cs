@@ -6,6 +6,7 @@
     using Moq;
     using Moq.Protected;
     using global::Xunit;
+    using global::Xunit.Sdk;
 
     public class TestBaseAttributeTest
     {
@@ -59,11 +60,25 @@
         public void CreateReturnsCorrectTestFixture()
         {
             var sut = Mocked.Of<TestBaseAttribute>();
-            var context = Mocked.Of<ITestMethodInfo>();
+            var methodInfo = Mocked.Of<ITestMethodInfo>();
             var expected = Mocked.Of<ITestFixture>();
-            sut.ToMock().Protected().Setup<ITestFixture>("Create", context).Returns(expected);
+            sut.ToMock().Protected().Setup<ITestFixture>("Create", methodInfo).Returns(expected);
 
-            var actual = ((ITestFixtureFactory)sut).Create(context);
+            var actual = ((ITestFixtureFactory)sut).Create(methodInfo);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CreatTestCommandReturnsCorrectCommands()
+        {
+            var expected = new[] { Mocked.Of<ITestCommand>(), Mocked.Of<ITestCommand>() };
+            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+            var factory = Mocked.Of<ITestCommandFactory>();
+            var sut = new Mock<TestBaseAttribute>(factory) { CallBase = true }.Object;
+            factory.Of(f => f.Create(method, sut) == expected);
+
+            var actual = sut.CreateTestCommands(method);
 
             Assert.Equal(expected, actual);
         }
