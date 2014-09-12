@@ -26,7 +26,7 @@ for (var j = 1; j <= i; j++)
 <#
 }
 #>
-    public interface ITestCaseWithAuto<<#=typeList#>>
+    public interface ITestCaseWithAuto<<#=typeList#>> : IFluentInterface
     {
         /// <summary>
         /// Creates a test case with one argument.

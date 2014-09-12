@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Xml;
     using Jwc.Experiment.Xunit;
     using global::Xunit;
@@ -36,12 +37,13 @@
         {
             var restrictiveReferences = new[]
             {
-                typeof(object).Assembly,
-                typeof(Enumerable).Assembly,
-                typeof(FactAttribute).Assembly,
-                typeof(TheoryAttribute).Assembly,
-                typeof(ITestFixture).Assembly,
-                typeof(XmlNode).Assembly
+                Assembly.Load("mscorlib"),
+                Assembly.Load("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Assembly.Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Assembly.Load("Jwc.Experiment"),
+                Assembly.Load("xunit"),
+                Assembly.Load("xunit.extensions")
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
             Assert.DoesNotThrow(() => sut.Verify(typeof(TestAttribute).Assembly));

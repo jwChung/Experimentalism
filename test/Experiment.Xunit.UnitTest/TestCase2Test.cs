@@ -124,7 +124,7 @@
         public void CreateWithAuto2ReturnsCorrectTestCase()
         {
             var @delegate = new Action<object, int>((x, y) => { });
-
+            
             var actual = TestCase2.WithAuto<object, int>().Create(@delegate);
 
             Assert.Empty(actual.Arguments);
@@ -132,19 +132,19 @@
             Assert.Equal(@delegate.Target, actual.TestObject);
         }
 
-        ////[Fact]
-        ////public void CreateWithExplicit3ReturnsCorrectTestCase()
-        ////{
-        ////    var arg1 = "anonymous";
-        ////    int arg2 = 123;
-        ////    var arg3 = new object();
-        ////    var @delegate = new Action<string, int>((x, y, z) => { });
+        [Fact]
+        public void CreateWithExplicit3AndAuto1ReturnsCorrectTestCase()
+        {
+            var arg1 = "anonymous";
+            int arg2 = 123;
+            var arg3 = new object();
+            var @delegate = new Action<string, int, object, int>((a1, a2, a3, a4) => { });
+            
+            var actual = TestCase2.WithArgs(arg1, arg2, arg3).WithAuto<int>().Create(@delegate);
 
-        ////    var actual = TestCase2.WithArgs(arg1, arg2, arg3).Create(@delegate);
-
-        ////    Assert.Equal(new object[] { arg1, arg2, arg3 }, actual.Arguments);
-        ////    Assert.Equal(@delegate.Method, actual.TestMethod);
-        ////    Assert.Equal(@delegate.Target, actual.TestObject);
-        ////}
+            Assert.Equal(new object[] { arg1, arg2, arg3 }, actual.Arguments);
+            Assert.Equal(@delegate.Method, actual.TestMethod);
+            Assert.Equal(@delegate.Target, actual.TestObject);
+        }
     }
 }
