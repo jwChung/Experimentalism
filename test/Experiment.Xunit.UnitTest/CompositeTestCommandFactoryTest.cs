@@ -54,5 +54,21 @@
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void CreateReturnsEmptyIfAllFactoriesReturnEmpty()
+        {
+            var method = Mocked.Of<IMethodInfo>();
+            var fixtureFactory = Mocked.Of<ITestFixtureFactory>();
+            var factory1 = Mocked.Of<ITestCommandFactory>(
+                f => f.Create(method, fixtureFactory) == new ITestCommand[0]);
+            var factory2 = Mocked.Of<ITestCommandFactory>(
+                f => f.Create(method, fixtureFactory) == new ITestCommand[0]);
+            var sut = new CompositeTestCommandFactory(factory1, factory2);
+
+            var actual = sut.Create(method, fixtureFactory);
+
+            Assert.Empty(actual);
+        }
     }
 }

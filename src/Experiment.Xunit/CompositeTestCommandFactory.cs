@@ -50,7 +50,7 @@
         {
             return this.factories
                 .Select(f => f.Create(testMethod, fixtureFactory))
-                .First(c => c.Any());
+                .FirstOrDefault(c => c.Any()) ?? Enumerable.Empty<ITestCommand>();
         }
     }
 }
