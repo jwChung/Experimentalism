@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
     using System.Reflection;
     using global::Xunit.Sdk;
 
@@ -12,9 +14,10 @@
     {
         private readonly MethodInfo testMethod;
         private readonly MethodInfo actualMethod;
+        private readonly object testObject;
         private readonly object actualObject;
         private readonly ITestFixtureFactory factory;
-        private readonly IEnumerable<object> arguments;
+        private readonly object[] arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestInfo"/> class.
@@ -45,7 +48,7 @@
             this.testMethod = testMethod;
             this.actualMethod = testMethod;
             this.factory = factory;
-            this.arguments = arguments;
+            this.arguments = arguments.ToArray();
         }
 
         /// <summary>
@@ -92,7 +95,17 @@
             this.actualMethod = actualMethod;
             this.actualObject = actualObject;
             this.factory = factory;
-            this.arguments = arguments;
+            this.arguments = arguments.ToArray();
+        }
+
+        private TestInfo(
+            object testObject,
+            TestInfo other)
+        {
+            this.testMethod = other.testMethod;
+            this.actualMethod = other.actualMethod;
+            this.testObject = testObject;
+            this.actualObject = other.actualObject ?? testObject;
         }
 
         /// <summary>
@@ -116,7 +129,7 @@
         /// </summary>
         public object TestObject
         {
-            get { return null; }
+            get { return this.testObject; }
         }
 
         /// <summary>
@@ -150,7 +163,31 @@
 
         IEnumerable<object> ITestCommandInfo.GetArguments(object testObject)
         {
-            throw new NotImplementedException();
+            var parameters = this.actualMethod.GetParameters();
+            if (parameters.Length < this.arguments.Length)
+                throw new InvalidOperationException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Expected {0} parameters, got {1} parameters",
+                    parameters.Length,
+                    this.arguments.Length));
+
+            if (this.actualMethod.GetParameters().Length == this.arguments.Length)
+                return this.arguments;
+
+            return this.GetArguments(testObject);
+        }
+
+        private IEnumerable<object> GetArguments(object testObject)
+        {
+            return this.arguments.Concat(this.GetAutoData(testObject));
+        }
+
+        private IEnumerable<object> GetAutoData(object testObject)
+        {
+            var fixture = this.factory.Create(new TestInfo(testObject, this));
+            return this.actualMethod.GetParameters()
+                .Skip(this.arguments.Length)
+                .Select(p => fixture.Create(p.ParameterType));
         }
     }
 }
