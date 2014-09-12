@@ -82,7 +82,7 @@
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(testMethod, sut.ActualMethod);
-            Assert.Null(sut.TestObject);
+            Assert.Null(((ITestMethodInfo)sut).TestObject);
             Assert.Null(sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.Arguments);
@@ -102,7 +102,7 @@
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Null(sut.TestObject);
+            Assert.Null(((ITestMethodInfo)sut).TestObject);
             Assert.Equal(actualObject, sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.Arguments);

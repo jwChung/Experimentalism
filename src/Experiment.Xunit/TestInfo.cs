@@ -124,10 +124,7 @@
             get { return this.actualMethod; }
         }
 
-        /// <summary>
-        /// Gets the test object declaring a adorned test method.
-        /// </summary>
-        public object TestObject
+        object ITestMethodInfo.TestObject
         {
             get { return this.testObject; }
         }
