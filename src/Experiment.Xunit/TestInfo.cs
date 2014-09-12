@@ -60,7 +60,7 @@
         /// <param name="actualMethod">
         /// The actual method.
         /// </param>
-        /// <param name="actualClass">
+        /// <param name="actualObject">
         /// The actual object.
         /// </param>
         /// <param name="factory">
@@ -69,10 +69,11 @@
         /// <param name="arguments">
         /// The arguments.
         /// </param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "object", Justification = "This rule is suppressed because the 'Object' term is appropriate to represent an object of a test class.")]
         public TestInfo(
             MethodInfo testMethod,
             MethodInfo actualMethod,
-            object actualClass,
+            object actualObject,
             ITestFixtureFactory factory,
             IEnumerable<object> arguments)
         {
@@ -82,8 +83,8 @@
             if (actualMethod == null)
                 throw new ArgumentNullException("actualMethod");
 
-            if (actualClass == null)
-                throw new ArgumentNullException("actualClass");
+            if (actualObject == null)
+                throw new ArgumentNullException("actualObject");
 
             if (factory == null)
                 throw new ArgumentNullException("factory");
@@ -93,7 +94,7 @@
 
             this.testMethod = testMethod;
             this.actualMethod = actualMethod;
-            this.actualObject = actualClass;
+            this.actualObject = actualObject;
             this.factory = factory;
             this.arguments = arguments.ToArray();
         }
