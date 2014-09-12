@@ -122,9 +122,9 @@
         public void CreateReturnsEmptyIfTestMethodIsParameterized()
         {
             var sut = new TestCaseCommandFactory();
-            var @delegate = new Func<object, int, IEnumerable<ITestCase2>>((x, y) => new ITestCase2[0]);
+            var delegator = new Func<object, int, IEnumerable<ITestCase2>>((x, y) => new ITestCase2[0]);
 
-            var actual = sut.Create(Reflector.Wrap(@delegate.Method), null);
+            var actual = sut.Create(Reflector.Wrap(delegator.Method), null);
 
             Assert.Empty(actual);
         }
@@ -156,7 +156,7 @@
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
                     && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
+                    && t.Target == TestObject);
             }
         }
 
@@ -172,7 +172,7 @@
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
                     && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
+                    && t.Target == TestObject);
             }
 
             public IEnumerable<ITestCase2> TestMethod()
@@ -180,17 +180,17 @@
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
                     && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
+                    && t.Target == TestObject);
 
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
                     && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
+                    && t.Target == TestObject);
 
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
                     && t.Arguments == Arguments
-                    && t.TestObject == TestObject);
+                    && t.Target == TestObject);
             }
         }
     }

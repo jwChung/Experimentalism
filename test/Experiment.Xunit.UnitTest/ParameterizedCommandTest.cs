@@ -49,22 +49,22 @@
         {
             bool verifid = false;
             var arguments = new object[] { 123, "Foo" };
-            var @delegate = new Action<int, string>((x, y) =>
+            var delegator = new Action<int, string>((x, y) =>
             {
                 Assert.Equal(arguments[0], x);
                 Assert.Equal(arguments[1], y);
                 verifid = true;
             });
             var testCommandInfo = Mocked.Of<ITestCommandInfo>(
-                c => c.TestMethod == Reflector.Wrap(@delegate.Method)
-                && c.GetArguments(@delegate.Target) == arguments);
+                c => c.TestMethod == Reflector.Wrap(delegator.Method)
+                && c.GetArguments(delegator.Target) == arguments);
             var sut = new ParameterizedCommand(testCommandInfo);
 
-            var actual = sut.Execute(@delegate.Target);
+            var actual = sut.Execute(delegator.Target);
 
             Assert.True(verifid);
             var passedResult = Assert.IsAssignableFrom<PassedResult>(actual);
-            Assert.Equal(@delegate.Method.Name, passedResult.MethodName);
+            Assert.Equal(delegator.Method.Name, passedResult.MethodName);
             Assert.Equal(sut.DisplayName, passedResult.DisplayName);
         }
 
@@ -72,15 +72,15 @@
         public void ExecuteSetsCorrectDisplayName()
         {
             var arguments = new object[] { 123, "Foo", new object() };
-            var @delegate = new Action<int, string, object>((x, y, z) => { });
+            var delegator = new Action<int, string, object>((x, y, z) => { });
             var testCommandInfo = Mocked.Of<ITestCommandInfo>(
-                c => c.TestMethod == Reflector.Wrap(@delegate.Method)
-                && c.GetArguments(@delegate.Target) == arguments);
+                c => c.TestMethod == Reflector.Wrap(delegator.Method)
+                && c.GetArguments(delegator.Target) == arguments);
             var sut = new ParameterizedCommand(testCommandInfo);
-            var expected = new TheoryCommand(Reflector.Wrap(@delegate.Method), arguments).DisplayName;
+            var expected = new TheoryCommand(Reflector.Wrap(delegator.Method), arguments).DisplayName;
             Assert.NotEqual(expected, sut.DisplayName);
 
-            sut.Execute(@delegate.Target);
+            sut.Execute(delegator.Target);
 
             Assert.Equal(expected, sut.DisplayName);
         }

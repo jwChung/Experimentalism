@@ -21,6 +21,6 @@
         /// <summary>
         /// Gets the test object declaring a actual test method.
         /// </summary>
-        object TestObject { get; }
+        object Target { get; }
     }
 }

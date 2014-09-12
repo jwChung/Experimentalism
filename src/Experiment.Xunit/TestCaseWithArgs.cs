@@ -14,9 +14,9 @@ namespace Jwc.Experiment.Xunit
             this.arg1 = arg1;
         }
 
-        public ITestCase2 Create(Action<T1> @delegate)
+        public ITestCase2 Create(Action<T1> delegator)
         {
-            return new TestCase2(@delegate, this.arg1);
+            return new TestCase2(delegator, this.arg1);
         }
 
         public ITestCaseWithAuto<T1, T2> WithAuto<T2>()
@@ -106,9 +106,9 @@ namespace Jwc.Experiment.Xunit
             this.arg2 = arg2;
         }
 
-        public ITestCase2 Create(Action<T1, T2> @delegate)
+        public ITestCase2 Create(Action<T1, T2> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2);
+            return new TestCase2(delegator, this.arg1, this.arg2);
         }
 
         public ITestCaseWithAuto<T1, T2, T3> WithAuto<T3>()
@@ -195,9 +195,9 @@ namespace Jwc.Experiment.Xunit
             this.arg3 = arg3;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T4>()
@@ -281,9 +281,9 @@ namespace Jwc.Experiment.Xunit
             this.arg4 = arg4;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T5>()
@@ -364,9 +364,9 @@ namespace Jwc.Experiment.Xunit
             this.arg5 = arg5;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T6>()
@@ -444,9 +444,9 @@ namespace Jwc.Experiment.Xunit
             this.arg6 = arg6;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T7>()
@@ -521,9 +521,9 @@ namespace Jwc.Experiment.Xunit
             this.arg7 = arg7;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T8>()
@@ -595,9 +595,9 @@ namespace Jwc.Experiment.Xunit
             this.arg8 = arg8;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T9>()
@@ -666,9 +666,9 @@ namespace Jwc.Experiment.Xunit
             this.arg9 = arg9;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T10>()
@@ -734,9 +734,9 @@ namespace Jwc.Experiment.Xunit
             this.arg10 = arg10;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T11>()
@@ -799,9 +799,9 @@ namespace Jwc.Experiment.Xunit
             this.arg11 = arg11;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T12>()
@@ -861,9 +861,9 @@ namespace Jwc.Experiment.Xunit
             this.arg12 = arg12;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T13>()
@@ -920,9 +920,9 @@ namespace Jwc.Experiment.Xunit
             this.arg13 = arg13;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T14>()
@@ -976,9 +976,9 @@ namespace Jwc.Experiment.Xunit
             this.arg14 = arg14;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T15>()
@@ -1029,9 +1029,9 @@ namespace Jwc.Experiment.Xunit
             this.arg15 = arg15;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T16>()
@@ -1079,9 +1079,9 @@ namespace Jwc.Experiment.Xunit
             this.arg16 = arg16;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator)
         {
-            return new TestCase2(@delegate, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15, this.arg16);
+            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15, this.arg16);
         }
     }
 

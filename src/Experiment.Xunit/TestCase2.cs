@@ -9,22 +9,22 @@
     /// </summary>
     public partial class TestCase2 : ITestCase2
     {
-        private readonly Delegate @delegate;
+        private readonly Delegate delegator;
         private readonly object[] arguments;
         
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase2"/> class.
         /// </summary>
-        /// <param name="delegate">
+        /// <param name="delegator">
         /// A delegate representing the actual test method.
         /// </param>
         /// <param name="arguments">
         /// Explicit arguments.
         /// </param>
-        public TestCase2(Delegate @delegate, params object[] arguments)
+        public TestCase2(Delegate delegator, params object[] arguments)
         {
             this.arguments = arguments;
-            this.@delegate = @delegate;
+            this.delegator = delegator;
         }
 
         /// <summary>
@@ -40,15 +40,15 @@
         /// </summary>
         public MethodInfo TestMethod
         {
-            get { return this.@delegate.Method; }
+            get { return this.delegator.Method; }
         }
 
         /// <summary>
         /// Gets the test object declaring a actual test method.
         /// </summary>
-        public object TestObject
+        public object Target
         {
-            get { return this.@delegate.Target; }
+            get { return this.delegator.Target; }
         }
 
         /// <summary>
@@ -56,21 +56,21 @@
         /// </summary>
         public Delegate Delegate
         {
-            get { return @delegate; }
+            get { return this.delegator; }
         }
 
         /// <summary>
         /// Creates a test case with no arguments.
         /// </summary>
-        /// <param name="delegate">'
-        /// A delegate representing the actual test method.
+        /// <param name="delegator">
+        /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
         /// The new test case.
         /// </returns>
-        public static ITestCase2 Create(Action @delegate)
+        public static ITestCase2 Create(Action delegator)
         {
-            return new TestCase2(@delegate, new object[0]);
+            return new TestCase2(delegator, new object[0]);
         }
 
         /// <summary>

@@ -13,33 +13,33 @@
     public partial class TestCase : ITestCase
     {
         private readonly string displayParameterName;
-        private readonly Delegate @delegate;
+        private readonly Delegate delegator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
-        /// <param name="delegate">
+        /// <param name="delegator">
         /// The test delegate.
         /// </param>
-        public TestCase(Delegate @delegate)
+        public TestCase(Delegate delegator)
         {
-            if (@delegate == null)
-                throw new ArgumentNullException("delegate");
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
             
-            this.@delegate = @delegate;
+            this.delegator = delegator;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase" /> class.
         /// </summary>
-        /// <param name="delegate">
+        /// <param name="delegator">
         /// The test delegate.
         /// </param>
         /// <param name="displayParameterName">
         /// A string to show parameters of a test method in test result.
         /// </param>
-        public TestCase(Delegate @delegate, string displayParameterName)
-            : this(@delegate)
+        public TestCase(Delegate delegator, string displayParameterName)
+            : this(delegator)
         {
             if (displayParameterName == null)
                 throw new ArgumentNullException("displayParameterName");
@@ -60,7 +60,7 @@
         /// </summary>
         public Delegate Delegate
         {
-            get { return this.@delegate; }
+            get { return this.delegator; }
         }
         
         /// <summary>
