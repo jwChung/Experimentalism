@@ -60,7 +60,7 @@
         /// <param name="actualMethod">
         /// The actual method.
         /// </param>
-        /// <param name="actualObject">
+        /// <param name="actualClass">
         /// The actual object.
         /// </param>
         /// <param name="factory">
@@ -72,7 +72,7 @@
         public TestInfo(
             MethodInfo testMethod,
             MethodInfo actualMethod,
-            object actualObject,
+            object actualClass,
             ITestFixtureFactory factory,
             IEnumerable<object> arguments)
         {
@@ -82,8 +82,8 @@
             if (actualMethod == null)
                 throw new ArgumentNullException("actualMethod");
 
-            if (actualObject == null)
-                throw new ArgumentNullException("actualObject");
+            if (actualClass == null)
+                throw new ArgumentNullException("actualClass");
 
             if (factory == null)
                 throw new ArgumentNullException("factory");
@@ -93,7 +93,7 @@
 
             this.testMethod = testMethod;
             this.actualMethod = actualMethod;
-            this.actualObject = actualObject;
+            this.actualObject = actualClass;
             this.factory = factory;
             this.arguments = arguments.ToArray();
         }
@@ -158,7 +158,7 @@
             get { return Reflector.Wrap(this.actualMethod); }
         }
 
-        IEnumerable<object> ITestCommandInfo.GetArguments(object testObject)
+        IEnumerable<object> ITestCommandInfo.GetArguments(object testClass)
         {
             var parameters = this.actualMethod.GetParameters();
             if (parameters.Length < this.arguments.Length)
@@ -171,17 +171,17 @@
             if (this.actualMethod.GetParameters().Length == this.arguments.Length)
                 return this.arguments;
 
-            return this.GetArguments(testObject);
+            return this.GetArguments(testClass);
         }
 
-        private IEnumerable<object> GetArguments(object testObject)
+        private IEnumerable<object> GetArguments(object testClass)
         {
-            return this.arguments.Concat(this.GetAutoData(testObject));
+            return this.arguments.Concat(this.GetAutoData(testClass));
         }
 
-        private IEnumerable<object> GetAutoData(object testObject)
+        private IEnumerable<object> GetAutoData(object testClass)
         {
-            var fixture = this.factory.Create(new TestInfo(testObject, this));
+            var fixture = this.factory.Create(new TestInfo(testClass, this));
             return this.actualMethod.GetParameters()
                 .Skip(this.arguments.Length)
                 .Select(p => fixture.Create(p.ParameterType));

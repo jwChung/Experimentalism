@@ -17,12 +17,12 @@
         /// <summary>
         /// Gets test arguments.
         /// </summary>
-        /// <param name="testObject">
+        /// <param name="testClass">
         /// A test object.
         /// </param>
         /// <returns>
         /// The test arguments.
         /// </returns>
-        IEnumerable<object> GetArguments(object testObject);
+        IEnumerable<object> GetArguments(object testClass);
     }
 }

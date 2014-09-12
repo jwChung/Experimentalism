@@ -26,6 +26,7 @@ for (var j = 1; j <= i; j++)
 <#
 }
 #>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
     public interface ITestCaseWithArgs<<#=typeList#>> : IFluentInterface
     {
         /// <summary>
