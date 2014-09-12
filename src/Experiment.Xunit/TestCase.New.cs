@@ -14,8 +14,12 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -30,8 +34,12 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -49,9 +57,15 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -66,9 +80,15 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -86,10 +106,18 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -104,10 +132,18 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -125,11 +161,21 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -144,11 +190,21 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -166,12 +222,24 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -186,12 +254,24 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -209,13 +289,27 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -230,13 +324,27 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -254,14 +362,30 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -276,14 +400,30 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -301,15 +441,33 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -324,15 +482,33 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -350,16 +526,36 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -374,16 +570,36 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -401,17 +617,39 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -426,17 +664,39 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -454,18 +714,42 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -480,18 +764,42 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -509,19 +817,45 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -536,19 +870,45 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -566,20 +926,48 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
-        /// <typeparam name="TArg14">A type of the fourteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg14">
+        /// A type of the fourteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -594,20 +982,48 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
-        /// <typeparam name="TArg14">A type of the fourteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg14">
+        /// A type of the fourteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -625,21 +1041,51 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
-        /// <typeparam name="TArg14">A type of the fourteenth argument.</typeparam>
-        /// <typeparam name="TArg15">A type of the fifteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg14">
+        /// A type of the fourteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg15">
+        /// A type of the fifteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -654,21 +1100,51 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
-        /// <typeparam name="TArg14">A type of the fourteenth argument.</typeparam>
-        /// <typeparam name="TArg15">A type of the fifteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg14">
+        /// A type of the fourteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg15">
+        /// A type of the fifteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -686,22 +1162,54 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
-        /// <typeparam name="TArg14">A type of the fourteenth argument.</typeparam>
-        /// <typeparam name="TArg15">A type of the fifteenth argument.</typeparam>
-        /// <typeparam name="TArg16">A type of the sixteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg14">
+        /// A type of the fourteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg15">
+        /// A type of the fifteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg16">
+        /// A type of the sixteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>
@@ -716,22 +1224,54 @@
         /// <summary>
         /// Creates a new instance of <see cref="TestCase" />.
         /// </summary>
-        /// <typeparam name="TArg1">A type of the first argument.</typeparam>
-        /// <typeparam name="TArg2">A type of the second argument.</typeparam>
-        /// <typeparam name="TArg3">A type of the third argument.</typeparam>
-        /// <typeparam name="TArg4">A type of the fourth argument.</typeparam>
-        /// <typeparam name="TArg5">A type of the fifth argument.</typeparam>
-        /// <typeparam name="TArg6">A type of the sixth argument.</typeparam>
-        /// <typeparam name="TArg7">A type of the seventh argument.</typeparam>
-        /// <typeparam name="TArg8">A type of the eighth argument.</typeparam>
-        /// <typeparam name="TArg9">A type of the ninth argument.</typeparam>
-        /// <typeparam name="TArg10">A type of the tenth argument.</typeparam>
-        /// <typeparam name="TArg11">A type of the eleventh argument.</typeparam>
-        /// <typeparam name="TArg12">A type of the twelfth argument.</typeparam>
-        /// <typeparam name="TArg13">A type of the thirteenth argument.</typeparam>
-        /// <typeparam name="TArg14">A type of the fourteenth argument.</typeparam>
-        /// <typeparam name="TArg15">A type of the fifteenth argument.</typeparam>
-        /// <typeparam name="TArg16">A type of the sixteenth argument.</typeparam>
+        /// <typeparam name="TArg1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="TArg2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <typeparam name="TArg3">
+        /// A type of the third argument.
+        /// </typeparam>
+        /// <typeparam name="TArg4">
+        /// A type of the fourth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg5">
+        /// A type of the fifth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg6">
+        /// A type of the sixth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg7">
+        /// A type of the seventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg8">
+        /// A type of the eighth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg9">
+        /// A type of the ninth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg10">
+        /// A type of the tenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg11">
+        /// A type of the eleventh argument.
+        /// </typeparam>
+        /// <typeparam name="TArg12">
+        /// A type of the twelfth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg13">
+        /// A type of the thirteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg14">
+        /// A type of the fourteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg15">
+        /// A type of the fifteenth argument.
+        /// </typeparam>
+        /// <typeparam name="TArg16">
+        /// A type of the sixteenth argument.
+        /// </typeparam>
         /// <param name="action">
         /// An action.
         /// </param>

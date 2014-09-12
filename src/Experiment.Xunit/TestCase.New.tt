@@ -26,9 +26,10 @@ for (var typeCount = 2; typeCount <= GenericTypeMax; typeCount++)
 <#
 for (var i = 1; i <= typeCount; i++)
 {
-    var typeName = string.Format("TArg{0}", i);
 #>
-        /// <typeparam name="<#=typeName#>">A type of the <#=ConvertToOrdinal(i)#> argument.</typeparam>
+        /// <typeparam name="<#=string.Format("TArg{0}", i)#>">
+        /// A type of the <#=ConvertToOrdinal(i)#> argument.
+        /// </typeparam>
 <#
 }
 #>
@@ -49,9 +50,10 @@ for (var i = 1; i <= typeCount; i++)
 <#
 for (var i = 1; i <= typeCount; i++)
 {
-    var typeName = string.Format("TArg{0}", i);
 #>
-        /// <typeparam name="<#=typeName#>">A type of the <#=ConvertToOrdinal(i)#> argument.</typeparam>
+        /// <typeparam name="<#=string.Format("TArg{0}", i)#>">
+        /// A type of the <#=ConvertToOrdinal(i)#> argument.
+        /// </typeparam>
 <#
 }
 #>

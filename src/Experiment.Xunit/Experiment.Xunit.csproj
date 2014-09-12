@@ -53,6 +53,16 @@
     </Compile>
     <Compile Include="ITestCase2.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ITestCaseWithArgs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITestCaseWithArgs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ITestCaseWithAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITestCaseWithAuto.tt</DependentUpon>
+    </Compile>
     <Compile Include="ITestCommandInfo.cs" />
     <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
@@ -73,6 +83,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCase.New.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestCase2.cs" />
+    <Compile Include="TestCase2.tt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCase2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestCaseWithArgs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCaseWithArgs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestCaseWithAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCaseWithAuto.tt</DependentUpon>
+    </Compile>
     <Compile Include="TestCommandCollection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,11 +107,32 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Helpers.tt" />
+    <None Include="ITestCaseWithArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ITestCaseWithArgs.cs</LastGenOutput>
+    </None>
+    <None Include="ITestCaseWithAuto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ITestCaseWithAuto.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="TestCase.New.tt">
       <DependentUpon>TestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TestCase.New.cs</LastGenOutput>
+    </None>
+    <None Include="TestCase2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCase2.tt.cs</LastGenOutput>
+    </None>
+    <None Include="TestCaseWithArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCaseWithArgs.cs</LastGenOutput>
+    </None>
+    <None Include="TestCaseWithAuto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCaseWithAuto.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
