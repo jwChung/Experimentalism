@@ -14,9 +14,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1> @delegate)
+        public ITestCase2 Create(Action<T1> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -29,9 +29,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2> @delegate)
+        public ITestCase2 Create(Action<T1, T2> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -44,9 +44,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -59,9 +59,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -74,9 +74,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -89,9 +89,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -104,9 +104,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -119,9 +119,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -134,9 +134,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -149,9 +149,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -164,9 +164,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -179,9 +179,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -194,9 +194,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -209,9 +209,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -224,9 +224,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -239,9 +239,9 @@ namespace Jwc.Experiment.Xunit
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> @delegate)
+        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 

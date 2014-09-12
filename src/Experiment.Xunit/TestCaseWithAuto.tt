@@ -23,9 +23,9 @@ for (var i = 1; i <= GenericTypeMax; i++)
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<<#=typeList#>> @delegate)
+        public ITestCase2 Create(Action<<#=typeList#>> delegator)
         {
-            return new TestCase2(@delegate, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 

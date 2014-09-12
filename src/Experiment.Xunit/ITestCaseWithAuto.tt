@@ -31,13 +31,13 @@ for (var j = 1; j <= i; j++)
         /// <summary>
         /// Creates a test case with one argument.
         /// </summary>
-        /// <param name="delegate">'
-        /// A delegate representing the actual test method.
+        /// <param name="delegator">
+        /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<<#=typeList#>> @delegate);
+        ITestCase2 Create(Action<<#=typeList#>> delegator);
     }
 
 <#
