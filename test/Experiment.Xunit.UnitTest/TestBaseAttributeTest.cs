@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Moq;
@@ -81,6 +82,26 @@
             var actual = sut.CreateTestCommands(method);
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CreatTestCommandReturnsCorrectCommandsWhenTestCommandFactoryThrows()
+        {
+            var factory = Mocked.Of<ITestCommandFactory>(
+                f => f.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()) == this.GetTestCommands());
+            var sut = new Mock<TestBaseAttribute>(factory) { CallBase = true }.Object;
+
+            var actual = sut.CreateTestCommands(Mocked.Of<IMethodInfo>()).ToArray();
+
+            Assert.Equal(2, actual.Length);
+            var command = Assert.IsAssignableFrom<ExceptionCommand>(actual[1]);
+            Assert.IsType<InvalidOperationException>(command.Exception);
+        }
+
+        private IEnumerable<ITestCommand> GetTestCommands()
+        {
+            yield return Mocked.Of<ITestCommand>();
+            throw new InvalidOperationException();
         }
     }
 }

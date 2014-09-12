@@ -63,7 +63,7 @@
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
-            return this.factory.Create(method, this);
+            return new TestCommandCollection(method, this.factory.Create(method, this));
         }
 
         /// <summary>
