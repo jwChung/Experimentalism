@@ -39,6 +39,9 @@ for (var j = 1; j <= i; j++)
 
         public ITestCase2 Create(Action<<#=typeList#>> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, <#=GetGenericList(i, "this.arg{0}")#>);
         }
 <#

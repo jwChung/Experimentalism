@@ -136,5 +136,22 @@
             Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
         }
+
+        [Fact]
+        public void CreateWithNullDelegatorThrows()
+        {
+            Assert.Throws<ArgumentNullException>(() => TestCase2.Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase2.WithArgs("1").Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase2.WithAuto<string>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase2.WithArgs("1", 1).Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase2.WithArgs("1").WithAuto<int>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase2.WithAuto<object, int>().Create(null));
+            Assert.Throws<ArgumentNullException>(
+                () => TestCase2.WithArgs("1", 1, new object()).WithAuto<int>().Create(null));
+            Assert.Throws<ArgumentNullException>(
+                () => TestCase2.WithArgs("1", 1, new object(), "1", 1)
+                    .WithAuto<object, object, object, object>()
+                    .Create(null));
+        }
     }
 }

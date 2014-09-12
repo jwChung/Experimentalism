@@ -60,6 +60,9 @@
         /// </returns>
         public static ITestCase2 Create(Action delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, new object[0]);
         }
 

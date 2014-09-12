@@ -16,6 +16,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1);
         }
 
@@ -108,6 +111,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2);
         }
 
@@ -197,6 +203,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3);
         }
 
@@ -283,6 +292,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4);
         }
 
@@ -366,6 +378,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
         }
 
@@ -446,6 +461,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
         }
 
@@ -523,6 +541,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
         }
 
@@ -597,6 +618,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
         }
 
@@ -668,6 +692,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
         }
 
@@ -736,6 +763,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
         }
 
@@ -801,6 +831,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
         }
 
@@ -863,6 +896,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
         }
 
@@ -922,6 +958,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
         }
 
@@ -978,6 +1017,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14);
         }
 
@@ -1031,6 +1073,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15);
         }
 
@@ -1081,6 +1126,9 @@ namespace Jwc.Experiment.Xunit
 
         public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator)
         {
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
             return new TestCase2(delegator.Method, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15, this.arg16);
         }
     }
