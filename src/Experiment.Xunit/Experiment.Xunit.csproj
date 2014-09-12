@@ -124,6 +124,7 @@
       <LastGenOutput>TestCase.New.cs</LastGenOutput>
     </None>
     <None Include="TestCase2.tt">
+      <DependentUpon>TestCase2.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TestCase2.tt.cs</LastGenOutput>
     </None>
