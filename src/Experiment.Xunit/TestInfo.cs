@@ -148,7 +148,7 @@
             get { return Reflector.Wrap(this.actualMethod); }
         }
 
-        object[] ITestCommandInfo.GetArguments(object testObject)
+        IEnumerable<object> ITestCommandInfo.GetArguments(object testObject)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
     using global::Xunit.Sdk;
 
     /// <summary>
@@ -22,6 +23,6 @@
         /// <returns>
         /// The test arguments.
         /// </returns>
-        object[] GetArguments(object testObject);
+        IEnumerable<object> GetArguments(object testObject);
     }
 }
