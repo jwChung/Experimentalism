@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Reflection;
     using Ploeh.Albedo;
     using global::Xunit;
     using global::Xunit.Extensions;
@@ -42,6 +43,26 @@
             var actual = sut.TestCommandInfo;
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TimeoutIsCorrect()
+        {
+            var sut = new ParameterizedCommand(Mocked.Of<ITestCommandInfo>());
+            var actual = sut.Timeout;
+            Assert.Equal(-1, actual);
+        }
+
+        [Fact(Timeout = 1000)]
+        public void TimeoutIsCorrectWhenMethodDeclaresTimeout()
+        {
+            var method = (MethodInfo)MethodBase.GetCurrentMethod();
+            var sut = new ParameterizedCommand(
+                Mocked.Of<ITestCommandInfo>(x => x.TestMethod == Reflector.Wrap(method)));
+
+            var actual = sut.Timeout;
+
+            Assert.Equal(1000, actual);
         }
 
         [Fact]

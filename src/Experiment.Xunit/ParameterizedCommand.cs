@@ -19,8 +19,10 @@
         /// <param name="testCommandInfo">
         /// Information about this test command.
         /// </param>
-        public ParameterizedCommand(ITestCommandInfo testCommandInfo)
-            : base(GuardNull(testCommandInfo).TestMethod, null, 0)
+        public ParameterizedCommand(ITestCommandInfo testCommandInfo) : base(
+            GuardNull(testCommandInfo).TestMethod,
+            null,
+            MethodUtility.GetTimeoutParameter(testCommandInfo.TestMethod))
         {
             this.testCommandInfo = testCommandInfo;
         }
