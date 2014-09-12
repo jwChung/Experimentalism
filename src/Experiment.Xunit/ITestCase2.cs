@@ -17,10 +17,5 @@
         /// Gets the test method to be actually executed.
         /// </summary>
         MethodInfo TestMethod { get; }
-
-        /// <summary>
-        /// Gets the test object declaring a actual test method.
-        /// </summary>
-        object Target { get; } // TODO: delete
     }
 }

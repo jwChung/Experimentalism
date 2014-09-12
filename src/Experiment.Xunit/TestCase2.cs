@@ -44,14 +44,6 @@
         }
 
         /// <summary>
-        /// Gets the test object declaring a actual test method.
-        /// </summary>
-        public object Target
-        {
-            get { return this.delegator.Target; }
-        }
-
-        /// <summary>
         /// Gets the delegate.
         /// </summary>
         public Delegate Delegate

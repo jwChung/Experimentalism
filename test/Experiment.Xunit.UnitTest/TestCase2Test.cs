@@ -35,17 +35,6 @@
         }
 
         [Fact]
-        public void TestObjectIsCorrect()
-        {
-            var delegator = new Action(() => { });
-            var sut = new TestCase2(delegator, new object[0]);
-            
-            var actual = sut.Target;
-
-            Assert.Equal(delegator.Target, actual);
-        }
-
-        [Fact]
         public void DelegateIsCorrect()
         {
             var delegator = new Action(() => { });
@@ -65,7 +54,6 @@
 
             Assert.Empty(actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -78,7 +66,6 @@
             
             Assert.Equal(new object[] { arg1 }, actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -90,7 +77,6 @@
 
             Assert.Empty(actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -104,7 +90,6 @@
 
             Assert.Equal(new object[] { arg1, arg2 }, actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -117,7 +102,6 @@
 
             Assert.Equal(new object[] { arg1 }, actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -129,7 +113,6 @@
 
             Assert.Empty(actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -144,7 +127,6 @@
 
             Assert.Equal(new object[] { arg1, arg2, arg3 }, actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
 
         [Fact]
@@ -164,7 +146,6 @@
 
             Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, actual.Arguments);
             Assert.Equal(delegator.Method, actual.TestMethod);
-            Assert.Equal(delegator.Target, actual.Target);
         }
     }
 }
