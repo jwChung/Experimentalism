@@ -12,10 +12,11 @@
     /// </summary>
     public class TestInfo : ITestMethodInfo, ITestCommandInfo
     {
+        private readonly bool isSameObject;
         private readonly MethodInfo testMethod;
         private readonly MethodInfo actualMethod;
         private readonly object testObj;
-        private readonly object actualObject;
+        private readonly object actualObj;
         private readonly ITestFixtureFactory factory;
         private readonly object[] arguments;
 
@@ -49,6 +50,7 @@
             this.actualMethod = testMethod;
             this.factory = factory;
             this.arguments = arguments.ToArray();
+            this.isSameObject = true;
         }
 
         /// <summary>
@@ -60,8 +62,8 @@
         /// <param name="actualMethod">
         /// The actual method.
         /// </param>
-        /// <param name="actualObject">
-        /// The actual object.
+        /// <param name="testObject">
+        /// The test object.
         /// </param>
         /// <param name="factory">
         /// The factory of test fixture.
@@ -73,7 +75,7 @@
         public TestInfo(
             MethodInfo testMethod,
             MethodInfo actualMethod,
-            object actualObject,
+            object testObject,
             ITestFixtureFactory factory,
             IEnumerable<object> arguments)
         {
@@ -83,9 +85,6 @@
             if (actualMethod == null)
                 throw new ArgumentNullException("actualMethod");
 
-            if (actualObject == null)
-                throw new ArgumentNullException("actualObject");
-
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
@@ -94,19 +93,18 @@
 
             this.testMethod = testMethod;
             this.actualMethod = actualMethod;
-            this.actualObject = actualObject;
+            this.testObj = testObject;
             this.factory = factory;
             this.arguments = arguments.ToArray();
+            this.isSameObject = false;
         }
 
-        private TestInfo(
-            object testObject,
-            TestInfo other)
+        private TestInfo(object actualObject, TestInfo other)
         {
             this.testMethod = other.testMethod;
             this.actualMethod = other.actualMethod;
-            this.testObj = testObject;
-            this.actualObject = other.actualObject ?? testObject;
+            this.testObj = other.testObj ?? (other.isSameObject ? actualObject : null);
+            this.actualObj = actualObject;
         }
 
         /// <summary>
@@ -138,7 +136,7 @@
         /// </summary>
         public object ActualObject
         {
-            get { return this.actualObject; }
+            get { return this.actualObj; }
         }
 
         /// <summary>
@@ -165,13 +163,13 @@
         /// <summary>
         /// Gets test arguments.
         /// </summary>
-        /// <param name="testObject">
-        /// A test object.
+        /// <param name="actualObject">
+        /// An actual object.
         /// </param>
         /// <returns>
         /// The test arguments.
         /// </returns>
-        public IEnumerable<object> GetArguments(object testObject)
+        public IEnumerable<object> GetArguments(object actualObject)
         {
             var parameters = this.actualMethod.GetParameters();
             if (parameters.Length < this.arguments.Length)
@@ -184,12 +182,12 @@
             if (this.actualMethod.GetParameters().Length == this.arguments.Length)
                 return this.arguments;
 
-            return this.arguments.Concat(this.GetAutoData(testObject));
+            return this.arguments.Concat(this.GetAutoData(actualObject));
         }
 
-        private IEnumerable<object> GetAutoData(object testClass)
+        private IEnumerable<object> GetAutoData(object actualObject)
         {
-            var fixture = this.factory.Create(new TestInfo(testClass, this));
+            var fixture = this.factory.Create(new TestInfo(actualObject, this));
             return this.actualMethod.GetParameters()
                 .Skip(this.arguments.Length)
                 .Select(p => fixture.Create(p.ParameterType));

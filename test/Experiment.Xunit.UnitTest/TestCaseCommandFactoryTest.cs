@@ -113,7 +113,7 @@
                 testInfo,
                 testMethod,
                 StaticTestClass.Method,
-                StaticTestClass.TestObject,
+                null,
                 StaticTestClass.Arguments,
                 factory));
         }
@@ -133,13 +133,13 @@
             TestInfo testInfo,
             MethodInfo testMethod,
             MethodInfo actualMethod,
-            object actualObject,
+            object testObject,
             IEnumerable<object> arguments,
             ITestFixtureFactory factory)
         {
             return testInfo.TestMethod == testMethod
                 && testInfo.ActualMethod == actualMethod
-                && testInfo.ActualObject == actualObject
+                && testInfo.TestObject == testObject
                 && testInfo.ExplicitArguments.SequenceEqual(arguments)
                 && testInfo.TestFixtureFactory == factory;
         }
@@ -149,14 +149,12 @@
         {
             public static readonly MethodInfo Method = new Methods<object>().Select(x => x.ToString());
             public static readonly object[] Arguments = new object[] { 123, "string" };
-            public static object TestObject = new object();
 
             public static IEnumerable<ITestCase2> StaticTestMethod()
             {
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.Target == TestObject);
+                    && t.Arguments == Arguments);
             }
         }
 
@@ -165,32 +163,33 @@
         {
             public static readonly MethodInfo Method = new Methods<object>().Select(x => x.ToString());
             public static readonly object[] Arguments = new object[] { 123, "string" };
-            public static object TestObject = new object();
+            public static object TestObject;
+
+            public TestClass()
+            {
+                TestObject = this;
+            }
 
             public static IEnumerable<ITestCase2> StaticTestMethod()
             {
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.Target == TestObject);
+                    && t.Arguments == Arguments);
             }
 
             public IEnumerable<ITestCase2> TestMethod()
             {
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.Target == TestObject);
+                    && t.Arguments == Arguments);
 
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.Target == TestObject);
+                    && t.Arguments == Arguments);
 
                 yield return Mocked.Of<ITestCase2>(t =>
                     t.TestMethod == Method
-                    && t.Arguments == Arguments
-                    && t.Target == TestObject);
+                    && t.Arguments == Arguments);
             }
         }
     }

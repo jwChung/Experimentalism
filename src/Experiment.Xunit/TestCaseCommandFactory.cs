@@ -38,7 +38,7 @@
                 : null;
             var testCases = (IEnumerable<ITestCase2>)method.Invoke(testObject, null);
             var commands = testCases.Select(t => new ParameterizedCommand(
-                new TestInfo(method, t.TestMethod, t.Target, fixtureFactory, t.Arguments)));
+                new TestInfo(method, t.TestMethod, testObject, fixtureFactory, t.Arguments)));
 
             foreach (var command in commands)
                 yield return command;

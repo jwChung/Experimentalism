@@ -15,11 +15,11 @@
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var actualMethod = Mocked.Of<MethodInfo>();
-            var actualObject = new object();
+            var testObject = new object();
             var factory = Mocked.Of<ITestFixtureFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
 
-            var sut = new TestInfo(testMethod, actualMethod, actualMethod, factory, arguments);
+            var sut = new TestInfo(testMethod, actualMethod, testObject, factory, arguments);
 
             Assert.IsAssignableFrom<ITestMethodInfo>(sut);
         }
@@ -29,11 +29,11 @@
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var actualMethod = Mocked.Of<MethodInfo>();
-            var actualObject = new object();
+            var testObject = new object();
             var factory = Mocked.Of<ITestFixtureFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
 
-            var sut = new TestInfo(testMethod, actualMethod, actualMethod, factory, arguments);
+            var sut = new TestInfo(testMethod, actualMethod, testObject, factory, arguments);
 
             Assert.IsAssignableFrom<ITestCommandInfo>(sut);
         }
@@ -55,20 +55,17 @@
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var actualMethod = Mocked.Of<MethodInfo>();
-            var actualObject = new object();
             var factory = Mocked.Of<ITestFixtureFactory>();
             var arguments = new[] { new object(), new object() };
 
             Assert.Throws<ArgumentNullException>(
-                () => new TestInfo(null, actualMethod, actualObject, factory, arguments));
+                () => new TestInfo(null, actualMethod, null, factory, arguments));
             Assert.Throws<ArgumentNullException>(
-                () => new TestInfo(testMethod, null, actualObject, factory, arguments));
+                () => new TestInfo(testMethod, null, null, factory, arguments));
             Assert.Throws<ArgumentNullException>(
-                () => new TestInfo(testMethod, actualMethod, null, factory, arguments));
+                () => new TestInfo(testMethod, actualMethod, null, null, arguments));
             Assert.Throws<ArgumentNullException>(
-                () => new TestInfo(testMethod, actualMethod, actualObject, null, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestInfo(testMethod, actualMethod, actualObject, factory, null));
+                () => new TestInfo(testMethod, actualMethod, null, factory, null));
         }
 
         [Fact]
@@ -94,16 +91,16 @@
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var actualMethod = Mocked.Of<MethodInfo>();
-            var actualObject = new object();
+            var testObject = new object();
             var factory = Mocked.Of<ITestFixtureFactory>();
             var arguments = new[] { new object(), new object() };
 
-            var sut = new TestInfo(testMethod, actualMethod, actualObject, factory, arguments);
+            var sut = new TestInfo(testMethod, actualMethod, testObject, factory, arguments);
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Null(sut.TestObject);
-            Assert.Equal(actualObject, sut.ActualObject);
+            Assert.Equal(testObject, sut.TestObject);
+            Assert.Null(sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
             Assert.Equal(actualMethod, ((ITestCommandInfo)sut).TestMethod.MethodInfo);
@@ -135,27 +132,27 @@
         }
 
         [Fact]
-        public void GetArgumentsWithModestCtorReturnsCorrectValuesWhenNubmerOfArgumentsIsLessThanNumberOfTestArguments()
+        public void GetArgumentsWithModestCtorReturnsCorrectValues()
         {
             var testMethod = new Methods<TestInfoTest>().Select(x => x.TestMethod(null, null, 0));
             var arguments = new[] { new object() };
             var arg1 = "string";
             var arg2 = 123;
-            var testObject = new object();
+            var actualObject = new object();
             var fixture = Mocked.Of<ITestFixture>(
                         t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
             var factory = Mocked.Of<ITestFixtureFactory>(
                 f => f.Create(It.Is<ITestMethodInfo>(
-                    p => HasValues(p, testMethod, testMethod, testObject, testObject))) == fixture);
+                    p => HasValues(p, testMethod, testMethod, actualObject, actualObject))) == fixture);
             var sut = new TestInfo(testMethod, factory, arguments);
 
-            var actual = sut.GetArguments(testObject);
+            var actual = sut.GetArguments(actualObject);
 
             Assert.Equal(arguments.Concat(new object[] { arg1, arg2 }), actual);
         }
 
         [Fact]
-        public void GetArgumentsWithGreedyCtorReturnsCorrectValuesWhenNubmerOfArgumentsIsLessThanNumberOfTestArguments()
+        public void GetArgumentsWithGreedyCtorReturnsCorrectValues()
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var actualMethod = new Methods<TestInfoTest>().Select(x => x.TestMethod(null, null, 0));
@@ -169,9 +166,30 @@
             var factory = Mocked.Of<ITestFixtureFactory>(
                 f => f.Create(It.Is<ITestMethodInfo>(
                     p => HasValues(p, testMethod, actualMethod, testObject, actualObject))) == fixture);
-            var sut = new TestInfo(testMethod, actualMethod, actualObject, factory, arguments);
+            var sut = new TestInfo(testMethod, actualMethod, testObject, factory, arguments);
 
-            var actual = sut.GetArguments(testObject);
+            var actual = sut.GetArguments(actualObject);
+
+            Assert.Equal(arguments.Concat(new object[] { arg1, arg2 }), actual);
+        }
+
+        [Fact]
+        public void GetArgumentsWithModestCtorAndNullTestObjectReturnsCorrectValues()
+        {
+            var testMethod = Mocked.Of<MethodInfo>();
+            var actualMethod = new Methods<TestInfoTest>().Select(x => x.TestMethod(null, null, 0));
+            var actualObject = new object();
+            var arguments = new[] { new object() };
+            var arg1 = "string";
+            var arg2 = 123;
+            var fixture = Mocked.Of<ITestFixture>(
+                        t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
+            var factory = Mocked.Of<ITestFixtureFactory>(
+                f => f.Create(It.Is<ITestMethodInfo>(
+                    p => HasValues(p, testMethod, actualMethod, null, actualObject))) == fixture);
+            var sut = new TestInfo(testMethod, actualMethod, null, factory, arguments);
+
+            var actual = sut.GetArguments(actualObject);
 
             Assert.Equal(arguments.Concat(new object[] { arg1, arg2 }), actual);
         }
