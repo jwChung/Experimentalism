@@ -124,7 +124,10 @@
             get { return this.actualMethod; }
         }
 
-        object ITestMethodInfo.TestObject
+        /// <summary>
+        /// Gets the test object declaring a adorned test method.
+        /// </summary>
+        public object TestObject
         {
             get { return this.testObject; }
         }
@@ -158,7 +161,16 @@
             get { return Reflector.Wrap(this.actualMethod); }
         }
 
-        IEnumerable<object> ITestCommandInfo.GetArguments(object testClass)
+        /// <summary>
+        /// Gets test arguments.
+        /// </summary>
+        /// <param name="testClass">
+        /// A test object.
+        /// </param>
+        /// <returns>
+        /// The test arguments.
+        /// </returns>
+        public IEnumerable<object> GetArguments(object testClass)
         {
             var parameters = this.actualMethod.GetParameters();
             if (parameters.Length < this.arguments.Length)
@@ -171,11 +183,6 @@
             if (this.actualMethod.GetParameters().Length == this.arguments.Length)
                 return this.arguments;
 
-            return this.GetArguments(testClass);
-        }
-
-        private IEnumerable<object> GetArguments(object testClass)
-        {
             return this.arguments.Concat(this.GetAutoData(testClass));
         }
 

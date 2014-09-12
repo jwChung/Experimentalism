@@ -82,7 +82,7 @@
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(testMethod, sut.ActualMethod);
-            Assert.Null(((ITestMethodInfo)sut).TestObject);
+            Assert.Null(sut.TestObject);
             Assert.Null(sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.Arguments);
@@ -102,7 +102,7 @@
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Null(((ITestMethodInfo)sut).TestObject);
+            Assert.Null(sut.TestObject);
             Assert.Equal(actualObject, sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.Arguments);
@@ -115,7 +115,7 @@
             var testMethod = new Methods<TestInfoTest>().Select(x => x.TestMethod(null, null));
             var actualMethod = (MethodInfo)MethodBase.GetCurrentMethod();
             var arguments = new[] { new object(), new object() };
-            ITestCommandInfo sut = new TestInfo(
+            var sut = new TestInfo(
                 testMethod, actualMethod, new object(), Mocked.Of<ITestFixtureFactory>(), arguments);
 
             Assert.Throws<InvalidOperationException>(() => sut.GetArguments(new object()));
@@ -126,7 +126,7 @@
         {
             var testMethod = new Methods<TestInfoTest>().Select(x => x.TestMethod(null, null));
             var arguments = new[] { new object(), new object() };
-            ITestCommandInfo sut = new TestInfo(
+            var sut = new TestInfo(
                 testMethod, Mocked.Of<ITestFixtureFactory>(), arguments);
 
             var actual = sut.GetArguments(new object());
@@ -147,7 +147,7 @@
             var factory = Mocked.Of<ITestFixtureFactory>(
                 f => f.Create(It.Is<ITestMethodInfo>(
                     p => HasValues(p, testMethod, testMethod, testObject, testObject))) == fixture);
-            ITestCommandInfo sut = new TestInfo(testMethod, factory, arguments);
+            var sut = new TestInfo(testMethod, factory, arguments);
 
             var actual = sut.GetArguments(testObject);
 
@@ -169,7 +169,7 @@
             var factory = Mocked.Of<ITestFixtureFactory>(
                 f => f.Create(It.Is<ITestMethodInfo>(
                     p => HasValues(p, testMethod, actualMethod, testObject, actualObject))) == fixture);
-            ITestCommandInfo sut = new TestInfo(testMethod, actualMethod, actualObject, factory, arguments);
+            var sut = new TestInfo(testMethod, actualMethod, actualObject, factory, arguments);
 
             var actual = sut.GetArguments(testObject);
 
