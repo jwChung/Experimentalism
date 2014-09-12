@@ -1,6 +1,9 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using global::Xunit.Extensions;
     using global::Xunit.Sdk;
 
     /// <summary>
@@ -41,7 +44,10 @@
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            throw new NotImplementedException();
+            var arguments = this.testCommandInfo.GetArguments(testClass).ToArray();
+            this.SetDisplayName(arguments);
+            this.testCommandInfo.TestMethod.Invoke(testClass, arguments);
+            return new PassedResult(this.testCommandInfo.TestMethod, this.DisplayName);
         }
 
         private static ITestCommandInfo GuardNull(ITestCommandInfo testCommandInfo)
@@ -50,6 +56,11 @@
                 throw new ArgumentNullException("testCommandInfo");
 
             return testCommandInfo;
+        }
+
+        private void SetDisplayName(object[] arguments)
+        {
+            this.DisplayName = new TheoryCommand(this.testCommandInfo.TestMethod, arguments).DisplayName;
         }
     }
 }
