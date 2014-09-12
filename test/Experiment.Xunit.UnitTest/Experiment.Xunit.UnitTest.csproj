@@ -82,6 +82,7 @@
     <Compile Include="TestBaseAttributeTest.cs" />
     <Compile Include="TestCase2Test.cs" />
     <Compile Include="TestCaseTest.cs" />
+    <Compile Include="TestInfoTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
