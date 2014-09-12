@@ -27,7 +27,7 @@
         {
             var method = new Methods<ParameterizedCommandTest>().Select(x => x.MethodNameIsCorrect());
             var sut = new ParameterizedCommand(
-                Mocked.Of<ITestCommandInfo>(x => x.TestMethod == Reflector.Wrap(method)));
+                Mocked.Of<ITestCommandInfo>(x => x.ActualMethod == Reflector.Wrap(method)));
 
             var actual = sut.MethodName;
 
@@ -77,7 +77,7 @@
                 verifid = true;
             });
             var testCommandInfo = Mocked.Of<ITestCommandInfo>(
-                c => c.TestMethod == Reflector.Wrap(delegator.Method)
+                c => c.ActualMethod == Reflector.Wrap(delegator.Method)
                 && c.GetArguments(delegator.Target) == arguments);
             var sut = new ParameterizedCommand(testCommandInfo);
 

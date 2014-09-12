@@ -20,7 +20,7 @@
         /// Information about this test command.
         /// </param>
         public ParameterizedCommand(ITestCommandInfo testCommandInfo) : base(
-            GuardNull(testCommandInfo).TestMethod,
+            GuardNull(testCommandInfo).ActualMethod,
             null,
             MethodUtility.GetTimeoutParameter(testCommandInfo.TestMethod))
         {
@@ -48,8 +48,8 @@
         {
             var arguments = this.testCommandInfo.GetArguments(testClass).ToArray();
             this.SetDisplayName(arguments);
-            this.testCommandInfo.TestMethod.Invoke(testClass, arguments);
-            return new PassedResult(this.testCommandInfo.TestMethod, this.DisplayName);
+            this.testCommandInfo.ActualMethod.Invoke(testClass, arguments);
+            return new PassedResult(this.testCommandInfo.ActualMethod, this.DisplayName);
         }
 
         private static ITestCommandInfo GuardNull(ITestCommandInfo testCommandInfo)

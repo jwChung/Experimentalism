@@ -157,6 +157,11 @@
 
         IMethodInfo ITestCommandInfo.TestMethod
         {
+            get { return Reflector.Wrap(this.testMethod); }
+        }
+
+        IMethodInfo ITestCommandInfo.ActualMethod
+        {
             get { return Reflector.Wrap(this.actualMethod); }
         }
 

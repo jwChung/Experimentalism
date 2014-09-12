@@ -15,6 +15,11 @@
         IMethodInfo TestMethod { get; }
 
         /// <summary>
+        /// Gets the actual method.
+        /// </summary>
+        IMethodInfo ActualMethod { get; }
+
+        /// <summary>
         /// Gets test arguments.
         /// </summary>
         /// <param name="actualObject">
