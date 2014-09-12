@@ -14,7 +14,7 @@
     {
         private readonly MethodInfo testMethod;
         private readonly MethodInfo actualMethod;
-        private readonly object testObject;
+        private readonly object testObj;
         private readonly object actualObject;
         private readonly ITestFixtureFactory factory;
         private readonly object[] arguments;
@@ -104,7 +104,7 @@
         {
             this.testMethod = other.testMethod;
             this.actualMethod = other.actualMethod;
-            this.testObject = testObject;
+            this.testObj = testObject;
             this.actualObject = other.actualObject ?? testObject;
         }
 
@@ -129,7 +129,7 @@
         /// </summary>
         public object TestObject
         {
-            get { return this.testObject; }
+            get { return this.testObj; }
         }
 
         /// <summary>
@@ -164,13 +164,13 @@
         /// <summary>
         /// Gets test arguments.
         /// </summary>
-        /// <param name="testClass">
+        /// <param name="testObject">
         /// A test object.
         /// </param>
         /// <returns>
         /// The test arguments.
         /// </returns>
-        public IEnumerable<object> GetArguments(object testClass)
+        public IEnumerable<object> GetArguments(object testObject)
         {
             var parameters = this.actualMethod.GetParameters();
             if (parameters.Length < this.arguments.Length)
@@ -183,7 +183,7 @@
             if (this.actualMethod.GetParameters().Length == this.arguments.Length)
                 return this.arguments;
 
-            return this.arguments.Concat(this.GetAutoData(testClass));
+            return this.arguments.Concat(this.GetAutoData(testObject));
         }
 
         private IEnumerable<object> GetAutoData(object testClass)

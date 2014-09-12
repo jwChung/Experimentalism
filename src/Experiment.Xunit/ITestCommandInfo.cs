@@ -17,12 +17,13 @@
         /// <summary>
         /// Gets test arguments.
         /// </summary>
-        /// <param name="testClass">
+        /// <param name="testObject">
         /// A test object.
         /// </param>
         /// <returns>
         /// The test arguments.
         /// </returns>
-        IEnumerable<object> GetArguments(object testClass);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "object", Justification = "This rule is suppressed because the 'Object' term is appropriate to represent an object of a test class.")]
+        IEnumerable<object> GetArguments(object testObject);
     }
 }
