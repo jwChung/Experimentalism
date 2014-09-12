@@ -152,7 +152,7 @@
         /// <summary>
         /// Gets the arguments.
         /// </summary>
-        public IEnumerable<object> Arguments
+        public IEnumerable<object> ExplicitArguments
         {
             get { return this.arguments; }
         }

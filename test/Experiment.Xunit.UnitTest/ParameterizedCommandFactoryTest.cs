@@ -69,7 +69,7 @@
            ITestFixtureFactory factory)
         {
             return testInfo.TestMethod == testMethod
-                && testInfo.Arguments.Count() == 0
+                && testInfo.ExplicitArguments.Count() == 0
                 && testInfo.TestFixtureFactory == factory;
         }
 

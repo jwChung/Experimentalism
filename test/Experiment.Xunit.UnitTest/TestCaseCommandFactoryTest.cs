@@ -140,7 +140,7 @@
             return testInfo.TestMethod == testMethod
                 && testInfo.ActualMethod == actualMethod
                 && testInfo.ActualObject == actualObject
-                && testInfo.Arguments.SequenceEqual(arguments)
+                && testInfo.ExplicitArguments.SequenceEqual(arguments)
                 && testInfo.TestFixtureFactory == factory;
         }
 
