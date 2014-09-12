@@ -32,10 +32,7 @@
                 || method.GetParameters().Length != 0)
                 yield break;
 
-            var reflectedType = method.ReflectedType;
-            var testObject = !reflectedType.IsAbstract || !reflectedType.IsSealed
-                ? Activator.CreateInstance(reflectedType)
-                : null;
+            var testObject = !method.IsStatic ? Activator.CreateInstance(method.ReflectedType) : null;
             var testCases = (IEnumerable<ITestCase2>)method.Invoke(testObject, null);
             var commands = testCases.Select(t => new ParameterizedCommand(
                 new TestInfo(method, t.TestMethod, testObject, fixtureFactory, t.Arguments)));

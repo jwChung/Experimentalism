@@ -93,7 +93,7 @@
                 testInfo,
                 testMethod,
                 TestClass.Method,
-                TestClass.TestObject,
+                null,
                 TestClass.Arguments,
                 factory));
         }
