@@ -72,7 +72,7 @@
         }
 
         [Fact]
-        public void InitializeModestCtorCorrectInitializesProperties()
+        public void InitializeModestCtorCorrectlyInitializesProperties()
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var factory = Mocked.Of<ITestFixtureFactory>();
@@ -90,7 +90,7 @@
         }
 
         [Fact]
-        public void InitializeGreedyCtorCorrectInitializesProperties()
+        public void InitializeGreedyCtorCorrectlyInitializesProperties()
         {
             var testMethod = Mocked.Of<MethodInfo>();
             var actualMethod = Mocked.Of<MethodInfo>();

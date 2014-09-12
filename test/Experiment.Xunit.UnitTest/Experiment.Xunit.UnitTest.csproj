@@ -66,6 +66,7 @@
       <Link>Mocked.cs</Link>
     </Compile>
     <Compile Include="AssemblyTest.cs" />
+    <Compile Include="CompositeTestCommandFactoryTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="FactCommandFactoryTest.cs" />
