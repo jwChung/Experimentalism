@@ -146,7 +146,7 @@
                         t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
             var factory = Mocked.Of<ITestFixtureFactory>(
                 f => f.Create(It.Is<ITestMethodInfo>(
-                    p => this.HasValues(p, testMethod, testMethod, testObject, testObject))) == fixture);
+                    p => HasValues(p, testMethod, testMethod, testObject, testObject))) == fixture);
             ITestCommandInfo sut = new TestInfo(testMethod, factory, arguments);
 
             var actual = sut.GetArguments(testObject);
@@ -168,7 +168,7 @@
                         t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
             var factory = Mocked.Of<ITestFixtureFactory>(
                 f => f.Create(It.Is<ITestMethodInfo>(
-                    p => this.HasValues(p, testMethod, actualMethod, testObject, actualObject))) == fixture);
+                    p => HasValues(p, testMethod, actualMethod, testObject, actualObject))) == fixture);
             ITestCommandInfo sut = new TestInfo(testMethod, actualMethod, actualObject, factory, arguments);
 
             var actual = sut.GetArguments(testObject);
@@ -176,15 +176,7 @@
             Assert.Equal(arguments.Concat(new object[] { arg1, arg2 }), actual);
         }
 
-        private void TestMethod(object arg1, object arg2)
-        {
-        }
-
-        private void TestMethod(object arg1, string arg2, int arg3)
-        {
-        }
-
-        private bool HasValues(
+        private static bool HasValues(
             ITestMethodInfo m,
             MethodInfo testMethod,
             MethodInfo actualMethod,
@@ -195,6 +187,14 @@
                     && m.ActualMethod == actualMethod
                     && m.TestObject == testObject
                     && m.ActualObject == actualObject;
+        }
+
+        private void TestMethod(object arg1, object arg2)
+        {
+        }
+
+        private void TestMethod(object arg1, string arg2, int arg3)
+        {
         }
     }
 }

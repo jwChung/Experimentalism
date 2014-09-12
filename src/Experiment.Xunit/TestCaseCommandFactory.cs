@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using global::Xunit.Sdk;
 
     /// <summary>
@@ -23,7 +24,24 @@
         /// </returns>
         public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
         {
-            throw new NotImplementedException();
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
+            var method = testMethod.MethodInfo;
+            if (!typeof(IEnumerable<ITestCase2>).IsAssignableFrom(method.ReturnType)
+                || method.GetParameters().Length != 0)
+                yield break;
+
+            var reflectedType = method.ReflectedType;
+            var testObject = !reflectedType.IsAbstract || !reflectedType.IsSealed
+                ? Activator.CreateInstance(reflectedType)
+                : null;
+            var testCases = (IEnumerable<ITestCase2>)method.Invoke(testObject, null);
+            var commands = testCases.Select(t => new ParameterizedCommand(
+                new TestInfo(method, t.TestMethod, t.TestObject, fixtureFactory, t.Arguments)));
+
+            foreach (var command in commands)
+                yield return command;
         }
     }
 }
