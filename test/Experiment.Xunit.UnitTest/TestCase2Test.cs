@@ -146,5 +146,25 @@
             Assert.Equal(@delegate.Method, actual.TestMethod);
             Assert.Equal(@delegate.Target, actual.TestObject);
         }
+
+        [Fact]
+        public void CreateWithExplicit5AndAuto4ReturnsCorrectTestCase()
+        {
+            var arg1 = new object();
+            var arg2 = new object();
+            var arg3 = new object();
+            var arg4 = new object();
+            var arg5 = new object();
+            var @delegate = new Action<object, object, object, object, object, object, object, object, object>(
+                (a1, a2, a3, a4, a5, a6, a7, a8, a9) => { });
+
+            var actual = TestCase2.WithArgs(arg1, arg2, arg3, arg4, arg5)
+                .WithAuto<object, object, object, object>()
+                .Create(@delegate);
+
+            Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, actual.Arguments);
+            Assert.Equal(@delegate.Method, actual.TestMethod);
+            Assert.Equal(@delegate.Target, actual.TestObject);
+        }
     }
 }
