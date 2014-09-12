@@ -8,41 +8,30 @@
         [Fact]
         public void SutIsTestCase2()
         {
-            var sut = new TestCase2(new Action(() => { }), new object[0]);
+            var sut = new TestCase2(new Action(() => { }).Method, new object[0]);
             Assert.IsAssignableFrom<ITestCase2>(sut);
         }
         
         [Fact]
-        public void ArgumentsIsCorrect()
+        public void InitializeWithAnyNullArgumentsThrows()
         {
-            var expected = new object[] { "1", 123 };
-            var sut = new TestCase2(new Action(() => { }), expected);
+            var testMethod = new Action(() => { }).Method;
+            var arguments = new object[] { "1", 123 };
 
-            var actual = sut.Arguments;
-
-            Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentNullException>(() => new TestCase2(null, arguments));
+            Assert.Throws<ArgumentNullException>(() => new TestCase2(testMethod, null));
         }
 
         [Fact]
-        public void TestMethodIsCorrect()
+        public void InitializeCorrectlyInitializesProperties()
         {
-            var delegator = new Action(() => { });
-            var sut = new TestCase2(delegator, new object[0]);
+            var testMethod = new Action(() => { }).Method;
+            var arguments = new object[] { "1", 123 };
 
-            var actual = sut.TestMethod;
+            var sut = new TestCase2(testMethod, arguments);
 
-            Assert.Equal(delegator.Method, actual);
-        }
-
-        [Fact]
-        public void DelegateIsCorrect()
-        {
-            var delegator = new Action(() => { });
-            var sut = new TestCase2(delegator, new object[0]);
-
-            var actual = sut.Delegate;
-
-            Assert.Equal(delegator, actual);
+            Assert.Equal(testMethod, sut.TestMethod);
+            Assert.Equal(arguments, sut.Arguments);
         }
 
         [Fact]

@@ -9,22 +9,28 @@
     /// </summary>
     public partial class TestCase2 : ITestCase2
     {
-        private readonly Delegate delegator;
+        private readonly MethodInfo testMethod;
         private readonly object[] arguments;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase2"/> class.
         /// </summary>
-        /// <param name="delegator">
-        /// A delegate representing the actual test method.
+        /// <param name="testMethod">
+        /// A test method.
         /// </param>
         /// <param name="arguments">
-        /// Explicit arguments.
+        /// Test arguments.
         /// </param>
-        public TestCase2(Delegate delegator, params object[] arguments)
+        public TestCase2(MethodInfo testMethod, params object[] arguments)
         {
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
+            if (arguments == null)
+                throw new ArgumentNullException("arguments");
+
+            this.testMethod = testMethod;
             this.arguments = arguments;
-            this.delegator = delegator;
         }
 
         /// <summary>
@@ -40,15 +46,7 @@
         /// </summary>
         public MethodInfo TestMethod
         {
-            get { return this.delegator.Method; }
-        }
-
-        /// <summary>
-        /// Gets the delegate.
-        /// </summary>
-        public Delegate Delegate
-        {
-            get { return this.delegator; }
+            get { return this.testMethod; }
         }
 
         /// <summary>
@@ -62,7 +60,7 @@
         /// </returns>
         public static ITestCase2 Create(Action delegator)
         {
-            return new TestCase2(delegator, new object[0]);
+            return new TestCase2(delegator.Method, new object[0]);
         }
 
         /// <summary>

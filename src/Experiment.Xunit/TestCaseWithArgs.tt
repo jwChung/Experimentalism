@@ -39,7 +39,7 @@ for (var j = 1; j <= i; j++)
 
         public ITestCase2 Create(Action<<#=typeList#>> delegator)
         {
-            return new TestCase2(delegator, <#=GetGenericList(i, "this.arg{0}")#>);
+            return new TestCase2(delegator.Method, <#=GetGenericList(i, "this.arg{0}")#>);
         }
 <#
 for (var j = i; j < GenericTypeMax; j++)
