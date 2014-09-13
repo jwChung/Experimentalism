@@ -90,6 +90,7 @@
         /// <param name="arguments">
         /// Explicit arguments of the actual method.
         /// </param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "object", Justification = "This rule is suppressed because the 'Object' term is appropriate to represent an object of a test class.")]
         public TestCommandContext(
             IMethodInfo testMethod,
             IMethodInfo actualMethod,
