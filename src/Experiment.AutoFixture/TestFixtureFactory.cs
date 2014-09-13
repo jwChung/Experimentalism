@@ -61,7 +61,7 @@ namespace Jwc.Experiment.AutoFixture
         {
             return new CompositeCustomization(
                 new AutoMoqCustomization(),
-                new OmitOmitAutoPropertiesCustomizatoin());
+                new OmitAutoPropertiesCustomizatoin());
         }
 
         private class ParameterAttributeCutomization : ICustomization
@@ -87,7 +87,7 @@ namespace Jwc.Experiment.AutoFixture
             }
         }
 
-        private class OmitOmitAutoPropertiesCustomizatoin : ICustomization
+        private class OmitAutoPropertiesCustomizatoin : ICustomization
         {
             public void Customize(IFixture fixture)
             {
