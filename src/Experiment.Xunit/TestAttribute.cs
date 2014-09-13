@@ -133,8 +133,7 @@
 
             private IEnumerable<DataAttribute> GetDataAttributes()
             {
-                return (IEnumerable<DataAttribute>)this.method
-                    .GetCustomAttributes(typeof(DataAttribute), false);
+                return this.method.GetCustomAttributes(typeof(DataAttribute), false).Cast<DataAttribute>();
             }
 
             private Type[] GetParameterTypes()
