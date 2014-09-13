@@ -35,8 +35,8 @@
         [Fact]
         public void DisplayParameterNameIsCorrectWhenInitializedWithDelegate()
         {
-            Delegate @delegate = new Func<object>(() => null);
-            var sut = new TestCase(@delegate);
+            Delegate delegator = new Func<object>(() => null);
+            var sut = new TestCase(delegator);
 
             var actual = sut.DisplayParameterName;
 
@@ -57,23 +57,23 @@
         [Fact]
         public void DelegateIsCorrectWhenInitializedWithDelegate()
         {
-            Delegate @delegate = new Func<object>(() => null);
-            var sut = new TestCase(@delegate);
+            Delegate delegator = new Func<object>(() => null);
+            var sut = new TestCase(delegator);
 
             var actual = sut.Delegate;
 
-            Assert.Equal(@delegate, actual);
+            Assert.Equal(delegator, actual);
         }
 
         [Fact]
         public void DelegateIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
         {
-            Delegate @delegate = new Func<object>(() => null);
-            var sut = new TestCase(@delegate, "anonymous");
+            Delegate delegator = new Func<object>(() => null);
+            var sut = new TestCase(delegator, "anonymous");
 
             var actual = sut.Delegate;
 
-            Assert.Equal(@delegate, actual);
+            Assert.Equal(delegator, actual);
         }
 
         [Fact]
@@ -180,8 +180,8 @@
         public void ConvertParameterizedDelegateToTestCommandReturnsCorrectTestCommand()
         {
             // Fixture setup
-            Action<int, string, object> @delegate = (x, y, z) => { };
-            var sut = new TestCase(@delegate);
+            Action<int, string, object> delegator = (x, y, z) => { };
+            var sut = new TestCase(delegator);
 
             var fixture = new DelegatingTestFixture
             {
@@ -203,7 +203,7 @@
             {
                 OnCreate = mi =>
                 {
-                    Assert.Equal(@delegate.Method, mi);
+                    Assert.Equal(delegator.Method, mi);
                     return fixture;
                 }
             };
@@ -306,8 +306,8 @@
         [Fact]
         public void ConvertActionDelegateToTestCommandReturnsTestCommandWithCorrectDelegate()
         {
-            Delegate @delegate = new Action(() => { });
-            var sut = new TestCase(@delegate);
+            Delegate delegator = new Action(() => { });
+            var sut = new TestCase(delegator);
 
             var actual = sut.ConvertToTestCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
@@ -315,7 +315,7 @@
 
             var command = Assert.IsType<FirstClassCommand>(
                 Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(@delegate, command.Action);
+            Assert.Equal(delegator, command.Action);
         }
     }
 }

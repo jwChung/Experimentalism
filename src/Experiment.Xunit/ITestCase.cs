@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using global::Xunit.Sdk;
+    using ITestFixtureFactory2 = Experiment.ITestFixtureFactory;
 
     /// <summary>
     /// Represents a test-case that can be turned into an xUnit.net ITestCommand when returned from
@@ -21,6 +22,6 @@
         /// <returns>
         /// An xUnit.net ITestCommand that represents the executable test case.
         /// </returns>
-        ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory testFixtureFactory);
+        ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory2 testFixtureFactory);
     }
 }
