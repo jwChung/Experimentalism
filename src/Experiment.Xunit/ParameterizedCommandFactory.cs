@@ -26,7 +26,7 @@
             if (testMethod.MethodInfo.GetParameters().Length == 0)
                 yield break;
 
-            yield return new ParameterizedCommand2(
+            yield return new ParameterizedCommand(
                 new TestCommandContext(testMethod, fixtureFactory, new object[0]));
         }
     }

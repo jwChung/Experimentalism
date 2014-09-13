@@ -48,7 +48,7 @@
         {
             var testCases = (IEnumerable<ITestCase2>)testMethod.MethodInfo.Invoke(null, new object[0]);
             return testCases.Select(
-                c => new ParameterizedCommand2(
+                c => new ParameterizedCommand(
                     new TestCommandContext(
                         testMethod,
                         Reflector.Wrap(c.TestMethod),
@@ -63,7 +63,7 @@
             var testCases = (IEnumerable<ITestCase2>)testMethod.MethodInfo.Invoke(testObject, new object[0]);
 
             return testCases.Select(
-                c => new ParameterizedCommand2(
+                c => new ParameterizedCommand(
                     new TestCommandContext(
                         testMethod,
                         Reflector.Wrap(c.TestMethod),

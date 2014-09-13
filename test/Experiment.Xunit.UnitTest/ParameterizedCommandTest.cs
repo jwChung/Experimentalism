@@ -6,19 +6,19 @@ namespace Jwc.Experiment.Xunit
     using global::Xunit.Extensions;
     using global::Xunit.Sdk;
 
-    public class ParameterizedCommand2Test
+    public class ParameterizedCommandTest
     {
         [Fact]
         public void SutIsTestCommand()
         {
-            var sut = new ParameterizedCommand2(Mocked.Of<ITestCommandContext>());
+            var sut = new ParameterizedCommand(Mocked.Of<ITestCommandContext>());
             Assert.IsAssignableFrom<ITestCommand>(sut);
         }
 
         [Fact]
         public void InitializeWithNullContextThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ParameterizedCommand2(null));
+            Assert.Throws<ArgumentNullException>(() => new ParameterizedCommand(null));
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Jwc.Experiment.Xunit
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
             var context = Mocked.Of<ITestCommandContext>(x => x.ActualMethod == Reflector.Wrap(method));
 
-            var sut = new ParameterizedCommand2(context);
+            var sut = new ParameterizedCommand(context);
 
             Assert.Equal(context, sut.TestCommandContext);
             Assert.Equal(method.Name, sut.MethodName);
@@ -40,7 +40,7 @@ namespace Jwc.Experiment.Xunit
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
             var context = Mocked.Of<ITestCommandContext>(x => x.ActualMethod == Reflector.Wrap(method));
 
-            var sut = new ParameterizedCommand2(context);
+            var sut = new ParameterizedCommand(context);
 
             Assert.Equal(12345, sut.Timeout);
         }
@@ -50,7 +50,7 @@ namespace Jwc.Experiment.Xunit
         {
             var method = new Action(() => { }).Method;
             var context = Mocked.Of<ITestCommandContext>(x => x.ActualMethod == Reflector.Wrap(method));
-            var sut = new ParameterizedCommand2(context);
+            var sut = new ParameterizedCommand(context);
 
             var actual = sut.Execute(null);
 
@@ -81,7 +81,7 @@ namespace Jwc.Experiment.Xunit
                 && x.GetMethodContext(delegator.Target) == methodContext
                 && x.GetArguments(methodContext) == arguments);
 
-            var sut = new ParameterizedCommand2(context);
+            var sut = new ParameterizedCommand(context);
 
             // Exercise system
             sut.Execute(delegator.Target);
@@ -105,7 +105,7 @@ namespace Jwc.Experiment.Xunit
                 && x.GetMethodContext(delegator.Target) == methodContext
                 && x.GetArguments(methodContext) == arguments);
 
-            var sut = new ParameterizedCommand2(context);
+            var sut = new ParameterizedCommand(context);
 
             var expectecd = new TheoryCommand(Reflector.Wrap(delegator.Method), arguments).DisplayName;
 

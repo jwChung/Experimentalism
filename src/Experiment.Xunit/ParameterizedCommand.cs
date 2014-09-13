@@ -8,17 +8,17 @@
     /// <summary>
     /// Represents a parameterized command.
     /// </summary>
-    public class ParameterizedCommand2 : TestCommand
+    public class ParameterizedCommand : TestCommand
     {
         private readonly ITestCommandContext context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParameterizedCommand2"/> class.
+        /// Initializes a new instance of the <see cref="ParameterizedCommand"/> class.
         /// </summary>
         /// <param name="context">
         /// Information of this test command.
         /// </param>
-        public ParameterizedCommand2(ITestCommandContext context)
+        public ParameterizedCommand(ITestCommandContext context)
             : base(GuardNull(context).ActualMethod, null, MethodUtility.GetTimeoutParameter(context.ActualMethod))
         {
             this.context = context;

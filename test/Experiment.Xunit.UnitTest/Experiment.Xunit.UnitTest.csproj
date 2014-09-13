@@ -70,7 +70,7 @@
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="FactCommandFactoryTest.cs" />
-    <Compile Include="ParameterizedCommand2Test.cs" />
+    <Compile Include="ParameterizedCommandTest.cs" />
     <Compile Include="ParameterizedCommandFactoryTest.cs" />
     <Compile Include="TargetInvocationExceptionUnwrappingCommandTest.cs" />
     <Compile Include="SpyTestAssemblyConfigurationAttribute.cs" />

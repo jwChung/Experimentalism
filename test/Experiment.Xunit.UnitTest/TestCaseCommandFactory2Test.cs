@@ -80,7 +80,7 @@
             Assert.Equal(3, actual.Length);
             foreach (var testCommand in actual)
             {
-                var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand2>(testCommand);
+                var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
                 var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
@@ -106,7 +106,7 @@
             Assert.Equal(2, actual.Length);
             foreach (var testCommand in actual)
             {
-                var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand2>(testCommand);
+                var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
                 var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
