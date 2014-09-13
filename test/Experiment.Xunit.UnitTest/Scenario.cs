@@ -7,7 +7,7 @@
     using global::Xunit;
     using global::Xunit.Extensions;
 
-    public class Scenario
+    public class Scenario : IDisposable
     {
         [ScenarioTest]
         public void TestAttributeSupportsNonParameterizedTest()
@@ -83,6 +83,15 @@
                 Assert.Equal("custom string", x);
                 Assert.Equal(5678, y);
             });
+        }
+
+        public void Dispose()
+        {
+            SpyTestAssemblyConfigurationAttribute.SetUpCount = 0;
+            DefaultFixtureFactory.SetCurrent(null);
+            typeof(TestAssemblyConfigurationAttribute)
+                .GetField("configured", BindingFlags.NonPublic | BindingFlags.Static)
+                .SetValue(null, false);
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute

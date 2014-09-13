@@ -74,7 +74,7 @@
         /// </value>
         public override bool ShouldCreateInstance
         {
-            get { return false; }
+            get { return true; }
         }
 
         /// <summary>

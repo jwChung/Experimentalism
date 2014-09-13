@@ -251,17 +251,7 @@
             var actual = sut.CreateTestCommands(method).Single();
 
             var command = Assert.IsType<ExceptionCommand>(actual);
-            try
-            {
-                Assert.IsType<InvalidOperationException>(command.Exception);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("======================================================");
-                Console.WriteLine(command.Exception);
-                Console.WriteLine("======================================================");
-                throw;
-            }
+            Assert.IsType<InvalidOperationException>(command.Exception);
         }
 
         public void Dispose()

@@ -145,7 +145,7 @@
                 string.Empty,
                 () => { });
             var actual = sut.ShouldCreateInstance;
-            Assert.False(actual, "ShouldCreateInstance");
+            Assert.True(actual, "ShouldCreateInstance");
         }
 
         [Fact]

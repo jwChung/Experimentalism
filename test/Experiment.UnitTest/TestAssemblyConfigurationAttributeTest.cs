@@ -7,7 +7,7 @@
     using System.Threading;
     using Xunit;
 
-    public class TestAssemblyConfigurationAttributeTest
+    public class TestAssemblyConfigurationAttributeTest : IDisposable
     {
         [Fact]
         public void SutIsAttribute()
@@ -19,88 +19,65 @@
         [Fact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenCalledManyTimes()
         {
-            try
+            // Fixture setup
+            var attribute1 = new TssTestAssemblyConfigurationAttribute();
+            var attribute2 = new TssTestAssemblyConfigurationAttribute();
+            var assembly = new DelegatingAssembly
             {
-                // Fixture setup
-                var attribute1 = new TssTestAssemblyConfigurationAttribute();
-                var attribute2 = new TssTestAssemblyConfigurationAttribute();
-                var assembly = new DelegatingAssembly
+                OnGetCustomAttributesWithType = (t, i) =>
                 {
-                    OnGetCustomAttributesWithType = (t, i) =>
-                    {
-                        Assert.Equal(typeof(TestAssemblyConfigurationAttribute), t);
-                        Assert.False(i);
-                        return new object[] { attribute1, attribute2 };
-                    }
-                };
+                    Assert.Equal(typeof(TestAssemblyConfigurationAttribute), t);
+                    Assert.False(i);
+                    return new object[] { attribute1, attribute2 };
+                }
+            };
 
-                // Exercise system
-                TestAssemblyConfigurationAttribute.Configure(assembly);
-                TestAssemblyConfigurationAttribute.Configure(assembly);
+            // Exercise system
+            TestAssemblyConfigurationAttribute.Configure(assembly);
+            TestAssemblyConfigurationAttribute.Configure(assembly);
 
-                // Verify outcome
-                Assert.Equal(assembly, attribute1.SetUpAssemblies.Single());
-                Assert.Equal(assembly, attribute2.SetUpAssemblies.Single());
-            }
-            finally
-            {
-                // Fixture teardown
-                this.ResetConfigured();
-            }
+            // Verify outcome
+            Assert.Equal(assembly, attribute1.SetUpAssemblies.Single());
+            Assert.Equal(assembly, attribute2.SetUpAssemblies.Single());
         }
 
         [Fact]
         public void ConfigureRegistersCorrectTearDownHandlerToDomainUnloadEvent()
         {
-            try
+            var attribute = new TssTestAssemblyConfigurationAttribute();
+            var assembly = new DelegatingAssembly
             {
-                var attribute = new TssTestAssemblyConfigurationAttribute();
-                var assembly = new DelegatingAssembly
-                {
-                    OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
-                };
+                OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
+            };
 
-                TestAssemblyConfigurationAttribute.Configure(assembly);
+            TestAssemblyConfigurationAttribute.Configure(assembly);
 
-                attribute.RaiseDomainUnload();
-                Assert.Equal(assembly, attribute.TearDownAssemblies.Single());
-            }
-            finally
-            {
-                this.ResetConfigured();
-            }
+            attribute.RaiseDomainUnload();
+            Assert.Equal(assembly, attribute.TearDownAssemblies.Single());
         }
 
         [Fact]
         public void ConfigureSetsUpFixtureOnlyOnceWhenAccessedByMultipleThreads()
         {
-            try
+            // Fixture setup
+            var attribute = new TssTestAssemblyConfigurationAttribute();
+            var assembly = new DelegatingAssembly
             {
-                // Fixture setup
-                var attribute = new TssTestAssemblyConfigurationAttribute();
-                var assembly = new DelegatingAssembly
-                {
-                    OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
-                };
+                OnGetCustomAttributesWithType = (t, i) => new object[] { attribute }
+            };
 
-                var threads = new Thread[30];
-                for (int i = 0; i < threads.Length; i++)
-                    threads[i] = new Thread(() => TestAssemblyConfigurationAttribute.Configure(assembly));
+            var threads = new Thread[30];
+            for (int i = 0; i < threads.Length; i++)
+                threads[i] = new Thread(() => TestAssemblyConfigurationAttribute.Configure(assembly));
 
-                // Exercise system
-                foreach (var thread in threads)
-                    thread.Start();
-                foreach (var thread in threads)
-                    thread.Join();
+            // Exercise system
+            foreach (var thread in threads)
+                thread.Start();
+            foreach (var thread in threads)
+                thread.Join();
 
-                // Verify outcome
-                Assert.Equal(assembly, attribute.SetUpAssemblies.Single());
-            }
-            finally
-            {
-                // Fixture teardown
-                this.ResetConfigured();
-            }
+            // Verify outcome
+            Assert.Equal(assembly, attribute.SetUpAssemblies.Single());
         }
 
         [Fact]
@@ -109,7 +86,7 @@
             Assert.Throws<ArgumentNullException>(() => TestAssemblyConfigurationAttribute.Configure(null));
         }
 
-        public void ResetConfigured()
+        public void Dispose()
         {
             typeof(TestAssemblyConfigurationAttribute)
                 .GetField("configured", BindingFlags.NonPublic | BindingFlags.Static)
@@ -120,7 +97,7 @@
         {
             private readonly List<Assembly> setUpAssemblies = new List<Assembly>();
             private readonly List<Assembly> tearDownAssemblies = new List<Assembly>();
-            
+
             protected override event EventHandler DomainUnload;
 
             public List<Assembly> SetUpAssemblies
