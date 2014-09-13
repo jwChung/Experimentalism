@@ -31,46 +31,35 @@
         [Fact]
         public void CreateWithParameterizedTestMethodReturnsCorrectMethod()
         {
-            var method = new Methods<ParameterizedCommandFactoryTest>().Select(x => x.ParameterizedTestMethod(null));
+            var method = Reflector.Wrap(new Methods<ParameterizedCommandFactoryTest>().Select(
+                x => x.ParameterizedTestMethod(null)));
             var sut = new ParameterizedCommandFactory();
             var factory = Mocked.Of<ITestFixtureFactory>();
 
-            var actual = sut.Create(Reflector.Wrap(method), factory).Single();
+            var actual = sut.Create(method, factory).Single();
 
-            var command = Assert.IsAssignableFrom<ParameterizedCommand>(actual);
-            var testInfo = Assert.IsAssignableFrom<TestInfo>(command.TestCommandInfo);
-            Assert.True(HasValues(
-                testInfo,
-                method,
-                factory));
+            var command = Assert.IsAssignableFrom<ParameterizedCommand2>(actual);
+            var context = Assert.IsAssignableFrom<TestCommandContext>(command.TestCommandContext);
+            Assert.Equal(method, context.TestMethod);
+            Assert.Equal(factory, context.TestFixtureFactory);
+            Assert.Empty(context.ExplicitArguments);
         }
 
         [Fact]
         public void CreateWithParameterizedTestMethodWithReturnValueReturnsCorrectMethod()
         {
-            var method = new Methods<ParameterizedCommandFactoryTest>().Select(
-                x => x.ParameterizedTestMethodWithReturnValue(null));
+            var method = Reflector.Wrap(new Methods<ParameterizedCommandFactoryTest>().Select(
+                x => x.ParameterizedTestMethodWithReturnValue(null)));
             var sut = new ParameterizedCommandFactory();
             var factory = Mocked.Of<ITestFixtureFactory>();
 
-            var actual = sut.Create(Reflector.Wrap(method), factory).Single();
+            var actual = sut.Create(method, factory).Single();
 
-            var command = Assert.IsAssignableFrom<ParameterizedCommand>(actual);
-            var testInfo = Assert.IsAssignableFrom<TestInfo>(command.TestCommandInfo);
-            Assert.True(HasValues(
-                testInfo,
-                method,
-                factory));
-        }
-
-        private static bool HasValues(
-           TestInfo context,
-           MethodInfo testMethod,
-           ITestFixtureFactory factory)
-        {
-            return context.TestMethod == testMethod
-                && context.ExplicitArguments.Count() == 0
-                && context.TestFixtureFactory == factory;
+            var command = Assert.IsAssignableFrom<ParameterizedCommand2>(actual);
+            var context = Assert.IsAssignableFrom<TestCommandContext>(command.TestCommandContext);
+            Assert.Equal(method, context.TestMethod);
+            Assert.Equal(factory, context.TestFixtureFactory);
+            Assert.Empty(context.ExplicitArguments);
         }
 
         private void ParameterizedTestMethod(object argument)
