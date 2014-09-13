@@ -61,11 +61,11 @@
         public void CreateReturnsCorrectTestFixture()
         {
             var sut = Mocked.Of<TestBaseAttribute>();
-            var methodInfo = Mocked.Of<ITestMethodInfo>();
+            var context = Mocked.Of<ITestMethodContext>();
             var expected = Mocked.Of<ITestFixture>();
-            sut.ToMock().Protected().Setup<ITestFixture>("Create", methodInfo).Returns(expected);
+            sut.ToMock().Protected().Setup<ITestFixture>("Create", context).Returns(expected);
 
-            var actual = ((ITestFixtureFactory)sut).Create(methodInfo);
+            var actual = ((ITestFixtureFactory)sut).Create(context);
 
             Assert.Equal(expected, actual);
         }

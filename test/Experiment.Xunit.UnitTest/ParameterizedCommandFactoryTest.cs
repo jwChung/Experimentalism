@@ -64,13 +64,13 @@
         }
 
         private static bool HasValues(
-           TestInfo testInfo,
+           TestInfo context,
            MethodInfo testMethod,
            ITestFixtureFactory factory)
         {
-            return testInfo.TestMethod == testMethod
-                && testInfo.ExplicitArguments.Count() == 0
-                && testInfo.TestFixtureFactory == factory;
+            return context.TestMethod == testMethod
+                && context.ExplicitArguments.Count() == 0
+                && context.TestFixtureFactory == factory;
         }
 
         private void ParameterizedTestMethod(object argument)

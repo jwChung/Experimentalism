@@ -45,7 +45,7 @@
             get { return this.factory; }
         }
 
-        ITestFixture ITestFixtureFactory.Create(ITestMethodInfo context)
+        ITestFixture ITestFixtureFactory.Create(ITestMethodContext context)
         {
             return this.Create(context);
         }
@@ -69,12 +69,12 @@
         /// <summary>
         /// Creates a test fixture.
         /// </summary>
-        /// <param name="testMethod">
+        /// <param name="context">
         /// The test information about a test method.
         /// </param>
         /// <returns>
         /// The test fixture.
         /// </returns>
-        protected abstract ITestFixture Create(ITestMethodInfo testMethod);
+        protected abstract ITestFixture Create(ITestMethodContext context);
     }
 }

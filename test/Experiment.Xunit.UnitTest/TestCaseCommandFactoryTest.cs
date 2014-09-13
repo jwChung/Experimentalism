@@ -130,18 +130,18 @@
         }
 
         private static bool HasValues(
-            TestInfo testInfo,
+            TestInfo context,
             MethodInfo testMethod,
             MethodInfo actualMethod,
             object testObject,
             IEnumerable<object> arguments,
             ITestFixtureFactory factory)
         {
-            return testInfo.TestMethod == testMethod
-                && testInfo.ActualMethod == actualMethod
-                && testInfo.TestObject == testObject
-                && testInfo.ExplicitArguments.SequenceEqual(arguments)
-                && testInfo.TestFixtureFactory == factory;
+            return context.TestMethod == testMethod
+                && context.ActualMethod == actualMethod
+                && context.TestObject == testObject
+                && context.ExplicitArguments.SequenceEqual(arguments)
+                && context.TestFixtureFactory == factory;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "To test members of test type.")]

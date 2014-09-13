@@ -21,7 +21,7 @@
 
             var sut = new TestInfo(testMethod, actualMethod, testObject, factory, arguments);
 
-            Assert.IsAssignableFrom<ITestMethodInfo>(sut);
+            Assert.IsAssignableFrom<ITestMethodContext>(sut);
         }
 
         [Fact]
@@ -144,7 +144,7 @@
             var fixture = Mocked.Of<ITestFixture>(
                         t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
             var factory = Mocked.Of<ITestFixtureFactory>(
-                f => f.Create(It.Is<ITestMethodInfo>(
+                f => f.Create(It.Is<ITestMethodContext>(
                     p => HasValues(p, testMethod, testMethod, actualObject, actualObject))) == fixture);
             var sut = new TestInfo(testMethod, factory, arguments);
 
@@ -166,7 +166,7 @@
             var fixture = Mocked.Of<ITestFixture>(
                         t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
             var factory = Mocked.Of<ITestFixtureFactory>(
-                f => f.Create(It.Is<ITestMethodInfo>(
+                f => f.Create(It.Is<ITestMethodContext>(
                     p => HasValues(p, testMethod, actualMethod, testObject, actualObject))) == fixture);
             var sut = new TestInfo(testMethod, actualMethod, testObject, factory, arguments);
 
@@ -187,7 +187,7 @@
             var fixture = Mocked.Of<ITestFixture>(
                         t => t.Create(typeof(string)) == (object)arg1 && t.Create(typeof(int)) == (object)arg2);
             var factory = Mocked.Of<ITestFixtureFactory>(
-                f => f.Create(It.Is<ITestMethodInfo>(
+                f => f.Create(It.Is<ITestMethodContext>(
                     p => HasValues(p, testMethod, actualMethod, null, actualObject))) == fixture);
             var sut = new TestInfo(testMethod, actualMethod, null, factory, arguments);
 
@@ -197,16 +197,16 @@
         }
 
         private static bool HasValues(
-            ITestMethodInfo m,
+            ITestMethodContext context,
             MethodInfo testMethod,
             MethodInfo actualMethod,
             object testObject,
             object actualObject)
         {
-            return m.TestMethod == testMethod
-                    && m.ActualMethod == actualMethod
-                    && m.TestObject == testObject
-                    && m.ActualObject == actualObject;
+            return context.TestMethod == testMethod
+                    && context.ActualMethod == actualMethod
+                    && context.TestObject == testObject
+                    && context.ActualObject == actualObject;
         }
 
         private void TestMethod(object arg1, object arg2)

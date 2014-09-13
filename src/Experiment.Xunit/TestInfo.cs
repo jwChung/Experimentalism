@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents information of a test.
     /// </summary>
-    public class TestInfo : ITestMethodInfo, ITestCommandInfo
+    public class TestInfo : ITestMethodContext, ITestCommandInfo
     {
         private readonly bool isSameObject;
         private readonly MethodInfo testMethod;

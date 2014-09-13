@@ -5,7 +5,7 @@
     /// <summary>
     /// Defines information about a test method.
     /// </summary>
-    public interface ITestMethodInfo
+    public interface ITestMethodContext
     {
         /// <summary>
         /// Gets the test method adorned with a test attribute.

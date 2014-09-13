@@ -68,7 +68,7 @@
     <Compile Include="ITestCommandInfo.cs" />
     <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
-    <Compile Include="ITestMethodInfo.cs" />
+    <Compile Include="ITestMethodContext.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="ParameterizedCommand.cs" />
     <Compile Include="ParameterizedCommandFactory.cs" />
