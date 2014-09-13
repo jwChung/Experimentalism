@@ -84,7 +84,7 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="TestBaseAttributeTest.cs" />
     <Compile Include="TestCase2Test.cs" />
-    <Compile Include="TestCaseCommandFactory2Test.cs" />
+    <Compile Include="TestCaseCommandFactoryTest.cs" />
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="TestCommandContextTest.cs" />
     <Compile Include="TestMethodContextExtensions.cs" />

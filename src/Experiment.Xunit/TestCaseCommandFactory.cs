@@ -9,7 +9,7 @@
     /// <summary>
     /// Represents a factory to create test-case commands.
     /// </summary>
-    public class TestCaseCommandFactory2 : ITestCommandFactory
+    public class TestCaseCommandFactory : ITestCommandFactory
     {
         /// <summary>
         /// Creates test commands.

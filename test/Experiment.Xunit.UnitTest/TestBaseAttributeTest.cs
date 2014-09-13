@@ -42,7 +42,7 @@
             Assert.Equal(
                 new[]
                 {
-                    typeof(TestCaseCommandFactory2),
+                    typeof(TestCaseCommandFactory),
                     typeof(ParameterizedCommandFactory),
                     typeof(FactCommandFactory)
                 },

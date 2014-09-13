@@ -9,19 +9,19 @@
     using global::Xunit.Extensions;
     using global::Xunit.Sdk;
 
-    public class TestCaseCommandFactory2Test
+    public class TestCaseCommandFactoryTest
     {
         [Fact]
         public void SutIsTestCommandFactory()
         {
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             Assert.IsAssignableFrom<ITestCommandFactory>(sut);
         }
 
         [Fact]
         public void CreateWithNullTestMethodThrows()
         {
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             Assert.Throws<ArgumentNullException>(() => sut.Create(null, null).ToArray());
         }
 
@@ -30,7 +30,7 @@
         [InlineData(typeof(object))]
         public void CreateReturnsEmptyIfReturnTypeIsIncorrect(Type returnType)
         {
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             var testMethod = Mocked.Of<IMethodInfo>(
                 m => m.MethodInfo == Mocked.Of<MethodInfo>(i => i.ReturnType == returnType));
 
@@ -45,7 +45,7 @@
         [InlineData(typeof(IList<ITestCase2>))]
         public void CreateReturnsNonEmptyIfReturnTypeIsCorrect(Type returnType)
         {
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             var testMethod = new Methods<TestClass>().Select(x => x.TestMethod());
             var factory = Mocked.Of<ITestFixtureFactory>();
 
@@ -57,7 +57,7 @@
         [Fact]
         public void CreateReturnsEmptyIfTestMethodIsParameterized()
         {
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             var delegator = new Func<object, int, IEnumerable<ITestCase2>>((x, y) => new ITestCase2[0]);
 
             var actual = sut.Create(Reflector.Wrap(delegator.Method), null);
@@ -70,7 +70,7 @@
         {
             // Fixture setup
             var testMethod = Reflector.Wrap(new Methods<TestClass>().Select(x => x.TestMethod()));
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             var factory = Mocked.Of<ITestFixtureFactory>();
 
             // Exercise system
@@ -96,7 +96,7 @@
         {
             // Fixture setup
             var testMethod = Reflector.Wrap(Methods.Select(() => TestClass.StaticTestMethod()));
-            var sut = new TestCaseCommandFactory2();
+            var sut = new TestCaseCommandFactory();
             var factory = Mocked.Of<ITestFixtureFactory>();
 
             // Exercise system

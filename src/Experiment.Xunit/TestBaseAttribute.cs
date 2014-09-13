@@ -17,7 +17,7 @@
         /// </summary>
         protected TestBaseAttribute()
             : this(new CompositeTestCommandFactory(
-                new TestCaseCommandFactory2(),
+                new TestCaseCommandFactory(),
                 new ParameterizedCommandFactory(),
                 new FactCommandFactory()))
         {
