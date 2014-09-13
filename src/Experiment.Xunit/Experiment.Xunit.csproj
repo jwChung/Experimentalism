@@ -66,7 +66,6 @@
       <DependentUpon>ITestCaseWithAuto.tt</DependentUpon>
     </Compile>
     <Compile Include="ITestCommandContext.cs" />
-    <Compile Include="ITestCommandInfo.cs" />
     <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
     <Compile Include="ITestMethodContext.cs" />
