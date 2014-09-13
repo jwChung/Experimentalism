@@ -107,7 +107,6 @@
     </Compile>
     <Compile Include="TestCommandCollection.cs" />
     <Compile Include="TestCommandContext.cs" />
-    <Compile Include="TestInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
