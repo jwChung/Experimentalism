@@ -88,6 +88,7 @@
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="TestCommandContextTest.cs" />
     <Compile Include="TestInfoTest.cs" />
+    <Compile Include="TestMethodContextExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

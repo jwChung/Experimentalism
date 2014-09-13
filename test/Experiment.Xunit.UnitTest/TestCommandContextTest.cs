@@ -1,6 +1,8 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
+    using System.Reflection;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -59,7 +61,6 @@
             var sut = new TestCommandContext(testMethod, factory, arguments);
 
             Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Equal(testMethod, sut.ActualMethod);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
@@ -80,6 +81,48 @@
             Assert.Equal(testObject, sut.TestObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
+        }
+
+        [Fact]
+        public void GetMethodContextThroughModestCtorReturnsCorrectContext()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
+            var sut = new TestCommandContext(
+                testMethod,
+                Mocked.Of<ITestFixtureFactory>(),
+                new[] { new object(), new object() });
+            var actualObject = new object();
+
+            var actual = sut.GetMethodContext(actualObject);
+
+            actual.AssertHasCorrectValues(
+                testMethod.MethodInfo,
+                testMethod.MethodInfo,
+                actualObject,
+                actualObject);
+        }
+
+        [Fact]
+        public void GetMethodContextThroughGreedyCtorReturnsCorrectContext()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
+            var actualMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
+            var testObject = new object();
+            var sut = new TestCommandContext(
+                testMethod,
+                actualMethod,
+                testObject,
+                Mocked.Of<ITestFixtureFactory>(),
+                new[] { new object(), new object() });
+            var actualObject = new object();
+
+            var actual = sut.GetMethodContext(actualObject);
+
+            actual.AssertHasCorrectValues(
+                testMethod.MethodInfo,
+                actualMethod.MethodInfo,
+                testObject,
+                actualObject);
         }
     }
 }
