@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.4.1")]
-[assembly: AssemblyInformationalVersion("1.4.1")]
+[assembly: AssemblyVersion("1.5.0")]
+[assembly: AssemblyInformationalVersion("1.5.0")]
 
 /*
- * Version 1.4.1
+ * Version 1.5.0
  * 
- * - [Patch] Fixed that TargetInvocationException thrown while constructing test
- *   data be shown as test result.
+ * - [Minor] Introduced TestBaseAttribute which provides basic features of test
+ *   attribute.
  */
