@@ -19,7 +19,7 @@
         }
 
         [Fact]
-        public void InitializeModestCtorWithAnyNullArgumentsThrows()
+        public void InitializeFirstCtorWithAnyNullArgumentsThrows()
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var factory = Mocked.Of<ITestFixtureFactory>();
@@ -31,7 +31,25 @@
         }
 
         [Fact]
-        public void InitializeGreedyCtorWithAnyNullArgumentsThrows()
+        public void InitializeSecondCtorWithAnyNullArgumentsThrows()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>();
+            var actualMethod = Mocked.Of<IMethodInfo>();
+            var factory = Mocked.Of<ITestFixtureFactory>();
+            var arguments = new[] { new object(), new object() };
+
+            Assert.Throws<ArgumentNullException>(
+                () => new TestCommandContext(null, actualMethod, factory, arguments));
+            Assert.Throws<ArgumentNullException>(
+                () => new TestCommandContext(testMethod, null, factory, arguments));
+            Assert.Throws<ArgumentNullException>(
+                () => new TestCommandContext(testMethod, actualMethod, null, arguments));
+            Assert.Throws<ArgumentNullException>(
+                () => new TestCommandContext(testMethod, actualMethod, factory, null));
+        }
+
+        [Fact]
+        public void InitializeThirdCtorWithAnyNullArgumentsThrows()
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
@@ -52,7 +70,7 @@
         }
 
         [Fact]
-        public void InitializeModestCtorCorrectlyInitializesProperties()
+        public void InitializeFirstCtorCorrectlyInitializesProperties()
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var factory = Mocked.Of<ITestFixtureFactory>();
@@ -67,7 +85,23 @@
         }
 
         [Fact]
-        public void InitializeGreedyCtorCorrectlyInitializesProperties()
+        public void InitializeSecondCtorCorrectlyInitializesProperties()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>();
+            var actualMethod = Mocked.Of<IMethodInfo>();
+            var factory = Mocked.Of<ITestFixtureFactory>();
+            var arguments = new[] { new object(), new object() };
+
+            var sut = new TestCommandContext(testMethod, actualMethod, factory, arguments);
+
+            Assert.Equal(testMethod, sut.TestMethod);
+            Assert.Equal(actualMethod, sut.ActualMethod);
+            Assert.Equal(factory, sut.TestFixtureFactory);
+            Assert.Equal(arguments, sut.ExplicitArguments);
+        }
+
+        [Fact]
+        public void InitializeThirdCtorCorrectlyInitializesProperties()
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
@@ -85,7 +119,7 @@
         }
 
         [Fact]
-        public void GetMethodContextThroughModestCtorReturnsCorrectContext()
+        public void GetMethodContextThroughFirstCtorReturnsCorrectContext()
         {
             var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
             var sut = new TestCommandContext(
@@ -104,7 +138,7 @@
         }
 
         [Fact]
-        public void GetMethodContextThroughGreedyCtorReturnsCorrectContext()
+        public void GetMethodContextThroughThirdCtorReturnsCorrectContext()
         {
             var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
             var actualMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());

@@ -14,7 +14,7 @@
         private IMethodInfo actualMethod;
         private object testObject;
         private ITestFixtureFactory factory;
-        private object[] arguments;
+        private IEnumerable<object> arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCommandContext"/> class.
@@ -28,7 +28,7 @@
         /// <param name="arguments">
         /// Explicit arguments of the test method.
         /// </param>
-        public TestCommandContext(IMethodInfo testMethod, ITestFixtureFactory factory, object[] arguments)
+        public TestCommandContext(IMethodInfo testMethod, ITestFixtureFactory factory, IEnumerable<object> arguments)
         {
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
@@ -42,6 +42,34 @@
             this.testMethod = testMethod;
             this.factory = factory;
             this.arguments = arguments;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCommandContext"/> class.
+        /// </summary>
+        /// <param name="testMethod">
+        /// A test method.
+        /// </param>
+        /// <param name="actualMethod">
+        /// A actual method.
+        /// </param>
+        /// <param name="factory">
+        /// A factory to create test fixture.
+        /// </param>
+        /// <param name="arguments">
+        /// Explicit arguments of the actual method.
+        /// </param>
+        public TestCommandContext(
+            IMethodInfo testMethod,
+            IMethodInfo actualMethod,
+            ITestFixtureFactory factory,
+            IEnumerable<object> arguments)
+            : this(testMethod, factory, arguments)
+        {
+            if (actualMethod == null)
+                throw new ArgumentNullException("actualMethod");
+
+            this.actualMethod = actualMethod;
         }
 
         /// <summary>
@@ -67,15 +95,11 @@
             IMethodInfo actualMethod,
             object testObject,
             ITestFixtureFactory factory,
-            object[] arguments) : this(testMethod, factory, arguments)
+            IEnumerable<object> arguments) : this(testMethod, actualMethod, factory, arguments)
         {
-            if (actualMethod == null)
-                throw new ArgumentNullException("actualMethod");
-
             if (testObject == null)
                 throw new ArgumentNullException("testObject");
 
-            this.actualMethod = actualMethod;
             this.testObject = testObject;
         }
 
