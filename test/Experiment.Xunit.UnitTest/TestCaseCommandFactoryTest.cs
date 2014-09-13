@@ -31,8 +31,8 @@
         public void CreateReturnsEmptyIfReturnTypeIsIncorrect(Type returnType)
         {
             var sut = new TestCaseCommandFactory();
-            var testMethod = Mocked.Of<IMethodInfo>(m => m.MethodInfo
-                == Mocked.Of<MethodInfo>(i => i.ReturnType == returnType));
+            var testMethod = Mocked.Of<IMethodInfo>(
+                m => m.MethodInfo == Mocked.Of<MethodInfo>(i => i.ReturnType == returnType));
 
             var actual = sut.Create(testMethod, null);
 
@@ -64,18 +64,19 @@
 
             Assert.Equal(3, actual.Count());
 
-            Assert.True(actual.All(x =>
-            {
-                var command = Assert.IsAssignableFrom<ParameterizedCommand>(x);
-                var testInfo = Assert.IsAssignableFrom<TestInfo>(command.TestCommandInfo);
-                return HasValues(
-                    testInfo,
-                    testMethod,
-                    TestClass.Method,
-                    TestClass.TestObject,
-                    TestClass.Arguments,
-                    factory);
-            }));
+            Assert.True(actual.All(
+                x =>
+                {
+                    var command = Assert.IsAssignableFrom<ParameterizedCommand>(x);
+                    var testInfo = Assert.IsAssignableFrom<TestInfo>(command.TestCommandInfo);
+                    return HasValues(
+                        testInfo,
+                        testMethod,
+                        TestClass.Method,
+                        TestClass.TestObject,
+                        TestClass.Arguments,
+                        factory);
+                }));
         }
 
         [Fact]
@@ -152,9 +153,7 @@
 
             public static IEnumerable<ITestCase2> StaticTestMethod()
             {
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
             }
         }
 
@@ -172,24 +171,14 @@
 
             public static IEnumerable<ITestCase2> StaticTestMethod()
             {
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
             }
 
             public IEnumerable<ITestCase2> TestMethod()
             {
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments);
-
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments);
-
-                yield return Mocked.Of<ITestCase2>(t =>
-                    t.TestMethod == Method
-                    && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
             }
         }
     }
