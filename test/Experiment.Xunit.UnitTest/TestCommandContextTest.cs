@@ -79,7 +79,7 @@
             var sut = new TestCommandContext(testMethod, factory, arguments);
 
             Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Equal(testMethod, sut.ActualMethod);
+            Assert.Null(sut.ActualMethod);
             Assert.Null(sut.TestObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);

@@ -117,7 +117,7 @@
         /// </summary>
         public IMethodInfo ActualMethod
         {
-            get { return this.actualMethod ?? this.testMethod; }
+            get { return this.actualMethod; }
         }
 
         /// <summary>

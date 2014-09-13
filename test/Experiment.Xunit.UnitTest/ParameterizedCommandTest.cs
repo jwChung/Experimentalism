@@ -25,7 +25,7 @@ namespace Jwc.Experiment.Xunit
         public void InitializeCorrectlyInitializesProperties()
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            var context = Mocked.Of<ITestCommandContext>(x => x.ActualMethod == Reflector.Wrap(method));
+            var context = Mocked.Of<ITestCommandContext>(x => x.TestMethod == Reflector.Wrap(method));
 
             var sut = new ParameterizedCommand(context);
 
@@ -38,7 +38,7 @@ namespace Jwc.Experiment.Xunit
         public void InitializeCorrectlyInitializesTimeoutWhenSpecifyingTimeout()
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            var context = Mocked.Of<ITestCommandContext>(x => x.ActualMethod == Reflector.Wrap(method));
+            var context = Mocked.Of<ITestCommandContext>(x => x.TestMethod == Reflector.Wrap(method));
 
             var sut = new ParameterizedCommand(context);
 
@@ -48,12 +48,21 @@ namespace Jwc.Experiment.Xunit
         [Fact]
         public void ExecuteReturnsCorrectResult()
         {
+            // Fixture setup
             var method = new Action(() => { }).Method;
-            var context = Mocked.Of<ITestCommandContext>(x => x.ActualMethod == Reflector.Wrap(method));
+            
+            var testObject = new object();
+
+            var methodContext = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == method);
+
+            var context = Mocked.Of<ITestCommandContext>(x => x.GetMethodContext(testObject) == methodContext);
+            
             var sut = new ParameterizedCommand(context);
 
-            var actual = sut.Execute(null);
+            // Exercise system
+            var actual = sut.Execute(testObject);
 
+            // Verify outcome
             var passedResult = Assert.IsAssignableFrom<PassedResult>(actual);
             Assert.Equal(method.Name, passedResult.MethodName);
             Assert.Equal(actual.DisplayName, passedResult.DisplayName);
@@ -74,35 +83,40 @@ namespace Jwc.Experiment.Xunit
                 verified = true;
             });
 
-            var methodContext = Mocked.Of<ITestMethodContext>();
+            var testObject = new object();
+
+            var methodContext = Mocked.Of<ITestMethodContext>(
+                x => x.ActualMethod == delegator.Method
+                && x.ActualObject == delegator.Target);
 
             var context = Mocked.Of<ITestCommandContext>(x =>
-                x.ActualMethod == Reflector.Wrap(delegator.Method)
-                && x.GetMethodContext(delegator.Target) == methodContext
+                x.GetMethodContext(testObject) == methodContext
                 && x.GetArguments(methodContext) == arguments);
 
             var sut = new ParameterizedCommand(context);
 
             // Exercise system
-            sut.Execute(delegator.Target);
+            sut.Execute(testObject);
 
             // Verify outcome
             Assert.True(verified, "verified");
         }
 
-        [Test]
+        [Fact]
         public void ExecuteSetsCorrectDisplayName()
         {
             // Fixture setup
+            var arguments = new object[] { "1", 1 };
+
             var delegator = new Action<string, int>((x, y) => { });
 
-            var arguments = new object[] { "1", 1 };
+            var testObject = new object();
 
             var methodContext = Mocked.Of<ITestMethodContext>();
 
             var context = Mocked.Of<ITestCommandContext>(x =>
                 x.TestMethod == Reflector.Wrap(delegator.Method)
-                && x.GetMethodContext(delegator.Target) == methodContext
+                && x.GetMethodContext(testObject) == methodContext
                 && x.GetArguments(methodContext) == arguments);
 
             var sut = new ParameterizedCommand(context);
@@ -110,7 +124,7 @@ namespace Jwc.Experiment.Xunit
             var expectecd = new TheoryCommand(Reflector.Wrap(delegator.Method), arguments).DisplayName;
 
             // Exercise system
-            sut.Execute(delegator.Target);
+            sut.Execute(testObject);
 
             // Verify outcome
             Assert.Equal(expectecd, sut.DisplayName);
