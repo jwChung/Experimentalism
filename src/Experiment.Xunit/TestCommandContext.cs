@@ -92,7 +92,7 @@
         /// </summary>
         public IMethodInfo ActualMethod
         {
-            get { return this.actualMethod; }
+            get { return this.actualMethod ?? this.testMethod; }
         }
 
         /// <summary>
