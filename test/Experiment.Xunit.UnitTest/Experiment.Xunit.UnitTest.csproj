@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="CompositeTestCommandFactoryTest.cs" />
+    <Compile Include="DataAttributeCommandFactoryTest.cs" />
     <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="FactCommandFactoryTest.cs" />
