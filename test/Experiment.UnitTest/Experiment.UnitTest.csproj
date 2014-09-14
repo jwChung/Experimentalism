@@ -56,7 +56,6 @@
     <Compile Include="FuncTestFixtureFactoryTest.cs" />
     <Compile Include="Mocked.cs" />
     <Compile Include="AssemblyTest.cs" />
-    <Compile Include="DefaultFixtureFactoryTest.cs" />
     <Compile Include="DelegatingTestFixtureFactory.cs" />
     <Compile Include="NotSupportedFixtureFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
