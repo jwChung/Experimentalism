@@ -40,6 +40,7 @@ using System.Runtime.InteropServices;
  *       - TestAssemblyConfigurationAttribute
  *       - DefaultFixtureFactory
  *       - NotSupportedFixtureFactory
+ *       - FuncTestFixtureFactory
  *
  *     * Experiment.AutoFixture
  *       - AutoPropertiesAttribute

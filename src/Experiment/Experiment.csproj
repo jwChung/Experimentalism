@@ -43,7 +43,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
-    <Compile Include="NotSupportedFixtureFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
