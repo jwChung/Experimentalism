@@ -49,13 +49,15 @@ namespace Jwc.Experiment.Xunit
         public void ExecuteReturnsCorrectResult()
         {
             // Fixture setup
-            var method = new Action(() => { }).Method;
+            var testMethod = new Action(() => { }).Method;
+            var actualMethod = new Action(() => { }).Method;
             
             var testObject = new object();
 
-            var methodContext = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == method);
+            var methodContext = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
 
-            var context = Mocked.Of<ITestCommandContext>(x => x.GetMethodContext(testObject) == methodContext);
+            var context = Mocked.Of<ITestCommandContext>(
+                x => x.TestMethod == Reflector.Wrap(testMethod) && x.GetMethodContext(testObject) == methodContext);
             
             var sut = new ParameterizedCommand(context);
 
@@ -64,7 +66,7 @@ namespace Jwc.Experiment.Xunit
 
             // Verify outcome
             var passedResult = Assert.IsAssignableFrom<PassedResult>(actual);
-            Assert.Equal(method.Name, passedResult.MethodName);
+            Assert.Equal(testMethod.Name, passedResult.MethodName);
             Assert.Equal(actual.DisplayName, passedResult.DisplayName);
         }
 

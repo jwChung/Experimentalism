@@ -51,7 +51,7 @@
 
             actualMethod.Invoke(methodContext.ActualObject, arguments);
 
-            return new PassedResult(actualMethod, this.DisplayName);
+            return new PassedResult(this.testMethod, this.DisplayName);
         }
 
         private static ITestCommandContext GuardNull(ITestCommandContext context)
