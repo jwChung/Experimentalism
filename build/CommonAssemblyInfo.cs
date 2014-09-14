@@ -10,25 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.5.1")]
-[assembly: AssemblyInformationalVersion("1.5.1")]
+[assembly: AssemblyVersion("1.5.2")]
+[assembly: AssemblyInformationalVersion("1.5.2")]
 
 /*
- * Version 1.5.1
+ * Version 1.5.2
  * 
- * - [Patch] Fixed that FirstClassTestAttribute doesn't tear down, which is to
- *   execute a Dispose method.
- *   
- * - [Patch] Fixed that TestBaseAttribute does not tear down. This patch
- *   introduced breaking-changes but was included to this patch-version release
- *   because this bug should be addressed as soon.
- *   
- *     BREAKING-CHANGES
- *       - NEW: ITestCase2.Target
- *   
- * - [Patch] Fixed that the TestCommandContext.GetArguments method isn't
- *   implemeted accidentally.
- *   
- * - [Patch] Fixed that CompositeTestCommandFactory creates any commands when
- *   returning just an Enumerable object.
+ * - [Patch] Fixed that Jwc.Experiment.Xunit does not have Jwc.Experiment as
+ *   dependency in the nuget packge.
  */
