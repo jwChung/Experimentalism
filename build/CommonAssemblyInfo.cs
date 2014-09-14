@@ -37,6 +37,7 @@ using System.Runtime.InteropServices;
  * 
  *     * Experiment
  *       - DefaultFixtureConfigurationAttribute
+ *       - TestAssemblyConfigurationAttribute
  *
  *     * Experiment.AutoFixture
  *       - AutoPropertiesAttribute

@@ -1,6 +1,4 @@
-﻿[assembly: Jwc.Experiment.Scenario.ScenarioFixtureConfiguration]
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
     using System;
     using System.Collections.Generic;
@@ -95,25 +93,9 @@ namespace Jwc.Experiment
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
-        {
-            protected override void Setup(Assembly testAssembly)
-            {
-                DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
-            }
-        }
-
         private class CustomTestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
-            {
-                return new FakeTestFixture();
-            }
-        }
-
-        private class FakeTestFixtureFactory : ITestFixtureFactory
-        {
-            public ITestFixture Create(MethodInfo testMethod)
             {
                 return new FakeTestFixture();
             }

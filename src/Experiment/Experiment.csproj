@@ -40,7 +40,6 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="FuncTestFixtureFactory.cs" />
-    <Compile Include="TestAssemblyConfigurationAttribute.cs" />
     <Compile Include="DefaultFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />

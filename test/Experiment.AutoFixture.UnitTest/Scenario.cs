@@ -1,6 +1,4 @@
-﻿[assembly: Jwc.Experiment.AutoFixture.Scenario.ScenarioFixtureConfiguration]
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
     using System.Collections.Generic;
@@ -66,14 +64,6 @@ namespace Jwc.Experiment.AutoFixture
             yield return TestCase2.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
             yield return TestCase2.WithAuto<string>().Create(x => Assert.NotNull(x));
             yield return TestCase2.WithAuto<object>().Create(x => Assert.NotNull(x));
-        }
-
-        public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
-        {
-            protected override void Setup(Assembly testAssembly)
-            {
-                DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
-            }
         }
 
         private class CustomTestAttribute : TestBaseAttribute
