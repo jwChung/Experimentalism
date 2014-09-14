@@ -11,6 +11,7 @@
     {
         private readonly MethodInfo testMethod;
         private readonly object[] arguments;
+        private readonly Delegate delegator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase2"/> class.
@@ -21,6 +22,7 @@
         /// <param name="arguments">
         /// Test arguments.
         /// </param>
+        [Obsolete("This constructor is not supported and will be removed on the next major release.")]
         public TestCase2(MethodInfo testMethod, params object[] arguments)
         {
             if (testMethod == null)
@@ -34,11 +36,41 @@
         }
 
         /// <summary>
-        /// Gets the arguments specified with explicit values.
+        /// Initializes a new instance of the <see cref="TestCase2"/> class.
         /// </summary>
-        public IEnumerable<object> Arguments
+        /// <param name="delegator">
+        /// A delegate representing actual test-case.
+        /// </param>
+        /// <param name="arguments">
+        /// Test arguments.
+        /// </param>
+        public TestCase2(Delegate delegator, params object[] arguments)
         {
-            get { return this.arguments; }
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
+            if (arguments == null)
+                throw new ArgumentNullException("arguments");
+
+            this.delegator = delegator;
+            this.arguments = arguments;
+            this.testMethod = delegator.Method;
+        }
+
+        /// <summary>
+        /// Gets the delegate representing actual test-case.
+        /// </summary>
+        public Delegate Delegator
+        {
+            get { return this.delegator; }
+        }
+
+        /// <summary>
+        /// Gets the test object.
+        /// </summary>
+        public object Target
+        {
+            get { return this.delegator.Target; }
         }
 
         /// <summary>
@@ -47,6 +79,14 @@
         public MethodInfo TestMethod
         {
             get { return this.testMethod; }
+        }
+
+        /// <summary>
+        /// Gets the arguments specified with explicit values.
+        /// </summary>
+        public IEnumerable<object> Arguments
+        {
+            get { return this.arguments; }
         }
 
         /// <summary>
@@ -63,7 +103,7 @@
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, new object[0]);
+            return new TestCase2(delegator, new object[0]);
         }
 
         /// <summary>

@@ -31,10 +31,13 @@
             if (IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 
-            if (testMethod.IsStatic)
-                return CreateStaticTestCommands(testMethod, fixtureFactory);
+            var testCases = (IEnumerable<ITestCase2>)testMethod.MethodInfo.Invoke(
+                testMethod.CreateInstance(), new object[0]);
 
-            return CreateTestCommands(testMethod, fixtureFactory);
+            return testCases.Select(
+                c => c.Target != null
+                    ? CreateCommand(testMethod, fixtureFactory, c)
+                    : CreateStaticCommand(testMethod, fixtureFactory, c));
         }
 
         private static bool IsValidSignature(MethodInfo method)
@@ -43,33 +46,27 @@
                 || method.GetParameters().Length != 0;
         }
 
-        private static IEnumerable<ITestCommand> CreateStaticTestCommands(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+        private static ParameterizedCommand CreateCommand(
+            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase2 testCase)
         {
-            var testCases = (IEnumerable<ITestCase2>)testMethod.MethodInfo.Invoke(null, new object[0]);
-            return testCases.Select(
-                c => new ParameterizedCommand(
-                    new TestCommandContext(
-                        testMethod,
-                        Reflector.Wrap(c.TestMethod),
-                        fixtureFactory,
-                        c.Arguments)));
+            return new ParameterizedCommand(
+                new TestCommandContext(
+                    testMethod,
+                    Reflector.Wrap(testCase.TestMethod),
+                    testCase.Target,
+                    fixtureFactory,
+                    testCase.Arguments));
         }
 
-        private static IEnumerable<ITestCommand> CreateTestCommands(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+        private static ParameterizedCommand CreateStaticCommand(
+            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase2 testCase)
         {
-            var testObject = testMethod.CreateInstance();
-            var testCases = (IEnumerable<ITestCase2>)testMethod.MethodInfo.Invoke(testObject, new object[0]);
-
-            return testCases.Select(
-                c => new ParameterizedCommand(
-                    new TestCommandContext(
-                        testMethod,
-                        Reflector.Wrap(c.TestMethod),
-                        testObject,
-                        fixtureFactory,
-                        c.Arguments)));
+            return new ParameterizedCommand(
+                new TestCommandContext(
+                    testMethod,
+                    Reflector.Wrap(testCase.TestMethod),
+                    fixtureFactory,
+                    testCase.Arguments));
         }
     }
 }

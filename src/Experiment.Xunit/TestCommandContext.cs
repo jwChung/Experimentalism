@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
     using System.Reflection;
     using global::Xunit.Sdk;
 
@@ -12,7 +14,7 @@
     {
         private IMethodInfo testMethod;
         private IMethodInfo actualMethod;
-        private object testObject;
+        private object actualObject;
         private ITestFixtureFactory factory;
         private IEnumerable<object> arguments;
 
@@ -81,7 +83,7 @@
         /// <param name="actualMethod">
         /// A actual method.
         /// </param>
-        /// <param name="testObject">
+        /// <param name="actualObject">
         /// The test object.
         /// </param>
         /// <param name="factory">
@@ -94,14 +96,15 @@
         public TestCommandContext(
             IMethodInfo testMethod,
             IMethodInfo actualMethod,
-            object testObject,
+            object actualObject,
             ITestFixtureFactory factory,
-            IEnumerable<object> arguments) : this(testMethod, actualMethod, factory, arguments)
+            IEnumerable<object> arguments)
+            : this(testMethod, actualMethod, factory, arguments)
         {
-            if (testObject == null)
-                throw new ArgumentNullException("testObject");
+            if (actualObject == null)
+                throw new ArgumentNullException("actualObject");
 
-            this.testObject = testObject;
+            this.actualObject = actualObject;
         }
 
         /// <summary>
@@ -123,9 +126,18 @@
         /// <summary>
         /// Gets the test object.
         /// </summary>
+        [Obsolete("This property is not supported and will be removed on the next major release.")]
         public object TestObject
         {
-            get { return this.testObject; }
+            get { throw new NotSupportedException(); }
+        }
+
+        /// <summary>
+        /// Gets the actual object.
+        /// </summary>
+        public object ActualObject
+        {
+            get { return this.actualObject; }
         }
 
         /// <summary>
@@ -160,7 +172,7 @@
                     this.testMethod.MethodInfo, this.testMethod.MethodInfo, testObject, testObject);
 
             return new TestMethodContext(
-                    this.testMethod.MethodInfo, this.actualMethod.MethodInfo, this.testObject, testObject);
+                    this.testMethod.MethodInfo, this.actualMethod.MethodInfo, testObject, this.actualObject);
         }
 
         /// <summary>
@@ -174,7 +186,27 @@
         /// </returns>
         public IEnumerable<object> GetArguments(ITestMethodContext context)
         {
-            throw new NotImplementedException();
+            if (context == null)
+                throw new ArgumentNullException("context");
+
+            var parameters = context.ActualMethod.GetParameters();
+            var explicitArguments = this.arguments.ToArray();
+
+            if (explicitArguments.Length > parameters.Length)
+                throw new InvalidOperationException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Expected {0} parameters, got {1} parameters",
+                    parameters.Length,
+                    explicitArguments.Length));
+
+            if (explicitArguments.Length == parameters.Length)
+                return explicitArguments;
+
+            var fixture = this.factory.Create(context);
+            var autoArguments = parameters.Skip(explicitArguments.Length)
+                .Select(p => fixture.Create(p.ParameterType));
+
+            return explicitArguments.Concat(autoArguments);
         }
 
         private class TestMethodContext : ITestMethodContext

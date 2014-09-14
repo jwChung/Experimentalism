@@ -1,5 +1,6 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
+    using System;
     using System.Collections.Generic;
     using global::Xunit.Sdk;
 
@@ -16,6 +17,7 @@
         /// <summary>
         /// Gets the actual method.
         /// </summary>
+        [Obsolete("This property is not supported and will be removed on the next major release.")]
         IMethodInfo ActualMethod { get; }
 
         /// <summary>

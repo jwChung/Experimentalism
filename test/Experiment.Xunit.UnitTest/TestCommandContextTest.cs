@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using global::Xunit;
     using global::Xunit.Sdk;
@@ -80,7 +81,7 @@
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Null(sut.ActualMethod);
-            Assert.Null(sut.TestObject);
+            Assert.Null(sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
@@ -97,7 +98,7 @@
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Null(sut.TestObject);
+            Assert.Null(sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
@@ -107,17 +108,28 @@
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
-            var testObject = new object();
+            var actualObject = new object();
             var factory = Mocked.Of<ITestFixtureFactory>();
             var arguments = new[] { new object(), new object() };
 
-            var sut = new TestCommandContext(testMethod, actualMethod, testObject, factory, arguments);
+            var sut = new TestCommandContext(testMethod, actualMethod, actualObject, factory, arguments);
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Equal(testObject, sut.TestObject);
+            Assert.Equal(actualObject, sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
+        }
+
+        [Fact]
+        [Obsolete]
+        public void TestObjectThrowsNotSupportedException()
+        {
+            var sut = new TestCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                Mocked.Of<ITestFixtureFactory>(),
+                new object[0]);
+            Assert.Throws<NotSupportedException>(() => sut.TestObject);
         }
 
         [Fact]
@@ -144,22 +156,91 @@
         {
             var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
             var actualMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
-            var testObject = new object();
+            var actualObject = new object();
             var sut = new TestCommandContext(
                 testMethod,
                 actualMethod,
-                testObject,
+                actualObject,
                 Mocked.Of<ITestFixtureFactory>(),
                 new[] { new object(), new object() });
-            var actualObject = new object();
+            var testObject = new object();
 
-            var actual = sut.GetMethodContext(actualObject);
+            var actual = sut.GetMethodContext(testObject);
 
             actual.AssertHasCorrectValues(
                 testMethod.MethodInfo,
                 actualMethod.MethodInfo,
                 testObject,
                 actualObject);
+        }
+
+        [Fact]
+        public void GetArgumentsWithNullContextThrows()
+        {
+            var sut = new TestCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                Mocked.Of<ITestFixtureFactory>(),
+                new object[0]);
+            Assert.Throws<ArgumentNullException>(() => sut.GetArguments(null));
+        }
+
+        [Fact]
+        public void GetArgumentsThrowsWhenExplicitArgumentsAreMoreThanTestMethodParameters()
+        {
+            var arguments = new object[] { "1", 1, new object() };
+            var sut = new TestCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                Mocked.Of<ITestFixtureFactory>(),
+                arguments);
+            var actualMethod = new Action<string, int>((x, y) => { }).Method;
+            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
+
+            Assert.Throws<InvalidOperationException>(() => sut.GetArguments(context));
+        }
+
+        [Fact]
+        public void GetArgumentsReturnsCorrectValuesWhenExplicitArgumentsAreMatchedWithTestMethodParameters()
+        {
+            var arguments = new object[] { "1", 1, new object() };
+            var sut = new TestCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                Mocked.Of<ITestFixtureFactory>(),
+                arguments);
+            var actualMethod = new Action<string, int, object>((x, y, z) => { }).Method;
+            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
+
+            var actual = sut.GetArguments(context);
+
+            Assert.Equal(arguments, actual);
+        }
+
+        [Fact]
+        public void GetArgumentsReturnsCorrectValuesWhenExplicitArgumentsAreLessThanTestMethodParameters()
+        {
+            // Fixture setup
+            var arguments = new object[] { new object() };
+
+            var actualMethod = new Action<object, string, int>((x, y, z) => { }).Method;
+            
+            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
+            
+            var fixture = new FakeTestFixture();
+            
+            var factory = Mocked.Of<ITestFixtureFactory>(x => x.Create(context) == fixture);
+            
+            var sut = new TestCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                factory,
+                arguments);
+
+            var expected = arguments.Concat(
+                new object[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) });
+
+            // Exercise system
+            var actual = sut.GetArguments(context);
+
+            // Verify outcome
+            Assert.Equal(expected, actual);
         }
     }
 }
