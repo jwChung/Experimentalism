@@ -180,22 +180,12 @@ First class test 방식은 [Bug squash의 First-class tests in MbUnit](http://bu
 ###Third-party libraries
 Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습니다. 아래의 각 라이브러리에서 언급되는 라이센스 전문은 LICENSE.txt 파일 또는 각 소스파일의 헤더형태로 제공되므로 이를 참고할 수 있습니다.
 
-* xunit 1.9.0.1566  
-  Website:      https://github.com/xunit/xunit  
-  Copyright:    Copyright 2013 Outercurve Foundation  
-  License:      Apache 2.0
-
-* xunit.extensions 1.9.0.1566  
-  Website:      https://github.com/xunit/xunit  
-  Copyright:    Copyright 2013 Outercurve Foundation  
-  License:      Apache 2.0
-
-* AutoFixture 3.18.7  
-  Website:      https://github.com/AutoFixture/AutoFixture  
+* Albedo 1.0.1  
+  Website:      https://github.com/ploeh/Albedo  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* AutoFixture.Idioms 3.18.7  
+* AutoFixture 3.18.7  
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
@@ -205,8 +195,8 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
-* Albedo 1.0.1  
-  Website:      https://github.com/ploeh/Albedo  
+* AutoFixture.Idioms 3.18.7  
+  Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
@@ -219,6 +209,16 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Website:      http://www.moqthis.com  
   Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD  
   License:      BSD
+
+* xunit 1.9.0.1566  
+  Website:      https://github.com/xunit/xunit  
+  Copyright:    Copyright 2013 Outercurve Foundation  
+  License:      Apache 2.0
+
+* xunit.extensions 1.9.0.1566  
+  Website:      https://github.com/xunit/xunit  
+  Copyright:    Copyright 2013 Outercurve Foundation  
+  License:      Apache 2.0
 
 ### Icon image
 Website:      http://www.oxygen-icons.org  
