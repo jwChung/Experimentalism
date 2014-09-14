@@ -127,6 +127,7 @@
         /// Gets the test object.
         /// </summary>
         [Obsolete("This property is not supported and will be removed on the next major release.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This is public API.")]
         public object TestObject
         {
             get { throw new NotSupportedException(); }
