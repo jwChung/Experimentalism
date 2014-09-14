@@ -76,7 +76,7 @@
   </Target>
 
   <Target Name="NuGetPack">
-    <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" ContinueOnError="true" />
+    <Exec Command="$(NuGetPath) pack %(NuGetFiles.Identity) -Symbols" />
   </Target>
 
   <Target Name="RestoreNuGetVersion" Outputs="%(NuGetFiles.FullPath)">
