@@ -44,14 +44,12 @@
       <HintPath>..\..\packages\AutoFixture.AutoMoq.3.18.7\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
       <ILMerge>true</ILMerge>
     </Reference>
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="TestFixtureConfigurationAttribute.cs" />
-    <Compile Include="CustomizeAttribute.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />

@@ -55,8 +55,6 @@
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="TestFixtureConfigurationAttributeTest.cs" />
     <Compile Include="ConcreteType.cs" />
-    <Compile Include="CustomizeAttributeTest.cs" />
-    <Compile Include="DelegatingCustomizeAttribute.cs" />
     <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureFactoryTest.cs" />

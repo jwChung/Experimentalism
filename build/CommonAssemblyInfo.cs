@@ -41,6 +41,7 @@ using System.Runtime.InteropServices;
  *       - GreedyAttribute
  *       - ModestAttribute
  *       - NoAutoPropertiesAttribute
+ *       - CustomizeAttribute
  *
  *     * Experiment.Xunit
  *       - FirstClassTestAttribute
