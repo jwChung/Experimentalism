@@ -47,32 +47,6 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [CustomTest]
-        public void FrozenAttributeFreezesInstanceOfCertainType(
-            [Frozen] string arg1,
-            string arg2)
-        {
-            Assert.Same(arg1, arg2);
-        }
-
-        [CustomTest]
-        public void ModestAttributeUsesModestCtorToConstructInstanceOfCertainType(
-            [Modest] Person person)
-        {
-            Assert.Null(person.Name);
-            Assert.Equal(0, person.Age);
-        }
-
-        [CustomTest]
-        public void GreedyAttributeUsesGreedyCtorToConstructInstanceOfCertainType(
-            [Frozen] string name,
-            [Frozen] int age,
-            [Greedy] Person person)
-        {
-            Assert.Same(name, person.Name);
-            Assert.Equal(age, person.Age);
-        }
-
-        [CustomTest]
         public IEnumerable<ITestCase2> FirstClassTestAttributeSupportsManyTestCases()
         {
             var testCases = new[]

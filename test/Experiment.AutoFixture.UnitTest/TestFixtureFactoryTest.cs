@@ -23,54 +23,10 @@
         }
 
         [Fact]
-        public void CreateAppliesCustomizeAttribute()
-        {
-            var sut = new TestFixtureFactory();
-            var actual = sut.Create(GetType().GetMethod("FrozenTest"));
-            Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
-        }
-
-        [Fact]
-        public void CreateAppliesComplexCustomizeAttributes()
-        {
-            var sut = new TestFixtureFactory();
-
-            var actual = sut.Create(GetType().GetMethod("PersonTest"));
-
-            var name = (string)actual.Create(typeof(string));
-            var age = (int)actual.Create(typeof(int));
-            var person = (Person)actual.Create(typeof(Person));
-            var other = actual.Create(typeof(object));
-            Assert.Same(name, person.Name);
-            Assert.Equal(age, person.Age);
-            Assert.NotNull(other);
-        }
-
-        [Fact]
-        public void CreateAppliesManyCustomizeAttributesOnSameParameter()
-        {
-            var sut = new TestFixtureFactory();
-
-            var actual = sut.Create(GetType().GetMethod("ManyAttributeTest"));
-
-            var person = (Person)actual.Create(typeof(Person));
-            Assert.NotNull(person.Name);
-            Assert.NotEqual(0, person.Age);
-        }
-
-        [Fact]
         public void CreateWithNullTestMethodThrows()
         {
             var sut = new TestFixtureFactory();
             Assert.Throws<ArgumentNullException>(() => sut.Create(null));
-        }
-
-        [Fact]
-        public void CreateCorrectlyAppliesCustomizeAttribute()
-        {
-            var sut = new TestFixtureFactory();
-            var actual = sut.Create(GetType().GetMethod("FrozenTest"));
-            Assert.Same(actual.Create(typeof(string)), actual.Create(typeof(string)));
         }
 
         [Fact]
@@ -129,21 +85,6 @@
             var fixture = Assert.IsAssignableFrom<TestFixture>(actual).Fixture;
             Assert.False(fixture.OmitAutoProperties);
             Assert.Throws<ObjectCreationException>(() => fixture.Create<IDisposable>());
-        }
-    }
-
-    public partial class TestFixtureFactoryTest
-    {
-        public void FrozenTest([Frozen] string arg)
-        {
-        }
-
-        public void PersonTest([Frozen] string name, [Frozen] int age, [Greedy] Person person, object other)
-        {
-        }
-
-        public void ManyAttributeTest([Greedy] [Frozen] Person person)
-        {
         }
     }
 
