@@ -9,13 +9,13 @@
 
     public class Scenario
     {
-        [CustomTest]
+        [Test]
         public void TestAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [CustomTest]
+        [Test]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
@@ -24,7 +24,7 @@
             Assert.Equal(1234, arg2);
         }
 
-        [CustomTest]
+        [Test]
         public void TestAttributeSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
@@ -32,7 +32,7 @@
             Assert.Equal(5678, arg2);
         }
 
-        [CustomTest]
+        [Test]
         [InlineData("expected")]
         public void TestAttributeSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
@@ -41,14 +41,14 @@
             Assert.Equal(5678, arg2);
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForYieldReturn()
         {
             yield return TestCase.Create(() => Assert.Equal(3, 2 + 1));
             yield return TestCase.Create(() => Assert.Equal(10, 3 + 7));
         }
 
-        [CustomTest]
+        [Test]
         public ITestCase[] TestBaseAttributeSupportsTestCasesForArray()
         {
             var testCases = new[]
@@ -62,7 +62,7 @@
                 .Cast<ITestCase>().ToArray();
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
@@ -75,7 +75,7 @@
                 c => TestCase.Create(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesWithAutoData()
         {
             yield return TestCase.WithAuto<string, int>().Create((x, y) =>
@@ -94,7 +94,7 @@
             }
         }
 
-        private class CustomTestAttribute : TestBaseAttribute
+        private class TestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {

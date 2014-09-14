@@ -11,7 +11,7 @@
 
     public class Scenario
     {
-        [CustomTest]
+        [Test]
         public void NullGuardClasuseAssertionCorrectlyVerifiesMembers(
             GuardClauseAssertion assertion)
         {
@@ -27,7 +27,7 @@
                 .ForEach(assertion.Verify);
         }
 
-        [CustomTest]
+        [Test]
         public void MemberInitializationAssertionCorrectlyVerifiesMembers(
             MemberInitializationAssertion assertion)
         {
@@ -37,7 +37,7 @@
                 .ForEach(assertion.Verify);
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> NullGuardClasuseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -52,7 +52,7 @@
                     .Create((x, y) => y.Verify(x)));
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
@@ -61,14 +61,14 @@
                         .Create((x, y) => y.Verify(x)));
         }
 
-        [CustomTest]
+        [Test]
         public void NullGuardClasuseAssertionCorrectlyVerifiesType(
             GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }
 
-        [CustomTest]
+        [Test]
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
@@ -83,7 +83,7 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        [CustomTest]
+        [Test]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
@@ -93,7 +93,7 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        private class CustomTestAttribute : TestBaseAttribute
+        private class TestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {

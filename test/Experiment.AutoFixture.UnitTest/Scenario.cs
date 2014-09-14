@@ -11,13 +11,13 @@
 
     public class Scenario
     {
-        [CustomTest]
+        [Test]
         public void TestAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [CustomTest]
+        [Test]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
@@ -26,7 +26,7 @@
             Assert.Equal(1234, arg2);
         }
 
-        [CustomTest]
+        [Test]
         public void TestAttributeSupportsParameterizedTestWithAutoData(
             string arg1,
             Type arg2)
@@ -35,7 +35,7 @@
             Assert.NotNull(arg2);
         }
 
-        [CustomTest]
+        [Test]
         [InlineData("expected")]
         public void TestAttributeSupportsParameterizedTestWithMixedData(
             string arg1,
@@ -45,7 +45,7 @@
             Assert.NotNull(arg2);
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> FirstClassTestAttributeSupportsManyTestCases()
         {
             var testCases = new[]
@@ -59,7 +59,7 @@
                 c => TestCase.Create(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
-        [CustomTest]
+        [Test]
         public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
             yield return TestCase.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
@@ -67,7 +67,7 @@
             yield return TestCase.WithAuto<object>().Create(x => Assert.NotNull(x));
         }
 
-        private class CustomTestAttribute : TestBaseAttribute
+        private class TestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
