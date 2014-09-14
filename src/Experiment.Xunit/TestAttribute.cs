@@ -46,7 +46,7 @@
                 return new[] { new ExceptionCommand(method, exception) };
             }
 
-            return new TestCommandCollection(method, this.GetTestCommands(method));
+            return new TryCatchCommandCollection(method, this.GetTestCommands(method));
         }
 
         /// <summary>

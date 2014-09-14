@@ -6,12 +6,12 @@ namespace Jwc.Experiment.Xunit
     using System.Diagnostics.CodeAnalysis;
     using global::Xunit.Sdk;
 
-    internal class TestCommandCollection : IEnumerable<ITestCommand>
+    internal class TryCatchCommandCollection : IEnumerable<ITestCommand>
     {
         private readonly IMethodInfo testMethod;
         private readonly IEnumerable<ITestCommand> testCommands;
 
-        public TestCommandCollection(IMethodInfo testMethod, IEnumerable<ITestCommand> testCommands)
+        public TryCatchCommandCollection(IMethodInfo testMethod, IEnumerable<ITestCommand> testCommands)
         {
             this.testMethod = testMethod;
             this.testCommands = testCommands;
