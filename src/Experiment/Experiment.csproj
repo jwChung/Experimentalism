@@ -42,7 +42,6 @@
     <Compile Include="FuncTestFixtureFactory.cs" />
     <Compile Include="TestAssemblyConfigurationAttribute.cs" />
     <Compile Include="DefaultFixtureFactory.cs" />
-    <Compile Include="DefaultFixtureConfigurationAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />

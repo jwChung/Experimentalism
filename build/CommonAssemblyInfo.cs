@@ -35,6 +35,9 @@ using System.Runtime.InteropServices;
  * 
  * - [Major] Removed the renewed or discarded types.
  * 
+ *     * Experiment
+ *       - DefaultFixtureConfigurationAttribute
+ *
  *     * Experiment.AutoFixture
  *       - AutoPropertiesAttribute
  *       - FrozenAttribute
