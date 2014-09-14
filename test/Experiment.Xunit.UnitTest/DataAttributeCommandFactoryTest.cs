@@ -19,6 +19,13 @@
         }
 
         [Fact]
+        public void CreateWithNullTestMethodThrows()
+        {
+            var sut = new DataAttributeCommandFactory();
+            Assert.Throws<ArgumentNullException>(() => sut.Create(null, null));
+        }
+
+        [Fact]
         public void CreateReturnsEmptyWhenTestMethodDoesNotHaveDataAttribute()
         {
             var testMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());

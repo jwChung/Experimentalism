@@ -26,6 +26,9 @@
         /// </returns>
         public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
         {
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
             var attributes = testMethod.MethodInfo
                 .GetCustomAttributes(typeof(DataAttribute), false).Cast<DataAttribute>();
 
