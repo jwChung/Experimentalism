@@ -123,17 +123,6 @@
         }
 
         [Fact]
-        [Obsolete]
-        public void TestObjectThrowsNotSupportedException()
-        {
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
-                Mocked.Of<ITestFixtureFactory>(),
-                new object[0]);
-            Assert.Throws<NotSupportedException>(() => sut.TestObject);
-        }
-
-        [Fact]
         public void GetMethodContextThroughFirstCtorReturnsCorrectContext()
         {
             var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
