@@ -14,17 +14,6 @@
         }
         
         [Fact]
-        [Obsolete]
-        public void InitializeObsoleteCtorWithAnyNullArgumentsThrows()
-        {
-            var testMethod = new Action(() => { }).Method;
-            var arguments = new object[] { "1", 123 };
-
-            Assert.Throws<ArgumentNullException>(() => new TestCase2((MethodInfo)null, arguments));
-            Assert.Throws<ArgumentNullException>(() => new TestCase2(testMethod, null));
-        }
-
-        [Fact]
         public void InitializeWithAnyNullArgumentsThrows()
         {
             var delegator = new Action(() => { });
@@ -32,19 +21,6 @@
 
             Assert.Throws<ArgumentNullException>(() => new TestCase2((Delegate)null, arguments));
             Assert.Throws<ArgumentNullException>(() => new TestCase2(delegator, null));
-        }
-
-        [Fact]
-        [Obsolete]
-        public void InitializeObsoleteCtorCorrectlyInitializesProperties()
-        {
-            var testMethod = new Action(() => { }).Method;
-            var arguments = new object[] { "1", 123 };
-
-            var sut = new TestCase2(testMethod, arguments);
-
-            Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Equal(arguments, sut.Arguments);
         }
 
         [Fact]

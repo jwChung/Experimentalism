@@ -25,6 +25,7 @@ using System.Runtime.InteropServices;
  *     - AutoFixtureConfigurationAttribute
  *     - TestFixtureFactory.CreateFixture(MethodInfo)
  *     - ITestCommandContext.ActualMethod
+ *     - TestCase2(MethodInfo, object[])
  *
  * - [Major] Renamed NullGuardClauseAssertion to GuardClauseAssertion.
  */

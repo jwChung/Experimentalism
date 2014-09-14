@@ -16,28 +16,6 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCase2"/> class.
         /// </summary>
-        /// <param name="testMethod">
-        /// A test method.
-        /// </param>
-        /// <param name="arguments">
-        /// Test arguments.
-        /// </param>
-        [Obsolete("This constructor is not supported and will be removed on the next major release.")]
-        public TestCase2(MethodInfo testMethod, params object[] arguments)
-        {
-            if (testMethod == null)
-                throw new ArgumentNullException("testMethod");
-
-            if (arguments == null)
-                throw new ArgumentNullException("arguments");
-
-            this.testMethod = testMethod;
-            this.arguments = arguments;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestCase2"/> class.
-        /// </summary>
         /// <param name="delegator">
         /// A delegate representing actual test-case.
         /// </param>
