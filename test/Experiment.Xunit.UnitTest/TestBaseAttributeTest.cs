@@ -43,6 +43,7 @@
                 new[]
                 {
                     typeof(TestCaseCommandFactory),
+                    typeof(DataAttributeCommandFactory),
                     typeof(ParameterizedCommandFactory),
                     typeof(FactCommandFactory)
                 },
