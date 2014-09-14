@@ -38,6 +38,7 @@ using System.Runtime.InteropServices;
  *     * Experiment.AutoFixture
  *       - AutoPropertiesAttribute
  *       - FrozenAttribute
+ *       - GreedyAttribute
  *
  *     * Experiment.Xunit
  *       - FirstClassTestAttribute
