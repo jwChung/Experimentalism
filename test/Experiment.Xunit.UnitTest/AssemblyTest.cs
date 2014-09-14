@@ -24,7 +24,7 @@
         public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
         {
             new IndirectReferenceAssertion(
-                Assembly.Load("xunit.extensions"))
+                Assembly.Load("xunit.extensions")) // Not il-merged
                 .Verify(Assembly.Load("Jwc.Experiment.Xunit"));
         }
     }
