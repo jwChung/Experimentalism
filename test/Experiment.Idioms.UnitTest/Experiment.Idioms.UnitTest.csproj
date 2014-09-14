@@ -66,14 +66,12 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Experiment.UnitTest\DelegatingAssembly.cs">
-      <Link>DelegatingAssembly.cs</Link>
-    </Compile>
     <Compile Include="..\Experiment.UnitTest\Mocked.cs">
       <Link>Mocked.cs</Link>
     </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
+    <Compile Include="DelegatingAssembly.cs" />
     <Compile Include="Idioms\IdiomaticAssertionTest.cs" />
     <Compile Include="IInterfaceWithMembers.cs" />
     <Compile Include="Idioms\ObjectDisposalAssertionTest.cs" />
