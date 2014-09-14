@@ -10,11 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.5.4")]
-[assembly: AssemblyInformationalVersion("1.5.4")]
+[assembly: AssemblyVersion("1.6.0")]
+[assembly: AssemblyInformationalVersion("1.6.0")]
 
 /*
- * Version 1.5.4
+ * Version 1.6.0
  * 
- * - [Patch] Fixed that VS cannot run first-class tests using TestBaseAttribute.
+ * - [Minor] Implemented that TestBaseAttribute supports tests with
+ *   DataAttribute(Xunit).
  */
