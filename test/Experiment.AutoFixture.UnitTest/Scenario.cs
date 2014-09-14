@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using Jwc.Experiment.Xunit;
+    using Ploeh.AutoFixture;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -70,7 +71,7 @@
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
-                return new TestFixtureFactory().Create(context.ActualMethod);
+                return new TestFixture(new Fixture());
             }
         }
 

@@ -12,16 +12,7 @@
             new RestrictiveReferenceAssertion(
                 Assembly.Load("mscorlib"),
                 Assembly.Load("Jwc.Experiment"),
-                Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.AutoMoq"))
-                .Verify(Assembly.Load("Jwc.Experiment.AutoFixture"));
-        }
-
-        [Fact]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
-        {
-            new IndirectReferenceAssertion(
-                Assembly.Load("Ploeh.AutoFixture.AutoMoq"))
+                Assembly.Load("Ploeh.AutoFixture"))
                 .Verify(Assembly.Load("Jwc.Experiment.AutoFixture"));
         }
     }

@@ -41,6 +41,7 @@ using System.Runtime.InteropServices;
  *       - DefaultFixtureFactory
  *       - NotSupportedFixtureFactory
  *       - FuncTestFixtureFactory
+ *       - ITestFixtureFactory
  *
  *     * Experiment.AutoFixture
  *       - AutoPropertiesAttribute
@@ -50,6 +51,7 @@ using System.Runtime.InteropServices;
  *       - NoAutoPropertiesAttribute
  *       - CustomizeAttribute
  *       - TestFixtureConfigurationAttribute
+ *       - TestFixtureFactory
  *
  *     * Experiment.Xunit
  *       - FirstClassTestAttribute

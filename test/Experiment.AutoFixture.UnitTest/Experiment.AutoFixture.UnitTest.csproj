@@ -54,7 +54,6 @@
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
-    <Compile Include="TestFixtureFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
