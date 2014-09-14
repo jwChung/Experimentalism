@@ -16,7 +16,6 @@ using System.Runtime.InteropServices;
 /*
  * Version 2.0.0
  * 
- * 
  * - [Major] Removed the obsolete types and members.
  *     - ITestFixture.Create<T>(), TestFixture.Create<T>()
  *     - ITestFixture.Freeze<T>(), TestFixture.Freeze<T>()
@@ -31,6 +30,7 @@ using System.Runtime.InteropServices;
  *     - NullGuardClauseAssertion -> GuardClauseAssertion.
  * 
  * - [Major] Removed the renewed or discarded types.
- *    - FirstClassTestAttribute
- *    - ITestCase, TestCase
+ *     - FirstClassTestAttribute
+ *     - ITestCase, TestCase
+ *     - FirstClassCommand
  */
