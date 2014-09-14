@@ -48,9 +48,19 @@
         /// </returns>
         public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
         {
-            return this.factories
-                .Select(f => f.Create(testMethod, fixtureFactory))
-                .FirstOrDefault(c => c.Any()) ?? Enumerable.Empty<ITestCommand>();
+            foreach (var factory in this.factories)
+            {
+                int count = 0;
+                var testCommands = factory.Create(testMethod, fixtureFactory);
+                foreach (var testCommand in testCommands)
+                {
+                    count++;
+                    yield return testCommand;
+                }
+
+                if (count != 0)
+                    yield break;
+            }
         }
     }
 }
