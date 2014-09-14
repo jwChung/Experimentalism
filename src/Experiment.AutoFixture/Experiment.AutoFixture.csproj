@@ -52,7 +52,6 @@
     </Compile>
     <Compile Include="TestFixtureConfigurationAttribute.cs" />
     <Compile Include="CustomizeAttribute.cs" />
-    <Compile Include="NoAutoPropertiesAttribute.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />

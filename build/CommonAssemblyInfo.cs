@@ -40,6 +40,7 @@ using System.Runtime.InteropServices;
  *       - FrozenAttribute
  *       - GreedyAttribute
  *       - ModestAttribute
+ *       - NoAutoPropertiesAttribute
  *
  *     * Experiment.Xunit
  *       - FirstClassTestAttribute

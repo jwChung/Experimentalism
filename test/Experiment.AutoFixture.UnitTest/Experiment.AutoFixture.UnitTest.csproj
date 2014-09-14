@@ -57,7 +57,6 @@
     <Compile Include="ConcreteType.cs" />
     <Compile Include="CustomizeAttributeTest.cs" />
     <Compile Include="DelegatingCustomizeAttribute.cs" />
-    <Compile Include="NoAutoPropertiesAttributeTest.cs" />
     <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureFactoryTest.cs" />
