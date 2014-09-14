@@ -49,7 +49,6 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="TestFixtureConfigurationAttribute.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="TestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />

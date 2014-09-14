@@ -42,6 +42,7 @@ using System.Runtime.InteropServices;
  *       - ModestAttribute
  *       - NoAutoPropertiesAttribute
  *       - CustomizeAttribute
+ *       - TestFixtureConfigurationAttribute
  *
  *     * Experiment.Xunit
  *       - FirstClassTestAttribute
