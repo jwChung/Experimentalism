@@ -13,7 +13,7 @@ namespace Jwc.Experiment
 
     public class Scenario
     {
-        [Test]
+        [CustomTest]
         public void NullGuardClasuseAssertionCorrectlyVerifiesMembers(
             GuardClauseAssertion assertion)
         {
@@ -29,7 +29,7 @@ namespace Jwc.Experiment
                 .ForEach(assertion.Verify);
         }
 
-        [Test]
+        [CustomTest]
         public void MemberInitializationAssertionCorrectlyVerifiesMembers(
             MemberInitializationAssertion assertion)
         {
@@ -63,14 +63,14 @@ namespace Jwc.Experiment
                         .Create((x, y) => y.Verify(x)));
         }
 
-        [Test]
+        [CustomTest]
         public void NullGuardClasuseAssertionCorrectlyVerifiesType(
             GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }
 
-        [Test]
+        [CustomTest]
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
@@ -85,7 +85,7 @@ namespace Jwc.Experiment
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        [Test]
+        [CustomTest]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(

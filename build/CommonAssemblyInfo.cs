@@ -33,4 +33,5 @@ using System.Runtime.InteropServices;
  *     - FirstClassTestAttribute
  *     - ITestCase, TestCase
  *     - FirstClassCommand
+ *     - TestAttribute
  */

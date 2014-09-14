@@ -77,7 +77,6 @@
     <Compile Include="TargetInvocationExceptionUnwrappingCommandTest.cs" />
     <Compile Include="SpyTestAssemblyConfigurationAttribute.cs" />
     <Compile Include="TestAssemblyExceptionConfigurationAttribute.cs" />
-    <Compile Include="TestAttributeTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

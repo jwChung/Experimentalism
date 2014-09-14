@@ -37,7 +37,7 @@
             var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
             var types = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
-            var assembly = typeof(TestAttribute).Assembly;
+            var assembly = typeof(TestBaseAttribute).Assembly;
             var expected = assembly.GetExportedTypes();
 
             sut.Verify(assembly);

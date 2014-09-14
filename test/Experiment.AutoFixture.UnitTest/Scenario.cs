@@ -12,13 +12,13 @@ namespace Jwc.Experiment.AutoFixture
 
     public class Scenario
     {
-        [Test]
+        [CustomTest]
         public void TestAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [Test]
+        [CustomTest]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
@@ -27,7 +27,7 @@ namespace Jwc.Experiment.AutoFixture
             Assert.Equal(1234, arg2);
         }
 
-        [Test]
+        [CustomTest]
         public void TestAttributeSupportsParameterizedTestWithAutoData(
             string arg1,
             Type arg2)
@@ -36,7 +36,7 @@ namespace Jwc.Experiment.AutoFixture
             Assert.NotNull(arg2);
         }
 
-        [Test]
+        [CustomTest]
         [InlineData("expected")]
         public void TestAttributeSupportsParameterizedTestWithMixedData(
             string arg1,
@@ -46,7 +46,7 @@ namespace Jwc.Experiment.AutoFixture
             Assert.NotNull(arg2);
         }
 
-        [Test]
+        [CustomTest]
         public void FrozenAttributeFreezesInstanceOfCertainType(
             [Frozen] string arg1,
             string arg2)
@@ -54,7 +54,7 @@ namespace Jwc.Experiment.AutoFixture
             Assert.Same(arg1, arg2);
         }
 
-        [Test]
+        [CustomTest]
         public void ModestAttributeUsesModestCtorToConstructInstanceOfCertainType(
             [Modest] Person person)
         {
@@ -62,7 +62,7 @@ namespace Jwc.Experiment.AutoFixture
             Assert.Equal(0, person.Age);
         }
 
-        [Test]
+        [CustomTest]
         public void GreedyAttributeUsesGreedyCtorToConstructInstanceOfCertainType(
             [Frozen] string name,
             [Frozen] int age,

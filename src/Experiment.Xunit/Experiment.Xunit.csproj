@@ -73,7 +73,6 @@
     <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="ParameterizedCommand.cs" />
     <Compile Include="ParameterizedCommandFactory.cs" />
-    <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

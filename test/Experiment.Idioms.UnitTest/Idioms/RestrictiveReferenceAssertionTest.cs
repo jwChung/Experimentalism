@@ -46,7 +46,7 @@
                 Assembly.Load("xunit.extensions")
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
-            Assert.DoesNotThrow(() => sut.Verify(typeof(TestAttribute).Assembly));
+            Assert.DoesNotThrow(() => sut.Verify(typeof(TestBaseAttribute).Assembly));
         }
 
         [Fact]
@@ -59,7 +59,7 @@
                 typeof(TheoryAttribute).Assembly
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
-            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(TestAttribute).Assembly));
+            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(TestBaseAttribute).Assembly));
         }
 
         [Fact]

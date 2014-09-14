@@ -9,13 +9,13 @@
 
     public class Scenario : IDisposable
     {
-        [ScenarioTest]
+        [CustomTest]
         public void TestAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [ScenarioTest]
+        [CustomTest]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
@@ -24,7 +24,7 @@
             Assert.Equal(1234, arg2);
         }
 
-        [ScenarioTest]
+        [CustomTest]
         public void TestAttributeSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
@@ -32,7 +32,7 @@
             Assert.Equal(5678, arg2);
         }
 
-        [ScenarioTest]
+        [CustomTest]
         [InlineData("expected")]
         public void TestAttributeSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
@@ -100,14 +100,6 @@
                 MethodInfo methodUnderTest, Type[] parameterTypes)
             {
                 yield return new object[] { "expected", 1234 };
-            }
-        }
-
-        private class ScenarioTestAttribute : TestAttribute
-        {
-            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
-            {
-                return new CustomTestFixture();
             }
         }
 
