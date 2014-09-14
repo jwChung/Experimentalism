@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.5.0")]
-[assembly: AssemblyInformationalVersion("1.5.0")]
+[assembly: AssemblyVersion("1.5.1")]
+[assembly: AssemblyInformationalVersion("1.5.1")]
 
 /*
  * Version 1.5.1
@@ -26,6 +26,9 @@ using System.Runtime.InteropServices;
  *     BREAKING-CHANGES
  *       - NEW: ITestCase2.Target
  *   
- * - [Path] Fixed that the TestCommandContext.GetArguments method isn't
+ * - [Patch] Fixed that the TestCommandContext.GetArguments method isn't
  *   implemeted accidentally.
+ *   
+ * - [Patch] Fixed that CompositeTestCommandFactory creates any commands when
+ *   returning just an Enumerable object.
  */
