@@ -147,20 +147,20 @@
         /// <summary>
         /// Gets information of the test method.
         /// </summary>
-        /// <param name="actualObject">
-        /// The actual object.
+        /// <param name="testObject">
+        /// The test object.
         /// </param>
         /// <returns>
         /// The information of the test method.
         /// </returns>
-        public ITestMethodContext GetMethodContext(object actualObject)
+        public ITestMethodContext GetMethodContext(object testObject)
         {
             if (this.actualMethod == null)
                 return new TestMethodContext(
-                    this.testMethod.MethodInfo, this.testMethod.MethodInfo, actualObject, actualObject);
+                    this.testMethod.MethodInfo, this.testMethod.MethodInfo, testObject, testObject);
 
             return new TestMethodContext(
-                    this.testMethod.MethodInfo, this.actualMethod.MethodInfo, this.testObject, actualObject);
+                    this.testMethod.MethodInfo, this.actualMethod.MethodInfo, this.testObject, testObject);
         }
 
         /// <summary>
