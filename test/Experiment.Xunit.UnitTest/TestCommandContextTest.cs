@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Moq;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -187,11 +188,10 @@
         [Fact]
         public void GetArgumentsThrowsWhenExplicitArgumentsAreMoreThanTestMethodParameters()
         {
-            var arguments = new object[] { "1", 1, new object() };
             var sut = new TestCommandContext(
                 Mocked.Of<IMethodInfo>(),
                 Mocked.Of<ITestFixtureFactory>(),
-                arguments);
+                new object[] { "1", 1, new object() });
             var actualMethod = new Action<string, int>((x, y) => { }).Method;
             var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
 
@@ -241,6 +241,22 @@
 
             // Verify outcome
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GetArgumentsShouldNotCreateTestFixtureWhenDoesNotNeedAutoData()
+        {
+            var factory = Mocked.Of<ITestFixtureFactory>();
+            var sut = new TestCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                factory,
+                new object[] { "1", 1, new object() });
+            var actualMethod = new Action<string, int, object>((x, y, z) => { }).Method;
+            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
+
+            sut.GetArguments(context);
+
+            factory.ToMock().Verify(x => x.Create(It.IsAny<ITestMethodContext>()), Times.Never());
         }
     }
 }
