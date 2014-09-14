@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="method">
         /// The test method which this instance is associated. This will likely be the method
-        /// adorned with an <see cref="FirstClassTestAttribute" />.
+        /// adorned with a first-class test attribute.
         /// </param>
         /// <param name="displayParameterName">
         /// A string to show parameters of a test method in test result.

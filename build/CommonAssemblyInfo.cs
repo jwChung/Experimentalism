@@ -18,7 +18,6 @@ using System.Runtime.InteropServices;
  * 
  * 
  * - [Major] Removed the obsolete types and members.
- * 
  *     - ITestFixture.Create<T>(), TestFixture.Create<T>()
  *     - ITestFixture.Freeze<T>(), TestFixture.Freeze<T>()
  *     - TestFixtureConfigurationAttribute
@@ -28,5 +27,9 @@ using System.Runtime.InteropServices;
  *     - TestCase2(MethodInfo, object[])
  *     - TestCommandContext.TestObject
  *
- * - [Major] Renamed NullGuardClauseAssertion to GuardClauseAssertion.
+ * - [Major] Renamed.
+ *     - NullGuardClauseAssertion -> GuardClauseAssertion.
+ * 
+ * - [Major] Removed the renewed or discarded types.
+ *    - FirstClassTestAttribute
  */

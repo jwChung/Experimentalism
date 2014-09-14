@@ -72,8 +72,8 @@ namespace Jwc.Experiment.AutoFixture
             Assert.Equal(age, person.Age);
         }
 
-        [FirstClassTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsManyTestCases()
+        [CustomTest]
+        public IEnumerable<ITestCase2> FirstClassTestAttributeSupportsManyTestCases()
         {
             var testCases = new[]
             {
@@ -83,15 +83,15 @@ namespace Jwc.Experiment.AutoFixture
             };
 
             return testCases.Select(
-                c => TestCase.New(() => Assert.Equal(c.Z, c.X + c.Y)));
+                c => TestCase2.Create(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
-        [FirstClassTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
+        [CustomTest]
+        public IEnumerable<ITestCase2> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
-            yield return TestCase.New<int>(x => Assert.True(x > 0, "x > 0"));
-            yield return TestCase.New<string>(x => Assert.NotNull(x));
-            yield return TestCase.New<object>(x => Assert.NotNull(x));
+            yield return TestCase2.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
+            yield return TestCase2.WithAuto<string>().Create(x => Assert.NotNull(x));
+            yield return TestCase2.WithAuto<object>().Create(x => Assert.NotNull(x));
         }
 
         public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
@@ -99,6 +99,14 @@ namespace Jwc.Experiment.AutoFixture
             protected override void Setup(Assembly testAssembly)
             {
                 DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
+            }
+        }
+
+        private class CustomTestAttribute : TestBaseAttribute
+        {
+            protected override ITestFixture Create(ITestMethodContext context)
+            {
+                return new TestFixtureFactory().Create(context.ActualMethod);
             }
         }
 

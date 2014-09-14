@@ -39,8 +39,8 @@ namespace Jwc.Experiment
                 .ForEach(assertion.Verify);
         }
 
-        [FirstClassTest]
-        public IEnumerable<ITestCase> NullGuardClasuseAssertionCanBeUsedInTestCases()
+        [CustomTest]
+        public IEnumerable<ITestCase2> NullGuardClasuseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -50,19 +50,17 @@ namespace Jwc.Experiment
                         Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
-                .Select(m => TestCase.New<GuardClauseAssertion>(
-                    a => a.Verify(m),
-                    m.GetDisplayName()));
+                .Select(m => TestCase2.WithArgs(m).WithAuto<GuardClauseAssertion>()
+                    .Create((x, y) => y.Verify(x)));
         }
 
-        [FirstClassTest]
-        public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
+        [CustomTest]
+        public IEnumerable<ITestCase2> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
-                .GetIdiomaticMembers()
-                .Select(m => TestCase.New<MemberInitializationAssertion>(
-                    a => a.Verify(m),
-                    m.GetDisplayName()));
+                .GetIdiomaticMembers().Select(m =>
+                    TestCase2.WithArgs(m).WithAuto<MemberInitializationAssertion>()
+                        .Create((x, y) => y.Verify(x)));
         }
 
         [Test]
@@ -102,6 +100,14 @@ namespace Jwc.Experiment
             protected override void Setup(Assembly testAssembly)
             {
                 DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
+            }
+        }
+
+        private class CustomTestAttribute : TestBaseAttribute
+        {
+            protected override ITestFixture Create(ITestMethodContext context)
+            {
+                return new FakeTestFixture();
             }
         }
 

@@ -41,15 +41,15 @@
             Assert.Equal(5678, arg2);
         }
 
-        [FirstClassScenarioTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForYieldReturn()
+        [CustomTest]
+        public IEnumerable<ITestCase2> TestBaseAttributeSupportsTestCasesForYieldReturn()
         {
-            yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
-            yield return TestCase.New(() => Assert.Equal(10, 3 + 7));
+            yield return TestCase2.Create(() => Assert.Equal(3, 2 + 1));
+            yield return TestCase2.Create(() => Assert.Equal(10, 3 + 7));
         }
 
-        [FirstClassScenarioTest]
-        public ITestCase[] FirstClassTestAttributeSupportsTestCasesForArray()
+        [CustomTest]
+        public ITestCase2[] TestBaseAttributeSupportsTestCasesForArray()
         {
             var testCases = new[]
             {
@@ -58,12 +58,12 @@
                 new { X = 100, Y = 23, Z = 123 }
             };
 
-            return testCases.Select(c => TestCase.New(() => Assert.Equal(c.Z, c.X + c.Y)))
-                .Cast<ITestCase>().ToArray();
+            return testCases.Select(c => TestCase2.Create(() => Assert.Equal(c.Z, c.X + c.Y)))
+                .Cast<ITestCase2>().ToArray();
         }
 
-        [FirstClassScenarioTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForEnumerable()
+        [CustomTest]
+        public IEnumerable<ITestCase2> TestBaseAttributeSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
             {
@@ -72,13 +72,13 @@
             };
 
             return testCases.Select(
-                c => TestCase.New(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
+                c => TestCase2.Create(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
-        [FirstClassScenarioTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesWithAutoData()
+        [CustomTest]
+        public IEnumerable<ITestCase2> TestBaseAttributeSupportsTestCasesWithAutoData()
         {
-            yield return TestCase.New<string, int>((x, y) =>
+            yield return TestCase2.WithAuto<string, int>().Create((x, y) =>
             {
                 Assert.Equal("custom string", x);
                 Assert.Equal(5678, y);
@@ -111,9 +111,9 @@
             }
         }
 
-        private class FirstClassScenarioTestAttribute : FirstClassTestAttribute
+        private class CustomTestAttribute : TestBaseAttribute
         {
-            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            protected override ITestFixture Create(ITestMethodContext context)
             {
                 return new CustomTestFixture();
             }
