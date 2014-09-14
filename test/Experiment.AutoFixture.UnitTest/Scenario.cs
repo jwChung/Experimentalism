@@ -46,7 +46,7 @@
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> FirstClassTestAttributeSupportsManyTestCases()
+        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsManyTestCases()
         {
             var testCases = new[]
             {
@@ -56,15 +56,15 @@
             };
 
             return testCases.Select(
-                c => TestCase2.Create(() => Assert.Equal(c.Z, c.X + c.Y)));
+                c => TestCase.Create(() => Assert.Equal(c.Z, c.X + c.Y)));
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
+        public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
-            yield return TestCase2.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
-            yield return TestCase2.WithAuto<string>().Create(x => Assert.NotNull(x));
-            yield return TestCase2.WithAuto<object>().Create(x => Assert.NotNull(x));
+            yield return TestCase.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
+            yield return TestCase.WithAuto<string>().Create(x => Assert.NotNull(x));
+            yield return TestCase.WithAuto<object>().Create(x => Assert.NotNull(x));
         }
 
         private class CustomTestAttribute : TestBaseAttribute

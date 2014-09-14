@@ -7,14 +7,14 @@
     /// <summary>
     /// Represents test case.
     /// </summary>
-    public partial class TestCase2 : ITestCase2
+    public partial class TestCase : ITestCase
     {
         private readonly MethodInfo testMethod;
         private readonly object[] arguments;
         private readonly Delegate delegator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestCase2"/> class.
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
         /// </summary>
         /// <param name="delegator">
         /// A delegate representing actual test-case.
@@ -22,7 +22,7 @@
         /// <param name="arguments">
         /// Test arguments.
         /// </param>
-        public TestCase2(Delegate delegator, params object[] arguments)
+        public TestCase(Delegate delegator, params object[] arguments)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
@@ -76,12 +76,12 @@
         /// <returns>
         /// The new test case.
         /// </returns>
-        public static ITestCase2 Create(Action delegator)
+        public static ITestCase Create(Action delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, new object[0]);
+            return new TestCase(delegator, new object[0]);
         }
 
         /// <summary>

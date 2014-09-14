@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents a test-case.
     /// </summary>
-    public interface ITestCase2
+    public interface ITestCase
     {
         /// <summary>
         /// Gets the test object.

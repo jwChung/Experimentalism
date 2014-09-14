@@ -4,7 +4,7 @@ namespace Jwc.Experiment.Xunit
 {
     using System;
 
-    public partial class TestCase2 : ITestCase2
+    public partial class TestCase : ITestCase
     {
         /// <summary>
         /// Returns a test case with arguments.

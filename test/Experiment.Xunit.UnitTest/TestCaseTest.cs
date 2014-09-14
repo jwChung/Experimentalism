@@ -4,13 +4,13 @@
     using System.Reflection;
     using global::Xunit;
 
-    public class TestCase2Test
+    public class TestCaseTest
     {
         [Fact]
         public void SutIsTestCase2()
         {
-            var sut = new TestCase2(new Action(() => { }), new object[0]);
-            Assert.IsAssignableFrom<ITestCase2>(sut);
+            var sut = new TestCase(new Action(() => { }), new object[0]);
+            Assert.IsAssignableFrom<ITestCase>(sut);
         }
         
         [Fact]
@@ -19,8 +19,8 @@
             var delegator = new Action(() => { });
             var arguments = new object[] { "1", 123 };
 
-            Assert.Throws<ArgumentNullException>(() => new TestCase2((Delegate)null, arguments));
-            Assert.Throws<ArgumentNullException>(() => new TestCase2(delegator, null));
+            Assert.Throws<ArgumentNullException>(() => new TestCase((Delegate)null, arguments));
+            Assert.Throws<ArgumentNullException>(() => new TestCase(delegator, null));
         }
 
         [Fact]
@@ -29,7 +29,7 @@
             var delegator = new Action(() => { });
             var arguments = new object[] { "1", 123 };
 
-            var sut = new TestCase2(delegator, arguments);
+            var sut = new TestCase(delegator, arguments);
 
             Assert.Equal(delegator, sut.Delegator);
             Assert.Equal(delegator.Target, sut.Target);
@@ -42,9 +42,9 @@
         {
             var delegator = new Action(() => { });
 
-            var actual = TestCase2.Create(delegator);
+            var actual = TestCase.Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Empty(testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -55,9 +55,9 @@
             var arg1 = "anonymous";
             var delegator = new Action<string>(x => { });
 
-            var actual = TestCase2.WithArgs<string>(arg1).Create(delegator);
+            var actual = TestCase.WithArgs<string>(arg1).Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Equal(new object[] { arg1 }, testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -67,9 +67,9 @@
         {
             var delegator = new Action<string>(x => { });
 
-            var actual = TestCase2.WithAuto<string>().Create(delegator);
+            var actual = TestCase.WithAuto<string>().Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Empty(testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -81,9 +81,9 @@
             object arg2 = 123;
             var delegator = new Action<object, object>((x, y) => { });
 
-            var actual = TestCase2.WithArgs(arg1, arg2).Create(delegator);
+            var actual = TestCase.WithArgs(arg1, arg2).Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Equal(new object[] { arg1, arg2 }, testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -94,9 +94,9 @@
             object arg1 = "anonymous";
             var delegator = new Action<object, int>((x, y) => { });
 
-            var actual = TestCase2.WithArgs(arg1).WithAuto<int>().Create(delegator);
+            var actual = TestCase.WithArgs(arg1).WithAuto<int>().Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Equal(new object[] { arg1 }, testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -106,9 +106,9 @@
         {
             var delegator = new Action<object, int>((x, y) => { });
             
-            var actual = TestCase2.WithAuto<object, int>().Create(delegator);
+            var actual = TestCase.WithAuto<object, int>().Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Empty(testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -121,9 +121,9 @@
             var arg3 = new object();
             var delegator = new Action<string, int, object, int>((a1, a2, a3, a4) => { });
             
-            var actual = TestCase2.WithArgs(arg1, arg2, arg3).WithAuto<int>().Create(delegator);
+            var actual = TestCase.WithArgs(arg1, arg2, arg3).WithAuto<int>().Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Equal(new object[] { arg1, arg2, arg3 }, testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -139,11 +139,11 @@
             var delegator = new Action<object, object, object, object, object, object, object, object, object>(
                 (a1, a2, a3, a4, a5, a6, a7, a8, a9) => { });
 
-            var actual = TestCase2.WithArgs(arg1, arg2, arg3, arg4, arg5)
+            var actual = TestCase.WithArgs(arg1, arg2, arg3, arg4, arg5)
                 .WithAuto<object, object, object, object>()
                 .Create(delegator);
 
-            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
             Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, testCase.Arguments);
             Assert.Equal(delegator, testCase.Delegator);
         }
@@ -151,16 +151,16 @@
         [Fact]
         public void CreateWithNullDelegatorThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => TestCase2.Create(null));
-            Assert.Throws<ArgumentNullException>(() => TestCase2.WithArgs("1").Create(null));
-            Assert.Throws<ArgumentNullException>(() => TestCase2.WithAuto<string>().Create(null));
-            Assert.Throws<ArgumentNullException>(() => TestCase2.WithArgs("1", 1).Create(null));
-            Assert.Throws<ArgumentNullException>(() => TestCase2.WithArgs("1").WithAuto<int>().Create(null));
-            Assert.Throws<ArgumentNullException>(() => TestCase2.WithAuto<object, int>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithArgs("1").Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithAuto<string>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithArgs("1", 1).Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithArgs("1").WithAuto<int>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithAuto<object, int>().Create(null));
             Assert.Throws<ArgumentNullException>(
-                () => TestCase2.WithArgs("1", 1, new object()).WithAuto<int>().Create(null));
+                () => TestCase.WithArgs("1", 1, new object()).WithAuto<int>().Create(null));
             Assert.Throws<ArgumentNullException>(
-                () => TestCase2.WithArgs("1", 1, new object(), "1", 1)
+                () => TestCase.WithArgs("1", 1, new object(), "1", 1)
                     .WithAuto<object, object, object, object>()
                     .Create(null));
         }

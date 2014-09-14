@@ -38,7 +38,7 @@
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> NullGuardClasuseAssertionCanBeUsedInTestCases()
+        public IEnumerable<ITestCase> NullGuardClasuseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -48,16 +48,16 @@
                         Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
-                .Select(m => TestCase2.WithArgs(m).WithAuto<GuardClauseAssertion>()
+                .Select(m => TestCase.WithArgs(m).WithAuto<GuardClauseAssertion>()
                     .Create((x, y) => y.Verify(x)));
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> MemberInitializationAssertionCanBeUsedInTestCases()
+        public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers().Select(m =>
-                    TestCase2.WithArgs(m).WithAuto<MemberInitializationAssertion>()
+                    TestCase.WithArgs(m).WithAuto<MemberInitializationAssertion>()
                         .Create((x, y) => y.Verify(x)));
         }
 

@@ -22,7 +22,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1> delegator);
+        ITestCase Create(Action<T1> delegator);
 
         /// <summary>
         /// Create a test case with two arguments.
@@ -526,7 +526,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2> delegator);
+        ITestCase Create(Action<T1, T2> delegator);
 
         /// <summary>
         /// Create a test case with three arguments.
@@ -980,7 +980,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3> delegator);
+        ITestCase Create(Action<T1, T2, T3> delegator);
 
         /// <summary>
         /// Create a test case with four arguments.
@@ -1387,7 +1387,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4> delegator);
 
         /// <summary>
         /// Create a test case with five arguments.
@@ -1750,7 +1750,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5> delegator);
 
         /// <summary>
         /// Create a test case with six arguments.
@@ -2072,7 +2072,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6> delegator);
 
         /// <summary>
         /// Create a test case with seven arguments.
@@ -2356,7 +2356,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator);
 
         /// <summary>
         /// Create a test case with eight arguments.
@@ -2605,7 +2605,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator);
 
         /// <summary>
         /// Create a test case with nine arguments.
@@ -2822,7 +2822,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator);
 
         /// <summary>
         /// Create a test case with ten arguments.
@@ -3010,7 +3010,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator);
 
         /// <summary>
         /// Create a test case with eleven arguments.
@@ -3172,7 +3172,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator);
 
         /// <summary>
         /// Create a test case with twelve arguments.
@@ -3311,7 +3311,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator);
 
         /// <summary>
         /// Create a test case with thirteen arguments.
@@ -3430,7 +3430,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator);
 
         /// <summary>
         /// Create a test case with fourteen arguments.
@@ -3532,7 +3532,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator);
 
         /// <summary>
         /// Create a test case with fifteen arguments.
@@ -3620,7 +3620,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator);
 
         /// <summary>
         /// Create a test case with sixteen arguments.
@@ -3697,7 +3697,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator);
+        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator);
     }
 
 }

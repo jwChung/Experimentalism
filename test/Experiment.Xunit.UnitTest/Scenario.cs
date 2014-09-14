@@ -42,14 +42,14 @@
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> TestBaseAttributeSupportsTestCasesForYieldReturn()
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForYieldReturn()
         {
-            yield return TestCase2.Create(() => Assert.Equal(3, 2 + 1));
-            yield return TestCase2.Create(() => Assert.Equal(10, 3 + 7));
+            yield return TestCase.Create(() => Assert.Equal(3, 2 + 1));
+            yield return TestCase.Create(() => Assert.Equal(10, 3 + 7));
         }
 
         [CustomTest]
-        public ITestCase2[] TestBaseAttributeSupportsTestCasesForArray()
+        public ITestCase[] TestBaseAttributeSupportsTestCasesForArray()
         {
             var testCases = new[]
             {
@@ -58,12 +58,12 @@
                 new { X = 100, Y = 23, Z = 123 }
             };
 
-            return testCases.Select(c => TestCase2.Create(() => Assert.Equal(c.Z, c.X + c.Y)))
-                .Cast<ITestCase2>().ToArray();
+            return testCases.Select(c => TestCase.Create(() => Assert.Equal(c.Z, c.X + c.Y)))
+                .Cast<ITestCase>().ToArray();
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> TestBaseAttributeSupportsTestCasesForEnumerable()
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
             {
@@ -72,13 +72,13 @@
             };
 
             return testCases.Select(
-                c => TestCase2.Create(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
+                c => TestCase.Create(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
         [CustomTest]
-        public IEnumerable<ITestCase2> TestBaseAttributeSupportsTestCasesWithAutoData()
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesWithAutoData()
         {
-            yield return TestCase2.WithAuto<string, int>().Create((x, y) =>
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
             {
                 Assert.Equal("custom string", x);
                 Assert.Equal(5678, y);

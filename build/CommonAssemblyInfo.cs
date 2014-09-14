@@ -30,8 +30,12 @@ using System.Runtime.InteropServices;
  *
  * - [Major] Renamed.
  * 
- *     * Experiment.Xunit
+ *     * Experiment.Idioms
  *       - NullGuardClauseAssertion -> GuardClauseAssertion.
+ *       
+ *     * Experiment.Xunit
+ *       - ITestCase2 -> ITestCase
+ *       - TestCase2 -> TestCase
  * 
  * - [Major] Removed the renewed or discarded types.
  * 

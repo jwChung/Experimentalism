@@ -31,7 +31,7 @@
             if (IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 
-            var testCases = (IEnumerable<ITestCase2>)testMethod.MethodInfo.Invoke(
+            var testCases = (IEnumerable<ITestCase>)testMethod.MethodInfo.Invoke(
                 testMethod.CreateInstance(), new object[0]);
 
             return testCases.Select(
@@ -42,12 +42,12 @@
 
         private static bool IsValidSignature(MethodInfo method)
         {
-            return !typeof(IEnumerable<ITestCase2>).IsAssignableFrom(method.ReturnType)
+            return !typeof(IEnumerable<ITestCase>).IsAssignableFrom(method.ReturnType)
                 || method.GetParameters().Length != 0;
         }
 
         private static ParameterizedCommand CreateCommand(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase2 testCase)
+            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase testCase)
         {
             return new ParameterizedCommand(
                 new TestCommandContext(
@@ -59,7 +59,7 @@
         }
 
         private static ParameterizedCommand CreateStaticCommand(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase2 testCase)
+            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase testCase)
         {
             return new ParameterizedCommand(
                 new TestCommandContext(
