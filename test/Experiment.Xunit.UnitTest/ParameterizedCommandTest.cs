@@ -1,6 +1,7 @@
 namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Linq;
     using System.Reflection;
     using global::Xunit;
     using global::Xunit.Extensions;
@@ -49,13 +50,15 @@ namespace Jwc.Experiment.Xunit
         public void ExecuteReturnsCorrectResult()
         {
             // Fixture setup
-            var method = new Action(() => { }).Method;
+            var testMethod = new Action(() => { }).Method;
+            var actualMethod = new Action(() => { }).Method;
             
             var testObject = new object();
 
-            var methodContext = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == method);
+            var methodContext = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
 
-            var context = Mocked.Of<ITestCommandContext>(x => x.GetMethodContext(testObject) == methodContext);
+            var context = Mocked.Of<ITestCommandContext>(
+                x => x.TestMethod == Reflector.Wrap(testMethod) && x.GetMethodContext(testObject) == methodContext);
             
             var sut = new ParameterizedCommand(context);
 
@@ -64,7 +67,7 @@ namespace Jwc.Experiment.Xunit
 
             // Verify outcome
             var passedResult = Assert.IsAssignableFrom<PassedResult>(actual);
-            Assert.Equal(method.Name, passedResult.MethodName);
+            Assert.Equal(testMethod.Name, passedResult.MethodName);
             Assert.Equal(actual.DisplayName, passedResult.DisplayName);
         }
 
@@ -108,25 +111,40 @@ namespace Jwc.Experiment.Xunit
             // Fixture setup
             var arguments = new object[] { "1", 1 };
 
-            var delegator = new Action<string, int>((x, y) => { });
+            var testMethod = Reflector.Wrap(new Action<string, int>((x, y) => { }).Method);
 
             var testObject = new object();
 
             var methodContext = Mocked.Of<ITestMethodContext>();
 
             var context = Mocked.Of<ITestCommandContext>(x =>
-                x.TestMethod == Reflector.Wrap(delegator.Method)
+                x.TestMethod == testMethod
                 && x.GetMethodContext(testObject) == methodContext
                 && x.GetArguments(methodContext) == arguments);
 
             var sut = new ParameterizedCommand(context);
 
-            var expectecd = new TheoryCommand(Reflector.Wrap(delegator.Method), arguments).DisplayName;
+            var expectecd = new TheoryCommand(testMethod, arguments).DisplayName;
 
             // Exercise system
             sut.Execute(testObject);
 
             // Verify outcome
+            Assert.Equal(expectecd, sut.DisplayName);
+        }
+
+        [Fact]
+        public void ExecuteSetsDisplayNameBeforeInvokingActualMethod()
+        {
+            var testMethod = Reflector.Wrap(
+                new Action(() => { throw new InvalidOperationException(); }).Method);
+            var sut = new ParameterizedCommand(new TestCommandContext(
+                testMethod,
+                Mocked.Of<ITestFixtureFactory>(),
+                Enumerable.Empty<object>()));
+            var expectecd = new TheoryCommand(testMethod, new object[0]).DisplayName;
+
+            Assert.Throws<InvalidOperationException>(() => sut.Execute(null));
             Assert.Equal(expectecd, sut.DisplayName);
         }
     }
