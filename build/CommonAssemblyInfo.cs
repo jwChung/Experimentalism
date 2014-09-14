@@ -10,12 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.5.3")]
-[assembly: AssemblyInformationalVersion("1.5.3")]
+[assembly: AssemblyVersion("1.5.4")]
+[assembly: AssemblyInformationalVersion("1.5.4")]
 
 /*
- * Version 1.5.3
+ * Version 1.5.4
  * 
- * - [Patch] Fixed that Jwc.Experiment.Xunit does not have Jwc.Experiment as
- *   dependency in the nuget packge.
+ * - [Patch] Fixed that VS cannot run first-class tests using TestBaseAttribute.
  */
