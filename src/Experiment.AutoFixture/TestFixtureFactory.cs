@@ -28,7 +28,7 @@ namespace Jwc.Experiment.AutoFixture
 
 #pragma warning disable 618
             var fixture = this.CreateFixture(testMethod).Customize(
-                new ParameterAttributeCutomization(testMethod.GetParameters()));
+                new ParameterAttributeCustomization(testMethod.GetParameters()));
 #pragma warning restore 618
             return new TestFixture(fixture);
         }
@@ -61,14 +61,14 @@ namespace Jwc.Experiment.AutoFixture
         {
             return new CompositeCustomization(
                 new AutoMoqCustomization(),
-                new OmitOmitAutoPropertiesCustomizatoin());
+                new OmitAutoPropertiesCustomizatoin());
         }
 
-        private class ParameterAttributeCutomization : ICustomization
+        private class ParameterAttributeCustomization : ICustomization
         {
             private readonly IEnumerable<ParameterInfo> parameters;
 
-            public ParameterAttributeCutomization(IEnumerable<ParameterInfo> parameters)
+            public ParameterAttributeCustomization(IEnumerable<ParameterInfo> parameters)
             {
                 this.parameters = parameters;
             }
@@ -87,7 +87,7 @@ namespace Jwc.Experiment.AutoFixture
             }
         }
 
-        private class OmitOmitAutoPropertiesCustomizatoin : ICustomization
+        private class OmitAutoPropertiesCustomizatoin : ICustomization
         {
             public void Customize(IFixture fixture)
             {
