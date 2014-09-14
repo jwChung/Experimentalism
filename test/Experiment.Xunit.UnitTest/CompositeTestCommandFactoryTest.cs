@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using Moq;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -69,6 +70,21 @@
             var actual = sut.Create(method, fixtureFactory);
 
             Assert.Empty(actual);
+        }
+
+        [Fact]
+        public void CreateShouldNotCreateAnyCommandsWhenReturingEnumerable()
+        {
+            var factory1 = Mocked.Of<ITestCommandFactory>();
+            var factory2 = Mocked.Of<ITestCommandFactory>();
+            var sut = new CompositeTestCommandFactory(factory1, factory2);
+
+            sut.Create(Mocked.Of<IMethodInfo>(), Mocked.Of<ITestFixtureFactory>());
+
+            factory1.ToMock().Verify(
+                x => x.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()), Times.Never());
+            factory2.ToMock().Verify(
+                x => x.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()), Times.Never());
         }
     }
 }

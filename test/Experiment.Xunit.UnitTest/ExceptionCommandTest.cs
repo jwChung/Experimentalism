@@ -99,7 +99,7 @@
             Assert.Equal(sut.DisplayName, failedResult.DisplayName);
         }
 
-        [Test]
+        [Fact]
         public void ExecuteUnwrapsTargetInvocationExceptionWithoutLoosingStackTraces()
         {
             try
@@ -123,7 +123,7 @@
             }
         }
 
-        [Test]
+        [Fact]
         public void ExecuteRecursivelyUnwrapsTargetInvocationException()
         {
             try

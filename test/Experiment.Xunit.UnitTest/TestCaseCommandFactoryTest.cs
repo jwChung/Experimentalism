@@ -85,7 +85,7 @@
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
-                Assert.Equal(TestClass.TestObject, context.TestObject);
+                Assert.Equal(TestClass.TestObject, context.ActualObject);
                 Assert.Equal(factory, context.TestFixtureFactory);
                 Assert.Equal(TestClass.Arguments, context.ExplicitArguments);
             }
@@ -95,7 +95,7 @@
         public void CreateWithStaticMethodReturnsCorrectCommands()
         {
             // Fixture setup
-            var testMethod = Reflector.Wrap(Methods.Select(() => TestClass.StaticTestMethod()));
+            var testMethod = Reflector.Wrap(new Methods<TestClass>().Select(x => x.StaticActualTestMethod()));
             var sut = new TestCaseCommandFactory();
             var factory = Mocked.Of<ITestFixtureFactory>();
 
@@ -111,7 +111,7 @@
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
-                Assert.Equal(null, context.TestObject);
+                Assert.Equal(null, context.ActualObject);
                 Assert.Equal(factory, context.TestFixtureFactory);
                 Assert.Equal(TestClass.Arguments, context.ExplicitArguments);
             }
@@ -122,24 +122,24 @@
         {
             public static readonly MethodInfo Method = new Methods<object>().Select(x => x.ToString());
             public static readonly object[] Arguments = new object[] { 123, "string" };
-            public static object TestObject;
+            public static object TestObject = new object();
 
-            public TestClass()
+            public IEnumerable<ITestCase2> StaticActualTestMethod()
             {
-                TestObject = this;
-            }
-
-            public static IEnumerable<ITestCase2> StaticTestMethod()
-            {
-                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
-                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(
+                    t => t.Target == null && t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(
+                    t => t.Target == null && t.TestMethod == Method && t.Arguments == Arguments);
             }
 
             public IEnumerable<ITestCase2> TestMethod()
             {
-                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
-                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
-                yield return Mocked.Of<ITestCase2>(t => t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(
+                    t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(
+                    t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
+                yield return Mocked.Of<ITestCase2>(
+                    t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
             }
         }
     }

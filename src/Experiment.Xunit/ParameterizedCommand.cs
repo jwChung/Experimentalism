@@ -19,7 +19,7 @@
         /// Information of this test command.
         /// </param>
         public ParameterizedCommand(ITestCommandContext context)
-            : base(GuardNull(context).ActualMethod, null, MethodUtility.GetTimeoutParameter(context.ActualMethod))
+            : base(GuardNull(context).TestMethod, null, MethodUtility.GetTimeoutParameter(context.TestMethod))
         {
             this.context = context;
         }
@@ -43,11 +43,15 @@
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            var arguments = this.GetArguments(testClass);
-            this.SetDisplayName(arguments);
-            this.InvokeTestMethod(testClass, arguments);
+            var methodContext = this.context.GetMethodContext(testClass);
+            var actualMethod = Reflector.Wrap(methodContext.ActualMethod);
+            var arguments = this.context.GetArguments(methodContext).ToArray();
 
-            return new PassedResult(this.context.ActualMethod, this.DisplayName);
+            this.DisplayName = new TheoryCommand(this.context.TestMethod, arguments).DisplayName;
+
+            actualMethod.Invoke(methodContext.ActualObject, arguments);
+
+            return new PassedResult(actualMethod, this.DisplayName);
         }
 
         private static ITestCommandContext GuardNull(ITestCommandContext context)
@@ -56,22 +60,6 @@
                 throw new ArgumentNullException("context");
 
             return context;
-        }
-
-        private void InvokeTestMethod(object testClass, object[] arguments)
-        {
-            this.context.ActualMethod.Invoke(testClass, arguments);
-        }
-
-        private object[] GetArguments(object testClass)
-        {
-            var methodContext = this.context.GetMethodContext(testClass);
-            return this.context.GetArguments(methodContext).ToArray();
-        }
-
-        private void SetDisplayName(object[] arguments)
-        {
-            this.DisplayName = new TheoryCommand(this.context.TestMethod, arguments).DisplayName;
         }
     }
 }

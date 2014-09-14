@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Reflection;
     using global::Xunit;
 
     public class TestCase2Test
@@ -8,22 +9,34 @@
         [Fact]
         public void SutIsTestCase2()
         {
-            var sut = new TestCase2(new Action(() => { }).Method, new object[0]);
+            var sut = new TestCase2(new Action(() => { }), new object[0]);
             Assert.IsAssignableFrom<ITestCase2>(sut);
         }
         
         [Fact]
-        public void InitializeWithAnyNullArgumentsThrows()
+        [Obsolete]
+        public void InitializeObsoleteCtorWithAnyNullArgumentsThrows()
         {
             var testMethod = new Action(() => { }).Method;
             var arguments = new object[] { "1", 123 };
 
-            Assert.Throws<ArgumentNullException>(() => new TestCase2(null, arguments));
+            Assert.Throws<ArgumentNullException>(() => new TestCase2((MethodInfo)null, arguments));
             Assert.Throws<ArgumentNullException>(() => new TestCase2(testMethod, null));
         }
 
         [Fact]
-        public void InitializeCorrectlyInitializesProperties()
+        public void InitializeWithAnyNullArgumentsThrows()
+        {
+            var delegator = new Action(() => { });
+            var arguments = new object[] { "1", 123 };
+
+            Assert.Throws<ArgumentNullException>(() => new TestCase2((Delegate)null, arguments));
+            Assert.Throws<ArgumentNullException>(() => new TestCase2(delegator, null));
+        }
+
+        [Fact]
+        [Obsolete]
+        public void InitializeObsoleteCtorCorrectlyInitializesProperties()
         {
             var testMethod = new Action(() => { }).Method;
             var arguments = new object[] { "1", 123 };
@@ -35,14 +48,29 @@
         }
 
         [Fact]
+        public void InitializeCorrectlyInitializesProperties()
+        {
+            var delegator = new Action(() => { });
+            var arguments = new object[] { "1", 123 };
+
+            var sut = new TestCase2(delegator, arguments);
+
+            Assert.Equal(delegator, sut.Delegator);
+            Assert.Equal(delegator.Target, sut.Target);
+            Assert.Equal(delegator.Method, sut.TestMethod);
+            Assert.Equal(arguments, sut.Arguments);
+        }
+
+        [Fact]
         public void CreateWithNoArgumentsReturnsCorrectTestCase()
         {
             var delegator = new Action(() => { });
 
             var actual = TestCase2.Create(delegator);
 
-            Assert.Empty(actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -52,9 +80,10 @@
             var delegator = new Action<string>(x => { });
 
             var actual = TestCase2.WithArgs<string>(arg1).Create(delegator);
-            
-            Assert.Equal(new object[] { arg1 }, actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Equal(new object[] { arg1 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -64,8 +93,9 @@
 
             var actual = TestCase2.WithAuto<string>().Create(delegator);
 
-            Assert.Empty(actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -77,8 +107,9 @@
 
             var actual = TestCase2.WithArgs(arg1, arg2).Create(delegator);
 
-            Assert.Equal(new object[] { arg1, arg2 }, actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Equal(new object[] { arg1, arg2 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -89,8 +120,9 @@
 
             var actual = TestCase2.WithArgs(arg1).WithAuto<int>().Create(delegator);
 
-            Assert.Equal(new object[] { arg1 }, actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Equal(new object[] { arg1 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -100,8 +132,9 @@
             
             var actual = TestCase2.WithAuto<object, int>().Create(delegator);
 
-            Assert.Empty(actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -114,8 +147,9 @@
             
             var actual = TestCase2.WithArgs(arg1, arg2, arg3).WithAuto<int>().Create(delegator);
 
-            Assert.Equal(new object[] { arg1, arg2, arg3 }, actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Equal(new object[] { arg1, arg2, arg3 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
@@ -133,8 +167,9 @@
                 .WithAuto<object, object, object, object>()
                 .Create(delegator);
 
-            Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, actual.Arguments);
-            Assert.Equal(delegator.Method, actual.TestMethod);
+            var testCase = Assert.IsAssignableFrom<TestCase2>(actual);
+            Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]

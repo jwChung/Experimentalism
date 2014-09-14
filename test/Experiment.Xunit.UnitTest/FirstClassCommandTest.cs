@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Linq;
     using System.Reflection;
     using global::Xunit;
     using global::Xunit.Sdk;
@@ -138,10 +139,21 @@
         }
 
         [Fact]
-        public void ShouldCreateInstanceIsCorrect()
+        public void ShouldCreateInstanceIsTrueWhenMethodIsNotStatic()
         {
             var sut = new FirstClassCommand(
                 Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
+                string.Empty,
+                () => { });
+            var actual = sut.ShouldCreateInstance;
+            Assert.True(actual, "ShouldCreateInstance");
+        }
+
+        [Fact]
+        public void ShouldCreateInstanceIsFalseWhenMethodIsStatic()
+        {
+            var sut = new FirstClassCommand(
+                Reflector.Wrap(typeof(object).GetMethods().First(m => m.IsStatic)),
                 string.Empty,
                 () => { });
             var actual = sut.ShouldCreateInstance;

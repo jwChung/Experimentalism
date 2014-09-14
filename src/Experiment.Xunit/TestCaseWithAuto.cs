@@ -19,7 +19,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -37,7 +37,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -55,7 +55,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -73,7 +73,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -91,7 +91,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -109,7 +109,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -127,7 +127,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -145,7 +145,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -163,7 +163,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -181,7 +181,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -199,7 +199,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -217,7 +217,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -235,7 +235,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -253,7 +253,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -271,7 +271,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 
@@ -289,7 +289,7 @@ namespace Jwc.Experiment.Xunit
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator.Method, this.arguments);
+            return new TestCase2(delegator, this.arguments);
         }
     }
 

@@ -157,7 +157,7 @@
             Assert.Throws(exception.GetType(), () => sut.Execute(testClass));
         }
 
-        [Test]
+        [Fact]
         public void ExecuteUnwrapsTargetInvocationExceptionWithoutLoosingStackTraces()
         {
             var testCommand = Mock.Of<ITestCommand>();
@@ -174,7 +174,7 @@
                 e.ToString());
         }
 
-        [Test]
+        [Fact]
         public void ExecuteRecursivelyUnwrapsTargetInvocationException()
         {
             var testCommand = Mock.Of<ITestCommand>();
