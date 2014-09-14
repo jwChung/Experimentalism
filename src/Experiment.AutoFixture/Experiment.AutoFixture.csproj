@@ -51,7 +51,6 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="TestFixtureConfigurationAttribute.cs" />
-    <Compile Include="AutoPropertiesAttribute.cs" />
     <Compile Include="CustomizeAttribute.cs" />
     <Compile Include="FrozenAttribute.cs" />
     <Compile Include="GreedyAttribute.cs" />

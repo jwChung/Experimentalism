@@ -17,21 +17,31 @@ using System.Runtime.InteropServices;
  * Version 2.0.0
  * 
  * - [Major] Removed the obsolete types and members.
- *     - ITestFixture.Create<T>(), TestFixture.Create<T>()
- *     - ITestFixture.Freeze<T>(), TestFixture.Freeze<T>()
- *     - TestFixtureConfigurationAttribute
- *     - AutoFixtureConfigurationAttribute
- *     - TestFixtureFactory.CreateFixture(MethodInfo)
- *     - ITestCommandContext.ActualMethod
- *     - TestCase2(MethodInfo, object[])
- *     - TestCommandContext.TestObject
+ * 
+ *     * Experiment.Xunit
+ *       - ITestFixture.Create<T>(), TestFixture.Create<T>()
+ *       - ITestFixture.Freeze<T>(), TestFixture.Freeze<T>()
+ *       - TestFixtureConfigurationAttribute
+ *       - AutoFixtureConfigurationAttribute
+ *       - TestFixtureFactory.CreateFixture(MethodInfo)
+ *       - ITestCommandContext.ActualMethod
+ *       - TestCase2(MethodInfo, object[])
+ *       - TestCommandContext.TestObject
  *
  * - [Major] Renamed.
- *     - NullGuardClauseAssertion -> GuardClauseAssertion.
+ * 
+ *     * Experiment.Xunit
+ *       - NullGuardClauseAssertion -> GuardClauseAssertion.
  * 
  * - [Major] Removed the renewed or discarded types.
- *     - FirstClassTestAttribute
- *     - ITestCase, TestCase
- *     - FirstClassCommand
- *     - TestAttribute
+ * 
+ *     * Experiment.AutoFixture
+ *       - AutoPropertiesAttribute
+ *
+ *     * Experiment.Xunit
+ *       - FirstClassTestAttribute
+ *       - ITestCase, TestCase
+ *       - FirstClassCommand
+ *       - TestAttribute
+ *       
  */
