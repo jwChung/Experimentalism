@@ -39,7 +39,6 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="FuncTestFixtureFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />

@@ -51,16 +51,11 @@
     <Compile Include="..\..\build\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AbstractType.cs" />
     <Compile Include="AssemblyTest.cs" />
-    <Compile Include="ConcreteType.cs" />
     <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestFixtureFactoryTest.cs" />
-    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeWithConcreteParameterMethod.cs" />
-    <Compile Include="TypeWithOverloadedMembers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
