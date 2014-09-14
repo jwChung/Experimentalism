@@ -1,6 +1,5 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
-    using System;
     using System.Collections.Generic;
     using global::Xunit.Sdk;
 
@@ -13,12 +12,6 @@
         /// Gets the test method.
         /// </summary>
         IMethodInfo TestMethod { get; }
-
-        /// <summary>
-        /// Gets the actual method.
-        /// </summary>
-        [Obsolete("This property is not supported and will be removed on the next major release.")]
-        IMethodInfo ActualMethod { get; }
 
         /// <summary>
         /// Gets information of the test method.
