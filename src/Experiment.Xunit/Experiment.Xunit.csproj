@@ -77,16 +77,9 @@
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="FirstClassCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ITestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBaseAttribute.cs" />
-    <Compile Include="TestCase.cs" />
     <Compile Include="TargetInvocationExceptionUnwrappingCommand.cs" />
-    <Compile Include="TestCase.New.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestCase.New.tt</DependentUpon>
-    </Compile>
     <Compile Include="TestCase2.cs" />
     <Compile Include="TestCase2.tt.cs">
       <AutoGen>True</AutoGen>
@@ -123,11 +116,6 @@
       <LastGenOutput>ITestCaseWithAuto.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="TestCase.New.tt">
-      <DependentUpon>TestCase.cs</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCase.New.cs</LastGenOutput>
-    </None>
     <None Include="TestCase2.tt">
       <DependentUpon>TestCase2.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>

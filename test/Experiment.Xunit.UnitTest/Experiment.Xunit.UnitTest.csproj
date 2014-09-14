@@ -71,7 +71,6 @@
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="CompositeTestCommandFactoryTest.cs" />
     <Compile Include="DataAttributeCommandFactoryTest.cs" />
-    <Compile Include="DelegatingTestCase.cs" />
     <Compile Include="FactCommandFactoryTest.cs" />
     <Compile Include="ParameterizedCommandTest.cs" />
     <Compile Include="ParameterizedCommandFactoryTest.cs" />
@@ -87,7 +86,6 @@
     <Compile Include="TestBaseAttributeTest.cs" />
     <Compile Include="TestCase2Test.cs" />
     <Compile Include="TestCaseCommandFactoryTest.cs" />
-    <Compile Include="TestCaseTest.cs" />
     <Compile Include="TestCommandContextTest.cs" />
     <Compile Include="TestMethodContextExtensions.cs" />
   </ItemGroup>

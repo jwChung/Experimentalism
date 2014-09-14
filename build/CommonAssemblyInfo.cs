@@ -32,4 +32,5 @@ using System.Runtime.InteropServices;
  * 
  * - [Major] Removed the renewed or discarded types.
  *    - FirstClassTestAttribute
+ *    - ITestCase, TestCase
  */
