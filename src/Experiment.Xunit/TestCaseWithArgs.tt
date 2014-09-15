@@ -16,25 +16,11 @@ for (var i = 1; i <= GenericTypeMax; i++)
 #>
     internal class TestCaseWithArgs<<#=typeList#>> : ITestCaseWithArgs<<#=typeList#>>
     {
-<#
-for (var j = 1; j <= i; j++)
-{
-#>
-        private readonly <#=string.Format("T{0} arg{0}", j)#>;
-<#
-}
-#>
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(<#=GetGenericList(i, "T{0} arg{0}")#>)
+        public TestCaseWithArgs(params object[] arguments)
         {
-<#
-for (var j = 1; j <= i; j++)
-{
-#>
-            <#=string.Format("this.arg{0} = arg{0}", j)#>;
-<#
-}
-#>
+            this.arguments = arguments;
         }
 
         public ITestCase Create(Action<<#=typeList#>> delegator)
@@ -42,7 +28,7 @@ for (var j = 1; j <= i; j++)
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase(delegator, <#=GetGenericList(i, "this.arg{0}")#>);
+            return new TestCase(delegator, this.arguments);
         }
 <#
 for (var j = i; j < GenericTypeMax; j++)
@@ -51,7 +37,7 @@ for (var j = i; j < GenericTypeMax; j++)
 
         public ITestCaseWithAuto<<#=GetGenericList(j + 1, "T{0}")#>> WithAuto<<#=GetGenericList(i + 1, j - i + 1, "T{0}")#>>()
         {
-            return new TestCaseWithAuto<<#=GetGenericList(j + 1, "T{0}")#>>(<#=GetGenericList(i, "this.arg{0}")#>);
+            return new TestCaseWithAuto<<#=GetGenericList(j + 1, "T{0}")#>>(this.arguments);
         }
 <#
 }
