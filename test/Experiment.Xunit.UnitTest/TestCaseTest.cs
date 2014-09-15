@@ -7,7 +7,7 @@
     public class TestCaseTest
     {
         [Fact]
-        public void SutIsTestCase2()
+        public void SutIsTestCase()
         {
             var sut = new TestCase(new Action(() => { }), new object[0]);
             Assert.IsAssignableFrom<ITestCase>(sut);

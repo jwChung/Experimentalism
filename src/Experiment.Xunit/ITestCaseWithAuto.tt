@@ -38,7 +38,7 @@ for (var j = 1; j <= i; j++)
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<<#=typeList#>> delegator);
+        ITestCase Create(Action<<#=typeList#>> delegator);
     }
 
 <#
