@@ -77,10 +77,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBaseAttribute.cs" />
     <Compile Include="TestCase.cs" />
-    <Compile Include="TestCase2.tt.cs">
+    <Compile Include="TestCase.tt.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TestCase2.tt</DependentUpon>
+      <DependentUpon>TestCase.tt</DependentUpon>
     </Compile>
     <Compile Include="TestCaseCommandFactory.cs" />
     <Compile Include="TestCaseWithArgs.cs">
@@ -112,10 +112,10 @@
       <LastGenOutput>ITestCaseWithAuto.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="TestCase2.tt">
+    <None Include="TestCase.tt">
       <DependentUpon>TestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCase2.tt.cs</LastGenOutput>
+      <LastGenOutput>TestCase.tt.cs</LastGenOutput>
     </None>
     <None Include="TestCaseWithArgs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
