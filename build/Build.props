@@ -10,10 +10,12 @@
   <PropertyGroup>
     <TestAssemblies>..\test\**\bin\release\*UnitTest.dll</TestAssemblies>
     <LocalNugetFeed>D:\LocalNugetFeed</LocalNugetFeed>
+    <NuGetDeletePath>NuGetDelete.exe</NuGetDeletePath>
     <Repository>https://$(MY_GITHUBACCOUNT)@github.com/jwChung/Experimentalism.git</Repository>
     <CommitAuthor>$(APPVEYOR_REPO_COMMIT_AUTHOR)</CommitAuthor>
-    <CommitAuthorEmail>$(APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL)</CommitAuthorEmail>
+    <CommitAuthorEmail>$(MY_EMAIL)</CommitAuthorEmail>
     <SetApiKey>$(MY_SETAPIKEY)</SetApiKey>
     <PrivateKey>$(MY_PRIVATEKEY)</PrivateKey>
+    <NugetKey>$(MY_NUGETKEY)</NugetKey>
   </PropertyGroup>
 </Project>
