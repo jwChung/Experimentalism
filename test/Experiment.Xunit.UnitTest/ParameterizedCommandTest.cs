@@ -3,10 +3,11 @@ namespace Jwc.Experiment.Xunit
     using System;
     using System.Linq;
     using System.Reflection;
+    using Moq;
     using global::Xunit;
     using global::Xunit.Extensions;
     using global::Xunit.Sdk;
-
+    
     public class ParameterizedCommandTest
     {
         [Fact]
@@ -115,12 +116,9 @@ namespace Jwc.Experiment.Xunit
 
             var testObject = new object();
 
-            var methodContext = Mocked.Of<ITestMethodContext>();
-
             var context = Mocked.Of<ITestCommandContext>(x =>
                 x.TestMethod == testMethod
-                && x.GetMethodContext(testObject) == methodContext
-                && x.GetArguments(methodContext) == arguments);
+                && x.GetArguments(It.IsAny<ITestMethodContext>()) == arguments);
 
             var sut = new ParameterizedCommand(context);
 
