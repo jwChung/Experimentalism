@@ -55,6 +55,8 @@
     <Compile Include="IFluentInterface.cs" />
     <Compile Include="ITestCase.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ITestCasesWithArgs.cs" />
+    <Compile Include="ITestCasesWithAuto.cs" />
     <Compile Include="ITestCaseWithArgs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +85,9 @@
       <DependentUpon>TestCase.tt</DependentUpon>
     </Compile>
     <Compile Include="TestCaseCommandFactory.cs" />
+    <Compile Include="TestCases.cs" />
+    <Compile Include="TestCasesWithArgs.cs" />
+    <Compile Include="TestCasesWithAuto.cs" />
     <Compile Include="TestCaseWithArgs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
