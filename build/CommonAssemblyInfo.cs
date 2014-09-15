@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("1.6.0")]
-[assembly: AssemblyInformationalVersion("1.6.0")]
+[assembly: AssemblyVersion("2.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.0-pre01")]
 
 /*
- * Version 2.0.0
+ * Version 2.0.0-pre01
  * 
  * - [Major] Removed the obsolete types and members.
  * 
