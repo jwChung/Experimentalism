@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
     using global::Xunit.Sdk;
 
     public abstract class TestCommandContext2 : ITestCommandContext
@@ -39,7 +41,27 @@
 
         public IEnumerable<object> GetArguments(ITestMethodContext context)
         {
-            throw new NotImplementedException();
+            if (context == null)
+                throw new ArgumentNullException("context");
+
+            var parameters = context.ActualMethod.GetParameters();
+            var explicitArguments = this.arguments.ToArray();
+
+            if (explicitArguments.Length > parameters.Length)
+                throw new InvalidOperationException(string.Format(
+                    CultureInfo.CurrentCulture,
+                    "Expected {0} parameters, got {1} parameters",
+                    parameters.Length,
+                    explicitArguments.Length));
+
+            if (explicitArguments.Length == parameters.Length)
+                return explicitArguments;
+
+            var fixture = this.factory.Create(context);
+            var autoArguments = parameters.Skip(explicitArguments.Length)
+                .Select(p => fixture.Create(p.ParameterType));
+
+            return explicitArguments.Concat(autoArguments);
         }
     }
 }
