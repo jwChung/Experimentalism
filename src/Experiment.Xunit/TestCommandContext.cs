@@ -167,6 +167,17 @@
         }
 
         /// <summary>
+        /// Gets information of the static test method.
+        /// </summary>
+        /// <returns>
+        /// The information of the static test method.
+        /// </returns>
+        public ITestMethodContext GetStaticMethodContext()
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
         /// Gets test arguments.
         /// </summary>
         /// <param name="context">

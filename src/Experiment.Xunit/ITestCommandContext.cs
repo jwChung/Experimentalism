@@ -26,6 +26,14 @@
         ITestMethodContext GetMethodContext(object testObject);
 
         /// <summary>
+        /// Gets information of the static test method.
+        /// </summary>
+        /// <returns>
+        /// The information of the static test method.
+        /// </returns>
+        ITestMethodContext GetStaticMethodContext();
+
+        /// <summary>
         /// Gets test arguments.
         /// </summary>
         /// <param name="context">
