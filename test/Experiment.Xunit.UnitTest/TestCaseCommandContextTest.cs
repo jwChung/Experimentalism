@@ -56,5 +56,54 @@
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
+
+        [Fact]
+        public void GetMethodContextWithNullTestObjectThrows()
+        {
+            var sut = new TestCaseCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                Mocked.Of<IMethodInfo>(),
+                new object(),
+                Mocked.Of<ITestFixtureFactory>(),
+                new object[0]);
+            Assert.Throws<ArgumentNullException>(() => sut.GetMethodContext(null));
+        }
+
+        [Fact]
+        public void GetMethodContextReturnsCorrectResult()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>();
+            var actualMethod = Mocked.Of<IMethodInfo>();
+            var actualObject = new object();
+            var sut = new TestCaseCommandContext(
+                testMethod,
+                actualMethod,
+                actualObject,
+                Mocked.Of<ITestFixtureFactory>(),
+                new object[0]);
+            var testObject = new object();
+
+            var actual = sut.GetMethodContext(testObject);
+
+            actual.AssertHasCorrectValues(testMethod.MethodInfo, actualMethod.MethodInfo, testObject, actualObject);
+        }
+
+        [Fact]
+        public void GetStaticMethodContextReturnsCorrectResult()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>();
+            var actualMethod = Mocked.Of<IMethodInfo>();
+            var actualObject = new object();
+            var sut = new TestCaseCommandContext(
+                testMethod,
+                actualMethod,
+                actualObject,
+                Mocked.Of<ITestFixtureFactory>(),
+                new object[0]);
+
+            var actual = sut.GetStaticMethodContext();
+
+            actual.AssertHasCorrectValues(testMethod.MethodInfo, actualMethod.MethodInfo, null, actualObject);
+        }
     }
 }
