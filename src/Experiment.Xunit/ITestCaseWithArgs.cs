@@ -14,13 +14,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1> delegator);
 
@@ -31,7 +31,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the second argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2> WithAuto<T2>();
 
@@ -45,7 +45,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the third argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3> WithAuto<T2, T3>();
 
@@ -62,7 +62,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T2, T3, T4>();
 
@@ -82,7 +82,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T2, T3, T4, T5>();
 
@@ -105,7 +105,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T2, T3, T4, T5, T6>();
 
@@ -131,7 +131,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the seventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T2, T3, T4, T5, T6, T7>();
 
@@ -160,7 +160,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T2, T3, T4, T5, T6, T7, T8>();
 
@@ -192,7 +192,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9>();
 
@@ -227,7 +227,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10>();
 
@@ -265,7 +265,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>();
 
@@ -306,7 +306,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
 
@@ -350,7 +350,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
@@ -397,7 +397,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
@@ -447,7 +447,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -500,7 +500,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -518,13 +518,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2> delegator);
 
@@ -535,7 +535,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the third argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3> WithAuto<T3>();
 
@@ -549,7 +549,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T3, T4>();
 
@@ -566,7 +566,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T3, T4, T5>();
 
@@ -586,7 +586,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T3, T4, T5, T6>();
 
@@ -609,7 +609,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the seventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T3, T4, T5, T6, T7>();
 
@@ -635,7 +635,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T3, T4, T5, T6, T7, T8>();
 
@@ -664,7 +664,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T3, T4, T5, T6, T7, T8, T9>();
 
@@ -696,7 +696,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10>();
 
@@ -731,7 +731,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11>();
 
@@ -769,7 +769,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
 
@@ -810,7 +810,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
@@ -854,7 +854,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
@@ -901,7 +901,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -951,7 +951,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -972,13 +972,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3> delegator);
 
@@ -989,7 +989,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T4>();
 
@@ -1003,7 +1003,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T4, T5>();
 
@@ -1020,7 +1020,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T4, T5, T6>();
 
@@ -1040,7 +1040,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the seventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T4, T5, T6, T7>();
 
@@ -1063,7 +1063,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T4, T5, T6, T7, T8>();
 
@@ -1089,7 +1089,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T4, T5, T6, T7, T8, T9>();
 
@@ -1118,7 +1118,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T4, T5, T6, T7, T8, T9, T10>();
 
@@ -1150,7 +1150,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11>();
 
@@ -1185,7 +1185,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12>();
 
@@ -1223,7 +1223,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
@@ -1264,7 +1264,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
@@ -1308,7 +1308,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -1355,7 +1355,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -1379,13 +1379,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4> delegator);
 
@@ -1396,7 +1396,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T5>();
 
@@ -1410,7 +1410,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T5, T6>();
 
@@ -1427,7 +1427,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the seventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T5, T6, T7>();
 
@@ -1447,7 +1447,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T5, T6, T7, T8>();
 
@@ -1470,7 +1470,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T5, T6, T7, T8, T9>();
 
@@ -1496,7 +1496,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T5, T6, T7, T8, T9, T10>();
 
@@ -1525,7 +1525,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T5, T6, T7, T8, T9, T10, T11>();
 
@@ -1557,7 +1557,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12>();
 
@@ -1592,7 +1592,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
@@ -1630,7 +1630,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
@@ -1671,7 +1671,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -1715,7 +1715,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -1742,13 +1742,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5> delegator);
 
@@ -1759,7 +1759,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T6>();
 
@@ -1773,7 +1773,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the seventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T6, T7>();
 
@@ -1790,7 +1790,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T6, T7, T8>();
 
@@ -1810,7 +1810,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T6, T7, T8, T9>();
 
@@ -1833,7 +1833,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T6, T7, T8, T9, T10>();
 
@@ -1859,7 +1859,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T6, T7, T8, T9, T10, T11>();
 
@@ -1888,7 +1888,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T6, T7, T8, T9, T10, T11, T12>();
 
@@ -1920,7 +1920,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13>();
 
@@ -1955,7 +1955,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
@@ -1993,7 +1993,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -2034,7 +2034,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -2064,13 +2064,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6> delegator);
 
@@ -2081,7 +2081,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the seventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T7>();
 
@@ -2095,7 +2095,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T7, T8>();
 
@@ -2112,7 +2112,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T7, T8, T9>();
 
@@ -2132,7 +2132,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T7, T8, T9, T10>();
 
@@ -2155,7 +2155,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T7, T8, T9, T10, T11>();
 
@@ -2181,7 +2181,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T7, T8, T9, T10, T11, T12>();
 
@@ -2210,7 +2210,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T7, T8, T9, T10, T11, T12, T13>();
 
@@ -2242,7 +2242,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14>();
 
@@ -2277,7 +2277,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -2315,7 +2315,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -2348,13 +2348,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator);
 
@@ -2365,7 +2365,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eighth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T8>();
 
@@ -2379,7 +2379,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T8, T9>();
 
@@ -2396,7 +2396,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T8, T9, T10>();
 
@@ -2416,7 +2416,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T8, T9, T10, T11>();
 
@@ -2439,7 +2439,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T8, T9, T10, T11, T12>();
 
@@ -2465,7 +2465,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T8, T9, T10, T11, T12, T13>();
 
@@ -2494,7 +2494,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T8, T9, T10, T11, T12, T13, T14>();
 
@@ -2526,7 +2526,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15>();
 
@@ -2561,7 +2561,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -2597,13 +2597,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator);
 
@@ -2614,7 +2614,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the ninth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T9>();
 
@@ -2628,7 +2628,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T9, T10>();
 
@@ -2645,7 +2645,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T9, T10, T11>();
 
@@ -2665,7 +2665,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T9, T10, T11, T12>();
 
@@ -2688,7 +2688,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T9, T10, T11, T12, T13>();
 
@@ -2714,7 +2714,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T9, T10, T11, T12, T13, T14>();
 
@@ -2743,7 +2743,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T9, T10, T11, T12, T13, T14, T15>();
 
@@ -2775,7 +2775,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T9, T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -2814,13 +2814,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator);
 
@@ -2831,7 +2831,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the tenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T10>();
 
@@ -2845,7 +2845,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T10, T11>();
 
@@ -2862,7 +2862,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T10, T11, T12>();
 
@@ -2882,7 +2882,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T10, T11, T12, T13>();
 
@@ -2905,7 +2905,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T10, T11, T12, T13, T14>();
 
@@ -2931,7 +2931,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T10, T11, T12, T13, T14, T15>();
 
@@ -2960,7 +2960,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T10, T11, T12, T13, T14, T15, T16>();
     }
@@ -3002,13 +3002,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator);
 
@@ -3019,7 +3019,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the eleventh argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T11>();
 
@@ -3033,7 +3033,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T11, T12>();
 
@@ -3050,7 +3050,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T11, T12, T13>();
 
@@ -3070,7 +3070,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T11, T12, T13, T14>();
 
@@ -3093,7 +3093,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T11, T12, T13, T14, T15>();
 
@@ -3119,7 +3119,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T11, T12, T13, T14, T15, T16>();
     }
@@ -3164,13 +3164,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator);
 
@@ -3181,7 +3181,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the twelfth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T12>();
 
@@ -3195,7 +3195,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T12, T13>();
 
@@ -3212,7 +3212,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T12, T13, T14>();
 
@@ -3232,7 +3232,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T12, T13, T14, T15>();
 
@@ -3255,7 +3255,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T12, T13, T14, T15, T16>();
     }
@@ -3303,13 +3303,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator);
 
@@ -3320,7 +3320,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the thirteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T13>();
 
@@ -3334,7 +3334,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T13, T14>();
 
@@ -3351,7 +3351,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T13, T14, T15>();
 
@@ -3371,7 +3371,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T13, T14, T15, T16>();
     }
@@ -3422,13 +3422,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator);
 
@@ -3439,7 +3439,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fourteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T14>();
 
@@ -3453,7 +3453,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T14, T15>();
 
@@ -3470,7 +3470,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T14, T15, T16>();
     }
@@ -3524,13 +3524,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator);
 
@@ -3541,7 +3541,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the fifteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T15>();
 
@@ -3555,7 +3555,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T15, T16>();
     }
@@ -3612,13 +3612,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator);
 
@@ -3629,7 +3629,7 @@ namespace Jwc.Experiment.Xunit
         /// A type of the sixteenth argument.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T16>();
     }
@@ -3689,13 +3689,13 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
         ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator);
     }

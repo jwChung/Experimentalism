@@ -14,7 +14,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -38,7 +38,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -65,7 +65,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -95,7 +95,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -128,7 +128,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -164,7 +164,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -203,7 +203,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -245,7 +245,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -290,7 +290,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -338,7 +338,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -389,7 +389,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -443,7 +443,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -500,7 +500,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -560,7 +560,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -623,7 +623,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -689,7 +689,7 @@ namespace Jwc.Experiment.Xunit
     public interface ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
