@@ -107,6 +107,38 @@ namespace Jwc.Experiment.Xunit
         }
 
         [Fact]
+        public void ExecuteWithNullTestObjectCorrectlyInvokesActualMethod()
+        {
+            // Fixture setup
+            var verified = false;
+
+            var arguments = new object[] { "1", 1 };
+
+            var delegator = new Action<string, int>((x, y) =>
+            {
+                Assert.Equal(x, arguments[0]);
+                Assert.Equal(y, arguments[1]);
+                verified = true;
+            });
+
+            var methodContext = Mocked.Of<ITestMethodContext>(
+                x => x.ActualMethod == delegator.Method
+                && x.ActualObject == delegator.Target);
+
+            var context = Mocked.Of<ITestCommandContext>(x =>
+                x.GetStaticMethodContext() == methodContext
+                && x.GetArguments(methodContext) == arguments);
+
+            var sut = new ParameterizedCommand(context);
+
+            // Exercise system
+            sut.Execute(null);
+
+            // Verify outcome
+            Assert.True(verified, "verified");
+        }
+
+        [Fact]
         public void ExecuteSetsCorrectDisplayName()
         {
             // Fixture setup
@@ -142,7 +174,7 @@ namespace Jwc.Experiment.Xunit
                 Enumerable.Empty<object>()));
             var expectecd = new TheoryCommand(testMethod, new object[0]).DisplayName;
 
-            Assert.Throws<InvalidOperationException>(() => sut.Execute(null));
+            Assert.Throws<InvalidOperationException>(() => sut.Execute(new object()));
             Assert.Equal(expectecd, sut.DisplayName);
         }
     }
