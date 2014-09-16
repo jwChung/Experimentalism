@@ -8,7 +8,7 @@ namespace Jwc.Experiment.Xunit
     /// <summary>
     /// Represents test cases.
     /// </summary>
-    public class TestCases
+    public sealed class TestCases
     {
         private TestCases()
         {
