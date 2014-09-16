@@ -3,18 +3,19 @@
 namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1> : IFluentInterface
+    public interface ITestCasesWithArgs<T1> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -22,503 +23,503 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1> delegator);
+        IEnumerable<ITestCase> Create(Action<T1> delegator);
 
         /// <summary>
         /// Create a test case with two arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2> WithAuto<T2>();
+        ITestCasesWithAuto<T1, T2> WithAuto<T2>();
 
         /// <summary>
         /// Create a test case with three arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3> WithAuto<T2, T3>();
+        ITestCasesWithAuto<T1, T2, T3> WithAuto<T2, T3>();
 
         /// <summary>
         /// Create a test case with four arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T2, T3, T4>();
+        ITestCasesWithAuto<T1, T2, T3, T4> WithAuto<T2, T3, T4>();
 
         /// <summary>
         /// Create a test case with five arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T2, T3, T4, T5>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5> WithAuto<T2, T3, T4, T5>();
 
         /// <summary>
         /// Create a test case with six arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T2, T3, T4, T5, T6>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T2, T3, T4, T5, T6>();
 
         /// <summary>
         /// Create a test case with seven arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T2, T3, T4, T5, T6, T7>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T2, T3, T4, T5, T6, T7>();
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T2, T3, T4, T5, T6, T7, T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T2, T3, T4, T5, T6, T7, T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T2">
-        /// A type of the second argument.
+        /// A type of the second arguments.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -526,453 +527,453 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2> delegator);
 
         /// <summary>
         /// Create a test case with three arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3> WithAuto<T3>();
+        ITestCasesWithAuto<T1, T2, T3> WithAuto<T3>();
 
         /// <summary>
         /// Create a test case with four arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T3, T4>();
+        ITestCasesWithAuto<T1, T2, T3, T4> WithAuto<T3, T4>();
 
         /// <summary>
         /// Create a test case with five arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T3, T4, T5>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5> WithAuto<T3, T4, T5>();
 
         /// <summary>
         /// Create a test case with six arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T3, T4, T5, T6>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T3, T4, T5, T6>();
 
         /// <summary>
         /// Create a test case with seven arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T3, T4, T5, T6, T7>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T3, T4, T5, T6, T7>();
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T3, T4, T5, T6, T7, T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T3, T4, T5, T6, T7, T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T3, T4, T5, T6, T7, T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T3, T4, T5, T6, T7, T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T3">
-        /// A type of the third argument.
+        /// A type of the third arguments.
         /// </typeparam>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -980,406 +981,406 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3> delegator);
 
         /// <summary>
         /// Create a test case with four arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T4>();
+        ITestCasesWithAuto<T1, T2, T3, T4> WithAuto<T4>();
 
         /// <summary>
         /// Create a test case with five arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T4, T5>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5> WithAuto<T4, T5>();
 
         /// <summary>
         /// Create a test case with six arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T4, T5, T6>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T4, T5, T6>();
 
         /// <summary>
         /// Create a test case with seven arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T4, T5, T6, T7>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T4, T5, T6, T7>();
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T4, T5, T6, T7, T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T4, T5, T6, T7, T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T4, T5, T6, T7, T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T4, T5, T6, T7, T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T4, T5, T6, T7, T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T4, T5, T6, T7, T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T4">
-        /// A type of the fourth argument.
+        /// A type of the fourth arguments.
         /// </typeparam>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -1387,362 +1388,362 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4> delegator);
 
         /// <summary>
         /// Create a test case with five arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T5>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5> WithAuto<T5>();
 
         /// <summary>
         /// Create a test case with six arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T5, T6>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T5, T6>();
 
         /// <summary>
         /// Create a test case with seven arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T5, T6, T7>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T5, T6, T7>();
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T5, T6, T7, T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T5, T6, T7, T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T5, T6, T7, T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T5, T6, T7, T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T5, T6, T7, T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T5, T6, T7, T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T5, T6, T7, T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T5, T6, T7, T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T5">
-        /// A type of the fifth argument.
+        /// A type of the fifth arguments.
         /// </typeparam>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -1750,321 +1751,321 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5> delegator);
 
         /// <summary>
         /// Create a test case with six arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T6>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T6>();
 
         /// <summary>
         /// Create a test case with seven arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T6, T7>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T6, T7>();
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T6, T7, T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T6, T7, T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T6, T7, T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T6, T7, T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T6, T7, T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T6, T7, T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T6, T7, T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T6, T7, T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T6, T7, T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T6, T7, T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T6">
-        /// A type of the sixth argument.
+        /// A type of the sixth arguments.
         /// </typeparam>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -2072,283 +2073,283 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6> delegator);
 
         /// <summary>
         /// Create a test case with seven arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T7>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T7>();
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T7, T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T7, T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T7, T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T7, T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T7, T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T7, T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T7, T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T7, T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T7, T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T7, T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T7, T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T7, T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T7">
-        /// A type of the seventh argument.
+        /// A type of the seventh arguments.
         /// </typeparam>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -2356,248 +2357,248 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator);
 
         /// <summary>
         /// Create a test case with eight arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T8>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T8>();
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T8, T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T8, T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T8, T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T8, T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T8, T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T8, T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T8, T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T8, T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T8, T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T8, T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T8, T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T8, T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T8">
-        /// A type of the eighth argument.
+        /// A type of the eighth arguments.
         /// </typeparam>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -2605,216 +2606,216 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator);
 
         /// <summary>
         /// Create a test case with nine arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T9>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T9>();
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T9, T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T9, T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T9, T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T9, T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T9, T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T9, T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T9, T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T9, T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T9, T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T9, T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T9, T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T9, T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T9">
-        /// A type of the ninth argument.
+        /// A type of the ninth arguments.
         /// </typeparam>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T9, T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T9, T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -2822,187 +2823,187 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator);
 
         /// <summary>
         /// Create a test case with ten arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T10>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T10>();
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T10, T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T10, T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T10, T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T10, T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T10, T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T10, T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T10, T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T10, T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T10, T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T10, T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T10">
-        /// A type of the tenth argument.
+        /// A type of the tenth arguments.
         /// </typeparam>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T10, T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T10, T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3010,161 +3011,161 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator);
 
         /// <summary>
         /// Create a test case with eleven arguments.
         /// </summary>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T11>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T11>();
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T11, T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T11, T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T11, T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T11, T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T11, T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T11, T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T11, T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T11, T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T11">
-        /// A type of the eleventh argument.
+        /// A type of the eleventh arguments.
         /// </typeparam>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T11, T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T11, T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     /// <typeparam name="T11">
-    /// A type of the eleventh argument.
+    /// A type of the eleventh arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3172,138 +3173,138 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator);
 
         /// <summary>
         /// Create a test case with twelve arguments.
         /// </summary>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T12>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T12>();
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T12, T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T12, T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T12, T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T12, T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T12, T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T12, T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T12">
-        /// A type of the twelfth argument.
+        /// A type of the twelfth arguments.
         /// </typeparam>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T12, T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T12, T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     /// <typeparam name="T11">
-    /// A type of the eleventh argument.
+    /// A type of the eleventh arguments.
     /// </typeparam>
     /// <typeparam name="T12">
-    /// A type of the twelfth argument.
+    /// A type of the twelfth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3311,118 +3312,118 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator);
 
         /// <summary>
         /// Create a test case with thirteen arguments.
         /// </summary>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T13>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T13>();
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T13, T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T13, T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T13, T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T13, T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T13">
-        /// A type of the thirteenth argument.
+        /// A type of the thirteenth arguments.
         /// </typeparam>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T13, T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T13, T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     /// <typeparam name="T11">
-    /// A type of the eleventh argument.
+    /// A type of the eleventh arguments.
     /// </typeparam>
     /// <typeparam name="T12">
-    /// A type of the twelfth argument.
+    /// A type of the twelfth arguments.
     /// </typeparam>
     /// <typeparam name="T13">
-    /// A type of the thirteenth argument.
+    /// A type of the thirteenth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3430,101 +3431,101 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator);
 
         /// <summary>
         /// Create a test case with fourteen arguments.
         /// </summary>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T14>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T14>();
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T14, T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T14, T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T14">
-        /// A type of the fourteenth argument.
+        /// A type of the fourteenth arguments.
         /// </typeparam>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T14, T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T14, T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     /// <typeparam name="T11">
-    /// A type of the eleventh argument.
+    /// A type of the eleventh arguments.
     /// </typeparam>
     /// <typeparam name="T12">
-    /// A type of the twelfth argument.
+    /// A type of the twelfth arguments.
     /// </typeparam>
     /// <typeparam name="T13">
-    /// A type of the thirteenth argument.
+    /// A type of the thirteenth arguments.
     /// </typeparam>
     /// <typeparam name="T14">
-    /// A type of the fourteenth argument.
+    /// A type of the fourteenth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3532,87 +3533,87 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator);
 
         /// <summary>
         /// Create a test case with fifteen arguments.
         /// </summary>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T15>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T15>();
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T15">
-        /// A type of the fifteenth argument.
+        /// A type of the fifteenth arguments.
         /// </typeparam>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T15, T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T15, T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     /// <typeparam name="T11">
-    /// A type of the eleventh argument.
+    /// A type of the eleventh arguments.
     /// </typeparam>
     /// <typeparam name="T12">
-    /// A type of the twelfth argument.
+    /// A type of the twelfth arguments.
     /// </typeparam>
     /// <typeparam name="T13">
-    /// A type of the thirteenth argument.
+    /// A type of the thirteenth arguments.
     /// </typeparam>
     /// <typeparam name="T14">
-    /// A type of the fourteenth argument.
+    /// A type of the fourteenth arguments.
     /// </typeparam>
     /// <typeparam name="T15">
-    /// A type of the fifteenth argument.
+    /// A type of the fifteenth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3620,76 +3621,76 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator);
 
         /// <summary>
         /// Create a test case with sixteen arguments.
         /// </summary>
         /// <typeparam name="T16">
-        /// A type of the sixteenth argument.
+        /// A type of the sixteenth arguments.
         /// </typeparam>
         /// <returns>
-        /// The new test case with the arguments.
+        /// The new test cases with the arguments.
         /// </returns>
-        ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T16>();
+        ITestCasesWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T16>();
     }
 
     /// <summary>
-    /// Represents a test case with arguments.
+    /// Represents test cases with arguments.
     /// </summary>
     /// <typeparam name="T1">
-    /// A type of the first argument.
+    /// A type of the first arguments.
     /// </typeparam>
     /// <typeparam name="T2">
-    /// A type of the second argument.
+    /// A type of the second arguments.
     /// </typeparam>
     /// <typeparam name="T3">
-    /// A type of the third argument.
+    /// A type of the third arguments.
     /// </typeparam>
     /// <typeparam name="T4">
-    /// A type of the fourth argument.
+    /// A type of the fourth arguments.
     /// </typeparam>
     /// <typeparam name="T5">
-    /// A type of the fifth argument.
+    /// A type of the fifth arguments.
     /// </typeparam>
     /// <typeparam name="T6">
-    /// A type of the sixth argument.
+    /// A type of the sixth arguments.
     /// </typeparam>
     /// <typeparam name="T7">
-    /// A type of the seventh argument.
+    /// A type of the seventh arguments.
     /// </typeparam>
     /// <typeparam name="T8">
-    /// A type of the eighth argument.
+    /// A type of the eighth arguments.
     /// </typeparam>
     /// <typeparam name="T9">
-    /// A type of the ninth argument.
+    /// A type of the ninth arguments.
     /// </typeparam>
     /// <typeparam name="T10">
-    /// A type of the tenth argument.
+    /// A type of the tenth arguments.
     /// </typeparam>
     /// <typeparam name="T11">
-    /// A type of the eleventh argument.
+    /// A type of the eleventh arguments.
     /// </typeparam>
     /// <typeparam name="T12">
-    /// A type of the twelfth argument.
+    /// A type of the twelfth arguments.
     /// </typeparam>
     /// <typeparam name="T13">
-    /// A type of the thirteenth argument.
+    /// A type of the thirteenth arguments.
     /// </typeparam>
     /// <typeparam name="T14">
-    /// A type of the fourteenth argument.
+    /// A type of the fourteenth arguments.
     /// </typeparam>
     /// <typeparam name="T15">
-    /// A type of the fifteenth argument.
+    /// A type of the fifteenth arguments.
     /// </typeparam>
     /// <typeparam name="T16">
-    /// A type of the sixteenth argument.
+    /// A type of the sixteenth arguments.
     /// </typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IFluentInterface
+    public interface ITestCasesWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IFluentInterface
     {
         /// <summary>
-        /// Creates test cases with one argument.
+        /// Creates test cases with one arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -3697,7 +3698,7 @@ namespace Jwc.Experiment.Xunit
         /// <returns>
         /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator);
+        IEnumerable<ITestCase> Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator);
     }
 
 }

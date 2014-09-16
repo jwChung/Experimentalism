@@ -55,6 +55,16 @@
     <Compile Include="IFluentInterface.cs" />
     <Compile Include="ITestCase.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ITestCasesWithArgs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITestCasesWithArgs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ITestCasesWithAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITestCasesWithAuto.tt</DependentUpon>
+    </Compile>
     <Compile Include="ITestCaseWithArgs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +93,21 @@
       <DependentUpon>TestCase.tt</DependentUpon>
     </Compile>
     <Compile Include="TestCaseCommandFactory.cs" />
+    <Compile Include="TestCases.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCases.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestCasesWithArgs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCasesWithArgs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestCasesWithAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCasesWithAuto.tt</DependentUpon>
+    </Compile>
     <Compile Include="TestCaseWithArgs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +128,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Helpers.tt" />
+    <None Include="ITestCasesWithArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ITestCasesWithArgs.cs</LastGenOutput>
+    </None>
+    <None Include="ITestCasesWithAuto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ITestCasesWithAuto.cs</LastGenOutput>
+    </None>
     <None Include="ITestCaseWithArgs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ITestCaseWithArgs.cs</LastGenOutput>
@@ -116,6 +149,18 @@
       <DependentUpon>TestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TestCase.tt.cs</LastGenOutput>
+    </None>
+    <None Include="TestCases.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCases.cs</LastGenOutput>
+    </None>
+    <None Include="TestCasesWithArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCasesWithArgs.cs</LastGenOutput>
+    </None>
+    <None Include="TestCasesWithAuto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCasesWithAuto.cs</LastGenOutput>
     </None>
     <None Include="TestCaseWithArgs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

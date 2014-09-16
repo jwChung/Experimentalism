@@ -7,6 +7,7 @@
 namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections.Generic;
 
 <#
 for (var i = 1; i <= GenericTypeMax; i++)
@@ -14,31 +15,31 @@ for (var i = 1; i <= GenericTypeMax; i++)
     var typeList = GetGenericList(i, "T{0}");
 #>
     /// <summary>
-    /// Represents a test case with auto arguments.
+    /// Represents test cases with auto arguments.
     /// </summary>
 <#
 for (var j = 1; j <= i; j++)
 {
 #>
     /// <typeparam name="<#=string.Format("T{0}", j)#>">
-    /// A type of the <#=ConvertToOrdinal(j)#> argument.
+    /// A type of the <#=ConvertToOrdinal(j)#> arguments.
     /// </typeparam>
 <#
 }
 #>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "This rules is suppressed to pass many arguments to a test method.")]
-    public interface ITestCaseWithAuto<<#=typeList#>> : IFluentInterface
+    public interface ITestCasesWithAuto<<#=typeList#>> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with auto arguments.
+        /// Creates test cases with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
-        ITestCase Create(Action<<#=typeList#>> delegator);
+        IEnumerable<ITestCase> Create(Action<<#=typeList#>> delegator);
     }
 
 <#
