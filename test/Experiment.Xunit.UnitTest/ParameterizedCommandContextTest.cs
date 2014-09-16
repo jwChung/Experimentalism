@@ -42,5 +42,52 @@
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
+
+        [Fact]
+        public void GetMethodContextWithNullThrows()
+        {
+            var sut = new ParameterizedCommandContext(
+                Mocked.Of<IMethodInfo>(),
+                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IEnumerable<object>>());
+            Assert.Throws<ArgumentNullException>(() => sut.GetMethodContext(null));
+        }
+
+        [Fact]
+        public void GetMethodContextReturnsCorrectResult()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>();
+            var sut = new ParameterizedCommandContext(
+                testMethod,
+                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IEnumerable<object>>());
+            var testObject = new object();
+
+            var actual = sut.GetMethodContext(testObject);
+
+            actual.AssertHasCorrectValues(
+                testMethod.MethodInfo,
+                testMethod.MethodInfo,
+                testObject,
+                testObject);
+        }
+
+        [Fact]
+        public void GetStaticMethodContextReturnsCorrectResult()
+        {
+            var testMethod = Mocked.Of<IMethodInfo>();
+            var sut = new ParameterizedCommandContext(
+                testMethod,
+                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IEnumerable<object>>());
+
+            var actual = sut.GetStaticMethodContext();
+
+            actual.AssertHasCorrectValues(
+                testMethod.MethodInfo,
+                testMethod.MethodInfo,
+                null,
+                null);
+        }
     }
 }

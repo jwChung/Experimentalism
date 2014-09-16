@@ -25,12 +25,17 @@
 
         public override ITestMethodContext GetMethodContext(object testObject)
         {
-            throw new NotImplementedException();
+            if (testObject == null)
+                throw new ArgumentNullException("testObject");
+
+            return new TestMethodContext(
+                this.testMethod.MethodInfo, this.testMethod.MethodInfo, testObject, testObject);
         }
 
         public override ITestMethodContext GetStaticMethodContext()
         {
-            throw new NotImplementedException();
+            return new TestMethodContext(
+               this.testMethod.MethodInfo, this.testMethod.MethodInfo, null, null);
         }
     }
 }
