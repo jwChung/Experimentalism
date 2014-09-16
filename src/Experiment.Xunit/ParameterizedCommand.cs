@@ -43,11 +43,11 @@
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            var context = this.GetTestMethodContext(testClass);
-            var arguments = this.context.GetArguments(context).ToArray();
+            var methodContext = this.GetTestMethodContext(testClass);
+            var arguments = this.context.GetArguments(methodContext).ToArray();
             this.DisplayName = new TheoryCommand(this.context.TestMethod, arguments).DisplayName;
 
-            Reflector.Wrap(context.ActualMethod).Invoke(context.ActualObject, arguments);
+            Reflector.Wrap(methodContext.ActualMethod).Invoke(methodContext.ActualObject, arguments);
 
             return new PassedResult(this.testMethod, this.DisplayName);
         }
