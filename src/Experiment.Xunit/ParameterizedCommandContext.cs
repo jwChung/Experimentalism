@@ -6,14 +6,21 @@
 
     public class ParameterizedCommandContext : TestCommandContext2
     {
-        public ParameterizedCommandContext(ITestFixtureFactory factory, IEnumerable<object> arguments)
+        private readonly IMethodInfo testMethod;
+
+        public ParameterizedCommandContext(
+            IMethodInfo testMethod, ITestFixtureFactory factory, IEnumerable<object> arguments)
             : base(factory, arguments)
         {
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
+            this.testMethod = testMethod;
         }
 
         public override IMethodInfo TestMethod
         {
-            get { throw new NotImplementedException(); }
+            get { return this.testMethod; }
         }
 
         public override ITestMethodContext GetMethodContext(object testObject)
