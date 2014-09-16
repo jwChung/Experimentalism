@@ -118,6 +118,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCaseWithAuto.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestCommandContext2.cs" />
     <Compile Include="TryCatchCommandCollection.cs" />
     <Compile Include="TestCommandContext.cs" />
   </ItemGroup>
