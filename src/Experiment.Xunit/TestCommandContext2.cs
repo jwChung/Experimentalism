@@ -6,11 +6,23 @@
     using System.Linq;
     using global::Xunit.Sdk;
 
+    /// <summary>
+    /// Represents a base class for test command context.
+    /// </summary>
     public abstract class TestCommandContext2 : ITestCommandContext
     {
         private readonly ITestFixtureFactory factory;
         private readonly IEnumerable<object> arguments;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestCommandContext2"/> class.
+        /// </summary>
+        /// <param name="factory">
+        /// A factory to create test fixture.
+        /// </param>
+        /// <param name="arguments">
+        /// Explicit arguments of the test method.
+        /// </param>
         public TestCommandContext2(ITestFixtureFactory factory, IEnumerable<object> arguments)
         {
             this.factory = factory;
@@ -33,12 +45,39 @@
             get { return this.arguments; }
         }
 
+        /// <summary>
+        /// Gets the test method.
+        /// </summary>
         public abstract IMethodInfo TestMethod { get; }
 
+        /// <summary>
+        /// Gets information of the test method.
+        /// </summary>
+        /// <param name="testObject">
+        /// The test object.
+        /// </param>
+        /// <returns>
+        /// The information of the test method.
+        /// </returns>
         public abstract ITestMethodContext GetMethodContext(object testObject);
 
+        /// <summary>
+        /// Gets information of the static test method.
+        /// </summary>
+        /// <returns>
+        /// The information of the static test method.
+        /// </returns>
         public abstract ITestMethodContext GetStaticMethodContext();
 
+        /// <summary>
+        /// Gets test arguments.
+        /// </summary>
+        /// <param name="context">
+        /// Information of the test method.
+        /// </param>
+        /// <returns>
+        /// The test arguments.
+        /// </returns>
         public IEnumerable<object> GetArguments(ITestMethodContext context)
         {
             if (context == null)
