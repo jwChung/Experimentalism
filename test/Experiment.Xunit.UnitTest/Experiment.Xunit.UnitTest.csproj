@@ -67,6 +67,7 @@
     <Compile Include="ParameterizedCommandFactoryTest.cs" />
     <Compile Include="ExceptionCommandTest.cs" />
     <Compile Include="FakeTestFixture.cs" />
+    <Compile Include="ParameterizedCommandContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="TestBaseAttributeTest.cs" />

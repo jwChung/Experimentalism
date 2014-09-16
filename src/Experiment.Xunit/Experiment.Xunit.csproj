@@ -81,6 +81,7 @@
     <Compile Include="ITestMethodContext.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="ParameterizedCommand.cs" />
+    <Compile Include="ParameterizedCommandContext.cs" />
     <Compile Include="ParameterizedCommandFactory.cs" />
     <Compile Include="ExceptionCommand.cs" />
     <Compile Include="GlobalSuppressions.cs" />
