@@ -124,7 +124,6 @@
     <Compile Include="TestCommandContext2.cs" />
     <Compile Include="TestMethodContext.cs" />
     <Compile Include="TryCatchCommandCollection.cs" />
-    <Compile Include="TestCommandContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
