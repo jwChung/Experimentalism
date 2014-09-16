@@ -27,7 +27,7 @@
                 yield break;
 
             yield return new ParameterizedCommand(
-                new TestCommandContext(testMethod, fixtureFactory, new object[0]));
+                new ParameterizedCommandContext(testMethod, fixtureFactory, new object[0]));
         }
     }
 }

@@ -39,7 +39,7 @@
             var actual = sut.Create(method, factory).Single();
 
             var command = Assert.IsAssignableFrom<ParameterizedCommand>(actual);
-            var context = Assert.IsAssignableFrom<TestCommandContext>(command.TestCommandContext);
+            var context = Assert.IsAssignableFrom<ParameterizedCommandContext>(command.TestCommandContext);
             Assert.Equal(method, context.TestMethod);
             Assert.Equal(factory, context.TestFixtureFactory);
             Assert.Empty(context.ExplicitArguments);
@@ -56,7 +56,7 @@
             var actual = sut.Create(method, factory).Single();
 
             var command = Assert.IsAssignableFrom<ParameterizedCommand>(actual);
-            var context = Assert.IsAssignableFrom<TestCommandContext>(command.TestCommandContext);
+            var context = Assert.IsAssignableFrom<ParameterizedCommandContext>(command.TestCommandContext);
             Assert.Equal(method, context.TestMethod);
             Assert.Equal(factory, context.TestFixtureFactory);
             Assert.Empty(context.ExplicitArguments);
