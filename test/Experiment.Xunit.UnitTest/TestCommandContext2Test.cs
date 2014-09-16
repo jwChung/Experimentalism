@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using Moq;
     using global::Xunit;
     
@@ -18,10 +19,22 @@
         }
 
         [Fact]
+        public void InitializeWithAnyNullArgumentsThrows()
+        {
+            var factory = Mocked.Of<ITestFixtureFactory>();
+            var arguments = Mocked.Of<IEnumerable<object>>();
+
+            Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
+                () => Mocked.Of<TestCommandContext2>(null, arguments)).InnerException);
+            Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
+                () => Mocked.Of<TestCommandContext2>(factory, null)).InnerException);
+        }
+
+        [Fact]
         public void InitializeCorrectlyInitializes()
         {
-            ITestFixtureFactory factory = Mocked.Of<ITestFixtureFactory>();
-            IEnumerable<object> arguments = Mocked.Of<IEnumerable<object>>();
+            var factory = Mocked.Of<ITestFixtureFactory>();
+            var arguments = Mocked.Of<IEnumerable<object>>();
 
             var sut = Mocked.Of<TestCommandContext2>(factory, arguments);
 

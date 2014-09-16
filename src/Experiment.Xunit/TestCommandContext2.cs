@@ -23,8 +23,14 @@
         /// <param name="arguments">
         /// Explicit arguments of the test method.
         /// </param>
-        public TestCommandContext2(ITestFixtureFactory factory, IEnumerable<object> arguments)
+        protected TestCommandContext2(ITestFixtureFactory factory, IEnumerable<object> arguments)
         {
+            if (factory == null)
+                throw new ArgumentNullException("factory");
+
+            if (arguments == null)
+                throw new ArgumentNullException("arguments");
+
             this.factory = factory;
             this.arguments = arguments;
         }
