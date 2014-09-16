@@ -14,6 +14,10 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class TestCases
     {
+        private TestCases()
+        {
+        }
+
 <#
 for (var i = 1; i <= GenericTypeMax; i++)
 {

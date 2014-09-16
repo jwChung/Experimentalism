@@ -10,6 +10,10 @@ namespace Jwc.Experiment.Xunit
     /// </summary>
     public class TestCases
     {
+        private TestCases()
+        {
+        }
+
         /// <summary>
         /// Returns test cases with arguments.
         /// </summary>
