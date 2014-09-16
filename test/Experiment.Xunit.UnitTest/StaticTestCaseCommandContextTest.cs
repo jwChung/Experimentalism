@@ -35,7 +35,6 @@
                 () => new StaticTestCaseCommandContext(testMethod, actualMethod, factory, null));
         }
 
-
         [Fact]
         public void InitializeCorrectlyInitializes()
         {
