@@ -66,6 +66,12 @@ using System.Runtime.InteropServices;
  *         
  * - [Major] Renewed some types.
  * 
+ *     * Experiment.Xunit
+ *       - ITestCommandContext: Added the new GetStaticMethodContext method.
+ *       - TestCommandContxt: Made this abstract and extracted some logic to
+ *         their sub-clsses(ParameterizedCommandContext,
+ *         StaticTestCaseCommandContext, TestCaseCommandContext).
+ * 
  * - [Minor] Supported creating test cases using TestCases which is simpler
  *   than using TestCase.
  */
