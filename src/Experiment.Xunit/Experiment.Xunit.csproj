@@ -93,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCase.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestCaseCommandContext.cs" />
     <Compile Include="TestCaseCommandFactory.cs" />
     <Compile Include="TestCases.cs">
       <AutoGen>True</AutoGen>
