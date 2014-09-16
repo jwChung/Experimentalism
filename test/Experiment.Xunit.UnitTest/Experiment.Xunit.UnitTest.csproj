@@ -70,6 +70,7 @@
     <Compile Include="ParameterizedCommandContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
+    <Compile Include="StaticTestCaseCommandContextTest.cs" />
     <Compile Include="TestBaseAttributeTest.cs" />
     <Compile Include="TestCaseCommandContextTest.cs" />
     <Compile Include="TestCasesTest.cs" />
