@@ -76,7 +76,7 @@
     <Compile Include="TestCasesTest.cs" />
     <Compile Include="TestCaseTest.cs" />
     <Compile Include="TestCaseCommandFactoryTest.cs" />
-    <Compile Include="TestCommandContext2Test.cs" />
+    <Compile Include="TestCommandContextTest.cs" />
     <Compile Include="TestMethodContextExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

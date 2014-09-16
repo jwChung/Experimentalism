@@ -15,7 +15,7 @@
                 new object(),
                 Mocked.Of<ITestFixtureFactory>(),
                 new object[0]);
-            Assert.IsAssignableFrom<TestCommandContext2>(sut);
+            Assert.IsAssignableFrom<TestCommandContext>(sut);
         }
 
         [Fact]

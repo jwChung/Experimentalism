@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents context of a parameterized command.
     /// </summary>
-    public class ParameterizedCommandContext : TestCommandContext2
+    public class ParameterizedCommandContext : TestCommandContext
     {
         private readonly IMethodInfo testMethod;
 

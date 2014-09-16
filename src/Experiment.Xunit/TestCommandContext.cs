@@ -9,13 +9,13 @@
     /// <summary>
     /// Represents a base class for test command context.
     /// </summary>
-    public abstract class TestCommandContext2 : ITestCommandContext
+    public abstract class TestCommandContext : ITestCommandContext
     {
         private readonly ITestFixtureFactory factory;
         private readonly IEnumerable<object> arguments;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestCommandContext2"/> class.
+        /// Initializes a new instance of the <see cref="TestCommandContext"/> class.
         /// </summary>
         /// <param name="factory">
         /// A factory to create test fixture.
@@ -23,7 +23,7 @@
         /// <param name="arguments">
         /// Explicit arguments of the test method.
         /// </param>
-        protected TestCommandContext2(ITestFixtureFactory factory, IEnumerable<object> arguments)
+        protected TestCommandContext(ITestFixtureFactory factory, IEnumerable<object> arguments)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");

@@ -14,7 +14,7 @@
                 Mocked.Of<IMethodInfo>(),
                 Mocked.Of<ITestFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
-            Assert.IsAssignableFrom<TestCommandContext2>(sut);
+            Assert.IsAssignableFrom<TestCommandContext>(sut);
         }
 
         [Fact]

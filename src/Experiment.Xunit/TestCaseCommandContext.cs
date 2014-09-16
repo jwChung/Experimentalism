@@ -7,7 +7,7 @@
     /// <summary>
     /// Represents context of a test-case command.
     /// </summary>
-    public class TestCaseCommandContext : TestCommandContext2
+    public class TestCaseCommandContext : TestCommandContext
     {
         private readonly IMethodInfo testMethod;
         private readonly IMethodInfo actualMethod;

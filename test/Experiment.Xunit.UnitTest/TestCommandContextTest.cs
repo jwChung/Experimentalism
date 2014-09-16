@@ -7,12 +7,12 @@
     using Moq;
     using global::Xunit;
     
-    public class TestCommandContext2Test
+    public class TestCommandContextTest
     {
         [Fact]
         public void SutIsTestCommandContext()
         {
-            var sut = Mocked.Of<TestCommandContext2>(
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             Assert.IsAssignableFrom<ITestCommandContext>(sut);
@@ -25,9 +25,9 @@
             var arguments = Mocked.Of<IEnumerable<object>>();
 
             Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
-                () => Mocked.Of<TestCommandContext2>(null, arguments)).InnerException);
+                () => Mocked.Of<TestCommandContext>(null, arguments)).InnerException);
             Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
-                () => Mocked.Of<TestCommandContext2>(factory, null)).InnerException);
+                () => Mocked.Of<TestCommandContext>(factory, null)).InnerException);
         }
 
         [Fact]
@@ -36,7 +36,7 @@
             var factory = Mocked.Of<ITestFixtureFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
 
-            var sut = Mocked.Of<TestCommandContext2>(factory, arguments);
+            var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
@@ -45,7 +45,7 @@
         [Fact]
         public void GetArgumentsWithNullContextThrows()
         {
-            var sut = Mocked.Of<TestCommandContext2>(
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             Assert.Throws<ArgumentNullException>(() => sut.GetArguments(null));
@@ -54,7 +54,7 @@
         [Fact]
         public void GetArgumentsThrowsWhenExplicitArgumentsAreMoreThanTestMethodParameters()
         {
-            var sut = Mocked.Of<TestCommandContext2>(
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
                 new[] { "1", 1, new object() });
             var actualMethod = new Action<string, int>((x, y) => { }).Method;
@@ -67,7 +67,7 @@
         public void GetArgumentsReturnsCorrectValuesWhenExplicitArgumentsAreMatchedWithTestMethodParameters()
         {
             var arguments = new[] { "1", 1, new object() };
-            var sut = Mocked.Of<TestCommandContext2>(
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
                 arguments);
             var actualMethod = new Action<string, int, object>((x, y, z) => { }).Method;
@@ -91,7 +91,7 @@
 
             var factory = Mocked.Of<ITestFixtureFactory>(x => x.Create(context) == fixture);
 
-            var sut = Mocked.Of<TestCommandContext2>(factory, arguments);
+            var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
             var expected = arguments.Concat(
                 new object[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) });
@@ -107,7 +107,7 @@
         public void GetArgumentsShouldNotCreateTestFixtureWhenDoesNotNeedAutoData()
         {
             var factory = Mocked.Of<ITestFixtureFactory>();
-            var sut = Mocked.Of<TestCommandContext2>(
+            var sut = Mocked.Of<TestCommandContext>(
                 factory,
                 new object[] { "1", 1, new object() });
             var method = new Action<string, int, object>((x, y, z) => { }).Method;
