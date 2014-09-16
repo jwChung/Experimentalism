@@ -51,7 +51,7 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<ParameterizedCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(factory, context.TestFixtureFactory);
