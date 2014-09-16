@@ -6,6 +6,9 @@
 
     public class StaticTestCaseCommandContext : TestCommandContext2
     {
+        private readonly IMethodInfo testMethod;
+        private readonly IMethodInfo actualMethod;
+
         public StaticTestCaseCommandContext(
             IMethodInfo testMethod,
             IMethodInfo actualMethod,
@@ -13,11 +16,24 @@
             IEnumerable<object> arguments)
             : base(factory, arguments)
         {
+            if (testMethod == null)
+                throw new ArgumentNullException("testMethod");
+
+            if (actualMethod == null)
+                throw new ArgumentNullException("actualMethod");
+
+            this.testMethod = testMethod;
+            this.actualMethod = actualMethod;
         }
 
         public override IMethodInfo TestMethod
         {
-            get { throw new NotImplementedException(); }
+            get { return this.testMethod; }
+        }
+
+        public IMethodInfo ActualMethod
+        {
+            get { return this.actualMethod; }
         }
 
         public override ITestMethodContext GetMethodContext(object testObject)
