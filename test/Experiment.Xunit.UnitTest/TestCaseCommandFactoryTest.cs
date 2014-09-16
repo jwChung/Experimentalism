@@ -81,7 +81,7 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<TestCaseCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
@@ -107,11 +107,10 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<StaticTestCaseCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
-                Assert.Equal(null, context.ActualObject);
                 Assert.Equal(factory, context.TestFixtureFactory);
                 Assert.Equal(TestClass.Arguments, context.ExplicitArguments);
             }

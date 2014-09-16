@@ -168,7 +168,7 @@ namespace Jwc.Experiment.Xunit
         {
             var testMethod = Reflector.Wrap(
                 new Action(() => { throw new InvalidOperationException(); }).Method);
-            var sut = new ParameterizedCommand(new TestCommandContext(
+            var sut = new ParameterizedCommand(new ParameterizedCommandContext(
                 testMethod,
                 Mocked.Of<ITestFixtureFactory>(),
                 Enumerable.Empty<object>()));

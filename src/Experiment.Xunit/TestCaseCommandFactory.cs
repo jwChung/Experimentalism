@@ -50,7 +50,7 @@
             IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase testCase)
         {
             return new ParameterizedCommand(
-                new TestCommandContext(
+                new TestCaseCommandContext(
                     testMethod,
                     Reflector.Wrap(testCase.TestMethod),
                     testCase.Target,
@@ -62,7 +62,7 @@
             IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase testCase)
         {
             return new ParameterizedCommand(
-                new TestCommandContext(
+                new StaticTestCaseCommandContext(
                     testMethod,
                     Reflector.Wrap(testCase.TestMethod),
                     fixtureFactory,
