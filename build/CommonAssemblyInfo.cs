@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("2.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-pre01")]
+[assembly: AssemblyInformationalVersion("2.0.0-pre02")]
 
 /*
- * Version 2.0.0-pre01
+ * Version 2.0.0-pre02
  * 
  * - [Major] Removed the obsolete types and members.
  * 
@@ -63,4 +63,6 @@ using System.Runtime.InteropServices;
  *       - FirstClassCommand
  *       - TestAttribute
  *       
+ *  - [Minor] Supported creating test cases using TestCases which is simpler
+ *    than using TestCase.
  */
