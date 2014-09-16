@@ -19,8 +19,10 @@ using System.Runtime.InteropServices;
  * - [Major] Removed the obsolete types and members.
  * 
  *     * Experiment.Xunit
- *       - ITestFixture.Create<T>(), TestFixture.Create<T>()
- *       - ITestFixture.Freeze<T>(), TestFixture.Freeze<T>()
+ *       - ITestFixture.Create<T>()
+ *         TestFixture.Create<T>()
+ *       - ITestFixture.Freeze<T>()
+ *         TestFixture.Freeze<T>()
  *       - TestFixtureConfigurationAttribute
  *       - AutoFixtureConfigurationAttribute
  *       - TestFixtureFactory.CreateFixture(MethodInfo)
@@ -28,16 +30,7 @@ using System.Runtime.InteropServices;
  *       - TestCase2(MethodInfo, object[])
  *       - TestCommandContext.TestObject
  *
- * - [Major] Renamed.
- * 
- *     * Experiment.Idioms
- *       - NullGuardClauseAssertion -> GuardClauseAssertion.
- *       
- *     * Experiment.Xunit
- *       - ITestCase2 -> ITestCase
- *       - TestCase2 -> TestCase
- * 
- * - [Major] Removed the renewed or discarded types.
+ * - [Major] Removed discarded types.
  * 
  *     * Experiment
  *       - DefaultFixtureConfigurationAttribute
@@ -45,7 +38,6 @@ using System.Runtime.InteropServices;
  *       - DefaultFixtureFactory
  *       - NotSupportedFixtureFactory
  *       - FuncTestFixtureFactory
- *       - ITestFixtureFactory
  *
  *     * Experiment.AutoFixture
  *       - AutoPropertiesAttribute
@@ -55,14 +47,25 @@ using System.Runtime.InteropServices;
  *       - NoAutoPropertiesAttribute
  *       - CustomizeAttribute
  *       - TestFixtureConfigurationAttribute
- *       - TestFixtureFactory
  *
  *     * Experiment.Xunit
  *       - FirstClassTestAttribute
- *       - ITestCase, TestCase
  *       - FirstClassCommand
  *       - TestAttribute
  *       
- *  - [Minor] Supported creating test cases using TestCases which is simpler
- *    than using TestCase.
+ * - [Major] Renamed some types.
+ * 
+ *     * Experiment.Idioms
+ *       - NullGuardClauseAssertion -> GuardClauseAssertion.
+ *       
+ *     * Experiment.Xunit
+ *       - ITestCase2 -> ITestCase
+ *         TestCase2  -> TestCase
+ *       - ITestFixtureFactory2 -> ITestFixtureFactory
+ *         TestFixtureFactory2  -> TestFixtureFactory
+ *         
+ * - [Major] Renewed some types.
+ * 
+ * - [Minor] Supported creating test cases using TestCases which is simpler
+ *   than using TestCase.
  */
