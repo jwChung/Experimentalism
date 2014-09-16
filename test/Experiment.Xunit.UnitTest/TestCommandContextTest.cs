@@ -6,181 +6,57 @@
     using System.Reflection;
     using Moq;
     using global::Xunit;
-    using global::Xunit.Sdk;
-
+    
     public class TestCommandContextTest
     {
         [Fact]
         public void SutIsTestCommandContext()
         {
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
-                new object[0]);
+                Mocked.Of<IEnumerable<object>>());
             Assert.IsAssignableFrom<ITestCommandContext>(sut);
         }
 
         [Fact]
-        public void InitializeFirstCtorWithAnyNullArgumentsThrows()
+        public void InitializeWithAnyNullArgumentsThrows()
         {
-            var testMethod = Mocked.Of<IMethodInfo>();
             var factory = Mocked.Of<ITestFixtureFactory>();
-            var arguments = new[] { new object(), new object() };
+            var arguments = Mocked.Of<IEnumerable<object>>();
 
-            Assert.Throws<ArgumentNullException>(() => new TestCommandContext(null, factory, arguments));
-            Assert.Throws<ArgumentNullException>(() => new TestCommandContext(testMethod, null, arguments));
-            Assert.Throws<ArgumentNullException>(() => new TestCommandContext(testMethod, factory, null));
+            Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
+                () => Mocked.Of<TestCommandContext>(null, arguments)).InnerException);
+            Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
+                () => Mocked.Of<TestCommandContext>(factory, null)).InnerException);
         }
 
         [Fact]
-        public void InitializeSecondCtorWithAnyNullArgumentsThrows()
+        public void InitializeCorrectlyInitializes()
         {
-            var testMethod = Mocked.Of<IMethodInfo>();
-            var actualMethod = Mocked.Of<IMethodInfo>();
             var factory = Mocked.Of<ITestFixtureFactory>();
-            var arguments = new[] { new object(), new object() };
+            var arguments = Mocked.Of<IEnumerable<object>>();
 
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(null, actualMethod, factory, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, null, factory, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, actualMethod, null, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, actualMethod, factory, null));
-        }
+            var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
-        [Fact]
-        public void InitializeThirdCtorWithAnyNullArgumentsThrows()
-        {
-            var testMethod = Mocked.Of<IMethodInfo>();
-            var actualMethod = Mocked.Of<IMethodInfo>();
-            var testObject = new object();
-            var factory = Mocked.Of<ITestFixtureFactory>();
-            var arguments = new[] { new object(), new object() };
-
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(null, actualMethod, testObject, factory, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, null, testObject, factory, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, actualMethod, null, null, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, actualMethod, testObject, null, arguments));
-            Assert.Throws<ArgumentNullException>(
-                () => new TestCommandContext(testMethod, actualMethod, testObject, factory, null));
-        }
-
-        [Fact]
-        public void InitializeFirstCtorCorrectlyInitializesProperties()
-        {
-            var testMethod = Mocked.Of<IMethodInfo>();
-            var factory = Mocked.Of<ITestFixtureFactory>();
-            var arguments = new[] { new object(), new object() };
-
-            var sut = new TestCommandContext(testMethod, factory, arguments);
-
-            Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Null(sut.ActualMethod);
-            Assert.Null(sut.ActualObject);
             Assert.Equal(factory, sut.TestFixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
-        }
-
-        [Fact]
-        public void InitializeSecondCtorCorrectlyInitializesProperties()
-        {
-            var testMethod = Mocked.Of<IMethodInfo>();
-            var actualMethod = Mocked.Of<IMethodInfo>();
-            var factory = Mocked.Of<ITestFixtureFactory>();
-            var arguments = new[] { new object(), new object() };
-
-            var sut = new TestCommandContext(testMethod, actualMethod, factory, arguments);
-
-            Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Null(sut.ActualObject);
-            Assert.Equal(factory, sut.TestFixtureFactory);
-            Assert.Equal(arguments, sut.ExplicitArguments);
-        }
-
-        [Fact]
-        public void InitializeThirdCtorCorrectlyInitializesProperties()
-        {
-            var testMethod = Mocked.Of<IMethodInfo>();
-            var actualMethod = Mocked.Of<IMethodInfo>();
-            var actualObject = new object();
-            var factory = Mocked.Of<ITestFixtureFactory>();
-            var arguments = new[] { new object(), new object() };
-
-            var sut = new TestCommandContext(testMethod, actualMethod, actualObject, factory, arguments);
-
-            Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Equal(actualObject, sut.ActualObject);
-            Assert.Equal(factory, sut.TestFixtureFactory);
-            Assert.Equal(arguments, sut.ExplicitArguments);
-        }
-
-        [Fact]
-        public void GetMethodContextThroughFirstCtorReturnsCorrectContext()
-        {
-            var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
-            var sut = new TestCommandContext(
-                testMethod,
-                Mocked.Of<ITestFixtureFactory>(),
-                new[] { new object(), new object() });
-            var actualObject = new object();
-
-            var actual = sut.GetMethodContext(actualObject);
-
-            actual.AssertHasCorrectValues(
-                testMethod.MethodInfo,
-                testMethod.MethodInfo,
-                actualObject,
-                actualObject);
-        }
-
-        [Fact]
-        public void GetMethodContextThroughThirdCtorReturnsCorrectContext()
-        {
-            var testMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
-            var actualMethod = Mocked.Of<IMethodInfo>(x => x.MethodInfo == Mocked.Of<MethodInfo>());
-            var actualObject = new object();
-            var sut = new TestCommandContext(
-                testMethod,
-                actualMethod,
-                actualObject,
-                Mocked.Of<ITestFixtureFactory>(),
-                new[] { new object(), new object() });
-            var testObject = new object();
-
-            var actual = sut.GetMethodContext(testObject);
-
-            actual.AssertHasCorrectValues(
-                testMethod.MethodInfo,
-                actualMethod.MethodInfo,
-                testObject,
-                actualObject);
         }
 
         [Fact]
         public void GetArgumentsWithNullContextThrows()
         {
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
-                new object[0]);
+                Mocked.Of<IEnumerable<object>>());
             Assert.Throws<ArgumentNullException>(() => sut.GetArguments(null));
         }
 
         [Fact]
         public void GetArgumentsThrowsWhenExplicitArgumentsAreMoreThanTestMethodParameters()
         {
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
-                new object[] { "1", 1, new object() });
+                new[] { "1", 1, new object() });
             var actualMethod = new Action<string, int>((x, y) => { }).Method;
             var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
 
@@ -190,9 +66,8 @@
         [Fact]
         public void GetArgumentsReturnsCorrectValuesWhenExplicitArgumentsAreMatchedWithTestMethodParameters()
         {
-            var arguments = new object[] { "1", 1, new object() };
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
+            var arguments = new[] { "1", 1, new object() };
+            var sut = Mocked.Of<TestCommandContext>(
                 Mocked.Of<ITestFixtureFactory>(),
                 arguments);
             var actualMethod = new Action<string, int, object>((x, y, z) => { }).Method;
@@ -209,18 +84,14 @@
             // Fixture setup
             var arguments = new object[] { new object() };
 
-            var actualMethod = new Action<object, string, int>((x, y, z) => { }).Method;
-            
-            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
-            
+            var method = new Action<object, string, int>((a, b, c) => { }).Method;
+            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == method);
+
             var fixture = new FakeTestFixture();
-            
+
             var factory = Mocked.Of<ITestFixtureFactory>(x => x.Create(context) == fixture);
-            
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
-                factory,
-                arguments);
+
+            var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
             var expected = arguments.Concat(
                 new object[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) });
@@ -231,17 +102,16 @@
             // Verify outcome
             Assert.Equal(expected, actual);
         }
-
+        
         [Fact]
         public void GetArgumentsShouldNotCreateTestFixtureWhenDoesNotNeedAutoData()
         {
             var factory = Mocked.Of<ITestFixtureFactory>();
-            var sut = new TestCommandContext(
-                Mocked.Of<IMethodInfo>(),
+            var sut = Mocked.Of<TestCommandContext>(
                 factory,
                 new object[] { "1", 1, new object() });
-            var actualMethod = new Action<string, int, object>((x, y, z) => { }).Method;
-            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
+            var method = new Action<string, int, object>((x, y, z) => { }).Method;
+            var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == method);
 
             sut.GetArguments(context);
 

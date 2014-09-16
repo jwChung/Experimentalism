@@ -26,6 +26,15 @@
         ITestMethodContext GetMethodContext(object testObject);
 
         /// <summary>
+        /// Gets information of the static test method.
+        /// </summary>
+        /// <returns>
+        /// The information of the static test method.
+        /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Method is more appropriate than a property as this method is overloaded with the upper method.")]
+        ITestMethodContext GetStaticMethodContext();
+
+        /// <summary>
         /// Gets test arguments.
         /// </summary>
         /// <param name="context">

@@ -41,7 +41,7 @@
             return from attribute in attributes
                    from data in attribute.GetData(testMethod.MethodInfo, parameterTypes)
                    select new ParameterizedCommand(
-                       new TestCommandContext(testMethod, fixtureFactory, data));
+                       new ParameterizedCommandContext(testMethod, fixtureFactory, data));
         }
     }
 }

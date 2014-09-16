@@ -7,10 +7,11 @@
     using global::Xunit;
     using global::Xunit.Extensions;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1204:StaticElementsMustAppearBeforeInstanceElements", Justification = "Semantically to order the test methods.")]
     public class Scenario
     {
         [Test]
-        public void TestAttributeSupportsNonParameterizedTest()
+        public void TestBaseAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
@@ -18,14 +19,14 @@
         [Test]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
+        public void TestBaseAttributeSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);
         }
 
         [Test]
-        public void TestAttributeSupportsParameterizedTestWithAutoData(
+        public void TestBaseAttributeSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
             Assert.Equal("custom string", arg1);
@@ -34,7 +35,7 @@
 
         [Test]
         [InlineData("expected")]
-        public void TestAttributeSupportsParameterizedTestWithMixedData(
+        public void TestBaseAttributeSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
@@ -72,15 +73,55 @@
             };
 
             return testCases.Select(
-                c => TestCase.Create(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
+                c => TestCase.Create(() => new Scenario().TestBaseAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
         [Test]
-        public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesWithAutoData()
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoData()
         {
             yield return TestCase.WithAuto<string, int>().Create((x, y) =>
             {
                 Assert.Equal("custom string", x);
+                Assert.Equal(5678, y);
+            });
+        }
+
+        [Test]
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoData()
+        {
+            var expected = "custom string";
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
+            {
+                Assert.Equal(expected, x);
+                Assert.Equal(5678, y);
+            });
+        }
+
+        [Test]
+        public static void TestBaseAttributeSupportsStaticParameterizedTestWithAutoData(
+            string arg1, int arg2)
+        {
+            Assert.Equal("custom string", arg1);
+            Assert.Equal(5678, arg2);
+        }
+
+        [Test]
+        public static IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoDataAdorenedWithStaticMethod()
+        {
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
+            {
+                Assert.Equal("custom string", x);
+                Assert.Equal(5678, y);
+            });
+        }
+
+        [Test]
+        public static IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoDataAdorenedWithStaticMethod()
+        {
+            var expected = "custom string";
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
+            {
+                Assert.Equal(expected, x);
                 Assert.Equal(5678, y);
             });
         }
