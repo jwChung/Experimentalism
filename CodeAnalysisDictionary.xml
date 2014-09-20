@@ -2,8 +2,10 @@
 <Dictionary>
   <Words>
     <Recognized>
-      <Word>Jwc</Word>
-      <Word>Xunit</Word>
+      <Word>jwc</Word>
+      <Word>xunit</Word>
+      <Word>sut</Word>
+      <Word>ctor</Word>
     </Recognized>
     <Unrecognized>
       <Word></Word>
