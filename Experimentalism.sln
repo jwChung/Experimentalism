@@ -17,17 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspec", "Nuspec", "{D77C66
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC-4A95-4D59-951B-61C4ABCEAAC2}"
-	ProjectSection(SolutionItems) = preProject
-		build\Build.proj = build\Build.proj
-		build\Build.props = build\Build.props
-		build\Build.targets = build\Build.targets
-		build\Build.tasks = build\Build.tasks
-		build\CodeAnalysisDictionary.xml = build\CodeAnalysisDictionary.xml
-		build\CommonAssemblyInfo.cs = build\CommonAssemblyInfo.cs
-		build\ILMerge.targets = build\ILMerge.targets
-		Run.cmd = Run.cmd
-		Run.sh = Run.sh
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "src\Experiment\Experiment.csproj", "{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}"
 EndProject
@@ -53,6 +42,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Xunit", "src\Experiment.Xunit\Experiment.Xunit.csproj", "{D178DCD9-76A9-4EEB-B850-4E48C70BA07D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Xunit.UnitTest", "test\Experiment.Xunit.UnitTest\Experiment.Xunit.UnitTest.csproj", "{C014692D-8241-4404-BDAB-634150CB0414}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspecs", "Nuspecs", "{920F7B7C-CB7C-4F45-9807-E8655CA2505A}"
+	ProjectSection(SolutionItems) = preProject
+		nuspecs\Experiment.AutoFixture.nuspec = nuspecs\Experiment.AutoFixture.nuspec
+		nuspecs\Experiment.Idioms.nuspec = nuspecs\Experiment.Idioms.nuspec
+		nuspecs\Experiment.Xunit.nuspec = nuspecs\Experiment.Xunit.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
