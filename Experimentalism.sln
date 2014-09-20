@@ -11,10 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdowns", "Markdowns", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC-4A95-4D59-951B-61C4ABCEAAC2}"
 	ProjectSection(SolutionItems) = preProject
-		packages\CIBuild.Scripts.0.1.0\tools\net20\All.ruleset = packages\CIBuild.Scripts.0.1.0\tools\net20\All.ruleset
-		packages\CIBuild.Scripts.0.1.0\tools\net20\Build.proj = packages\CIBuild.Scripts.0.1.0\tools\net20\Build.proj
-		packages\CIBuild.Scripts.0.1.0\tools\net20\Build.props = packages\CIBuild.Scripts.0.1.0\tools\net20\Build.props
-		packages\CIBuild.Scripts.0.1.0\tools\net20\Test.ruleset = packages\CIBuild.Scripts.0.1.0\tools\net20\Test.ruleset
+		build\All.ruleset = build\All.ruleset
+		build\Build.proj = build\Build.proj
+		build\Build.props = build\Build.props
+		build\Test.ruleset = build\Test.ruleset
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "src\Experiment\Experiment.csproj", "{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}"

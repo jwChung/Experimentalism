@@ -1,0 +1,187 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+  <!-- Global Properties and Items -->
+  <Import Project="Build.props"/>
+  <PropertyGroup>
+    <PackagesDirectory>$(SolutionDir)packages\</PackagesDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <CopyNuspecFiles Include="@(NuspecFiles)"/>
+  </ItemGroup>
+
+  <!-- UsingTasks -->
+  <ItemGroup>
+    <CIBuildTasksPath Include="$(PackagesDirectory)**\Jwc.CIBuildTasks.dll" />
+    <XunitRunnerPath Include="$(PackagesDirectory)**\xunit.runner.msbuild.dll" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CIBuildTasksPath>@(CIBuildTasksPath)</CIBuildTasksPath>
+    <XunitRunnerPath>@(XunitRunnerPath)</XunitRunnerPath>
+  </PropertyGroup>
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.Base64StringToFile" />
+  <UsingTask AssemblyFile="$(XunitRunnerPath)" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.SemanticVersioning" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.PublishNugetDetermination" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.ReleaseNoteExtractor" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.NugetPackageDeleter" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.GitHubTagger" />
+  
+  
+  <!-- Targets -->
+  <Target Name="CI">
+    <CallTarget Targets="BuildAndPublish;Cleanup" RunEachTargetSeparately="True" />
+  </Target>
+  
+  <Target Name="BuildAndPublish" DependsOnTargets="
+          MakePrivateKey;
+          Build;
+          RunTests;
+          GetSemanticVersion;
+          DetermineCanPush;
+          Publish" />
+
+  <Target Name ="Publish" Condition=" '$(CanPush)' == 'true' " DependsOnTargets="
+          VersioningNuspecs;
+          GetReleaseNotes;
+          SetReleaseNotes;
+          PackNugetPackages;
+          PushNugetPackages;
+          MakeTagOnGitHub" />
+  
+  <Target Name="MakePrivateKey">
+    <Base64StringToFile Input="$(PrivateKeyBase64String)" OutputFile="PrivateKey.snk" />
+  </Target>
+
+  <Target Name="Build">
+    <ItemGroup>
+      <PrivateKey Include="$(SolutionDir)**\*.snk" />
+    </ItemGroup>
+    <PropertyGroup>
+      <PrivateKey>%(PrivateKey.FullPath)</PrivateKey>
+      <ProjectRulSet>%(ProjectRulSet.FullPath)</ProjectRulSet>
+      <TestProjectRulSet>%(TestProjectRulSet.FullPath)</TestProjectRulSet>
+    </PropertyGroup>
+    <MSBuild Projects="@(Projects)"
+             Targets="Build"
+             Properties="Configuration=Release;
+                         TreatWarningsAsErrors=true;
+                         CodeAnalysisTreatWarningsAsErrors=true;
+                         StyleCopTreatErrorsAsWarnings=false;
+                         RunCodeAnalysis=$(RunCodeAnalysis);
+                         CodeAnalysisRuleSet=$(ProjectRulSet);
+                         SignAssembly=true;
+                         AssemblyOriginatorKeyFile=$(PrivateKey);"/>
+    <MSBuild Projects="@(TestProjects)"
+             Targets="Build"
+             Properties="Configuration=Release;
+                         TreatWarningsAsErrors=true;
+                         CodeAnalysisTreatWarningsAsErrors=true;
+                         StyleCopTreatErrorsAsWarnings=false;
+                         RunCodeAnalysis=$(RunCodeAnalysis);
+                         CodeAnalysisRuleSet=$(TestProjectRulSet);">
+      <Output TaskParameter="TargetOutputs" ItemName="TestAssemblies" />
+    </MSBuild>
+  </Target>
+
+  <Target Name="RunTests">
+    <xunit Assemblies="@(TestAssemblies)"/>
+  </Target>
+
+  <Target Name="GetSemanticVersion">
+    <SemanticVersioning AssemblyInfo="%(CommonAssemblyInfo.FullPath)">
+      <Output TaskParameter="SemanticVersion" PropertyName="SemanticVersion" />
+    </SemanticVersioning>
+  </Target>
+  
+  <Target Name="DetermineCanPush">
+    <PropertyGroup>
+      <PackageName>%(NuspecFiles.FileName)</PackageName>
+    </PropertyGroup>
+    <PublishNugetDetermination Identifier="$(PackageName) $(SemanticVersion)">
+      <Output TaskParameter="CanPush" PropertyName="CanPush" />
+    </PublishNugetDetermination>
+  </Target>
+
+  <Target Name="VersioningNuspecs" Outputs="%(NuspecFiles.FullPath)">
+    <PropertyGroup>
+      <NuspecFile>%(NuspecFiles.FullPath)</NuspecFile>
+    </PropertyGroup>
+    <XmlPoke XmlInputPath="$(NuspecFile)"
+             Query="//metadata/version"
+             Value="$(SemanticVersion)" />
+    <XmlPoke XmlInputPath="$(NuspecFile)"
+             Query="//metadata/dependencies/dependency[@id='%(CopyNuspecFiles.Filename)']/@version"
+             Value="$(SemanticVersion)" />
+  </Target>
+
+  <Target Name="GetReleaseNotes">
+    <ReleaseNoteExtractor AssemblyInfo="%(CommonAssemblyInfo.FullPath)">
+      <Output TaskParameter="ReleaseNotes" PropertyName="ReleaseNotes" />
+      <Output TaskParameter="XmlEscapedReleaseNotes" PropertyName="XmlEscapedReleaseNotes" />
+    </ReleaseNoteExtractor>
+  </Target>
+  
+  <Target Name="SetReleaseNotes">
+    <XmlPoke XmlInputPath="%(NuspecFiles.FullPath)" Query="//metadata/releaseNotes" Value="$(XmlEscapedReleaseNotes)" />
+  </Target>
+  
+  <Target Name="PackNugetPackages">
+    <ItemGroup>
+      <NugetPath Include="$(PackagesDirectory)**\nuget.exe" />
+    </ItemGroup>
+    <PropertyGroup>
+      <NugetPath>%(NugetPath.FullPath)</NugetPath>
+    </PropertyGroup>
+    <Exec Command="$(NugetPath) pack %(NuspecFiles.Identity) -Symbols -NoPackageAnalysis" />
+  </Target>
+  
+  <Target Name="PushNugetPackages">
+    <ItemGroup>
+      <NugetSymbolPackages Include="*.symbols.nupkg" />
+      <NugetPackages Include="@(NuspecFiles->'%(Filename).$(SemanticVersion).nupkg')" />
+    </ItemGroup>
+    <Exec Command="$(NugetPath) setApiKey $(SetApiKey) -Verbosity quiet" />
+    <Exec Command="$(NugetPath) push %(NugetSymbolPackages.Identity)" ContinueOnError="true" />
+    <Delete Files="@(NugetSymbolPackages)" />
+    <Exec Command="$(NugetPath) push %(NugetPackages.Identity)" />
+    <NugetPackageDeleter IdOrEmail="$(NugetId)" Password="$(NugetPassword)" Identifier="%(NuspecFiles.Filename) $(SemanticVersion)" Condition="$(SemanticVersion.Contains('-'))"/>
+  </Target>
+
+  <Target Name="MakeTagOnGitHub" Condition="!$(SemanticVersion.Contains('-'))">
+    <Message Text="v$(SemanticVersion)" />
+    <ItemGroup>
+      <TagInfo Include="v$(SemanticVersion)">
+        <AccessToken>$(GitHubAccessToken)</AccessToken>
+        <Owner>$(GitHubId)</Owner>
+        <Repository>$(GitHubRepository)</Repository>
+        <RefOrSha>$(RefOrShaForTag)</RefOrSha>
+        <ReleaseNotes>$(ReleaseNotes)</ReleaseNotes>
+        <AuthorName>$(AuthorName)</AuthorName>
+        <AuthorEmail>$(AuthorEmail)</AuthorEmail>
+      </TagInfo>
+    </ItemGroup>
+    <GitHubTagger TagInfo="@(TagInfo)" />
+  </Target>
+
+  <!-- Cleanup -->
+  <Target Name="Cleanup" DependsOnTargets="UndoVersioningNuspecs">
+    <Delete Files="PrivateKey.snk" />
+    <XmlPoke XmlInputPath="%(NuspecFiles.FullPath)" Query="//metadata/releaseNotes" Value="releaseNotes" />
+    <ItemGroup>
+      <NupkgFiles Include="*.nupkg" />
+    </ItemGroup>
+    <Delete Files="@(NupkgFiles)" />
+  </Target>
+
+  <Target Name="UndoVersioningNuspecs" Outputs="%(NuspecFiles.FullPath)">
+    <PropertyGroup>
+      <NuspecFile>%(NuspecFiles.FullPath)</NuspecFile>
+    </PropertyGroup>
+    <XmlPoke XmlInputPath="$(NuspecFile)"
+             Query="//metadata/version"
+             Value="0.0.0" />
+    <XmlPoke XmlInputPath="$(NuspecFile)"
+             Query="//metadata/dependencies/dependency[@id='%(CopyNuspecFiles.Filename)']/@version"
+             Value="0.0.0" />
+  </Target>
+</Project>
