@@ -15,7 +15,7 @@
         }
 
         [Fact]
-        public void GetCustomizationReturnsCorrectCustomizaton()
+        public void GetCustomizationReturnsCorrectCustomization()
         {
             var sut = new AutoPropertiesAttribute();
             var parameter = GetType().GetMethod("Test").GetParameters().Single();

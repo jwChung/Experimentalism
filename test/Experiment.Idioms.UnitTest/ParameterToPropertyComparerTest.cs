@@ -41,7 +41,7 @@
         }
 
         [Fact]
-        public void EqualsNonParametertToPropertyReturnsFalse()
+        public void EqualsNonParameterToPropertyReturnsFalse()
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
             var nonParameterInfoElement = GetType().ToElement();
@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToPropetyReturnsTrueWhenTheyHaveEqualValue()
+        public void EqualsParameterToPropertyReturnsTrueWhenTheyHaveEqualValue()
         {
             var testFixture = new DelegatingTestFixture
             {
@@ -90,7 +90,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToPropetyReturnsFalseWhenThayRepresentDifferentReflectedTypes()
+        public void EqualsParameterToPropertyReturnsFalseWhenTheyRepresentDifferentReflectedTypes()
         {
             var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
@@ -119,7 +119,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToWritableOnlyPropertyRetrunsFalse()
+        public void EqualsParameterToWritableOnlyPropertyReturnsFalse()
         {
             var testFixture = new DelegatingTestFixture
             {
@@ -141,7 +141,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToPrivateGetPropetyReturnsTrueWhenTheyHaveEqualValue()
+        public void EqualsParameterToPrivateGetPropertyReturnsTrueWhenTheyHaveEqualValue()
         {
             var testFixture = new DelegatingTestFixture
             {
@@ -163,7 +163,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToPrivateGetPropetyReturnsTrueWhenTheyHaveEqualEnumerable()
+        public void EqualsParameterToPrivateGetPropertyReturnsTrueWhenTheyHaveEqualEnumerable()
         {
             var testFixture = new DelegatingTestFixture
             {
@@ -185,7 +185,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToIndexerAlwaysRetrunsFalse()
+        public void EqualsParameterToIndexerAlwaysReturnsFalse()
         {
             var testFixture = new DelegatingTestFixture
             {

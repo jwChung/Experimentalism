@@ -362,7 +362,7 @@
 
             sut.CreateTestCommands(method).ToArray();
 
-            Assert.Equal(1, SpyTestAssemblyConfigurationAttribute.SetUpCount);
+            Assert.Equal(1, SpyTestAssemblyConfigurationAttribute.SetupCount);
         }
 
         [Fact]
@@ -387,7 +387,7 @@
 
         public void Dispose()
         {
-            SpyTestAssemblyConfigurationAttribute.SetUpCount = 0;
+            SpyTestAssemblyConfigurationAttribute.SetupCount = 0;
             DefaultFixtureFactory.SetCurrent(null);
             typeof(TestAssemblyConfigurationAttribute)
                 .GetField("configured", BindingFlags.NonPublic | BindingFlags.Static)

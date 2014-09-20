@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public void EqualsNonParametertToFieldReturnsFalse()
+        public void EqualsNonParameterToFieldReturnsFalse()
         {
             var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
             var nonParameterInfoElement = GetType().ToElement();

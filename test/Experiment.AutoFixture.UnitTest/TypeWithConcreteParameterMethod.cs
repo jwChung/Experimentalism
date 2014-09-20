@@ -5,7 +5,7 @@ namespace Jwc.Experiment.AutoFixture
 {
     public class TypeWithConcreteParameterMethod
     {
-        public void DoSomething(ConcreteType param)
+        public void DoSomething(ConcreteType parameter)
         {
         }
     }

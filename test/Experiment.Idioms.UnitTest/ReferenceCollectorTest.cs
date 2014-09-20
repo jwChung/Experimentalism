@@ -426,7 +426,7 @@
                 typeof(Fixture).Assembly
             };
             var methodInfoElement = new Methods<ClassForCollectingReference>()
-                .Select(x => x.RetrunValueInMethodBody()).ToElement();
+                .Select(x => x.ReturnValueInMethodBody()).ToElement();
 
             sut.Visit(methodInfoElement);
 

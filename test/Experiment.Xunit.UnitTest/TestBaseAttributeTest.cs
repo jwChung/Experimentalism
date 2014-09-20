@@ -72,7 +72,7 @@
         }
 
         [Fact]
-        public void CreatTestCommandReturnsCorrectCommands()
+        public void CreateTestCommandReturnsCorrectCommands()
         {
             var expected = new[] { Mocked.Of<ITestCommand>(), Mocked.Of<ITestCommand>() };
             var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
@@ -86,7 +86,7 @@
         }
 
         [Fact]
-        public void CreatTestCommandReturnsCorrectCommandsWhenTestCommandFactoryThrows()
+        public void CreateTestCommandReturnsCorrectCommandsWhenTestCommandFactoryThrows()
         {
             var factory = Mocked.Of<ITestCommandFactory>(
                 f => f.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()) == this.GetTestCommands());

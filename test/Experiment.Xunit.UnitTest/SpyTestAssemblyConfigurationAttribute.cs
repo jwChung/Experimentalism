@@ -7,24 +7,24 @@ namespace Jwc.Experiment.Xunit
     
     public class SpyTestAssemblyConfigurationAttribute : TestAssemblyConfigurationAttribute
     {
-        public static int SetUpCount { get; set; }
+        public static int SetupCount { get; set; }
 
-        public static int TearDownCount { get; set; }
+        public static int TeardownCount { get; set; }
 
-        public static Assembly SetUpAssembly { get; set; }
+        public static Assembly SetupAssembly { get; set; }
 
-        public static Assembly TearDownAssembly { get; set; }
+        public static Assembly TeardownAssembly { get; set; }
 
         protected override void Setup(Assembly testAssembly)
         {
-            SetUpAssembly = testAssembly;
-            SetUpCount++;
+            SetupAssembly = testAssembly;
+            SetupCount++;
         }
 
         protected override void Teardown(Assembly testAssembly)
         {
-            TearDownAssembly = testAssembly;
-            TearDownCount++;
+            TeardownAssembly = testAssembly;
+            TeardownCount++;
         }
     }
 }

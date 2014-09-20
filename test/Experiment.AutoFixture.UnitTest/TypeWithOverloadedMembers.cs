@@ -11,15 +11,15 @@ namespace Jwc.Experiment.AutoFixture
         {
         }
 
-        public void DoSomething(object obj)
+        public void DoSomething(object value)
         {
         }
 
-        public void DoSomething(object x, object y)
+        public void DoSomething(object value1, object value2)
         {
         }
 
-        public void DoSomething(object x, object y, object z)
+        public void DoSomething(object value1, object value2, object value3)
         {
         }
     }

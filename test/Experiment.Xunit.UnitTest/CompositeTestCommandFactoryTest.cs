@@ -73,7 +73,7 @@
         }
 
         [Fact]
-        public void CreateShouldNotCreateAnyCommandsWhenReturingEnumerable()
+        public void CreateShouldNotCreateAnyCommandsWhenReturningEnumerable()
         {
             var factory1 = Mocked.Of<ITestCommandFactory>();
             var factory2 = Mocked.Of<ITestCommandFactory>();
