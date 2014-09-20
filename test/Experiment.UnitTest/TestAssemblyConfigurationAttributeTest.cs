@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public void ConfigureRegistersCorrectTearDownHandlerToDomainUnloadEvent()
+        public void ConfigureRegistersCorrectTeardownHandlerToDomainUnloadEvent()
         {
             var attribute = new TssTestAssemblyConfigurationAttribute();
             var assembly = new DelegatingAssembly

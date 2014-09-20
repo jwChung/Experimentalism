@@ -25,7 +25,7 @@
     <GitHubId>jwChung</GitHubId>
 
     <!--Github repository name -->
-    <GitHubRepository>Experimentalism</GitHubRepository>
+    <GitHubRepository>CIBuild</GitHubRepository>
     
     <!--Ref or sha to create a tag for, which can be ommited as the default is 'refs/heads/master'.-->
     <RefOrShaForTag>$(APPVEYOR_REPO_COMMIT)</RefOrShaForTag>

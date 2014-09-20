@@ -24,7 +24,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Fact]
-        public void GetCustomizationFromNullParamterThrows()
+        public void GetCustomizationFromNullParameterThrows()
         {
             // Fixture setup
             var sut = new FrozenAttribute();

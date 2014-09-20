@@ -9,30 +9,30 @@ namespace Jwc.Experiment.AutoFixture
         {
         }
 
-        public ConcreteType(object obj)
+        public ConcreteType(object value)
         {
-            this.Property1 = obj;
+            this.Property1 = value;
         }
 
-        public ConcreteType(object obj1, object obj2)
+        public ConcreteType(object value1, object value2)
         {
-            this.Property1 = obj1;
-            this.Property2 = obj2;
+            this.Property1 = value1;
+            this.Property2 = value2;
         }
 
-        public ConcreteType(object obj1, object obj2, object obj3)
+        public ConcreteType(object value1, object value2, object value3)
         {
-            this.Property1 = obj1;
-            this.Property2 = obj2;
-            this.Property3 = obj3;
+            this.Property1 = value1;
+            this.Property2 = value2;
+            this.Property3 = value3;
         }
 
-        public ConcreteType(object obj1, object obj2, object obj3, object obj4)
+        public ConcreteType(object value1, object value2, object value3, object value4)
         {
-            this.Property1 = obj1;
-            this.Property2 = obj2;
-            this.Property3 = obj3;
-            this.Property4 = obj4;
+            this.Property1 = value1;
+            this.Property2 = value2;
+            this.Property3 = value3;
+            this.Property4 = value4;
         }
 
         public override object Property4 { get; set; }

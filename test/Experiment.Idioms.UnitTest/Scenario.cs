@@ -14,7 +14,7 @@ namespace Jwc.Experiment
     public class Scenario
     {
         [Test]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesMembers(
+        public void NullGuardClauseAssertionCorrectlyVerifiesMembers(
             NullGuardClauseAssertion assertion)
         {
             typeof(ClassForNullGuardClause)
@@ -40,7 +40,7 @@ namespace Jwc.Experiment
         }
 
         [FirstClassTest]
-        public IEnumerable<ITestCase> NullGuardClasuseAssertionCanBeUsedInTestCases()
+        public IEnumerable<ITestCase> NullGuardClauseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -66,7 +66,7 @@ namespace Jwc.Experiment
         }
 
         [Test]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesType(
+        public void NullGuardClauseAssertionCorrectlyVerifiesType(
             NullGuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));

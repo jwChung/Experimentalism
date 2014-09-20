@@ -24,7 +24,7 @@
         }
 
         [Fact]
-        public void CreateReturnsEmtpyCommandIfTestMethodHasReturnValue()
+        public void CreateReturnsEmptyCommandIfTestMethodHasReturnValue()
         {
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(x => x.NonVoidMethod());
@@ -35,7 +35,7 @@
         }
 
         [Fact]
-        public void CreateReturnsEmtpyCommandIfTestMethodIsParameterized()
+        public void CreateReturnsEmptyCommandIfTestMethodIsParameterized()
         {
             var sut = new FactCommandFactory();
             var method = new Methods<FactCommandFactoryTest>().Select(x => x.ParameterizedMethod(null, 0));

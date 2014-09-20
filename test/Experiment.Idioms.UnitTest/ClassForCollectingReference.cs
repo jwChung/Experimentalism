@@ -45,7 +45,7 @@ namespace Jwc.Experiment
             this.PrivateMethod1(new Fixture());
         }
 
-        public void RetrunValueInMethodBody()
+        public void ReturnValueInMethodBody()
         {
             this.PrivateMethod2();
         }

@@ -145,7 +145,7 @@
         }
 
         [Fact]
-        public void VerifyInterfaceGetPropetyDoesNotThrow()
+        public void VerifyInterfaceGetPropertyDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
             var property = new Properties<IInterfaceWithMembers>().Select(x => x.GetProperty);
@@ -153,7 +153,7 @@
         }
 
         [Fact]
-        public void VerifyInterfaceSetPropetyDoesNotThrow()
+        public void VerifyInterfaceSetPropertyDoesNotThrow()
         {
             var sut = new NullGuardClauseAssertion(new FakeTestFixture());
             var property = typeof(IInterfaceWithMembers).GetProperty("SetProperty");

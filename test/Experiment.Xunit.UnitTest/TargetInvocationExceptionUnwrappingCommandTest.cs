@@ -96,7 +96,7 @@
         }
 
         [Fact]
-        public void ExcuteReturnsCorrectResult()
+        public void ExecuteReturnsCorrectResult()
         {
             var testClass = new object();
             var methodResult = new PassedResult(Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), null);
@@ -142,7 +142,7 @@
         }
 
         [Fact]
-        public void ExecuteDoesNotThrowIfInnerExceptionIsNullWhenUnwrappingTargetInvocaionException()
+        public void ExecuteDoesNotThrowIfInnerExceptionIsNullWhenUnwrappingTargetInvocationException()
         {
             // Fixture setup
             var testClass = new object();
