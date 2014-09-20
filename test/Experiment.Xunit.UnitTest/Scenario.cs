@@ -106,7 +106,7 @@
         }
 
         [Test]
-        public static IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoDataAdorenedWithStaticMethod()
+        public static IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoDataAdornedWithStaticMethod()
         {
             yield return TestCase.WithAuto<string, int>().Create((x, y) =>
             {
@@ -116,7 +116,7 @@
         }
 
         [Test]
-        public static IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoDataAdorenedWithStaticMethod()
+        public static IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoDataAdornedWithStaticMethod()
         {
             var expected = "custom string";
             yield return TestCase.WithAuto<string, int>().Create((x, y) =>
