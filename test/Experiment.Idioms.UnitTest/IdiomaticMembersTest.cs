@@ -182,7 +182,7 @@
         }
 
         [Fact]
-        public void SutDoesNotEnumeratNestedTypes()
+        public void SutDoesNotEnumerateNestedTypes()
         {
             var sut = new IdiomaticMembers(typeof(IndirectReferenceAssertionTest), MemberKinds.Default);
             var actual = sut.ToArray();

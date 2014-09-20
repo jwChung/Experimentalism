@@ -1,0 +1,16 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="ILMerge" AfterTargets="Build" Inputs="@(IntermediateAssembly)"
+          Outputs="@(MainAssembly -> '%(RelativeDir)ILMergeOutput\%(Filename)%(Extension)')"
+          Condition=" '$(SignAssembly)' == 'True' ">
+    <ItemGroup>
+      <ILMergePath Include="..\..\**\ILMerge.exe" />
+      <ILMergeAssemblies Include="@(ReferencePath)" Condition="'%(ReferencePath.ILMerge)'=='True'" />
+    </ItemGroup>
+    <PropertyGroup>
+      <ILMergePath>%(ILMergePath.FullPath)</ILMergePath>
+    </PropertyGroup>
+    <MakeDir Directories="$(OutputPath)ILMergeOutput" />
+    <Message Text="MERGING: %(ILMergeAssemblies.Filename)" Importance="High" />
+    <Exec Command="$(ILMergePath) /Closed /Internalize /Lib:$(OutputPath) /keyfile:$(AssemblyOriginatorKeyFile) /out:&quot;$(OutputPath)ILMergeOutput\%(MainAssembly.Filename)%(MainAssembly.Extension)&quot; &quot;@(IntermediateAssembly)&quot; @(ILMergeAssemblies->'&quot;%(FullPath)&quot;', ' ')" />
+  </Target>
+</Project>

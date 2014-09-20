@@ -3,3 +3,4 @@ bin/
 obj/
 StyleCop.Cache
 *.user
+/Run.sh

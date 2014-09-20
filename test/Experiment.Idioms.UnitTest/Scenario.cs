@@ -12,7 +12,7 @@
     public class Scenario
     {
         [Test]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesMembers(
+        public void NullGuardClauseAssertionCorrectlyVerifiesMembers(
             GuardClauseAssertion assertion)
         {
             typeof(ClassForNullGuardClause)
@@ -38,7 +38,7 @@
         }
 
         [Test]
-        public IEnumerable<ITestCase> NullGuardClasuseAssertionCanBeUsedInTestCases()
+        public IEnumerable<ITestCase> NullGuardClauseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -62,7 +62,7 @@
         }
 
         [Test]
-        public void NullGuardClasuseAssertionCorrectlyVerifiesType(
+        public void NullGuardClauseAssertionCorrectlyVerifiesType(
             GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
