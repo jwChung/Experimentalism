@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Kernel;
@@ -12,8 +13,9 @@
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "The warnings are from Korean.")]
     public class TestFixture : ITestFixture
     {
-        private readonly IFixture fixture;
         private readonly ISpecimenContext specimenContext;
+        private readonly IFixture fixture;
+        private readonly ICustomization customization;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixture" /> class.
@@ -21,15 +23,22 @@
         /// <param name="fixture">
         /// The fixture.
         /// </param>
-        public TestFixture(IFixture fixture)
+        public TestFixture(IFixture fixture) : this(fixture, new CompositeCustomization())
+        {
+        }
+
+        public TestFixture(IFixture fixture, ICustomization customization)
         {
             if (fixture == null)
-            {
                 throw new ArgumentNullException("fixture");
-            }
+
+            if (customization == null)
+                throw new ArgumentNullException("customization");
 
             this.fixture = fixture;
-            this.specimenContext = new SpecimenContext(fixture);
+            this.customization = customization;
+
+            this.specimenContext = new SpecimenContext(fixture.Customize(customization));
             this.RegisterTestFixture();
         }
 
@@ -38,10 +47,12 @@
         /// </summary>
         public IFixture Fixture
         {
-            get
-            {
-                return this.fixture;
-            }
+            get { return this.fixture; }
+        }
+
+        public ICustomization Customization
+        {
+            get { return this.customization; }
         }
 
         /// <summary>
