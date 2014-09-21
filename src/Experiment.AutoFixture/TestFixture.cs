@@ -27,6 +27,15 @@
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestFixture"/> class.
+        /// </summary>
+        /// <param name="fixture">
+        /// The fixture.
+        /// </param>
+        /// <param name="customization">
+        /// The customization.
+        /// </param>
         public TestFixture(IFixture fixture, ICustomization customization)
         {
             if (fixture == null)
@@ -50,6 +59,9 @@
             get { return this.fixture; }
         }
 
+        /// <summary>
+        /// Gets the customization.
+        /// </summary>
         public ICustomization Customization
         {
             get { return this.customization; }
