@@ -1,8 +1,8 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
-    using global::Xunit;
     using Ploeh.AutoFixture;
+    using global::Xunit;
 
     public class OmitAutoPropertiesCustomizationTest
     {
