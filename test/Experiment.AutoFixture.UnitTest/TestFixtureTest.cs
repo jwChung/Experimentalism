@@ -15,24 +15,47 @@
         }
         
         [Fact]
-        public void InitializeWithNullFixtureThrows()
+        public void InitializeModestWithNullFixtureThrows()
         {
             Assert.Throws<ArgumentNullException>(() => new TestFixture(null));
         }
 
         [Fact]
-        public void FixtureIsCorrect()
+        public void InitializeGreedyCtorWithAnyNullArgumentsThrows()
         {
-            var expected = new Fixture();
-            var sut = new TestFixture(expected);
+            var fixture = Mocked.Of<IFixture>();
+            var customization = Mocked.Of<ICustomization>();
 
-            var actual = sut.Fixture;
-
-            Assert.Same(expected, actual);
+            Assert.Throws<ArgumentNullException>(() => new TestFixture(null, customization));
+            Assert.Throws<ArgumentNullException>(() => new TestFixture(fixture, null));
         }
 
         [Fact]
-        public void CreateReturnsCorrectSpecimen()
+        public void InitializeModestCtorCorrectlyInitializes()
+        {
+            var fixture = Mocked.Of<IFixture>();
+
+            var sut = new TestFixture(fixture);
+
+            Assert.Equal(fixture, sut.Fixture);
+            var customization = Assert.IsType<CompositeCustomization>(sut.Customization);
+            Assert.Empty(customization.Customizations);
+        }
+
+        [Fact]
+        public void InitializeGreedyCtorCorrectlyInitializes()
+        {
+            var fixture = Mocked.Of<IFixture>();
+            var customization = Mocked.Of<ICustomization>();
+
+            var sut = new TestFixture(fixture, customization);
+
+            Assert.Equal(fixture, sut.Fixture);
+            Assert.Equal(customization, sut.Customization);
+        }
+
+        [Fact]
+        public void CreateReturnsCorrectSpecimenUsingModestCtor()
         {
             var request = typeof(object);
             var fixture = new Fixture();
@@ -42,6 +65,19 @@
             var actual = sut.Create(request);
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CreateReturnsCorrectSpecimenUsingGreedyCtor()
+        {
+            var fixture = new Fixture();
+            var customization = new FreezingCustomization(typeof(object));
+            var sut = new TestFixture(fixture, customization);
+            var request = typeof(object);
+
+            var actual = sut.Create(request);
+
+            Assert.Equal(fixture.Create<object>(), actual);
         }
 
         [Theory]
