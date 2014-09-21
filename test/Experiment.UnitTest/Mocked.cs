@@ -13,6 +13,7 @@
 
         public static T Of<T>(this T mocked, Expression<Func<T, bool>> predicate) where T : class
         {
+            mocked.ToMock().SetupAllProperties();
             return CreateMockQuery<T>(mocked).First(predicate);
         }
 
@@ -33,7 +34,9 @@
 
         public static T Of<T>(params object[] arguments) where T : class
         {
-            return new Mock<T>(arguments) { DefaultValue = DefaultValue.Mock, CallBase = true }.Object;
+            var mock = new Mock<T>(arguments) { DefaultValue = DefaultValue.Mock, CallBase = true };
+            mock.SetupAllProperties();
+            return mock.Object;
         }
 
         public static Mock<T> ToMock<T>(this T mocked) where T : class
