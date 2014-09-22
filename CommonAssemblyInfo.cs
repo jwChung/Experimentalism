@@ -71,6 +71,10 @@ using System.Runtime.InteropServices;
  *       - TestCommandContxt: Made this abstract and extracted some logic to
  *         their sub-clsses(ParameterizedCommandContext,
  *         StaticTestCaseCommandContext, TestCaseCommandContext).
+ *         
+ * - [Major] Moved some types to other project.
+ *     - ITestMethodContext: Experiment.Xunit -> Experiment
+ *     - ITestFixtureFactory: Experiment.Xunit -> Experiment
  * 
  * - [Minor] Supported creating test cases using TestCases which is simpler
  *   than using TestCase.
