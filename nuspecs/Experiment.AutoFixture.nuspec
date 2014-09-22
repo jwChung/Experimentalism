@@ -24,11 +24,12 @@
     <file src="..\src\Experiment.AutoFixture\bin\Release\Jwc.Experiment.AutoFixture.dll" target="lib\net40" />
     <file src="..\src\Experiment.AutoFixture\bin\Release\Jwc.Experiment.AutoFixture.pdb" target="lib\net40" />
     <file src="..\src\Experiment.AutoFixture\bin\Release\Jwc.Experiment.AutoFixture.xml" target="lib\net40" />
-    <file src="..\src\**\*.cs" target="src" />
     <file src="..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.dll" target="lib\net40" />
     <file src="..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.xml" target="lib\net40" />
     <file src="..\packages\AutoFixture.Xunit.3.18.7\lib\net40\Ploeh.AutoFixture.Xunit.dll" target="lib\net40" />
     <file src="..\packages\AutoFixture.Xunit.3.18.7\lib\net40\Ploeh.AutoFixture.Xunit.xml" target="lib\net40" />
+    <file src="..\src\**\*.cs" target="src\net40" />
+    <file src="..\src\Experiment.AutoFixture\app.config.transform" target="content" />
     <file src="Install.ps1" target="tools" />
   </files>
 </package>
