@@ -16,62 +16,65 @@ using System.Runtime.InteropServices;
 /*
  * Version 2.0.0-pre02
  * 
- * - [Major] Removed the obsolete types and members.
- * 
- *     * Experiment.Xunit
- *       - ITestFixture.Create<T>()
- *         TestFixture.Create<T>()
- *       - ITestFixture.Freeze<T>()
- *         TestFixture.Freeze<T>()
- *       - TestFixtureConfigurationAttribute
- *       - AutoFixtureConfigurationAttribute
- *       - TestFixtureFactory.CreateFixture(MethodInfo)
- *       - ITestCommandContext.ActualMethod
- *       - TestCase2(MethodInfo, object[])
- *       - TestCommandContext.TestObject
+ * - [Major] Removed obsolete and discarded, types or members.
+ *     * Jwc.Experiment.DefaultFixtureConfigurationAttribute
+ *     * Jwc.Experiment.DefaultFixtureFactory
+ *     * Jwc.Experiment.FuncTestFixtureFactory
+ *     - Jwc.Experiment.ITestFixture.Create<T>()
+ *     - Jwc.Experiment.ITestFixture.Freeze<T>()
+ *     * Jwc.Experiment.ITestFixtureFactory(old)
+ *     * Jwc.Experiment.NotSupportedFixtureFactory
+ *     * Jwc.Experiment.TestAssemblyConfigurationAttribute
+ *     * Jwc.Experiment.TestFixtureConfigurationAttribute
+ *     * Jwc.Experiment.AutoFixture.AutoFixtureConfigurationAttribute
+ *     * Jwc.Experiment.AutoFixture.AutoPropertiesAttribute
+ *     * Jwc.Experiment.AutoFixture.CustomizeAttribute
+ *     * Jwc.Experiment.AutoFixture.FrozenAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.AutoFixture.ModestAttribute
+ *     * Jwc.Experiment.AutoFixture.NoAutoPropertiesAttribute
+ *     - Jwc.Experiment.AutoFixture.TestFixture.Create<T>()
+ *     - Jwc.Experiment.AutoFixture.TestFixture.Freeze<T>()
+ *     * Jwc.Experiment.AutoFixture.TestFixtureConfigurationAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.AutoFixture.GreedyAttribute
+ *     * Jwc.Experiment.Xunit.FirstClassCommand
+ *     * Jwc.Experiment.Xunit.FirstClassTestAttribute
+ *     * Jwc.Experiment.Xunit.ITestCase
+ *     * Jwc.Experiment.Xunit.ITestFixtureFactory
+ *     * Jwc.Experiment.Xunit.TargetInvocationExceptionUnwrappingCommand
+ *     * Jwc.Experiment.Xunit.TestAttribute
+ *     * Jwc.Experiment.Xunit.TestCase(old)
+ *     
+ * - [Major] Renewed some types or members.
+ *     - Jwc.Experiment.AutoFixture.TestFixtureFactory.Create(MethodInfo) ->
+ *       Jwc.Experiment.AutoFixture.TestFixtureFactory.Create(ITestMethodContext)
  *
- * - [Major] Removed discarded types.
- * 
- *     * Experiment
- *       - DefaultFixtureConfigurationAttribute
- *       - TestAssemblyConfigurationAttribute
- *       - DefaultFixtureFactory
- *       - NotSupportedFixtureFactory
- *       - FuncTestFixtureFactory
- *
- *     * Experiment.AutoFixture
- *       - AutoPropertiesAttribute
- *       - FrozenAttribute
- *       - GreedyAttribute
- *       - ModestAttribute
- *       - NoAutoPropertiesAttribute
- *       - CustomizeAttribute
- *       - TestFixtureConfigurationAttribute
- *
- *     * Experiment.Xunit
- *       - FirstClassTestAttribute
- *       - FirstClassCommand
- *       - TestAttribute
+ * - [Major] Renamed(or moved) some types or members.
+ *     * Jwc.Experiment.Idioms.NullGuardClauseAssertion -> 
+ *       Jwc.Experiment.Idioms.GuardClauseAssertion
+ *     * Jwc.Experiment.Xunit.ITestCase2 ->
+ *       Jwc.Experiment.Xunit.ITestCase(new)
+ *     * Jwc.Experiment.Xunit.ITestFixtureFactory ->
+ *       Jwc.Experiment.ITestFixtureFactor(new)
+ *     * Jwc.Experiment.Xunit.ITestMethodContext ->
+ *       Jwc.Experiment.ITestMethodContext
+ *     * Jwc.Experiment.Xunit.TestCase ->
+ *       Jwc.Experiment.Xunit.TestCase(new)
+ *     * Jwc.Experiment.Xunit.TestCommandContxt
+ *         : Made this abstract and extracted some logic to their sub-clsses
+ *           (ParameterizedCommandContext, StaticTestCaseCommandContext, TestCaseCommandContext).
+ *     * Jwc.Experiment.Xunit.TestCommandCollection ->
+ *       Jwc.Experiment.Xunit.TryCatchCommandCollection
  *       
- * - [Major] Renamed some types.
- * 
- *     * Experiment.Idioms
- *       - NullGuardClauseAssertion -> GuardClauseAssertion.
- *       
- *     * Experiment.Xunit
- *       - ITestCase2 -> ITestCase
- *         TestCase2  -> TestCase
- *       - ITestFixtureFactory2 -> ITestFixtureFactory
- *         TestFixtureFactory2  -> TestFixtureFactory
- *         
- * - [Major] Renewed some types.
- * 
- *     * Experiment.Xunit
- *       - ITestCommandContext: Added the new GetStaticMethodContext method.
- *       - TestCommandContxt: Made this abstract and extracted some logic to
- *         their sub-clsses(ParameterizedCommandContext,
- *         StaticTestCaseCommandContext, TestCaseCommandContext).
- * 
- * - [Minor] Supported creating test cases using TestCases which is simpler
- *   than using TestCase.
+ * - [Minor] Introduced new types or members(new features).
+ *     * Jwc.Experiment.AutoFixture.OmitAutoPropertiesCustomization
+ *     * Jwc.Experiment.AutoFixture.TestParametersCustomization
+ *     * Jwc.Experiment.Xunit.TestCases
+ *         : Supported creating test cases using TestCases which is simpler than
+ *           using TestCase.
  */
