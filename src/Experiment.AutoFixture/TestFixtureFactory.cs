@@ -2,6 +2,7 @@
 {
     using System;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.AutoMoq;
 
     /// <summary>
     /// Represents a factory to create test fixtures.
@@ -38,7 +39,8 @@
         {
             return new CompositeCustomization(
                 new OmitAutoPropertiesCustomization(),
-                new TestParametersCustomization(context));
+                new TestParametersCustomization(context),
+                new AutoMoqCustomization());
         }
     }
 }

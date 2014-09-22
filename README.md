@@ -200,6 +200,11 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
 
+* AutoFixture.Xunit 3.18.7  
+  Website:      https://github.com/AutoFixture/AutoFixture  
+  Copyright:    Copyright (c) 2013 Mark Seemann  
+  License:      The MIT License
+
 * Mono.Reflection 1.0.0  
   Website:      https://github.com/jbevain/mono.reflection  
   Copyright:    Copyright (C) 2009 - 2010 Novell, Inc. (http://www.novell.com)  
