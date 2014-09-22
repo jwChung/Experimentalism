@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("2.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-pre03")]
+[assembly: AssemblyInformationalVersion("2.0.0-pre04")]
 
 /*
- * Version 2.0.0-pre03
+ * Version 2.0.0-pre04
  * 
  * - [Major] Removed obsolete and discarded, types or members.
  *     * Jwc.Experiment.DefaultFixtureConfigurationAttribute
@@ -73,4 +73,6 @@ using System.Runtime.InteropServices;
  *     * Jwc.Experiment.Xunit.TestCases
  *         : Supported creating test cases using TestCases which is simpler than
  *           using TestCase.
+ *
+ * - [Patch] Fixed that bindingRedirect elements aren't automatically updated.
  */
