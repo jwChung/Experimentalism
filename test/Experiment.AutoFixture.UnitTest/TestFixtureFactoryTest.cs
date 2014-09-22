@@ -5,6 +5,7 @@
     using Moq;
     using Moq.Protected;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.AutoMoq;
     using global::Xunit;
 
     public class TestFixtureFactoryTest
@@ -56,12 +57,13 @@
             var customizations = Assert.IsAssignableFrom<CompositeCustomization>(
                 sut.Customization).Customizations;
 
-            Assert.Equal(2, customizations.Count());
+            Assert.Equal(3, customizations.Count());
 
             customizations.OfType<OmitAutoPropertiesCustomization>().Single();
             Assert.Equal(
                 context,
                 customizations.OfType<TestParametersCustomization>().Single().TestMethodContext);
+            customizations.OfType<AutoMoqCustomization>().Single();
         }
 
         private class TssTestFixtureFactory : TestFixtureFactory
