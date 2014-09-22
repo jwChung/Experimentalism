@@ -1,4 +1,4 @@
-﻿namespace Jwc.Experiment.Xunit
+﻿namespace Jwc.Experiment
 {
     using System.Reflection;
 
