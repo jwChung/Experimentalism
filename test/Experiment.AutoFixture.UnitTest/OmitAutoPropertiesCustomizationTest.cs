@@ -21,7 +21,7 @@
         }
 
         [Fact]
-        public void CustomizeCorrectlySetsOmitAutproperties()
+        public void CustomizeCorrectlySetsOmitAutoProperties()
         {
             var sut = new OmitAutoPropertiesCustomization();
             var fixture = new Fixture();
