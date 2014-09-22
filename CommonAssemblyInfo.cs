@@ -55,6 +55,8 @@ using System.Runtime.InteropServices;
  *       Jwc.Experiment.AutoFixture.TestFixtureFactory.Create(ITestMethodContext)
  *
  * - [Major] Renamed(or moved) some types or members.
+ *     * Jwc.Experiment.AutoFixture.TestFixtureFactory
+ *         : Slightly improved.
  *     * Jwc.Experiment.Idioms.NullGuardClauseAssertion -> 
  *       Jwc.Experiment.Idioms.GuardClauseAssertion
  *     * Jwc.Experiment.Xunit.ITestCase2 ->
