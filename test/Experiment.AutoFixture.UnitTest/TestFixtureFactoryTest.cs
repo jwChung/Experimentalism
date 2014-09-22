@@ -36,7 +36,7 @@
 
             var actual = sut.Create(context);
 
-            var fixture= Assert.IsAssignableFrom<Fixture>(
+            var fixture = Assert.IsAssignableFrom<Fixture>(
                 Assert.IsAssignableFrom<TestFixture>(actual).Fixture);
             customization.ToMock().Verify(c => c.Customize(fixture));
         }
@@ -61,8 +61,7 @@
             customizations.OfType<OmitAutoPropertiesCustomization>().Single();
             Assert.Equal(
                 context,
-                customizations.OfType<TestParametersCustomization>()
-                .Single().TestMethodContext);
+                customizations.OfType<TestParametersCustomization>().Single().TestMethodContext);
         }
 
         private class TssTestFixtureFactory : TestFixtureFactory

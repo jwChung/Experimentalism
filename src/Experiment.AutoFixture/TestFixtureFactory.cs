@@ -3,8 +3,20 @@
     using System;
     using Ploeh.AutoFixture;
 
+    /// <summary>
+    /// Represents a factory to create test fixtures.
+    /// </summary>
     public class TestFixtureFactory : ITestFixtureFactory
     {
+        /// <summary>
+        /// Creates a test fixture.
+        /// </summary>
+        /// <param name="context">
+        /// The test method context to provide information for creating the test fixture.
+        /// </param>
+        /// <returns>
+        /// The test fixture.
+        /// </returns>
         public ITestFixture Create(ITestMethodContext context)
         {
             if (context == null)
@@ -13,6 +25,15 @@
             return new TestFixture(new Fixture().Customize(this.GetCustomization(context)));
         }
 
+        /// <summary>
+        /// Gets a customization.
+        /// </summary>
+        /// <param name="context">
+        /// The test method context to provide information for getting the customization.
+        /// </param>
+        /// <returns>
+        /// The customization.
+        /// </returns>
         protected virtual ICustomization GetCustomization(ITestMethodContext context)
         {
             return new CompositeCustomization(
