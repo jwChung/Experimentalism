@@ -49,7 +49,6 @@
             sut.Customize(fixture);
 
             Assert.Equal(fixture.Create<object>(), fixture.Create<object>());
-            Assert.Equal(fixture.Create<Person>(), fixture.Create<Person>());
             Assert.NotNull(fixture.Create<Person>().Name);
         }
 
