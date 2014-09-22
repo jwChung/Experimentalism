@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("2.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-pre02")]
+[assembly: AssemblyInformationalVersion("2.0.0-pre03")]
 
 /*
- * Version 2.0.0-pre02
+ * Version 2.0.0-pre03
  * 
  * - [Major] Removed obsolete and discarded, types or members.
  *     * Jwc.Experiment.DefaultFixtureConfigurationAttribute
@@ -36,12 +36,6 @@ using System.Runtime.InteropServices;
  *     - Jwc.Experiment.AutoFixture.TestFixture.Create<T>()
  *     - Jwc.Experiment.AutoFixture.TestFixture.Freeze<T>()
  *     * Jwc.Experiment.AutoFixture.TestFixtureConfigurationAttribute
- *     * Jwc.Experiment.AutoFixture.GreedyAttribute
- *     * Jwc.Experiment.AutoFixture.GreedyAttribute
- *     * Jwc.Experiment.AutoFixture.GreedyAttribute
- *     * Jwc.Experiment.AutoFixture.GreedyAttribute
- *     * Jwc.Experiment.AutoFixture.GreedyAttribute
- *     * Jwc.Experiment.AutoFixture.GreedyAttribute
  *     * Jwc.Experiment.Xunit.FirstClassCommand
  *     * Jwc.Experiment.Xunit.FirstClassTestAttribute
  *     * Jwc.Experiment.Xunit.ITestCase
