@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <runtime>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <runtime xdt:Transform="InsertIfMissing">
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly>
+      <dependentAssembly xdt:Transform="Insert">
         <assemblyIdentity name="xunit.extensions" publicKeyToken="8d05b1bb7a6fdb6c" culture="neutral" />
         <bindingRedirect oldVersion="0.0.0.0-1.9.0.1566" newVersion="1.9.0.1566" />
       </dependentAssembly>

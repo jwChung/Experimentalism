@@ -27,7 +27,7 @@
     <file src="..\packages\Albedo.1.0.2\lib\net35\Ploeh.Albedo.dll" target="lib\net40" />
     <file src="..\packages\Albedo.1.0.2\lib\net35\Ploeh.Albedo.xml" target="lib\net40" />
     <file src="..\src\**\*.cs" target="src\net40" />
-    <file src="..\src\Experiment.Idioms\app.config.transform" target="content" />
+    <file src="..\src\Experiment.Idioms\app.config.install.xdt" target="content" />
     <file src="Install.ps1" target="tools" />
   </files>
 </package>
