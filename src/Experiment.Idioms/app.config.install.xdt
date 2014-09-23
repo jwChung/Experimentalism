@@ -2,7 +2,8 @@
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <runtime xdt:Transform="InsertIfMissing">
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly xdt:Transform="Insert">
+      <dependentAssembly xdt:Transform="InsertIfMissing"
+                         xdt:Locator="Condition(_defaultNamespace:assemblyIdentity/@name='Ploeh.Albedo')">
         <assemblyIdentity name="Ploeh.Albedo" publicKeyToken="179ef6dd03497bbd" culture="neutral" />
         <bindingRedirect oldVersion="0.0.0.0-1.0.2.0" newVersion="1.0.2.0" />
       </dependentAssembly>

@@ -2,13 +2,20 @@
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <runtime xdt:Transform="InsertIfMissing">
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly xdt:Transform="Insert">
+      <dependentAssembly xdt:Transform="InsertIfMissing"
+                         xdt:Locator="Condition(_defaultNamespace:assemblyIdentity/@name='Ploeh.AutoFixture')">
         <assemblyIdentity name="Ploeh.AutoFixture" publicKeyToken="b24654c590009d4f" culture="neutral" />
         <bindingRedirect oldVersion="0.0.0.0-3.18.7.0" newVersion="3.18.7.0" />
       </dependentAssembly>
-      <dependentAssembly xdt:Transform="Insert">
+      <dependentAssembly xdt:Transform="InsertIfMissing"
+                         xdt:Locator="Condition(_defaultNamespace:assemblyIdentity/@name='Ploeh.AutoFixture.Xunit')">
         <assemblyIdentity name="Ploeh.AutoFixture.Xunit" publicKeyToken="b24654c590009d4f" culture="neutral" />
         <bindingRedirect oldVersion="0.0.0.0-3.18.7.0" newVersion="3.18.7.0" />
+      </dependentAssembly>
+      <dependentAssembly xdt:Transform="InsertIfMissing"
+                         xdt:Locator="Condition(_defaultNamespace:assemblyIdentity/@name='Moq')">
+        <assemblyIdentity name="Moq" publicKeyToken="69f491c39445e920" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.1.416.3" newVersion="3.1.416.3" />
       </dependentAssembly>
     </assemblyBinding>
   </runtime>
