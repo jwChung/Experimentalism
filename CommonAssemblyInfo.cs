@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("2.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-pre04")]
+[assembly: AssemblyInformationalVersion("2.0.0-pre05")]
 
 /*
- * Version 2.0.0-pre04
+ * Version 2.0.0-pre05
  * 
  * - [Major] Removed obsolete and discarded, types or members.
  *     * Jwc.Experiment.DefaultFixtureConfigurationAttribute
