@@ -46,7 +46,7 @@
         }
 
         [Test]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsManyTestCases()
+        public IEnumerable<ITestCase> TestAttributeSupportsManyTestCases()
         {
             var testCases = new[]
             {
@@ -60,7 +60,7 @@
         }
 
         [Test]
-        public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
+        public IEnumerable<ITestCase> TestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
             yield return TestCase.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
             yield return TestCase.WithAuto<string>().Create(x => Assert.NotNull(x));
