@@ -54,9 +54,8 @@
                 new { X = 3, Y = 7, Z = 10 },
                 new { X = 100, Y = 23, Z = 123 }
             };
-
-            return testCases.Select(
-                c => TestCase.Create(() => Assert.Equal(c.Z, c.X + c.Y)));
+            return TestCases.WithArgs(testCases).Create(
+                c => Assert.Equal(c.Z, c.X + c.Y));
         }
 
         [Test]
