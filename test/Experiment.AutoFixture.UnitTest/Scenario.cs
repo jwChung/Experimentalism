@@ -6,6 +6,7 @@
     using System.Reflection;
     using Jwc.Experiment.Xunit;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Xunit;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -66,11 +67,18 @@
             yield return TestCase.WithAuto<object>().Create(x => Assert.NotNull(x));
         }
 
+        [Test]
+        public void TestAttributeCorrectlyCreatesFrozenMockedInstance(
+            [Frozen] IDisposable instance)
+        {
+            Assert.NotNull(instance);
+        }
+
         private class TestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
-                return new TestFixture(new Fixture());
+                return new TestFixtureFactory().Create(context);
             }
         }
 

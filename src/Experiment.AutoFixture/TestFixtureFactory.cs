@@ -39,8 +39,8 @@
         {
             return new CompositeCustomization(
                 new OmitAutoPropertiesCustomization(),
-                new TestParametersCustomization(context),
-                new AutoMoqCustomization());
+                new AutoMoqCustomization(),
+                new TestParametersCustomization(context));
         }
     }
 }

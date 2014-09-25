@@ -66,6 +66,30 @@
             customizations.OfType<AutoMoqCustomization>().Single();
         }
 
+        [Fact]
+        public void CreateUsesCustomizationsInProperOrder()
+        {
+            // Fixture setup
+            var sut = new TssTestFixtureFactory();
+
+            var context = Mocked.Of<ITestMethodContext>();
+
+            var expected = new[]
+            {
+                typeof(OmitAutoPropertiesCustomization),
+                typeof(AutoMoqCustomization),
+                typeof(TestParametersCustomization)
+            };
+
+            // Exercise system
+            sut.Create(context);
+
+            // Verify outcome
+            var actual = Assert.IsAssignableFrom<CompositeCustomization>(
+                sut.Customization).Customizations.Select(c => c.GetType());
+            Assert.Equal(expected, actual);
+        }
+
         private class TssTestFixtureFactory : TestFixtureFactory
         {
             public ICustomization Customization { get; set; }
