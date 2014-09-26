@@ -1,4 +1,4 @@
-Experimentalism
+Experimentalism [![appveyor](http://img.shields.io/appveyor/ci/jwChung/Experimentalism.svg?style=flat-square)](https://ci.appveyor.com/project/jwChung/experimentalism)
 ===============
 
 Experimentalism은 TDD에 도움을 줄 수 있는 라이브러리와 툴을 제공하는 것이 목적입니다. 
@@ -8,9 +8,12 @@ Experimentalism의 모든 프로젝트(NuGet패키지)는 [Semantic Versioning](
 Experimentalism의 프로젝트들은 [NuGet](https://www.nuget.org/profiles/jwChung/)에 등록이 되어있으므로,
 NuGet package manager 혹은 [Package manager console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)을 통해 각 패키지들을 설치할 수 있습니다.
 
-* Experiment.Xunit
-* Experiment.AutoFixture
-* Experiment.Idioms
+ - Experiment.Xunit:  
+   [![install from nuget](http://img.shields.io/nuget/v/Experiment.Xunit.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Xunit)[![downloads](http://img.shields.io/nuget/dt/Experiment.Xunit.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Xunit)
+ - Experiment.AutoFixture:  
+   [![install from nuget](http://img.shields.io/nuget/v/Experiment.AutoFixture.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.AutoFixture)[![downloads](http://img.shields.io/nuget/dt/Experiment.AutoFixture.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.AutoFixture)
+ - Experiment.Idioms:  
+   [![install from nuget](http://img.shields.io/nuget/v/Experiment.Idioms.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Idioms)[![downloads](http://img.shields.io/nuget/dt/Experiment.Idioms.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Idioms)
 
 Experiment.Xunit
 ----------------
