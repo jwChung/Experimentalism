@@ -11,7 +11,7 @@
     <AssemblyName>Jwc.Experiment.AutoFixture</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>a250256a</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>a3a3581e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +52,7 @@
       <HintPath>..\..\packages\AutoFixture.Xunit.3.18.7\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\CommonAssemblyInfo.cs">
@@ -84,9 +85,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets'))" />
-    <Error Condition="!Exists('..\..\packages\CIBuild.ILMerge.0.1.1\build\net20\CIBuild.ILMerge.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CIBuild.ILMerge.0.1.1\build\net20\CIBuild.ILMerge.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CIBuild.ILMerge.0.1.2\build\net20\CIBuild.ILMerge.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CIBuild.ILMerge.0.1.2\build\net20\CIBuild.ILMerge.targets'))" />
   </Target>
-  <Import Project="..\..\packages\CIBuild.ILMerge.0.1.1\build\net20\CIBuild.ILMerge.targets" Condition="Exists('..\..\packages\CIBuild.ILMerge.0.1.1\build\net20\CIBuild.ILMerge.targets')" />
+  <Import Project="..\..\packages\CIBuild.ILMerge.0.1.2\build\net20\CIBuild.ILMerge.targets" Condition="Exists('..\..\packages\CIBuild.ILMerge.0.1.2\build\net20\CIBuild.ILMerge.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

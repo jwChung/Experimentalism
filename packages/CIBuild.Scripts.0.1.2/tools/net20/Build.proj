@@ -21,11 +21,11 @@
   <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.Base64StringToFile" />
   <UsingTask AssemblyFile="$(XunitRunnerPath)" TaskName="Xunit.Runner.MSBuild.xunit" />
   <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.SemanticVersioning" />
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.PublishNugetDetermination" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)"
+             TaskName="Jwc.CIBuildTasks.PublishNugetDetermination" />
   <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.ReleaseNoteExtractor" />
   <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.NugetPackageDeleter" />
   <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.GitHubTagger" />
-  
   
   <!-- Targets -->
   <Target Name="CI">
@@ -122,7 +122,9 @@
   </Target>
   
   <Target Name="SetReleaseNotes">
-    <XmlPoke XmlInputPath="%(NuspecFiles.FullPath)" Query="//metadata/releaseNotes" Value="$(XmlEscapedReleaseNotes)" />
+    <XmlPoke XmlInputPath="%(NuspecFiles.FullPath)"
+             Query="//metadata/releaseNotes"
+             Value="$(XmlEscapedReleaseNotes)" />
   </Target>
   
   <Target Name="PackNugetPackages">
@@ -144,7 +146,9 @@
     <Exec Command="$(NugetPath) push %(NugetSymbolPackages.Identity)" ContinueOnError="true" />
     <Delete Files="@(NugetSymbolPackages)" />
     <Exec Command="$(NugetPath) push %(NugetPackages.Identity)" />
-    <NugetPackageDeleter IdOrEmail="$(NugetId)" Password="$(NugetPassword)" Identifier="%(NuspecFiles.Filename) $(SemanticVersion)" Condition="$(SemanticVersion.Contains('-'))"/>
+    <NugetPackageDeleter IdOrEmail="$(NugetId)" Password="$(NugetPassword)"
+                         Identifier="%(NuspecFiles.Filename) $(SemanticVersion)"
+                         Condition="$(SemanticVersion.Contains('-'))"/>
   </Target>
 
   <Target Name="MakeTagOnGitHub" Condition="!$(SemanticVersion.Contains('-'))">
@@ -166,7 +170,9 @@
   <!-- Cleanup -->
   <Target Name="Cleanup" DependsOnTargets="UndoVersioningNuspecs">
     <Delete Files="PrivateKey.snk" />
-    <XmlPoke XmlInputPath="%(NuspecFiles.FullPath)" Query="//metadata/releaseNotes" Value="releaseNotes" />
+    <XmlPoke XmlInputPath="%(NuspecFiles.FullPath)"
+             Query="//metadata/releaseNotes"
+             Value="releaseNotes" />
     <ItemGroup>
       <NupkgFiles Include="*.nupkg" />
     </ItemGroup>

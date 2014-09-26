@@ -10,7 +10,7 @@
       <ILMergePath>%(ILMergePath.FullPath)</ILMergePath>
     </PropertyGroup>
     <MakeDir Directories="$(OutputPath)ILMergeOutput" />
-    <Message Text="MERGING: %(ILMergeAssemblies.Filename)" Importance="High" />
     <Exec Command="$(ILMergePath) /Closed /Internalize /Lib:$(OutputPath) /keyfile:$(AssemblyOriginatorKeyFile) /out:&quot;$(OutputPath)ILMergeOutput\%(MainAssembly.Filename)%(MainAssembly.Extension)&quot; &quot;@(IntermediateAssembly)&quot; @(ILMergeAssemblies->'&quot;%(FullPath)&quot;', ' ')" />
+    <Message Text="The '%(ILMergeAssemblies.Filename)' assembly was merged." Importance="High" />
   </Target>
 </Project>

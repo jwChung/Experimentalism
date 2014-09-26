@@ -9,31 +9,32 @@
     <!--Private key string encoded using Base64String.-->
     <PrivateKeyBase64String>$(PrivateKeyBase64String)</PrivateKeyBase64String>
     
-    <!--Nuget account id-->
+    <!--Nuget account id used to delete packages when pre-release version is pushed.-->
     <NugetId>$(NugetId)</NugetId>
     
-    <!--Nuget accout password-->
+    <!--Nuget accout password used to delete packages when pre-release version is pushed.-->
     <NugetPassword>$(NugetPassword)</NugetPassword>
     
-    <!--Nuget api key-->
+    <!--Nuget api key used to push packages to Nuget server.-->
     <SetApiKey>$(SetApiKey)</SetApiKey>
     
-    <!--Sccess token of github.-->
+    <!--Access token of github used to make git tag on GitHub.-->
     <GitHubAccessToken>$(GitHubAccessToken)</GitHubAccessToken>
 
-    <!--Github account id -->
+    <!--Github account id used to identify the repository on GitHub. -->
     <GitHubId>jwChung</GitHubId>
 
-    <!--Github repository name -->
+    <!--Github repository name used to identify the repository on GitHub.-->
     <GitHubRepository>CIBuild</GitHubRepository>
     
-    <!--Ref or sha to create a tag for, which can be ommited as the default is 'refs/heads/master'.-->
+    <!--Ref or sha to create a tag for, which can be ommited as the default is
+        'refs/heads/master'.-->
     <RefOrShaForTag>$(APPVEYOR_REPO_COMMIT)</RefOrShaForTag>
 
-    <!--Author name for git commit-->
+    <!--Author name for git commit as the author for making git tag.-->
     <AuthorName>Jin-Wook Chung</AuthorName>
     
-    <!--Author email for git commit-->
+    <!--Author email for git commit as the author's email for making git tag.-->
     <AuthorEmail>$(AuthorEmail)</AuthorEmail>
     
   </PropertyGroup>
