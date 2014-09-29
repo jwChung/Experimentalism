@@ -13,8 +13,13 @@
     public class TestParametersCustomization : ICustomization
     {
         private readonly IEnumerable<ParameterInfo> parameters;
-        private readonly ITestMethodContext testMethodContext;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestParametersCustomization"/> class.
+        /// </summary>
+        /// <param name="parameters">
+        /// Test parameters to get <see cref="CustomizeAttribute"/> to customize fixture.
+        /// </param>
         public TestParametersCustomization(IEnumerable<ParameterInfo> parameters)
         {
             if (parameters == null)
@@ -23,6 +28,9 @@
             this.parameters = parameters;
         }
 
+        /// <summary>
+        /// Gets the test parameters.
+        /// </summary>
         public IEnumerable<ParameterInfo> Parameters
         {
             get { return this.parameters; }
