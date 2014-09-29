@@ -1,7 +1,9 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using Moq;
     using Moq.Protected;
     using Ploeh.AutoFixture;
@@ -43,30 +45,6 @@
         }
 
         [Fact]
-        public void CreateReturnsFixtureCustomizedWithCorrectCustomization()
-        {
-            // Fixture setup
-            var sut = new TssTestFixtureFactory();
-
-            var context = Mocked.Of<ITestMethodContext>();
-
-            // Exercise system
-            sut.Create(context);
-
-            // Verify outcome
-            var customizations = Assert.IsAssignableFrom<CompositeCustomization>(
-                sut.Customization).Customizations;
-
-            Assert.Equal(3, customizations.Count());
-
-            customizations.OfType<OmitAutoPropertiesCustomization>().Single();
-            Assert.Equal(
-                context,
-                customizations.OfType<TestParametersCustomization>().Single().TestMethodContext);
-            customizations.OfType<AutoMoqCustomization>().Single();
-        }
-
-        [Fact]
         public void CreateUsesCustomizationsInProperOrder()
         {
             // Fixture setup
@@ -88,6 +66,22 @@
             var actual = Assert.IsAssignableFrom<CompositeCustomization>(
                 sut.Customization).Customizations.Select(c => c.GetType());
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CreateReturnsFixtureCustomizedWithCorrectTestParametersCustomization()
+        {
+            var sut = new TssTestFixtureFactory();
+            var parameters = new[] { Mocked.Of<ParameterInfo>(), Mocked.Of<ParameterInfo>() };
+            var context = Mocked.Of<ITestMethodContext>(
+                c => c.ActualMethod == Mocked.Of<MethodInfo>(
+                    m => m.GetParameters() == parameters));
+
+            sut.Create(context);
+
+            var customization = Assert.IsAssignableFrom<CompositeCustomization>(sut.Customization)
+                .Customizations.OfType<TestParametersCustomization>().Single();
+            Assert.Equal(parameters, customization.Parameters);
         }
 
         private class TssTestFixtureFactory : TestFixtureFactory

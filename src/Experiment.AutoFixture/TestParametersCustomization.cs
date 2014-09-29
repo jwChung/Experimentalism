@@ -1,7 +1,9 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Xunit;
 
@@ -10,28 +12,28 @@
     /// </summary>
     public class TestParametersCustomization : ICustomization
     {
-        private readonly ITestMethodContext testMethodContext;
+        private readonly IEnumerable<ParameterInfo> parameters;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestParametersCustomization"/> class.
         /// </summary>
-        /// <param name="testMethodContext">
-        /// The test method context.
+        /// <param name="parameters">
+        /// Test parameters to get <see cref="CustomizeAttribute"/> to customize fixture.
         /// </param>
-        public TestParametersCustomization(ITestMethodContext testMethodContext)
+        public TestParametersCustomization(IEnumerable<ParameterInfo> parameters)
         {
-            if (testMethodContext == null)
-                throw new ArgumentNullException("testMethodContext");
+            if (parameters == null)
+                throw new ArgumentNullException("parameters");
 
-            this.testMethodContext = testMethodContext;
+            this.parameters = parameters;
         }
 
         /// <summary>
-        /// Gets the test method context.
+        /// Gets the test parameters.
         /// </summary>
-        public ITestMethodContext TestMethodContext
+        public IEnumerable<ParameterInfo> Parameters
         {
-            get { return this.testMethodContext; }
+            get { return this.parameters; }
         }
 
         /// <summary>
@@ -45,11 +47,11 @@
             if (fixture == null)
                 throw new ArgumentNullException("fixture");
 
-            var customizations = this.testMethodContext.ActualMethod.GetParameters()
-                .SelectMany(p =>
-                    p.GetCustomAttributes(typeof(CustomizeAttribute), false)
-                    .Cast<CustomizeAttribute>()
-                    .Select(c => c.GetCustomization(p)))
+            var customizations = this.parameters
+                .SelectMany(
+                    p => p.GetCustomAttributes(typeof(CustomizeAttribute), false)
+                        .Cast<CustomizeAttribute>()
+                        .Select(c => c.GetCustomization(p)))
                 .ToArray();
 
             fixture.Customize(new CompositeCustomization(customizations));

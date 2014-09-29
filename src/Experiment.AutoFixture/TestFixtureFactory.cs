@@ -37,10 +37,13 @@
         /// </returns>
         protected virtual ICustomization GetCustomization(ITestMethodContext context)
         {
+            if (context == null)
+                throw new ArgumentNullException("context");
+
             return new CompositeCustomization(
                 new OmitAutoPropertiesCustomization(),
                 new AutoMoqCustomization(),
-                new TestParametersCustomization(context));
+                new TestParametersCustomization(context.ActualMethod.GetParameters()));
         }
     }
 }
