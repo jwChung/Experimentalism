@@ -15,34 +15,12 @@
         private readonly IEnumerable<ParameterInfo> parameters;
         private readonly ITestMethodContext testMethodContext;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestParametersCustomization"/> class.
-        /// </summary>
-        /// <param name="testMethodContext">
-        /// The test method context.
-        /// </param>
-        public TestParametersCustomization(ITestMethodContext testMethodContext)
-        {
-            if (testMethodContext == null)
-                throw new ArgumentNullException("testMethodContext");
-
-            this.testMethodContext = testMethodContext;
-        }
-
         public TestParametersCustomization(IEnumerable<ParameterInfo> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
 
             this.parameters = parameters;
-        }
-
-        /// <summary>
-        /// Gets the test method context.
-        /// </summary>
-        public ITestMethodContext TestMethodContext
-        {
-            get { return this.testMethodContext; }
         }
 
         public IEnumerable<ParameterInfo> Parameters

@@ -13,15 +13,8 @@
         [Fact]
         public void SutIsCustomization()
         {
-            var sut = new TestParametersCustomization(Mocked.Of<ITestMethodContext>());
+            var sut = new TestParametersCustomization(Mocked.Of<IEnumerable<ParameterInfo>>());
             Assert.IsAssignableFrom<ICustomization>(sut);
-        }
-
-        [Fact]
-        public void InitializeWithNullContextThrows()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => new TestParametersCustomization((ITestMethodContext)null));
         }
 
         [Fact]
@@ -29,14 +22,6 @@
         {
             Assert.Throws<ArgumentNullException>(
                 () => new TestParametersCustomization((IEnumerable<ParameterInfo>)null));
-        }
-
-        [Fact]
-        public void InitializeCorrectlyInitializesProperties2()
-        {
-            var testMethodContext = Mocked.Of<ITestMethodContext>();
-            var sut = new TestParametersCustomization(testMethodContext);
-            Assert.Equal(testMethodContext, sut.TestMethodContext);
         }
 
         [Fact]
@@ -50,7 +35,7 @@
         [Fact]
         public void CustomizeWitNullFixtureThrows()
         {
-            var sut = new TestParametersCustomization(Mocked.Of<ITestMethodContext>());
+            var sut = new TestParametersCustomization(Mocked.Of<IEnumerable<ParameterInfo>>());
             Assert.Throws<ArgumentNullException>(() => sut.Customize(null));
         }
 
