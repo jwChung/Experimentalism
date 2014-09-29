@@ -39,22 +39,14 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="FuncTestFixtureFactory.cs" />
-    <Compile Include="TestAssemblyConfigurationAttribute.cs" />
-    <Compile Include="DefaultFixtureFactory.cs" />
-    <Compile Include="TestFixtureConfigurationAttribute.cs" />
-    <Compile Include="DefaultFixtureConfigurationAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
     <Compile Include="ITestFixtureFactory.cs" />
-    <Compile Include="NotSupportedFixtureFactory.cs" />
+    <Compile Include="ITestMethodContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

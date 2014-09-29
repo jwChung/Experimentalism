@@ -38,7 +38,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
     </Reference>
@@ -54,8 +53,18 @@
     <Compile Include="CompositeTestCommandFactory.cs" />
     <Compile Include="DataAttributeCommandFactory.cs" />
     <Compile Include="IFluentInterface.cs" />
-    <Compile Include="ITestCase2.cs" />
+    <Compile Include="ITestCase.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ITestCasesWithArgs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITestCasesWithArgs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ITestCasesWithAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ITestCasesWithAuto.tt</DependentUpon>
+    </Compile>
     <Compile Include="ITestCaseWithArgs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,32 +78,37 @@
     <Compile Include="ITestCommandContext.cs" />
     <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
-    <Compile Include="ITestMethodContext.cs" />
-    <Compile Include="ITestFixtureFactory.cs" />
     <Compile Include="ParameterizedCommand.cs" />
+    <Compile Include="ParameterizedCommandContext.cs" />
     <Compile Include="ParameterizedCommandFactory.cs" />
-    <Compile Include="TestAttribute.cs" />
     <Compile Include="ExceptionCommand.cs" />
-    <Compile Include="FirstClassCommand.cs" />
-    <Compile Include="FirstClassTestAttribute.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ITestCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaticTestCaseCommandContext.cs" />
     <Compile Include="TestBaseAttribute.cs" />
     <Compile Include="TestCase.cs" />
-    <Compile Include="TargetInvocationExceptionUnwrappingCommand.cs" />
-    <Compile Include="TestCase.New.cs">
+    <Compile Include="TestCase.tt.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TestCase.New.tt</DependentUpon>
+      <DependentUpon>TestCase.tt</DependentUpon>
     </Compile>
-    <Compile Include="TestCase2.cs" />
-    <Compile Include="TestCase2.tt.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestCase2.tt</DependentUpon>
-    </Compile>
+    <Compile Include="TestCaseCommandContext.cs" />
     <Compile Include="TestCaseCommandFactory.cs" />
+    <Compile Include="TestCases.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCases.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestCasesWithArgs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCasesWithArgs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestCasesWithAuto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestCasesWithAuto.tt</DependentUpon>
+    </Compile>
     <Compile Include="TestCaseWithArgs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -105,11 +119,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestCaseWithAuto.tt</DependentUpon>
     </Compile>
-    <Compile Include="TryCatchCommandCollection.cs" />
     <Compile Include="TestCommandContext.cs" />
+    <Compile Include="TestMethodContext.cs" />
+    <Compile Include="TryCatchCommandCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Helpers.tt" />
+    <None Include="ITestCasesWithArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ITestCasesWithArgs.cs</LastGenOutput>
+    </None>
+    <None Include="ITestCasesWithAuto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ITestCasesWithAuto.cs</LastGenOutput>
+    </None>
     <None Include="ITestCaseWithArgs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ITestCaseWithArgs.cs</LastGenOutput>
@@ -119,15 +142,22 @@
       <LastGenOutput>ITestCaseWithAuto.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="TestCase.New.tt">
+    <None Include="TestCase.tt">
       <DependentUpon>TestCase.cs</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCase.New.cs</LastGenOutput>
+      <LastGenOutput>TestCase.tt.cs</LastGenOutput>
     </None>
-    <None Include="TestCase2.tt">
-      <DependentUpon>TestCase2.cs</DependentUpon>
+    <None Include="TestCases.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TestCase2.tt.cs</LastGenOutput>
+      <LastGenOutput>TestCases.cs</LastGenOutput>
+    </None>
+    <None Include="TestCasesWithArgs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCasesWithArgs.cs</LastGenOutput>
+    </None>
+    <None Include="TestCasesWithAuto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TestCasesWithAuto.cs</LastGenOutput>
     </None>
     <None Include="TestCaseWithArgs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

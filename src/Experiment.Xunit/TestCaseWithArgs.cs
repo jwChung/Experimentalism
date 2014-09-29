@@ -7,1129 +7,889 @@ namespace Jwc.Experiment.Xunit
 
     internal class TestCaseWithArgs<T1> : ITestCaseWithArgs<T1>
     {
-        private readonly T1 arg1;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1> delegator)
+        public ITestCase Create(Action<T1> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2> WithAuto<T2>()
         {
-            return new TestCaseWithAuto<T1, T2>(this.arg1);
+            return new TestCaseWithAuto<T1, T2>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3> WithAuto<T2, T3>()
         {
-            return new TestCaseWithAuto<T1, T2, T3>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T2, T3, T4>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T2, T3, T4, T5>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T2, T3, T4, T5, T6>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T2, T3, T4, T5, T6, T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T2, T3, T4, T5, T6, T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2> : ITestCaseWithArgs<T1, T2>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2> delegator)
+        public ITestCase Create(Action<T1, T2> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3> WithAuto<T3>()
         {
-            return new TestCaseWithAuto<T1, T2, T3>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T3, T4>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T3, T4, T5>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T3, T4, T5, T6>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T3, T4, T5, T6, T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T3, T4, T5, T6, T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T3, T4, T5, T6, T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3> : ITestCaseWithArgs<T1, T2, T3>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3> delegator)
+        public ITestCase Create(Action<T1, T2, T3> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T4>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T4, T5>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T4, T5, T6>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T4, T5, T6, T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T4, T5, T6, T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T4, T5, T6, T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T4, T5, T6, T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4> : ITestCaseWithArgs<T1, T2, T3, T4>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T5>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T5, T6>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T5, T6, T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T5, T6, T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T5, T6, T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T5, T6, T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T5, T6, T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5> : ITestCaseWithArgs<T1, T2, T3, T4, T5>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T6>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T6, T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T6, T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T6, T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T6, T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T6, T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T6, T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
-        private readonly T11 arg11;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
-            this.arg11 = arg11;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
-        private readonly T11 arg11;
-        private readonly T12 arg12;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
-            this.arg11 = arg11;
-            this.arg12 = arg12;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
-        private readonly T11 arg11;
-        private readonly T12 arg12;
-        private readonly T13 arg13;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
-            this.arg11 = arg11;
-            this.arg12 = arg12;
-            this.arg13 = arg13;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
-        private readonly T11 arg11;
-        private readonly T12 arg12;
-        private readonly T13 arg13;
-        private readonly T14 arg14;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
-            this.arg11 = arg11;
-            this.arg12 = arg12;
-            this.arg13 = arg13;
-            this.arg14 = arg14;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
-        private readonly T11 arg11;
-        private readonly T12 arg12;
-        private readonly T13 arg13;
-        private readonly T14 arg14;
-        private readonly T15 arg15;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
-            this.arg11 = arg11;
-            this.arg12 = arg12;
-            this.arg13 = arg13;
-            this.arg14 = arg14;
-            this.arg15 = arg15;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15);
+            return new TestCase(delegator, this.arguments);
         }
 
         public ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this.arguments);
         }
     }
 
     internal class TestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : ITestCaseWithArgs<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
     {
-        private readonly T1 arg1;
-        private readonly T2 arg2;
-        private readonly T3 arg3;
-        private readonly T4 arg4;
-        private readonly T5 arg5;
-        private readonly T6 arg6;
-        private readonly T7 arg7;
-        private readonly T8 arg8;
-        private readonly T9 arg9;
-        private readonly T10 arg10;
-        private readonly T11 arg11;
-        private readonly T12 arg12;
-        private readonly T13 arg13;
-        private readonly T14 arg14;
-        private readonly T15 arg15;
-        private readonly T16 arg16;
+        private readonly object[] arguments;
 
-        public TestCaseWithArgs(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15, T16 arg16)
+        public TestCaseWithArgs(params object[] arguments)
         {
-            this.arg1 = arg1;
-            this.arg2 = arg2;
-            this.arg3 = arg3;
-            this.arg4 = arg4;
-            this.arg5 = arg5;
-            this.arg6 = arg6;
-            this.arg7 = arg7;
-            this.arg8 = arg8;
-            this.arg9 = arg9;
-            this.arg10 = arg10;
-            this.arg11 = arg11;
-            this.arg12 = arg12;
-            this.arg13 = arg13;
-            this.arg14 = arg14;
-            this.arg15 = arg15;
-            this.arg16 = arg16;
+            this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator)
+        public ITestCase Create(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arg1, this.arg2, this.arg3, this.arg4, this.arg5, this.arg6, this.arg7, this.arg8, this.arg9, this.arg10, this.arg11, this.arg12, this.arg13, this.arg14, this.arg15, this.arg16);
+            return new TestCase(delegator, this.arguments);
         }
     }
 

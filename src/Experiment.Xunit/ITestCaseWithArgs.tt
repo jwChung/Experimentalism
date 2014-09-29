@@ -30,15 +30,15 @@ for (var j = 1; j <= i; j++)
     public interface ITestCaseWithArgs<<#=typeList#>> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates test cases with one argument.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new test case.
+        /// The new test cases.
         /// </returns>
-        ITestCase2 Create(Action<<#=typeList#>> delegator);
+        ITestCase Create(Action<<#=typeList#>> delegator);
 <#
 for (var j = i + 1; j <= GenericTypeMax; j++)
 {
@@ -58,7 +58,7 @@ for (var k = i + 1; k <= j; k++)
 }
 #>
         /// <returns>
-        /// The new test case with the two argument.
+        /// The new test case with the arguments.
         /// </returns>
         ITestCaseWithAuto<<#=GetGenericList(j, "T{0}")#>> WithAuto<<#=GetGenericList(i + 1, j - i, "T{0}")#>>();
 <#

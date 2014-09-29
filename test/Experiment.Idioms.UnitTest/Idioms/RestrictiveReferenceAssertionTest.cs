@@ -40,13 +40,12 @@
                 Assembly.Load("mscorlib"),
                 Assembly.Load("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
-                Assembly.Load("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("Jwc.Experiment"),
                 Assembly.Load("xunit"),
                 Assembly.Load("xunit.extensions")
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
-            Assert.DoesNotThrow(() => sut.Verify(typeof(TestAttribute).Assembly));
+            Assert.DoesNotThrow(() => sut.Verify(typeof(TestBaseAttribute).Assembly));
         }
 
         [Fact]
@@ -59,7 +58,7 @@
                 typeof(TheoryAttribute).Assembly
             };
             var sut = new RestrictiveReferenceAssertion(restrictiveReferences);
-            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(TestAttribute).Assembly));
+            Assert.Throws<RestrictiveReferenceException>(() => sut.Verify(typeof(TestBaseAttribute).Assembly));
         }
 
         [Fact]

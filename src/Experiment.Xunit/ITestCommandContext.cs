@@ -1,6 +1,5 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
-    using System;
     using System.Collections.Generic;
     using global::Xunit.Sdk;
 
@@ -15,12 +14,6 @@
         IMethodInfo TestMethod { get; }
 
         /// <summary>
-        /// Gets the actual method.
-        /// </summary>
-        [Obsolete("This property is not supported and will be removed on the next major release.")]
-        IMethodInfo ActualMethod { get; }
-
-        /// <summary>
         /// Gets information of the test method.
         /// </summary>
         /// <param name="testObject">
@@ -31,6 +24,15 @@
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "object", Justification = "This rule is suppressed because the 'Object' term is appropriate to represent an object of a test class.")]
         ITestMethodContext GetMethodContext(object testObject);
+
+        /// <summary>
+        /// Gets information of the static test method.
+        /// </summary>
+        /// <returns>
+        /// The information of the static test method.
+        /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Method is more appropriate than a property as this method is overloaded with the upper method.")]
+        ITestMethodContext GetStaticMethodContext();
 
         /// <summary>
         /// Gets test arguments.

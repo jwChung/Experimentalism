@@ -53,26 +53,5 @@
             var actual = sut.Create(testFixtureType);
             Assert.Same(sut, actual);
         }
-
-        [Fact]
-        [Obsolete]
-        public void CreateWithGenericReturnsCorrectSpecimen()
-        {
-            var sut = new TestFixture(new Fixture());
-            var actual = sut.Create<string>();
-            Assert.NotNull(actual);
-        }
-
-        [Fact]
-        [Obsolete]
-        public void FreezeCorrectlyFreezesSpecimen()
-        {
-            var expected = "foo";
-            var sut = new TestFixture(new Fixture());
-
-            sut.Freeze(expected);
-
-            Assert.Same(expected, sut.Create(typeof(string)));
-        }
     }
 }

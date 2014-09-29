@@ -4,141 +4,35 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Reflection;
     using global::Xunit.Sdk;
 
     /// <summary>
-    /// Represents information of a test command.
+    /// Represents a base class for test command context.
     /// </summary>
-    public class TestCommandContext : ITestCommandContext
+    public abstract class TestCommandContext : ITestCommandContext
     {
-        private IMethodInfo testMethod;
-        private IMethodInfo actualMethod;
-        private object actualObject;
-        private ITestFixtureFactory factory;
-        private IEnumerable<object> arguments;
+        private readonly ITestFixtureFactory factory;
+        private readonly IEnumerable<object> arguments;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestCommandContext"/> class.
         /// </summary>
-        /// <param name="testMethod">
-        /// A test method.
-        /// </param>
         /// <param name="factory">
         /// A factory to create test fixture.
         /// </param>
         /// <param name="arguments">
         /// Explicit arguments of the test method.
         /// </param>
-        public TestCommandContext(IMethodInfo testMethod, ITestFixtureFactory factory, IEnumerable<object> arguments)
+        protected TestCommandContext(ITestFixtureFactory factory, IEnumerable<object> arguments)
         {
-            if (testMethod == null)
-                throw new ArgumentNullException("testMethod");
-
             if (factory == null)
                 throw new ArgumentNullException("factory");
 
             if (arguments == null)
                 throw new ArgumentNullException("arguments");
 
-            this.testMethod = testMethod;
             this.factory = factory;
             this.arguments = arguments;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestCommandContext"/> class.
-        /// </summary>
-        /// <param name="testMethod">
-        /// A test method.
-        /// </param>
-        /// <param name="actualMethod">
-        /// A actual method.
-        /// </param>
-        /// <param name="factory">
-        /// A factory to create test fixture.
-        /// </param>
-        /// <param name="arguments">
-        /// Explicit arguments of the actual method.
-        /// </param>
-        public TestCommandContext(
-            IMethodInfo testMethod,
-            IMethodInfo actualMethod,
-            ITestFixtureFactory factory,
-            IEnumerable<object> arguments)
-            : this(testMethod, factory, arguments)
-        {
-            if (actualMethod == null)
-                throw new ArgumentNullException("actualMethod");
-
-            this.actualMethod = actualMethod;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestCommandContext"/> class.
-        /// </summary>
-        /// <param name="testMethod">
-        /// A test method.
-        /// </param>
-        /// <param name="actualMethod">
-        /// A actual method.
-        /// </param>
-        /// <param name="actualObject">
-        /// The test object.
-        /// </param>
-        /// <param name="factory">
-        /// A factory to create test fixture.
-        /// </param>
-        /// <param name="arguments">
-        /// Explicit arguments of the actual method.
-        /// </param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "object", Justification = "This rule is suppressed because the 'Object' term is appropriate to represent an object of a test class.")]
-        public TestCommandContext(
-            IMethodInfo testMethod,
-            IMethodInfo actualMethod,
-            object actualObject,
-            ITestFixtureFactory factory,
-            IEnumerable<object> arguments)
-            : this(testMethod, actualMethod, factory, arguments)
-        {
-            if (actualObject == null)
-                throw new ArgumentNullException("actualObject");
-
-            this.actualObject = actualObject;
-        }
-
-        /// <summary>
-        /// Gets the test method.
-        /// </summary>
-        public IMethodInfo TestMethod
-        {
-            get { return this.testMethod; }
-        }
-
-        /// <summary>
-        /// Gets the actual method.
-        /// </summary>
-        public IMethodInfo ActualMethod
-        {
-            get { return this.actualMethod; }
-        }
-
-        /// <summary>
-        /// Gets the test object.
-        /// </summary>
-        [Obsolete("This property is not supported and will be removed on the next major release.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This is public API.")]
-        public object TestObject
-        {
-            get { throw new NotSupportedException(); }
-        }
-
-        /// <summary>
-        /// Gets the actual object.
-        /// </summary>
-        public object ActualObject
-        {
-            get { return this.actualObject; }
         }
 
         /// <summary>
@@ -158,6 +52,11 @@
         }
 
         /// <summary>
+        /// Gets the test method.
+        /// </summary>
+        public abstract IMethodInfo TestMethod { get; }
+
+        /// <summary>
         /// Gets information of the test method.
         /// </summary>
         /// <param name="testObject">
@@ -166,15 +65,15 @@
         /// <returns>
         /// The information of the test method.
         /// </returns>
-        public ITestMethodContext GetMethodContext(object testObject)
-        {
-            if (this.actualMethod == null)
-                return new TestMethodContext(
-                    this.testMethod.MethodInfo, this.testMethod.MethodInfo, testObject, testObject);
+        public abstract ITestMethodContext GetMethodContext(object testObject);
 
-            return new TestMethodContext(
-                    this.testMethod.MethodInfo, this.actualMethod.MethodInfo, testObject, this.actualObject);
-        }
+        /// <summary>
+        /// Gets information of the static test method.
+        /// </summary>
+        /// <returns>
+        /// The information of the static test method.
+        /// </returns>
+        public abstract ITestMethodContext GetStaticMethodContext();
 
         /// <summary>
         /// Gets test arguments.
@@ -208,46 +107,6 @@
                 .Select(p => fixture.Create(p.ParameterType));
 
             return explicitArguments.Concat(autoArguments);
-        }
-
-        private class TestMethodContext : ITestMethodContext
-        {
-            private readonly MethodInfo testMethod;
-            private readonly MethodInfo actualMethod;
-            private readonly object testObject;
-            private readonly object actualObject;
-
-            public TestMethodContext(
-                MethodInfo testMethod,
-                MethodInfo actualMethod,
-                object testObject,
-                object actualObject)
-            {
-                this.testMethod = testMethod;
-                this.actualMethod = actualMethod;
-                this.testObject = testObject;
-                this.actualObject = actualObject;
-            }
-
-            public MethodInfo TestMethod
-            {
-                get { return this.testMethod; }
-            }
-
-            public MethodInfo ActualMethod
-            {
-                get { return this.actualMethod; }
-            }
-
-            public object TestObject
-            {
-                get { return this.testObject; }
-            }
-
-            public object ActualObject
-            {
-                get { return this.actualObject; }
-            }
         }
     }
 }

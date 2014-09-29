@@ -1,6 +1,4 @@
-﻿[assembly: Jwc.Experiment.Scenario.ScenarioFixtureConfiguration]
-
-namespace Jwc.Experiment
+﻿namespace Jwc.Experiment
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +13,7 @@ namespace Jwc.Experiment
     {
         [Test]
         public void NullGuardClauseAssertionCorrectlyVerifiesMembers(
-            NullGuardClauseAssertion assertion)
+            GuardClauseAssertion assertion)
         {
             typeof(ClassForNullGuardClause)
                 .GetIdiomaticMembers()
@@ -39,7 +37,7 @@ namespace Jwc.Experiment
                 .ForEach(assertion.Verify);
         }
 
-        [FirstClassTest]
+        [Test]
         public IEnumerable<ITestCase> NullGuardClauseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -50,24 +48,22 @@ namespace Jwc.Experiment
                         Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
                         new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
                     })
-                .Select(m => TestCase.New<NullGuardClauseAssertion>(
-                    a => a.Verify(m),
-                    m.GetDisplayName()));
+                .Select(m => TestCase.WithArgs(m).WithAuto<GuardClauseAssertion>()
+                    .Create((x, y) => y.Verify(x)));
         }
 
-        [FirstClassTest]
+        [Test]
         public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
-                .GetIdiomaticMembers()
-                .Select(m => TestCase.New<MemberInitializationAssertion>(
-                    a => a.Verify(m),
-                    m.GetDisplayName()));
+                .GetIdiomaticMembers().Select(m =>
+                    TestCase.WithArgs(m).WithAuto<MemberInitializationAssertion>()
+                        .Create((x, y) => y.Verify(x)));
         }
 
         [Test]
         public void NullGuardClauseAssertionCorrectlyVerifiesType(
-            NullGuardClauseAssertion assertion)
+            GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }
@@ -97,17 +93,9 @@ namespace Jwc.Experiment
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
+        private class TestAttribute : TestBaseAttribute
         {
-            protected override void Setup(Assembly testAssembly)
-            {
-                DefaultFixtureFactory.SetCurrent(new FakeTestFixtureFactory());
-            }
-        }
-
-        private class FakeTestFixtureFactory : ITestFixtureFactory
-        {
-            public ITestFixture Create(MethodInfo testMethod)
+            protected override ITestFixture Create(ITestMethodContext context)
             {
                 return new FakeTestFixture();
             }

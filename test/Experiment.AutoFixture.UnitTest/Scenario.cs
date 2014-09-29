@@ -1,12 +1,12 @@
-﻿[assembly: Jwc.Experiment.AutoFixture.Scenario.ScenarioFixtureConfiguration]
-
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Jwc.Experiment.Xunit;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Xunit;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -47,33 +47,7 @@ namespace Jwc.Experiment.AutoFixture
         }
 
         [Test]
-        public void FrozenAttributeFreezesInstanceOfCertainType(
-            [Frozen] string arg1,
-            string arg2)
-        {
-            Assert.Same(arg1, arg2);
-        }
-
-        [Test]
-        public void ModestAttributeUsesModestCtorToConstructInstanceOfCertainType(
-            [Modest] Person person)
-        {
-            Assert.Null(person.Name);
-            Assert.Equal(0, person.Age);
-        }
-
-        [Test]
-        public void GreedyAttributeUsesGreedyCtorToConstructInstanceOfCertainType(
-            [Frozen] string name,
-            [Frozen] int age,
-            [Greedy] Person person)
-        {
-            Assert.Same(name, person.Name);
-            Assert.Equal(age, person.Age);
-        }
-
-        [FirstClassTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsManyTestCases()
+        public IEnumerable<ITestCase> TestAttributeSupportsManyTestCases()
         {
             var testCases = new[]
             {
@@ -81,24 +55,30 @@ namespace Jwc.Experiment.AutoFixture
                 new { X = 3, Y = 7, Z = 10 },
                 new { X = 100, Y = 23, Z = 123 }
             };
-
-            return testCases.Select(
-                c => TestCase.New(() => Assert.Equal(c.Z, c.X + c.Y)));
+            return TestCases.WithArgs(testCases).Create(
+                c => Assert.Equal(c.Z, c.X + c.Y));
         }
 
-        [FirstClassTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
+        [Test]
+        public IEnumerable<ITestCase> TestAttributeWithCustomFixtureSupportsTestCasesWithAutoData()
         {
-            yield return TestCase.New<int>(x => Assert.True(x > 0, "x > 0"));
-            yield return TestCase.New<string>(x => Assert.NotNull(x));
-            yield return TestCase.New<object>(x => Assert.NotNull(x));
+            yield return TestCase.WithAuto<int>().Create(x => Assert.True(x > 0, "x > 0"));
+            yield return TestCase.WithAuto<string>().Create(x => Assert.NotNull(x));
+            yield return TestCase.WithAuto<object>().Create(x => Assert.NotNull(x));
         }
 
-        public class ScenarioFixtureConfigurationAttribute : TestAssemblyConfigurationAttribute
+        [Test]
+        public void TestAttributeCorrectlyCreatesFrozenMockedInstance(
+            [Frozen] IDisposable instance)
         {
-            protected override void Setup(Assembly testAssembly)
+            Assert.NotNull(instance);
+        }
+
+        private class TestAttribute : TestBaseAttribute
+        {
+            protected override ITestFixture Create(ITestMethodContext context)
             {
-                DefaultFixtureFactory.SetCurrent(new TestFixtureFactory());
+                return new TestFixtureFactory().Create(context);
             }
         }
 

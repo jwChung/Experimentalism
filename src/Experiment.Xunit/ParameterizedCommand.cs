@@ -43,9 +43,8 @@
         /// </returns>
         public override MethodResult Execute(object testClass)
         {
-            var methodContext = this.context.GetMethodContext(testClass);
+            var methodContext = this.GetTestMethodContext(testClass);
             var arguments = this.context.GetArguments(methodContext).ToArray();
-
             this.DisplayName = new TheoryCommand(this.context.TestMethod, arguments).DisplayName;
 
             Reflector.Wrap(methodContext.ActualMethod).Invoke(methodContext.ActualObject, arguments);
@@ -59,6 +58,13 @@
                 throw new ArgumentNullException("context");
 
             return context;
+        }
+
+        private ITestMethodContext GetTestMethodContext(object testClass)
+        {
+            return testClass != null
+                ? this.context.GetMethodContext(testClass)
+                : this.context.GetStaticMethodContext();
         }
     }
 }

@@ -1,27 +1,26 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
-    using global::Xunit.Sdk;
-    using ITestFixtureFactory2 = Experiment.ITestFixtureFactory;
+    using System.Collections.Generic;
+    using System.Reflection;
 
     /// <summary>
-    /// Represents a test-case that can be turned into an xUnit.net ITestCommand when returned from
-    /// a test method adorned with the
-    /// <see cref="FirstClassTestAttribute" />.
+    /// Represents a test-case.
     /// </summary>
     public interface ITestCase
     {
         /// <summary>
-        /// Converts the instance to an xUnit.net ITestCommand instance.
+        /// Gets the test object.
         /// </summary>
-        /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
-        /// </param>
-        /// <param name="testFixtureFactory">
-        /// A test fixture factory to provide auto data.
-        /// </param>
-        /// <returns>
-        /// An xUnit.net ITestCommand that represents the executable test case.
-        /// </returns>
-        ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory2 testFixtureFactory);
+        object Target { get; }
+
+        /// <summary>
+        /// Gets the test method to be actually executed.
+        /// </summary>
+        MethodInfo TestMethod { get; }
+
+        /// <summary>
+        /// Gets the arguments specified with explicit values.
+        /// </summary>
+        IEnumerable<object> Arguments { get; }
     }
 }

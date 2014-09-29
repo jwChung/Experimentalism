@@ -2,194 +2,157 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using global::Xunit.Sdk;
-    using ITestFixtureFactory2 = Experiment.ITestFixtureFactory;
+    using System.Reflection;
 
     /// <summary>
-    /// Represents a weakly-typed test case that can be turned into an xUnit.net ITestCommand when
-    /// returned from a test method adorned with the <see cref="FirstClassTestAttribute" />.
+    /// Represents test case.
     /// </summary>
     public partial class TestCase : ITestCase
     {
-        private readonly string displayParameterName;
+        private readonly MethodInfo testMethod;
+        private readonly object[] arguments;
         private readonly Delegate delegator;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestCase" /> class.
+        /// Initializes a new instance of the <see cref="TestCase"/> class.
         /// </summary>
         /// <param name="delegator">
-        /// The test delegate.
+        /// A delegate representing actual test-case.
         /// </param>
-        public TestCase(Delegate delegator)
+        /// <param name="arguments">
+        /// Test arguments.
+        /// </param>
+        public TestCase(Delegate delegator, params object[] arguments)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
-            
+
+            if (arguments == null)
+                throw new ArgumentNullException("arguments");
+
             this.delegator = delegator;
+            this.arguments = arguments;
+            this.testMethod = delegator.Method;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestCase" /> class.
+        /// Gets the delegate representing actual test-case.
         /// </summary>
-        /// <param name="delegator">
-        /// The test delegate.
-        /// </param>
-        /// <param name="displayParameterName">
-        /// A string to show parameters of a test method in test result.
-        /// </param>
-        public TestCase(Delegate delegator, string displayParameterName)
-            : this(delegator)
-        {
-            if (displayParameterName == null)
-                throw new ArgumentNullException("displayParameterName");
-
-            this.displayParameterName = displayParameterName;
-        }
-        
-        /// <summary>
-        /// Gets a value indicating the string to show parameters of a test method in test result.
-        /// </summary>
-        public string DisplayParameterName
-        {
-            get { return this.displayParameterName; }
-        }
-
-        /// <summary>
-        /// Gets the test delegate.
-        /// </summary>
-        public Delegate Delegate
+        public Delegate Delegator
         {
             get { return this.delegator; }
         }
-        
+
         /// <summary>
-        /// Creates a new instance of <see cref="TestCase"/>.
+        /// Gets the test object.
         /// </summary>
-        /// <param name="action">
-        /// An action.
-        /// </param>
-        /// <returns>
-        /// The new instance.
-        /// </returns>
-        public static TestCase New(Action action)
+        public object Target
         {
-            return new TestCase(action);
+            get { return this.delegator.Target; }
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="TestCase" />.
+        /// Gets the test method to be actually executed.
         /// </summary>
-        /// <param name="action">
-        /// An action.
-        /// </param>
-        /// <param name="displayParameterName">
-        /// A name of the parameter.
-        /// </param>
-        /// <returns>
-        /// The new instance.
-        /// </returns>
-        public static TestCase New(Action action, string displayParameterName)
+        public MethodInfo TestMethod
         {
-            return new TestCase(action, displayParameterName);
+            get { return this.testMethod; }
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="TestCase" />.
+        /// Gets the arguments specified with explicit values.
         /// </summary>
-        /// <typeparam name="TArg">A type of the first argument.</typeparam>
-        /// <param name="action">
-        /// An action.
-        /// </param>
-        /// <returns>
-        /// The new instance.
-        /// </returns>
-        public static TestCase New<TArg>(Action<TArg> action)
+        public IEnumerable<object> Arguments
         {
-            return new TestCase(action);
+            get { return this.arguments; }
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="TestCase" />.
+        /// Creates a test case with no arguments.
         /// </summary>
-        /// <typeparam name="TArg">A type of the first argument.</typeparam>
-        /// <param name="action">
-        /// An action.
-        /// </param>
-        /// <param name="displayParameterName">
-        /// A name of the parameter.
+        /// <param name="delegator">
+        /// A delegator representing the actual test method.
         /// </param>
         /// <returns>
-        /// The new instance.
+        /// The new test case.
         /// </returns>
-        public static TestCase New<TArg>(Action<TArg> action, string displayParameterName)
+        public static ITestCase Create(Action delegator)
         {
-            return new TestCase(action, displayParameterName);
+            if (delegator == null)
+                throw new ArgumentNullException("delegator");
+
+            return new TestCase(delegator, new object[0]);
         }
 
         /// <summary>
-        /// Converts the instance to an xUnit.net ITestCommand instance.
+        /// Returns a test case with arguments.
         /// </summary>
-        /// <param name="method">
-        /// The method adorned by a <see cref="FirstClassTestAttribute" />.
-        /// </param>
-        /// <param name="testFixtureFactory">
-        /// A test fixture factory to provide auto data.
+        /// <typeparam name="T">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <param name="arg">
+        /// The first argument.
         /// </param>
         /// <returns>
-        /// An xUnit.net ITestCommand that represents the executable test case.
+        /// The new test case with arguments.
         /// </returns>
-        public ITestCommand ConvertToTestCommand(IMethodInfo method, ITestFixtureFactory2 testFixtureFactory)
+        public static ITestCaseWithArgs<T> WithArgs<T>(T arg)
         {
-            if (method == null)
-                throw new ArgumentNullException("method");
-
-            if (testFixtureFactory == null)
-                throw new ArgumentNullException("testFixtureFactory");
-
-            var fixture = new Lazy<ITestFixture>(() => testFixtureFactory.Create(this.Delegate.Method));
-            return this.CreateTestCommand(method, fixture);
+            return new TestCaseWithArgs<T>(arg);
         }
 
-        private static string GetArgumentValue(string typeName, object argument)
+        /// <summary>
+        /// Returns a test case with arguments.
+        /// </summary>
+        /// <typeparam name="T">
+        /// A type of the first auto argument.
+        /// </typeparam>
+        /// <returns>
+        /// The new test case with arguments.
+        /// </returns>
+        public static ITestCaseWithAuto<T> WithAuto<T>()
         {
-            return typeName + ": " + (argument ?? "(null)");
+            return new TestCaseWithAuto<T>();
         }
 
-        private ITestCommand CreateTestCommand(IMethodInfo method, Lazy<ITestFixture> fixture)
+        /// <summary>
+        /// Returns a test case with arguments.
+        /// </summary>
+        /// <typeparam name="T1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <param name="arg1">
+        /// The first argument.
+        /// </param>
+        /// <param name="arg2">
+        /// The second argument.
+        /// </param>
+        /// <returns>
+        /// The new test case with arguments.
+        /// </returns>
+        public static ITestCaseWithArgs<T1, T2> WithArgs<T1, T2>(T1 arg1, T2 arg2)
         {
-            var arguments = this.Delegate.Method.GetParameters()
-                .Select(p => fixture.Value.Create(p.ParameterType)).ToArray();
-
-            return new TargetInvocationExceptionUnwrappingCommand(
-                new FirstClassCommand(
-                    method,
-                    this.GetDisplayParameterName(arguments),
-                    this.GetAction(arguments)));
+            return new TestCaseWithArgs<T1, T2>(arg1, arg2);
         }
 
-        private string GetDisplayParameterName(IList<object> arguments)
+        /// <summary>
+        /// Returns a test case with arguments.
+        /// </summary>
+        /// <typeparam name="T1">
+        /// A type of the first argument.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// A type of the second argument.
+        /// </typeparam>
+        /// <returns>
+        /// The new test case with arguments.
+        /// </returns>
+        public static ITestCaseWithAuto<T1, T2> WithAuto<T1, T2>()
         {
-            return this.DisplayParameterName ?? string.Join(", ", this.GetArgumentValues(arguments));
-        }
-
-        private Action GetAction(object[] arguments)
-        {
-            var action = this.Delegate as Action;
-            if (action != null)
-                return action;
-
-            var func = this.Delegate as Func<object>;
-            if (func != null)
-                return () => func();
-
-            return () => this.Delegate.GetType().GetMethod("Invoke").Invoke(this.Delegate, arguments);
-        }
-
-        private IEnumerable<string> GetArgumentValues(IList<object> arguments)
-        {
-            return this.Delegate.Method.GetParameters()
-                .Select(pi => TestCase.GetArgumentValue(pi.ParameterType.Name, arguments[pi.Position]));
+            return new TestCaseWithAuto<T1, T2>();
         }
     }
 }

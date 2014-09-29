@@ -30,7 +30,7 @@ for (var j = 1; j <= i; j++)
     public interface ITestCaseWithAuto<<#=typeList#>> : IFluentInterface
     {
         /// <summary>
-        /// Creates a test case with one argument.
+        /// Creates a test case with auto arguments.
         /// </summary>
         /// <param name="delegator">
         /// A delegator representing the actual test method.
@@ -38,7 +38,7 @@ for (var j = 1; j <= i; j++)
         /// <returns>
         /// The new test case.
         /// </returns>
-        ITestCase2 Create(Action<<#=typeList#>> delegator);
+        ITestCase Create(Action<<#=typeList#>> delegator);
     }
 
 <#

@@ -7,49 +7,50 @@
     using global::Xunit;
     using global::Xunit.Extensions;
 
-    public class Scenario : IDisposable
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1204:StaticElementsMustAppearBeforeInstanceElements", Justification = "Semantically to order the test methods.")]
+    public class Scenario
     {
-        [ScenarioTest]
-        public void TestAttributeSupportsNonParameterizedTest()
+        [Test]
+        public void TestBaseAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [ScenarioTest]
+        [Test]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
-        public void TestAttributeSupportsParameterizedTest(string arg1, int arg2)
+        public void TestBaseAttributeSupportsParameterizedTest(string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(1234, arg2);
         }
 
-        [ScenarioTest]
-        public void TestAttributeSupportsParameterizedTestWithAutoData(
+        [Test]
+        public void TestBaseAttributeSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
             Assert.Equal("custom string", arg1);
             Assert.Equal(5678, arg2);
         }
 
-        [ScenarioTest]
+        [Test]
         [InlineData("expected")]
-        public void TestAttributeSupportsParameterizedTestWithMixedData(
+        public void TestBaseAttributeSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
         {
             Assert.Equal("expected", arg1);
             Assert.Equal(5678, arg2);
         }
 
-        [FirstClassScenarioTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForYieldReturn()
+        [Test]
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForYieldReturn()
         {
-            yield return TestCase.New(() => Assert.Equal(3, 2 + 1));
-            yield return TestCase.New(() => Assert.Equal(10, 3 + 7));
+            yield return TestCase.Create(() => Assert.Equal(3, 2 + 1));
+            yield return TestCase.Create(() => Assert.Equal(10, 3 + 7));
         }
 
-        [FirstClassScenarioTest]
-        public ITestCase[] FirstClassTestAttributeSupportsTestCasesForArray()
+        [Test]
+        public ITestCase[] TestBaseAttributeSupportsTestCasesForArray()
         {
             var testCases = new[]
             {
@@ -58,12 +59,12 @@
                 new { X = 100, Y = 23, Z = 123 }
             };
 
-            return testCases.Select(c => TestCase.New(() => Assert.Equal(c.Z, c.X + c.Y)))
+            return testCases.Select(c => TestCase.Create(() => Assert.Equal(c.Z, c.X + c.Y)))
                 .Cast<ITestCase>().ToArray();
         }
 
-        [FirstClassScenarioTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesForEnumerable()
+        [Test]
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
             {
@@ -72,26 +73,57 @@
             };
 
             return testCases.Select(
-                c => TestCase.New(() => new Scenario().TestAttributeSupportsParameterizedTest(c.X, c.Y)));
+                c => TestCase.Create(() => new Scenario().TestBaseAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
-        [FirstClassScenarioTest]
-        public IEnumerable<ITestCase> FirstClassTestAttributeSupportsTestCasesWithAutoData()
+        [Test]
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoData()
         {
-            yield return TestCase.New<string, int>((x, y) =>
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
             {
                 Assert.Equal("custom string", x);
                 Assert.Equal(5678, y);
             });
         }
 
-        public void Dispose()
+        [Test]
+        public IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoData()
         {
-            SpyTestAssemblyConfigurationAttribute.SetupCount = 0;
-            DefaultFixtureFactory.SetCurrent(null);
-            typeof(TestAssemblyConfigurationAttribute)
-                .GetField("configured", BindingFlags.NonPublic | BindingFlags.Static)
-                .SetValue(null, false);
+            var expected = "custom string";
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
+            {
+                Assert.Equal(expected, x);
+                Assert.Equal(5678, y);
+            });
+        }
+
+        [Test]
+        public static void TestBaseAttributeSupportsStaticParameterizedTestWithAutoData(
+            string arg1, int arg2)
+        {
+            Assert.Equal("custom string", arg1);
+            Assert.Equal(5678, arg2);
+        }
+
+        [Test]
+        public static IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoDataAdornedWithStaticMethod()
+        {
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
+            {
+                Assert.Equal("custom string", x);
+                Assert.Equal(5678, y);
+            });
+        }
+
+        [Test]
+        public static IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoDataAdornedWithStaticMethod()
+        {
+            var expected = "custom string";
+            yield return TestCase.WithAuto<string, int>().Create((x, y) =>
+            {
+                Assert.Equal(expected, x);
+                Assert.Equal(5678, y);
+            });
         }
 
         private class ParameterizedTestDataAttribute : DataAttribute
@@ -103,17 +135,9 @@
             }
         }
 
-        private class ScenarioTestAttribute : TestAttribute
+        private class TestAttribute : TestBaseAttribute
         {
-            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
-            {
-                return new CustomTestFixture();
-            }
-        }
-
-        private class FirstClassScenarioTestAttribute : FirstClassTestAttribute
-        {
-            protected override ITestFixture CreateTestFixture(MethodInfo testMethod)
+            protected override ITestFixture Create(ITestMethodContext context)
             {
                 return new CustomTestFixture();
             }
@@ -137,16 +161,6 @@
                     }
                 }
 
-                throw new NotSupportedException();
-            }
-
-            public void Freeze<T>(T specimen)
-            {
-                throw new NotSupportedException();
-            }
-
-            public T Create<T>()
-            {
                 throw new NotSupportedException();
             }
         }

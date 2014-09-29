@@ -40,9 +40,9 @@
         }
 
         [Theory]
-        [InlineData(typeof(IEnumerable<ITestCase2>))]
-        [InlineData(typeof(ITestCase2[]))]
-        [InlineData(typeof(IList<ITestCase2>))]
+        [InlineData(typeof(IEnumerable<ITestCase>))]
+        [InlineData(typeof(ITestCase[]))]
+        [InlineData(typeof(IList<ITestCase>))]
         public void CreateReturnsNonEmptyIfReturnTypeIsCorrect(Type returnType)
         {
             var sut = new TestCaseCommandFactory();
@@ -58,7 +58,7 @@
         public void CreateReturnsEmptyIfTestMethodIsParameterized()
         {
             var sut = new TestCaseCommandFactory();
-            var delegator = new Func<object, int, IEnumerable<ITestCase2>>((x, y) => new ITestCase2[0]);
+            var delegator = new Func<object, int, IEnumerable<ITestCase>>((x, y) => new ITestCase[0]);
 
             var actual = sut.Create(Reflector.Wrap(delegator.Method), null);
 
@@ -81,7 +81,7 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<TestCaseCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
@@ -107,11 +107,10 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<TestCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<StaticTestCaseCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
-                Assert.Equal(null, context.ActualObject);
                 Assert.Equal(factory, context.TestFixtureFactory);
                 Assert.Equal(TestClass.Arguments, context.ExplicitArguments);
             }
@@ -124,21 +123,21 @@
             public static readonly object[] Arguments = new object[] { 123, "string" };
             public static object TestObject = new object();
 
-            public IEnumerable<ITestCase2> StaticActualTestMethod()
+            public IEnumerable<ITestCase> StaticActualTestMethod()
             {
-                yield return Mocked.Of<ITestCase2>(
+                yield return Mocked.Of<ITestCase>(
                     t => t.Target == null && t.TestMethod == Method && t.Arguments == Arguments);
-                yield return Mocked.Of<ITestCase2>(
+                yield return Mocked.Of<ITestCase>(
                     t => t.Target == null && t.TestMethod == Method && t.Arguments == Arguments);
             }
 
-            public IEnumerable<ITestCase2> TestMethod()
+            public IEnumerable<ITestCase> TestMethod()
             {
-                yield return Mocked.Of<ITestCase2>(
+                yield return Mocked.Of<ITestCase>(
                     t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
-                yield return Mocked.Of<ITestCase2>(
+                yield return Mocked.Of<ITestCase>(
                     t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
-                yield return Mocked.Of<ITestCase2>(
+                yield return Mocked.Of<ITestCase>(
                     t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
             }
         }

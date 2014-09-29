@@ -134,41 +134,38 @@ public void AddTest(int a, int b, int expected)
 하지만 Attribute Tabular Test는 Tabular Test에서는 없는 문제점이 있는데, 그것은 type-safe 방식이 아니라는 점입니다. 그래서 Experiment에서는 Tabular Test와 Attribute Tabular Test의 장점만을 살릴 수 있는 First class test 방식을 지원합니다. First class test 방식에서는 Eager Test 문제를 해결함과 동시에 type-safe 방식을 지원하는 장점을 가집니다.
 
 ```c#
-[FirstClassTest]
+[Test]
 public IEnumerable<ITestCase> AddTest()
 {
-    var testCases = new[]
-    {
-        new { X = 1, Y = 2, Z = 3 },
-        new { X = 3, Y = 7, Z = 10 },
-        new { X = 100, Y = 23, Z = 123 }
-    };
-    return testCases.Select(c => new TestCase(() =>
-    {
-        var sut = new Calc();
-        var actual = sut.Add(c.X, c.Y);
-        Assert.Equal(c.Z, actual);
-    }));
+	var testCases = new[]
+	{
+		new { X = 1, Y = 2, Z = 3 },
+		new { X = 3, Y = 7, Z = 10 },
+		new { X = 100, Y = 23, Z = 123 }
+	};
+	return TestCases.WithArgs(testCases).Create(
+		c => Assert.Equal(c.Z, c.X + c.Y));
 }
 ```
 
 또한, First class test 방식은 아래와 같이 anonymous 값을 넘겨주는 auto data 기능도 제공합니다.
 
 ```c#
-[FirstClassTest]
+[Test]
 public IEnumerable<ITestCase> AddTest()
 {
-    var testCases = new[]
-    {
-        new { X = 1, Y = 2, Z = 3 },
-        new { X = 3, Y = 7, Z = 10 },
-        new { X = 100, Y = 23, Z = 123 }
-    };
-    return testCases.Select(c => new TestCase(new Action<Calc>(sut =>
-    {
-        var actual = sut.Add(c.X, c.Y);
-        Assert.Equal(c.Z, actual);
-    })));
+	var testCases = new[]
+	{
+		new { X = 1, Y = 2, Z = 3 },
+		new { X = 3, Y = 7, Z = 10 },
+		new { X = 100, Y = 23, Z = 123 }
+	};
+	return TestCases.WithArgs(testCases).WithAuto<Calc>().Create(
+		(c, sut) =>
+		{
+			var actual = sut.Add(c.X, c.Y);
+			Assert.Equal(c.Z, actual);
+		});
 }
 ```
 
@@ -199,6 +196,11 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   License:      The MIT License
 
 * AutoFixture.Idioms 3.18.7  
+  Website:      https://github.com/AutoFixture/AutoFixture  
+  Copyright:    Copyright (c) 2013 Mark Seemann  
+  License:      The MIT License
+
+* AutoFixture.Xunit 3.18.7  
   Website:      https://github.com/AutoFixture/AutoFixture  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License

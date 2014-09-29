@@ -3,319 +3,166 @@
     using System;
     using System.Reflection;
     using global::Xunit;
-    using global::Xunit.Sdk;
 
     public class TestCaseTest
     {
         [Fact]
         public void SutIsTestCase()
         {
-            var sut = TestCase.New(() => { });
+            var sut = new TestCase(new Action(() => { }), new object[0]);
             Assert.IsAssignableFrom<ITestCase>(sut);
         }
         
         [Fact]
-        public void InitializeWithNullDelegateThrows()
+        public void InitializeWithAnyNullArgumentsThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestCase(null));
+            var delegator = new Action(() => { });
+            var arguments = new object[] { "1", 123 };
+
+            Assert.Throws<ArgumentNullException>(() => new TestCase((Delegate)null, arguments));
+            Assert.Throws<ArgumentNullException>(() => new TestCase(delegator, null));
         }
 
         [Fact]
-        public void InitializeWithNullDelegateAndDisplayParameterNameThrows()
+        public void InitializeCorrectlyInitializesProperties()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestCase(null, string.Empty));
+            var delegator = new Action(() => { });
+            var arguments = new object[] { "1", 123 };
+
+            var sut = new TestCase(delegator, arguments);
+
+            Assert.Equal(delegator, sut.Delegator);
+            Assert.Equal(delegator.Target, sut.Target);
+            Assert.Equal(delegator.Method, sut.TestMethod);
+            Assert.Equal(arguments, sut.Arguments);
         }
 
         [Fact]
-        public void InitializeWithNullDisplayParameterNameThrows()
+        public void CreateWithNoArgumentsReturnsCorrectTestCase()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestCase(new Action(() => { }), null));
+            var delegator = new Action(() => { });
+
+            var actual = TestCase.Create(delegator);
+
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void DisplayParameterNameIsCorrectWhenInitializedWithDelegate()
+        public void CreateWithExplicit1ReturnsCorrectTestCase()
         {
-            Delegate delegator = new Func<object>(() => null);
-            var sut = new TestCase(delegator);
+            var arg1 = "anonymous";
+            var delegator = new Action<string>(x => { });
 
-            var actual = sut.DisplayParameterName;
+            var actual = TestCase.WithArgs<string>(arg1).Create(delegator);
 
-            Assert.Null(actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Equal(new object[] { arg1 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void DisplayParameterNameIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
+        public void CreateWithAuto1ReturnsCorrectTestCase()
         {
-            string displayParameterName = "anonymous";
-            var sut = new TestCase(new Func<object>(() => null), displayParameterName);
+            var delegator = new Action<string>(x => { });
 
-            var actual = sut.DisplayParameterName;
+            var actual = TestCase.WithAuto<string>().Create(delegator);
 
-            Assert.Equal(displayParameterName, actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithDelegate()
+        public void CreateWithExplicit2ReturnsCorrectTestCase()
         {
-            Delegate delegator = new Func<object>(() => null);
-            var sut = new TestCase(delegator);
+            object arg1 = "anonymous";
+            object arg2 = 123;
+            var delegator = new Action<object, object>((x, y) => { });
 
-            var actual = sut.Delegate;
+            var actual = TestCase.WithArgs(arg1, arg2).Create(delegator);
 
-            Assert.Equal(delegator, actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Equal(new object[] { arg1, arg2 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void DelegateIsCorrectWhenInitializedWithDisplayParameterNameAndDelegate()
+        public void CreateWithExplicit1AndAuto1ReturnsCorrectTestCase()
         {
-            Delegate delegator = new Func<object>(() => null);
-            var sut = new TestCase(delegator, "anonymous");
+            object arg1 = "anonymous";
+            var delegator = new Action<object, int>((x, y) => { });
 
-            var actual = sut.Delegate;
+            var actual = TestCase.WithArgs(arg1).WithAuto<int>().Create(delegator);
 
-            Assert.Equal(delegator, actual);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Equal(new object[] { arg1 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void NewWithActionReturnsCorrectInstance()
+        public void CreateWithAuto2ReturnsCorrectTestCase()
         {
-            Action action = () => { };
+            var delegator = new Action<object, int>((x, y) => { });
+            
+            var actual = TestCase.WithAuto<object, int>().Create(delegator);
 
-            TestCase actual = TestCase.New(action);
-
-            Assert.Equal(action, actual.Delegate);
-            Assert.Null(actual.DisplayParameterName);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void NewWithActionAndDisplayParameterNameReturnsCorrectInstance()
+        public void CreateWithExplicit3AndAuto1ReturnsCorrectTestCase()
         {
-            Action action = () => { };
-            var displayParameterName = "anonymous";
+            var arg1 = "anonymous";
+            int arg2 = 123;
+            var arg3 = new object();
+            var delegator = new Action<string, int, object, int>((a1, a2, a3, a4) => { });
+            
+            var actual = TestCase.WithArgs(arg1, arg2, arg3).WithAuto<int>().Create(delegator);
 
-            TestCase actual = TestCase.New(action, displayParameterName);
-
-            Assert.Equal(action, actual.Delegate);
-            Assert.Equal(displayParameterName, actual.DisplayParameterName);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Equal(new object[] { arg1, arg2, arg3 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void NewWithActionOfTArgReturnsCorrectInstance()
+        public void CreateWithExplicit5AndAuto4ReturnsCorrectTestCase()
         {
-            Action<object> action = x => { };
+            var arg1 = new object();
+            var arg2 = new object();
+            var arg3 = new object();
+            var arg4 = new object();
+            var arg5 = new object();
+            var delegator = new Action<object, object, object, object, object, object, object, object, object>(
+                (a1, a2, a3, a4, a5, a6, a7, a8, a9) => { });
 
-            TestCase actual = TestCase.New(action);
+            var actual = TestCase.WithArgs(arg1, arg2, arg3, arg4, arg5)
+                .WithAuto<object, object, object, object>()
+                .Create(delegator);
 
-            Assert.Equal(action, actual.Delegate);
-            Assert.Null(actual.DisplayParameterName);
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Equal(new object[] { arg1, arg2, arg3, arg4, arg5 }, testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
         }
 
         [Fact]
-        public void NewWithActionOfTArgAndDisplayParameterNameReturnsCorrectInstance()
+        public void CreateWithNullDelegatorThrows()
         {
-            Action<object> action = x => { };
-            var displayParameterName = "anonymous";
-
-            TestCase actual = TestCase.New(action, displayParameterName);
-
-            Assert.Equal(action, actual.Delegate);
-            Assert.Equal(displayParameterName, actual.DisplayParameterName);
-        }
-
-        [Fact]
-        public void NewWithActionOfTArg1AndTArg2ReturnsCorrectInstance()
-        {
-            Action<object, string> action = (x, y) => { };
-
-            TestCase actual = TestCase.New(action);
-
-            Assert.Equal(action, actual.Delegate);
-            Assert.Null(actual.DisplayParameterName);
-        }
-
-        [Fact]
-        public void NewWithActionOfTArg1AndTArg2AndDisplayParameterNameReturnsCorrectInstance()
-        {
-            Action<object, string> action = (x, y) => { };
-            var displayParameterName = "anonymous";
-
-            TestCase actual = TestCase.New(action, displayParameterName);
-
-            Assert.Equal(action, actual.Delegate);
-            Assert.Equal(displayParameterName, actual.DisplayParameterName);
-        }
-
-        [Fact]
-        public void ConvertNullMethodToTestCommandThrows()
-        {
-            var sut = TestCase.New(() => { });
+            Assert.Throws<ArgumentNullException>(() => TestCase.Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithArgs("1").Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithAuto<string>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithArgs("1", 1).Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithArgs("1").WithAuto<int>().Create(null));
+            Assert.Throws<ArgumentNullException>(() => TestCase.WithAuto<object, int>().Create(null));
             Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(null, new DelegatingTestFixtureFactory()));
-        }
-
-        [Fact]
-        public void ConvertToTestCommandWithNullFixtureFactoryThrows()
-        {
-            var sut = TestCase.New(() => { });
-            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
+                () => TestCase.WithArgs("1", 1, new object()).WithAuto<int>().Create(null));
             Assert.Throws<ArgumentNullException>(
-                () => sut.ConvertToTestCommand(dummyMethod, null));
-        }
-
-        [Fact]
-        public void ConvertNonParameterizedDelegateToTestCommandReturnsCorrectTestCommand()
-        {
-            var sut = TestCase.New(() => { });
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-
-            var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
-
-            var command = Assert.IsType<FirstClassCommand>(
-               Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(method, command.Method);
-            Assert.Equal(string.Empty, command.DisplayParameterName);
-        }
-
-        [Fact]
-        public void ConvertParameterizedDelegateToTestCommandReturnsCorrectTestCommand()
-        {
-            // Fixture setup
-            Action<int, string, object> delegator = (x, y, z) => { };
-            var sut = new TestCase(delegator);
-
-            var fixture = new DelegatingTestFixture
-            {
-                OnCreate = r =>
-                {
-                    var type = r as Type;
-                    if (type == typeof(string))
-                        return "anonymous";
-                    if (type == typeof(int))
-                        return 123;
-                    if (type == typeof(object))
-                        return null;
-
-                    throw new NotSupportedException();
-                }
-            };
-
-            var fixtureFactory = new DelegatingTestFixtureFactory
-            {
-                OnCreate = mi =>
-                {
-                    Assert.Equal(delegator.Method, mi);
-                    return fixture;
-                }
-            };
-
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            string displayParameterName = "Int32: 123, String: anonymous, Object: (null)";
-
-            // Exercise system
-            var actual = sut.ConvertToTestCommand(method, fixtureFactory);
-
-            // Verify outcome
-            var command = Assert.IsType<FirstClassCommand>(
-               Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-
-            Assert.Equal(method, command.Method);
-            Assert.Equal(displayParameterName, command.DisplayParameterName);
-        }
-
-        [Fact]
-        public void ConvertNonParameterizedDelegateToTestCommandDoesNotCreateFixture()
-        {
-            // Fixture setup
-            var sut = TestCase.New(() => { });
-            var fixtureFactory = new DelegatingTestFixtureFactory
-            {
-                OnCreate = mi => { throw new InvalidOperationException(); }
-            };
-            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-
-            // Exercise system and Verify outcome
-            Assert.DoesNotThrow(() => sut.ConvertToTestCommand(dummyMethod, fixtureFactory));
-        }
-
-        [Fact]
-        public void ConvertParameterizedDelegateToTestCommandCreatesFixtureOnlyOnce()
-        {
-            var sut = new TestCase(new Action<int, string>((x, y) => { }));
-            int createdCount = 0;
-            var fixtureFactory = new DelegatingTestFixtureFactory
-            {
-                OnCreate = mi =>
-                {
-                    createdCount++;
-                    return new FakeTestFixture();
-                }
-            };
-            var dummyMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-
-            sut.ConvertToTestCommand(dummyMethod, fixtureFactory);
-
-            Assert.Equal(1, createdCount);
-        }
-
-        [Fact]
-        public void ConvertNonParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
-        {
-            string displayParameterName = "anonymous";
-            var sut = new TestCase(new Func<object>(() => null), displayParameterName);
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-
-            var actual = sut.ConvertToTestCommand(method, new DelegatingTestFixtureFactory());
-
-            var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(displayParameterName, command.DisplayParameterName);
-        }
-
-        [Fact]
-        public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandReflectingCorrectDisplayParameterName()
-        {
-            string displayParameterName = "anonymous";
-            var sut = new TestCase(new Action<int>(x => { }), displayParameterName);
-            var method = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
-            var testFixtureFactory = new DelegatingTestFixtureFactory { OnCreate = m => new FakeTestFixture() };
-
-            var actual = sut.ConvertToTestCommand(method, testFixtureFactory);
-
-            var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(displayParameterName, command.DisplayParameterName);
-        }
-
-        [Fact]
-        public void ConvertParameterizedDelegateToTestCommandReturnsTestCommandWithCorrectDelegate()
-        {
-            bool verifyMock = false;
-            var fixture = new DelegatingTestFixture { OnCreate = r => 123 };
-            var sut = new TestCase(new Action<int>(x => { Assert.Equal(123, x); verifyMock = true; }));
-            var factory = new DelegatingTestFixtureFactory { OnCreate = m => fixture };
-
-            var actual = sut.ConvertToTestCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()), factory);
-
-            var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-            command.Action.Invoke();
-            Assert.True(verifyMock);
-        }
-
-        [Fact]
-        public void ConvertActionDelegateToTestCommandReturnsTestCommandWithCorrectDelegate()
-        {
-            Delegate delegator = new Action(() => { });
-            var sut = new TestCase(delegator);
-
-            var actual = sut.ConvertToTestCommand(
-                Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod()),
-                new DelegatingTestFixtureFactory());
-
-            var command = Assert.IsType<FirstClassCommand>(
-                Assert.IsType<TargetInvocationExceptionUnwrappingCommand>(actual).TestCommand);
-            Assert.Equal(delegator, command.Action);
+                () => TestCase.WithArgs("1", 1, new object(), "1", 1)
+                    .WithAuto<object, object, object, object>()
+                    .Create(null));
         }
     }
 }

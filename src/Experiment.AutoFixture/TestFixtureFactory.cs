@@ -1,101 +1,49 @@
-namespace Jwc.Experiment.AutoFixture
+﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.AutoMoq;
 
     /// <summary>
-    /// Represent the default factory for <see cref="ITestFixtureFactory" />.
+    /// Represents a factory to create test fixtures.
     /// </summary>
     public class TestFixtureFactory : ITestFixtureFactory
     {
         /// <summary>
         /// Creates a test fixture.
         /// </summary>
-        /// <param name="testMethod">
-        /// The test method in which the test fixture will be used.
+        /// <param name="context">
+        /// The test method context to provide information for creating the test fixture.
         /// </param>
         /// <returns>
         /// The test fixture.
         /// </returns>
-        public ITestFixture Create(MethodInfo testMethod)
+        public ITestFixture Create(ITestMethodContext context)
         {
-            if (testMethod == null)
-                throw new ArgumentNullException("testMethod");
+            if (context == null)
+                throw new ArgumentNullException("context");
 
-#pragma warning disable 618
-            var fixture = this.CreateFixture(testMethod).Customize(
-                new ParameterAttributeCustomization(testMethod.GetParameters()));
-#pragma warning restore 618
-            return new TestFixture(fixture);
+            return new TestFixture(new Fixture().Customize(this.GetCustomization(context)));
         }
 
         /// <summary>
-        /// Creates a fixture with a test method.
+        /// Gets a customization.
         /// </summary>
-        /// <param name="testMethod">
-        /// The test method.
+        /// <param name="context">
+        /// The test method context to provide information for getting the customization.
         /// </param>
         /// <returns>
-        /// The new fixture.
+        /// The customization.
         /// </returns>
-        [Obsolete("Use the GetCustomiztion method instead. This method will be removed on the next major release.")]
-        protected virtual IFixture CreateFixture(MethodInfo testMethod)
+        protected virtual ICustomization GetCustomization(ITestMethodContext context)
         {
-            return new Fixture().Customize(this.GetCustomization(testMethod));
-        }
+            if (context == null)
+                throw new ArgumentNullException("context");
 
-        /// <summary>
-        /// Creates a customization to customize test fixture.
-        /// </summary>
-        /// <param name="testMethod">
-        /// The test method.
-        /// </param>
-        /// <returns>
-        /// The new customization.
-        /// </returns>
-        protected virtual ICustomization GetCustomization(MethodInfo testMethod)
-        {
             return new CompositeCustomization(
+                new OmitAutoPropertiesCustomization(),
                 new AutoMoqCustomization(),
-                new OmitAutoPropertiesCustomizatoin());
-        }
-
-        private class ParameterAttributeCustomization : ICustomization
-        {
-            private readonly IEnumerable<ParameterInfo> parameters;
-
-            public ParameterAttributeCustomization(IEnumerable<ParameterInfo> parameters)
-            {
-                this.parameters = parameters;
-            }
-
-            public void Customize(IFixture fixture)
-            {
-                this.parameters.SelectMany(GetCustomizations)
-                    .Aggregate(fixture, (f, c) => f.Customize(c));
-            }
-
-            private static IEnumerable<ICustomization> GetCustomizations(ParameterInfo parameter)
-            {
-                return parameter.GetCustomAttributes(typeof(CustomizeAttribute), false)
-                    .Cast<CustomizeAttribute>()
-                    .Select(ca => ca.GetCustomization(parameter));
-            }
-        }
-
-        private class OmitAutoPropertiesCustomizatoin : ICustomization
-        {
-            public void Customize(IFixture fixture)
-            {
-                if (fixture == null)
-                    throw new ArgumentNullException("fixture");
-
-                fixture.OmitAutoProperties = true;
-            }
+                new TestParametersCustomization(context.ActualMethod.GetParameters()));
         }
     }
 }

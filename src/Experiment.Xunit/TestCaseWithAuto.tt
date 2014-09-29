@@ -23,12 +23,12 @@ for (var i = 1; i <= GenericTypeMax; i++)
             this.arguments = arguments;
         }
 
-        public ITestCase2 Create(Action<<#=typeList#>> delegator)
+        public ITestCase Create(Action<<#=typeList#>> delegator)
         {
             if (delegator == null)
                 throw new ArgumentNullException("delegator");
 
-            return new TestCase2(delegator, this.arguments);
+            return new TestCase(delegator, this.arguments);
         }
     }
 
