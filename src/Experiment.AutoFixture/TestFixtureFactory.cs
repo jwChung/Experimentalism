@@ -40,7 +40,7 @@
             return new CompositeCustomization(
                 new OmitAutoPropertiesCustomization(),
                 new AutoMoqCustomization(),
-                new TestParametersCustomization(context));
+                new TestParametersCustomization(context.ActualMethod.GetParameters()));
         }
     }
 }

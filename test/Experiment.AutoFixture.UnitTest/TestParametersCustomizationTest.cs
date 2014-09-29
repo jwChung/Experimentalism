@@ -1,6 +1,8 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
+    using System.Collections.Generic;
+    using System.Reflection;
     using Ploeh.Albedo;
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Xunit;
@@ -18,15 +20,31 @@
         [Fact]
         public void InitializeWithNullContextThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestParametersCustomization(null));
+            Assert.Throws<ArgumentNullException>(
+                () => new TestParametersCustomization((ITestMethodContext)null));
+        }
+
+        [Fact]
+        public void InitializeWithAnyNullArgumentsThrows()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => new TestParametersCustomization((IEnumerable<ParameterInfo>)null));
+        }
+
+        [Fact]
+        public void InitializeCorrectlyInitializesProperties2()
+        {
+            var testMethodContext = Mocked.Of<ITestMethodContext>();
+            var sut = new TestParametersCustomization(testMethodContext);
+            Assert.Equal(testMethodContext, sut.TestMethodContext);
         }
 
         [Fact]
         public void InitializeCorrectlyInitializesProperties()
         {
-            var testMethodContext = Mocked.Of<ITestMethodContext>();
-            var sut = new TestParametersCustomization(testMethodContext);
-            Assert.Equal(testMethodContext, sut.TestMethodContext);
+            var parameters = Mocked.Of<IEnumerable<ParameterInfo>>();
+            var sut = new TestParametersCustomization(parameters);
+            Assert.Equal(parameters, sut.Parameters);
         }
 
         [Fact]
@@ -39,11 +57,10 @@
         [Fact]
         public void CustomizeCorrectlyCustomizesFixture()
         {
-            var context = Mocked.Of<ITestMethodContext>(
-                c => c.ActualMethod
-                    == new Methods<TestParametersCustomizationTest>()
-                    .Select(x => x.TestMethod(null, null)));
-            var sut = new TestParametersCustomization(context);
+            var parameters = new Methods<TestParametersCustomizationTest>()
+                .Select(x => x.TestMethod(null, null))
+                .GetParameters();
+            var sut = new TestParametersCustomization(parameters);
             var fixture = new Fixture();
 
             sut.Customize(fixture);
@@ -52,7 +69,7 @@
             Assert.NotNull(fixture.Create<Person>().Name);
         }
 
-        private void TestMethod([Frozen] object arg1, [Frozen][Greedy] Person arg2)
+        private void TestMethod([Frozen] object arg1, [Frozen] [Greedy] Person arg2)
         {
         }
 
