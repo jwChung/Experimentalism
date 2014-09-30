@@ -31,10 +31,10 @@
         'refs/heads/master'.-->
     <RefOrShaForTag>$(APPVEYOR_REPO_COMMIT)</RefOrShaForTag>
 
-    <!--Author name for git commit as the author for making git tag.-->
+    <!--Author name for making git tag.-->
     <AuthorName>Jin-Wook Chung</AuthorName>
     
-    <!--Author email for git commit as the author's email for making git tag.-->
+    <!--Author email for making git tag.-->
     <AuthorEmail>$(AuthorEmail)</AuthorEmail>
     
   </PropertyGroup>
