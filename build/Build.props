@@ -41,9 +41,9 @@
   <ItemGroup>
     <Projects Include="$(SolutionDir)src\**\*.csproj" />
     <TestProjects Include="$(SolutionDir)test\**\*.csproj" />
-    <ProjectRulSet Include="All.ruleset" />
-    <TestProjectRulSet Include="Test.ruleset" />
-    <CommonAssemblyInfo Include="$(SolutionDir)CommonAssemblyInfo.cs" />
+    <ProjectRulSet Include="$(SolutionDir)**\Experimentalism.ruleset" />
+    <TestProjectRulSet Include="$(SolutionDir)**\ExperimentalismTest.ruleset" />
+    <CommonAssemblyInfo Include="$(SolutionDir)**\CommonAssemblyInfo.cs" />
     <NuspecFiles Include="$(SolutionDir)**\*.nuspec" />
   </ItemGroup>
 </Project>
