@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="CIBulid Test Rules" ToolsVersion="12.0">
+<RuleSet Name="Experimentalism Test Rules" ToolsVersion="12.0">
   <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
-    <Name Resource="CIBulid Test Rules" />
-    <Description Resource="CIBulid Test Rules" />
+    <Name Resource="Experimentalism Test Rules" />
+    <Description Resource="Experimentalism Test Rules" />
   </Localization>
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Warning" />
