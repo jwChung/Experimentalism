@@ -20,9 +20,6 @@
         /// </returns>
         public ITestFixture Create(ITestMethodContext context)
         {
-            if (context == null)
-                throw new ArgumentNullException("context");
-
             return new TestFixture(new Fixture().Customize(this.GetCustomization(context)));
         }
 
