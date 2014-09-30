@@ -73,6 +73,4 @@ using System.Runtime.InteropServices;
  *     * Jwc.Experiment.Xunit.TestCases
  *         : Supported creating test cases using TestCases which is simpler than
  *           using TestCase.
- *
- * - [Patch] Fixed that bindingRedirect elements aren't automatically updated.
  */
