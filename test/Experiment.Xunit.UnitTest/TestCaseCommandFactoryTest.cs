@@ -116,6 +116,25 @@
             }
         }
 
+        [Fact]
+        public void CreateWithStaticClassReturnsCorrectCommands()
+        {
+            var sut = new TestCaseCommandFactory();
+            var testMethod = Reflector.Wrap(Methods.Select(() => StaticTestClass.TestMethod()));
+
+            var actual = sut.Create(testMethod, Mocked.Of<ITestFixtureFactory>()).ToArray();
+
+            Assert.Equal(1, actual.Length);
+        }
+
+        private static class StaticTestClass
+        {
+            public static IEnumerable<ITestCase> TestMethod()
+            {
+                yield return Mocked.Of<ITestCase>();
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "To test members of test type.")]
         private class TestClass
         {

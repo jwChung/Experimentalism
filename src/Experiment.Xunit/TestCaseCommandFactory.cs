@@ -31,13 +31,23 @@
             if (IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 
-            var testCases = (IEnumerable<ITestCase>)testMethod.MethodInfo.Invoke(
-                testMethod.CreateInstance(), new object[0]);
-
-            return testCases.Select(
+            return CreateTestCases(testMethod).Select(
                 c => c.Target != null
                     ? CreateCommand(testMethod, fixtureFactory, c)
                     : CreateStaticCommand(testMethod, fixtureFactory, c));
+        }
+
+        private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo testMethod)
+        {
+            return (IEnumerable<ITestCase>)testMethod.MethodInfo.Invoke(
+                CreateTestClass(testMethod), new object[0]);
+        }
+
+        private static object CreateTestClass(IMethodInfo testMethod)
+        {
+            return testMethod.MethodInfo.ReflectedType.IsAbstract
+                ? null
+                : testMethod.CreateInstance();
         }
 
         private static bool IsValidSignature(MethodInfo method)

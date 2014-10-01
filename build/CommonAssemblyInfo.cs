@@ -73,4 +73,7 @@ using System.Runtime.InteropServices;
  *     * Jwc.Experiment.Xunit.TestCases
  *         : Supported creating test cases using TestCases which is simpler than
  *           using TestCase.
+ *           
+  * - [Path] Fixed the error occured when doing first-class tests under static
+ *    class.
  */
