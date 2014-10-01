@@ -11,11 +11,11 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("1.6.0")]
-[assembly: AssemblyInformationalVersion("1.6.0-pre03")]
+[assembly: AssemblyInformationalVersion("1.6.1")]
 
 /*
- * Version 1.6.0
+ * Version 1.6.1
  * 
- * - [Minor] Implemented that TestBaseAttribute supports tests with
- *   DataAttribute(Xunit).
+ * - [Path] Fixed the error occured when doing first-class tests under static
+ *   class.
  */
