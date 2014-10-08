@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="CIBulid All Rules" ToolsVersion="12.0">
-  <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
-    <Name Resource="CIBulid All Rules" />
-    <Description Resource="CIBulid All Rules" />
-  </Localization>
-  <IncludeAll Action="Warning" />
-</RuleSet>

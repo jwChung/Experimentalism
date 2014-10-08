@@ -12,7 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC-4A95-4D59-951B-61C4ABCEAAC2}"
 	ProjectSection(SolutionItems) = preProject
 		build\Build.proj = build\Build.proj
-		build\Build.props = build\Build.props
 		build\Experimentalism.ruleset = build\Experimentalism.ruleset
 		build\ExperimentalismTest.ruleset = build\ExperimentalismTest.ruleset
 	EndProjectSection

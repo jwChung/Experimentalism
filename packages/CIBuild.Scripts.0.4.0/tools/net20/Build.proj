@@ -1,8 +1,9 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  
   <PropertyGroup>
-    <!--Solution directory path-->
-    <SolutionDir>..\</SolutionDir>
-    
+    <!--Root directory absolute path-->
+    <RootDir>$(MSBuildProjectDirectory)\..\</RootDir>
+
     <!--True to run code-analysis, otherwise false-->
     <RunCodeAnalysis>true</RunCodeAnalysis>
     
@@ -31,19 +32,19 @@
         'refs/heads/master'.-->
     <RefOrShaForTag>$(APPVEYOR_REPO_COMMIT)</RefOrShaForTag>
 
-    <!--Author name for git commit as the author for making git tag.-->
+    <!--Author name for making git tag.-->
     <AuthorName>Jin-Wook Chung</AuthorName>
     
-    <!--Author email for git commit as the author's email for making git tag.-->
+    <!--Author email for making git tag.-->
     <AuthorEmail>$(AuthorEmail)</AuthorEmail>
-    
   </PropertyGroup>
+  
   <ItemGroup>
-    <Projects Include="$(SolutionDir)src\**\*.csproj" />
-    <TestProjects Include="$(SolutionDir)test\**\*.csproj" />
-    <ProjectRulSet Include="All.ruleset" />
-    <TestProjectRulSet Include="Test.ruleset" />
-    <CommonAssemblyInfo Include="$(SolutionDir)CommonAssemblyInfo.cs" />
-    <NuspecFiles Include="$(SolutionDir)**\*.nuspec" />
+    <Projects Include="$(RootDir)src\**\*.csproj" />
+    <TestProjects Include="$(RootDir)test\**\*.csproj" />
+    <CommonAssemblyInfo Include="$(RootDir)**\CommonAssemblyInfo.cs" />
+    <NuspecFiles Include="$(RootDir)**\*.nuspec" />
   </ItemGroup>
+  
+  <Import Project="Build.targets"/>
 </Project>
