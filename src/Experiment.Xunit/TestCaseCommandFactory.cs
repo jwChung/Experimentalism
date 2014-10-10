@@ -28,7 +28,7 @@
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
-            if (IsValidSignature(testMethod.MethodInfo))
+            if (!IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 
             return CreateTestCases(testMethod).Select(
@@ -52,8 +52,8 @@
 
         private static bool IsValidSignature(MethodInfo method)
         {
-            return !typeof(IEnumerable<ITestCase>).IsAssignableFrom(method.ReturnType)
-                || method.GetParameters().Length != 0;
+            return typeof(IEnumerable<ITestCase>).IsAssignableFrom(method.ReturnType)
+                && method.GetParameters().Length == 0;
         }
 
         private static ParameterizedCommand CreateCommand(
