@@ -27,7 +27,7 @@
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
 
-            if (testMethod.MethodInfo.ReturnType != typeof(void) || testMethod.MethodInfo.GetParameters().Any())
+            if (testMethod.MethodInfo.GetParameters().Any())
                 yield break;
 
             yield return new FactCommand(testMethod);
