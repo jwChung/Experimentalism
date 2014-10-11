@@ -104,7 +104,7 @@
 
             var fixture = this.factory.Create(context);
             var autoArguments = parameters.Skip(explicitArguments.Length)
-                .Select(p => fixture.Create(p.ParameterType));
+                .Select(p => fixture.Create(p));
 
             return explicitArguments.Concat(autoArguments);
         }

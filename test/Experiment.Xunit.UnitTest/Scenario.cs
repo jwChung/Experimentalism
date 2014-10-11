@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Ploeh.AutoFixture;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -126,6 +127,16 @@
             });
         }
 
+        [Test]
+        public IEnumerable<ITestCase> TestBaseAttributePassesAutoDataToMethodOfFirstClassTests(
+            IFixture fixture)
+        {
+            yield return TestCase.Create(() =>
+            {
+                Assert.NotNull(fixture);
+            });
+        }
+
         private class ParameterizedTestDataAttribute : DataAttribute
         {
             public override IEnumerable<object[]> GetData(
@@ -139,29 +150,10 @@
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
-                return new CustomTestFixture();
-            }
-        }
-
-        private class CustomTestFixture : ITestFixture
-        {
-            public object Create(object request)
-            {
-                var type = request as Type;
-                if (type != null)
-                {
-                    if (type == typeof(string))
-                    {
-                        return "custom string";
-                    }
-
-                    if (type == typeof(int))
-                    {
-                        return 5678;
-                    }
-                }
-
-                throw new NotSupportedException();
+                var fixture = new Fixture();
+                fixture.Inject("custom string");
+                fixture.Inject(5678);
+                return new FakeTestFixture(fixture);
             }
         }
     }

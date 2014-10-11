@@ -246,15 +246,5 @@
                 return fixture;
             }
         }
-
-        private class FakeTestFixture : ITestFixture
-        {
-            ISpecimenContext context = new SpecimenContext(new Fixture());
-
-            public object Create(object request)
-            {
-                return context.Resolve(request);
-            }
-        }
     }
 }

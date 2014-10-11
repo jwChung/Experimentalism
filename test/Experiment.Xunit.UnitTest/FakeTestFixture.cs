@@ -1,29 +1,25 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     public class FakeTestFixture : ITestFixture
     {
-        private readonly string stringValue = Guid.NewGuid().ToString();
-        private readonly int intValue = new Random().Next();
+        private readonly ISpecimenContext context = new SpecimenContext(new Fixture());
+
+        public FakeTestFixture() : this(new Fixture())
+        {
+        }
+
+        public FakeTestFixture(IFixture fixture)
+        {
+            this.context = new SpecimenContext(fixture);
+        }
 
         public object Create(object request)
         {
-            var type = request as Type;
-            if (type != null)
-            {
-                if (type == typeof(string))
-                {
-                    return this.stringValue;
-                }
-
-                if (type == typeof(int))
-                {
-                    return this.intValue;
-                }
-            }
-
-            throw new NotSupportedException();
+            return this.context.Resolve(request);
         }
     }
 }

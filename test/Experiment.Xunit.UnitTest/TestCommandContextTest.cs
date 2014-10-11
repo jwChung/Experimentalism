@@ -5,8 +5,9 @@
     using System.Linq;
     using System.Reflection;
     using Moq;
+    using Ploeh.AutoFixture;
     using global::Xunit;
-    
+
     public class TestCommandContextTest
     {
         [Fact]
@@ -87,14 +88,13 @@
             var method = new Action<object, string, int>((a, b, c) => { }).Method;
             var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == method);
 
-            var fixture = new FakeTestFixture();
+            var fixture = new Fixture();
+            var expected = arguments.Concat(
+                new object[] { fixture.Freeze<string>(), fixture.Freeze<int>() });
 
-            var factory = Mocked.Of<ITestFixtureFactory>(x => x.Create(context) == fixture);
+            var factory = Mocked.Of<ITestFixtureFactory>(x => x.Create(context) == new FakeTestFixture(fixture));
 
             var sut = Mocked.Of<TestCommandContext>(factory, arguments);
-
-            var expected = arguments.Concat(
-                new object[] { fixture.Create(typeof(string)), fixture.Create(typeof(int)) });
 
             // Exercise system
             var actual = sut.GetArguments(context);
