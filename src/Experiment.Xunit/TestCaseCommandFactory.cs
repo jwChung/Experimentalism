@@ -27,7 +27,7 @@
         {
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
-
+            
             if (!IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 

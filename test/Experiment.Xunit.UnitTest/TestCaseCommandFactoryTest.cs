@@ -81,7 +81,8 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<TestCaseCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<TestCaseCommandContext>(
+                    parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
@@ -107,7 +108,8 @@
             foreach (var testCommand in actual)
             {
                 var parameterizedCommand = Assert.IsAssignableFrom<ParameterizedCommand>(testCommand);
-                var context = Assert.IsAssignableFrom<StaticTestCaseCommandContext>(parameterizedCommand.TestCommandContext);
+                var context = Assert.IsAssignableFrom<StaticTestCaseCommandContext>(
+                    parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
@@ -125,6 +127,17 @@
             var actual = sut.Create(testMethod, Mocked.Of<ITestFixtureFactory>()).ToArray();
 
             Assert.Equal(1, actual.Length);
+        }
+
+        [Fact]
+        public void CreateLazilyReturnsCommand()
+        {
+            var sut = new TestCaseCommandFactory();
+            var testMethod = Reflector.Wrap(new Methods<TestClass>().Select(x => x.ThrowMethod()));
+            Assert.DoesNotThrow(() =>
+            {
+                sut.Create(testMethod, Mocked.Of<ITestFixtureFactory>());
+            });
         }
 
         private static class StaticTestClass
@@ -158,6 +171,13 @@
                     t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
                 yield return Mocked.Of<ITestCase>(
                     t => t.Target == TestObject && t.TestMethod == Method && t.Arguments == Arguments);
+            }
+
+            public IEnumerable<ITestCase> ThrowMethod()
+            {
+                var testCase = Mocked.Of<ITestCase>();
+                testCase.ToMock().SetupGet(x => x.TestMethod).Throws<Exception>();
+                yield return testCase;
             }
         }
     }
