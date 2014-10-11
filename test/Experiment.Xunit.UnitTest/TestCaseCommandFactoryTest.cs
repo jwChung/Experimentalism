@@ -57,17 +57,6 @@
             Assert.NotEmpty(actual);
         }
 
-        [Fact(Skip = "Conflict")]
-        public void CreateReturnsEmptyIfTestMethodIsParameterized()
-        {
-            var sut = new TestCaseCommandFactory();
-            var delegator = new Func<object, int, IEnumerable<ITestCase>>((x, y) => new ITestCase[0]);
-
-            var actual = sut.Create(Reflector.Wrap(delegator.Method), null);
-
-            Assert.Empty(actual);
-        }
-
         [Fact]
         public void CreateReturnsCorrectCommands()
         {
