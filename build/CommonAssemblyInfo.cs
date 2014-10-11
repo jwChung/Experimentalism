@@ -10,13 +10,16 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.0.2")]
-[assembly: AssemblyInformationalVersion("2.0.2")]
+[assembly: AssemblyVersion("2.0.3")]
+[assembly: AssemblyInformationalVersion("2.0.3")]
 
 /*
- * Version 2.0.2
+ * Version 2.0.3
  * 
- * - The release does not have any changes, but rather is to publish symbol and
- *   source to the server("https://www.symbolsource.org/") because when
- *   publishing the previous release to it, the server was unavailable.
+ * - [Patch] Provided default constructor of TestFixture.
+ * 
+ * - [Patch] Supported passing auto-data to methods of first-class-test style.
+ * 
+ * - [Patch] Fixed auto-data requests of test methods weren't ParameterInfo(s),
+ *   but rather types of the parameters.
  */
