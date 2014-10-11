@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -23,7 +24,8 @@
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+        public IEnumerable<ITestCommand> Create(
+            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
         {
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
@@ -31,52 +33,83 @@
             if (!IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 
-            return CreateTestCases(testMethod).Select(
-                c => c.Target != null
-                    ? CreateCommand(testMethod, fixtureFactory, c)
-                    : CreateStaticCommand(testMethod, fixtureFactory, c));
-        }
-
-        private static IEnumerable<ITestCase> CreateTestCases(IMethodInfo testMethod)
-        {
-            return (IEnumerable<ITestCase>)testMethod.MethodInfo.Invoke(
-                CreateTestClass(testMethod), new object[0]);
-        }
-
-        private static object CreateTestClass(IMethodInfo testMethod)
-        {
-            return testMethod.MethodInfo.ReflectedType.IsAbstract
-                ? null
-                : testMethod.CreateInstance();
+            return new TestCommandContextCollection(testMethod, fixtureFactory)
+                .Select(c => new ParameterizedCommand(c));
         }
 
         private static bool IsValidSignature(MethodInfo method)
         {
-            return typeof(IEnumerable<ITestCase>).IsAssignableFrom(method.ReturnType)
-                && method.GetParameters().Length == 0;
+            return typeof(IEnumerable<ITestCase>).IsAssignableFrom(method.ReturnType);
         }
 
-        private static ParameterizedCommand CreateCommand(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase testCase)
+        private class TestCommandContextCollection : IEnumerable<ITestCommandContext>
         {
-            return new ParameterizedCommand(
-                new TestCaseCommandContext(
-                    testMethod,
-                    Reflector.Wrap(testCase.TestMethod),
-                    testCase.Target,
-                    fixtureFactory,
-                    testCase.Arguments));
-        }
+            private readonly IMethodInfo testMethod;
+            private readonly MethodInfo methodInfo;
+            private readonly ITestFixtureFactory fixtureFactory;
 
-        private static ParameterizedCommand CreateStaticCommand(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory, ITestCase testCase)
-        {
-            return new ParameterizedCommand(
-                new StaticTestCaseCommandContext(
-                    testMethod,
-                    Reflector.Wrap(testCase.TestMethod),
-                    fixtureFactory,
-                    testCase.Arguments));
+            public TestCommandContextCollection(
+                IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+            {
+                this.testMethod = testMethod;
+                this.methodInfo = testMethod.MethodInfo;
+                this.fixtureFactory = fixtureFactory;
+            }
+
+            public IEnumerator<ITestCommandContext> GetEnumerator()
+            {
+                return this.CreateTestCases().Select(this.TestCommandContext).GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                throw new NotImplementedException();
+            }
+
+            private IEnumerable<ITestCase> CreateTestCases()
+            {
+                object testObject = this.CreateTestClass();
+                return (IEnumerable<ITestCase>)this.methodInfo.Invoke(
+                    testObject, this.GetArguments(testObject));
+            }
+
+            private ITestCommandContext TestCommandContext(ITestCase testCase)
+            {
+                return testCase.Target != null
+                    ? (ITestCommandContext)new TestCaseCommandContext(
+                        this.testMethod,
+                        Reflector.Wrap(testCase.TestMethod),
+                        testCase.Target,
+                        this.fixtureFactory,
+                        testCase.Arguments)
+                    : new StaticTestCaseCommandContext(
+                        this.testMethod,
+                        Reflector.Wrap(testCase.TestMethod),
+                        this.fixtureFactory,
+                        testCase.Arguments);
+            }
+
+            private object CreateTestClass()
+            {
+                return this.methodInfo.ReflectedType.IsAbstract
+                    ? null
+                    : this.testMethod.CreateInstance();
+            }
+
+            private object[] GetArguments(object testObject)
+            {
+                if (!this.methodInfo.GetParameters().Any())
+                    return new object[0];
+
+                var fixture = this.fixtureFactory.Create(new TestMethodContext(
+                    this.methodInfo,
+                    this.methodInfo,
+                    testObject,
+                    testObject));
+
+                return this.methodInfo.GetParameters()
+                    .Select(p => fixture.Create(p)).ToArray();
+            }
         }
     }
 }

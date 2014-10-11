@@ -4,7 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Moq;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Extensions;
     using global::Xunit.Sdk;
@@ -54,7 +57,7 @@
             Assert.NotEmpty(actual);
         }
 
-        [Fact]
+        [Fact(Skip = "Conflict")]
         public void CreateReturnsEmptyIfTestMethodIsParameterized()
         {
             var sut = new TestCaseCommandFactory();
@@ -140,6 +143,52 @@
             });
         }
 
+        [Fact]
+        public void CreateReturnsCorrectCommandForParameterizedMethod()
+        {
+            var sut = new TestCaseCommandFactory();
+            var testMethod = Reflector.Wrap(
+                new Methods<TestClass>().Select(x => x.TestMethod(null, 0, null)));
+
+            var actual = sut.Create(testMethod, new FakeTestFixtureFactory());
+
+            Assert.True(actual.Any());
+        }
+
+        [Fact]
+        public void CreatePassesCorrectMethodContextForParameterizedMethod()
+        {
+            var sut = new TestCaseCommandFactory();
+            var method = new Methods<TestClass>().Select(x => x.TestMethod(null, 0, null));
+            var factory = Mocked.Of<ITestFixtureFactory>();
+            factory.ToMock()
+                .Setup(x => x.Create(It.IsAny<ITestMethodContext>()))
+                .Returns(new FakeTestFixture())
+                .Callback<ITestMethodContext>(c =>
+                {
+                    Assert.Equal(method, c.TestMethod);
+                    Assert.Equal(method, c.ActualMethod);
+                    Assert.IsAssignableFrom<TestClass>(c.TestObject);
+                    Assert.IsAssignableFrom<TestClass>(c.ActualObject);
+                });
+
+            sut.Create(Reflector.Wrap(method), factory).ToArray();
+
+            factory.ToMock().VerifyAll();
+        }
+
+        [Fact]
+        public void CreateDoesNotCreateTestFixtureForNonParameterizedMethod()
+        {
+            var sut = new TestCaseCommandFactory();
+            var method = new Methods<TestClass>().Select(x => x.TestMethod());
+            var factory = Mocked.Of<ITestFixtureFactory>();
+
+            sut.Create(Reflector.Wrap(method), factory);
+
+            factory.ToMock().Verify(x => x.Create(It.IsAny<ITestMethodContext>()), Times.Never());
+        }
+
         private static class StaticTestClass
         {
             public static IEnumerable<ITestCase> TestMethod()
@@ -178,6 +227,33 @@
                 var testCase = Mocked.Of<ITestCase>();
                 testCase.ToMock().SetupGet(x => x.TestMethod).Throws<Exception>();
                 yield return testCase;
+            }
+
+            public IEnumerable<ITestCase> TestMethod(string arg1, int arg2, object arg3)
+            {
+                yield return Mocked.Of<ITestCase>();
+            }
+        }
+
+        private class FakeTestFixtureFactory : ITestFixtureFactory
+        {
+            public ITestFixture Create(ITestMethodContext context)
+            {
+                var specimenContext = new SpecimenContext(new Fixture());
+                var fixture = Mocked.Of<ITestFixture>();
+                fixture.ToMock().Setup(x => x.Create(It.IsAny<object>()))
+                    .Returns<object>(a => specimenContext.Resolve(a));
+                return fixture;
+            }
+        }
+
+        private class FakeTestFixture : ITestFixture
+        {
+            ISpecimenContext context = new SpecimenContext(new Fixture());
+
+            public object Create(object request)
+            {
+                return context.Resolve(request);
             }
         }
     }
