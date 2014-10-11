@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.AutoMoq;
     using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
@@ -14,6 +15,15 @@
     {
         private readonly IFixture fixture;
         private readonly ISpecimenContext specimenContext;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestFixture"/> class.
+        /// </summary>
+        public TestFixture() : this(
+            new Fixture { OmitAutoProperties = true }
+                .Customize(new AutoMoqCustomization()))
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixture" /> class.

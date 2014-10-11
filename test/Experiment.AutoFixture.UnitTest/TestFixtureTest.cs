@@ -1,7 +1,9 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
+    using System.Linq;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.AutoMoq;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -32,6 +34,30 @@
         }
 
         [Fact]
+        public void FixtureIsCorrectWhenInitializedByDefaultCtor()
+        {
+            var sut = new TestFixture();
+            var actual = sut.Fixture;
+            Assert.NotNull(actual);
+        }
+
+        [Fact]
+        public void FixtureOmitsAutoProperties()
+        {
+            var sut = new TestFixture();
+            var actual = sut.Fixture;
+            Assert.True(actual.OmitAutoProperties);
+        }
+
+        [Fact]
+        public void FixtureEnablesAutoMoq()
+        {
+            var sut = new TestFixture();
+            var actual = sut.Fixture;
+            Assert.DoesNotThrow(() => actual.Create<IDisposable>());
+        }
+
+        [Fact]
         public void CreateReturnsCorrectSpecimen()
         {
             var request = typeof(object);
@@ -50,6 +76,16 @@
         public void CreateTestFixtureReturnsItself(Type testFixtureType)
         {
             var sut = new TestFixture(new Fixture());
+            var actual = sut.Create(testFixtureType);
+            Assert.Same(sut, actual);
+        }
+
+        [Theory]
+        [InlineData(typeof(ITestFixture))]
+        [InlineData(typeof(TestFixture))]
+        public void CreateTestFixtureReturnsItselfWhenInitializedDefaultCtor(Type testFixtureType)
+        {
+            var sut = new TestFixture();
             var actual = sut.Create(testFixtureType);
             Assert.Same(sut, actual);
         }
