@@ -10,12 +10,13 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.0.1")]
-[assembly: AssemblyInformationalVersion("2.0.1")]
+[assembly: AssemblyVersion("2.0.2")]
+[assembly: AssemblyInformationalVersion("2.0.2")]
 
 /*
- * Version 2.0.1
+ * Version 2.0.2
  * 
- * - [Patch] Fixed that TestAttribute does not support parameterless async
- *   test methods.
+ * - The release does not have any changes, but rather is to publish symbol and
+ *   source to the server("https://www.symbolsource.org/") because when
+ *   publishing the previous release to it, the server was unavailable.
  */
