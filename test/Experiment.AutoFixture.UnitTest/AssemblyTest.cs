@@ -24,7 +24,7 @@
         {
             new IndirectReferenceAssertion(
                 Assembly.Load("Ploeh.AutoFixture.AutoMoq"),
-                Assembly.Load("Ploeh.AutoFixture.Xunit"))
+                Assembly.Load("Ploeh.AutoFixture.Xunit")) // Not il-merged
                 .Verify(Assembly.Load("Jwc.Experiment.AutoFixture"));
         }
     }
