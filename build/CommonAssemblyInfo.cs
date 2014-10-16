@@ -10,16 +10,13 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.0.3")]
-[assembly: AssemblyInformationalVersion("2.0.3")]
+[assembly: AssemblyVersion("2.1.0")]
+[assembly: AssemblyInformationalVersion("2.1.0")]
 
 /*
- * Version 2.0.3
+ * Version 2.1.0
  * 
- * - [Patch] Provided default constructor of TestFixture.
- * 
- * - [Patch] Supported passing auto-data to methods of first-class-test style.
- * 
- * - [Patch] Fixed auto-data requests of test methods weren't ParameterInfo(s),
- *   but rather types of the parameters.
+ * - [Minor] Deprecated TestFixtureFactory and the default constructor of
+ *   TestFixture to explicitly customize a fixture, so AutoFixture was added to
+ *   nuget dependecy.
  */
