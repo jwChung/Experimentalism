@@ -12,6 +12,9 @@
     <iconUrl>https://raw.githubusercontent.com/jwChung/Experimentalism/master/icon.png</iconUrl>
     <licenseUrl>https://raw.github.com/jwChung/Experimentalism/master/LICENSE.txt</licenseUrl>
     <releaseNotes>releaseNotes</releaseNotes>
+    <dependencies>
+      <dependency id="AutoFixture" version="3.18.7" />
+    </dependencies>
     <references>
       <reference file="Jwc.Experiment.dll" />
       <reference file="Jwc.Experiment.AutoFixture.dll" />
@@ -24,8 +27,6 @@
     <file src="..\src\Experiment.AutoFixture\bin\Release\ILMergeOutput\Jwc.Experiment.AutoFixture.dll" target="lib\net40" />
     <file src="..\src\Experiment.AutoFixture\bin\Release\ILMergeOutput\Jwc.Experiment.AutoFixture.pdb" target="lib\net40" />
     <file src="..\src\Experiment.AutoFixture\bin\Release\Jwc.Experiment.AutoFixture.xml" target="lib\net40" />
-    <file src="..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.dll" target="lib\net40" />
-    <file src="..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.xml" target="lib\net40" />
     <file src="..\packages\AutoFixture.Xunit.3.18.7\lib\net40\Ploeh.AutoFixture.Xunit.dll" target="lib\net40" />
     <file src="..\packages\AutoFixture.Xunit.3.18.7\lib\net40\Ploeh.AutoFixture.Xunit.xml" target="lib\net40" />
     <file src="..\packages\Moq.3.1.416.3\lib\Moq.dll" target="lib\net40" />
