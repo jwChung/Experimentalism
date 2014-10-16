@@ -34,6 +34,7 @@
         }
 
         [Fact]
+        [Obsolete]
         public void FixtureIsCorrectWhenInitializedByDefaultCtor()
         {
             var sut = new TestFixture();
@@ -42,6 +43,7 @@
         }
 
         [Fact]
+        [Obsolete]
         public void FixtureOmitsAutoProperties()
         {
             var sut = new TestFixture();
@@ -50,6 +52,7 @@
         }
 
         [Fact]
+        [Obsolete]
         public void FixtureEnablesAutoMoq()
         {
             var sut = new TestFixture();
@@ -83,6 +86,7 @@
         [Theory]
         [InlineData(typeof(ITestFixture))]
         [InlineData(typeof(TestFixture))]
+        [Obsolete]
         public void CreateTestFixtureReturnsItselfWhenInitializedDefaultCtor(Type testFixtureType)
         {
             var sut = new TestFixture();

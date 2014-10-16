@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.AutoFixture
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.AutoMoq;
@@ -19,6 +20,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="TestFixture"/> class.
         /// </summary>
+        [Obsolete("Do not use this constructor but instead, use TestFixture(IFixture) to explicitly customize the fixture.")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public TestFixture() : this(
             new Fixture { OmitAutoProperties = true }
                 .Customize(new AutoMoqCustomization()))
