@@ -30,6 +30,6 @@
     <file src="..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.dll" target="lib\net40" />
     <file src="..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.xml" target="lib\net40" />
     <file src="..\src\**\*.cs" target="src\net40" />
-    <file src="Install.ps1" target="tools" />
+    <file src="Install.ps1" target="tools\net40" />
   </files>
 </package>
