@@ -46,5 +46,5 @@
     <NuspecFiles Include="$(RootDir)**\*.nuspec" />
   </ItemGroup>
   
-  <Import Project="$(RootDir)packages\CIBuild.Scripts.0.4.0\tools\net20\Build.targets"/>
+  <Import Project="$(RootDir)packages\CIBuild.Scripts.0.4.1\tools\net20\Build.targets"/>
 </Project>
