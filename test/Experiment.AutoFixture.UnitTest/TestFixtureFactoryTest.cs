@@ -10,6 +10,7 @@
     using Ploeh.AutoFixture.AutoMoq;
     using global::Xunit;
 
+    [Obsolete]
     public class TestFixtureFactoryTest
     {
         [Fact]
@@ -88,6 +89,7 @@
         {
             public ICustomization Customization { get; set; }
 
+            [Obsolete]
             protected override ICustomization GetCustomization(ITestMethodContext context)
             {
                 this.Customization = base.GetCustomization(context);

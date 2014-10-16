@@ -6,6 +6,7 @@
     using System.Reflection;
     using Jwc.Experiment.Xunit;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.AutoMoq;
     using Ploeh.AutoFixture.Xunit;
     using global::Xunit;
     using global::Xunit.Extensions;
@@ -78,7 +79,12 @@
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
-                return new TestFixtureFactory().Create(context);
+                var fixture = new Fixture()
+                    .Customize(new OmitAutoPropertiesCustomization())
+                    .Customize(new AutoMoqCustomization())
+                    .Customize(new TestParametersCustomization(context.ActualMethod.GetParameters()));
+
+                return new TestFixture(fixture);
             }
         }
 
