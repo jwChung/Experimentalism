@@ -1,0 +1,454 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jwc.CIBuildTasks</name>
+    </assembly>
+    <members>
+        <member name="T:Jwc.CIBuild.Tasks.Base64StringToFile">
+            <summary>
+            Represents a MSBuild task to save bytes from base 64 string to a file.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.Base64StringToFile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jwc.CIBuild.Tasks.Base64StringToFile"/> class.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.Base64StringToFile.#ctor(Jwc.CIBuild.IFileWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jwc.CIBuild.Tasks.Base64StringToFile"/> class.
+            </summary>
+            <param name="fileWriter">
+            The file writer.
+            </param>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.Base64StringToFile.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.Base64StringToFile.Input">
+            <summary>
+            Gets or sets the base 64 string.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.Base64StringToFile.OutputFile">
+            <summary>
+            Gets or sets the file path to save bytes from base 64 string.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.Base64StringToFile.FileWriter">
+            <summary>
+            Gets the file writer.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.CreateTagCommand">
+            <summary>
+            Represents command implementation for creating a tag.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.ICreateTagCommand">
+            <summary>
+            Represents command for creating a tag.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.ICreateTagCommand.Execute(Jwc.CIBuild.ITagInfo)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="tagInfo">
+            The tag information.
+            </param>
+        </member>
+        <member name="M:Jwc.CIBuild.CreateTagCommand.Execute(Jwc.CIBuild.ITagInfo)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="tagInfo">
+            The tag information.
+            </param>
+        </member>
+        <member name="T:Jwc.CIBuild.FileWriter">
+            <summary>
+            Represents implementation of file writer.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.IFileWriter">
+            <summary>
+            Represents file writer.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.IFileWriter.Write(System.String,System.Byte[])">
+            <summary>
+            Writes byte array to the specified path.
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <param name="value">
+            The byte array.
+            </param>
+        </member>
+        <member name="M:Jwc.CIBuild.FileWriter.Write(System.String,System.Byte[])">
+            <summary>
+            Writes byte array to the specified path.
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <param name="value">
+            The byte array.
+            </param>
+        </member>
+        <member name="T:Jwc.CIBuild.Tasks.GitHubTagger">
+            <summary>
+            Represents a task to create a tag on GitHub.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.ITagInfo">
+            <summary>
+            Represents tag information.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.AccessToken">
+            <summary>
+            Gets the access token.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.Owner">
+            <summary>
+            Gets the owner.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.Repository">
+            <summary>
+            Gets the repository.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.RefOrSha">
+            <summary>
+            Gets the reference name or SHA.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.TagName">
+            <summary>
+            Gets the name of the tag.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.ReleaseNotes">
+            <summary>
+            Gets the release notes.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.AuthorName">
+            <summary>
+            Gets the name of the author.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.ITagInfo.AuthorEmail">
+            <summary>
+            Gets the author email.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.GitHubTagger.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jwc.CIBuild.Tasks.GitHubTagger"/> class.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.GitHubTagger.#ctor(Jwc.CIBuild.ICreateTagCommand,Jwc.CIBuild.ITaskLogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jwc.CIBuild.Tasks.GitHubTagger"/> class.
+            </summary>
+            <param name="createCommand">
+            The command for creating a tag.
+            </param>
+            <param name="logger">
+            The task logger.
+            </param>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.GitHubTagger.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.AccessToken">
+            <summary>
+            Gets or sets the access token.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.Owner">
+            <summary>
+            Gets or sets the owner.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.Repository">
+            <summary>
+            Gets or sets the repository.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.RefOrSha">
+            <summary>
+            Gets or sets the reference name or SHA.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.TagName">
+            <summary>
+            Gets or sets the name of the tag.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.ReleaseNotes">
+            <summary>
+            Gets or sets the release notes.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.AuthorName">
+            <summary>
+            Gets or sets the name of the author.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.AuthorEmail">
+            <summary>
+            Gets or sets the author email.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.CreateCommand">
+            <summary>
+            Gets the command for creating a tag.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.GitHubTagger.Logger">
+            <summary>
+            Gets the task logger.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.IDeletePackageCommand">
+            <summary>
+            Represents command for deleting a nuget package.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.IDeletePackageCommand.Execute(Jwc.CIBuild.INugetPackageInfo)">
+            <summary>
+            Deletes the specified nuget package.
+            </summary>
+            <param name="nugetPackageInfo">
+            The information to delete a nuget package .
+            </param>
+        </member>
+        <member name="T:Jwc.CIBuild.INugetPackageInfo">
+            <summary>
+            Represents information to delete a nuget package.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.INugetPackageInfo.UserId">
+            <summary>
+            Gets the user identifier.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.INugetPackageInfo.UserPassword">
+            <summary>
+            Gets the user password.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.INugetPackageInfo.NugetId">
+            <summary>
+            Gets the nuget identifier.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.INugetPackageInfo.NugetVersion">
+            <summary>
+            Gets the nuget version.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.ITaskLogger">
+            <summary>
+            Represents task logger.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.ITaskLogger.Log(Microsoft.Build.Utilities.Task,System.String,Microsoft.Build.Framework.MessageImportance)">
+            <summary>
+            Logs the specified message.
+            </summary>
+            <param name="task">
+            A task to provide actual logger.
+            </param>
+            <param name="message">
+            Message.
+            </param>
+            <param name="messageImportance">
+            Message importance.
+            </param>
+        </member>
+        <member name="T:Jwc.CIBuild.DeletePackageCommand">
+            <summary>
+            Represents command implementation for deleting a nuget package.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.DeletePackageCommand.Execute(Jwc.CIBuild.INugetPackageInfo)">
+            <summary>
+            Deletes the specified nuget package.
+            </summary>
+            <param name="nugetPackageInfo">
+            The nuget package information to be deleted.
+            </param>
+        </member>
+        <member name="T:Jwc.CIBuild.Tasks.NugetPackageDeleter">
+            <summary>
+            Represents a MSBuild task to delete a specified nuget package on the server.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.NugetPackageDeleter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jwc.CIBuild.Tasks.NugetPackageDeleter"/> class.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.NugetPackageDeleter.#ctor(Jwc.CIBuild.IDeletePackageCommand,Jwc.CIBuild.ITaskLogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jwc.CIBuild.Tasks.NugetPackageDeleter"/> class.
+            </summary>
+            <param name="deleteCommand">
+            The command for deleting a nuget package.
+            </param>
+            <param name="logger">
+            The task logger.
+            </param>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.NugetPackageDeleter.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.NugetPackageDeleter.UserId">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.NugetPackageDeleter.UserPassword">
+            <summary>
+            Gets or sets the user password.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.NugetPackageDeleter.NugetId">
+            <summary>
+            Gets or sets the nuget identifier.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.NugetPackageDeleter.NugetVersion">
+            <summary>
+            Gets or sets the nuget version.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.NugetPackageDeleter.DeleteCommand">
+            <summary>
+            Gets the command for deleting a nuget package.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.NugetPackageDeleter.Logger">
+            <summary>
+            Gets the task logger.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.Tasks.PublishNugetDetermination">
+            <summary>
+            Represents a MSBuild task to determine whether packages of a certain version can be
+            published.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.PublishNugetDetermination.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.PublishNugetDetermination.Identifier">
+            <summary>
+            Gets or sets the Nuget identifier, which consists of id and version.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.PublishNugetDetermination.CanPush">
+            <summary>
+            Gets or sets a value indicating whether packages can publish.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.Tasks.ReleaseNoteExtractor">
+            <summary>
+            Represents a MSBuild task to extract release notes from AssemblyInfo.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.ReleaseNoteExtractor.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.ReleaseNoteExtractor.AssemblyInfo">
+            <summary>
+            Gets or sets the file path of the assembly information.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.ReleaseNoteExtractor.ReleaseNotes">
+            <summary>
+            Gets or sets the release notes.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.ReleaseNoteExtractor.XmlEscapedReleaseNotes">
+            <summary>
+            Gets or sets the XML escaped release notes.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.Tasks.SemanticVersioning">
+            <summary>
+            Represents a MSBuild task to get semantic version from AssemblyInfo file.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.Tasks.SemanticVersioning.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.SemanticVersioning.AssemblyInfo">
+            <summary>
+            Gets or sets the file path of the assembly information.
+            </summary>
+        </member>
+        <member name="P:Jwc.CIBuild.Tasks.SemanticVersioning.SemanticVersion">
+            <summary>
+            Gets or sets the semantic version.
+            </summary>
+        </member>
+        <member name="T:Jwc.CIBuild.TaskLogger">
+            <summary>
+            Represents task logger.
+            </summary>
+        </member>
+        <member name="M:Jwc.CIBuild.TaskLogger.Log(Microsoft.Build.Utilities.Task,System.String,Microsoft.Build.Framework.MessageImportance)">
+            <summary>
+            Logs the specified message.
+            </summary>
+            <param name="task">
+            A task to provide actual logger.
+            </param>
+            <param name="message">
+            Message.
+            </param>
+            <param name="messageImportance">
+            Message importance.
+            </param>
+        </member>
+    </members>
+</doc>

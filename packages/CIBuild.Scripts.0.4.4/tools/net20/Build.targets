@@ -17,14 +17,13 @@
     <CIBuildTasksPath>@(CIBuildTasksPath)</CIBuildTasksPath>
     <XunitRunnerPath>@(XunitRunnerPath)</XunitRunnerPath>
   </PropertyGroup>
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.Base64StringToFile" />
   <UsingTask AssemblyFile="$(XunitRunnerPath)" TaskName="Xunit.Runner.MSBuild.xunit" />
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.SemanticVersioning" />
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)"
-             TaskName="Jwc.CIBuildTasks.PublishNugetDetermination" />
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.ReleaseNoteExtractor" />
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.NugetPackageDeleter" />
-  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuildTasks.GitHubTagger" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuild.Tasks.Base64StringToFile" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuild.Tasks.SemanticVersioning" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuild.Tasks.PublishNugetDetermination" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuild.Tasks.ReleaseNoteExtractor" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuild.Tasks.NugetPackageDeleter" />
+  <UsingTask AssemblyFile="$(CIBuildTasksPath)" TaskName="Jwc.CIBuild.Tasks.GitHubTagger" />
   
   <!-- Targets -->
   <Target Name="CI">
@@ -84,7 +83,7 @@
   </Target>
 
   <Target Name="GetSemanticVersion">
-    <SemanticVersioning AssemblyInfo="%(CommonAssemblyInfo.FullPath)">
+    <SemanticVersioning AssemblyInfo="%(SolutionInfo.FullPath)">
       <Output TaskParameter="SemanticVersion" PropertyName="SemanticVersion" />
     </SemanticVersioning>
   </Target>
@@ -111,7 +110,7 @@
   </Target>
 
   <Target Name="GetReleaseNotes">
-    <ReleaseNoteExtractor AssemblyInfo="%(CommonAssemblyInfo.FullPath)">
+    <ReleaseNoteExtractor AssemblyInfo="%(SolutionInfo.FullPath)">
       <Output TaskParameter="ReleaseNotes" PropertyName="ReleaseNotes" />
       <Output TaskParameter="XmlEscapedReleaseNotes" PropertyName="XmlEscapedReleaseNotes" />
     </ReleaseNoteExtractor>
@@ -142,25 +141,22 @@
     <Exec Command="$(NugetPath) push %(NugetSymbolPackages.Identity)" ContinueOnError="true" />
     <Delete Files="@(NugetSymbolPackages)" />
     <Exec Command="$(NugetPath) push %(NugetPackages.Identity)" />
-    <NugetPackageDeleter IdOrEmail="$(NugetId)" Password="$(NugetPassword)"
-                         Identifier="%(NuspecFiles.Filename) $(SemanticVersion)"
+    <NugetPackageDeleter UserId="$(NugetId)"
+                         UserPassword="$(NugetPassword)"
+                         NugetId="%(NuspecFiles.Filename)"
+                         NugetVersion ="$(SemanticVersion)"
                          Condition="$(SemanticVersion.Contains('-'))"/>
   </Target>
 
   <Target Name="MakeTagOnGitHub" Condition="!$(SemanticVersion.Contains('-'))">
-    <Message Text="v$(SemanticVersion)" />
-    <ItemGroup>
-      <TagInfo Include="v$(SemanticVersion)">
-        <AccessToken>$(GitHubAccessToken)</AccessToken>
-        <Owner>$(GitHubId)</Owner>
-        <Repository>$(GitHubRepository)</Repository>
-        <RefOrSha>$(RefOrShaForTag)</RefOrSha>
-        <ReleaseNotes>$(ReleaseNotes)</ReleaseNotes>
-        <AuthorName>$(AuthorName)</AuthorName>
-        <AuthorEmail>$(AuthorEmail)</AuthorEmail>
-      </TagInfo>
-    </ItemGroup>
-    <GitHubTagger TagInfo="@(TagInfo)" />
+    <GitHubTagger TagName="v$(SemanticVersion)"
+                  AccessToken="$(GitHubAccessToken)"
+                  Owner="$(GitHubId)"
+                  Repository="$(GitHubRepository)"
+                  RefOrSha ="$(RefOrShaForTag)"
+                  ReleaseNotes ="$(ReleaseNotes)"
+                  AuthorName ="$(AuthorName)"
+                  AuthorEmail ="$(AuthorEmail)" />
   </Target>
 
   <!-- Cleanup -->

@@ -4,13 +4,13 @@
           Condition=" '$(SignAssembly)' == 'True' ">
     <ItemGroup>
       <ILMergePath Include="..\..\**\ILMerge.exe" />
-      <ILMergeAssemblies Include="@(ReferencePath)" Condition="'%(ReferencePath.ILMerge)'=='True'" />
+      <ILMergeAssemblies Include="@(ReferencePath)" Condition=" '%(ReferencePath.ILMerge)'=='True' " />
     </ItemGroup>
     <PropertyGroup>
       <ILMergePath>%(ILMergePath.FullPath)</ILMergePath>
     </PropertyGroup>
     <MakeDir Directories="$(OutputPath)ILMergeOutput" />
     <Exec Command="$(ILMergePath) /Closed /Internalize /Lib:$(OutputPath) /keyfile:$(AssemblyOriginatorKeyFile) /out:&quot;$(OutputPath)ILMergeOutput\%(MainAssembly.Filename)%(MainAssembly.Extension)&quot; &quot;@(IntermediateAssembly)&quot; @(ILMergeAssemblies->'&quot;%(FullPath)&quot;', ' ')" />
-    <Message Text="The '%(ILMergeAssemblies.Filename)' assembly was merged." Importance="High" />
+    <Message Text="The '%(ILMergeAssemblies.Filename)' assembly was merged." Importance="High" Condition=" @(ILMergeAssemblies) != '' " />
   </Target>
 </Project>

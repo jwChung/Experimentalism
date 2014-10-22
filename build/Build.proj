@@ -42,9 +42,9 @@
   <ItemGroup>
     <Projects Include="$(RootDir)src\**\*.csproj" />
     <TestProjects Include="$(RootDir)test\**\*.csproj" />
-    <CommonAssemblyInfo Include="$(RootDir)**\CommonAssemblyInfo.cs" />
+    <SolutionInfo Include="$(RootDir)**\SolutionInfo.cs" />
     <NuspecFiles Include="$(RootDir)**\*.nuspec" />
   </ItemGroup>
   
-  <Import Project="$(RootDir)packages\CIBuild.Scripts.0.4.1\tools\net20\Build.targets"/>
+  <Import Project="$(RootDir)packages\CIBuild.Scripts.0.4.4\tools\net20\Build.targets"/>
 </Project>
