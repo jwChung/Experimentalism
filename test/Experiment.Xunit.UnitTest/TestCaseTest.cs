@@ -149,6 +149,21 @@
         }
 
         [Fact]
+        public void CreateWithAuto5ReturnsCorrectTestCase()
+        {
+            var delegator = new Action<object, object, object, object, object>(
+                (a1, a2, a3, a4, a5) => { });
+
+            var actual = TestCase
+                .WithAuto<object, object, object, object, object>()
+                .Create(delegator);
+
+            var testCase = Assert.IsAssignableFrom<TestCase>(actual);
+            Assert.Empty(testCase.Arguments);
+            Assert.Equal(delegator, testCase.Delegator);
+        }
+
+        [Fact]
         public void CreateWithNullDelegatorThrows()
         {
             Assert.Throws<ArgumentNullException>(() => TestCase.Create(null));

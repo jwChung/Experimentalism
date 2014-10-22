@@ -47,21 +47,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T3">
         /// A type of the third argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3> WithAuto<T1, T2, T3>(T1 arg1, T2 arg2, T3 arg3)
+        public static ITestCaseWithAuto<T1, T2, T3> WithAuto<T1, T2, T3>()
         {
-            return new TestCaseWithAuto<T1, T2, T3>(arg1, arg2, arg3);
+            return new TestCaseWithAuto<T1, T2, T3>();
         }
 
         /// <summary>
@@ -114,24 +105,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T4">
         /// A type of the fourth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T1, T2, T3, T4>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        public static ITestCaseWithAuto<T1, T2, T3, T4> WithAuto<T1, T2, T3, T4>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4>(arg1, arg2, arg3, arg4);
+            return new TestCaseWithAuto<T1, T2, T3, T4>();
         }
 
         /// <summary>
@@ -193,27 +172,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T5">
         /// A type of the fifth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T1, T2, T3, T4, T5>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5> WithAuto<T1, T2, T3, T4, T5>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5>(arg1, arg2, arg3, arg4, arg5);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5>();
         }
 
         /// <summary>
@@ -284,30 +248,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T6">
         /// A type of the sixth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T1, T2, T3, T4, T5, T6>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6> WithAuto<T1, T2, T3, T4, T5, T6>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>(arg1, arg2, arg3, arg4, arg5, arg6);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6>();
         }
 
         /// <summary>
@@ -387,33 +333,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T7">
         /// A type of the seventh argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T1, T2, T3, T4, T5, T6, T7>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7> WithAuto<T1, T2, T3, T4, T5, T6, T7>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7>();
         }
 
         /// <summary>
@@ -502,36 +427,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T8">
         /// A type of the eighth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8>();
         }
 
         /// <summary>
@@ -629,39 +530,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T9">
         /// A type of the ninth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9>();
         }
 
         /// <summary>
@@ -768,42 +642,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T10">
         /// A type of the tenth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>();
         }
 
         /// <summary>
@@ -919,45 +763,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T11">
         /// A type of the eleventh argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
-        /// <param name="arg11">
-        /// The eleventh argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>();
         }
 
         /// <summary>
@@ -1082,48 +893,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T12">
         /// A type of the twelfth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
-        /// <param name="arg11">
-        /// The eleventh argument.
-        /// </param>
-        /// <param name="arg12">
-        /// The twelfth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>();
         }
 
         /// <summary>
@@ -1257,51 +1032,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T13">
         /// A type of the thirteenth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
-        /// <param name="arg11">
-        /// The eleventh argument.
-        /// </param>
-        /// <param name="arg12">
-        /// The twelfth argument.
-        /// </param>
-        /// <param name="arg13">
-        /// The thirteenth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>();
         }
 
         /// <summary>
@@ -1444,54 +1180,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T14">
         /// A type of the fourteenth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
-        /// <param name="arg11">
-        /// The eleventh argument.
-        /// </param>
-        /// <param name="arg12">
-        /// The twelfth argument.
-        /// </param>
-        /// <param name="arg13">
-        /// The thirteenth argument.
-        /// </param>
-        /// <param name="arg14">
-        /// The fourteenth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>();
         }
 
         /// <summary>
@@ -1643,57 +1337,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T15">
         /// A type of the fifteenth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
-        /// <param name="arg11">
-        /// The eleventh argument.
-        /// </param>
-        /// <param name="arg12">
-        /// The twelfth argument.
-        /// </param>
-        /// <param name="arg13">
-        /// The thirteenth argument.
-        /// </param>
-        /// <param name="arg14">
-        /// The fourteenth argument.
-        /// </param>
-        /// <param name="arg15">
-        /// The fifteenth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>();
         }
 
         /// <summary>
@@ -1854,60 +1503,12 @@ namespace Jwc.Experiment.Xunit
         /// <typeparam name="T16">
         /// A type of the sixteenth argument.
         /// </typeparam>
-        /// <param name="arg1">
-        /// The first argument.
-        /// </param>
-        /// <param name="arg2">
-        /// The second argument.
-        /// </param>
-        /// <param name="arg3">
-        /// The third argument.
-        /// </param>
-        /// <param name="arg4">
-        /// The fourth argument.
-        /// </param>
-        /// <param name="arg5">
-        /// The fifth argument.
-        /// </param>
-        /// <param name="arg6">
-        /// The sixth argument.
-        /// </param>
-        /// <param name="arg7">
-        /// The seventh argument.
-        /// </param>
-        /// <param name="arg8">
-        /// The eighth argument.
-        /// </param>
-        /// <param name="arg9">
-        /// The ninth argument.
-        /// </param>
-        /// <param name="arg10">
-        /// The tenth argument.
-        /// </param>
-        /// <param name="arg11">
-        /// The eleventh argument.
-        /// </param>
-        /// <param name="arg12">
-        /// The twelfth argument.
-        /// </param>
-        /// <param name="arg13">
-        /// The thirteenth argument.
-        /// </param>
-        /// <param name="arg14">
-        /// The fourteenth argument.
-        /// </param>
-        /// <param name="arg15">
-        /// The fifteenth argument.
-        /// </param>
-        /// <param name="arg16">
-        /// The sixteenth argument.
-        /// </param>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, T6 arg6, T7 arg7, T8 arg8, T9 arg9, T10 arg10, T11 arg11, T12 arg12, T13 arg13, T14 arg14, T15 arg15, T16 arg16)
+        public static ITestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> WithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>()
         {
-            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16);
+            return new TestCaseWithAuto<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>();
         }
 
     }

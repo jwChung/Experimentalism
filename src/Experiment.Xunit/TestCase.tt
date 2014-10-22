@@ -61,22 +61,12 @@ for (var j = 1; j <= i; j++)
 <#
 }
 #>
-<#
-for (var j = 1; j <= i; j++)
-{
-#>
-        /// <param name="<#=string.Format("arg{0}", j)#>">
-        /// The <#=ConvertToOrdinal(j)#> argument.
-        /// </param>
-<#
-}
-#>
         /// <returns>
         /// The new test case with arguments.
         /// </returns>
-        public static ITestCaseWithAuto<<#=typeList#>> WithAuto<<#=typeList#>>(<#=parameterList#>)
+        public static ITestCaseWithAuto<<#=typeList#>> WithAuto<<#=typeList#>>()
         {
-            return new TestCaseWithAuto<<#=typeList#>>(<#=argumentList#>);
+            return new TestCaseWithAuto<<#=typeList#>>();
         }
 
 <#
