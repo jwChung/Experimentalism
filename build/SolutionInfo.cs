@@ -10,11 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.1.1")]
-[assembly: AssemblyInformationalVersion("2.1.1")]
+[assembly: AssemblyVersion("2.1.2")]
+[assembly: AssemblyInformationalVersion("2.1.2")]
 
 /*
- * Version 2.1.1
+ * Version 2.1.2
  * 
- * - [Path] Fixed invalid WithAuto method signature.
+ * - [Path]  Fixed that ParameterToPropertyComparer doesn't use ParameterInfo to
+ *   create arguments.
  */
