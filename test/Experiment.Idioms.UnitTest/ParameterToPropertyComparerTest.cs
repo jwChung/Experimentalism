@@ -70,17 +70,17 @@
         [Fact]
         public void EqualsParameterToPropertyReturnsTrueWhenTheyHaveEqualValue()
         {
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+                .GetParameters().First().ToElement();
             var testFixture = new DelegatingTestFixture
             {
                 OnCreate = x =>
                 {
-                    Assert.Equal(typeof(int), x);
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
                     return 123;
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
-                .GetParameters().First().ToElement();
             var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Value).ToElement();
 
@@ -121,17 +121,17 @@
         [Fact]
         public void EqualsParameterToWritableOnlyPropertyReturnsFalse()
         {
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+                .GetParameters().First().ToElement();
             var testFixture = new DelegatingTestFixture
             {
                 OnCreate = x =>
                 {
-                    Assert.Equal(typeof(int), x);
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
                     return 123;
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
-                .GetParameters().First().ToElement();
             var propetyInfoElement = typeof(TypeForPropertyEqualValue)
                 .GetProperty("WritableOnlyProperty").ToElement();
 
@@ -143,17 +143,17 @@
         [Fact]
         public void EqualsParameterToPrivateGetPropertyReturnsTrueWhenTheyHaveEqualValue()
         {
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+                .GetParameters().First().ToElement();
             var testFixture = new DelegatingTestFixture
             {
                 OnCreate = x =>
                 {
-                    Assert.Equal(typeof(int), x);
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
                     return 123;
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
-                .GetParameters().First().ToElement();
             var propetyInfoElement = typeof(TypeForPropertyEqualValue)
                 .GetProperty("PrivateGetProperty").ToElement();
 
@@ -165,17 +165,17 @@
         [Fact]
         public void EqualsParameterToPrivateGetPropertyReturnsTrueWhenTheyHaveEqualEnumerable()
         {
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(new int[0]))
+                .GetParameters().First().ToElement();
             var testFixture = new DelegatingTestFixture
             {
                 OnCreate = x =>
                 {
-                    Assert.Equal(typeof(int[]), x);
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
                     return new[] { 1, 2, 3, 4 };
                 }
             };
             var sut = new ParameterToPropertyComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(new int[0]))
-                .GetParameters().First().ToElement();
             var propertyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Values).ToElement();
 
