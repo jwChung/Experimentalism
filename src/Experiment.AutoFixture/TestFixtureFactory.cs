@@ -21,7 +21,7 @@
         /// <returns>
         /// The test fixture.
         /// </returns>
-        [Obsolete("Do not use this method but instead, explicity create TestFixture.")]
+        [Obsolete("Do not use this method but instead, explicitly create TestFixture.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ITestFixture Create(ITestMethodContext context)
         {
@@ -37,7 +37,7 @@
         /// <returns>
         /// The customization.
         /// </returns>
-        [Obsolete("Do not use this method but instead, explicity create TestFixture.")]
+        [Obsolete("Do not use this method but instead, explicitly create TestFixture.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected virtual ICustomization GetCustomization(ITestMethodContext context)
         {
