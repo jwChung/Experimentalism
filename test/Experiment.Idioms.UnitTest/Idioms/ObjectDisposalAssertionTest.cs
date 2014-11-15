@@ -200,11 +200,41 @@
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
 
+        [Fact]
+        public void VerifyMethodUsesParameterInfoToCreateArguments()
+        {
+            var parameters = new List<ParameterInfo>();
+            var fakeFixture = new FakeTestFixture();
+            var fixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    var parameter = x as ParameterInfo;
+                    if (parameter != null)
+                        parameters.Add(parameter);
+                    return fakeFixture.Create(x);
+                }
+            };
+            var sut = new ObjectDisposalAssertion(fixture);
+            var method = new Methods<ClassForDisposable>().Select(
+                x => x.ThrowObjectDisposedException(null));
+
+            sut.Verify(method);
+
+            Assert.Equal(1, parameters.Count);
+        }
+
         private class ClassForDisposable : IDisposable
         {
             private bool disposed;
 
             public void ThrowObjectDisposedException()
+            {
+                if (this.disposed)
+                    throw new ObjectDisposedException(ToString());
+            }
+
+            public void ThrowObjectDisposedException(string value)
             {
                 if (this.disposed)
                     throw new ObjectDisposedException(ToString());

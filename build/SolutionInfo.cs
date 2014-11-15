@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("2.1.2")]
 
 /*
- * Version 2.1.2
+ * Version 2.1.3
  * 
- * - [Path]  Fixed that ParameterToPropertyComparer doesn't use ParameterInfo to
- *   create arguments.
+ * - [Path]  Fixed that ObjectDisposalAssertion doesn't use ParameterInfo to
+ *   create necessary argumetns.
  */

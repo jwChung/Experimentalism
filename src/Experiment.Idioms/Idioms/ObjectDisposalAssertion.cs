@@ -151,7 +151,7 @@ Method: {1}";
 
         private object[] GetArguments(IEnumerable<ParameterInfo> parameters)
         {
-            return parameters.Select(pi => this.TestFixture.Create(pi.ParameterType)).ToArray();
+            return parameters.Select(pi => this.TestFixture.Create(pi)).ToArray();
         }
     }
 }
