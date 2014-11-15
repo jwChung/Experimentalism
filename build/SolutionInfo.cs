@@ -16,6 +16,6 @@ using System.Runtime.InteropServices;
 /*
  * Version 2.1.3
  * 
- * - [Path]  Fixed that ObjectDisposalAssertion doesn't use ParameterInfo to
- *   create necessary argumetns.
+ * - [Path]  Fixed that ObjectDisposalAssertion and ParameterToFieldComparer
+ *   don't use ParameterInfo to create necessary argumetns.
  */
