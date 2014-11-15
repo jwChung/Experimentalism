@@ -71,17 +71,17 @@
         [Fact]
         public void EqualsParameterToFieldReturnsTrueWhenTheyHaveEqualValue()
         {
+            var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(0))
+                .GetParameters().First().ToElement();
             var testFixture = new DelegatingTestFixture
             {
                 OnCreate = x =>
                 {
-                    Assert.Equal(typeof(int), x);
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
                     return 123;
                 }
             };
             var sut = new ParameterToFieldComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(0))
-                .GetParameters().First().ToElement();
             var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
                 .Select(x => x.Value).ToElement();
 
@@ -122,17 +122,17 @@
         [Fact]
         public void EqualsParameterToFieldReturnsTrueWhenTheyHaveEqualEnumerable()
         {
+            var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(new int[0]))
+                .GetParameters().First().ToElement();
             var testFixture = new DelegatingTestFixture
             {
                 OnCreate = x =>
                 {
-                    Assert.Equal(typeof(int[]), x);
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
                     return new[] { 0, 1, 2, 3, 4 };
                 }
             };
             var sut = new ParameterToFieldComparer(testFixture);
-            var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(new int[0]))
-                .GetParameters().First().ToElement();
             var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
                 .Select(x => x.Values).ToElement();
 

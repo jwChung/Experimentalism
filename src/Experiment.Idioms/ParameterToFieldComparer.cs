@@ -73,7 +73,7 @@
                 return false;
 
             var arguments = constructorInfo.GetParameters()
-                .Select(pi => this.TestFixture.Create(pi.ParameterType))
+                .Select(pi => this.TestFixture.Create(pi))
                 .ToArray();
             var target = constructorInfo.Invoke(arguments);
             var argumentValue = arguments[parameterInfo.Position];
