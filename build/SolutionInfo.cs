@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.1.3")]
-[assembly: AssemblyInformationalVersion("2.1.3")]
+[assembly: AssemblyVersion("2.1.4")]
+[assembly: AssemblyInformationalVersion("2.1.4")]
 
 /*
- * Version 2.1.3
+ * Version 2.1.4
  * 
- * - [Path]  Fixed that ObjectDisposalAssertion and ParameterToFieldComparer
- *   don't use ParameterInfo to create necessary argumetns.
+ * - [Path]  Fixed that ParameterToPropertyComparer doesn't return false when
+ *   getting value throws an exception.
  */
