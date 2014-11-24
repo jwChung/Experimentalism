@@ -200,7 +200,7 @@
         }
 
         [Fact]
-        public void EqualsParameterToPropertyThrowingAlwaysReturnsFalse()
+        public void EqualsParameterToPropertyAlwaysReturnsFalseWhenPropertyThrows()
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                .GetParameters().Single().ToElement();
@@ -221,6 +221,29 @@
             Assert.False(actual);
         }
 
+        [Fact]
+        public void EqualsParameterToPropertyAlwaysReturnsFalseWhenConstructorThrows()
+        {
+            var parameterInfoElement = Constructors
+                .Select(() => new TypeForPropertyEqualValue(default(object)))
+                .GetParameters().Single().ToElement();
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
+                    return 123;
+                }
+            };
+            var sut = new ParameterToPropertyComparer(testFixture);
+            var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
+                .Select(x => x.Value).ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+
+            Assert.False(actual);
+        }
+
         private class TypeForPropertyEqualValue
         {
             private readonly int value;
@@ -234,6 +257,11 @@
             public TypeForPropertyEqualValue(int[] values)
             {
                 this.values = values.ToArray();
+            }
+
+            public TypeForPropertyEqualValue(object value)
+            {
+                throw new NotSupportedException();
             }
 
             public IEnumerable<int> Values

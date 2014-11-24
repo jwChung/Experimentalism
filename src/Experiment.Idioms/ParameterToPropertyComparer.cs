@@ -78,7 +78,16 @@
             var arguments = constructorInfo.GetParameters()
                 .Select(pi => this.TestFixture.Create(pi))
                 .ToArray();
-            var target = constructorInfo.Invoke(arguments);
+            object target;
+            try
+            {
+                target = constructorInfo.Invoke(arguments);
+            }
+            catch (TargetInvocationException)
+            {
+                return false;
+            }
+
             var argumentValue = arguments[parameterInfo.Position];
             object propetyValue;
             try

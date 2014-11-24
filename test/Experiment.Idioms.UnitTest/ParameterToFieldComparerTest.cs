@@ -141,6 +141,29 @@
             Assert.True(actual, "Equals.");
         }
 
+        [Fact]
+        public void EqualsParameterToFieldAlwaysReturnsFalseWhenConstructorThrows()
+        {
+            var parameterInfoElement = Constructors
+                .Select(() => new TypeForFieldEqualValue(default(object)))
+                .GetParameters().Single().ToElement();
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
+                    return 123;
+                }
+            };
+            var sut = new ParameterToFieldComparer(testFixture);
+            var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
+                .Select(x => x.Value).ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, fieldInfoElement);
+
+            Assert.False(actual);
+        }
+
         private class TypeForFieldEqualValue
         {
             public readonly IEnumerable<int> Values;
@@ -157,6 +180,11 @@
             public TypeForFieldEqualValue(int[] values)
             {
                 this.Values = values.ToArray();
+            }
+
+            public TypeForFieldEqualValue(object value)
+            {
+                throw new NotSupportedException();
             }
 
             public object WritableOnlyProperty
