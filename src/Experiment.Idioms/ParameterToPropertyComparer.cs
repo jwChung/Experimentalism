@@ -80,15 +80,21 @@
                 .ToArray();
             var target = constructorInfo.Invoke(arguments);
             var argumentValue = arguments[parameterInfo.Position];
-            var propetyValue = propertyInfo.GetValue(target, null);
+            object propetyValue;
+            try
+            {
+                propetyValue = propertyInfo.GetValue(target, null);
+            }
+            catch (TargetInvocationException)
+            {
+                return false;
+            }
 
             var enumerableArgument = argumentValue as IEnumerable;
             var enumerableProperty = propetyValue as IEnumerable;
             if (enumerableArgument != null && enumerableProperty != null)
-            {
                 return enumerableArgument.Cast<object>()
                     .SequenceEqual(enumerableProperty.Cast<object>());
-            }
 
             return argumentValue.Equals(propetyValue);
         }

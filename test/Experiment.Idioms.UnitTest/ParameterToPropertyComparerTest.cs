@@ -187,14 +187,7 @@
         [Fact]
         public void EqualsParameterToIndexerAlwaysReturnsFalse()
         {
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(typeof(int), x);
-                    return 123;
-                }
-            };
+            var testFixture = new DelegatingTestFixture();
             var sut = new ParameterToPropertyComparer(testFixture);
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().Single().ToElement();
@@ -204,6 +197,28 @@
             var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
 
             Assert.False(actual, "Not Equals.");
+        }
+
+        [Fact]
+        public void EqualsParameterToPropertyThrowingAlwaysReturnsFalse()
+        {
+            var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
+               .GetParameters().Single().ToElement();
+            var testFixture = new DelegatingTestFixture
+            {
+                OnCreate = x =>
+                {
+                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
+                    return 123;
+                }
+            };
+            var sut = new ParameterToPropertyComparer(testFixture);
+            var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
+                .Select(x => x.ThrowingProperty).ToElement();
+
+            var actual = sut.Equals(parameterInfoElement, propetyInfoElement);
+
+            Assert.False(actual);
         }
 
         private class TypeForPropertyEqualValue
@@ -254,6 +269,11 @@
                 set
                 {
                 }
+            }
+
+            public object ThrowingProperty
+            {
+                get { throw new NotSupportedException(); }
             }
 
             public object this[int key]
