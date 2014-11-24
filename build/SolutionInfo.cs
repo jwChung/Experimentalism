@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.1.4")]
-[assembly: AssemblyInformationalVersion("2.1.4")]
+[assembly: AssemblyVersion("2.1.5")]
+[assembly: AssemblyInformationalVersion("2.1.5")]
 
 /*
- * Version 2.1.4
+ * Version 2.1.5
  * 
- * - [Path]  Fixed that ParameterToPropertyComparer doesn't return false when
- *   getting value throws an exception.
+ * - [Path] Fixed that ParameterToPropertyComparer and ParameterToFieldComparer
+ *   doesn't return false when invoking constructor throws an exception.
  */
