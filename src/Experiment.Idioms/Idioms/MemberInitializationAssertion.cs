@@ -33,7 +33,7 @@
         {
             this.testFixture = testFixture;
         }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
         /// </summary>

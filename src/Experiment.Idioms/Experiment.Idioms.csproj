@@ -69,6 +69,7 @@
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="DisplayNameCollector.cs" />
     <Compile Include="MemberReferenceCollector.cs" />
+    <Compile Include="SpecimenBuilderComposer.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
