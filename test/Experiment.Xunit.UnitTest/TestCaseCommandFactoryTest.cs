@@ -226,15 +226,6 @@
 
         private class FakeFixtureFactory : IFixtureFactory
         {
-            public ITestFixture Create(ITestMethodContext context)
-            {
-                var specimenContext = new SpecimenContext(new Fixture());
-                var fixture = Mocked.Of<ITestFixture>();
-                fixture.ToMock().Setup(x => x.Create(It.IsAny<object>()))
-                    .Returns<object>(a => specimenContext.Resolve(a));
-                return fixture;
-            }
-
             public ISpecimenBuilder NewCreate(ITestMethodContext context)
             {
                 return new Fixture();

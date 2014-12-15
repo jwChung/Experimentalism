@@ -9,17 +9,6 @@
     public interface IFixtureFactory
     {
         /// <summary>
-        /// Creates a test fixture.
-        /// </summary>
-        /// <param name="context">
-        /// Information about a test method.
-        /// </param>
-        /// <returns>
-        /// The test fixture.
-        /// </returns>
-        ITestFixture Create(ITestMethodContext context);
-
-        /// <summary>
         /// Creates a fixture.
         /// </summary>
         /// <param name="context">

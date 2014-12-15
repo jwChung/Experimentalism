@@ -149,14 +149,6 @@
 
         private class TestAttribute : TestBaseAttribute
         {
-            protected override ITestFixture Create(ITestMethodContext context)
-            {
-                var fixture = new Fixture();
-                fixture.Inject("custom string");
-                fixture.Inject(5678);
-                return new FakeTestFixture(fixture);
-            }
-
             protected override ISpecimenBuilder NewCreate(ITestMethodContext context)
             {
                 var fixture = new Fixture();

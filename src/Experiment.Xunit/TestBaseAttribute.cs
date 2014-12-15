@@ -48,11 +48,6 @@
             get { return this.factory; }
         }
 
-        ITestFixture IFixtureFactory.Create(ITestMethodContext context)
-        {
-            return this.Create(context);
-        }
-
         ISpecimenBuilder IFixtureFactory.NewCreate(ITestMethodContext context)
         {
             return this.NewCreate(context);
@@ -73,17 +68,6 @@
         {
             return new TryCatchCommandCollection(method, this.factory.Create(method, this));
         }
-
-        /// <summary>
-        /// Creates a test fixture.
-        /// </summary>
-        /// <param name="context">
-        /// The test information about a test method.
-        /// </param>
-        /// <returns>
-        /// The test fixture.
-        /// </returns>
-        protected abstract ITestFixture Create(ITestMethodContext context);
 
         /// <summary>
         /// Creates a specimen builder.

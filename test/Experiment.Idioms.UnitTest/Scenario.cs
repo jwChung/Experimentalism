@@ -78,11 +78,6 @@
 
         private class TestAttribute : TestBaseAttribute
         {
-            protected override ITestFixture Create(ITestMethodContext context)
-            {
-                return new FakeTestFixture();
-            }
-
             protected override ISpecimenBuilder NewCreate(ITestMethodContext context)
             {
                 return new Fixture();
