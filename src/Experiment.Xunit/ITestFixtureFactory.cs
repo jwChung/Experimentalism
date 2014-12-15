@@ -1,7 +1,5 @@
-﻿namespace Jwc.Experiment
+﻿namespace Jwc.Experiment.Xunit
 {
-    using System.Reflection;
-
     /// <summary>
     /// Represents a factory to create an instance of <see cref="ITestFixture" />.
     /// </summary>

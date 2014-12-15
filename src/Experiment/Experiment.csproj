@@ -41,8 +41,6 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ITestFixture.cs" />
-    <Compile Include="ITestFixtureFactory.cs" />
-    <Compile Include="ITestMethodContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
