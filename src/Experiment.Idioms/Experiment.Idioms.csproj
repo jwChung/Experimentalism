@@ -49,11 +49,6 @@
       <HintPath>..\..\packages\AutoFixture.3.18.7\lib\net40\Ploeh.AutoFixture.dll</HintPath>
       <ILMerge>true</ILMerge>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.Idioms, Version=3.18.7.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\AutoFixture.Idioms.3.18.7\lib\net40\Ploeh.AutoFixture.Idioms.dll</HintPath>
-      <ILMerge>true</ILMerge>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -97,12 +92,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Experiment\Experiment.csproj">
-      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
-      <Name>Experiment</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\build\CodeAnalysisDictionary.xml">
