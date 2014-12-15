@@ -56,9 +56,6 @@
     <Compile Include="..\..\build\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Experiment.Xunit\SpecimenBuilderComposer.cs">
-      <Link>SpecimenBuilderComposer.cs</Link>
-    </Compile>
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="Idioms\IdiomaticAssertion.cs" />
@@ -67,6 +64,7 @@
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="DisplayNameCollector.cs" />
     <Compile Include="MemberReferenceCollector.cs" />
+    <Compile Include="SpecimenBuilderComposer.cs" />
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
