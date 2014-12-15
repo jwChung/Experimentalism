@@ -87,7 +87,6 @@
     <Compile Include="MemberKindCollectorTest.cs" />
     <Compile Include="ReferenceCollectorTest.cs" />
     <Compile Include="MemberInitializationExceptionTest.cs" />
-    <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
     <Compile Include="OrEqualityComparerTest.cs" />
     <Compile Include="ParameterToFieldComparerTest.cs" />
