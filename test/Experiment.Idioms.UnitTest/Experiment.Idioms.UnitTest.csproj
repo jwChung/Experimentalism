@@ -85,7 +85,6 @@
     <Compile Include="IndirectReferenceExceptionTest.cs" />
     <Compile Include="Idioms\IndirectReferenceAssertionTest.cs" />
     <Compile Include="Idioms\MemberInitializationAssertionTest.cs" />
-    <Compile Include="Idioms\GuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MemberKindCollectorTest.cs" />
     <Compile Include="ReferenceCollectorTest.cs" />

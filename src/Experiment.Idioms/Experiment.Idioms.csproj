@@ -78,7 +78,6 @@
     <Compile Include="IndirectReferenceException.cs" />
     <Compile Include="Idioms\IndirectReferenceAssertion.cs" />
     <Compile Include="Idioms\MemberInitializationAssertion.cs" />
-    <Compile Include="Idioms\GuardClauseAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
     <Compile Include="Idioms\IIdiomaticMemberAssertion.cs" />

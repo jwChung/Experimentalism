@@ -8,25 +8,10 @@
     using Jwc.Experiment.Idioms;
     using Jwc.Experiment.Xunit;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture.Idioms;
 
     public class Scenario
     {
-        [Test]
-        public void NullGuardClauseAssertionCorrectlyVerifiesMembers(
-            GuardClauseAssertion assertion)
-        {
-            typeof(ClassForNullGuardClause)
-                .GetIdiomaticMembers()
-                .Except(
-                    new MemberInfo[]
-                    {
-                        Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
-                        new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
-                    })
-                .ToList()
-                .ForEach(assertion.Verify);
-        }
-
         [Test]
         public void MemberInitializationAssertionCorrectlyVerifiesMembers(
             MemberInitializationAssertion assertion)
