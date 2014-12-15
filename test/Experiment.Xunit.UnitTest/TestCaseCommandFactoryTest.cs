@@ -234,6 +234,11 @@
                     .Returns<object>(a => specimenContext.Resolve(a));
                 return fixture;
             }
+
+            public IFixture NewCreate(ITestMethodContext context)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

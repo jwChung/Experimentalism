@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Ploeh.AutoFixture;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -49,6 +50,11 @@
         ITestFixture IFixtureFactory.Create(ITestMethodContext context)
         {
             return this.Create(context);
+        }
+
+        IFixture IFixtureFactory.NewCreate(ITestMethodContext context)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
