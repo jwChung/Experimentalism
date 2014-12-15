@@ -69,7 +69,7 @@
                 return false;
 
             var arguments = constructorInfo.GetParameters()
-                .Select(pi => this.fixture.Create(pi))
+                .Select(pi => this.fixture.CreateAnonymous(pi))
                 .ToArray();
             object target;
             try

@@ -6,6 +6,8 @@
     using System.Reflection;
     using Moq;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
 
     public class ObjectDisposalAssertionTest
@@ -13,38 +15,38 @@
         [Fact]
         public void SutIsIdiomaticMemberAssertion()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             Assert.IsAssignableFrom<IIdiomaticMemberAssertion>(sut);
         }
 
         [Fact]
         public void SutIsIdiomaticTypeAssertion()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
         }
 
         [Fact]
         public void InitializeWithNullTestFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ObjectDisposalAssertion(null));
+            Assert.Throws<ArgumentNullException>(() => new ObjectDisposalAssertion((IFixture)null));
         }
 
         [Fact]
-        public void TestFixtureIsCorrect()
+        public void BuilderIsCorrect()
         {
-            var testFixture = new FakeTestFixture();
-            var sut = new ObjectDisposalAssertion(testFixture);
+            var builder = new Fixture();
+            var sut = new ObjectDisposalAssertion(builder);
 
-            var actual = sut.TestFixture;
+            var actual = sut.Builder;
 
-            Assert.Equal(testFixture, actual);
+            Assert.Same(builder, actual);
         }
 
         [Fact]
         public void VerifyTypeVerifiesCorrectMembers()
         {
-            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
+            var sut = new Mock<ObjectDisposalAssertion>(new Fixture()) { CallBase = true }.Object;
             var members = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
             var type = typeof(ClassWithMembers);
@@ -58,7 +60,7 @@
         [Fact]
         public void VerifyGetSetPropertyCallsVerifyGetMethodAndSetMethod()
         {
-            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
+            var sut = new Mock<ObjectDisposalAssertion>(new Fixture()) { CallBase = true }.Object;
             var property = new Properties<ClassWithMembers>().Select(x => x.PublicProperty);
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MethodInfo>()));
 
@@ -71,7 +73,7 @@
         [Fact]
         public void VerifyPrivateGetPropertyCallsVerifySetMethod()
         {
-            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
+            var sut = new Mock<ObjectDisposalAssertion>(new Fixture()) { CallBase = true }.Object;
             var property = typeof(ClassWithMembers).GetProperty("PrivateGetProperty");
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MethodInfo>()));
 
@@ -84,7 +86,7 @@
         [Fact]
         public void VerifyPrivateSetPropertyCallsVerifyGetMethod()
         {
-            var sut = new Mock<ObjectDisposalAssertion>(new FakeTestFixture()) { CallBase = true }.Object;
+            var sut = new Mock<ObjectDisposalAssertion>(new Fixture()) { CallBase = true }.Object;
             var property = new Properties<ClassWithMembers>().Select(x => x.PrivateSetProperty);
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MethodInfo>()));
 
@@ -97,7 +99,7 @@
         [Fact]
         public void VerifyNullPropertyThrows()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             Assert.Throws<ArgumentNullException>(() => sut.Verify((PropertyInfo)null));
         }
 
@@ -105,7 +107,7 @@
         public void VerifyStaticSetPropertyDoesNotThrow()
         {
             // Fixture setup
-            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var property = typeof(ClassWithMembers).GetProperty("StaticWriteOnlyProperty");
             Assert.NotNull(property);
 
@@ -117,7 +119,7 @@
         public void VerifyStaticGetPropertyDoesNotThrow()
         {
             // Fixture setup
-            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var property = typeof(ClassWithMembers).GetProperty("StaticReadOnlyProperty");
             Assert.NotNull(property);
 
@@ -129,7 +131,7 @@
         public void VerifyInterfaceSetPropertyDoesNotThrow()
         {
             // Fixture setup
-            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var property = typeof(IInterfaceWithMembers).GetProperty("SetProperty");
             Assert.NotNull(property);
 
@@ -140,7 +142,7 @@
         [Fact]
         public void VerifyMethodDoesNotThrowWhenMethodThrowsObjectDisposedException()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var method = new Methods<ClassForDisposable>().Select(x => x.ThrowObjectDisposedException());
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
@@ -148,7 +150,7 @@
         [Fact]
         public void VerifyMethodThrowsWhenTargetIsNotDisposable()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var method = new Methods<ClassForNonDisposable>().Select(x => x.Method());
             Assert.Throws<ArgumentException>(() => sut.Verify(method));
         }
@@ -156,7 +158,7 @@
         [Fact]
         public void VerifyMethodThrowsWhenMethodDoesNotThrowObjectDisposedException()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var method = new Methods<ClassForDisposable>().Select(x => x.DoNotThrowException());
             Assert.Throws<ObjectDisposalException>(() => sut.Verify(method));
         }
@@ -164,7 +166,7 @@
         [Fact]
         public void VerifyMethodThrowsWhenMethodThrowsOtherException()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var method = new Methods<ClassForDisposable>().Select(x => x.ThrowNotSupportedException());
             Assert.Throws<TargetInvocationException>(() => sut.Verify(method));
         }
@@ -172,7 +174,7 @@
         [Fact]
         public void VerifyNullMethodThrows()
         {
-            var sut = new ObjectDisposalAssertion(new FakeTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             Assert.Throws<ArgumentNullException>(() => sut.Verify((MethodInfo)null));
         }
 
@@ -180,7 +182,7 @@
         public void VerifyStaticMethodDoesNotThrow()
         {
             // Fixture setup
-            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var method = typeof(ClassWithMembers).GetMethod("PublicStaticMethod");
             Assert.NotNull(method);
 
@@ -192,7 +194,7 @@
         public void VerifyInterfaceMethodDoesNotThrow()
         {
             // Fixture setup
-            var sut = new ObjectDisposalAssertion(new DelegatingTestFixture());
+            var sut = new ObjectDisposalAssertion(new Fixture());
             var method = typeof(IInterfaceWithMembers).GetMethod("Method");
             Assert.NotNull(method);
 
@@ -205,17 +207,16 @@
         {
             var parameters = new List<ParameterInfo>();
             var fakeFixture = new FakeTestFixture();
-            var fixture = new DelegatingTestFixture
+            var fixture = new Fixture();
+            var tracingBuilder = new TracingBuilder(fixture);
+            tracingBuilder.SpecimenCreated += (sender, args) =>
             {
-                OnCreate = x =>
-                {
-                    var parameter = x as ParameterInfo;
+                var parameter = args.Request as ParameterInfo;
                     if (parameter != null)
                         parameters.Add(parameter);
-                    return fakeFixture.Create(x);
-                }
             };
-            var sut = new ObjectDisposalAssertion(fixture);
+
+            var sut = new ObjectDisposalAssertion(tracingBuilder);
             var method = new Methods<ClassForDisposable>().Select(
                 x => x.ThrowObjectDisposedException(null));
 

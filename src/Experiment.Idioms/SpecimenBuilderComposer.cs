@@ -4,7 +4,7 @@ namespace Jwc.Experiment
 
     internal static class SpecimenBuilderComposer
     {
-        internal static object Create(this ISpecimenBuilder builder, object request)
+        internal static object CreateAnonymous(this ISpecimenBuilder builder, object request)
         {
             return new SpecimenContext(builder).Resolve(request);
         }

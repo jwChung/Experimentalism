@@ -6,6 +6,8 @@
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
     /// Encapsulates a unit test that verifies that members throw
@@ -13,31 +15,28 @@
     /// </summary>
     public class ObjectDisposalAssertion : IdiomaticMemberAssertion, IIdiomaticTypeAssertion
     {
-        private readonly ITestFixture testFixture;
-
+        private readonly ISpecimenBuilder builder;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectDisposalAssertion" /> class.
         /// </summary>
-        /// <param name="testFixture">
-        /// The test fixture to create an owner object.
+        /// <param name="builder">
+        /// The builder to create an owner object.
         /// </param>
-        public ObjectDisposalAssertion(ITestFixture testFixture)
+        public ObjectDisposalAssertion(ISpecimenBuilder builder)
         {
-            if (testFixture == null)
-                throw new ArgumentNullException("testFixture");
+            if (builder == null)
+                throw new ArgumentNullException("fixture");
 
-            this.testFixture = testFixture;
+            this.builder = builder;
         }
 
         /// <summary>
-        /// Gets a value indicating the test fixture.
+        /// Gets a value indicating the builder.
         /// </summary>
-        public ITestFixture TestFixture
+        public ISpecimenBuilder Builder
         {
-            get
-            {
-                return this.testFixture;
-            }
+            get { return this.builder; }
         }
 
         /// <summary>
@@ -146,12 +145,12 @@ Method: {1}";
 
         private IDisposable GetOwner(MethodInfo method)
         {
-            return this.TestFixture.Create(method.ReflectedType) as IDisposable;
+            return this.builder.CreateAnonymous(method.ReflectedType) as IDisposable;
         }
 
         private object[] GetArguments(IEnumerable<ParameterInfo> parameters)
         {
-            return parameters.Select(pi => this.TestFixture.Create(pi)).ToArray();
+            return parameters.Select(pi => this.builder.CreateAnonymous(pi)).ToArray();
         }
     }
 }
