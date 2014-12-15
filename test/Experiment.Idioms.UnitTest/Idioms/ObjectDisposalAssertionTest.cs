@@ -206,7 +206,6 @@
         public void VerifyMethodUsesParameterInfoToCreateArguments()
         {
             var parameters = new List<ParameterInfo>();
-            var fakeFixture = new FakeTestFixture();
             var fixture = new Fixture();
             var tracingBuilder = new TracingBuilder(fixture);
             tracingBuilder.SpecimenCreated += (sender, args) =>

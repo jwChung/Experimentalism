@@ -104,7 +104,6 @@
     <Compile Include="ClassWithMembers.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
-    <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
   </ItemGroup>
