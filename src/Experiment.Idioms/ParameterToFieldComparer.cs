@@ -14,24 +14,7 @@
     public class ParameterToFieldComparer : IEqualityComparer<IReflectionElement>
     {
         private readonly IFixture fixture;
-        private readonly ITestFixture testFixture;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParameterToFieldComparer" /> class.
-        /// </summary>
-        /// <param name="testFixture">
-        /// The test fixture to create an anonymous specimen.
-        /// </param>
-        public ParameterToFieldComparer(ITestFixture testFixture)
-        {
-            if (testFixture == null)
-            {
-                throw new ArgumentNullException("testFixture");
-            }
-
-            this.testFixture = testFixture;
-        }
-
+       
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterToFieldComparer" /> class.
         /// </summary>
@@ -44,17 +27,6 @@
                 throw new ArgumentNullException("fixture");
 
             this.fixture = fixture;
-        }
-
-        /// <summary>
-        /// Gets a value indicating the test fixture.
-        /// </summary>
-        public ITestFixture TestFixture
-        {
-            get
-            {
-                return this.testFixture;
-            }
         }
 
         /// <summary>

@@ -15,26 +15,8 @@
     public class MemberInitializationAssertion : IdiomaticAssertion
     {
         private readonly IFixture fixture;
-        private readonly ITestFixture testFixture;
         private readonly IEqualityComparer<IReflectionElement> parameterToMemberComparer;
         private readonly IEqualityComparer<IReflectionElement> memberToParameterComparer;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
-        /// </summary>
-        /// <param name="testFixture">
-        /// A test fixture to crete auto-data.
-        /// </param>
-        public MemberInitializationAssertion(ITestFixture testFixture) : this(
-            new OrEqualityComparer<IReflectionElement>(
-                new ParameterToPropertyComparer(testFixture),
-                new ParameterToFieldComparer(testFixture)),
-            new OrEqualityComparer<IReflectionElement>(
-                new PropertyToParameterComparer(testFixture),
-                new FieldToParameterComparer(testFixture)))
-        {
-            this.testFixture = testFixture;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
@@ -76,17 +58,6 @@
 
             this.parameterToMemberComparer = parameterToMemberComparer;
             this.memberToParameterComparer = memberToParameterComparer;
-        }
-
-        /// <summary>
-        /// Gets a value indicating the fixture.
-        /// </summary>
-        public ITestFixture TestFixture
-        {
-            get
-            {
-                return this.testFixture;
-            }
         }
 
         /// <summary>

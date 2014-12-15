@@ -10,20 +10,7 @@
     public class PropertyToParameterComparer : IEqualityComparer<IReflectionElement>
     {
         private readonly IFixture fixture;
-        private readonly ITestFixture testFixture;
         private readonly IEqualityComparer<IReflectionElement> comparer;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PropertyToParameterComparer" /> class.
-        /// </summary>
-        /// <param name="testFixture">
-        /// The test fixture.
-        /// </param>
-        public PropertyToParameterComparer(ITestFixture testFixture)
-        {
-            this.testFixture = testFixture;
-            this.comparer = new ParameterToPropertyComparer(testFixture);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyToParameterComparer" /> class.
@@ -35,17 +22,6 @@
         {
             this.fixture = fixture;
             this.comparer = new ParameterToPropertyComparer(fixture);
-        }
-
-        /// <summary>
-        /// Gets a value indicating the test fixture.
-        /// </summary>
-        public ITestFixture TestFixture
-        {
-            get
-            {
-                return this.testFixture;
-            }
         }
 
         /// <summary>
