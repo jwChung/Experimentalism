@@ -7,34 +7,35 @@
     using System.Reflection;
     using Ploeh.Albedo;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
     /// Represent comparer to determine that a parameter value equals to a field value.
     /// </summary>
     public class ParameterToFieldComparer : IEqualityComparer<IReflectionElement>
     {
-        private readonly IFixture fixture;
+        private readonly ISpecimenBuilder builder;
        
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterToFieldComparer" /> class.
         /// </summary>
-        /// <param name="fixture">
-        /// The fixture to create an anonymous specimen.
+        /// <param name="builder">
+        /// The builder to create an anonymous specimen.
         /// </param>
-        public ParameterToFieldComparer(IFixture fixture)
+        public ParameterToFieldComparer(ISpecimenBuilder builder)
         {
-            if (fixture == null)
-                throw new ArgumentNullException("fixture");
+            if (builder == null)
+                throw new ArgumentNullException("builder");
 
-            this.fixture = fixture;
+            this.builder = builder;
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture.
+        /// Gets a value indicating the builder.
         /// </summary>
-        public IFixture Fixture
+        public ISpecimenBuilder Builder
         {
-            get { return this.fixture; }
+            get { return this.builder; }
         }
 
         /// <summary>
@@ -69,7 +70,7 @@
                 return false;
 
             var arguments = constructorInfo.GetParameters()
-                .Select(pi => this.fixture.CreateAnonymous(pi))
+                .Select(pi => this.builder.CreateAnonymous(pi))
                 .ToArray();
             object target;
             try

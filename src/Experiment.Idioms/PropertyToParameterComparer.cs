@@ -3,33 +3,34 @@
     using System.Collections.Generic;
     using Ploeh.Albedo;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
     /// Represent comparer to determine that a property value equals to a parameter value.
     /// </summary>
     public class PropertyToParameterComparer : IEqualityComparer<IReflectionElement>
     {
-        private readonly IFixture fixture;
+        private readonly ISpecimenBuilder builder;
         private readonly IEqualityComparer<IReflectionElement> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyToParameterComparer" /> class.
         /// </summary>
-        /// <param name="fixture">
-        /// The fixture.
+        /// <param name="builder">
+        /// The builder.
         /// </param>
-        public PropertyToParameterComparer(IFixture fixture)
+        public PropertyToParameterComparer(ISpecimenBuilder builder)
         {
-            this.fixture = fixture;
-            this.comparer = new ParameterToPropertyComparer(fixture);
+            this.builder = builder;
+            this.comparer = new ParameterToPropertyComparer(builder);
         }
 
         /// <summary>
-        /// Gets a value indicating the fixture.
+        /// Gets a value indicating the builder.
         /// </summary>
-        public IFixture Fixture
+        public ISpecimenBuilder Builder
         {
-            get { return this.fixture; }
+            get { return this.builder; }
         }
 
         /// <summary>

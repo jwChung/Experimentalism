@@ -17,14 +17,14 @@
         }
 
         [Fact]
-        public void TestFixtureIsCorrect()
+        public void BuilderIsCorrect()
         {
-            var fixture = new Fixture();
-            var sut = new FieldToParameterComparer(fixture);
+            var builder = new Fixture();
+            var sut = new FieldToParameterComparer(builder);
 
-            var actual = sut.Fixture;
+            var actual = sut.Builder;
 
-            Assert.Same(fixture, actual);
+            Assert.Same(builder, actual);
         }
 
         [Fact]

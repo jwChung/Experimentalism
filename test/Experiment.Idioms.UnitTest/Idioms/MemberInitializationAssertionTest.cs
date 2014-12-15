@@ -70,8 +70,8 @@
         [Fact]
         public void ParameterToMemberComparerIsCorrectWhenInitializedWithTestFixture()
         {
-            var fixture = new Fixture();
-            var sut = new MemberInitializationAssertion(fixture);
+            var builder = new Fixture();
+            var sut = new MemberInitializationAssertion(builder);
 
             var actual = sut.ParameterToMemberComparer;
 
@@ -79,9 +79,9 @@
                 .EqualityComparers.ToArray();
             Assert.Equal(2, comparers.Length);
             var comparers1 = Assert.IsAssignableFrom<ParameterToPropertyComparer>(comparers[0]);
-            Assert.Same(fixture, comparers1.Fixture);
+            Assert.Same(builder, comparers1.Builder);
             var comparers2 = Assert.IsAssignableFrom<ParameterToFieldComparer>(comparers[1]);
-            Assert.Same(fixture, comparers2.Fixture);
+            Assert.Same(builder, comparers2.Builder);
         }
 
         [Fact]
@@ -109,20 +109,20 @@
                 .EqualityComparers.ToArray();
             Assert.Equal(2, comparers.Length);
             var comparers1 = Assert.IsAssignableFrom<PropertyToParameterComparer>(comparers[0]);
-            Assert.Same(fixture, comparers1.Fixture);
+            Assert.Same(fixture, comparers1.Builder);
             var comparers2 = Assert.IsAssignableFrom<FieldToParameterComparer>(comparers[1]);
-            Assert.Same(fixture, comparers2.Fixture);
+            Assert.Same(fixture, comparers2.Builder);
         }
 
         [Fact]
-        public void FixtureIsCorrect()
+        public void BuilderIsCorrect()
         {
-            var fixture = new Fixture();
-            var sut = new MemberInitializationAssertion(fixture);
+            var builder = new Fixture();
+            var sut = new MemberInitializationAssertion(builder);
 
-            var actual = sut.Fixture;
+            var actual = sut.Builder;
 
-            Assert.Same(fixture, actual);
+            Assert.Same(builder, actual);
         }
 
         [Fact]

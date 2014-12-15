@@ -7,6 +7,7 @@
     using System.Reflection;
     using Ploeh.Albedo;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
     /// Encapsulates a unit test that verifies that members (property or field) are correctly
@@ -14,25 +15,25 @@
     /// </summary>
     public class MemberInitializationAssertion : IdiomaticAssertion
     {
-        private readonly IFixture fixture;
+        private readonly ISpecimenBuilder builder;
         private readonly IEqualityComparer<IReflectionElement> parameterToMemberComparer;
         private readonly IEqualityComparer<IReflectionElement> memberToParameterComparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
         /// </summary>
-        /// <param name="fixture">
+        /// <param name="builder">
         /// A fixture to crete auto-data.
         /// </param>
-        public MemberInitializationAssertion(IFixture fixture) : this(
+        public MemberInitializationAssertion(ISpecimenBuilder builder) : this(
             new OrEqualityComparer<IReflectionElement>(
-                new ParameterToPropertyComparer(fixture),
-                new ParameterToFieldComparer(fixture)),
+                new ParameterToPropertyComparer(builder),
+                new ParameterToFieldComparer(builder)),
             new OrEqualityComparer<IReflectionElement>(
-                new PropertyToParameterComparer(fixture),
-                new FieldToParameterComparer(fixture)))
+                new PropertyToParameterComparer(builder),
+                new FieldToParameterComparer(builder)))
         {
-            this.fixture = fixture;
+            this.builder = builder;
         }
 
         /// <summary>
@@ -63,9 +64,9 @@
         /// <summary>
         /// Gets a value indicating the test fixture.
         /// </summary>
-        public IFixture Fixture
+        public ISpecimenBuilder Builder
         {
-            get { return this.fixture; }
+            get { return this.builder; }
         }
 
         /// <summary>
