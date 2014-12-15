@@ -32,34 +32,7 @@
 
             Assert.Same(expected, actual);
         }
-
-        [Fact]
-        [Obsolete]
-        public void FixtureIsCorrectWhenInitializedByDefaultCtor()
-        {
-            var sut = new TestFixture();
-            var actual = sut.Fixture;
-            Assert.NotNull(actual);
-        }
-
-        [Fact]
-        [Obsolete]
-        public void FixtureOmitsAutoProperties()
-        {
-            var sut = new TestFixture();
-            var actual = sut.Fixture;
-            Assert.True(actual.OmitAutoProperties);
-        }
-
-        [Fact]
-        [Obsolete]
-        public void FixtureEnablesAutoMoq()
-        {
-            var sut = new TestFixture();
-            var actual = sut.Fixture;
-            Assert.DoesNotThrow(() => actual.Create<IDisposable>());
-        }
-
+        
         [Fact]
         public void CreateReturnsCorrectSpecimen()
         {
@@ -79,17 +52,6 @@
         public void CreateTestFixtureReturnsItself(Type testFixtureType)
         {
             var sut = new TestFixture(new Fixture());
-            var actual = sut.Create(testFixtureType);
-            Assert.Same(sut, actual);
-        }
-
-        [Theory]
-        [InlineData(typeof(ITestFixture))]
-        [InlineData(typeof(TestFixture))]
-        [Obsolete]
-        public void CreateTestFixtureReturnsItselfWhenInitializedDefaultCtor(Type testFixtureType)
-        {
-            var sut = new TestFixture();
             var actual = sut.Create(testFixtureType);
             Assert.Same(sut, actual);
         }
