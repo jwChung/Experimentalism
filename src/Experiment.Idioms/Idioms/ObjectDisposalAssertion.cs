@@ -26,7 +26,7 @@
         public ObjectDisposalAssertion(ISpecimenBuilder builder)
         {
             if (builder == null)
-                throw new ArgumentNullException("fixture");
+                throw new ArgumentNullException("builder");
 
             this.builder = builder;
         }
