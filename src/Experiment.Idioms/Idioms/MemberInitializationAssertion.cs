@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
 
     /// <summary>
     /// Encapsulates a unit test that verifies that members (property or field) are correctly
@@ -13,6 +14,7 @@
     /// </summary>
     public class MemberInitializationAssertion : IdiomaticAssertion
     {
+        private readonly IFixture fixture;
         private readonly ITestFixture testFixture;
         private readonly IEqualityComparer<IReflectionElement> parameterToMemberComparer;
         private readonly IEqualityComparer<IReflectionElement> memberToParameterComparer;
@@ -33,7 +35,24 @@
         {
             this.testFixture = testFixture;
         }
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
+        /// </summary>
+        /// <param name="fixture">
+        /// A fixture to crete auto-data.
+        /// </param>
+        public MemberInitializationAssertion(IFixture fixture) : this(
+            new OrEqualityComparer<IReflectionElement>(
+                new ParameterToPropertyComparer(fixture),
+                new ParameterToFieldComparer(fixture)),
+            new OrEqualityComparer<IReflectionElement>(
+                new PropertyToParameterComparer(fixture),
+                new FieldToParameterComparer(fixture)))
+        {
+            this.fixture = fixture;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInitializationAssertion" /> class.
         /// </summary>
@@ -60,7 +79,7 @@
         }
 
         /// <summary>
-        /// Gets a value indicating the test fixture.
+        /// Gets a value indicating the fixture.
         /// </summary>
         public ITestFixture TestFixture
         {
@@ -68,6 +87,14 @@
             {
                 return this.testFixture;
             }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the test fixture.
+        /// </summary>
+        public IFixture Fixture
+        {
+            get { return this.fixture; }
         }
 
         /// <summary>
