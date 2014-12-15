@@ -16,7 +16,6 @@
                 Assembly.Load("Jwc.Experiment"),
                 Assembly.Load("Ploeh.Albedo"),
                 Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
@@ -25,8 +24,6 @@
         public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
         {
             new IndirectReferenceAssertion(
-                Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
