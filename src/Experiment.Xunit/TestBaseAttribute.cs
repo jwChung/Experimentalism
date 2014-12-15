@@ -55,7 +55,7 @@
 
         ISpecimenBuilder IFixtureFactory.NewCreate(ITestMethodContext context)
         {
-            throw new NotImplementedException();
+            return this.NewCreate(context);
         }
 
         /// <summary>

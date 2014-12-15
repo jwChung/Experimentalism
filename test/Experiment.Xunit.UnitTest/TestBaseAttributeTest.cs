@@ -6,6 +6,7 @@
     using System.Reflection;
     using Moq;
     using Moq.Protected;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -63,10 +64,10 @@
         {
             var sut = Mocked.Of<TestBaseAttribute>();
             var context = Mocked.Of<ITestMethodContext>();
-            var expected = Mocked.Of<ITestFixture>();
-            sut.ToMock().Protected().Setup<ITestFixture>("NewCreate", context).Returns(expected);
+            var expected = Mocked.Of<ISpecimenBuilder>();
+            sut.ToMock().Protected().Setup<ISpecimenBuilder>("NewCreate", context).Returns(expected);
 
-            var actual = ((IFixtureFactory)sut).Create(context);
+            var actual = ((IFixtureFactory)sut).NewCreate(context);
 
             Assert.Equal(expected, actual);
         }
