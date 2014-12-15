@@ -11,11 +11,9 @@
         {
             new RestrictiveReferenceAssertion(
                 Assembly.Load("mscorlib"),
-                Assembly.Load("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("Jwc.Experiment"),
                 Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.AutoMoq"),
                 Assembly.Load("Ploeh.AutoFixture.Xunit"))
                 .Verify(Assembly.Load("Jwc.Experiment.AutoFixture"));
         }
