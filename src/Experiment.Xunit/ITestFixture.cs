@@ -1,4 +1,4 @@
-﻿namespace Jwc.Experiment
+﻿namespace Jwc.Experiment.Xunit
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

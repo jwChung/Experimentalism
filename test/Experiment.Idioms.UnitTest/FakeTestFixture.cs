@@ -2,6 +2,7 @@ namespace Jwc.Experiment
 {
     using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Kernel;
+    using Xunit;
 
     public class FakeTestFixture : ITestFixture
     {

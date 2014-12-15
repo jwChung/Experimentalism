@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment
 {
     using System;
+    using Xunit;
 
     public class DelegatingTestFixture : ITestFixture
     {
