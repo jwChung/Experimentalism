@@ -13,7 +13,7 @@
                 Mocked.Of<IMethodInfo>(),
                 Mocked.Of<IMethodInfo>(),
                 new object(),
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 new object[0]);
             Assert.IsAssignableFrom<TestCommandContext>(sut);
         }
@@ -24,7 +24,7 @@
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
             var testObject = new object();
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
             var arguments = new[] { new object(), new object() };
 
             Assert.Throws<ArgumentNullException>(
@@ -45,7 +45,7 @@
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
             var actualObject = new object();
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
             var arguments = new[] { new object(), new object() };
 
             var sut = new TestCaseCommandContext(testMethod, actualMethod, actualObject, factory, arguments);
@@ -53,7 +53,7 @@
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
             Assert.Equal(actualObject, sut.ActualObject);
-            Assert.Equal(factory, sut.TestFixtureFactory);
+            Assert.Equal(factory, sut.FixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
 
@@ -64,7 +64,7 @@
                 Mocked.Of<IMethodInfo>(),
                 Mocked.Of<IMethodInfo>(),
                 new object(),
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 new object[0]);
             Assert.Throws<ArgumentNullException>(() => sut.GetMethodContext(null));
         }
@@ -79,7 +79,7 @@
                 testMethod,
                 actualMethod,
                 actualObject,
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 new object[0]);
             var testObject = new object();
 
@@ -98,7 +98,7 @@
                 testMethod,
                 actualMethod,
                 actualObject,
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 new object[0]);
 
             var actual = sut.GetStaticMethodContext();

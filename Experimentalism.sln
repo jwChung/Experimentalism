@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdowns", "Markdowns", "{F487D8F8-A322-4F7B-82F5-72922E2122E2}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,18 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{C893A6AC
 		build\ExperimentalismTest.ruleset = build\ExperimentalismTest.ruleset
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment", "src\Experiment\Experiment.csproj", "{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.UnitTest", "test\Experiment.UnitTest\Experiment.UnitTest.csproj", "{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{955D29E5-839E-4E13-B1C7-280876B6AE25}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture", "src\Experiment.AutoFixture\Experiment.AutoFixture.csproj", "{7F77A967-02AA-47FC-A42A-0382697B483A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.AutoFixture.UnitTest", "test\Experiment.AutoFixture.UnitTest\Experiment.AutoFixture.UnitTest.csproj", "{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{E102D7D2-FF22-43DC-A273-DF690515C276}"
 EndProject
@@ -54,22 +46,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F77A967-02AA-47FC-A42A-0382697B483A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F77A967-02AA-47FC-A42A-0382697B483A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F77A967-02AA-47FC-A42A-0382697B483A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F77A967-02AA-47FC-A42A-0382697B483A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0139B4D-E570-4EAC-B760-4C01D33CDEF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7352FC70-2780-415C-9A43-F889F7B8028D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7352FC70-2780-415C-9A43-F889F7B8028D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7352FC70-2780-415C-9A43-F889F7B8028D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -91,10 +67,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31} = {E102D7D2-FF22-43DC-A273-DF690515C276}
-		{47A1DAD4-4D1F-40CA-BEE7-E9335240621A} = {0C3DF458-C908-4D2E-9A4D-BCF7D1C760FB}
-		{7F77A967-02AA-47FC-A42A-0382697B483A} = {E102D7D2-FF22-43DC-A273-DF690515C276}
-		{B0139B4D-E570-4EAC-B760-4C01D33CDEF9} = {0C3DF458-C908-4D2E-9A4D-BCF7D1C760FB}
 		{7352FC70-2780-415C-9A43-F889F7B8028D} = {E102D7D2-FF22-43DC-A273-DF690515C276}
 		{CD942D14-856A-436B-905C-BA417767E977} = {0C3DF458-C908-4D2E-9A4D-BCF7D1C760FB}
 		{D178DCD9-76A9-4EEB-B850-4E48C70BA07D} = {E102D7D2-FF22-43DC-A273-DF690515C276}

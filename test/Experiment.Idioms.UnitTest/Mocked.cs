@@ -14,10 +14,11 @@
         public static T Of<T>(this T mocked, Expression<Func<T, bool>> predicate) where T : class
         {
             mocked.ToMock().SetupAllProperties();
-            return CreateMockQuery<T>(mocked).First(predicate);
+            return CreateMockQuery(mocked).First(predicate);
         }
 
-        public static T Of<T>(object[] arguments, Expression<Func<T, bool>> predicate) where T : class
+        public static T Of<T>(object[] arguments, Expression<Func<T, bool>> predicate)
+            where T : class
         {
             return Of<T>(arguments).Of(predicate);
         }
@@ -34,7 +35,10 @@
 
         public static T Of<T>(params object[] arguments) where T : class
         {
-            var mock = new Mock<T>(arguments) { DefaultValue = DefaultValue.Mock, CallBase = true };
+            var mock = new Mock<T>(arguments)
+            {
+                DefaultValue = DefaultValue.Mock, CallBase = true
+            };
             mock.SetupAllProperties();
             return mock.Object;
         }
@@ -46,13 +50,13 @@
 
         private static IQueryable<T> CreateMockQuery<T>(T mocked) where T : class
         {
-            return (IQueryable<T>)Mocked.GetConstructorOfMockQueryable<T>()
-                .Invoke(new object[] { Mocked.GetMethodCallExpression(mocked) });
+            return (IQueryable<T>)GetConstructorOfMockQueryable<T>()
+                .Invoke(new object[] { GetMethodCallExpression(mocked) });
         }
 
         private static ConstructorInfo GetConstructorOfMockQueryable<T>()
         {
-            return Mocked.TypeOfMockQueryable
+            return TypeOfMockQueryable
                 .MakeGenericType(typeof(T))
                 .GetConstructor(new[] { typeof(MethodCallExpression) });
         }

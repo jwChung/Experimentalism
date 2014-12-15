@@ -50,7 +50,7 @@
         {
             var sut = new TestCaseCommandFactory();
             var testMethod = new Methods<TestClass>().Select(x => x.TestMethod());
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
 
             var actual = sut.Create(Reflector.Wrap(testMethod), factory);
 
@@ -63,7 +63,7 @@
             // Fixture setup
             var testMethod = Reflector.Wrap(new Methods<TestClass>().Select(x => x.TestMethod()));
             var sut = new TestCaseCommandFactory();
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
 
             // Exercise system
             var actual = sut.Create(testMethod, factory).ToArray();
@@ -79,7 +79,7 @@
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
                 Assert.Equal(TestClass.TestObject, context.ActualObject);
-                Assert.Equal(factory, context.TestFixtureFactory);
+                Assert.Equal(factory, context.FixtureFactory);
                 Assert.Equal(TestClass.Arguments, context.ExplicitArguments);
             }
         }
@@ -90,7 +90,7 @@
             // Fixture setup
             var testMethod = Reflector.Wrap(new Methods<TestClass>().Select(x => x.StaticActualTestMethod()));
             var sut = new TestCaseCommandFactory();
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
 
             // Exercise system
             var actual = sut.Create(testMethod, factory).ToArray();
@@ -105,7 +105,7 @@
 
                 Assert.Equal(testMethod, context.TestMethod);
                 Assert.Equal(TestClass.Method, context.ActualMethod.MethodInfo);
-                Assert.Equal(factory, context.TestFixtureFactory);
+                Assert.Equal(factory, context.FixtureFactory);
                 Assert.Equal(TestClass.Arguments, context.ExplicitArguments);
             }
         }
@@ -116,7 +116,7 @@
             var sut = new TestCaseCommandFactory();
             var testMethod = Reflector.Wrap(Methods.Select(() => StaticTestClass.TestMethod()));
 
-            var actual = sut.Create(testMethod, Mocked.Of<ITestFixtureFactory>()).ToArray();
+            var actual = sut.Create(testMethod, Mocked.Of<IFixtureFactory>()).ToArray();
 
             Assert.Equal(1, actual.Length);
         }
@@ -128,7 +128,7 @@
             var testMethod = Reflector.Wrap(new Methods<TestClass>().Select(x => x.ThrowMethod()));
             Assert.DoesNotThrow(() =>
             {
-                sut.Create(testMethod, Mocked.Of<ITestFixtureFactory>());
+                sut.Create(testMethod, Mocked.Of<IFixtureFactory>());
             });
         }
 
@@ -139,7 +139,7 @@
             var testMethod = Reflector.Wrap(
                 new Methods<TestClass>().Select(x => x.TestMethod(null, 0, null)));
 
-            var actual = sut.Create(testMethod, new FakeTestFixtureFactory());
+            var actual = sut.Create(testMethod, new FakeFixtureFactory());
 
             Assert.True(actual.Any());
         }
@@ -149,10 +149,10 @@
         {
             var sut = new TestCaseCommandFactory();
             var method = new Methods<TestClass>().Select(x => x.TestMethod(null, 0, null));
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
             factory.ToMock()
                 .Setup(x => x.Create(It.IsAny<ITestMethodContext>()))
-                .Returns(new FakeTestFixture())
+                .Returns(new Fixture())
                 .Callback<ITestMethodContext>(c =>
                 {
                     Assert.Equal(method, c.TestMethod);
@@ -171,7 +171,7 @@
         {
             var sut = new TestCaseCommandFactory();
             var method = new Methods<TestClass>().Select(x => x.TestMethod());
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
 
             sut.Create(Reflector.Wrap(method), factory);
 
@@ -224,15 +224,11 @@
             }
         }
 
-        private class FakeTestFixtureFactory : ITestFixtureFactory
+        private class FakeFixtureFactory : IFixtureFactory
         {
-            public ITestFixture Create(ITestMethodContext context)
+            public ISpecimenBuilder Create(ITestMethodContext context)
             {
-                var specimenContext = new SpecimenContext(new Fixture());
-                var fixture = Mocked.Of<ITestFixture>();
-                fixture.ToMock().Setup(x => x.Create(It.IsAny<object>()))
-                    .Returns<object>(a => specimenContext.Resolve(a));
-                return fixture;
+                return new Fixture();
             }
         }
     }

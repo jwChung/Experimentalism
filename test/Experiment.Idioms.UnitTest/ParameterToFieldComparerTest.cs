@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
     using global::Xunit;
 
     public class ParameterToFieldComparerTest
@@ -12,31 +12,31 @@
         [Fact]
         public void SutIsEqualityComparer()
         {
-            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var sut = new ParameterToFieldComparer(new Fixture());
             Assert.IsAssignableFrom<IEqualityComparer<IReflectionElement>>(sut);
         }
 
         [Fact]
-        public void TestFixtureIsCorrect()
+        public void BuilderIsCorrect()
         {
-            var testFixture = new DelegatingTestFixture();
-            var sut = new ParameterToFieldComparer(testFixture);
+            var builder = new Fixture();
+            var sut = new ParameterToFieldComparer(builder);
 
-            var actual = sut.TestFixture;
+            var actual = sut.Builder;
 
-            Assert.Equal(testFixture, actual);
+            Assert.Same(builder, actual);
         }
 
         [Fact]
         public void InitializeWithNullTestFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ParameterToFieldComparer(null));
+            Assert.Throws<ArgumentNullException>(() => new ParameterToFieldComparer((IFixture)null));
         }
 
         [Fact]
         public void GetHashCodeReturnsAlwaysZero()
         {
-            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var sut = new ParameterToFieldComparer(new Fixture());
             var actual = sut.GetHashCode(null);
             Assert.Equal(0, actual);
         }
@@ -44,7 +44,7 @@
         [Fact]
         public void EqualsNonParameterToFieldReturnsFalse()
         {
-            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var sut = new ParameterToFieldComparer(new Fixture());
             var nonParameterInfoElement = GetType().ToElement();
             var fieldInfoElement = new Fields<ClassWithMembers>()
                 .Select(x => x.PublicField)
@@ -58,7 +58,7 @@
         [Fact]
         public void EqualsParameterToNonFieldReturnsFalse()
         {
-            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var sut = new ParameterToFieldComparer(new Fixture());
             var parameterInfoElement = Constructors.Select(() => new ClassWithMembers(0))
                 .GetParameters().First().ToElement();
             var nonFieldInfoElement = GetType().ToElement();
@@ -73,15 +73,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(0))
                 .GetParameters().First().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToFieldComparer(testFixture);
+            var sut = new ParameterToFieldComparer(new Fixture());
             var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
                 .Select(x => x.Value).ToElement();
 
@@ -93,7 +85,7 @@
         [Fact]
         public void EqualsParameterToFieldReturnsFalseWhenTheyRepresentDifferentReflectedTypes()
         {
-            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var sut = new ParameterToFieldComparer(new Fixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(0))
                 .GetParameters().First().ToElement();
             var fieldInfoElement = new Fields<ClassWithMembers>()
@@ -107,7 +99,7 @@
         [Fact]
         public void EqualsParameterToFieldReturnsFalseWhenParameterIsFromNonConstructor()
         {
-            var sut = new ParameterToFieldComparer(new DelegatingTestFixture());
+            var sut = new ParameterToFieldComparer(new Fixture());
             var parameterInfoElement = new Methods<TypeForFieldEqualValue>()
                 .Select(x => x.Mehtod(null))
                 .GetParameters().First().ToElement();
@@ -124,15 +116,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForFieldEqualValue(new int[0]))
                 .GetParameters().First().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return new[] { 0, 1, 2, 3, 4 };
-                }
-            };
-            var sut = new ParameterToFieldComparer(testFixture);
+            var sut = new ParameterToFieldComparer(new Fixture());
             var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
                 .Select(x => x.Values).ToElement();
 
@@ -147,15 +131,7 @@
             var parameterInfoElement = Constructors
                 .Select(() => new TypeForFieldEqualValue(default(object)))
                 .GetParameters().Single().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToFieldComparer(testFixture);
+            var sut = new ParameterToFieldComparer(new Fixture());
             var fieldInfoElement = new Fields<TypeForFieldEqualValue>()
                 .Select(x => x.Value).ToElement();
 

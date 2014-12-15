@@ -8,25 +8,12 @@
     using Jwc.Experiment.Idioms;
     using Jwc.Experiment.Xunit;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Idioms;
+    using Ploeh.AutoFixture.Kernel;
 
     public class Scenario
     {
-        [Test]
-        public void NullGuardClauseAssertionCorrectlyVerifiesMembers(
-            GuardClauseAssertion assertion)
-        {
-            typeof(ClassForNullGuardClause)
-                .GetIdiomaticMembers()
-                .Except(
-                    new MemberInfo[]
-                    {
-                        Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
-                        new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
-                    })
-                .ToList()
-                .ForEach(assertion.Verify);
-        }
-
         [Test]
         public void MemberInitializationAssertionCorrectlyVerifiesMembers(
             MemberInitializationAssertion assertion)
@@ -75,10 +62,8 @@
                 Assembly.Load("mscorlib"),
                 Assembly.Load("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
                 Assembly.Load("System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
-                Assembly.Load("Jwc.Experiment"),
                 Assembly.Load("Ploeh.Albedo"),
                 Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
@@ -87,17 +72,15 @@
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
-                Assembly.Load("Ploeh.AutoFixture"),
-                Assembly.Load("Ploeh.AutoFixture.Idioms"),
                 Assembly.Load("Mono.Reflection"))
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
         private class TestAttribute : TestBaseAttribute
         {
-            protected override ITestFixture Create(ITestMethodContext context)
+            protected override ISpecimenBuilder Create(ITestMethodContext context)
             {
-                return new FakeTestFixture();
+                return new Fixture();
             }
         }
 

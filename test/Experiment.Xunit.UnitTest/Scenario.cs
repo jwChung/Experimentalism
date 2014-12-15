@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -148,12 +149,12 @@
 
         private class TestAttribute : TestBaseAttribute
         {
-            protected override ITestFixture Create(ITestMethodContext context)
+            protected override ISpecimenBuilder Create(ITestMethodContext context)
             {
                 var fixture = new Fixture();
                 fixture.Inject("custom string");
                 fixture.Inject(5678);
-                return new FakeTestFixture(fixture);
+                return fixture;
             }
         }
     }

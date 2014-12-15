@@ -6,6 +6,7 @@
     using System.Reflection;
     using Moq;
     using Moq.Protected;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -22,7 +23,7 @@
         public void SutIsTestFixtureFactory()
         {
             var sut = Mocked.Of<TestBaseAttribute>();
-            Assert.IsAssignableFrom<ITestFixtureFactory>(sut);
+            Assert.IsAssignableFrom<IFixtureFactory>(sut);
         }
 
         [Fact]
@@ -63,10 +64,10 @@
         {
             var sut = Mocked.Of<TestBaseAttribute>();
             var context = Mocked.Of<ITestMethodContext>();
-            var expected = Mocked.Of<ITestFixture>();
-            sut.ToMock().Protected().Setup<ITestFixture>("Create", context).Returns(expected);
+            var expected = Mocked.Of<ISpecimenBuilder>();
+            sut.ToMock().Protected().Setup<ISpecimenBuilder>("NewCreate", context).Returns(expected);
 
-            var actual = ((ITestFixtureFactory)sut).Create(context);
+            var actual = ((IFixtureFactory)sut).Create(context);
 
             Assert.Equal(expected, actual);
         }
@@ -89,7 +90,7 @@
         public void CreateTestCommandReturnsCorrectCommandsWhenTestCommandFactoryThrows()
         {
             var factory = Mocked.Of<ITestCommandFactory>(
-                f => f.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()) == this.GetTestCommands());
+                f => f.Create(It.IsAny<IMethodInfo>(), It.IsAny<IFixtureFactory>()) == this.GetTestCommands());
             var sut = new Mock<TestBaseAttribute>(factory) { CallBase = true }.Object;
 
             var actual = sut.CreateTestCommands(Mocked.Of<IMethodInfo>()).ToArray();

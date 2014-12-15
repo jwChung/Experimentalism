@@ -4,6 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
     using global::Xunit;
 
     public class FieldToParameterComparerTest
@@ -11,25 +12,25 @@
         [Fact]
         public void SutIsEqualityComparer()
         {
-            var sut = new FieldToParameterComparer(new DelegatingTestFixture());
+            var sut = new FieldToParameterComparer(new Fixture());
             Assert.IsAssignableFrom<IEqualityComparer<IReflectionElement>>(sut);
         }
 
         [Fact]
-        public void TestFixtureIsCorrect()
+        public void BuilderIsCorrect()
         {
-            var testFixture = new DelegatingTestFixture();
-            var sut = new FieldToParameterComparer(testFixture);
+            var builder = new Fixture();
+            var sut = new FieldToParameterComparer(builder);
 
-            var actual = sut.TestFixture;
+            var actual = sut.Builder;
 
-            Assert.Equal(testFixture, actual);
+            Assert.Same(builder, actual);
         }
 
         [Fact]
         public void EqualsFieldToParameterWithSameValueReturnsTrue()
         {
-            var sut = new FieldToParameterComparer(new FakeTestFixture());
+            var sut = new FieldToParameterComparer(new Fixture());
             var fieldInfoElement = new Fields<ClassForFieldEqualToParameter>()
                 .Select(x => x.Value).ToElement();
             var parameterInfoElement = Constructors.Select(() => new ClassForFieldEqualToParameter(null))
@@ -43,7 +44,7 @@
         [Fact]
         public void EqualsFieldToParameterWithNotSameValueReturnsFalse()
         {
-            var sut = new FieldToParameterComparer(new FakeTestFixture());
+            var sut = new FieldToParameterComparer(new Fixture());
             var fieldInfoElement = new Fields<ClassForFieldEqualToParameter>()
                 .Select(x => x.Other).ToElement();
             var parameterInfoElement = Constructors.Select(() => new ClassForFieldEqualToParameter(null))
@@ -57,7 +58,7 @@
         [Fact]
         public void GetHashCodeReturnsZero()
         {
-            var sut = new FieldToParameterComparer(new DelegatingTestFixture());
+            var sut = new FieldToParameterComparer(new Fixture());
             var actual = sut.GetHashCode(null);
             Assert.Equal(0, actual);
         }

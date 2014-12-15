@@ -66,9 +66,6 @@
     <Compile Include="..\..\build\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Experiment.UnitTest\Mocked.cs">
-      <Link>Mocked.cs</Link>
-    </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
     <Compile Include="DelegatingAssembly.cs" />
@@ -78,6 +75,7 @@
     <Compile Include="DisplayNameCollectorTest.cs" />
     <Compile Include="MemberInfoExtensionsTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
+    <Compile Include="Mocked.cs" />
     <Compile Include="TypeExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
@@ -85,12 +83,10 @@
     <Compile Include="IndirectReferenceExceptionTest.cs" />
     <Compile Include="Idioms\IndirectReferenceAssertionTest.cs" />
     <Compile Include="Idioms\MemberInitializationAssertionTest.cs" />
-    <Compile Include="Idioms\GuardClauseAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MemberKindCollectorTest.cs" />
     <Compile Include="ReferenceCollectorTest.cs" />
     <Compile Include="MemberInitializationExceptionTest.cs" />
-    <Compile Include="FakeTestFixture.cs" />
     <Compile Include="FieldToParameterComparerTest.cs" />
     <Compile Include="OrEqualityComparerTest.cs" />
     <Compile Include="ParameterToFieldComparerTest.cs" />
@@ -107,7 +103,6 @@
     <Compile Include="ClassWithMembers.cs" />
     <Compile Include="DelegatingReflectionElementComparer.cs" />
     <Compile Include="DelegatingReflectionVisitor.cs" />
-    <Compile Include="DelegatingTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
   </ItemGroup>
@@ -123,10 +118,6 @@
     <ProjectReference Include="..\..\src\Experiment.Xunit\Experiment.Xunit.csproj">
       <Project>{d178dcd9-76a9-4eeb-b850-4e48c70ba07d}</Project>
       <Name>Experiment.Xunit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
-      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
-      <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

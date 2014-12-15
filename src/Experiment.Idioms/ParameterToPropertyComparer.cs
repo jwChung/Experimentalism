@@ -6,39 +6,36 @@
     using System.Linq;
     using System.Reflection;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
     /// Represent comparer to determine that a parameter value equals to a property value.
     /// </summary>
     public class ParameterToPropertyComparer : IEqualityComparer<IReflectionElement>
     {
-        private readonly ITestFixture testFixture;
-
+        private readonly ISpecimenBuilder builder;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterToPropertyComparer" /> class.
         /// </summary>
-        /// <param name="testFixture">
-        /// The test fixture to create an anonymous specimen.
+        /// <param name="builder">
+        /// The builder to create an anonymous specimen.
         /// </param>
-        public ParameterToPropertyComparer(ITestFixture testFixture)
+        public ParameterToPropertyComparer(ISpecimenBuilder builder)
         {
-            if (testFixture == null)
-            {
-                throw new ArgumentNullException("testFixture");
-            }
+            if (builder == null)
+                throw new ArgumentNullException("builder");
 
-            this.testFixture = testFixture;
+            this.builder = builder;
         }
 
         /// <summary>
-        /// Gets a value indicating the test fixture.
+        /// Gets a value indicating the builder.
         /// </summary>
-        public ITestFixture TestFixture
+        public ISpecimenBuilder Builder
         {
-            get
-            {
-                return this.testFixture;
-            }
+            get { return this.builder; }
         }
 
         /// <summary>
@@ -76,7 +73,7 @@
                 return false;
 
             var arguments = constructorInfo.GetParameters()
-                .Select(pi => this.TestFixture.Create(pi))
+                .Select(pi => this.builder.CreateAnonymous(pi))
                 .ToArray();
             object target;
             try

@@ -2,13 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Sdk;
 
     /// <summary>
     /// Represents base attribute to indicate that a given method is a test method.
     /// </summary>
-    public abstract class TestBaseAttribute : FactAttribute, ITestFixtureFactory
+    public abstract class TestBaseAttribute : FactAttribute, IFixtureFactory
     {
         private readonly ITestCommandFactory factory;
 
@@ -46,7 +48,7 @@
             get { return this.factory; }
         }
 
-        ITestFixture ITestFixtureFactory.Create(ITestMethodContext context)
+        ISpecimenBuilder IFixtureFactory.Create(ITestMethodContext context)
         {
             return this.Create(context);
         }
@@ -68,14 +70,14 @@
         }
 
         /// <summary>
-        /// Creates a test fixture.
+        /// Creates a specimen builder.
         /// </summary>
         /// <param name="context">
         /// The test information about a test method.
         /// </param>
         /// <returns>
-        /// The test fixture.
+        /// The specimen builder.
         /// </returns>
-        protected abstract ITestFixture Create(ITestMethodContext context);
+        protected abstract ISpecimenBuilder Create(ITestMethodContext context);
     }
 }

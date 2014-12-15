@@ -38,7 +38,7 @@
         public void CreateReturnsCorrectTestCommands()
         {
             var method = Mocked.Of<IMethodInfo>();
-            var fixtureFactory = Mocked.Of<ITestFixtureFactory>();
+            var fixtureFactory = Mocked.Of<IFixtureFactory>();
             var expected = new[] { Mocked.Of<ITestCommand>(), Mocked.Of<ITestCommand>() };
             var factory1 = Mocked.Of<ITestCommandFactory>(
                 f => f.Create(method, fixtureFactory) == new ITestCommand[0]);
@@ -60,7 +60,7 @@
         public void CreateReturnsEmptyIfAllFactoriesReturnEmpty()
         {
             var method = Mocked.Of<IMethodInfo>();
-            var fixtureFactory = Mocked.Of<ITestFixtureFactory>();
+            var fixtureFactory = Mocked.Of<IFixtureFactory>();
             var factory1 = Mocked.Of<ITestCommandFactory>(
                 f => f.Create(method, fixtureFactory) == new ITestCommand[0]);
             var factory2 = Mocked.Of<ITestCommandFactory>(
@@ -79,12 +79,12 @@
             var factory2 = Mocked.Of<ITestCommandFactory>();
             var sut = new CompositeTestCommandFactory(factory1, factory2);
 
-            sut.Create(Mocked.Of<IMethodInfo>(), Mocked.Of<ITestFixtureFactory>());
+            sut.Create(Mocked.Of<IMethodInfo>(), Mocked.Of<IFixtureFactory>());
 
             factory1.ToMock().Verify(
-                x => x.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()), Times.Never());
+                x => x.Create(It.IsAny<IMethodInfo>(), It.IsAny<IFixtureFactory>()), Times.Never());
             factory2.ToMock().Verify(
-                x => x.Create(It.IsAny<IMethodInfo>(), It.IsAny<ITestFixtureFactory>()), Times.Never());
+                x => x.Create(It.IsAny<IMethodInfo>(), It.IsAny<IFixtureFactory>()), Times.Never());
         }
     }
 }

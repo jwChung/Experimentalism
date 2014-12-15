@@ -11,7 +11,7 @@
     /// </summary>
     public abstract class TestCommandContext : ITestCommandContext
     {
-        private readonly ITestFixtureFactory factory;
+        private readonly IFixtureFactory factory;
         private readonly IEnumerable<object> arguments;
 
         /// <summary>
@@ -23,7 +23,7 @@
         /// <param name="arguments">
         /// Explicit arguments of the test method.
         /// </param>
-        protected TestCommandContext(ITestFixtureFactory factory, IEnumerable<object> arguments)
+        protected TestCommandContext(IFixtureFactory factory, IEnumerable<object> arguments)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
@@ -38,7 +38,7 @@
         /// <summary>
         /// Gets the factory to create test fixture.
         /// </summary>
-        public ITestFixtureFactory TestFixtureFactory
+        public IFixtureFactory FixtureFactory
         {
             get { return this.factory; }
         }
@@ -104,7 +104,7 @@
 
             var fixture = this.factory.Create(context);
             var autoArguments = parameters.Skip(explicitArguments.Length)
-                .Select(p => fixture.Create(p));
+                .Select(p => fixture.CreateAnonymous(p));
 
             return explicitArguments.Concat(autoArguments);
         }
