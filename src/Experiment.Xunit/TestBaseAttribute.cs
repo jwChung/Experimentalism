@@ -48,9 +48,9 @@
             get { return this.factory; }
         }
 
-        ISpecimenBuilder IFixtureFactory.NewCreate(ITestMethodContext context)
+        ISpecimenBuilder IFixtureFactory.Create(ITestMethodContext context)
         {
-            return this.NewCreate(context);
+            return this.Create(context);
         }
 
         /// <summary>
@@ -78,6 +78,6 @@
         /// <returns>
         /// The specimen builder.
         /// </returns>
-        protected abstract ISpecimenBuilder NewCreate(ITestMethodContext context);
+        protected abstract ISpecimenBuilder Create(ITestMethodContext context);
     }
 }

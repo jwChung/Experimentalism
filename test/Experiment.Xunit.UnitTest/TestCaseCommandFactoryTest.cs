@@ -151,7 +151,7 @@
             var method = new Methods<TestClass>().Select(x => x.TestMethod(null, 0, null));
             var factory = Mocked.Of<IFixtureFactory>();
             factory.ToMock()
-                .Setup(x => x.NewCreate(It.IsAny<ITestMethodContext>()))
+                .Setup(x => x.Create(It.IsAny<ITestMethodContext>()))
                 .Returns(new Fixture())
                 .Callback<ITestMethodContext>(c =>
                 {
@@ -175,7 +175,7 @@
 
             sut.Create(Reflector.Wrap(method), factory);
 
-            factory.ToMock().Verify(x => x.NewCreate(It.IsAny<ITestMethodContext>()), Times.Never());
+            factory.ToMock().Verify(x => x.Create(It.IsAny<ITestMethodContext>()), Times.Never());
         }
 
         private static class StaticTestClass
@@ -226,7 +226,7 @@
 
         private class FakeFixtureFactory : IFixtureFactory
         {
-            public ISpecimenBuilder NewCreate(ITestMethodContext context)
+            public ISpecimenBuilder Create(ITestMethodContext context)
             {
                 return new Fixture();
             }

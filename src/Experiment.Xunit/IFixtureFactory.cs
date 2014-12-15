@@ -17,6 +17,6 @@
         /// <returns>
         /// The specimen builder.
         /// </returns>
-        ISpecimenBuilder NewCreate(ITestMethodContext context);
+        ISpecimenBuilder Create(ITestMethodContext context);
     }
 }

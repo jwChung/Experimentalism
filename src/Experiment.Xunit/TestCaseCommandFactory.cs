@@ -101,7 +101,7 @@
                 if (!this.methodInfo.GetParameters().Any())
                     return new object[0];
 
-                var fixture = this.fixtureFactory.NewCreate(new TestMethodContext(
+                var fixture = this.fixtureFactory.Create(new TestMethodContext(
                     this.methodInfo,
                     this.methodInfo,
                     testObject,
