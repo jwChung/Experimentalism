@@ -25,7 +25,7 @@
         /// The new test commands.
         /// </returns>
         public IEnumerable<ITestCommand> Create(
-            IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+            IMethodInfo testMethod, IFixtureFactory fixtureFactory)
         {
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
@@ -46,10 +46,10 @@
         {
             private readonly IMethodInfo testMethod;
             private readonly MethodInfo methodInfo;
-            private readonly ITestFixtureFactory fixtureFactory;
+            private readonly IFixtureFactory fixtureFactory;
 
             public TestCommandContextCollection(
-                IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+                IMethodInfo testMethod, IFixtureFactory fixtureFactory)
             {
                 this.testMethod = testMethod;
                 this.methodInfo = testMethod.MethodInfo;

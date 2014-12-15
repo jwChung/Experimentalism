@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a factory to create an instance of <see cref="ITestFixture" />.
     /// </summary>
-    public interface ITestFixtureFactory
+    public interface IFixtureFactory
     {
         /// <summary>
         /// Creates a test fixture.

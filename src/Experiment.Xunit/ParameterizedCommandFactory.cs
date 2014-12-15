@@ -21,7 +21,7 @@
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory)
         {
             if (testMethod.MethodInfo.GetParameters().Length == 0)
                 yield break;

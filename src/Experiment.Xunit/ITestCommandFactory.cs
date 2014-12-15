@@ -20,6 +20,6 @@
         /// <returns>
         /// The new test commands.
         /// </returns>
-        IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory);
+        IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory);
     }
 }

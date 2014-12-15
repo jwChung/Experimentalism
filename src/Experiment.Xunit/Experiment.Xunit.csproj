@@ -79,7 +79,7 @@
     <Compile Include="FactCommandFactory.cs" />
     <Compile Include="ITestCommandFactory.cs" />
     <Compile Include="ITestFixture.cs" />
-    <Compile Include="ITestFixtureFactory.cs" />
+    <Compile Include="IFixtureFactory.cs" />
     <Compile Include="ITestMethodContext.cs" />
     <Compile Include="ParameterizedCommand.cs" />
     <Compile Include="ParameterizedCommandContext.cs" />

@@ -24,7 +24,7 @@
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory)
         {
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");

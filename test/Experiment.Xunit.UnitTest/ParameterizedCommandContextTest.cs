@@ -12,7 +12,7 @@
         {
             var sut = new ParameterizedCommandContext(
                 Mocked.Of<IMethodInfo>(),
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             Assert.IsAssignableFrom<TestCommandContext>(sut);
         }
@@ -21,7 +21,7 @@
         public void InitializeWithAnyNullArgumentsThrows()
         {
             var testMethod = Mocked.Of<IMethodInfo>();
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
 
             Assert.Throws<ArgumentNullException>(() => new ParameterizedCommandContext(null, factory, arguments));
@@ -33,13 +33,13 @@
         public void InitializeCorrectlyInitializesProperties()
         {
             var testMethod = Mocked.Of<IMethodInfo>();
-            var factory = Mocked.Of<ITestFixtureFactory>();
+            var factory = Mocked.Of<IFixtureFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
             
             var sut = new ParameterizedCommandContext(testMethod, factory, arguments);
 
             Assert.Equal(testMethod, sut.TestMethod);
-            Assert.Equal(factory, sut.TestFixtureFactory);
+            Assert.Equal(factory, sut.FixtureFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
 
@@ -48,7 +48,7 @@
         {
             var sut = new ParameterizedCommandContext(
                 Mocked.Of<IMethodInfo>(),
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             Assert.Throws<ArgumentNullException>(() => sut.GetMethodContext(null));
         }
@@ -59,7 +59,7 @@
             var testMethod = Mocked.Of<IMethodInfo>();
             var sut = new ParameterizedCommandContext(
                 testMethod,
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             var testObject = new object();
 
@@ -78,7 +78,7 @@
             var testMethod = Mocked.Of<IMethodInfo>();
             var sut = new ParameterizedCommandContext(
                 testMethod,
-                Mocked.Of<ITestFixtureFactory>(),
+                Mocked.Of<IFixtureFactory>(),
                 Mocked.Of<IEnumerable<object>>());
 
             var actual = sut.GetStaticMethodContext();

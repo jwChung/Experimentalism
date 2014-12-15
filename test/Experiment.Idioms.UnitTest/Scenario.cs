@@ -12,7 +12,7 @@
 
     public class Scenario
     {
-        [Test]
+        [Attribute]
         public void MemberInitializationAssertionCorrectlyVerifiesMembers(
             MemberInitializationAssertion assertion)
         {
@@ -22,7 +22,7 @@
                 .ForEach(assertion.Verify);
         }
 
-        [Test]
+        [Attribute]
         public IEnumerable<ITestCase> NullGuardClauseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -37,7 +37,7 @@
                     .Create((x, y) => y.Verify(x)));
         }
 
-        [Test]
+        [Attribute]
         public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
@@ -46,14 +46,14 @@
                         .Create((x, y) => y.Verify(x)));
         }
 
-        [Test]
+        [Attribute]
         public void NullGuardClauseAssertionCorrectlyVerifiesType(
             GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }
 
-        [Test]
+        [Attribute]
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
@@ -66,7 +66,7 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        [Test]
+        [Attribute]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
@@ -74,7 +74,7 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        private class TestAttribute : TestBaseAttribute
+        private class Attribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {

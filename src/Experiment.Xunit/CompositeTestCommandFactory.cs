@@ -46,7 +46,7 @@
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ITestFixtureFactory fixtureFactory)
+        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory)
         {
             foreach (var factory in this.factories)
             {
