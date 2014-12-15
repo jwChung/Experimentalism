@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="AssemblyTest.cs" />
     <Compile Include="OmitAutoPropertiesCustomizationTest.cs" />
-    <Compile Include="TestFixtureFactoryTest.cs" />
     <Compile Include="TestFixtureTest.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
