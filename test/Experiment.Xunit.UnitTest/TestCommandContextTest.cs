@@ -92,7 +92,7 @@
             var expected = arguments.Concat(
                 new object[] { fixture.Freeze<string>(), fixture.Freeze<int>() });
 
-            var factory = Mocked.Of<IFixtureFactory>(x => x.Create(context) == new FakeTestFixture(fixture));
+            var factory = Mocked.Of<IFixtureFactory>(x => x.NewCreate(context) == fixture);
 
             var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
@@ -115,7 +115,7 @@
 
             sut.GetArguments(context);
 
-            factory.ToMock().Verify(x => x.Create(It.IsAny<ITestMethodContext>()), Times.Never());
+            factory.ToMock().Verify(x => x.NewCreate(It.IsAny<ITestMethodContext>()), Times.Never());
         }
     }
 }

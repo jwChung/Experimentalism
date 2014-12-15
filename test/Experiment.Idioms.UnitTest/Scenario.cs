@@ -14,7 +14,7 @@
 
     public class Scenario
     {
-        [Attribute]
+        [Test]
         public void MemberInitializationAssertionCorrectlyVerifiesMembers(
             MemberInitializationAssertion assertion)
         {
@@ -24,7 +24,7 @@
                 .ForEach(assertion.Verify);
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> NullGuardClauseAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassForNullGuardClause)
@@ -39,7 +39,7 @@
                     .Create((x, y) => y.Verify(x)));
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
@@ -48,14 +48,14 @@
                         .Create((x, y) => y.Verify(x)));
         }
 
-        [Attribute]
+        [Test]
         public void NullGuardClauseAssertionCorrectlyVerifiesType(
             GuardClauseAssertion assertion)
         {
             assertion.Verify(typeof(Random));
         }
 
-        [Attribute]
+        [Test]
         public void RestrictiveAssertionCorrectlyVerifiesAssembly()
         {
             new RestrictiveReferenceAssertion(
@@ -68,7 +68,7 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        [Attribute]
+        [Test]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
             new IndirectReferenceAssertion(
@@ -76,7 +76,7 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }
 
-        private class Attribute : TestBaseAttribute
+        private class TestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
@@ -85,7 +85,7 @@
 
             protected override ISpecimenBuilder NewCreate(ITestMethodContext context)
             {
-                throw new NotImplementedException();
+                return new Fixture();
             }
         }
 

@@ -102,9 +102,9 @@
             if (explicitArguments.Length == parameters.Length)
                 return explicitArguments;
 
-            var fixture = this.factory.Create(context);
+            var fixture = this.factory.NewCreate(context);
             var autoArguments = parameters.Skip(explicitArguments.Length)
-                .Select(p => fixture.Create(p));
+                .Select(p => fixture.CreateAnonymous(p));
 
             return explicitArguments.Concat(autoArguments);
         }

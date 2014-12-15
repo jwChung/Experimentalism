@@ -12,13 +12,13 @@
     [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1204:StaticElementsMustAppearBeforeInstanceElements", Justification = "Semantically to order the test methods.")]
     public class Scenario
     {
-        [Attribute]
+        [Test]
         public void TestBaseAttributeSupportsNonParameterizedTest()
         {
             Assert.True(true, "executed.");
         }
 
-        [Attribute]
+        [Test]
         [InlineData("expected", 1234)]
         [ParameterizedTestData]
         public void TestBaseAttributeSupportsParameterizedTest(string arg1, int arg2)
@@ -27,7 +27,7 @@
             Assert.Equal(1234, arg2);
         }
 
-        [Attribute]
+        [Test]
         public void TestBaseAttributeSupportsParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
@@ -35,7 +35,7 @@
             Assert.Equal(5678, arg2);
         }
 
-        [Attribute]
+        [Test]
         [InlineData("expected")]
         public void TestBaseAttributeSupportsParameterizedTestWithMixedData(
             string arg1, int arg2)
@@ -44,14 +44,14 @@
             Assert.Equal(5678, arg2);
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForYieldReturn()
         {
             yield return TestCase.Create(() => Assert.Equal(3, 2 + 1));
             yield return TestCase.Create(() => Assert.Equal(10, 3 + 7));
         }
 
-        [Attribute]
+        [Test]
         public ITestCase[] TestBaseAttributeSupportsTestCasesForArray()
         {
             var testCases = new[]
@@ -65,7 +65,7 @@
                 .Cast<ITestCase>().ToArray();
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsTestCasesForEnumerable()
         {
             var testCases = new[]
@@ -78,7 +78,7 @@
                 c => TestCase.Create(() => new Scenario().TestBaseAttributeSupportsParameterizedTest(c.X, c.Y)));
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoData()
         {
             yield return TestCase.WithAuto<string, int>().Create((x, y) =>
@@ -88,7 +88,7 @@
             });
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoData()
         {
             var expected = "custom string";
@@ -99,7 +99,7 @@
             });
         }
 
-        [Attribute]
+        [Test]
         public static void TestBaseAttributeSupportsStaticParameterizedTestWithAutoData(
             string arg1, int arg2)
         {
@@ -107,7 +107,7 @@
             Assert.Equal(5678, arg2);
         }
 
-        [Attribute]
+        [Test]
         public static IEnumerable<ITestCase> TestBaseAttributeSupportsStaticTestCasesWithAutoDataAdornedWithStaticMethod()
         {
             yield return TestCase.WithAuto<string, int>().Create((x, y) =>
@@ -117,7 +117,7 @@
             });
         }
 
-        [Attribute]
+        [Test]
         public static IEnumerable<ITestCase> TestBaseAttributeSupportsInstanceTestCasesWithAutoDataAdornedWithStaticMethod()
         {
             var expected = "custom string";
@@ -128,7 +128,7 @@
             });
         }
 
-        [Attribute]
+        [Test]
         public IEnumerable<ITestCase> TestBaseAttributePassesAutoDataToMethodOfFirstClassTests(
             IFixture fixture)
         {
@@ -147,7 +147,7 @@
             }
         }
 
-        private class Attribute : TestBaseAttribute
+        private class TestAttribute : TestBaseAttribute
         {
             protected override ITestFixture Create(ITestMethodContext context)
             {
@@ -159,7 +159,10 @@
 
             protected override ISpecimenBuilder NewCreate(ITestMethodContext context)
             {
-                throw new NotImplementedException();
+                var fixture = new Fixture();
+                fixture.Inject("custom string");
+                fixture.Inject(5678);
+                return fixture;
             }
         }
     }

@@ -101,14 +101,14 @@
                 if (!this.methodInfo.GetParameters().Any())
                     return new object[0];
 
-                var fixture = this.fixtureFactory.Create(new TestMethodContext(
+                var fixture = this.fixtureFactory.NewCreate(new TestMethodContext(
                     this.methodInfo,
                     this.methodInfo,
                     testObject,
                     testObject));
 
                 return this.methodInfo.GetParameters()
-                    .Select(p => fixture.Create(p)).ToArray();
+                    .Select(p => fixture.CreateAnonymous(p)).ToArray();
             }
         }
     }
