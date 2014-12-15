@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Sdk;
 
@@ -52,7 +53,7 @@
             return this.Create(context);
         }
 
-        IFixture IFixtureFactory.NewCreate(ITestMethodContext context)
+        ISpecimenBuilder IFixtureFactory.NewCreate(ITestMethodContext context)
         {
             throw new NotImplementedException();
         }
@@ -83,5 +84,16 @@
         /// The test fixture.
         /// </returns>
         protected abstract ITestFixture Create(ITestMethodContext context);
+
+        /// <summary>
+        /// Creates a specimen builder.
+        /// </summary>
+        /// <param name="context">
+        /// The test information about a test method.
+        /// </param>
+        /// <returns>
+        /// The specimen builder.
+        /// </returns>
+        protected abstract ISpecimenBuilder NewCreate(ITestMethodContext context);
     }
 }

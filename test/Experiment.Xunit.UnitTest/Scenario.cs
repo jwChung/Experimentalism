@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
     using global::Xunit;
     using global::Xunit.Extensions;
 
@@ -154,6 +155,11 @@
                 fixture.Inject("custom string");
                 fixture.Inject(5678);
                 return new FakeTestFixture(fixture);
+            }
+
+            protected override ISpecimenBuilder NewCreate(ITestMethodContext context)
+            {
+                throw new NotImplementedException();
             }
         }
     }

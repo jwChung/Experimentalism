@@ -8,7 +8,9 @@
     using Jwc.Experiment.Idioms;
     using Jwc.Experiment.Xunit;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
     using Ploeh.AutoFixture.Idioms;
+    using Ploeh.AutoFixture.Kernel;
 
     public class Scenario
     {
@@ -79,6 +81,11 @@
             protected override ITestFixture Create(ITestMethodContext context)
             {
                 return new FakeTestFixture();
+            }
+
+            protected override ISpecimenBuilder NewCreate(ITestMethodContext context)
+            {
+                throw new NotImplementedException();
             }
         }
 

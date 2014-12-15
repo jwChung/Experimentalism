@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Xunit
 {
     using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
     /// Represents a factory to create an instance of <see cref="ITestFixture" />.
@@ -25,8 +26,8 @@
         /// Information about a test method.
         /// </param>
         /// <returns>
-        /// The fixture.
+        /// The specimen builder.
         /// </returns>
-        IFixture NewCreate(ITestMethodContext context);
+        ISpecimenBuilder NewCreate(ITestMethodContext context);
     }
 }

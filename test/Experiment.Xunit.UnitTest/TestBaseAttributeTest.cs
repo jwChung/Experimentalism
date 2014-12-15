@@ -64,7 +64,7 @@
             var sut = Mocked.Of<TestBaseAttribute>();
             var context = Mocked.Of<ITestMethodContext>();
             var expected = Mocked.Of<ITestFixture>();
-            sut.ToMock().Protected().Setup<ITestFixture>("Create", context).Returns(expected);
+            sut.ToMock().Protected().Setup<ITestFixture>("NewCreate", context).Returns(expected);
 
             var actual = ((IFixtureFactory)sut).Create(context);
 

@@ -235,7 +235,7 @@
                 return fixture;
             }
 
-            public IFixture NewCreate(ITestMethodContext context)
+            public ISpecimenBuilder NewCreate(ITestMethodContext context)
             {
                 throw new NotImplementedException();
             }
