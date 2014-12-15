@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
     using global::Xunit;
 
     public class ParameterToPropertyComparerTest
@@ -11,31 +12,28 @@
         [Fact]
         public void SutIsEqualityComparer()
         {
-            var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyComparer(new Fixture());
             Assert.IsAssignableFrom<IEqualityComparer<IReflectionElement>>(sut);
         }
 
         [Fact]
         public void InitializeWithNullTestFixtureThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new ParameterToPropertyComparer(null));
+            Assert.Throws<ArgumentNullException>(() => new ParameterToPropertyComparer((IFixture)null));
         }
 
         [Fact]
-        public void TestFixtureIsCorrect()
+        public void FixtureIsCorrect()
         {
-            var testFixture = new DelegatingTestFixture();
-            var sut = new ParameterToPropertyComparer(testFixture);
-
-            var actual = sut.TestFixture;
-
-            Assert.Equal(testFixture, actual);
+            var sut = new ParameterToPropertyComparer(new Fixture());
+            var actual = sut.Fixture;
+            Assert.Same(actual, actual);
         }
 
         [Fact]
         public void GetHashCodeReturnsZero()
         {
-            var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var actual = sut.GetHashCode(null);
             Assert.Equal(0, actual);
         }
@@ -43,7 +41,7 @@
         [Fact]
         public void EqualsNonParameterToPropertyReturnsFalse()
         {
-            var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var nonParameterInfoElement = GetType().ToElement();
             var propertyInfoElement = new Properties<ClassWithMembers>()
                 .Select(x => x.PublicProperty)
@@ -57,7 +55,7 @@
         [Fact]
         public void EqualsParameterToNonPropertyReturnsFalse()
         {
-            var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var parameterInfoElement = Constructors.Select(() => new ClassWithMembers(0))
                 .GetParameters().First().ToElement();
             var nonPropertyInfoElement = GetType().ToElement();
@@ -72,15 +70,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Value).ToElement();
 
@@ -92,7 +82,7 @@
         [Fact]
         public void EqualsParameterToPropertyReturnsFalseWhenTheyRepresentDifferentReflectedTypes()
         {
-            var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
             var propetyInfoElement = new Properties<Version>()
@@ -106,7 +96,7 @@
         [Fact]
         public void EqualsParameterToPropertyReturnsFalseWhenParameterIsFromNonConstructor()
         {
-            var sut = new ParameterToPropertyComparer(new DelegatingTestFixture());
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var parameterInfoElement = new Methods<TypeForPropertyEqualValue>()
                 .Select(x => x.Mehtod(null))
                 .GetParameters().First().ToElement();
@@ -123,15 +113,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var propetyInfoElement = typeof(TypeForPropertyEqualValue)
                 .GetProperty("WritableOnlyProperty").ToElement();
 
@@ -145,15 +127,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().First().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var propetyInfoElement = typeof(TypeForPropertyEqualValue)
                 .GetProperty("PrivateGetProperty").ToElement();
 
@@ -167,15 +141,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(new int[0]))
                 .GetParameters().First().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return new[] { 1, 2, 3, 4 };
-                }
-            };
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var propertyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Values).ToElement();
 
@@ -187,8 +153,7 @@
         [Fact]
         public void EqualsParameterToIndexerAlwaysReturnsFalse()
         {
-            var testFixture = new DelegatingTestFixture();
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                 .GetParameters().Single().ToElement();
             var propetyInfoElement = typeof(TypeForPropertyEqualValue)
@@ -204,15 +169,7 @@
         {
             var parameterInfoElement = Constructors.Select(() => new TypeForPropertyEqualValue(0))
                .GetParameters().Single().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.ThrowingProperty).ToElement();
 
@@ -227,15 +184,7 @@
             var parameterInfoElement = Constructors
                 .Select(() => new TypeForPropertyEqualValue(default(object)))
                 .GetParameters().Single().ToElement();
-            var testFixture = new DelegatingTestFixture
-            {
-                OnCreate = x =>
-                {
-                    Assert.Equal(parameterInfoElement.ParameterInfo, x);
-                    return 123;
-                }
-            };
-            var sut = new ParameterToPropertyComparer(testFixture);
+            var sut = new ParameterToPropertyComparer(new Fixture());
             var propetyInfoElement = new Properties<TypeForPropertyEqualValue>()
                 .Select(x => x.Value).ToElement();
 

@@ -6,12 +6,14 @@
     using System.Linq;
     using System.Reflection;
     using Ploeh.Albedo;
+    using Ploeh.AutoFixture;
 
     /// <summary>
     /// Represent comparer to determine that a parameter value equals to a property value.
     /// </summary>
     public class ParameterToPropertyComparer : IEqualityComparer<IReflectionElement>
     {
+        private readonly IFixture fixture;
         private readonly ITestFixture testFixture;
 
         /// <summary>
@@ -31,6 +33,20 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ParameterToPropertyComparer" /> class.
+        /// </summary>
+        /// <param name="fixture">
+        /// The fixture to create an anonymous specimen.
+        /// </param>
+        public ParameterToPropertyComparer(IFixture fixture)
+        {
+            if (fixture == null)
+                throw new ArgumentNullException("fixture");
+
+            this.fixture = fixture;
+        }
+
+        /// <summary>
         /// Gets a value indicating the test fixture.
         /// </summary>
         public ITestFixture TestFixture
@@ -39,6 +55,14 @@
             {
                 return this.testFixture;
             }
+        }
+
+        /// <summary>
+        /// Gets a value indicating the fixture.
+        /// </summary>
+        public IFixture Fixture
+        {
+            get { return this.fixture; }
         }
 
         /// <summary>
@@ -76,7 +100,7 @@
                 return false;
 
             var arguments = constructorInfo.GetParameters()
-                .Select(pi => this.TestFixture.Create(pi))
+                .Select(pi => this.fixture.Create(pi))
                 .ToArray();
             object target;
             try
