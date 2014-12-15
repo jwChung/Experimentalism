@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Ploeh.Albedo;
+    using Ploeh.Albedo; 
+    using Ploeh.AutoFixture;
     using global::Xunit;
 
     public class PropertyToParameterComparerTest
@@ -10,25 +11,25 @@
         [Fact]
         public void SutIsEqualityComparer()
         {
-            var sut = new PropertyToParameterComparer(new DelegatingTestFixture());
+            var sut = new PropertyToParameterComparer(new Fixture());
             Assert.IsAssignableFrom<IEqualityComparer<IReflectionElement>>(sut);
         }
 
         [Fact]
-        public void TestFixtureIsCorrect()
+        public void FixtureIsCorrect()
         {
-            var testFixture = new DelegatingTestFixture();
-            var sut = new PropertyToParameterComparer(testFixture);
+            var fixture = new Fixture();
+            var sut = new PropertyToParameterComparer(fixture);
 
-            var actual = sut.TestFixture;
+            var actual = sut.Fixture;
 
-            Assert.Equal(testFixture, actual);
+            Assert.Same(fixture, actual);
         }
 
         [Fact]
         public void EqualsPropertyToParameterWithSameValueReturnsTrue()
         {
-            var sut = new PropertyToParameterComparer(new FakeTestFixture());
+            var sut = new PropertyToParameterComparer(new Fixture());
             var propertyInfoElement = new Properties<ClassForPropertyEqualToParameter>()
                 .Select(x => x.Value).ToElement();
             var parameterInfoElement = Constructors.Select(() => new ClassForPropertyEqualToParameter(null))
@@ -42,7 +43,7 @@
         [Fact]
         public void EqualsPropertyToParameterWithNotSameValueReturnsFalse()
         {
-            var sut = new PropertyToParameterComparer(new FakeTestFixture());
+            var sut = new PropertyToParameterComparer(new Fixture());
             var propertyInfoElement = new Properties<ClassForPropertyEqualToParameter>()
                 .Select(x => x.Other).ToElement();
             var parameterInfoElement = Constructors.Select(() => new ClassForPropertyEqualToParameter(null))
@@ -56,7 +57,7 @@
         [Fact]
         public void GetHashCodeReturnsZero()
         {
-            var sut = new PropertyToParameterComparer(new DelegatingTestFixture());
+            var sut = new PropertyToParameterComparer(new Fixture());
             var actual = sut.GetHashCode(null);
             Assert.Equal(0, actual);
         }
