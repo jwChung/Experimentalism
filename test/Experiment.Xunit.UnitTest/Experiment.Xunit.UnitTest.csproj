@@ -59,7 +59,7 @@
     <Compile Include="..\..\build\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Experiment.UnitTest\Mocked.cs">
+    <Compile Include="..\Experiment.Idioms.UnitTest\Mocked.cs">
       <Link>Mocked.cs</Link>
     </Compile>
     <Compile Include="AssemblyTest.cs" />
@@ -94,10 +94,6 @@
     <ProjectReference Include="..\..\src\Experiment.Xunit\Experiment.Xunit.csproj">
       <Project>{d178dcd9-76a9-4eeb-b850-4e48c70ba07d}</Project>
       <Name>Experiment.Xunit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
-      <Project>{7e0ac9ae-046f-427d-8e9c-ce0690ff8a31}</Project>
-      <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

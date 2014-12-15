@@ -172,12 +172,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Experiment\Experiment.csproj">
-      <Project>{7e0ac9ae-046f-427d-8e9c-ce0690ff8a31}</Project>
-      <Name>Experiment</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>

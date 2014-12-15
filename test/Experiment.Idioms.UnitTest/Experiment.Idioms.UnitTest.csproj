@@ -66,9 +66,6 @@
     <Compile Include="..\..\build\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Experiment.UnitTest\Mocked.cs">
-      <Link>Mocked.cs</Link>
-    </Compile>
     <Compile Include="AccessibilityCollectorTest.cs" />
     <Compile Include="AbstractClassWithMembers.cs" />
     <Compile Include="DelegatingAssembly.cs" />
@@ -78,6 +75,7 @@
     <Compile Include="DisplayNameCollectorTest.cs" />
     <Compile Include="MemberInfoExtensionsTest.cs" />
     <Compile Include="MemberReferenceCollectorTest.cs" />
+    <Compile Include="Mocked.cs" />
     <Compile Include="TypeExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
@@ -122,10 +120,6 @@
     <ProjectReference Include="..\..\src\Experiment.Xunit\Experiment.Xunit.csproj">
       <Project>{d178dcd9-76a9-4eeb-b850-4e48c70ba07d}</Project>
       <Name>Experiment.Xunit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Experiment\Experiment.csproj">
-      <Project>{7E0AC9AE-046F-427D-8E9C-CE0690FF8A31}</Project>
-      <Name>Experiment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
