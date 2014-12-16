@@ -15,19 +15,19 @@
         /// <param name="testMethod">
         /// Information about a test method.
         /// </param>
-        /// <param name="fixtureFactory">
+        /// <param name="builderFactory">
         /// A factory of test fixture.
         /// </param>
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory)
+        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ISpecimenBuilderFactory builderFactory)
         {
             if (testMethod.MethodInfo.GetParameters().Length == 0)
                 yield break;
 
             yield return new ParameterizedCommand(
-                new ParameterizedCommandContext(testMethod, fixtureFactory, new object[0]));
+                new ParameterizedCommandContext(testMethod, builderFactory, new object[0]));
         }
     }
 }

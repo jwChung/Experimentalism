@@ -34,14 +34,14 @@
             var method = Reflector.Wrap(new Methods<ParameterizedCommandFactoryTest>().Select(
                 x => x.ParameterizedTestMethod(null)));
             var sut = new ParameterizedCommandFactory();
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
 
             var actual = sut.Create(method, factory).Single();
 
             var command = Assert.IsAssignableFrom<ParameterizedCommand>(actual);
             var context = Assert.IsAssignableFrom<ParameterizedCommandContext>(command.TestCommandContext);
             Assert.Equal(method, context.TestMethod);
-            Assert.Equal(factory, context.FixtureFactory);
+            Assert.Equal(factory, context.BuilderFactory);
             Assert.Empty(context.ExplicitArguments);
         }
 
@@ -51,14 +51,14 @@
             var method = Reflector.Wrap(new Methods<ParameterizedCommandFactoryTest>().Select(
                 x => x.ParameterizedTestMethodWithReturnValue(null)));
             var sut = new ParameterizedCommandFactory();
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
 
             var actual = sut.Create(method, factory).Single();
 
             var command = Assert.IsAssignableFrom<ParameterizedCommand>(actual);
             var context = Assert.IsAssignableFrom<ParameterizedCommandContext>(command.TestCommandContext);
             Assert.Equal(method, context.TestMethod);
-            Assert.Equal(factory, context.FixtureFactory);
+            Assert.Equal(factory, context.BuilderFactory);
             Assert.Empty(context.ExplicitArguments);
         }
 

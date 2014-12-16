@@ -14,7 +14,7 @@
         public void SutIsTestCommandContext()
         {
             var sut = Mocked.Of<TestCommandContext>(
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             Assert.IsAssignableFrom<ITestCommandContext>(sut);
         }
@@ -22,7 +22,7 @@
         [Fact]
         public void InitializeWithAnyNullArgumentsThrows()
         {
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
 
             Assert.IsType<ArgumentNullException>(Assert.Throws<TargetInvocationException>(
@@ -34,12 +34,12 @@
         [Fact]
         public void InitializeCorrectlyInitializes()
         {
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
             var arguments = Mocked.Of<IEnumerable<object>>();
 
             var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
-            Assert.Equal(factory, sut.FixtureFactory);
+            Assert.Equal(factory, sut.BuilderFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
 
@@ -47,7 +47,7 @@
         public void GetArgumentsWithNullContextThrows()
         {
             var sut = Mocked.Of<TestCommandContext>(
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 Mocked.Of<IEnumerable<object>>());
             Assert.Throws<ArgumentNullException>(() => sut.GetArguments(null));
         }
@@ -56,7 +56,7 @@
         public void GetArgumentsThrowsWhenExplicitArgumentsAreMoreThanTestMethodParameters()
         {
             var sut = Mocked.Of<TestCommandContext>(
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 new[] { "1", 1, new object() });
             var actualMethod = new Action<string, int>((x, y) => { }).Method;
             var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
@@ -69,7 +69,7 @@
         {
             var arguments = new[] { "1", 1, new object() };
             var sut = Mocked.Of<TestCommandContext>(
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 arguments);
             var actualMethod = new Action<string, int, object>((x, y, z) => { }).Method;
             var context = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
@@ -92,7 +92,7 @@
             var expected = arguments.Concat(
                 new object[] { fixture.Freeze<string>(), fixture.Freeze<int>() });
 
-            var factory = Mocked.Of<IFixtureFactory>(x => x.Create(context) == fixture);
+            var factory = Mocked.Of<ISpecimenBuilderFactory>(x => x.Create(context) == fixture);
 
             var sut = Mocked.Of<TestCommandContext>(factory, arguments);
 
@@ -106,7 +106,7 @@
         [Fact]
         public void GetArgumentsShouldNotCreateTestFixtureWhenDoesNotNeedAutoData()
         {
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
             var sut = Mocked.Of<TestCommandContext>(
                 factory,
                 new object[] { "1", 1, new object() });

@@ -18,14 +18,14 @@
         /// <param name="testMethod">
         /// Information about a test method.
         /// </param>
-        /// <param name="fixtureFactory">
+        /// <param name="builderFactory">
         /// A factory of test fixture.
         /// </param>
         /// <returns>
         /// The new test commands.
         /// </returns>
         public IEnumerable<ITestCommand> Create(
-            IMethodInfo testMethod, IFixtureFactory fixtureFactory)
+            IMethodInfo testMethod, ISpecimenBuilderFactory builderFactory)
         {
             if (testMethod == null)
                 throw new ArgumentNullException("testMethod");
@@ -33,7 +33,7 @@
             if (!IsValidSignature(testMethod.MethodInfo))
                 return Enumerable.Empty<ITestCommand>();
 
-            return new TestCommandContextCollection(testMethod, fixtureFactory)
+            return new TestCommandContextCollection(testMethod, builderFactory)
                 .Select(c => new ParameterizedCommand(c));
         }
 
@@ -46,14 +46,14 @@
         {
             private readonly IMethodInfo testMethod;
             private readonly MethodInfo methodInfo;
-            private readonly IFixtureFactory fixtureFactory;
+            private readonly ISpecimenBuilderFactory builderFactory;
 
             public TestCommandContextCollection(
-                IMethodInfo testMethod, IFixtureFactory fixtureFactory)
+                IMethodInfo testMethod, ISpecimenBuilderFactory builderFactory)
             {
                 this.testMethod = testMethod;
                 this.methodInfo = testMethod.MethodInfo;
-                this.fixtureFactory = fixtureFactory;
+                this.builderFactory = builderFactory;
             }
 
             public IEnumerator<ITestCommandContext> GetEnumerator()
@@ -80,12 +80,12 @@
                         this.testMethod,
                         Reflector.Wrap(testCase.TestMethod),
                         testCase.Target,
-                        this.fixtureFactory,
+                        this.builderFactory,
                         testCase.Arguments)
                     : new StaticTestCaseCommandContext(
                         this.testMethod,
                         Reflector.Wrap(testCase.TestMethod),
-                        this.fixtureFactory,
+                        this.builderFactory,
                         testCase.Arguments);
             }
 
@@ -101,7 +101,7 @@
                 if (!this.methodInfo.GetParameters().Any())
                     return new object[0];
 
-                var fixture = this.fixtureFactory.Create(new TestMethodContext(
+                var fixture = this.builderFactory.Create(new TestMethodContext(
                     this.methodInfo,
                     this.methodInfo,
                     testObject,

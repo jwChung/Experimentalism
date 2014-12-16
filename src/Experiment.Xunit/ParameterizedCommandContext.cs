@@ -24,7 +24,7 @@
         /// Explicit arguments of the test method.
         /// </param>
         public ParameterizedCommandContext(
-            IMethodInfo testMethod, IFixtureFactory factory, IEnumerable<object> arguments)
+            IMethodInfo testMethod, ISpecimenBuilderFactory factory, IEnumerable<object> arguments)
             : base(factory, arguments)
         {
             if (testMethod == null)

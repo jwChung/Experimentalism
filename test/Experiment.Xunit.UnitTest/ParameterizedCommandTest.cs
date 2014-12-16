@@ -170,7 +170,7 @@ namespace Jwc.Experiment.Xunit
                 new Action(() => { throw new InvalidOperationException(); }).Method);
             var sut = new ParameterizedCommand(new ParameterizedCommandContext(
                 testMethod,
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 Enumerable.Empty<object>()));
             var expectecd = new TheoryCommand(testMethod, new object[0]).DisplayName;
 

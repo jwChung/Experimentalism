@@ -10,7 +10,7 @@
     /// <summary>
     /// Represents base attribute to indicate that a given method is a test method.
     /// </summary>
-    public abstract class TestBaseAttribute : FactAttribute, IFixtureFactory
+    public abstract class TestBaseAttribute : FactAttribute, ISpecimenBuilderFactory
     {
         private readonly ITestCommandFactory factory;
 
@@ -48,7 +48,7 @@
             get { return this.factory; }
         }
 
-        ISpecimenBuilder IFixtureFactory.Create(ITestMethodContext context)
+        ISpecimenBuilder ISpecimenBuilderFactory.Create(ITestMethodContext context)
         {
             return this.Create(context);
         }

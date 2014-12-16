@@ -12,7 +12,7 @@
             var sut = new StaticTestCaseCommandContext(
                 Mocked.Of<IMethodInfo>(),
                 Mocked.Of<IMethodInfo>(),
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 new object[0]);
             Assert.IsAssignableFrom<TestCommandContext>(sut);
         }
@@ -22,7 +22,7 @@
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
             var arguments = new[] { new object(), new object() };
 
             Assert.Throws<ArgumentNullException>(
@@ -40,14 +40,14 @@
         {
             var testMethod = Mocked.Of<IMethodInfo>();
             var actualMethod = Mocked.Of<IMethodInfo>();
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
             var arguments = new[] { new object(), new object() };
 
             var sut = new StaticTestCaseCommandContext(testMethod, actualMethod, factory, arguments);
 
             Assert.Equal(testMethod, sut.TestMethod);
             Assert.Equal(actualMethod, sut.ActualMethod);
-            Assert.Equal(factory, sut.FixtureFactory);
+            Assert.Equal(factory, sut.BuilderFactory);
             Assert.Equal(arguments, sut.ExplicitArguments);
         }
 
@@ -57,7 +57,7 @@
             var sut = new StaticTestCaseCommandContext(
                 Mocked.Of<IMethodInfo>(),
                 Mocked.Of<IMethodInfo>(),
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 new object[0]);
             Assert.Throws<ArgumentNullException>(() => sut.GetMethodContext(null));
         }
@@ -70,7 +70,7 @@
             var sut = new StaticTestCaseCommandContext(
                 testMethod,
                 actualMethod,
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 new object[0]);
             var testObject = new object();
 
@@ -87,7 +87,7 @@
             var sut = new StaticTestCaseCommandContext(
                 testMethod,
                 actualMethod,
-                Mocked.Of<IFixtureFactory>(),
+                Mocked.Of<ISpecimenBuilderFactory>(),
                 new object[0]);
 
             var actual = sut.GetStaticMethodContext();

@@ -23,7 +23,7 @@
         public void SutIsTestFixtureFactory()
         {
             var sut = Mocked.Of<TestBaseAttribute>();
-            Assert.IsAssignableFrom<IFixtureFactory>(sut);
+            Assert.IsAssignableFrom<ISpecimenBuilderFactory>(sut);
         }
 
         [Fact]
@@ -67,7 +67,7 @@
             var expected = Mocked.Of<ISpecimenBuilder>();
             sut.ToMock().Protected().Setup<ISpecimenBuilder>("Create", context).Returns(expected);
 
-            var actual = ((IFixtureFactory)sut).Create(context);
+            var actual = ((ISpecimenBuilderFactory)sut).Create(context);
 
             Assert.Equal(expected, actual);
         }
@@ -90,7 +90,7 @@
         public void CreateTestCommandReturnsCorrectCommandsWhenTestCommandFactoryThrows()
         {
             var factory = Mocked.Of<ITestCommandFactory>(
-                f => f.Create(It.IsAny<IMethodInfo>(), It.IsAny<IFixtureFactory>()) == this.GetTestCommands());
+                f => f.Create(It.IsAny<IMethodInfo>(), It.IsAny<ISpecimenBuilderFactory>()) == this.GetTestCommands());
             var sut = new Mock<TestBaseAttribute>(factory) { CallBase = true }.Object;
 
             var actual = sut.CreateTestCommands(Mocked.Of<IMethodInfo>()).ToArray();

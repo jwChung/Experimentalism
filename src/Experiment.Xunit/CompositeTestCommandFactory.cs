@@ -40,18 +40,18 @@
         /// <param name="testMethod">
         /// Information about a test method.
         /// </param>
-        /// <param name="fixtureFactory">
+        /// <param name="builderFactory">
         /// A factory of test fixture.
         /// </param>
         /// <returns>
         /// The new test commands.
         /// </returns>
-        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory)
+        public IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ISpecimenBuilderFactory builderFactory)
         {
             foreach (var factory in this.factories)
             {
                 int count = 0;
-                var testCommands = factory.Create(testMethod, fixtureFactory);
+                var testCommands = factory.Create(testMethod, builderFactory);
                 foreach (var testCommand in testCommands)
                 {
                     count++;

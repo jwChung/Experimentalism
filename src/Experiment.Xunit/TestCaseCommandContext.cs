@@ -36,7 +36,7 @@
             IMethodInfo testMethod,
             IMethodInfo actualMethod,
             object actualObject,
-            IFixtureFactory factory,
+            ISpecimenBuilderFactory factory,
             IEnumerable<object> arguments)
             : base(factory, arguments)
         {

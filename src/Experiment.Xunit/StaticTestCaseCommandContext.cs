@@ -30,7 +30,7 @@
         public StaticTestCaseCommandContext(
             IMethodInfo testMethod,
             IMethodInfo actualMethod,
-            IFixtureFactory factory,
+            ISpecimenBuilderFactory factory,
             IEnumerable<object> arguments)
             : base(factory, arguments)
         {

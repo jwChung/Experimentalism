@@ -43,7 +43,7 @@
         {
             var testMethod = Reflector.Wrap((MethodInfo)MethodBase.GetCurrentMethod());
             var sut = new DataAttributeCommandFactory();
-            var factory = Mocked.Of<IFixtureFactory>();
+            var factory = Mocked.Of<ISpecimenBuilderFactory>();
 
             var actual = sut.Create(testMethod, factory).ToArray();
 
@@ -54,7 +54,7 @@
                 var context = Assert.IsAssignableFrom<ParameterizedCommandContext>(parameterizedCommand.TestCommandContext);
 
                 Assert.Equal(testMethod, context.TestMethod);
-                Assert.Equal(factory, context.FixtureFactory);
+                Assert.Equal(factory, context.BuilderFactory);
                 Assert.Equal(new object[] { "anonymous", 123 }, context.ExplicitArguments);
             }
         }

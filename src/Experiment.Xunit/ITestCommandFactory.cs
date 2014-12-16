@@ -14,12 +14,12 @@
         /// <param name="testMethod">
         /// Information about a test method.
         /// </param>
-        /// <param name="fixtureFactory">
+        /// <param name="builderFactory">
         /// A factory of test fixture.
         /// </param>
         /// <returns>
         /// The new test commands.
         /// </returns>
-        IEnumerable<ITestCommand> Create(IMethodInfo testMethod, IFixtureFactory fixtureFactory);
+        IEnumerable<ITestCommand> Create(IMethodInfo testMethod, ISpecimenBuilderFactory builderFactory);
     }
 }
