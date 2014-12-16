@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Idioms
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     /// <summary>
@@ -8,6 +9,27 @@
     /// </summary>
     public class CompositeIdiomaticAssertion : IIdiomaticAssertion
     {
+        private readonly IEnumerable<IIdiomaticAssertion> assertions;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompositeIdiomaticAssertion"/> class.
+        /// </summary>
+        /// <param name="assertions">
+        /// The assertions.
+        /// </param>
+        public CompositeIdiomaticAssertion(IEnumerable<IIdiomaticAssertion> assertions)
+        {
+            this.assertions = assertions;
+        }
+
+        /// <summary>
+        /// Gets the idiomatic assertions.
+        /// </summary>
+        public IEnumerable<IIdiomaticAssertion> Assertions
+        {
+            get { return this.assertions; }
+        }
+
         /// <summary>
         /// Verifies that the idiomatic assertion can be verified for the specified assembly.
         /// </summary>
