@@ -1,6 +1,7 @@
 ﻿namespace Jwc.Experiment.Idioms
 {
     using System.Collections.Generic;
+    using System.Reflection;
     using Ploeh.AutoFixture.Idioms;
     using Ploeh.AutoFixture.Xunit;
     using global::Xunit;
@@ -31,6 +32,16 @@
         public void SutIsIdiomaticAssertion(CompositeIdiomaticAssertion sut)
         {
             Assert.IsAssignableFrom<IIdiomaticAssertion>(sut);
+        }
+
+        [Theory, TestData]
+        public void VerifyAssemblyCorrectlyVerifies(
+            CompositeIdiomaticAssertion sut,
+            Assembly assembly)
+        {
+            sut.Verify(assembly);
+            foreach (var assertion in sut.Assertions)
+                assertion.ToMock().Verify(x => x.Verify(assembly));
         }
     }
 }

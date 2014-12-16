@@ -41,7 +41,8 @@
         /// </param>
         public void Verify(Assembly assembly)
         {
-            throw new NotImplementedException();
+            foreach (var assertion in this.assertions)
+                assertion.Verify(assembly);
         }
 
         /// <summary>
