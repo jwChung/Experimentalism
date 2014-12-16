@@ -4,12 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Jwc.Experiment;
     using Jwc.Experiment.Idioms;
     using Jwc.Experiment.Xunit;
-    using Ploeh.Albedo;
     using Ploeh.AutoFixture;
-    using Ploeh.AutoFixture.Idioms;
     using Ploeh.AutoFixture.Kernel;
 
     public class Scenario
@@ -25,34 +22,12 @@
         }
 
         [Test]
-        public IEnumerable<ITestCase> NullGuardClauseAssertionCanBeUsedInTestCases()
-        {
-            return typeof(ClassForNullGuardClause)
-                .GetIdiomaticMembers()
-                .Except(
-                    new MemberInfo[]
-                    {
-                        Constructors.Select(() => new ClassForNullGuardClause("anonymous")),
-                        new Properties<ClassForNullGuardClause>().Select(x => x.UnguradedProperty)
-                    })
-                .Select(m => TestCase.WithArgs(m).WithAuto<GuardClauseAssertion>()
-                    .Create((x, y) => y.Verify(x)));
-        }
-
-        [Test]
         public IEnumerable<ITestCase> MemberInitializationAssertionCanBeUsedInTestCases()
         {
             return typeof(ClassWithMembersInitializedByConstructor)
                 .GetIdiomaticMembers().Select(m =>
                     TestCase.WithArgs(m).WithAuto<MemberInitializationAssertion>()
                         .Create((x, y) => y.Verify(x)));
-        }
-
-        [Test]
-        public void NullGuardClauseAssertionCorrectlyVerifiesType(
-            GuardClauseAssertion assertion)
-        {
-            assertion.Verify(typeof(Random));
         }
 
         [Test]
