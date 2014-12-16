@@ -1,5 +1,6 @@
 ﻿namespace Jwc.Experiment.Idioms
 {
+    using System;
     using System.Collections.Generic;
     using System.Reflection;
     using Ploeh.AutoFixture.Idioms;
@@ -42,6 +43,16 @@
             sut.Verify(assembly);
             foreach (var assertion in sut.Assertions)
                 assertion.ToMock().Verify(x => x.Verify(assembly));
+        }
+
+        [Theory, TestData]
+        public void VerifyTypeCorrectlyVerifies(
+            CompositeIdiomaticAssertion sut,
+            Type type)
+        {
+            sut.Verify(type);
+            foreach (var assertion in sut.Assertions)
+                assertion.ToMock().Verify(x => x.Verify(type));
         }
     }
 }

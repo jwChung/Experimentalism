@@ -53,7 +53,8 @@
         /// </param>
         public void Verify(Type type)
         {
-            throw new NotImplementedException();
+            foreach (var assertion in this.assertions)
+                assertion.Verify(type);
         }
 
         /// <summary>
