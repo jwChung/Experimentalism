@@ -341,12 +341,12 @@
             Assert.DoesNotThrow(() => sut.Verify(@event));
         }
 
-        public class TypeForIndirectReference : IdiomaticMemberAssertion
+        public class TypeForIndirectReference : IdiomaticAssertion
         {
         }
 
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
-        public class ClassForIndirectReference : IdiomaticMemberAssertion
+        public class ClassForIndirectReference : IdiomaticAssertion
         {
 #pragma warning disable 649
             public Fixture Field;

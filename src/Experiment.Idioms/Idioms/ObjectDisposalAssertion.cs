@@ -13,7 +13,7 @@
     /// Encapsulates a unit test that verifies that members throw
     /// <see cref="ObjectDisposedException" /> after its owner(object) is disposed.
     /// </summary>
-    public class ObjectDisposalAssertion : IdiomaticMemberAssertion, IIdiomaticTypeAssertion
+    public class ObjectDisposalAssertion : IdiomaticAssertion
     {
         private readonly ISpecimenBuilder builder;
         
@@ -37,19 +37,6 @@
         public ISpecimenBuilder Builder
         {
             get { return this.builder; }
-        }
-
-        /// <summary>
-        /// Verifies that instance properties and methods of a given type throw
-        /// <see cref="ObjectDisposedException" /> after the instance of the type is disposed.
-        /// </summary>
-        /// <param name="type">
-        /// The type.
-        /// </param>
-        public void Verify(Type type)
-        {
-            foreach (var member in type.GetIdiomaticMembers())
-                this.Verify(member);
         }
 
         /// <summary>

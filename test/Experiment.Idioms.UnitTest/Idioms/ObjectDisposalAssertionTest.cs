@@ -16,14 +16,7 @@
         public void SutIsIdiomaticMemberAssertion()
         {
             var sut = new ObjectDisposalAssertion(new Fixture());
-            Assert.IsAssignableFrom<IIdiomaticMemberAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new ObjectDisposalAssertion(new Fixture());
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
+            Assert.IsAssignableFrom<IdiomaticAssertion>(sut);
         }
 
         [Fact]

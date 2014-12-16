@@ -68,7 +68,6 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
-    <Compile Include="Idioms\IdiomaticMemberAssertion.cs" />
     <Compile Include="Idioms\IIdiomaticAssemblyAssertion.cs" />
     <Compile Include="Idioms\IIdiomaticTypeAssertion.cs" />
     <Compile Include="IndirectReferenceException.cs" />
