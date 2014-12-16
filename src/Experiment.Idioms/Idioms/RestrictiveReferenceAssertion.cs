@@ -10,7 +10,7 @@
     /// <summary>
     /// Encapsulates a unit test that verifies that all references of an assembly are specified.
     /// </summary>
-    public class RestrictiveReferenceAssertion : IIdiomaticAssemblyAssertion
+    public class RestrictiveReferenceAssertion : IdiomaticAssertion
     {
         private readonly Assembly[] restrictiveReferences;
 
@@ -43,7 +43,7 @@
         /// <param name="assembly">
         /// The assembly.
         /// </param>
-        public void Verify(Assembly assembly)
+        public override void Verify(Assembly assembly)
         {
             var references = assembly.ToElement()
                 .Accept(new ReferenceCollector()).Value.Except(new[] { assembly })

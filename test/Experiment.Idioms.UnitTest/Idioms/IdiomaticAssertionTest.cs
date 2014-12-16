@@ -6,6 +6,7 @@
     using System.Reflection;
     using Jwc.Experiment.Xunit;
     using Moq;
+    using Ploeh.Albedo;
     using global::Xunit;
 
     public class IdiomaticAssertionTest
@@ -14,21 +15,7 @@
         public void SutIsIdiomaticAssemblyAssertion()
         {
             var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticMemberAssertion()
-        {
-            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
-            Assert.IsAssignableFrom<IdiomaticMemberAssertion>(sut);
+            Assert.IsAssignableFrom<IIdiomaticAssertion>(sut);
         }
 
         [Fact]
@@ -71,6 +58,61 @@
         {
             var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
             Assert.Throws<ArgumentNullException>(() => sut.Verify((Type)null));
+        }
+
+        [Fact]
+        public void VerifyFieldMemberCallsVerifyField()
+        {
+            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
+            var field = new Fields<ClassWithMembers>().Select(x => x.PublicField);
+
+            sut.Verify((MemberInfo)field);
+
+            sut.ToMock().Verify(x => x.Verify(field));
+        }
+
+        [Fact]
+        public void VerifyConstructorMemberCallsVerifyConstructor()
+        {
+            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
+            var constructor = Constructors.Select(() => new ClassWithMembers());
+
+            sut.Verify((MemberInfo)constructor);
+
+            sut.ToMock().Verify(x => x.Verify(constructor));
+        }
+
+        [Fact]
+        public void VerifyPropertyMemberCallsVerifyProperty()
+        {
+            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
+            var property = new Properties<ClassWithMembers>().Select(x => x.PublicProperty);
+
+            sut.Verify((MemberInfo)property);
+
+            sut.ToMock().Verify(x => x.Verify(property));
+        }
+
+        [Fact]
+        public void VerifyMethodMemberCallsVerifyMethod()
+        {
+            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
+            var method = new Methods<ClassWithMembers>().Select(x => x.PublicMethod());
+
+            sut.Verify((MemberInfo)method);
+
+            sut.ToMock().Verify(x => x.Verify(method));
+        }
+
+        [Fact]
+        public void VerifyEventMemberCallsVerifyEvent()
+        {
+            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
+            var @event = typeof(ClassWithMembers).GetEvents().First();
+
+            sut.Verify((MemberInfo)@event);
+
+            sut.ToMock().Verify(x => x.Verify(@event));
         }
     }
 }

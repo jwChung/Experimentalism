@@ -59,6 +59,7 @@
     <Compile Include="Accessibilities.cs" />
     <Compile Include="AccessibilityCollector.cs" />
     <Compile Include="Idioms\IdiomaticAssertion.cs" />
+    <Compile Include="Idioms\IIdiomaticAssertion.cs" />
     <Compile Include="Idioms\ObjectDisposalAssertion.cs" />
     <Compile Include="MemberInfoExtensions.cs" />
     <Compile Include="PropertyExtensions.cs" />
@@ -68,15 +69,11 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
-    <Compile Include="Idioms\IdiomaticMemberAssertion.cs" />
-    <Compile Include="Idioms\IIdiomaticAssemblyAssertion.cs" />
-    <Compile Include="Idioms\IIdiomaticTypeAssertion.cs" />
     <Compile Include="IndirectReferenceException.cs" />
     <Compile Include="Idioms\IndirectReferenceAssertion.cs" />
     <Compile Include="Idioms\MemberInitializationAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="FieldToParameterComparer.cs" />
-    <Compile Include="Idioms\IIdiomaticMemberAssertion.cs" />
     <Compile Include="MemberKindCollector.cs" />
     <Compile Include="ReferenceCollector.cs" />
     <Compile Include="MemberKinds.cs" />

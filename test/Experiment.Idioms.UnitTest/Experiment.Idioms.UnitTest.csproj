@@ -79,7 +79,6 @@
     <Compile Include="TypeExtensionsTest.cs" />
     <Compile Include="ObjectDisposalExceptionTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
-    <Compile Include="Idioms\IdiomaticMemberAssertionTest.cs" />
     <Compile Include="IndirectReferenceExceptionTest.cs" />
     <Compile Include="Idioms\IndirectReferenceAssertionTest.cs" />
     <Compile Include="Idioms\MemberInitializationAssertionTest.cs" />

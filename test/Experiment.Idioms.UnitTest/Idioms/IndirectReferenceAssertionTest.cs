@@ -17,21 +17,7 @@
         public void SutIsIdiomaticMemberAssertion()
         {
             var sut = new IndirectReferenceAssertion();
-            Assert.IsAssignableFrom<IIdiomaticMemberAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new IndirectReferenceAssertion();
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticAssemblyAssertion()
-        {
-            var sut = new IndirectReferenceAssertion();
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+            Assert.IsAssignableFrom<IdiomaticAssertion>(sut);
         }
 
         [Fact]
@@ -341,12 +327,12 @@
             Assert.DoesNotThrow(() => sut.Verify(@event));
         }
 
-        public class TypeForIndirectReference : IdiomaticMemberAssertion
+        public class TypeForIndirectReference : IdiomaticAssertion
         {
         }
 
         [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "The field is to test.")]
-        public class ClassForIndirectReference : IdiomaticMemberAssertion
+        public class ClassForIndirectReference : IdiomaticAssertion
         {
 #pragma warning disable 649
             public Fixture Field;
@@ -358,17 +344,17 @@
                 fixture.ToString();
             }
 
-            public ClassForIndirectReference(IIdiomaticTypeAssertion arg1, object arg2)
+            public ClassForIndirectReference(IIdiomaticAssertion arg1, object arg2)
             {
             }
 
 #pragma warning disable 67
-            public event Func<IIdiomaticTypeAssertion> Event;
+            public event Func<IIdiomaticAssertion> Event;
 #pragma warning restore 67
 
             public Fixture Property { get; set; }
 
-            public void Method(IIdiomaticTypeAssertion arg1, object arg2)
+            public void Method(IIdiomaticAssertion arg1, object arg2)
             {
             }
         }
