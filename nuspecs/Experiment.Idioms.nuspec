@@ -13,7 +13,8 @@
     <iconUrl>https://raw.githubusercontent.com/jwChung/Experimentalism/master/icon.png</iconUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
-      <dependency id="AutoFixture" version="3.18.7" />
+      <dependency id="Albedo" version="1.0.2" />
+      <dependency id="AutoFixture.Xunit" version="3.18.7" />
     </dependencies>
     <references>
       <reference file="Jwc.Experiment.Idioms.dll" />
@@ -23,8 +24,6 @@
     <file src="..\src\Experiment.Idioms\bin\Release\ILMergeOutput\Jwc.Experiment.Idioms.dll" target="lib\net40" />
     <file src="..\src\Experiment.Idioms\bin\Release\ILMergeOutput\Jwc.Experiment.Idioms.pdb" target="lib\net40" />
     <file src="..\src\Experiment.Idioms\bin\Release\Jwc.Experiment.Idioms.xml" target="lib\net40" />
-    <file src="..\packages\Albedo.1.0.2\lib\net35\Ploeh.Albedo.dll" target="lib\net40" />
-    <file src="..\packages\Albedo.1.0.2\lib\net35\Ploeh.Albedo.xml" target="lib\net40" />
     <file src="..\src\**\*.cs" target="src\net40" />
     <file src="Install.ps1" target="tools\net40" />
   </files>

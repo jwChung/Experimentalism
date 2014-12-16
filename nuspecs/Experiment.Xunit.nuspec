@@ -14,7 +14,7 @@
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="AutoFixture" version="3.18.7" />
-      <dependency id="xunit" version="1.9.0.1566" />
+      <dependency id="xunit.extensions" version="1.9.0.1566" />
     </dependencies>
     <references>
       <reference file="Jwc.Experiment.Xunit.dll" />
@@ -24,8 +24,6 @@
     <file src="..\src\Experiment.Xunit\bin\Release\Jwc.Experiment.Xunit.dll" target="lib\net40" />
     <file src="..\src\Experiment.Xunit\bin\Release\Jwc.Experiment.Xunit.pdb" target="lib\net40" />
     <file src="..\src\Experiment.Xunit\bin\Release\Jwc.Experiment.Xunit.xml" target="lib\net40" />
-    <file src="..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.dll" target="lib\net40" />
-    <file src="..\packages\xunit.extensions.1.9.0.1566\lib\xunit.extensions.xml" target="lib\net40" />
     <file src="..\src\**\*.cs" target="src\net40" />
     <file src="Install.ps1" target="tools\net40" />
   </files>
