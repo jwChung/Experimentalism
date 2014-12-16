@@ -46,7 +46,7 @@
         [Test]
         public void IndirectAssertionCorrectlyVerifiesAssembly()
         {
-            new IndirectReferenceAssertion(
+            new NotExposedReferenceAssertion(
                 Assembly.Load("Mono.Reflection"))
                 .Verify(Assembly.Load("Jwc.Experiment.Idioms"));
         }

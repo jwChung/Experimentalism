@@ -70,7 +70,7 @@
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
     <Compile Include="IndirectReferenceException.cs" />
-    <Compile Include="Idioms\IndirectReferenceAssertion.cs" />
+    <Compile Include="Idioms\NotExposedReferenceAssertion.cs" />
     <Compile Include="Idioms\MemberInitializationAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />
     <Compile Include="FieldToParameterComparer.cs" />

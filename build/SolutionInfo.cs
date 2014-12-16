@@ -22,4 +22,6 @@ using System.Runtime.InteropServices;
  *   
  * - [Major] Removed the old abstractions for test fixture, which is replaced
  *   with the AutoFixture abstractions.
+ *   
+ * - [Major] Renamed IndirectReferenceAssertion to NotExposedReferenceAssertion.
  */

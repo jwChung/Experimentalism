@@ -184,7 +184,7 @@
         [Fact]
         public void SutDoesNotEnumerateNestedTypes()
         {
-            var sut = new IdiomaticMembers(typeof(IndirectReferenceAssertionTest), MemberKinds.Default);
+            var sut = new IdiomaticMembers(typeof(NotExposedReferenceAssertionTest), MemberKinds.Default);
             var actual = sut.ToArray();
             Assert.True(actual.All(m => !(m is Type)), "No Types.");
         }

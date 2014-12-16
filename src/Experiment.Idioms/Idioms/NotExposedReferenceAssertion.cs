@@ -11,19 +11,19 @@
     /// <summary>
     /// Encapsulates a unit test that verifies that certain assemblies are not exposed through public API.
     /// </summary>
-    public class IndirectReferenceAssertion : IdiomaticAssertion
+    public class NotExposedReferenceAssertion : IdiomaticAssertion
     {
         private readonly MemberReferenceCollector memberReferenceCollector = new MemberReferenceCollector();
         private readonly AccessibilityCollector accessibilityCollector = new AccessibilityCollector();
         private readonly Assembly[] indirectReferences;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IndirectReferenceAssertion" /> class.
+        /// Initializes a new instance of the <see cref="NotExposedReferenceAssertion" /> class.
         /// </summary>
         /// <param name="indirectReferences">
         /// The indirect references which should not be exposed though API.
         /// </param>
-        public IndirectReferenceAssertion(params Assembly[] indirectReferences)
+        public NotExposedReferenceAssertion(params Assembly[] indirectReferences)
         {
             if (indirectReferences == null)
                 throw new ArgumentNullException("indirectReferences");

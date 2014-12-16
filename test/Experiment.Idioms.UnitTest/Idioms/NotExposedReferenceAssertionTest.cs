@@ -11,19 +11,19 @@
     using global::Xunit;
     using global::Xunit.Extensions;
 
-    public class IndirectReferenceAssertionTest
+    public class NotExposedReferenceAssertionTest
     {
         [Fact]
         public void SutIsIdiomaticMemberAssertion()
         {
-            var sut = new IndirectReferenceAssertion();
+            var sut = new NotExposedReferenceAssertion();
             Assert.IsAssignableFrom<IdiomaticAssertion>(sut);
         }
 
         [Fact]
         public void InitializeWithNullIndirectReferencesThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => new IndirectReferenceAssertion(null));
+            Assert.Throws<ArgumentNullException>(() => new NotExposedReferenceAssertion(null));
         }
 
         [Fact]
@@ -34,7 +34,7 @@
                 typeof(object).Assembly,
                 Assembly.Load("Ploeh.AutoFixture")
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
 
             var actual = sut.IndirectReferences;
 
@@ -46,7 +46,7 @@
         {
             // Fixture setup
             var arguments = new object[] { new Assembly[0] };
-            var sut = new Mock<IndirectReferenceAssertion>(arguments) { CallBase = true }.Object;
+            var sut = new Mock<NotExposedReferenceAssertion>(arguments) { CallBase = true }.Object;
             
             var types = new List<Type>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<Type>())).Callback<Type>(types.Add);
@@ -64,7 +64,7 @@
         [Fact]
         public void VerifyNullAssemblyThrows()
         {
-            var sut = new IndirectReferenceAssertion();
+            var sut = new NotExposedReferenceAssertion();
             Assert.Throws<ArgumentNullException>(() => sut.Verify((Assembly)null));
         }
 
@@ -73,7 +73,7 @@
         {
             // Fixture setup
             var arguments = new object[] { new Assembly[0] };
-            var sut = new Mock<IndirectReferenceAssertion>(arguments) { CallBase = true }.Object;
+            var sut = new Mock<NotExposedReferenceAssertion>(arguments) { CallBase = true }.Object;
 
             var members = new List<MemberInfo>();
             sut.ToMock().Setup(x => x.Verify(It.IsAny<MemberInfo>())).Callback<MemberInfo>(members.Add);
@@ -95,7 +95,7 @@
             {
                 Assembly.Load("Jwc.Experiment.Idioms")
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var type = typeof(TypeForIndirectReference);
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(type));
@@ -106,7 +106,7 @@
         public void VerifyUnexposedTypeIgnoresVerifying()
         {
             var type = typeof(object).Assembly.GetTypes().First(t => t.IsNotPublic);
-            var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
+            var sut = new NotExposedReferenceAssertion(new[] { typeof(object).Assembly });
             Assert.DoesNotThrow(() => sut.Verify(type));
         }
         
@@ -117,7 +117,7 @@
             {
                 GetType().Assembly
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var field = new Fields<ClassForIndirectReference>().Select(x => x.Field);
 
             Assert.DoesNotThrow(() => sut.Verify(field));
@@ -132,7 +132,7 @@
                 Assembly.Load("Ploeh.AutoFixture"),
                 typeof(object).Assembly
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var field = new Fields<ClassForIndirectReference>().Select(x => x.Field);
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(field));
@@ -146,7 +146,7 @@
             {
                 Assembly.Load("Ploeh.AutoFixture")
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var constructor = Constructors.Select(() => new ClassForIndirectReference(null, null));
             var field = new Fields<ClassForIndirectReference>().Select(x => x.Field);
 
@@ -162,7 +162,7 @@
             var field = Mock.Of<FieldInfo>(x =>
                 x.Attributes == attributes &&
                 x.FieldType == typeof(object));
-            var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
+            var sut = new NotExposedReferenceAssertion(new[] { typeof(object).Assembly });
             Assert.DoesNotThrow(() => sut.Verify(field));
         }
 
@@ -173,7 +173,7 @@
             {
                 GetType().Assembly
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var constructor = Constructors.Select(() => new ClassForIndirectReference(null, null));
 
             Assert.DoesNotThrow(() => sut.Verify(constructor));
@@ -187,7 +187,7 @@
                 GetType().Assembly,
                 Assembly.Load("Jwc.Experiment.Idioms")
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var constructor = Constructors.Select(() => new ClassForIndirectReference(null, null));
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(constructor));
@@ -201,7 +201,7 @@
             {
                 Assembly.Load("Ploeh.AutoFixture")
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var constructor = Constructors.Select(() => new ClassForIndirectReference());
 
             Assert.DoesNotThrow(() => sut.Verify(constructor));
@@ -217,7 +217,7 @@
                 x =>
                 x.Attributes == attributes &&
                 x.GetParameters() == parameterInfos);
-            var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
+            var sut = new NotExposedReferenceAssertion(new[] { typeof(object).Assembly });
             Assert.DoesNotThrow(() => sut.Verify(constructor));
         }
 
@@ -228,7 +228,7 @@
             {
                 GetType().Assembly
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var property = new Properties<ClassForIndirectReference>().Select(x => x.Property);
 
             Assert.DoesNotThrow(() => sut.Verify(property));
@@ -243,7 +243,7 @@
                 Assembly.Load("Ploeh.AutoFixture"),
                 typeof(object).Assembly
             };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var property = new Properties<ClassForIndirectReference>().Select(x => x.Property);
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(property));
@@ -257,7 +257,7 @@
         {
             var getMethod = Mock.Of<MethodInfo>(x => x.Attributes == attributes && x.ReturnType == typeof(object));
             var propertyInfo = Mock.Of<PropertyInfo>(x => x.GetGetMethod(true) == getMethod);
-            var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
+            var sut = new NotExposedReferenceAssertion(new[] { typeof(object).Assembly });
 
             Assert.DoesNotThrow(() => sut.Verify(propertyInfo));
         }
@@ -266,7 +266,7 @@
         public void VerifyMethodDoesNotThrowWhenMethodDoesNotExposeAnyIndirectReference()
         {
             var indirectReferences = new[] { GetType().Assembly };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var method = new Methods<ClassForIndirectReference>().Select(x => x.Method(null, null));
 
             Assert.DoesNotThrow(() => sut.Verify(method));
@@ -276,7 +276,7 @@
         public void VerifyMethodThrowsWhenMethodExposesAnyIndirectReference()
         {
             var indirectReferences = new[] { GetType().Assembly, Assembly.Load("Jwc.Experiment.Idioms") };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var method = new Methods<ClassForIndirectReference>().Select(x => x.Method(null, null));
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(method));
@@ -289,7 +289,7 @@
         public void VerifyUnexposedMethodIgnoresVerifying(MethodAttributes attributes)
         {
             var method = Mock.Of<MethodInfo>(x => x.Attributes == attributes && x.ReturnType == typeof(object));
-            var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
+            var sut = new NotExposedReferenceAssertion(new[] { typeof(object).Assembly });
             Assert.DoesNotThrow(() => sut.Verify(method));
         }
 
@@ -297,7 +297,7 @@
         public void VerifyEventDoesNotThrowWhenMethodDoesNotExposeAnyIndirectReference()
         {
             var indirectReferences = new[] { GetType().Assembly };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var @event = typeof(ClassForIndirectReference).GetEvent("Event");
 
             Assert.DoesNotThrow(() => sut.Verify(@event));
@@ -307,7 +307,7 @@
         public void VerifyEventThrowsWhenEventExposesAnyIndirectReference()
         {
             var indirectReferences = new[] { GetType().Assembly, Assembly.Load("Jwc.Experiment.Idioms") };
-            var sut = new IndirectReferenceAssertion(indirectReferences);
+            var sut = new NotExposedReferenceAssertion(indirectReferences);
             var @event = typeof(ClassForIndirectReference).GetEvent("Event");
 
             var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(@event));
@@ -322,7 +322,7 @@
             var addMethod = Mock.Of<MethodInfo>(x => x.Attributes == attributes && x.ReturnType == typeof(object));
             var @event = Mock.Of<EventInfo>(
                 x => x.GetAddMethod(true) == addMethod && x.GetRemoveMethod(true) == addMethod);
-            var sut = new IndirectReferenceAssertion(new[] { typeof(object).Assembly });
+            var sut = new NotExposedReferenceAssertion(new[] { typeof(object).Assembly });
 
             Assert.DoesNotThrow(() => sut.Verify(@event));
         }

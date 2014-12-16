@@ -88,7 +88,7 @@
     <Compile Include="ObjectDisposalExceptionTest.cs" />
     <Compile Include="IdiomaticMembersTest.cs" />
     <Compile Include="IndirectReferenceExceptionTest.cs" />
-    <Compile Include="Idioms\IndirectReferenceAssertionTest.cs" />
+    <Compile Include="Idioms\NotExposedReferenceAssertionTest.cs" />
     <Compile Include="Idioms\MemberInitializationAssertionTest.cs" />
     <Compile Include="IHierarchical.cs" />
     <Compile Include="MemberKindCollectorTest.cs" />

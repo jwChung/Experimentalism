@@ -3,6 +3,7 @@
     using System.Reflection;
     using Jwc.Experiment.Idioms;
     using global::Xunit;
+    using global::Xunit.Extensions;
 
     public class AssemblyTest
     {
@@ -20,11 +21,11 @@
                 .Verify(Assembly.Load("Jwc.Experiment.Xunit"));
         }
 
-        [Fact]
-        public void SutDoesNotExposeAnyTypesOfSpecifiedAssemblies()
+        [Theory]
+        [InlineData("xunit.extensions")] // Not il-merged
+        public void SutDoesNotExposeSpecifiedAssemblies(string assembly)
         {
-            new IndirectReferenceAssertion(
-                Assembly.Load("xunit.extensions")) // Not il-merged
+            new NotExposedReferenceAssertion(Assembly.Load(assembly))
                 .Verify(Assembly.Load("Jwc.Experiment.Xunit"));
         }
     }
