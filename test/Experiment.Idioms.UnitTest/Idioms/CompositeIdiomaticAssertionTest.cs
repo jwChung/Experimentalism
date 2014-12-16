@@ -54,5 +54,15 @@
             foreach (var assertion in sut.Assertions)
                 assertion.ToMock().Verify(x => x.Verify(type));
         }
+
+        [Theory, TestData]
+        public void VerifyMemberCorrectlyVerifies(
+            CompositeIdiomaticAssertion sut,
+            MemberInfo member)
+        {
+            sut.Verify(member);
+            foreach (var assertion in sut.Assertions)
+                assertion.ToMock().Verify(x => x.Verify(member));
+        }
     }
 }

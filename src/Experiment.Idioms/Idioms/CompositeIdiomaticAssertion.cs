@@ -65,7 +65,8 @@
         /// </param>
         public void Verify(MemberInfo member)
         {
-            throw new NotImplementedException();
+            foreach (var assertion in this.assertions)
+                assertion.Verify(member);
         }
     }
 }
