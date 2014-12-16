@@ -15,21 +15,7 @@
         public void SutIsIdiomaticAssemblyAssertion()
         {
             var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticMemberAssertion()
-        {
-            var sut = new Mock<IdiomaticAssertion> { CallBase = true }.Object;
-            Assert.IsAssignableFrom<IIdiomaticMemberAssertion>(sut);
+            Assert.IsAssignableFrom<IIdiomaticAssertion>(sut);
         }
 
         [Fact]

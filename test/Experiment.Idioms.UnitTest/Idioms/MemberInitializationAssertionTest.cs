@@ -19,21 +19,7 @@
             var sut = new MemberInitializationAssertion(
                 EqualityComparer<IReflectionElement>.Default,
                 EqualityComparer<IReflectionElement>.Default);
-            Assert.IsAssignableFrom<IIdiomaticMemberAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticTypeAssertion()
-        {
-            var sut = new MemberInitializationAssertion(new Fixture());
-            Assert.IsAssignableFrom<IIdiomaticTypeAssertion>(sut);
-        }
-
-        [Fact]
-        public void SutIsIdiomaticAssemblyAssertion()
-        {
-            var sut = new MemberInitializationAssertion(new Fixture());
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+            Assert.IsAssignableFrom<IdiomaticAssertion>(sut);
         }
 
         [Fact]

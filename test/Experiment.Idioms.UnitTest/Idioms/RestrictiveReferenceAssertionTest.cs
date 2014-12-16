@@ -14,7 +14,7 @@
         public void SutIsIdiomaticAssemblyAssertion()
         {
             var sut = new RestrictiveReferenceAssertion();
-            Assert.IsAssignableFrom<IIdiomaticAssemblyAssertion>(sut);
+            Assert.IsAssignableFrom<IdiomaticAssertion>(sut);
         }
 
         [Fact]

@@ -5,11 +5,9 @@
     using System.Reflection;
 
     /// <summary>
-    /// Represents base class implementing <see cref="IIdiomaticAssemblyAssertion" />,
-    /// <see cref="IIdiomaticTypeAssertion" /> and <see cref="IIdiomaticMemberAssertion" />.
+    /// Represents base class implementing <see cref="IIdiomaticAssertion" />.
     /// </summary>
-    public abstract class IdiomaticAssertion
-        : IIdiomaticMemberAssertion, IIdiomaticAssemblyAssertion, IIdiomaticTypeAssertion
+    public abstract class IdiomaticAssertion : IIdiomaticAssertion
     {
         /// <summary>
         /// Verifies that the idiomatic assertion can be verified for the specified assembly.
