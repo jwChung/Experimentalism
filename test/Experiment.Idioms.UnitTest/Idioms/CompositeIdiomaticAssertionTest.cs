@@ -23,16 +23,27 @@
         }
 
         [Theory, TestData]
-        public void SutCorrectlyInitializesMembers(
-            ConstructorInitializedMemberAssertion assertion)
-        {
-            assertion.Verify(typeof(CompositeIdiomaticAssertion));
-        }
-
-        [Theory, TestData]
         public void SutIsIdiomaticAssertion(CompositeIdiomaticAssertion sut)
         {
             Assert.IsAssignableFrom<IIdiomaticAssertion>(sut);
+        }
+
+        [Theory, TestData]
+        public void AssertionsIsCorrectWhenInitializedWithIEnumerable(
+            [Frozen] IEnumerable<IIdiomaticAssertion> assetions,
+            [FavorEnumerables] CompositeIdiomaticAssertion sut)
+        {
+            var actual = sut.Assertions;
+            Assert.Equal(assetions, actual);
+        }
+
+        [Theory, TestData]
+        public void AssertionsIsCorrectWhenInitializedWithArray(
+            [Frozen] IIdiomaticAssertion[] assetions,
+            [FavorArrays] CompositeIdiomaticAssertion sut)
+        {
+            var actual = sut.Assertions;
+            Assert.Equal(assetions, actual);
         }
 
         [Theory, TestData]

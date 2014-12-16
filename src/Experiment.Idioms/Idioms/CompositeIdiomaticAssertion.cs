@@ -17,6 +17,17 @@
         /// <param name="assertions">
         /// The assertions.
         /// </param>
+        public CompositeIdiomaticAssertion(params IIdiomaticAssertion[] assertions)
+            : this((IEnumerable<IIdiomaticAssertion>)assertions)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CompositeIdiomaticAssertion"/> class.
+        /// </summary>
+        /// <param name="assertions">
+        /// The assertions.
+        /// </param>
         public CompositeIdiomaticAssertion(IEnumerable<IIdiomaticAssertion> assertions)
         {
             if (assertions == null)
