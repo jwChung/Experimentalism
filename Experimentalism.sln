@@ -35,7 +35,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Experiment.Xunit.UnitTest",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuspecs", "Nuspecs", "{920F7B7C-CB7C-4F45-9807-E8655CA2505A}"
 	ProjectSection(SolutionItems) = preProject
-		nuspecs\Experiment.AutoFixture.nuspec = nuspecs\Experiment.AutoFixture.nuspec
 		nuspecs\Experiment.Idioms.nuspec = nuspecs\Experiment.Idioms.nuspec
 		nuspecs\Experiment.Xunit.nuspec = nuspecs\Experiment.Xunit.nuspec
 	EndProjectSection

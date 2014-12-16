@@ -13,17 +13,14 @@
     <iconUrl>https://raw.githubusercontent.com/jwChung/Experimentalism/master/icon.png</iconUrl>
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
+      <dependency id="AutoFixture" version="3.18.7" />
       <dependency id="xunit" version="1.9.0.1566" />
     </dependencies>
     <references>
-      <reference file="Jwc.Experiment.dll" />
       <reference file="Jwc.Experiment.Xunit.dll" />
     </references>
   </metadata>
   <files>
-    <file src="..\src\Experiment\bin\Release\Jwc.Experiment.dll" target="lib\net40" />
-    <file src="..\src\Experiment\bin\Release\Jwc.Experiment.pdb" target="lib\net40" />
-    <file src="..\src\Experiment\bin\Release\Jwc.Experiment.xml" target="lib\net40" />
     <file src="..\src\Experiment.Xunit\bin\Release\Jwc.Experiment.Xunit.dll" target="lib\net40" />
     <file src="..\src\Experiment.Xunit\bin\Release\Jwc.Experiment.Xunit.pdb" target="lib\net40" />
     <file src="..\src\Experiment.Xunit\bin\Release\Jwc.Experiment.Xunit.xml" target="lib\net40" />
