@@ -30,20 +30,20 @@
 
         [Theory, TestData]
         public void AssertionsIsCorrectWhenInitializedWithIEnumerable(
-            [Frozen] IEnumerable<IIdiomaticAssertion> assetions,
+            [Frozen] IEnumerable<IIdiomaticAssertion> assertions,
             [FavorEnumerables] CompositeIdiomaticAssertion sut)
         {
             var actual = sut.Assertions;
-            Assert.Equal(assetions, actual);
+            Assert.Equal(assertions, actual);
         }
 
         [Theory, TestData]
         public void AssertionsIsCorrectWhenInitializedWithArray(
-            [Frozen] IIdiomaticAssertion[] assetions,
+            [Frozen] IIdiomaticAssertion[] assertions,
             [FavorArrays] CompositeIdiomaticAssertion sut)
         {
             var actual = sut.Assertions;
-            Assert.Equal(assetions, actual);
+            Assert.Equal(assertions, actual);
         }
 
         [Theory, TestData]
