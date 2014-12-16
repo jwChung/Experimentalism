@@ -4,7 +4,7 @@
     using Ploeh.AutoFixture.Kernel;
 
     /// <summary>
-    /// Represents a factory to create an instance of <see cref="ITestFixture" />.
+    /// Represents a factory to create an instance of <see cref="ISpecimenBuilder" />.
     /// </summary>
     public interface ISpecimenBuilderFactory
     {
