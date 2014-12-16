@@ -9,18 +9,28 @@
     public class CompositeIdiomaticAssertionTest
     {
         [Theory, TestData]
-        public void SutIsIdiomaticAssertion(CompositeIdiomaticAssertion sut)
+        public void SutHasCorrectGuardClauses(
+            GuardClauseAssertion assertion)
         {
-            Assert.IsAssignableFrom<IIdiomaticAssertion>(sut);
+            var members = new IdiomaticMembers(
+                typeof(CompositeIdiomaticAssertion),
+                MemberKinds.Constructor);
+
+            foreach (var member in members)
+                assertion.Verify(member);
         }
 
         [Theory, TestData]
-        public void AssertionsIsCorrect(
-            [Frozen] IEnumerable<IIdiomaticAssertion> assertions,
-            CompositeIdiomaticAssertion sut)
+        public void SutCorrectlyInitializesMembers(
+            ConstructorInitializedMemberAssertion assertion)
         {
-            var actual = sut.Assertions;
-            Assert.Equal(assertions, actual);
+            assertion.Verify(typeof(CompositeIdiomaticAssertion));
+        }
+
+        [Theory, TestData]
+        public void SutIsIdiomaticAssertion(CompositeIdiomaticAssertion sut)
+        {
+            Assert.IsAssignableFrom<IIdiomaticAssertion>(sut);
         }
     }
 }

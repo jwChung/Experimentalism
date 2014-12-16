@@ -19,6 +19,9 @@
         /// </param>
         public CompositeIdiomaticAssertion(IEnumerable<IIdiomaticAssertion> assertions)
         {
+            if (assertions == null)
+                throw new ArgumentNullException("assertions");
+
             this.assertions = assertions;
         }
 
