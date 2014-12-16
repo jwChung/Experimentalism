@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="TestCommandContext.cs" />
     <Compile Include="TestMethodContext.cs" />
+    <Compile Include="ParameterCustomization.cs" />
     <Compile Include="TryCatchCommandCollection.cs" />
   </ItemGroup>
   <ItemGroup>
