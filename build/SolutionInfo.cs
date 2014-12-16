@@ -10,12 +10,16 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("2.1.5")]
-[assembly: AssemblyInformationalVersion("2.1.5")]
+[assembly: AssemblyVersion("3.0.0")]
+[assembly: AssemblyInformationalVersion("3.0.0-beta01")]
 
 /*
- * Version 2.1.5
+ * Version 3.0.0-beta01
  * 
- * - [Path] Fixed that ParameterToPropertyComparer and ParameterToFieldComparer
- *   doesn't return false when invoking constructor throws an exception.
+ * - [Major] Removed the Experiment.AutoFixture project. This project is not
+ *   used in the next new major release as the new version depends on the
+ *   AutoFixture abstractions. (IFixture, ISpecimenBuilder)
+ *   
+ * - [Major] Removed the old abstractions for test fixture, which is replaced
+ *   with the AutoFixture abstractions.
  */
