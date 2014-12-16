@@ -180,7 +180,7 @@ First class test 방식은 [Bug squash의 First-class tests in MbUnit](http://bu
 ###Third-party libraries
 Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습니다. 아래의 각 라이브러리에서 언급되는 라이센스 전문은 LICENSE.txt 파일 또는 각 소스파일의 헤더형태로 제공되므로 이를 참고할 수 있습니다.
 
-* Albedo 1.0.1  
+* Albedo 1.0.2  
   Website:      https://github.com/ploeh/Albedo  
   Copyright:    Copyright (c) 2013 Mark Seemann  
   License:      The MIT License
@@ -210,7 +210,7 @@ Experimentalism은 아래와 같은 Third-party libraries를 사용하고 있습
   Copyright:    Copyright (C) 2009 - 2010 Novell, Inc. (http://www.novell.com)  
   License:      The MIT License
 
-* Moq 3.1.416.3  
+* Moq 4.2.1402.2112
   Website:      http://www.moqthis.com  
   Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD  
   License:      BSD
@@ -239,7 +239,6 @@ Additional references
 Experimentalism은 각 테스트 프로젝트에서 해당 프로젝트에 대한 시나리오 테스트(acceptance test)를 포함하고 있습니다. 이 시나리오 테스트들은 해당 프로젝트를 어떻게 이용하는지 간략히 잘 나타내고 있습니다. 아래 링크를 참고하세요.
 
 * [Experiment.Xunit scenario tests](https://github.com/jwChung/Experimentalism/blob/master/test/Experiment.Xunit.UnitTest/Scenario.cs)
-* [Experiment.AutoFixture scenario tests](https://github.com/jwChung/Experimentalism/blob/master/test/Experiment.AutoFixture.UnitTest/Scenario.cs)
 * [Experiment.Idioms scenario tests](https://github.com/jwChung/Experimentalism/blob/master/test/Experiment.Idioms.UnitTest/Scenario.cs)
 
 Contributions
