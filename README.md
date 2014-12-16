@@ -10,8 +10,6 @@ NuGet package manager 혹은 [Package manager console](http://docs.nuget.org/doc
 
  - Experiment.Xunit:  
    [![install from nuget](http://img.shields.io/nuget/v/Experiment.Xunit.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Xunit)[![downloads](http://img.shields.io/nuget/dt/Experiment.Xunit.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Xunit)
- - Experiment.AutoFixture:  
-   [![install from nuget](http://img.shields.io/nuget/v/Experiment.AutoFixture.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.AutoFixture)[![downloads](http://img.shields.io/nuget/dt/Experiment.AutoFixture.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.AutoFixture)
  - Experiment.Idioms:  
    [![install from nuget](http://img.shields.io/nuget/v/Experiment.Idioms.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Idioms)[![downloads](http://img.shields.io/nuget/dt/Experiment.Idioms.svg?style=flat-square)](https://www.nuget.org/packages/Experiment.Idioms)
 
