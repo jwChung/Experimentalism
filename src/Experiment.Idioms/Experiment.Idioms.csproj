@@ -69,7 +69,7 @@
     <Compile Include="TypeExtensions.cs" />
     <Compile Include="ObjectDisposalException.cs" />
     <Compile Include="IdiomaticMembers.cs" />
-    <Compile Include="IndirectReferenceException.cs" />
+    <Compile Include="NotExposedReferenceException.cs" />
     <Compile Include="Idioms\NotExposedReferenceAssertion.cs" />
     <Compile Include="Idioms\MemberInitializationAssertion.cs" />
     <Compile Include="MemberInitializationException.cs" />

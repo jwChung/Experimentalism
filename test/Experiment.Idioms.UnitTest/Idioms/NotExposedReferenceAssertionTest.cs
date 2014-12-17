@@ -98,7 +98,7 @@
             var sut = new NotExposedReferenceAssertion(indirectReferences);
             var type = typeof(TypeForIndirectReference);
 
-            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(type));
+            var exception = Assert.Throws<NotExposedReferenceException>(() => sut.Verify(type));
             Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
         }
 
@@ -135,7 +135,7 @@
             var sut = new NotExposedReferenceAssertion(indirectReferences);
             var field = new Fields<ClassForIndirectReference>().Select(x => x.Field);
 
-            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(field));
+            var exception = Assert.Throws<NotExposedReferenceException>(() => sut.Verify(field));
             Assert.Contains("Ploeh.AutoFixture", exception.Message);
         }
 
@@ -150,7 +150,7 @@
             var constructor = Constructors.Select(() => new ClassForIndirectReference(null, null));
             var field = new Fields<ClassForIndirectReference>().Select(x => x.Field);
 
-            Assert.Throws<IndirectReferenceException>(() => sut.Verify(field));
+            Assert.Throws<NotExposedReferenceException>(() => sut.Verify(field));
             Assert.DoesNotThrow(() => sut.Verify(constructor));
         }
 
@@ -190,7 +190,7 @@
             var sut = new NotExposedReferenceAssertion(indirectReferences);
             var constructor = Constructors.Select(() => new ClassForIndirectReference(null, null));
 
-            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(constructor));
+            var exception = Assert.Throws<NotExposedReferenceException>(() => sut.Verify(constructor));
             Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
         }
 
@@ -246,7 +246,7 @@
             var sut = new NotExposedReferenceAssertion(indirectReferences);
             var property = new Properties<ClassForIndirectReference>().Select(x => x.Property);
 
-            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(property));
+            var exception = Assert.Throws<NotExposedReferenceException>(() => sut.Verify(property));
             Assert.Contains("Ploeh.AutoFixture", exception.Message);
         }
 
@@ -279,7 +279,7 @@
             var sut = new NotExposedReferenceAssertion(indirectReferences);
             var method = new Methods<ClassForIndirectReference>().Select(x => x.Method(null, null));
 
-            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(method));
+            var exception = Assert.Throws<NotExposedReferenceException>(() => sut.Verify(method));
             Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
         }
 
@@ -310,7 +310,7 @@
             var sut = new NotExposedReferenceAssertion(indirectReferences);
             var @event = typeof(ClassForIndirectReference).GetEvent("Event");
 
-            var exception = Assert.Throws<IndirectReferenceException>(() => sut.Verify(@event));
+            var exception = Assert.Throws<NotExposedReferenceException>(() => sut.Verify(@event));
             Assert.Contains("Jwc.Experiment.Idioms", exception.Message);
         }
 

@@ -3,12 +3,12 @@
     using System;
     using global::Xunit;
 
-    public class IndirectReferenceExceptionTest
+    public class NotExposedReferenceExceptionTest
     {
         [Fact]
         public void SutIsException()
         {
-            var sut = new IndirectReferenceException();
+            var sut = new NotExposedReferenceException();
             Assert.IsAssignableFrom<Exception>(sut);
         }
     }

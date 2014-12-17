@@ -155,7 +155,7 @@
 Indirect reference: {0}
 API(exposing)     : {1}";
 
-            throw new IndirectReferenceException(
+            throw new NotExposedReferenceException(
                 string.Format(
                     CultureInfo.CurrentCulture,
                     messageFormat,
