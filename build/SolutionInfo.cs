@@ -11,10 +11,10 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyVersion("3.0.0")]
-[assembly: AssemblyInformationalVersion("3.0.0-beta03")]
+[assembly: AssemblyInformationalVersion("3.0.0")]
 
 /*
- * Version 3.0.0-beta03
+ * Version 3.0.0
  * 
  * - [Major] Removed the Experiment.AutoFixture project. This project is not
  *   used in the next new major release as the new version depends on the
