@@ -14,7 +14,7 @@
     <releaseNotes>releaseNotes</releaseNotes>
     <dependencies>
       <dependency id="Albedo" version="1.0.2" />
-      <dependency id="AutoFixture.Xunit" version="3.18.7" />
+      <dependency id="AutoFixture" version="3.18.7" />
     </dependencies>
     <references>
       <reference file="Jwc.Experiment.Idioms.dll" />
