@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jwChung/Experimentalism.png?label=ready&title=Ready)](https://waffle.io/jwChung/Experimentalism)
 Experimentalism [![appveyor](http://img.shields.io/appveyor/ci/jwChung/Experimentalism.svg?style=flat-square)](https://ci.appveyor.com/project/jwChung/experimentalism)
 ===============
 
