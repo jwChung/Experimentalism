@@ -53,13 +53,15 @@ namespace Jwc.Experiment.Xunit
             // Fixture setup
             var testMethod = new Action(() => { }).Method;
             var actualMethod = new Action(() => { }).Method;
-            
-            var testObject = new object();
 
-            var methodContext = Mocked.Of<ITestMethodContext>(x => x.ActualMethod == actualMethod);
+            var testObject = Activator.CreateInstance(actualMethod.ReflectedType);
+
+            var methodContext = Mocked.Of<ITestMethodContext>(
+                x => x.ActualMethod == actualMethod && x.ActualObject == testObject);
 
             var context = Mocked.Of<ITestCommandContext>(
-                x => x.TestMethod == Reflector.Wrap(testMethod) && x.GetMethodContext(testObject) == methodContext);
+                x => x.TestMethod == Reflector.Wrap(testMethod)
+                && x.GetMethodContext(testObject) == methodContext);
             
             var sut = new ParameterizedCommand(context);
 
@@ -174,7 +176,8 @@ namespace Jwc.Experiment.Xunit
                 Enumerable.Empty<object>()));
             var expectecd = new TheoryCommand(testMethod, new object[0]).DisplayName;
 
-            Assert.Throws<InvalidOperationException>(() => sut.Execute(new object()));
+            Assert.Throws<InvalidOperationException>(
+                () => sut.Execute(Activator.CreateInstance(testMethod.Class.Type)));
             Assert.Equal(expectecd, sut.DisplayName);
         }
     }
