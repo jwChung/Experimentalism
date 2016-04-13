@@ -217,6 +217,29 @@
             Assert.Equal(1, parameters.Count);
         }
 
+        [Fact]
+        public void VerifyClassDoesNotAssertDisposeMethod()
+        {
+            var sut = new ObjectDisposalAssertion(new Fixture());
+            Assert.ThrowsDelegate action = () => sut.Verify(typeof(ClassForOnlyDisposable));
+            Assert.DoesNotThrow(action);
+        }
+
+        [Fact]
+        public void VerifyClassThrowsWhenClassIsNotDisposable()
+        {
+            var sut = new ObjectDisposalAssertion(new Fixture());
+            Assert.Throws<ArgumentException>(() => sut.Verify(typeof(ClassWithDispose)));
+        }
+
+        [Fact]
+        public void VerifyClassAssertsOtherDisposeMethod()
+        {
+            var sut = new ObjectDisposalAssertion(new Fixture());
+            Assert.ThrowsDelegate action = () => sut.Verify(typeof(ClassWithOtherDispose));
+            Assert.Throws<ObjectDisposalException>(action);
+        }
+
         private class ClassForDisposable : IDisposable
         {
             private bool disposed;
@@ -251,6 +274,31 @@
         private class ClassForNonDisposable
         {
             public void Method()
+            {
+            }
+        }
+
+        private class ClassForOnlyDisposable : IDisposable
+        {
+            public void Dispose()
+            {
+            }
+        }
+
+        private class ClassWithOtherDispose : IDisposable
+        {
+            public void Dispose()
+            {
+            }
+
+            public void Dispose(object argument)
+            {
+            }
+        }
+
+        private class ClassWithDispose
+        {
+            public void Dispose()
             {
             }
         }

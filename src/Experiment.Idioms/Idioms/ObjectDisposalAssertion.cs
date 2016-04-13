@@ -75,9 +75,12 @@
             if (method.IsStatic || method.IsAbstract)
                 return;
 
-            var owner = this.GetOwner(method);
+            IDisposable owner = this.GetOwner(method);
             if (owner == null)
                 ObjectDisposalAssertion.ThrowDoesNotImplementIDisposable(method);
+
+            if (method.Name == "Dispose" && method.GetParameters().Length == 0)
+                return;
 
             owner.Dispose();
 
