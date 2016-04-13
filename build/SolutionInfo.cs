@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyVersion("3.0.1")]
-[assembly: AssemblyInformationalVersion("3.0.1")]
+[assembly: AssemblyVersion("3.0.2")]
+[assembly: AssemblyInformationalVersion("3.0.2")]
 
 /*
- * Version 3.0.1
+ * Version 3.0.2
  * 
- * - Rectified an incorrect dependency of the Experiment.Idoms package.
+ * - Ignored the Dispose method when verifying ObjectDisposalAssertion.
  */
